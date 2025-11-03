@@ -1,0 +1,33 @@
+config:
+  cluster: switch-cluster
+  event: '0x00'
+  nodeId: '0x654231'
+name: switch-cluster_event_0x00_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '- `CurrentPosition`: 0'
+  ExpectedResponse: Event generated successfully
+  Pre-requisites: '- `NumberOfPositions` should be greater than 1'
+  arguments:
+    NewPosition: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '- `CurrentPosition`: `NumberOfPositions` - 1'
+  ExpectedResponse: Event generated successfully
+  Pre-requisites: '- `NumberOfPositions` should be greater than 1
+
+
+    These test cases cover the extreme values of the `NewPosition` field and ensure
+    that the event is generated correctly when the switch is moved to the first and
+    last positions.
+
+
+    ### References
+
+    - The details about the SwitchLatched event and its fields are derived from the
+    Matter Application Cluster Specification【4:0†source】.'
+  arguments:
+    NewPosition: '`NumberOfPositions` - 1'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SubscribeToEvent

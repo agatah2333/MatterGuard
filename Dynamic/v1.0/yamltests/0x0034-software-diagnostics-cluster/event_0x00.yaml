@@ -1,0 +1,117 @@
+config:
+  cluster: software-diagnostics-cluster
+  event: '0x00'
+  nodeId: '0x654231'
+name: software-diagnostics-cluster_event_0x00_v1.0.0
+tests:
+- ActionTime: After boot or reboot process
+  Attribute_Change: SoftwareVersion attribute in the Basic Information Cluster set
+    to 0
+  ExpectedResponse: Event generated with SoftwareVersion set to 0
+  Pre-requisites: Node must have completed a boot or reboot process
+  arguments:
+    '{"SoftwareVersion"': 0}
+  label: Test_Case_Extreme_Value_(Minimum)
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify software-diagnostics-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: After boot or reboot process
+  Attribute_Change: SoftwareVersion attribute in the Basic Information Cluster set
+    to 4294967295
+  ExpectedResponse: Event generated with SoftwareVersion set to 4294967295
+  Pre-requisites: 'Node must have completed a boot or reboot process
+
+
+    These test cases cover the extreme values of the SoftwareVersion field, ensuring
+    that the system correctly handles the minimum and maximum possible values for
+    a uint32 type【4:0†source】【4:1†source】.'
+  arguments:
+    '{"SoftwareVersion"': 4294967295}
+  label: Test_Case_Extreme_Value_(Maximum)
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify software-diagnostics-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true

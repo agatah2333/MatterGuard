@@ -1,0 +1,33 @@
+config:
+  cluster: level-control-cluster
+  command: '0x07'
+  nodeId: '0x654231'
+name: level-control-cluster_command_0x07_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: "- `CurrentLevel`: No change\n  - `RemainingTime`: 0"
+  ExpectedResponse: The device should stop any ongoing level change and leave the
+    `CurrentLevel` attribute at its current value.
+  Pre-requisites: An ongoing `MoveToLevel`, `Move`, or `Step` command should be in
+    process.
+  arguments:
+    OptionsMask: 0
+    OptionsOverride: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: "- `CurrentLevel`: No change\n  - `RemainingTime`: 0"
+  ExpectedResponse: The device should stop any ongoing level change and leave the
+    `CurrentLevel` attribute at its current value.
+  Pre-requisites: 'An ongoing `MoveToLevel`, `Move`, or `Step` command should be in
+    process.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    OptionsMask: 255
+    OptionsOverride: 255
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: SendCommand

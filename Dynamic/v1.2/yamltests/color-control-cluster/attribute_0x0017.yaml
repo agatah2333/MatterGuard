@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0017'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0017_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '- `Primary2Intensity`: 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Primary2Intensity: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '- `Primary2Intensity`: 255'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Primary2Intensity: 255
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '- `Primary2Intensity`: 128'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Primary2Intensity: 128
+  label: Test_Case_Mid-Range_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '- `Primary2Intensity`: 1'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    a mid-range value to ensure the attribute behaves as expected across its entire
+    range.'
+  arguments:
+    Primary2Intensity: 1
+  label: Test_Case_Special_Value_(Boundary_Condition)
+  option: WriteAttribute

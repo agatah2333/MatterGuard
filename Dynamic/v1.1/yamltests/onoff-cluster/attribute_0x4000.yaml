@@ -1,0 +1,41 @@
+config:
+  attribute: '0x4000'
+  cluster: onoff-cluster
+  nodeId: '0x654231'
+name: onoff-cluster_attribute_0x4000_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: N/A
+  Pre-requisites: The device has just received a command that sets the `OnOff` attribute
+    to TRUE (e.g., On, MoveToLevel(WithOnOff), RecallScene, or OnWithRecallGlobalScene).
+  arguments:
+    '{"GlobalSceneControl"': TRUE}
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: N/A
+  Pre-requisites: The device has just received an `OffWithEffect` command.
+  arguments:
+    '{"GlobalSceneControl"': FALSE}
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: N/A
+  Pre-requisites: The device has just received a standard On command.
+  arguments:
+    '{"GlobalSceneControl"': TRUE}
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: N/A
+  Pre-requisites: 'The device has just received an `OffWithEffect` command.
+
+
+    These test cases cover the extreme values of the `GlobalSceneControl` attribute
+    (TRUE and FALSE) and the special responses mentioned in the description of the
+    effect (setting to TRUE after certain commands and setting to FALSE after the
+    `OffWithEffect` command)【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"GlobalSceneControl"': FALSE}
+  option: WriteAttribute

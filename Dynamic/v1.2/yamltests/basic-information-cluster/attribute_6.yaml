@@ -1,0 +1,42 @@
+config:
+  attribute: '6'
+  cluster: basic-information-cluster
+  nodeId: '0x654231'
+name: basic-information-cluster_attribute_6_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"Location": ""}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Location"': '""}'
+  label: Test_Case_Minimum_Length
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Location": "A"*32}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Location"': '"A"*32}'
+  label: Test_Case_Maximum_Length
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Location": "!@#$%^&*()_+-=[]{}|;'':,.<>?/~`"}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Location"': '"!@#$%^&*()_+-=[]{}|;'':,.<>?/~`"}'
+  label: Test_Case_Special_Characters
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Error (Invalid length)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses.'
+  arguments:
+    '{"Location"': '"A"*33}'
+  label: Test_Case_Exceeding_Maximum_Length
+  option: WriteAttribute

@@ -1,0 +1,27 @@
+config:
+  cluster: onoff-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: onoff-cluster_command_0x01_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: OnOff attribute will be set to TRUE.
+  ExpectedResponse: The OnOff attribute is set to TRUE.
+  Pre-requisites: The device should be in the Off state before the command is sent.
+  arguments: {}
+  label: Test_Case_Extreme_Values_of_Constraints
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: "- OnOff attribute will be set to TRUE.\n  - OffWaitTime attribute\
+    \ will be set to 0 if OnTime is 0."
+  ExpectedResponse: "- The OnOff attribute is set to TRUE.\n  - If the OnTime attribute\
+    \ is supported and its value is 0, the OffWaitTime attribute is set to 0."
+  Pre-requisites: "- The device should be in the Off state before the command is sent.\n\
+    \  - The OnTime and OffWaitTime attributes should be supported by the device.\n\
+    \nThese test cases cover the scenarios of extreme values (though there are no\
+    \ data fields for this command) and special responses based on the description\
+    \ of the effect of the On command.\n\n### References\n- Matter Application Cluster\
+    \ Specification【4:0†source】."
+  arguments: {}
+  label: Test_Case_Special_Response_Based_on_Field_Values
+  option: SendCommand

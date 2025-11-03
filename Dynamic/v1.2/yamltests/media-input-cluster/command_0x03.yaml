@@ -1,0 +1,48 @@
+config:
+  cluster: media-input-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: media-input-cluster_command_0x03_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `InputList[0].Name`: "HDMI 1"'
+  ExpectedResponse: Success
+  Pre-requisites: The device must have at least one input in the `InputList`.
+  arguments:
+    Index: 0
+    Name: '"HDMI 1"'
+  label: Test_Case_Minimum_Index_Value
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '- `InputList[255].Name`: "HDMI 2" (if the index is valid)'
+  ExpectedResponse: Success or Error (depending on the number of inputs supported
+    by the device)
+  Pre-requisites: The device must support 256 inputs in the `InputList`.
+  arguments:
+    Index: 255
+    Name: '"HDMI 2"'
+  label: Test_Case_Maximum_Index_Value
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '- `InputList[1].Name`: "Living room Playstation"'
+  ExpectedResponse: Success
+  Pre-requisites: The device must have at least two inputs in the `InputList`.
+  arguments:
+    Index: 1
+    Name: '"Living room Playstation"'
+  label: Test_Case_Special_Character_in_Name
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '- `InputList[2].Name`: ""'
+  ExpectedResponse: Success
+  Pre-requisites: 'The device must have at least three inputs in the `InputList`.
+
+
+    These test cases cover the extreme values of the `Index` field and special values
+    for the `Name` field, including a typical name, a name with special characters,
+    and an empty name【4:0†source】【4:3†source】【4:15†source】.'
+  arguments:
+    Index: 2
+    Name: '""'
+  label: Test_Case_Empty_Name
+  option: SendCommand

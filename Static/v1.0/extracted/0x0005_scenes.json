@@ -1,0 +1,320 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0005",
+    "name": "Scenes",
+    "description": "This cluster provides attributes and commands for setting up and recalling a number of scenes for a device."
+  },
+  "derived_datatypes": [
+    {
+      "type": "struct",
+      "name": "AttributeValuePair",
+      "base_data_type": "STRUCT",
+      "value_range": {
+        "struct_fields": [
+          {
+            "name": "AttributeID",
+            "data_type": "uint8",
+            "description": ""
+          },
+          {
+            "name": "AttributeValue",
+            "data_type": "uint8",
+            "description": ""
+          }
+        ]
+      }
+    },
+    {
+      "type": "struct",
+      "name": "ExtensionFieldSet",
+      "base_data_type": "STRUCT",
+      "value_range": {
+        "struct_fields": [
+          {
+            "name": "ClusterID",
+            "data_type": "uint8",
+            "description": ""
+          },
+          {
+            "name": "AttributeValueList",
+            "data_type": "uint8",
+            "description": ""
+          }
+        ]
+      }
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "AddScene",
+      "parameters": [
+        {
+          "name": "GroupID",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Identifier value"
+        },
+        {
+          "name": "SceneID",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "Identifier value"
+        },
+        {
+          "name": "TransitionTime",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Time duration in appropriate units"
+        },
+        {
+          "name": "SceneName",
+          "data_type": "string",
+          "value_range": {
+            "max": "16"
+          },
+          "description": "SceneName parameter"
+        },
+        {
+          "name": "ExtensionFieldSets",
+          "data_type": "list[ExtensionFieldSet]",
+          "value_range": {},
+          "description": "ExtensionFieldSets parameter"
+        }
+      ],
+      "privilege": "V",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "ViewScene",
+      "parameters": [
+        {
+          "name": "GroupID",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Identifier value"
+        },
+        {
+          "name": "SceneID",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "Identifier value"
+        }
+      ],
+      "privilege": "V",
+      "side": "client"
+    },
+    {
+      "id": "0x02",
+      "name": "RemoveScene",
+      "parameters": [
+        {
+          "name": "GroupID",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Identifier value"
+        },
+        {
+          "name": "SceneID",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "Identifier value"
+        }
+      ],
+      "privilege": "V",
+      "side": "client"
+    },
+    {
+      "id": "0x03",
+      "name": "RemoveAllScenes",
+      "parameters": [
+        {
+          "name": "GroupID",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Identifier value"
+        }
+      ],
+      "privilege": "V",
+      "side": "client"
+    },
+    {
+      "id": "0x04",
+      "name": "StoreScene",
+      "parameters": [
+        {
+          "name": "GroupID",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Identifier value"
+        },
+        {
+          "name": "SceneID",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "Identifier value"
+        }
+      ],
+      "privilege": "V",
+      "side": "client"
+    },
+    {
+      "id": "0x05",
+      "name": "RecallScene",
+      "parameters": [
+        {
+          "name": "GroupID",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Identifier value"
+        },
+        {
+          "name": "SceneID",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "Identifier value"
+        },
+        {
+          "name": "TransitionTime",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Time duration in appropriate units"
+        }
+      ],
+      "privilege": "V",
+      "side": "client"
+    },
+    {
+      "id": "0x06",
+      "name": "GetSceneMembership",
+      "parameters": [
+        {
+          "name": "GroupID",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Identifier value"
+        }
+      ],
+      "privilege": "V",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "SceneCount",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "Indicates the number of scenes currently in the device's scene table",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "CurrentScene",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "Contains the scene ID of the scene last invoked",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "CurrentGroup",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "Contains the group ID of the scene last invoked",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0003",
+      "name": "SceneValid",
+      "data_type": "bool",
+      "value_range": {
+        "min": "false",
+        "max": "true"
+      },
+      "description": "Indicates whether the state of the device corresponds to that associated with the CurrentScene and CurrentGroup attributes",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0004",
+      "name": "NameSupport",
+      "data_type": "bitmap8",
+      "value_range": {},
+      "description": "Indicates support for scene names",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0005",
+      "name": "LastConfiguredBy",
+      "data_type": "node-id",
+      "value_range": {},
+      "description": "Indicates the node ID of the most recent node to configure the scene table",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

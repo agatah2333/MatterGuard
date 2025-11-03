@@ -1,0 +1,141 @@
+{
+  "source_file": "Electrical Energy Measurement_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0091",
+        "name": "Electrical Energy Measurement",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "Accuracy",
+            "dataType": "MeasurementAccuracyStruct",
+            "valueRange": "",
+            "description": "Indicates the accuracy of energy measurement by this server.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "CumulativeEnergyImported",
+            "dataType": "EnergyMeasurementStruct",
+            "valueRange": "",
+            "description": "Indicates the most recent measurement of cumulative energy imported by the server.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "CumulativeEnergyExported",
+            "dataType": "EnergyMeasurementStruct",
+            "valueRange": "",
+            "description": "Indicates the most recent measurement of cumulative energy exported by the server.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "PeriodicEnergyImported",
+            "dataType": "EnergyMeasurementStruct",
+            "valueRange": "",
+            "description": "Indicates the most recent measurement of energy imported by the server during a period.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0004",
+            "name": "PeriodicEnergyExported",
+            "dataType": "EnergyMeasurementStruct",
+            "valueRange": "",
+            "description": "Indicates the most recent measurement of energy exported by the server during a period.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0005",
+            "name": "CumulativeEnergyReset",
+            "dataType": "CumulativeEnergyResetStruct",
+            "valueRange": "",
+            "description": "Indicates when cumulative measurements were most recently zero.",
+            "privilege": "R",
+            "writable": true
+          }
+        ],
+        "commands": [],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "CumulativeEnergyMeasured",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "EnergyMeasurementStruct",
+              "description": "Generated when the server takes a snapshot of the cumulative energy imported or exported."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x01",
+            "name": "PeriodicEnergyMeasured",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "EnergyMeasurementStruct",
+              "description": "Generated when the server reaches the end of a reporting period for imported or exported energy."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "MeasurementAccuracyStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "MeasurementType": {
+                "type": "MeasurementTypeEnum",
+                "valueRange": ""
+              },
+              "Measured": {
+                "type": "bool",
+                "valueRange": "false"
+              },
+              "MinMeasuredValue": {
+                "type": "int64",
+                "valueRange": "-262 to 262"
+              },
+              "MaxMeasuredValue": {
+                "type": "int64",
+                "valueRange": "-262 to 262"
+              },
+              "AccuracyRanges": {
+                "type": "list[MeasurementAccuracyRangeStruct]",
+                "valueRange": "min 1"
+              }
+            }
+          },
+          "CumulativeEnergyResetStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "ImportedResetTimestamp": {
+                "type": "epoch-s",
+                "valueRange": ""
+              },
+              "ExportedResetTimestamp": {
+                "type": "epoch-s",
+                "valueRange": ""
+              },
+              "ImportedResetSystime": {
+                "type": "systime-ms",
+                "valueRange": ""
+              },
+              "ExportedResetSystime": {
+                "type": "systime-ms",
+                "valueRange": ""
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

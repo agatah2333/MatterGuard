@@ -1,0 +1,47 @@
+config:
+  attribute: '0x0003'
+  cluster: media-playback-cluster
+  nodeId: '0x654231'
+name: media-playback-cluster_attribute_0x0003_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`SampledPosition` will be set to `{"UpdatedAt": 0, "Position":
+    0}`'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Position: 0
+    UpdatedAt: 0
+  label: Test_Case_Minimum_Values
+  option: WriteAttribute
+- ActionTime: 18446744073709551615
+  Attribute_Change: '`SampledPosition` will be set to `{"UpdatedAt": 18446744073709551615,
+    "Position": 18446744073709551615}`'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Position: 18446744073709551615 (2^64-1)
+    UpdatedAt: 18446744073709551615 (2^64-1)
+  label: Test_Case_Maximum_Values
+  option: WriteAttribute
+- ActionTime: 'null'
+  Attribute_Change: '`SampledPosition` will be set to `{"UpdatedAt": null, "Position":
+    null}`'
+  ExpectedResponse: Success
+  Pre-requisites: Media is live with no known duration and seek is not supported
+  arguments: {}
+  label: Test_Case_Null_Value_for_Live_Media
+  option: WriteAttribute
+- ActionTime: 1000000
+  Attribute_Change: '`SampledPosition` will not be changed'
+  ExpectedResponse: SEEK_OUT_OF_RANGE
+  Pre-requisites: 'Duration of the media is less than 2000000 milliseconds
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the special responses mentioned in the description of the effect【4:0†source】【4:1†source】【4:6†source】【4:7†source】【4:19†source】.'
+  arguments:
+    Position: 2000000
+    UpdatedAt: 1000000
+  label: Test_Case_Position_Greater_than_Duration
+  option: WriteAttribute

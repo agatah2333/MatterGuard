@@ -1,0 +1,43 @@
+config:
+  attribute: '0x01'
+  cluster: general-commissioning-cluster
+  nodeId: '0x654231'
+name: general-commissioning-cluster_attribute_0x01_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: WindowStatus attribute is not set to WindowNotOpen.
+  arguments:
+    '{"AdminFabricIndex"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: WindowStatus attribute is not set to WindowNotOpen.
+  arguments:
+    '{"AdminFabricIndex"': <max_fabric_index>}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: AdminFabricIndex set to null
+  ExpectedResponse: Success
+  Pre-requisites: WindowStatus attribute is set to WindowNotOpen.
+  arguments:
+    '{"AdminFabricIndex"': null}
+  label: Test_Case_Special_Case_-_WindowStatus_is_WindowNotOpen
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: AdminFabricIndex set to null
+  ExpectedResponse: Success
+  Pre-requisites: 'Fabric for the Administrator that opened the window is removed
+    during an open commissioning window.
+
+
+    These test cases cover the extreme values of the `AdminFabricIndex` field and
+    the special responses as described in the specification【4:0†source】【4:2†source】【4:3†source】.'
+  arguments:
+    '{"AdminFabricIndex"': null}
+  label: Test_Case_Special_Case_-_Fabric_Removed_During_Open_Window
+  option: WriteAttribute

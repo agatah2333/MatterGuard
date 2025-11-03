@@ -1,0 +1,33 @@
+config:
+  attribute: '0x0003'
+  cluster: operational-state-cluster
+  nodeId: '0x654231'
+name: operational-state-cluster_attribute_0x0003_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: OperationalStateList will include the state with ID 0x00 and an
+    empty label.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    OperationalStateID: '0x00'
+    OperationalStateLabel: '""'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: OperationalState will be set to Error.
+  ExpectedResponse: Device enters error state
+  Pre-requisites: 'Device must be in a non-error state before this test.
+
+
+    These test cases cover the extreme values and special responses for the `OperationalStateList`
+    attribute in the Operational State Cluster.
+
+
+    For further details, you can refer to the Matter Application Cluster Specification
+    document【4:0†source】.'
+  arguments:
+    OperationalStateID: '0x03'
+    OperationalStateLabel: '"Error"'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

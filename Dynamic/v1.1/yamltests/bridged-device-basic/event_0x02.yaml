@@ -1,0 +1,46 @@
+config:
+  cluster: bridged-device-basic
+  event: '0x02'
+  nodeId: '0x654231'
+name: bridged-device-basic_event_0x02_v1.1.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`<remove_bindings_and_acl_entries>`'
+  ExpectedResponse: '`<update_nodes>`'
+  Pre-requisites: '`<node_in_fabric>`'
+  arguments:
+    FabricIndex: '`1`'
+  label: Test_Case_Minimum_Value
+  option: SubscribeToEvent
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`<remove_bindings_and_acl_entries>`'
+  ExpectedResponse: '`<update_nodes>`'
+  Pre-requisites: '`<node_in_fabric>`'
+  arguments:
+    FabricIndex: '`254`'
+  label: Test_Case_Maximum_Value
+  option: SubscribeToEvent
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`<remove_bindings_and_acl_entries>`'
+  ExpectedResponse: '`<update_nodes>`'
+  Pre-requisites: '`<node_in_fabric>`'
+  arguments:
+    FabricIndex: '`128`'
+  label: Test_Case_Mid-Range_Value
+  option: SubscribeToEvent
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`<remove_bindings_and_acl_entries>`'
+  ExpectedResponse: '`<update_nodes>`'
+  Pre-requisites: '`<node_in_fabric>`
+
+
+    These test cases cover the extreme values of the `FabricIndex` field and a mid-range
+    value, as well as a special response scenario where the `FabricIndex` is set to
+    a specific value that might trigger updates in the fabric.
+
+
+    For more detailed information, refer to the Matter 1.0 Core Specification document【4:0†source】.'
+  arguments:
+    FabricIndex: '`100`'
+  label: Test_Case_Special_Response_Trigger
+  option: SubscribeToEvent

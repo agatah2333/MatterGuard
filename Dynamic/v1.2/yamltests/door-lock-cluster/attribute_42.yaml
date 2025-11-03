@@ -1,0 +1,41 @@
+config:
+  attribute: '42'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_42_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"WrongCodeEntryLimit": 1}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"WrongCodeEntryLimit"': 1}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"WrongCodeEntryLimit": 255}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"WrongCodeEntryLimit"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: <none>
+  ExpectedResponse: <CONSTRAINT_ERROR>
+  Pre-requisites: <none>
+  arguments:
+    '{"WrongCodeEntryLimit"': 0}
+  label: Test_Case_Constraint_Error_(Value_0)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"WrongCodeEntryLimit": 3}'
+  ExpectedResponse: <lockout_state>
+  Pre-requisites: '<3 incorrect attempts made>
+
+
+    ### Summary'
+  arguments:
+    '{"WrongCodeEntryLimit"': 3}
+  label: Test_Case_Special_Response_(Lockout_State)
+  option: WriteAttribute

@@ -1,0 +1,69 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x005D",
+    "name": "Dishwasher Alarm",
+    "description": "This cluster is a derived cluster of the Alarm Base cluster.",
+    "classification": {
+      "hierarchy": "Alarm Base",
+      "role": "Application",
+      "scope": "Endpoint",
+      "pics_code": "DISHALM"
+    },
+    "revision_history": [
+      {
+        "revision": 1,
+        "description": "Initial revision"
+      }
+    ]
+  },
+  "features": {},
+  "data_types": {
+    "bitmaps": {
+      "AlarmBitmap": {
+        "type": "map32",
+        "description": "Alarm bitmap for dishwasher alarms",
+        "bits": {
+          "0": {
+            "name": "InflowError",
+            "summary": "Water inflow is abnormal",
+            "conformance": "P,O.a+"
+          },
+          "1": {
+            "name": "DrainError",
+            "summary": "Water draining is abnormal",
+            "conformance": "P,O.a+"
+          },
+          "2": {
+            "name": "DoorError",
+            "summary": "Door or door lock is abnormal",
+            "conformance": "O.a+"
+          },
+          "3": {
+            "name": "TempTooLow",
+            "summary": "Unable to reach normal temperature",
+            "conformance": "P,O.a+"
+          },
+          "4": {
+            "name": "TempTooHigh",
+            "summary": "Temperature is too high",
+            "conformance": "P,O.a+"
+          },
+          "5": {
+            "name": "WaterLevelError",
+            "summary": "Water level is abnormal",
+            "conformance": "P,O.a+"
+          }
+        }
+      }
+    }
+  },
+  "attributes": {
+    "note": "This cluster inherits all attributes from the Alarm Base cluster"
+  },
+  "commands": {
+    "note": "This cluster inherits all commands from the Alarm Base cluster"
+  },
+  "events": {
+    "note": "This cluster inherits all events from the Alarm Base cluster"
+  }
+}

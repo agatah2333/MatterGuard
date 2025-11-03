@@ -1,0 +1,71 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0504",
+    "name": "Channel",
+    "description": "Provides an interface for controlling the current Channel on a device or endpoint."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "ChangeChannel",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "ChangeChannelResponse",
+      "parameters": [],
+      "privilege": "V",
+      "side": "client"
+    },
+    {
+      "id": "0x02",
+      "name": "ChangeChannelByNumber",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x03",
+      "name": "SkipChannel",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "ChannelList",
+      "data_type": "list[ChannelInfo]",
+      "value_range": {},
+      "description": "This optional list provides the channels supported.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "Lineup",
+      "data_type": "LineupInfo",
+      "value_range": {},
+      "description": "This optional field identifies the channel lineup using external data sources.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "CurrentChannel",
+      "data_type": "ChannelInfo",
+      "value_range": {},
+      "description": "This optional field contains the current channel. When supported but a channel is not currently tuned to (if a content application is in foreground), the value of the field SHALL be null.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

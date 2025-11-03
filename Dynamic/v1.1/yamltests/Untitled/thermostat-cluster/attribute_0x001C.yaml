@@ -1,0 +1,275 @@
+config:
+  attribute: '0x001C'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x001C_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: SystemMode will be set to 0 (Off)
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"SystemMode"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify thermostat-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: Immediate
+  Attribute_Change: SystemMode will be set to 9 (Sleep)
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"SystemMode"': 9}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify thermostat-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: Immediate
+  Attribute_Change: SystemMode will be set to 1 (Auto)
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"SystemMode"': 1}
+  label: Test_Case_Special_Response_for_Auto_Mode
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify thermostat-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: Immediate
+  Attribute_Change: SystemMode will be set to 5 (EmergencyHeat)
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"SystemMode"': 5}
+  label: Test_Case_Special_Response_for_Emergency_Heat_Mode
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify thermostat-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:12†source】【4:13†source】.'
+  arguments:
+    '{"SystemMode"': 10}
+  label: Test_Case_Invalid_Value_(Out_of_Range)
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify thermostat-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 150
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

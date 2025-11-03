@@ -1,0 +1,26 @@
+name: Valve Configuration and Control - DefaultOpenLevel Attribute Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Valve Configuration and Control
+  timeout: 180
+tests:
+- label: Read DefaultOpenLevel attribute
+  command: readAttribute
+  attribute: DefaultOpenLevel
+  response:
+    saveAs: defaultopenlevel_value
+- label: DefaultOpenLevel - Test minimum value (0)
+  command: readAttribute
+  attribute: DefaultOpenLevel
+  response:
+    constraints:
+      minValue: 0
+      maxValue: 255
+- label: DefaultOpenLevel - Test maximum value (255)
+  command: readAttribute
+  attribute: DefaultOpenLevel
+  response:
+    constraints:
+      minValue: 0
+      maxValue: 255

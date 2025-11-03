@@ -1,0 +1,58 @@
+config:
+  attribute: '0x00'
+  cluster: general-diagnostics-cluster
+  nodeId: '0x654231'
+name: general-diagnostics-cluster_attribute_0x00_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: NetworkInterfaces will be an empty list
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"NetworkInterfaces"': '[]}'
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: NetworkInterfaces will be a list of 4 NetworkInterfaceType objects
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"NetworkInterfaces"': '[{"Name": "eth0", "FabricConnected": True, "OffPremiseServicesReachableIPv4":
+      True, "OffPremiseServicesReachableIPv6": True, "HardwareAddress": "00:11:22:33:44:55",
+      "Type": 1}, {"Name": "wlan0", "FabricConnected": True, "OffPremiseServicesReachableIPv4":
+      True, "OffPremiseServicesReachableIPv6": True, "HardwareAddress": "66:77:88:99:AA:BB",
+      "Type": 2}, {"Name": "eth1", "FabricConnected": False, "OffPremiseServicesReachableIPv4":
+      False, "OffPremiseServicesReachableIPv6": False, "HardwareAddress": "CC:DD:EE:FF:00:11",
+      "Type": 1}, {"Name": "wlan1", "FabricConnected": False, "OffPremiseServicesReachableIPv4":
+      False, "OffPremiseServicesReachableIPv6": False, "HardwareAddress": "22:33:44:55:66:77",
+      "Type": 2}]}'
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: NetworkInterfaces will be a list with one NetworkInterfaceType
+    object with FabricConnected set to False
+  ExpectedResponse: Fabric not connected
+  Pre-requisites: None
+  arguments:
+    '{"NetworkInterfaces"': '[{"Name": "eth0", "FabricConnected": False, "OffPremiseServicesReachableIPv4":
+      True, "OffPremiseServicesReachableIPv6": True, "HardwareAddress": "00:11:22:33:44:55",
+      "Type": 1}]}'
+  label: Test_Case_Special_Response_-_FabricConnected_False
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: NetworkInterfaces will be a list with one NetworkInterfaceType
+    object with OffPremiseServicesReachableIPv4 and OffPremiseServicesReachableIPv6
+    set to False
+  ExpectedResponse: Off-premise services not reachable
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:5†source】【4:11†source】.'
+  arguments:
+    '{"NetworkInterfaces"': '[{"Name": "eth0", "FabricConnected": True, "OffPremiseServicesReachableIPv4":
+      False, "OffPremiseServicesReachableIPv6": False, "HardwareAddress": "00:11:22:33:44:55",
+      "Type": 1}]}'
+  label: Test_Case_Special_Response_-_OffPremiseServicesReachableIPv4_and_IPv6_False
+  option: WriteAttribute

@@ -1,0 +1,53 @@
+config:
+  cluster: application-launcher-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: application-launcher-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: APP_NOT_AVAILABLE
+  Pre-requisites: None
+  arguments:
+    '**ApplicationID**': '""'
+    '**CatalogVendorID**': 0
+    '**Data**': '""'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: SYSTEM_BUSY
+  Pre-requisites: None
+  arguments:
+    '**ApplicationID**': '"A" * 255 (assuming 255 is the max length for the string)'
+    '**CatalogVendorID**': 65535
+    '**Data**': '"FF" * 1024 (assuming 1024 bytes is the max length for the octstr)'
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: APP_NOT_AVAILABLE
+  Pre-requisites: The application "NonExistentApp" should not be available in the
+    catalog with VendorID 1234.
+  arguments:
+    '**ApplicationID**': '"NonExistentApp"'
+    '**CatalogVendorID**': 1234
+    '**Data**': '""'
+  label: Test_Case_Special_Response_-_APP_NOT_AVAILABLE
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: SYSTEM_BUSY
+  Pre-requisites: 'The system should be busy or unable to honor the command for the
+    application "BusyApp".
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:5†source】【4:15†source】.'
+  arguments:
+    '**ApplicationID**': '"BusyApp"'
+    '**CatalogVendorID**': 5678
+    '**Data**': '""'
+  label: Test_Case_Special_Response_-_SYSTEM_BUSY
+  option: SendCommand

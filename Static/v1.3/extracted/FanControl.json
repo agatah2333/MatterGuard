@@ -1,0 +1,381 @@
+{
+  "cluster_id": "0x0202",
+  "name": "Fan Control",
+  "description": "This cluster specifies an interface to control the speed of a fan.",
+  "features": [
+    {
+      "bit": 0,
+      "code": "SPD",
+      "name": "MultiSpeed",
+      "summary": "0-SpeedMax Fan Speeds"
+    },
+    {
+      "bit": 1,
+      "code": "AUT",
+      "name": "Auto",
+      "summary": "Automatic mode supported for fan speed"
+    },
+    {
+      "bit": 2,
+      "code": "RCK",
+      "name": "Rocking",
+      "summary": "Rocking movement supported"
+    },
+    {
+      "bit": 3,
+      "code": "WND",
+      "name": "Wind",
+      "summary": "Wind emulation supported"
+    },
+    {
+      "bit": 4,
+      "code": "STEP",
+      "name": "Step",
+      "summary": "Step command supported"
+    },
+    {
+      "bit": 5,
+      "code": "DIR",
+      "name": "AirflowDirection",
+      "summary": "Airflow Direction attribute is supported"
+    }
+  ],
+  "data_types": [
+    {
+      "name": "RockBitmap",
+      "type": "bitmap",
+      "bits": [
+        {
+          "bit": 0,
+          "name": "RockLeftRight",
+          "summary": "Indicate rock left to right",
+          "conformance": "M"
+        },
+        {
+          "bit": 1,
+          "name": "RockUpDown",
+          "summary": "Indicate rock up and down",
+          "conformance": "M"
+        },
+        {
+          "bit": 2,
+          "name": "RockRound",
+          "summary": "Indicate rock around",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "name": "WindBitmap",
+      "type": "bitmap",
+      "bits": [
+        {
+          "bit": 0,
+          "name": "SleepWind",
+          "summary": "Indicate sleep wind",
+          "conformance": "M",
+          "description": "The fan speed, based on current settings, SHALL gradually slow down to a final minimum speed."
+        },
+        {
+          "bit": 1,
+          "name": "NaturalWind",
+          "summary": "Indicate natural wind",
+          "conformance": "M",
+          "description": "The fan speed SHALL vary to emulate natural wind."
+        }
+      ]
+    },
+    {
+      "name": "StepDirectionEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "Increase",
+          "summary": "Step moves in increasing direction",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "Decrease",
+          "summary": "Step moves in decreasing direction",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "name": "AirflowDirectionEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "Forward",
+          "summary": "Airflow is in the forward direction",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "Reverse",
+          "summary": "Airflow is in the reverse direction",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "name": "FanModeEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "Off",
+          "summary": "Fan is off",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "Low",
+          "summary": "Fan using low speed",
+          "conformance": "desc"
+        },
+        {
+          "value": 2,
+          "name": "Medium",
+          "summary": "Fan using medium speed",
+          "conformance": "desc"
+        },
+        {
+          "value": 3,
+          "name": "High",
+          "summary": "Fan using high speed",
+          "conformance": "M"
+        },
+        {
+          "value": 4,
+          "name": "On",
+          "summary": "",
+          "conformance": "D"
+        },
+        {
+          "value": 5,
+          "name": "Auto",
+          "summary": "Fan is using auto mode",
+          "conformance": "AUT"
+        },
+        {
+          "value": 6,
+          "name": "Smart",
+          "summary": "Fan is using smart mode",
+          "conformance": "D"
+        }
+      ]
+    },
+    {
+      "name": "FanModeSequenceEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "Off/Low/Med/High",
+          "summary": "Fan is capable of off, low, medium and high modes",
+          "conformance": "[!AUT].a"
+        },
+        {
+          "value": 1,
+          "name": "Off/Low/High",
+          "summary": "Fan is capable of off, low and high modes",
+          "conformance": "[!AUT].a"
+        },
+        {
+          "value": 2,
+          "name": "Off/Low/Med/High/Auto",
+          "summary": "Fan is capable of off, low, medium, high and auto modes",
+          "conformance": "[AUT].a"
+        },
+        {
+          "value": 3,
+          "name": "Off/Low/High/Auto",
+          "summary": "Fan is capable of off, low, high and auto modes",
+          "conformance": "[AUT].a"
+        },
+        {
+          "value": 4,
+          "name": "Off/High/Auto",
+          "summary": "Fan is capable of off, high and auto modes",
+          "conformance": "[AUT].a"
+        },
+        {
+          "value": 5,
+          "name": "Off/High",
+          "summary": "Fan is capable of off and high modes",
+          "conformance": "[!AUT].a"
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "Step",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "STEP",
+      "description": "This command speeds up or slows down the fan, in steps, without the client having to know the fan speed.",
+      "fields": [
+        {
+          "id": 0,
+          "name": "Direction",
+          "type": "StepDirectionEnum",
+          "default": "Increase",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "Wrap",
+          "type": "bool",
+          "default": "false",
+          "conformance": "O"
+        },
+        {
+          "id": 2,
+          "name": "LowestOff",
+          "type": "bool",
+          "default": "true",
+          "conformance": "O"
+        }
+      ]
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "FanMode",
+      "type": "FanModeEnum",
+      "constraint": "0 to 6",
+      "quality": "N",
+      "default": "0",
+      "access": "RW VO",
+      "conformance": "M"
+    },
+    {
+      "id": "0x0001",
+      "name": "FanModeSequence",
+      "type": "FanModeSequenceEnum",
+      "constraint": "0 to 5",
+      "quality": "N",
+      "default": "MS",
+      "access": "R[W] VO",
+      "conformance": "Zigbee"
+    },
+    {
+      "id": "0x0001",
+      "name": "FanModeSequence",
+      "type": "FanModeSequenceEnum",
+      "constraint": "0 to 5",
+      "quality": "F",
+      "default": "MS",
+      "access": "RV",
+      "conformance": "M"
+    },
+    {
+      "id": "0x0002",
+      "name": "PercentSetting",
+      "type": "percent",
+      "constraint": "0 to 100",
+      "quality": "X",
+      "default": "0",
+      "access": "RW VO",
+      "conformance": "M"
+    },
+    {
+      "id": "0x0003",
+      "name": "PercentCurrent",
+      "type": "percent",
+      "constraint": "0 to 100",
+      "default": "desc",
+      "access": "RV",
+      "conformance": "M"
+    },
+    {
+      "id": "0x0004",
+      "name": "SpeedMax",
+      "type": "uint8",
+      "constraint": "1 to 100",
+      "quality": "F",
+      "default": "MS",
+      "access": "RV",
+      "conformance": "SPD"
+    },
+    {
+      "id": "0x0005",
+      "name": "SpeedSetting",
+      "type": "uint8",
+      "constraint": "0 to SpeedMax",
+      "quality": "X",
+      "default": "0",
+      "access": "RW VO",
+      "conformance": "SPD"
+    },
+    {
+      "id": "0x0006",
+      "name": "SpeedCurrent",
+      "type": "uint8",
+      "constraint": "0 to SpeedMax",
+      "quality": "P",
+      "default": "desc",
+      "access": "RV",
+      "conformance": "SPD"
+    },
+    {
+      "id": "0x0007",
+      "name": "RockSupport",
+      "type": "RockBitmap",
+      "constraint": "desc",
+      "quality": "F",
+      "default": "0",
+      "access": "RV",
+      "conformance": "RCK"
+    },
+    {
+      "id": "0x0008",
+      "name": "RockSetting",
+      "type": "RockBitmap",
+      "constraint": "desc",
+      "quality": "P",
+      "default": "0",
+      "access": "RW VO",
+      "conformance": "RCK"
+    },
+    {
+      "id": "0x0009",
+      "name": "WindSupport",
+      "type": "WindBitmap",
+      "constraint": "desc",
+      "quality": "F",
+      "default": "0",
+      "access": "RV",
+      "conformance": "WND"
+    },
+    {
+      "id": "0x000A",
+      "name": "WindSetting",
+      "type": "WindBitmap",
+      "constraint": "desc",
+      "quality": "P",
+      "default": "0",
+      "access": "RW VO",
+      "conformance": "WND"
+    },
+    {
+      "id": "0x000B",
+      "name": "AirflowDirection",
+      "type": "AirflowDirectionEnum",
+      "constraint": "desc",
+      "quality": "P",
+      "default": "0",
+      "access": "RW VO",
+      "conformance": "DIR"
+    }
+  ],
+  "events": []
+}

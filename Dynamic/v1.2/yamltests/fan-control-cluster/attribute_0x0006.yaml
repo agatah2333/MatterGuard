@@ -1,0 +1,59 @@
+config:
+  attribute: '0x0006'
+  cluster: fan-control-cluster
+  nodeId: '0x654231'
+name: fan-control-cluster_attribute_0x0006_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: SpeedCurrent = 0
+  ExpectedResponse: <success>
+  Pre-requisites: SpeedMax should be greater than or equal to 0
+  arguments:
+    '{"SpeedCurrent"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: SpeedCurrent = <SpeedMax>
+  ExpectedResponse: <success>
+  Pre-requisites: SpeedMax should be set to a valid value
+  arguments:
+    '{"SpeedCurrent"': <SpeedMax>}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: SpeedCurrent = 0
+  ExpectedResponse: <success>
+  Pre-requisites: FanMode should be set to Off
+  arguments:
+    '{"SpeedCurrent"': 0}
+  label: Test_Case_Special_Response_-_Off_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: SpeedCurrent = <null>
+  ExpectedResponse: <success>
+  Pre-requisites: FanMode should be set to Auto
+  arguments:
+    '{"SpeedCurrent"': <null>}
+  label: Test_Case_Special_Response_-_Auto_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: <error>
+  Pre-requisites: SpeedMax should be set to a valid value
+  arguments:
+    '{"SpeedCurrent"': <SpeedMax + 1>}
+  label: Test_Case_Invalid_Value_(Above_Maximum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: <error>
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"SpeedCurrent"': -1}
+  label: Test_Case_Invalid_Value_(Negative)
+  option: WriteAttribute

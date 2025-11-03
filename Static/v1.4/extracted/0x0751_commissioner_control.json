@@ -1,0 +1,122 @@
+{
+  "source_file": "Commissioner Control_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0751",
+        "name": "Commissioner Control",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SupportedDeviceCategories",
+            "dataType": "SupportedDeviceCategoryBitmap",
+            "valueRange": "",
+            "description": "Supported device category capabilities bitmap",
+            "privilege": "Read",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "RequestCommissioningApproval",
+            "parameters": {
+              "RequestID": {
+                "dataType": "uint64",
+                "valueRange": ""
+              },
+              "VendorID": {
+                "dataType": "vendor-id",
+                "valueRange": ""
+              },
+              "ProductID": {
+                "dataType": "uint16",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "CommissionNode",
+            "parameters": {
+              "RequestID": {
+                "dataType": "uint64",
+                "valueRange": ""
+              },
+              "ResponseTimeoutSeconds": {
+                "dataType": "uint16",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "ReverseOpenCommissioningWindow",
+            "parameters": {
+              "CommissioningTimeout": {
+                "dataType": "uint16",
+                "valueRange": ""
+              },
+              "PAKEPasscodeVerifier": {
+                "dataType": "octstr",
+                "valueRange": ""
+              },
+              "Discriminator": {
+                "dataType": "uint16",
+                "valueRange": "0-4095"
+              },
+              "Iterations": {
+                "dataType": "uint32",
+                "valueRange": "1000-100000"
+              },
+              "Salt": {
+                "dataType": "octstr",
+                "valueRange": "16-32"
+              }
+            },
+            "privilege": "Manage",
+            "direction": "server ⇒ client"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "CommissioningRequestResult",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "RequestID: uint64, ClientNodeID: node-id, StatusCode: StatusEnum",
+              "description": "Commissioning request outcome notification"
+            },
+            "privilege": "Info",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "SupportedDeviceCategoryBitmap": {
+            "baseType": "bitmap32",
+            "fields": {
+              "FabricSynchronization": {
+                "mask": "0x00000001",
+                "description": "Supports fabric synchronization"
+              }
+            }
+          },
+          "StatusEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Success",
+              "1": "InvalidParameters",
+              "2": "Unauthorized",
+              "3": "DeviceNotSupported"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

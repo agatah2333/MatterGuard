@@ -1,0 +1,53 @@
+config:
+  cluster: ota-software-update-provider
+  command: '0x02'
+  nodeId: '0x654231'
+name: ota-software-update-provider_command_0x02_v1.1.0.0
+tests:
+- ActionTime: <0>
+  Attribute_Change: <NewVersion applied>
+  ExpectedResponse: <Proceed>
+  Pre-requisites: <OTA Requestor ready to apply update>
+  arguments:
+    NewVersion:
+      NewVersion: <minimum uint32 value>
+    UpdateToken:
+      UpdateToken: <8-byte value>
+  label: Test_Case_Minimum_Length_UpdateToken
+  option: SendCommand
+- ActionTime: <0>
+  Attribute_Change: <NewVersion applied>
+  ExpectedResponse: <Proceed>
+  Pre-requisites: <OTA Requestor ready to apply update>
+  arguments:
+    NewVersion:
+      NewVersion: <maximum uint32 value>
+    UpdateToken:
+      UpdateToken: <32-byte value>
+  label: Test_Case_Maximum_Length_UpdateToken
+  option: SendCommand
+- ActionTime: <non-zero value>
+  Attribute_Change: <None>
+  ExpectedResponse: <AwaitNextAction>
+  Pre-requisites: <OTA Requestor ready to apply update>
+  arguments:
+    NewVersion:
+      NewVersion: <valid NewVersion>
+    UpdateToken:
+      UpdateToken: <valid UpdateToken>
+  label: Test_Case_Special_Response_-_AwaitNextAction
+  option: SendCommand
+- ActionTime: <0>
+  Attribute_Change: <None>
+  ExpectedResponse: <Discontinue>
+  Pre-requisites: '<OTA Requestor ready to apply update>
+
+
+    ### Field Ranges'
+  arguments:
+    NewVersion:
+      NewVersion: <valid NewVersion>
+    UpdateToken:
+      UpdateToken: <valid UpdateToken>
+  label: Test_Case_Special_Response_-_Discontinue
+  option: SendCommand

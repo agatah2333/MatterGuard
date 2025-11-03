@@ -1,0 +1,383 @@
+config:
+  node_id: 305414945
+  cluster: '0x0008'
+  endpoint: 1
+tests:
+- label: test_step_StepMode_up
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_step_StepMode_down
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 1
+    StepSize: 1
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_step_StepSize_minimum_boundary
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_step_StepSize_maximum_boundary
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 0
+    StepSize: 254
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_step_StepSize_midrange
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 0
+    StepSize: 127
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_step_StepSize_below_minimum
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 0
+    StepSize: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+- label: test_step_StepSize_above_maximum
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 0
+    StepSize: 255
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+- label: test_step_TransitionTime_minimum_boundary
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_step_TransitionTime_maximum_boundary
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 65534
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_step_TransitionTime_midrange
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 32767
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_step_TransitionTime_null_value
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 65535
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_step_TransitionTime_above_maximum
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 65535
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+- label: test_step_OptionsMask_minimum_boundary
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_step_OptionsMask_maximum_boundary
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 0
+    OptionsMask: 255
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_step_OptionsMask_midrange
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 0
+    OptionsMask: 127
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_step_OptionsOverride_minimum_boundary
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_step_OptionsOverride_maximum_boundary
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 255
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_step_OptionsOverride_midrange
+  cluster: '0x0008'
+  command: '0x02'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 127
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS

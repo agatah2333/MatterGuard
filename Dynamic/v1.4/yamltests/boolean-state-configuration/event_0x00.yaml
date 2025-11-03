@@ -1,0 +1,14 @@
+config:
+  node_id: 6636324
+  cluster: '0x0080'
+  endpoint: 1
+tests:
+- label: read_event_00
+  cluster: '0x0080'
+  event: '0x00'
+  operation: read_event
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS

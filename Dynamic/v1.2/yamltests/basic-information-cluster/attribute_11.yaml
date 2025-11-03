@@ -1,0 +1,29 @@
+config:
+  attribute: '11'
+  cluster: basic-information-cluster
+  nodeId: '0x654231'
+name: basic-information-cluster_attribute_11_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: Reachable = 0
+  ExpectedResponse: Device is not reachable
+  Pre-requisites: 'Device must be powered off or disconnected
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"Reachable"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Reachable = 0
+  ExpectedResponse: Device is not reachable, trigger alert
+  Pre-requisites: 'Device must be powered off or disconnected, alert system must be
+    active
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"Reachable"': 0}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

@@ -1,0 +1,30 @@
+config:
+  attribute: '0x0000'
+  cluster: thermostat-user-interface-configuration-cluster
+  nodeId: '0x654231'
+name: thermostat-user-interface-configuration-cluster_attribute_0x0000_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: TemperatureDisplayMode will be set to 0 (Celsius)
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"TemperatureDisplayMode"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None, as the value is out of the valid range.
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    '{"TemperatureDisplayMode"': 2}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

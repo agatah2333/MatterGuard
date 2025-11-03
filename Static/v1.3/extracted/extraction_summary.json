@@ -1,0 +1,173 @@
+{
+  "extraction_date": "2024-10-09",
+  "source_file": "/home/agatha/matterSDK/dynamic/v1.3.0.0/data-model/specification/Matter-1.3-Core-Specification.txt",
+  "total_clusters": 32,
+  "successful_extractions": 25,
+  "failed_extractions": 7,
+  "section9_clusters": 11,
+  "section11_clusters": 21,
+  "successful_clusters": [
+    {
+      "cluster_id": "0x0039",
+      "name": "Bridged Device Basic Information",
+      "file": "cluster_0039_Bridged_Device_Basic_Information.json"
+    },
+    {
+      "cluster_id": "0x0025",
+      "name": "Actions",
+      "file": "cluster_0025_Actions.json"
+    },
+    {
+      "cluster_id": "0x0043",
+      "name": "Proxy Discovery",
+      "file": "cluster_0043_Proxy_Discovery.json"
+    },
+    {
+      "cluster_id": "0x0042",
+      "name": "Proxy Configuration",
+      "file": "cluster_0042_Proxy_Configuration.json"
+    },
+    {
+      "cluster_id": "0x0046",
+      "name": "ICD Management",
+      "file": "cluster_0046_ICD_Management.json"
+    },
+    {
+      "cluster_id": "0x0028",
+      "name": "Basic Information",
+      "file": "cluster_0028_Basic_Information.json"
+    },
+    {
+      "cluster_id": "0x003F",
+      "name": "Group Key Management",
+      "file": "cluster_003F_Group_Key_Management.json"
+    },
+    {
+      "cluster_id": "0x002B",
+      "name": "Localization Configuration",
+      "file": "cluster_002B_Localization_Configuration.json"
+    },
+    {
+      "cluster_id": "0x002C",
+      "name": "Time Format Localization",
+      "file": "cluster_002C_Time_Format_Localization.json"
+    },
+    {
+      "cluster_id": "0x002D",
+      "name": "Unit Localization",
+      "file": "cluster_002D_Unit_Localization.json"
+    },
+    {
+      "cluster_id": "0x002E",
+      "name": "Power Source Configuration",
+      "file": "cluster_002E_Power_Source_Configuration.json"
+    },
+    {
+      "cluster_id": "0x002F",
+      "name": "Power Source",
+      "file": "cluster_002F_Power_Source.json"
+    },
+    {
+      "cluster_id": "0x009C",
+      "name": "Power Topology",
+      "file": "cluster_009C_Power_Topology.json"
+    },
+    {
+      "cluster_id": "0x0031",
+      "name": "Network Commissioning",
+      "file": "cluster_0031_Network_Commissioning.json"
+    },
+    {
+      "cluster_id": "0x0030",
+      "name": "General Commissioning",
+      "file": "cluster_0030_General_Commissioning.json"
+    },
+    {
+      "cluster_id": "0x0032",
+      "name": "Diagnostic Logs",
+      "file": "cluster_0032_Diagnostic_Logs.json"
+    },
+    {
+      "cluster_id": "0x0033",
+      "name": "General Diagnostics",
+      "file": "cluster_0033_General_Diagnostics.json"
+    },
+    {
+      "cluster_id": "0x0034",
+      "name": "Software Diagnostics",
+      "file": "cluster_0034_Software_Diagnostics.json"
+    },
+    {
+      "cluster_id": "0x0035",
+      "name": "Thread Network Diagnostics",
+      "file": "cluster_0035_Thread_Network_Diagnostics.json"
+    },
+    {
+      "cluster_id": "0x0036",
+      "name": "Wi-Fi Network Diagnostics",
+      "file": "cluster_0036_Wi-Fi_Network_Diagnostics.json"
+    },
+    {
+      "cluster_id": "0x0037",
+      "name": "Ethernet Network Diagnostics",
+      "file": "cluster_0037_Ethernet_Network_Diagnostics.json"
+    },
+    {
+      "cluster_id": "0x0038",
+      "name": "Time Synchronization",
+      "file": "cluster_0038_Time_Synchronization.json"
+    },
+    {
+      "cluster_id": "0x003E",
+      "name": "Operational Credentials",
+      "file": "cluster_003E_Operational_Credentials.json"
+    },
+    {
+      "cluster_id": "0x003C",
+      "name": "Administrator Commissioning",
+      "file": "cluster_003C_Administrator_Commissioning.json"
+    },
+    {
+      "cluster_id": "0x002A",
+      "name": "OTA Software Update Requestor",
+      "file": "cluster_002A_OTA_Software_Update_Requestor.json"
+    }
+  ],
+  "failed_clusters": [
+    {
+      "cluster_id": "0x001D",
+      "name": "Descriptor",
+      "error": "Section not found"
+    },
+    {
+      "cluster_id": "0x001E",
+      "name": "Binding",
+      "error": "Section not found"
+    },
+    {
+      "cluster_id": "0x0040",
+      "name": "Fixed Label",
+      "error": "Section not found"
+    },
+    {
+      "cluster_id": "0x0041",
+      "name": "User Label",
+      "error": "Section not found"
+    },
+    {
+      "cluster_id": "0x001F",
+      "name": "Access Control",
+      "error": "Section not found"
+    },
+    {
+      "cluster_id": "0x0044",
+      "name": "Valid Proxies",
+      "error": "Section not found"
+    },
+    {
+      "cluster_id": "0x0029",
+      "name": "OTA Software Update Provider",
+      "error": "Section not found"
+    }
+  ]
+}

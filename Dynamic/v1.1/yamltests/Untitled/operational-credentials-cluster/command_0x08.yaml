@@ -1,0 +1,259 @@
+config:
+  cluster: operational-credentials-cluster
+  command: '0x08'
+  nodeId: '0x654231'
+name: operational-credentials-cluster_command_0x08_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"NOCs list": "updated with new NOC chain"}'
+  ExpectedResponse: '{"StatusCode": "Ok"}'
+  Pre-requisites: '{"CSRRequest command issued and response received"}'
+  arguments:
+    AdminVendorId:
+      AdminVendorId: <valid_vendor_id>
+    CaseAdminSubject:
+      CaseAdminSubject: <valid_subject_id>
+    ICACValue:
+      ICACValue: <400_octets_string>
+    IpkValue:
+      IpkValue: <16_octets_string>
+    NOCValue:
+      NOCValue: <400_octets_string>
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify operational-credentials-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: <current_time>
+  Attribute_Change: '{"NOCs list": "unchanged"}'
+  ExpectedResponse: '{"StatusCode": "TableFull"}'
+  Pre-requisites: '{"CommissionedFabrics attribute equal to SupportedFabrics attribute"}'
+  arguments:
+    AdminVendorId:
+      AdminVendorId: <valid_vendor_id>
+    CaseAdminSubject:
+      CaseAdminSubject: <valid_subject_id>
+    ICACValue:
+      ICACValue: <valid_octets_string>
+    IpkValue:
+      IpkValue: <valid_octets_string>
+    NOCValue:
+      NOCValue: <valid_octets_string>
+  label: Test_Case_Table_Full_Error
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify operational-credentials-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: <current_time>
+  Attribute_Change: '{"NOCs list": "unchanged"}'
+  ExpectedResponse: '{"StatusCode": "MissingCsr"}'
+  Pre-requisites: '{"No prior CSRRequest command invoked in the same secure session"}'
+  arguments:
+    AdminVendorId:
+      AdminVendorId: <valid_vendor_id>
+    CaseAdminSubject:
+      CaseAdminSubject: <valid_subject_id>
+    ICACValue:
+      ICACValue: <valid_octets_string>
+    IpkValue:
+      IpkValue: <valid_octets_string>
+    NOCValue:
+      NOCValue: <valid_octets_string>
+  label: Test_Case_Missing_CSR_Error
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify operational-credentials-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: <current_time>
+  Attribute_Change: '{"NOCs list": "unchanged"}'
+  ExpectedResponse: '{"StatusCode": "InvalidNOC"}'
+  Pre-requisites: '{"NOC validation fails"}
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【6:0†source】【6:1†source】【6:2†source】【6:3†source】【6:4†source】【6:5†source】【6:6†source】【6:7†source】【6:8†source】【6:9†source】【6:10†source】【6:11†source】【6:12†source】【6:13†source】【6:14†source】【6:15†source】【6:16†source】【6:17†source】【6:18†source】【6:19†source】.'
+  arguments:
+    AdminVendorId:
+      AdminVendorId: <valid_vendor_id>
+    CaseAdminSubject:
+      CaseAdminSubject: <valid_subject_id>
+    ICACValue:
+      ICACValue: <valid_octets_string>
+    IpkValue:
+      IpkValue: <valid_octets_string>
+    NOCValue:
+      NOCValue: <invalid_octets_string>
+  label: Test_Case_Invalid_NOC_Error
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify operational-credentials-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

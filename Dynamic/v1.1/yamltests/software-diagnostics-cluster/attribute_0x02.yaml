@@ -1,0 +1,43 @@
+config:
+  attribute: '0x02'
+  cluster: software-diagnostics-cluster
+  nodeId: '0x654231'
+name: software-diagnostics-cluster_attribute_0x02_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '`CurrentHeapUsed` will be set to 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments: {}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`CurrentHeapUsed` will be set to 18446744073709551615'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments: {}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`CurrentHeapUsed` will be set to 1073741824'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments: {}
+  label: Test_Case_Typical_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`CurrentHeapHighWatermark` will be set to the value of `CurrentHeapUsed`
+    (536870912)'
+  ExpectedResponse: Success
+  Pre-requisites: 'The `ResetWatermarks` command must be received
+
+
+    These test cases cover the extreme values of the `CurrentHeapUsed` attribute,
+    as well as a typical value and a special condition involving the `ResetWatermarks`
+    command.
+
+
+    For more details, refer to the Matter Core Specification【4:6†source】.'
+  arguments: {}
+  label: Test_Case_Special_Condition_-_ResetWatermarks_Command
+  option: WriteAttribute

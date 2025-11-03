@@ -1,0 +1,56 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x050a",
+    "name": "Content Launcher",
+    "description": "Provides an interface for launching content on a Video Player device such as a Streaming Media Player, Smart TV or Smart Screen."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "LaunchContent",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "LaunchURL",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x02",
+      "name": "LauncherResponse",
+      "parameters": [],
+      "privilege": "V",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "AcceptHeader",
+      "data_type": "list[string]",
+      "value_range": {
+        "max": "100"
+      },
+      "description": "This list provides list of content types supported by the Video Player or Content App in the form of entries in the HTTP 'Accept' request header.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "SupportedStreamingProtocols",
+      "data_type": "bitmap32",
+      "value_range": {},
+      "description": "This attribute provides information about supported streaming protocols.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

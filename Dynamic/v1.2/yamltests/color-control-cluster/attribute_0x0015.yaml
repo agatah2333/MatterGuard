@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0015'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0015_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '- `Primary2X`: 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Primary2X: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '- `Primary2X`: 0xFEFF'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Primary2X: '0xFEFF'
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '- `Primary2X`: 1'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Primary2X: 1
+  label: Test_Case_Special_Response_Value_(Boundary_Condition)
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '- `Primary2X`: 0xFEFE'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as per the attribute''s description
+    in the provided document【4:0†source】.'
+  arguments:
+    Primary2X: '0xFEFE'
+  label: Test_Case_Special_Response_Value_(Boundary_Condition)
+  option: WriteAttribute

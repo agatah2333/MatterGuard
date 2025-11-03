@@ -1,0 +1,51 @@
+config:
+  cluster: channel-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: channel-cluster_command_0x02_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '`CurrentChannel` attribute will be updated to reflect the change.'
+  ExpectedResponse: Success
+  Pre-requisites: The channel with major number 0 and minor number 0 must exist in
+    the `ChannelList`.
+  arguments:
+    majorNumber: 0
+    minorNumber: 0
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '`CurrentChannel` attribute will be updated to reflect the change.'
+  ExpectedResponse: Success
+  Pre-requisites: The channel with major number 65535 and minor number 65535 must
+    exist in the `ChannelList`.
+  arguments:
+    majorNumber: 65535
+    minorNumber: 65535
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: No attribute will be changed.
+  ExpectedResponse: Error (e.g., `CHANNEL_NOT_FOUND`)
+  Pre-requisites: The channel with major number 9999 and minor number 9999 must not
+    exist in the `ChannelList`.
+  arguments:
+    majorNumber: 9999
+    minorNumber: 9999
+  label: Test_Case_Special_Response_-_Non-existent_Channel
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '`CurrentChannel` attribute will be updated to reflect the change.'
+  ExpectedResponse: Success
+  Pre-requisites: 'The channel with major number 1 and minor number 65535 must exist
+    in the `ChannelList`.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:14†source】.'
+  arguments:
+    majorNumber: 1
+    minorNumber: 65535
+  label: Test_Case_Special_Response_-_Boundary_Condition
+  option: SendCommand

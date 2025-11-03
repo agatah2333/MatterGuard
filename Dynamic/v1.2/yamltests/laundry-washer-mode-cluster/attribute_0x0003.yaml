@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0003'
+  cluster: laundry-washer-mode-cluster
+  nodeId: '0x654231'
+name: laundry-washer-mode-cluster_attribute_0x0003_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentMode`: 0x00'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    OnMode: '0x00'
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentMode`: 0xFF'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    OnMode: '0xFF'
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentMode`: 0x4000'
+  ExpectedResponse: Success
+  Pre-requisites: SupportedModes must include Normal mode tag
+  arguments:
+    OnMode: '0x4000'
+  label: Test_Case_Normal_Mode_Tag
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentMode`: 0x4001'
+  ExpectedResponse: Success
+  Pre-requisites: 'SupportedModes must include Delicate mode tag
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:2†source】【4:6†source】【4:10†source】.'
+  arguments:
+    OnMode: '0x4001'
+  label: Test_Case_Delicate_Mode_Tag
+  option: WriteAttribute

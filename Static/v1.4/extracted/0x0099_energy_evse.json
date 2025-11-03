@@ -1,0 +1,423 @@
+{
+  "source_file": "Energy EVSE_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0099",
+        "name": "Energy EVSE",
+        "description": "Electric Vehicle Supply Equipment (EVSE) is equipment used to charge an Electric Vehicle (EV) or Plug-In Hybrid Electric Vehicle.",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "State",
+            "dataType": "StateEnum",
+            "valueRange": "",
+            "description": "Indicates the current status of the EVSE.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "SupplyState",
+            "dataType": "SupplyStateEnum",
+            "valueRange": "",
+            "description": "Indicates whether the EV is currently allowed to charge from or discharge to the EVSE.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "FaultState",
+            "dataType": "FaultStateEnum",
+            "valueRange": "",
+            "description": "Indicates the type of fault detected by the EVSE.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "ChargingEnabledUntil",
+            "dataType": "epoch-s",
+            "valueRange": "",
+            "description": "Indicates the UTC time when charging will automatically stop.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0004",
+            "name": "DischargingEnabledUntil",
+            "dataType": "epoch-s",
+            "valueRange": "",
+            "description": "Indicates the UTC time when discharging will automatically stop.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0005",
+            "name": "CircuitCapacity",
+            "dataType": "amperage-mA",
+            "valueRange": "min 0",
+            "description": "Maximum current capacity of the circuit.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0006",
+            "name": "MinimumChargeCurrent",
+            "dataType": "amperage-mA",
+            "valueRange": "min 0",
+            "description": "Minimum deliverable charging current.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0007",
+            "name": "MaximumChargeCurrent",
+            "dataType": "amperage-mA",
+            "valueRange": "min 0",
+            "description": "Maximum deliverable charging current.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0008",
+            "name": "MaximumDischargeCurrent",
+            "dataType": "amperage-mA",
+            "valueRange": "min 0",
+            "description": "Maximum acceptable discharge current.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0009",
+            "name": "UserMaximumChargeCurrent",
+            "dataType": "amperage-mA",
+            "valueRange": "",
+            "description": "User-defined maximum charge current preference.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x000A",
+            "name": "RandomizationDelayWindow",
+            "dataType": "elapsed-s",
+            "valueRange": "max 86400",
+            "description": "Randomized charging start window duration.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0023",
+            "name": "NextChargeStartTime",
+            "dataType": "epoch-s",
+            "valueRange": "",
+            "description": "Scheduled next charge start time (UTC).",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0024",
+            "name": "NextChargeTargetTime",
+            "dataType": "epoch-s",
+            "valueRange": "",
+            "description": "Target charge completion time (UTC).",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0025",
+            "name": "NextChargeRequiredEnergy",
+            "dataType": "energy-mWh",
+            "valueRange": "min 0",
+            "description": "Planned energy transfer for next charge.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0026",
+            "name": "NextChargeTargetSoC",
+            "dataType": "percent",
+            "valueRange": "0-100",
+            "description": "Target state of charge for next session.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0027",
+            "name": "ApproximateEVEfficiency",
+            "dataType": "uint16",
+            "valueRange": "",
+            "description": "Vehicle energy conversion efficiency rating.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0030",
+            "name": "StateOfCharge",
+            "dataType": "percent",
+            "valueRange": "0-100",
+            "description": "Current battery charge percentage.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0031",
+            "name": "BatteryCapacity",
+            "dataType": "energy-mWh",
+            "valueRange": "min 0",
+            "description": "Total battery energy capacity.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0032",
+            "name": "VehicleID",
+            "dataType": "string",
+            "valueRange": "max 32",
+            "description": "ISO-15118 vehicle identification.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0040",
+            "name": "SessionID",
+            "dataType": "uint32",
+            "valueRange": "",
+            "description": "Unique session identifier.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0041",
+            "name": "SessionDuration",
+            "dataType": "elapsed-s",
+            "valueRange": "",
+            "description": "Current/last session duration in seconds.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0042",
+            "name": "SessionEnergyCharged",
+            "dataType": "energy-mWh",
+            "valueRange": "min 0",
+            "description": "Energy delivered to EV in current/last session.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0043",
+            "name": "SessionEnergyDischarged",
+            "dataType": "energy-mWh",
+            "valueRange": "min 0",
+            "description": "Energy received from EV in current/last session.",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x01",
+            "name": "Disable",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Allows a client to disable the EVSE from charging and discharging."
+            },
+            "privilege": "M",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x02",
+            "name": "EnableCharging",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "MaxChargeCurrent: amperage-mA (min 0), MinChargeCurrent: amperage-mA (min 0)",
+              "description": "Enables charging with current limits"
+            },
+            "privilege": "M",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x03",
+            "name": "EnableDischarging",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "MaxDischargeCurrent: amperage-mA (min 0)",
+              "description": "Enables discharging with current limit"
+            },
+            "privilege": "M",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x04",
+            "name": "StartDiagnostics",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Initiates self-diagnostics mode"
+            },
+            "privilege": "A",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x05",
+            "name": "SetTargets",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "TargetSoC: percent, TargetTime: epoch-s",
+              "description": "Sets charging targets"
+            },
+            "privilege": "RW",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x06",
+            "name": "GetTargets",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Requests current charging targets"
+            },
+            "privilege": "R",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x07",
+            "name": "ClearTargets",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Clears stored charging targets"
+            },
+            "privilege": "RW",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x00",
+            "name": "GetTargetsResponse",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "CurrentTargets: (TargetSoC: percent, TargetTime: epoch-s)",
+              "description": "Returns current charging targets"
+            },
+            "privilege": "R",
+            "direction": "server → client"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "EVConnected",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "SessionID: uint32",
+              "description": "Generated when the EV is plugged in."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x01",
+            "name": "EVNotDetected",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "SessionID: uint32, State: StateEnum, SessionDuration: elapsed-s, SessionEnergyCharged: energy-mWh",
+              "description": "Generated when the EV is unplugged or not detected."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x02",
+            "name": "EnergyTransferStarted",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "SessionID: uint32, State: StateEnum, MaximumCurrent: amperage-mA",
+              "description": "Generated whenever the EV starts charging or discharging."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x03",
+            "name": "EnergyTransferStopped",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "SessionID: uint32",
+              "description": "This event is generated whenever the EV stops charging or discharging."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x04",
+            "name": "Fault",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "SessionID: uint32, FaultCode: FaultStateEnum",
+              "description": "Generated when the EVSE detects a fault."
+            },
+            "privilege": "CRITICAL",
+            "side": "server"
+          },
+          {
+            "id": "0x05",
+            "name": "RFID",
+            "parameters": {
+              "dataType": "octstr",
+              "valueRange": "max 64",
+              "description": "Generated when an RFID card has been read."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "StateEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Disabled",
+              "1": "Charging",
+              "2": "Discharging",
+              "3": "Fault"
+            }
+          },
+          "SupplyStateEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Disabled",
+              "1": "ChargingEnabled",
+              "2": "DischargingEnabled"
+            }
+          },
+          "FaultStateEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "NoError",
+              "1": "OverCurrent",
+              "2": "UnderVoltage",
+              "3": "OverTemperature"
+            }
+          },
+          "energy-mWh": {
+            "baseType": "uint64",
+            "unit": "milliwatt-hour"
+          },
+          "amperage-mA": {
+            "baseType": "uint32",
+            "unit": "milliampere"
+          }
+        },
+        "features": {
+          "ChargingPreferences": "0",
+          "SoCReporting": "1",
+          "PlugAndCharge": "2",
+          "RFID": "3",
+          "V2X": "4"
+        }
+      }
+    ]
+  }
+}

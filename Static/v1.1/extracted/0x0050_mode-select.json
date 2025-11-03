@@ -1,0 +1,74 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0050",
+    "name": "Mode Select",
+    "description": "SHALL support the FeatureMap global attribute:\n\nID                           Code                         Name                          Description\n\n0                            DEPONOFF                     On/Off                        Dependency with the\n                                                                                        On/Off cluster\n\n\n1."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "ChangeToMode",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Descrip",
+      "data_type": "string",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0001",
+      "name": "Standard",
+      "data_type": "enum16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0002",
+      "name": "Supported",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0003",
+      "name": "Current",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0004",
+      "name": "StartUp",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0005",
+      "name": "OnMode",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    }
+  ],
+  "events": []
+}

@@ -1,0 +1,66 @@
+{
+  "cluster_id": "0x002A",
+  "cluster_name": "OTA Software Update Requestor",
+  "section": "11.20.7",
+  "description": "",
+  "data_types": {},
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "DefaultO­",
+      "details": "list[Provid desc [] RW F VA M",
+      "raw_line": "0x0000         DefaultO­      list[Provid desc                            []             RW F VA    M"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "UpdatePos",
+      "details": "bool all True RV M",
+      "raw_line": "0x0001         UpdatePos bool               all                           True           RV         M"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "UpdateS­",
+      "details": "UpdateSta­ all Unknown RV M",
+      "raw_line": "0x0002         UpdateS­       UpdateSta­ all                              Unknown        RV         M"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "UpdateS­",
+      "details": "uint8 0 to 100 X null RV M",
+      "raw_line": "0x0003         UpdateS­       uint8         0 to 100       X              null           RV         M"
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "AnnounceO­",
+      "details": "client ⇒ server Y A O",
+      "raw_line": "0x00               AnnounceO­          client ⇒ server Y                       A                 O"
+    }
+  },
+  "events": {
+    "0x00": {
+      "id": "0x00",
+      "name": "StateTransition",
+      "details": "INFO V M",
+      "raw_line": "0x00                    StateTransition        INFO                     V                        M"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "VersionApplied",
+      "details": "CRITICAL V M",
+      "raw_line": "0x01                    VersionApplied         CRITICAL                 V                        M"
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "DownloadError",
+      "details": "INFO V M",
+      "raw_line": "0x02                    DownloadError          INFO                     V                        M"
+    }
+  },
+  "extraction_info": {
+    "start_line": 50273,
+    "end_line": 53544,
+    "total_lines": 3271
+  }
+}

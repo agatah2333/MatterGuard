@@ -1,0 +1,43 @@
+config:
+  attribute: '0x001A'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x001A_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: SafetyStatus = 0x0000
+  ExpectedResponse: Nominal operation, no safety issues.
+  Pre-requisites: None
+  arguments:
+    SafetyStatusBitmap: '0x0000'
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: SafetyStatus = 0xFFFF
+  ExpectedResponse: All safety issues flagged.
+  Pre-requisites: None
+  arguments:
+    SafetyStatusBitmap: '0xFFFF'
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: SafetyStatus = 0x0002
+  ExpectedResponse: Calibration needed.
+  Pre-requisites: None
+  arguments:
+    SafetyStatusBitmap: '0x0002'
+  label: Test_Case_Special_Response_-_Calibration_Needed
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: SafetyStatus = 0x0001
+  ExpectedResponse: Movement commands are ignored (locked out).
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    SafetyStatusBitmap: '0x0001'
+  label: Test_Case_Special_Response_-_Movement_Commands_Ignored
+  option: WriteAttribute

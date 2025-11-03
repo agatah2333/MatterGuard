@@ -1,0 +1,48 @@
+config:
+  attribute: '0x0005'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0005_v1.2.0.0
+tests:
+- ActionTime: Not applicable
+  Attribute_Change: Not applicable
+  ExpectedResponse: Not specified
+  Pre-requisites: None
+  arguments:
+    '{"DriftCompensation"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: Not applicable
+  Attribute_Change: Not applicable
+  ExpectedResponse: Not specified
+  Pre-requisites: None
+  arguments:
+    '{"DriftCompensation"': 4}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: Not applicable
+  Attribute_Change: Not applicable
+  ExpectedResponse: Not specified
+  Pre-requisites: None
+  arguments:
+    '{"DriftCompensation"': 2}
+  label: Test_Case_Special_Response_Values
+  option: WriteAttribute
+- ActionTime: Not applicable
+  Attribute_Change: Not applicable
+  ExpectedResponse: Not specified
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints and the values that
+    could result in special responses as per the attribute''s range and type.
+
+
+    ### Source
+
+    The information is derived from the Matter 1.2 Application Cluster Specification
+    document【4:0†source】.'
+  arguments:
+    '{"DriftCompensation"': 3}
+  label: Test_Case_Special_Response_Values
+  option: WriteAttribute

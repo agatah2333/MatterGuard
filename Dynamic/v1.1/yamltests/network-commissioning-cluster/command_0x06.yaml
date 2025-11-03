@@ -1,0 +1,6 @@
+config:
+  cluster: network-commissioning-cluster
+  command: '0x06'
+  nodeId: '0x654231'
+name: network-commissioning-cluster_command_0x06_v1.1.0.0
+tests: []

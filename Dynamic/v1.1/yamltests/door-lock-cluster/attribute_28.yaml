@@ -1,0 +1,37 @@
+config:
+  attribute: '28'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_28_v1.1.0.0
+tests:
+- ActionTime: N/A (Read-only attribute)
+  Attribute_Change: N/A (Read-only attribute)
+  ExpectedResponse: Default configuration values as set on the device.
+  Pre-requisites: Device must be in factory default state.
+  arguments:
+    Auto Relock Time: 0
+    Enable Local Programming: 0
+    Keypad Interface: 0
+    LED Settings: 0
+    Remote Interface: 0
+    Sound Volume: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A (Read-only attribute)
+  Attribute_Change: N/A (Read-only attribute)
+  ExpectedResponse: Default configuration values as set on the device.
+  Pre-requisites: 'Device must be in a state where all features are enabled.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    Auto Relock Time: 1
+    Enable Local Programming: 1
+    Keypad Interface: 1
+    LED Settings: 1
+    Remote Interface: 1
+    Sound Volume: 1
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

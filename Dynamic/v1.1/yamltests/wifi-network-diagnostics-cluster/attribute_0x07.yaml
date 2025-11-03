@@ -1,0 +1,44 @@
+config:
+  attribute: '0x07'
+  cluster: wifi-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: wifi-network-diagnostics-cluster_attribute_0x07_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: LastConnectErrorValue = -2147483648
+  ExpectedResponse: <error_response>
+  Pre-requisites: Ensure the device is in a state where it can report the LastConnectErrorValue.
+  arguments:
+    '{"LastConnectErrorValue"': -2147483648}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: LastConnectErrorValue = 2147483647
+  ExpectedResponse: <error_response>
+  Pre-requisites: Ensure the device is in a state where it can report the LastConnectErrorValue.
+  arguments:
+    '{"LastConnectErrorValue"': 2147483647}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: LastConnectErrorValue = null
+  ExpectedResponse: <null_response>
+  Pre-requisites: No network configurations exist in the Networks attribute, or no
+    connection attempt has been made.
+  arguments:
+    '{"LastConnectErrorValue"': null}
+  label: Test_Case_Null_Value_(No_Attempt_Made)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: LastConnectErrorValue = null
+  ExpectedResponse: <null_response>
+  Pre-requisites: 'The last connection attempt succeeded, as indicated by a value
+    of Success in the LastNetworkingStatus attribute.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special responses mentioned in the description of the effect【4:0†source】【4:1†source】.'
+  arguments:
+    '{"LastConnectErrorValue"': null}
+  label: Test_Case_Special_Response_(Success_in_LastNetworkingStatus)
+  option: WriteAttribute

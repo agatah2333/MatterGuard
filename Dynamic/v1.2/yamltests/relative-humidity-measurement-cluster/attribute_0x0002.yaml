@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0002'
+  cluster: relative-humidity-measurement-cluster
+  nodeId: '0x654231'
+name: relative-humidity-measurement-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `MaxMeasuredValue`: 1'
+  ExpectedResponse: Success
+  Pre-requisites: '- `MinMeasuredValue` should be set to 0'
+  arguments:
+    MaxMeasuredValue: 1
+  label: Test_Case_Minimum_Value_of_the_Constraint
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `MaxMeasuredValue`: 10000'
+  ExpectedResponse: Success
+  Pre-requisites: '- `MinMeasuredValue` should be set to a value less than 10000'
+  arguments:
+    MaxMeasuredValue: 10000
+  label: Test_Case_Maximum_Value_of_the_Constraint
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `MaxMeasuredValue`: 2'
+  ExpectedResponse: Success
+  Pre-requisites: '- `MinMeasuredValue` should be set to 1'
+  arguments:
+    MaxMeasuredValue: 2
+  label: Test_Case_Value_Just_Above_Minimum_Constraint
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `MaxMeasuredValue`: 9999'
+  ExpectedResponse: Success
+  Pre-requisites: '- `MinMeasuredValue` should be set to a value less than 9999
+
+
+    These test cases cover the extreme values of the constraints of the `MaxMeasuredValue`
+    field and values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    MaxMeasuredValue: 9999
+  label: Test_Case_Value_Just_Below_Maximum_Constraint
+  option: WriteAttribute

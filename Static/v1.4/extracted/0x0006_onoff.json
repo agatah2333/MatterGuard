@@ -1,0 +1,152 @@
+{
+  "source_file": "onoff.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0006",
+        "name": "On/Off",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "OnOff",
+            "dataType": "bool",
+            "valueRange": "",
+            "description": "Current device power state",
+            "privilege": "Read",
+            "writable": true
+          },
+          {
+            "id": "0x4000",
+            "name": "GlobalSceneControl",
+            "dataType": "bool",
+            "valueRange": "",
+            "description": "Global scene storage control",
+            "privilege": "Read",
+            "writable": true
+          },
+          {
+            "id": "0x4001",
+            "name": "OnTime",
+            "dataType": "uint16",
+            "valueRange": "0-65535",
+            "description": "Remaining on duration in 1/10th seconds",
+            "privilege": "ReadWrite",
+            "writable": true
+          },
+          {
+            "id": "0x4002",
+            "name": "OffWaitTime",
+            "dataType": "uint16",
+            "valueRange": "0-65535",
+            "description": "Delay before turning off in 1/10th seconds",
+            "privilege": "ReadWrite",
+            "writable": true
+          },
+          {
+            "id": "0x4003",
+            "name": "StartUpOnOff",
+            "dataType": "StartUpOnOffEnum",
+            "valueRange": "0-2",
+            "description": "Power restoration behavior",
+            "privilege": "ReadWrite",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "Off",
+            "parameters": {},
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "On",
+            "parameters": {},
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "Toggle",
+            "parameters": {},
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x40",
+            "name": "OffWithEffect",
+            "parameters": {
+              "EffectIdentifier": {
+                "dataType": "EffectIdentifierEnum",
+                "valueRange": "0-255"
+              },
+              "EffectVariant": {
+                "dataType": "uint8",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x41",
+            "name": "OnWithRecallGlobalScene",
+            "parameters": {},
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x42",
+            "name": "OnWithTimedOff",
+            "parameters": {
+              "Control": {
+                "dataType": "OnOffControlBitmap",
+                "valueRange": ""
+              },
+              "OnTime": {
+                "dataType": "uint16",
+                "valueRange": "0-65535"
+              },
+              "OffWaitTime": {
+                "dataType": "uint16",
+                "valueRange": "0-65535"
+              }
+            },
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "OnOffControlBitmap": {
+            "baseType": "bitmap8",
+            "fields": {
+              "AcceptOnlyWhenOn": {
+                "mask": "0x01",
+                "description": "Only accept command when device is on"
+              }
+            }
+          },
+          "StartUpOnOffEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Off",
+              "1": "On",
+              "2": "Toggle"
+            }
+          },
+          "EffectIdentifierEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "DelayedOff",
+              "1": "DyingLight"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

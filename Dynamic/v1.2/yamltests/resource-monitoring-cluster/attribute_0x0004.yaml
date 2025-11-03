@@ -1,0 +1,6 @@
+config:
+  attribute: '0x0004'
+  cluster: resource-monitoring-cluster
+  nodeId: '0x654231'
+name: resource-monitoring-cluster_attribute_0x0004_v1.2.0.0
+tests: []

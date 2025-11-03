@@ -1,0 +1,6 @@
+config:
+  attribute: '0x00'
+  cluster: unit-localization-cluster
+  nodeId: '0x654231'
+name: unit-localization-cluster_attribute_0x00_v1.0.0
+tests: []

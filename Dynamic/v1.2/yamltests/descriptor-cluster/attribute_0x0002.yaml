@@ -1,0 +1,31 @@
+config:
+  attribute: '0x0002'
+  cluster: descriptor-cluster
+  nodeId: '0x654231'
+name: descriptor-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`ClientList` will be set to an empty list.'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The endpoint must support the Descriptor cluster.
+  arguments:
+    ClientList: []
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`ClientList` will be set to [0x0000, 0xFFFF].'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'The endpoint must support the Descriptor cluster and the provided
+    cluster IDs must be valid.
+
+
+    These test cases cover the extreme values and special responses for the `ClientList`
+    attribute in the Descriptor cluster. The first test case checks the behavior with
+    an empty list, while the second test case checks the behavior with a list containing
+    the minimum and maximum possible cluster IDs.'
+  arguments:
+    ClientList:
+    - 0
+    - 65535
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: WriteAttribute

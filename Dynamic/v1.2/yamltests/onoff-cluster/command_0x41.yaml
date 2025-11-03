@@ -1,0 +1,26 @@
+config:
+  cluster: onoff-cluster
+  command: '0x41'
+  nodeId: '0x654231'
+name: onoff-cluster_command_0x41_v1.2.0.0
+tests:
+- ActionTime: Not applicable
+  Attribute_Change: OnOff attribute will be set to TRUE
+  ExpectedResponse: Success
+  Pre-requisites: The device should be in the Off state before the command is sent.
+  arguments: {}
+  label: Test_Case_Extreme_Value_(Turning_On)
+  option: SendCommand
+- ActionTime: Not applicable
+  Attribute_Change: OnOff attribute remains TRUE
+  ExpectedResponse: Success
+  Pre-requisites: 'The device should already be in the On state before the command
+    is sent.
+
+
+    These test cases cover the scenarios where the device is turned on from an off
+    state and when the device is already on, ensuring that the command behaves as
+    expected in both situations.'
+  arguments: {}
+  label: Test_Case_Special_Response_(Already_On)
+  option: SendCommand

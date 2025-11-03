@@ -1,0 +1,43 @@
+{
+  "cluster_id": "0x002C",
+  "cluster_name": "Time Format Localization",
+  "section": "11.4",
+  "description": "Nodes should be expected to be deployed to any and all regions of the world. These global regions may have differing preferences for how dates and times are conveyed. As such, Nodes that visually or audibly convey time information need a mechanism by which they can be configured to use a user’s preferred format. This cluster supports an interface to a Node. It provides attributes for determining and configuring",
+  "data_types": {
+    "HourFormatEnum": {
+      "name": "HourFormatEnum",
+      "definition_line": "11.4.5.1. HourFormatEnum Type"
+    },
+    "CalendarTypeEnum": {
+      "name": "CalendarTypeEnum",
+      "definition_line": "11.4.5.2. CalendarTypeEnum Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "HourFor­",
+      "details": "HourFor­ all N RW VM M",
+      "raw_line": "0x0000         HourFor­      HourFor­      all            N               RW VM                     M"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "ActiveCal­",
+      "details": "Calendar­ all N RW VM CALFMT",
+      "raw_line": "0x0001         ActiveCal­ Calendar­        all            N               RW VM                     CALFMT"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "Support­",
+      "details": "list[Calen­ desc F RV N/A CALFMT",
+      "raw_line": "0x0002         Support­      list[Calen­   desc           F               RV            N/A         CALFMT"
+    }
+  },
+  "commands": {},
+  "events": {},
+  "extraction_info": {
+    "start_line": 38290,
+    "end_line": 38457,
+    "total_lines": 167
+  }
+}

@@ -1,0 +1,43 @@
+config:
+  attribute: '0x02'
+  cluster: icd-management-cluster
+  nodeId: '0x654231'
+name: icd-management-cluster_attribute_0x02_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '`AdminVendorId` will be set to 0x0000'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AdminVendorId: '0x0000'
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`AdminVendorId` will be set to 0xFFFF'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AdminVendorId: '0xFFFF'
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`AdminVendorId` will be set to 0x8000'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AdminVendorId: '0x8000'
+  label: Test_Case_Special_Value_(Mid-Range)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`AdminVendorId` will be set to 0x1234'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the `AdminVendorId`
+    field and include a couple of special values that might be used in specific vendor
+    scenarios.'
+  arguments:
+    AdminVendorId: '0x1234'
+  label: Test_Case_Special_Value_(Vendor_Specific)
+  option: WriteAttribute

@@ -1,0 +1,398 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0101",
+    "name": "Door Lock",
+    "description": "This cluster provides an interface to door lock functionality, including configuration and control."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "Lock Door"
+    },
+    {
+      "id": "0x01",
+      "name": "Unlock Door"
+    },
+    {
+      "id": "0x02",
+      "name": "Toggle"
+    },
+    {
+      "id": "0x05",
+      "name": "Set PIN Code"
+    },
+    {
+      "id": "0x06",
+      "name": "Get PIN Code"
+    },
+    {
+      "id": "0x14",
+      "name": "Set User Type"
+    },
+    {
+      "id": "0x15",
+      "name": "Get User Type"
+    },
+    {
+      "id": "0x16",
+      "name": "Set RFID Code"
+    },
+    {
+      "id": "0x17",
+      "name": "Get RFID Code"
+    },
+    {
+      "id": "0x1a",
+      "name": "Set User"
+    },
+    {
+      "id": "0x1b",
+      "name": "Get User"
+    },
+    {
+      "id": "0x1d",
+      "name": "Clear User"
+    },
+    {
+      "id": "0x22",
+      "name": "Set Credential"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "LockState",
+      "type": "enum8",
+      "constraint": "desc",
+      "description": "LockState attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "LockType",
+      "type": "enum8",
+      "constraint": "desc",
+      "description": "LockType attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "ActuatorEnabled",
+      "type": "unknown",
+      "description": "ActuatorEnabled attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0003",
+      "name": "DoorStateMatterCopyright---Idmance",
+      "type": "enum8",
+      "constraint": "desc",
+      "description": "DoorStateMatterCopyright---Idmance attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0004",
+      "name": "DoorOpenEvents",
+      "type": "unknown",
+      "description": "DoorOpenEvents attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0005",
+      "name": "DoorClosedEvents",
+      "type": "unknown",
+      "description": "DoorClosedEvents attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0006",
+      "name": "OpenPeriod",
+      "type": "unknown",
+      "description": "OpenPeriod attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0010",
+      "name": "NumberOfLogRecordsSupported",
+      "type": "unknown",
+      "description": "NumberOfLogRecordsSupported attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0011",
+      "name": "NumberOfTotalUsersSupported",
+      "type": "unknown",
+      "description": "NumberOfTotalUsersSupported attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0012",
+      "name": "NumberOfPINUsersSupported",
+      "type": "unknown",
+      "description": "NumberOfPINUsersSupported attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0013",
+      "name": "NumberOfRFIDUsersSupported",
+      "type": "unknown",
+      "description": "NumberOfRFIDUsersSupported attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0014",
+      "name": "NumberOfWeekDaySchedulesSupportedPerUser",
+      "type": "unknown",
+      "description": "NumberOfWeekDaySchedulesSupportedPerUser attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0015",
+      "name": "NumberOfYearDaySchedulesSupportedPerUser",
+      "type": "unknown",
+      "description": "NumberOfYearDaySchedulesSupportedPerUser attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0016",
+      "name": "NumberOfHolidaySchedulesSupported",
+      "type": "unknown",
+      "description": "NumberOfHolidaySchedulesSupported attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0017",
+      "name": "MaxPINCodeLength",
+      "type": "unknown",
+      "description": "MaxPINCodeLength attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0018",
+      "name": "MinPINCodeLength",
+      "type": "unknown",
+      "description": "MinPINCodeLength attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0019",
+      "name": "MaxRFIDCodeLength",
+      "type": "unknown",
+      "description": "MaxRFIDCodeLength attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x001a",
+      "name": "MinRFIDCodeLength",
+      "type": "unknown",
+      "description": "MinRFIDCodeLength attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x001b",
+      "name": "CredentialRulesSupport",
+      "type": "unknown",
+      "description": "CredentialRulesSupport attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x001c",
+      "name": "NumberOfCredentialsSupportedPerUser",
+      "type": "unknown",
+      "description": "NumberOfCredentialsSupportedPerUser attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0020",
+      "name": "EnableLogging",
+      "type": "unknown",
+      "description": "EnableLogging attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0021",
+      "name": "Language",
+      "type": "string",
+      "constraint": "max 254",
+      "description": "Language attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0022",
+      "name": "LEDSettings",
+      "type": "unknown",
+      "description": "LEDSettings attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0023",
+      "name": "AutoRelockTime",
+      "type": "unknown",
+      "description": "AutoRelockTime attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0024",
+      "name": "SoundVolume",
+      "type": "unknown",
+      "description": "SoundVolume attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0025",
+      "name": "OperatingMode",
+      "type": "unknown",
+      "description": "OperatingMode attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0026",
+      "name": "SupportedOperatingModes",
+      "type": "unknown",
+      "description": "SupportedOperatingModes attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0027",
+      "name": "DefaultConfigurationRegister",
+      "type": "unknown",
+      "description": "DefaultConfigurationRegister attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0028",
+      "name": "EnableLocalProgramming",
+      "type": "unknown",
+      "description": "EnableLocalProgramming attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0029",
+      "name": "EnableOneTouchLocking",
+      "type": "unknown",
+      "description": "EnableOneTouchLocking attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x002a",
+      "name": "EnableInsideStatusLED",
+      "type": "unknown",
+      "description": "EnableInsideStatusLED attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x002b",
+      "name": "EnablePrivacyModeButton",
+      "type": "unknown",
+      "description": "EnablePrivacyModeButton attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x002c",
+      "name": "LocalProgrammingFeatures",
+      "type": "unknown",
+      "description": "LocalProgrammingFeatures attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0030",
+      "name": "WrongCodeEntryLimit",
+      "type": "unknown",
+      "description": "WrongCodeEntryLimit attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0031",
+      "name": "UserCodeTemporaryDisableTime",
+      "type": "unknown",
+      "description": "UserCodeTemporaryDisableTime attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0032",
+      "name": "SendPINOverTheAir",
+      "type": "unknown",
+      "description": "SendPINOverTheAir attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0033",
+      "name": "RequirePINforRemoteOperation",
+      "type": "unknown",
+      "description": "RequirePINforRemoteOperation attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0034",
+      "name": "SecurityLevel0",
+      "type": "unknown",
+      "description": "SecurityLevel0 attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0035",
+      "name": "ExpiringUserTimeout",
+      "type": "unknown",
+      "description": "ExpiringUserTimeout attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0040",
+      "name": "AlarmMask",
+      "type": "unknown",
+      "description": "AlarmMask attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0041",
+      "name": "KeypadOperationEventMask",
+      "type": "unknown",
+      "description": "KeypadOperationEventMask attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0042",
+      "name": "RemoteOperationEventMask",
+      "type": "unknown",
+      "description": "RemoteOperationEventMask attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0043",
+      "name": "ManualOperationEventMask",
+      "type": "unknown",
+      "description": "ManualOperationEventMask attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0044",
+      "name": "RFIDOperationEventMask",
+      "type": "unknown",
+      "description": "RFIDOperationEventMask attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0045",
+      "name": "KeypadProgrammingEventMask",
+      "type": "unknown",
+      "description": "KeypadProgrammingEventMask attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0046",
+      "name": "RemoteProgrammingEventMask",
+      "type": "unknown",
+      "description": "RemoteProgrammingEventMask attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0047",
+      "name": "RFIDProgrammingEventMask",
+      "type": "unknown",
+      "description": "RFIDProgrammingEventMask attribute",
+      "access": "R"
+    }
+  ],
+  "events": []
+}

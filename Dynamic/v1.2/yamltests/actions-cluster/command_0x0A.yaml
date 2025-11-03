@@ -1,0 +1,47 @@
+config:
+  cluster: actions-cluster
+  command: '0x0A'
+  nodeId: '0x654231'
+name: actions-cluster_command_0x0A_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: Action state will be changed to Inactive
+  ExpectedResponse: Success
+  Pre-requisites: Action with `ActionID` 0 must exist
+  arguments:
+    ActionID: 0
+    InvokeID: 0
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: Action state will be changed to Inactive
+  ExpectedResponse: Success
+  Pre-requisites: Action with `ActionID` 65535 must exist
+  arguments:
+    ActionID: 65535
+    InvokeID: 4294967295
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: ActionFailed
+  Pre-requisites: Action with `ActionID` 12345 does not exist
+  arguments:
+    ActionID: 12345
+    InvokeID: 67890
+  label: Test_Case_Special_Response_-_Action_Not_Found
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None (Action state remains Inactive)
+  ExpectedResponse: Success (No state change)
+  Pre-requisites: 'Action with `ActionID` 54321 is already Inactive
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:6†source】【4:7†source】.'
+  arguments:
+    ActionID: 54321
+    InvokeID: 98765
+  label: Test_Case_Special_Response_-_Action_Already_Inactive
+  option: SendCommand

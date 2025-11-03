@@ -1,0 +1,317 @@
+config:
+  attribute: '19'
+  cluster: 0xbasic-information-cluster
+  nodeId: '0x654231'
+  node_id: 305414945
+  endpoint: 1
+name: basic-information-cluster_attribute_19_v1.3.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: Reachable = True
+  ExpectedResponse: Device is reachable.
+  Pre-requisites: Device must be powered on and connected to the network.
+  arguments:
+    '{"Reachable"': True}
+  option: WriteAttribute
+  label: test_unknown_case_0
+  cluster: 0xbasic-information-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xbasic-information-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xBASIC
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xBASIC
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xBASIC
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xBASIC
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: <current_time>
+  Attribute_Change: Reachable = False
+  ExpectedResponse: Device is not reachable.
+  Pre-requisites: Device must be powered off or disconnected from the network.
+  arguments:
+    '{"Reachable"': False}
+  option: WriteAttribute
+  label: test_unknown_case_1
+  cluster: 0xbasic-information-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xbasic-information-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xBASIC
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xBASIC
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xBASIC
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xBASIC
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: <current_time>
+  Attribute_Change: Reachable = True
+  ExpectedResponse: Device becomes reachable after being unreachable.
+  Pre-requisites: Device was previously unreachable and is now powered on and connected
+    to the network.
+  arguments:
+    '{"Reachable"': True}
+  option: WriteAttribute
+  label: test_unknown_case_2
+  cluster: 0xbasic-information-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xbasic-information-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xBASIC
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xBASIC
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xBASIC
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xBASIC
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: <current_time>
+  Attribute_Change: Reachable = False
+  ExpectedResponse: Device becomes unreachable after being reachable.
+  Pre-requisites: 'Device was previously reachable and is now powered off or disconnected
+    from the network.
+
+
+    These test cases cover the extreme values of the `Reachable` attribute (True and
+    False) and the transitions between these states, which could result in special
+    responses as mentioned in the description of the effect.'
+  arguments:
+    '{"Reachable"': False}
+  option: WriteAttribute
+  label: test_unknown_case_3
+  cluster: 0xbasic-information-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xbasic-information-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xBASIC
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xBASIC
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xBASIC
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xBASIC
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+v13_validation:
+  strict_spec_compliance: true
+  validate_all_fields: true
+  check_conformance_requirements: true
+  validate_data_constraints: true
+  matter_version: 1.3.0.0
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

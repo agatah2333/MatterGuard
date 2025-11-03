@@ -1,0 +1,48 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0402",
+    "name": "Temperature Measurement",
+    "description": "has no cluster specific commands."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Measured",
+      "data_type": "int16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0001",
+      "name": "MinMea",
+      "data_type": "int16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0002",
+      "name": "MaxMea",
+      "data_type": "int16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0003",
+      "name": "Tolerance",
+      "data_type": "uint16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    }
+  ],
+  "events": []
+}

@@ -1,0 +1,176 @@
+{
+  "source_file": "Oven Cavity Operational State_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0048",
+        "name": "Oven Cavity Operational State",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "PhaseList",
+            "dataType": "list[string]",
+            "valueRange": "max 32 elements, each max 64 chars",
+            "description": "List of names of different phases for the selected function/mode",
+            "privilege": "RVM",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentPhase",
+            "dataType": "uint8",
+            "valueRange": "",
+            "description": "Current phase of operation being performed",
+            "privilege": "RVM",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "CountdownTime",
+            "dataType": "elapsed-s",
+            "valueRange": "0-259200",
+            "description": "Estimated time left before operation completion (seconds)",
+            "privilege": "RVO",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "OperationalStateList",
+            "dataType": "list[OperationalStateStruct]",
+            "valueRange": "",
+            "description": "Set of possible operational states",
+            "privilege": "RVM",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "OperationalState",
+            "dataType": "OperationalStateEnum",
+            "valueRange": "",
+            "description": "Current operational state of the device",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0005",
+            "name": "OperationalError",
+            "dataType": "ErrorStateStruct",
+            "valueRange": "",
+            "description": "Details of current error condition",
+            "privilege": "R",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "Pause",
+            "parameters": {
+              "dataType": "OperationalCommandResponse",
+              "valueRange": "",
+              "description": "Pauses the operation if possible"
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "Stop",
+            "parameters": {
+              "dataType": "OperationalCommandResponse",
+              "valueRange": "",
+              "description": "Stops the operation if possible"
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "Start",
+            "parameters": {
+              "dataType": "OperationalCommandResponse",
+              "valueRange": "",
+              "description": "Starts the operation if possible"
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x03",
+            "name": "Resume",
+            "parameters": {
+              "dataType": "OperationalCommandResponse",
+              "valueRange": "",
+              "description": "Resumes the operation if possible"
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x04",
+            "name": "OperationalCommandResponse",
+            "parameters": {
+              "dataType": "ErrorStateStruct",
+              "valueRange": "",
+              "description": "Indicates command success/failure"
+            },
+            "privilege": "N",
+            "direction": "client ⇐ server"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "OperationalError",
+            "parameters": {
+              "dataType": "ErrorStateStruct",
+              "valueRange": "",
+              "description": "Reportable error condition detected"
+            },
+            "privilege": "CRITICAL",
+            "side": "server"
+          },
+          {
+            "id": "0x01",
+            "name": "OperationCompletion",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "CompletionStatus: enum8, TotalDuration: elapsed-s, TimeRemaining: elapsed-s",
+              "description": "Operation end notification"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "OperationalStateStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "OperationalStateID": "OperationalStateEnum",
+              "OperationalStateLabel": "string(max 64)"
+            }
+          },
+          "OperationalStateEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Standby",
+              "1": "Heating",
+              "2": "Cooling",
+              "3": "Cleaning",
+              "4": "Error"
+            }
+          },
+          "ErrorStateStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "ErrorStateID": "uint8",
+              "ErrorStateLabel": "string(max 64)",
+              "ErrorDetails": "string(max 256)"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

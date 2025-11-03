@@ -1,0 +1,45 @@
+config:
+  cluster: onoff-cluster
+  command: '0x42'
+  nodeId: '0x654231'
+name: onoff-cluster_command_0x42_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`OnOff` = TRUE, `OnTime` = 0, `OffWaitTime` = 0'
+  ExpectedResponse: Command processed unconditionally, `OnOff` set to TRUE, `OnTime`
+    and `OffWaitTime` set to 0
+  Pre-requisites: None
+  arguments:
+    '{"OnOffControl"': '0, "OnTime": 0, "OffWaitTime": 0}'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: 65535
+  Attribute_Change: '`OnOff` = TRUE, `OnTime` = 65535, `OffWaitTime` = 65535'
+  ExpectedResponse: Command processed unconditionally, `OnOff` set to TRUE, `OnTime`
+    and `OffWaitTime` set to 65535
+  Pre-requisites: None
+  arguments:
+    '{"OnOffControl"': '0, "OnTime": 65535, "OffWaitTime": 65535}'
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: 100
+  Attribute_Change: None
+  ExpectedResponse: Command discarded because `OnOff` is FALSE
+  Pre-requisites: '`OnOff` = FALSE'
+  arguments:
+    '{"OnOffControl"': '1, "OnTime": 100, "OffWaitTime": 200}'
+  label: Test_Case_Special_Response_-_`AcceptOnlyWhenOn`_is_1_and_`OnOff`_is_FALSE
+  option: SendCommand
+- ActionTime: 300
+  Attribute_Change: '`OnOff` = TRUE, `OnTime` = 300, `OffWaitTime` = 400'
+  ExpectedResponse: Command processed, `OnOff` set to TRUE, `OnTime` and `OffWaitTime`
+    set to 300 and 400 respectively
+  Pre-requisites: '`OnOff` = TRUE
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the special responses mentioned in the description of the effect【4:0†source】【4:2†source】【4:6†source】【4:14†source】.'
+  arguments:
+    '{"OnOffControl"': '1, "OnTime": 300, "OffWaitTime": 400}'
+  label: Test_Case_Special_Response_-_`AcceptOnlyWhenOn`_is_1_and_`OnOff`_is_TRUE
+  option: SendCommand

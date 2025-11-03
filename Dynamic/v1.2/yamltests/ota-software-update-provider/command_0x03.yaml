@@ -1,0 +1,42 @@
+config:
+  cluster: ota-software-update-provider
+  command: '0x03'
+  nodeId: '0x654231'
+name: ota-software-update-provider_command_0x03_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: UpdateState to "Applying"
+  ExpectedResponse: Proceed immediately
+  Pre-requisites: Software image is ready to be applied.
+  arguments:
+    '{"Action"': '0, "DelayedActionTime": 0}'
+  label: Test_Case_Minimum_DelayedActionTime_with_Proceed_Action
+  option: SendCommand
+- ActionTime: 86400
+  Attribute_Change: UpdateState to "Applying" after 24 hours
+  ExpectedResponse: Proceed after 24 hours
+  Pre-requisites: Software image is ready to be applied.
+  arguments:
+    '{"Action"': '0, "DelayedActionTime": 86400}'
+  label: Test_Case_Maximum_DelayedActionTime_with_Proceed_Action
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: UpdateState to "AwaitingNextAction"
+  ExpectedResponse: Await next action immediately
+  Pre-requisites: Software image is ready but awaiting further instructions.
+  arguments:
+    '{"Action"': '1, "DelayedActionTime": 0}'
+  label: Test_Case_Minimum_DelayedActionTime_with_AwaitNextAction_Action
+  option: SendCommand
+- ActionTime: 86400
+  Attribute_Change: UpdateState to "Discontinued"
+  ExpectedResponse: Discontinue immediately
+  Pre-requisites: 'Software image is ready but needs to be discarded.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the specification【4:0†source】【4:1†source】【4:8†source】【4:12†source】.'
+  arguments:
+    '{"Action"': '2, "DelayedActionTime": 86400}'
+  label: Test_Case_Maximum_DelayedActionTime_with_Discontinue_Action
+  option: SendCommand

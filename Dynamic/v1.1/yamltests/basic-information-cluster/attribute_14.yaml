@@ -1,0 +1,42 @@
+config:
+  attribute: '14'
+  cluster: basic-information-cluster
+  nodeId: '0x654231'
+name: basic-information-cluster_attribute_14_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"Location": ""}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"Location"': '""}'
+  label: Test_Case_Minimum_Length
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Location": "<256_characters_string>"}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"Location"': '"<256_characters_string>"}'
+  label: Test_Case_Maximum_Length
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Location": "!@#$%^&*()_+-=[]{}|;'':,.<>?/~`"}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"Location"': '"!@#$%^&*()_+-=[]{}|;'':,.<>?/~`"}'
+  label: Test_Case_Special_Characters
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Location": "Living Room"}'
+  ExpectedResponse: <success>
+  Pre-requisites: '<none>
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    values that could result in special responses.'
+  arguments:
+    '{"Location"': '"Living Room"}'
+  label: Test_Case_Typical_Location_Name
+  option: WriteAttribute

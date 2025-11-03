@@ -1,0 +1,183 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x003B",
+    "name": "Switch",
+    "description": "This cluster exposes interactions with a switch device, for the purpose of using those interactions by other devices. Two types of switch devices are supported: latching switch (e.g. rocker switch) and momentary switch (e.g. push button), distinguished with their feature flags."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "NumberOfPositions",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "2"
+      },
+      "description": "This attribute SHALL indicate the maximum number of positions the switch has. Any kind of switch has a minimum of 2 positions.",
+      "privilege": "V",
+      "writable": false,
+      "default": "2"
+    },
+    {
+      "id": "0x0001",
+      "name": "CurrentPosition",
+      "data_type": "uint8",
+      "value_range": {
+        "max": "NumberOfPositions-1"
+      },
+      "description": "This attribute SHALL indicate the position of the switch. The valid range is zero to NumberOfPositions-1. CurrentPosition value 0 SHALL be assigned to the default position of the switch.",
+      "privilege": "V",
+      "writable": false,
+      "default": "0"
+    },
+    {
+      "id": "0x0002",
+      "name": "MultiPressMax",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "2"
+      },
+      "description": "This attribute SHALL indicate how many consecutive presses can be detected and reported by a momentary switch which supports multi-press.",
+      "privilege": "V",
+      "writable": false,
+      "conformance": "MSM",
+      "default": "2"
+    }
+  ],
+  "events": [
+    {
+      "id": "0x00",
+      "name": "SwitchLatched",
+      "priority": "INFO",
+      "privilege": "V",
+      "conformance": "LS",
+      "description": "This event SHALL be generated, when the latching switch is moved to a new position.",
+      "fields": [
+        {
+          "name": "NewPosition",
+          "data_type": "uint8",
+          "constraint": "0 to NumberOfPositions-1",
+          "description": "This field SHALL indicate the new value of the CurrentPosition attribute, i.e. after the move.",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x01",
+      "name": "InitialPress",
+      "priority": "INFO",
+      "privilege": "V",
+      "conformance": "MS",
+      "description": "This event SHALL be generated, when the momentary switch starts to be pressed (after debouncing).",
+      "fields": [
+        {
+          "name": "NewPosition",
+          "data_type": "uint8",
+          "constraint": "0 to NumberOfPositions-1",
+          "description": "This field SHALL indicate the new value of the CurrentPosition attribute, i.e. while pressed.",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x02",
+      "name": "LongPress",
+      "priority": "INFO",
+      "privilege": "V",
+      "conformance": "MSL",
+      "description": "This event SHALL be generated, when the momentary switch has been pressed for a 'long' time.",
+      "fields": [
+        {
+          "name": "NewPosition",
+          "data_type": "uint8",
+          "constraint": "0 to NumberOfPositions-1",
+          "description": "This field SHALL indicate the new value of the CurrentPosition attribute, i.e. while pressed.",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x03",
+      "name": "ShortRelease",
+      "priority": "INFO",
+      "privilege": "V",
+      "conformance": "MSR",
+      "description": "This event SHALL be generated, when the momentary switch has been released (after debouncing).",
+      "fields": [
+        {
+          "name": "PreviousPosition",
+          "data_type": "uint8",
+          "constraint": "0 to NumberOfPositions-1",
+          "description": "This field SHALL indicate the previous value of the CurrentPosition attribute, i.e. just prior to release.",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x04",
+      "name": "LongRelease",
+      "priority": "INFO",
+      "privilege": "V",
+      "conformance": "MSL",
+      "description": "This event SHALL be generated, when the momentary switch has been released (after debouncing) and after having been pressed for a long time.",
+      "fields": [
+        {
+          "name": "PreviousPosition",
+          "data_type": "uint8",
+          "constraint": "0 to NumberOfPositions-1",
+          "description": "This field SHALL indicate the previous value of the CurrentPosition attribute, i.e. just prior to release.",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x05",
+      "name": "MultiPressOngoing",
+      "priority": "INFO",
+      "privilege": "V",
+      "conformance": "MSM",
+      "description": "This event SHALL be generated to indicate how many times the momentary switch has been pressed in a multi-press sequence, during that sequence.",
+      "fields": [
+        {
+          "name": "NewPosition",
+          "data_type": "uint8",
+          "constraint": "0 to NumberOfPositions-1",
+          "description": "This field SHALL indicate the new value of the CurrentPosition attribute, i.e. while pressed.",
+          "conformance": "M"
+        },
+        {
+          "name": "CurrentNumberOfPressesCounted",
+          "data_type": "uint8",
+          "constraint": "2 to MultiPressMax",
+          "description": "This field SHALL contain the current number of presses counted in the multi-press sequence.",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x06",
+      "name": "MultiPressComplete",
+      "priority": "INFO",
+      "privilege": "V",
+      "conformance": "MSM",
+      "description": "This event SHALL be generated to indicate how many times the momentary switch has been pressed in a multi-press sequence, after it has been detected that the sequence has ended.",
+      "fields": [
+        {
+          "name": "PreviousPosition",
+          "data_type": "uint8",
+          "constraint": "0 to NumberOfPositions-1",
+          "description": "This field SHALL indicate the previous value of the CurrentPosition attribute, i.e. just prior to release.",
+          "conformance": "M"
+        },
+        {
+          "name": "TotalNumberOfPressesCounted",
+          "data_type": "uint8",
+          "constraint": "1 to MultiPressMax",
+          "description": "This field SHALL contain the total number of presses in the multi-press sequence that has ended.",
+          "conformance": "M"
+        }
+      ]
+    }
+  ]
+}

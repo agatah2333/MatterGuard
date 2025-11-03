@@ -1,0 +1,36 @@
+config:
+  cluster: actions-cluster
+  event: '0x01'
+  nodeId: '0x654231'
+name: actions-cluster_event_0x01_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Action state will be set to Failed
+  ExpectedResponse: ActionFailed event generated
+  Pre-requisites: Action with `ActionID` 65535 must exist and be in a state that allows
+    failure.
+  arguments:
+    ActionID: 65535
+    InvokeID: 4294967295
+    NewState: 2
+  label: Test_Case_Extreme_Values_of_Constraints
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: Action state will be set to Failed
+  ExpectedResponse: ActionFailed event generated
+  Pre-requisites: 'Action with `ActionID` 1 must exist and be in a state that allows
+    failure.
+
+
+    These test cases cover the extreme values of the constraints and the values that
+    could result in special responses as mentioned in the description of the effect.
+
+
+    For more detailed information, you can refer to the Matter 1.2 Core Specification
+    document【4:0†source】.'
+  arguments:
+    ActionID: 1
+    InvokeID: 1
+    NewState: 2
+  label: Test_Case_Special_Responses
+  option: SubscribeToEvent

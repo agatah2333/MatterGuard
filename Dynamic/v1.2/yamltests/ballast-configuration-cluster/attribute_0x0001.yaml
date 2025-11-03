@@ -1,0 +1,39 @@
+config:
+  attribute: '0x0001'
+  cluster: ballast-configuration-cluster
+  nodeId: '0x654231'
+name: ballast-configuration-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`PhysicalMaxLevel = 1`'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"PhysicalMaxLevel"': 1}`
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`PhysicalMaxLevel = 254`'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"PhysicalMaxLevel"': 254}`
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`PhysicalMaxLevel = Not Changed`'
+  ExpectedResponse: '`CONSTRAINT_ERROR`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"PhysicalMaxLevel"': 0}`
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`PhysicalMaxLevel = Not Changed`'
+  ExpectedResponse: '`CONSTRAINT_ERROR`'
+  Pre-requisites: '`None`
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:3†source】【4:4†source】.'
+  arguments:
+    '{"PhysicalMaxLevel"': 255}`
+  option: WriteAttribute

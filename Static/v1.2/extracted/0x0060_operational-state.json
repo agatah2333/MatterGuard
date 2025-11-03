@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0060",
+    "name": "Operational State",
+    "description": "Cluster for Operational State functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

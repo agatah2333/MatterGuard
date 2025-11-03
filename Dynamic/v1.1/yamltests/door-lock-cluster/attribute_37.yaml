@@ -1,0 +1,35 @@
+config:
+  attribute: '37'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_37_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`RequirePINForRemoteOperation` will be set to True.'
+  ExpectedResponse: The door lock server requires that an optional PIN be included
+    in the payload of remote lock operation events like Lock, Unlock, Unlock with
+    Timeout, and Toggle in order to function.
+  Pre-requisites: The door lock server must support the `RequirePINForRemoteOperation`
+    attribute.
+  arguments:
+    '{"RequirePINForRemoteOperation"': True}
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`RequirePINForRemoteOperation` will be set to False.'
+  ExpectedResponse: The door lock server does not require that an optional PIN be
+    included in the payload of remote lock operation events like Lock, Unlock, Unlock
+    with Timeout, and Toggle in order to function.
+  Pre-requisites: 'The door lock server must support the `RequirePINForRemoteOperation`
+    attribute.
+
+
+    These test cases cover the extreme values of the `RequirePINForRemoteOperation`
+    attribute, which is a boolean field, and the values that could result in special
+    responses as mentioned in the description of the effect.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments:
+    '{"RequirePINForRemoteOperation"': False}
+  option: WriteAttribute

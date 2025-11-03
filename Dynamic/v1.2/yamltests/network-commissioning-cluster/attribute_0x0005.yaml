@@ -1,0 +1,28 @@
+config:
+  attribute: '0x0005'
+  cluster: network-commissioning-cluster
+  nodeId: '0x654231'
+name: network-commissioning-cluster_attribute_0x0005_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: LastNetworkingStatus = 0
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"LastNetworkingStatus"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 1
+  Attribute_Change: LastNetworkingStatus = 1
+  ExpectedResponse: Network connection successful
+  Pre-requisites: 'A successful network connection attempt must have been made.
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"LastNetworkingStatus"': 1}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

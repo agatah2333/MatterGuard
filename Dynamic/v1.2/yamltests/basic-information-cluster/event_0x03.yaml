@@ -1,0 +1,41 @@
+config:
+  cluster: basic-information-cluster
+  event: '0x03'
+  nodeId: '0x654231'
+name: basic-information-cluster_event_0x03_v1.2.0.0
+tests:
+- ActionTime: <current timestamp>
+  Attribute_Change: Reachable attribute will be set to True.
+  ExpectedResponse: Event generated indicating the device is now reachable.
+  Pre-requisites: The device was previously unreachable.
+  arguments:
+    '{"Reachable"': True}
+  option: SubscribeToEvent
+- ActionTime: <current timestamp>
+  Attribute_Change: Reachable attribute will be set to False.
+  ExpectedResponse: Event generated indicating the device is now unreachable.
+  Pre-requisites: The device was previously reachable.
+  arguments:
+    '{"Reachable"': False}
+  option: SubscribeToEvent
+- ActionTime: <current timestamp>
+  Attribute_Change: Reachable attribute will be set to True.
+  ExpectedResponse: Event generated after a bridge restart indicating the device is
+    reachable.
+  Pre-requisites: The bridge was restarted, and the device is reachable.
+  arguments:
+    '{"Reachable"': True}
+  option: SubscribeToEvent
+- ActionTime: <current timestamp>
+  Attribute_Change: Reachable attribute will be set to False.
+  ExpectedResponse: Event generated after a bridge restart indicating the device is
+    unreachable.
+  Pre-requisites: 'The bridge was restarted, and the device is unreachable.
+
+
+    These test cases cover the extreme values of the `Reachable` field (True and False)
+    and the special responses mentioned in the description of the effect, such as
+    changes in reachability status and events generated after a bridge restart【4:0†source】.'
+  arguments:
+    '{"Reachable"': False}
+  option: SubscribeToEvent

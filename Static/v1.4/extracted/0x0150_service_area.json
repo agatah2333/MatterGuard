@@ -1,0 +1,93 @@
+{
+  "source_file": "Service Area_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0150",
+        "name": "Service Area",
+        "description": "Manages device operational areas and status reporting",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SupportedAreas",
+            "dataType": "list[AreaStruct]",
+            "valueRange": "max 255 entries",
+            "description": "Available operational areas",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "SelectedAreas",
+            "dataType": "list[uint32]",
+            "valueRange": "valid area IDs",
+            "description": "Target operational areas",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0005",
+            "name": "Progress",
+            "dataType": "list[ProgressStruct]",
+            "valueRange": "max 255 entries",
+            "description": "Area operation status tracking",
+            "privilege": "R",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "SelectAreas",
+            "parameters": [
+              {
+                "name": "NewAreas",
+                "dataType": "list[uint32]",
+                "valueRange": "valid area IDs"
+              }
+            ],
+            "description": "Set target operational areas",
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "SkipArea",
+            "parameters": [],
+            "description": "Skip current operational area",
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "dataTypes": {
+          "ProgressStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "AreaID": "uint32",
+              "Status": "OperationalStatusEnum",
+              "TotalOperationalTime": "elapsed-s",
+              "InitialTimeEstimate": "elapsed-s"
+            }
+          },
+          "OperationalStatusEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Inactive",
+              "1": "Active",
+              "2": "Paused",
+              "3": "Error"
+            }
+          },
+          "LandmarkInfoStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "LandmarkTag": "uint32",
+              "RelativePositionTag": "uint32"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

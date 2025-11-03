@@ -1,0 +1,237 @@
+config:
+  attribute: '0x0000'
+  cluster: binding-cluster
+  nodeId: '0x654231'
+name: binding-cluster_attribute_0x0000_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Binding list will include the entry with minimum values.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Cluster: 0
+    Endpoint: 0
+    Group: 0
+    Node: 0
+  label: Test_Case_Minimum_Values
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify binding-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 0
+  Attribute_Change: Binding list will include the entry with maximum values.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Cluster: '0xFFFF'
+    Endpoint: '0xFF'
+    Group: '0xFFFF'
+    Node: '0xFFFFFFFFFFFFFFFF'
+  label: Test_Case_Maximum_Values
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify binding-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 0
+  Attribute_Change: No change, as the binding will not be created.
+  ExpectedResponse: RESOURCE_EXHAUSTED
+  Pre-requisites: The system should have no available resources to create a new binding
+    entry.
+  arguments:
+    Cluster: '0x0001'
+    Endpoint: '0x01'
+    Group: '0x0001'
+    Node: '0x0000000000000001'
+  label: Test_Case_Special_Response_-_Resource_Exhausted
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify binding-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 0
+  Attribute_Change: No change, as the binding will not be created.
+  ExpectedResponse: INVALID_FIELD
+  Pre-requisites: 'Ensure that both Group and Endpoint fields are present, which is
+    not allowed.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:6†source】【4:7†source】【4:16†source】.'
+  arguments:
+    Cluster: '0x0002'
+    Endpoint: '0x02'
+    Group: '0x0002'
+    Node: '0x0000000000000002'
+  label: Test_Case_Special_Response_-_Invalid_Group_and_Endpoint_Combination
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify binding-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

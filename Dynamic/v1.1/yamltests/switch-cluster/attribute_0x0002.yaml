@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0002'
+  cluster: switch-cluster
+  nodeId: '0x654231'
+name: switch-cluster_attribute_0x0002_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`SubjectsPerAccessControlEntry` will be set to 4'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    SubjectsPerAccessControlEntry: 4
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`SubjectsPerAccessControlEntry` will be set to 5'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    SubjectsPerAccessControlEntry: 5
+  label: Test_Case_Just_Above_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`SubjectsPerAccessControlEntry` will be set to 10'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    SubjectsPerAccessControlEntry: 10
+  label: Test_Case_Typical_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`SubjectsPerAccessControlEntry` will be set to 65535'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    typical values that could be used in normal operations. The minimum value is 4
+    as specified in the document【4:2†source】.'
+  arguments:
+    SubjectsPerAccessControlEntry: 65535 (assuming 16-bit unsigned integer max value)
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute

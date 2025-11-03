@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0003'
+  cluster: pressure-measurement-cluster
+  nodeId: '0x654231'
+name: pressure-measurement-cluster_attribute_0x0003_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `Tolerance`: 0'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`<none>`'
+  arguments:
+    Tolerance: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `Tolerance`: 2048'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`<none>`'
+  arguments:
+    Tolerance: 2048
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `Tolerance`: 1024'
+  ExpectedResponse: '`<special_response_1>`'
+  Pre-requisites: '`<none>`'
+  arguments:
+    Tolerance: 1024
+  label: Test_Case_Special_Response_Value_1
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `Tolerance`: 512'
+  ExpectedResponse: '`<special_response_2>`'
+  Pre-requisites: '`<none>`
+
+
+    These test cases cover the extreme values of the `Tolerance` field and values
+    that could result in special responses as per the attribute constraints and descriptions
+    provided in the document【4:0†source】.'
+  arguments:
+    Tolerance: 512
+  label: Test_Case_Special_Response_Value_2
+  option: WriteAttribute

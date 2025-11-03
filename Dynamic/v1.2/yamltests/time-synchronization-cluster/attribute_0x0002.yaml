@@ -1,0 +1,34 @@
+config:
+  attribute: '0x0002'
+  cluster: time-synchronization-cluster
+  nodeId: '0x654231'
+name: time-synchronization-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`State: 0`'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"State"': 0}`
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`State: 0xFFFFFFFF`'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"State"': 0xFFFFFFFF}`
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`State: null`'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: '`The total operational time exceeds the maximum value that can
+    be conveyed by this attribute.`
+
+
+    ### Summary'
+  arguments:
+    '{"State"': null}`
+  label: Test_Case_Special_Response_-_Null_Value
+  option: WriteAttribute

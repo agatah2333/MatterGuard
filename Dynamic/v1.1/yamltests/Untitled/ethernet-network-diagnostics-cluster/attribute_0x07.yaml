@@ -1,0 +1,223 @@
+config:
+  attribute: '0x07'
+  cluster: ethernet-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: ethernet-network-diagnostics-cluster_attribute_0x07_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"LastConnectErrorValue": -2147483648}'
+  ExpectedResponse: <error_response>
+  Pre-requisites: <Ensure no network configurations exist>
+  arguments:
+    '{"LastConnectErrorValue"': -2147483648}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify ethernet-network-diagnostics-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: <current_time>
+  Attribute_Change: '{"LastConnectErrorValue": 2147483647}'
+  ExpectedResponse: <error_response>
+  Pre-requisites: <Ensure no network configurations exist>
+  arguments:
+    '{"LastConnectErrorValue"': 2147483647}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify ethernet-network-diagnostics-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: <current_time>
+  Attribute_Change: '{"LastConnectErrorValue": null}'
+  ExpectedResponse: <null_response>
+  Pre-requisites: <Ensure no connection attempt was made>
+  arguments:
+    '{"LastConnectErrorValue"': null}
+  label: Test_Case_Special_Response_-_No_Attempt_Made
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify ethernet-network-diagnostics-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: <current_time>
+  Attribute_Change: '{"LastConnectErrorValue": null}'
+  ExpectedResponse: <null_response>
+  Pre-requisites: '<Ensure the last connection attempt succeeded>
+
+
+    These test cases cover the extreme values of the `int32` type and the special
+    conditions where the attribute should be set to `null` based on the connection
+    attempts and their outcomes【4:0†source】.'
+  arguments:
+    '{"LastConnectErrorValue"': null}
+  label: Test_Case_Special_Response_-_Last_Connection_Succeeded
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify ethernet-network-diagnostics-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

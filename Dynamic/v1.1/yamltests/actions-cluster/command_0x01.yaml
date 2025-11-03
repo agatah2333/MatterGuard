@@ -1,0 +1,54 @@
+config:
+  cluster: actions-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: actions-cluster_command_0x01_v1.1.0.0
+tests:
+- ActionTime: '`0`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`NOT_FOUND`'
+  Pre-requisites: '`ActionID 0 does not exist in ActionList`'
+  arguments:
+    '{"ActionID"': '0, "InvokeID": 0}`'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: '`0`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`NOT_FOUND`'
+  Pre-requisites: '`ActionID 65535 does not exist in ActionList`'
+  arguments:
+    '{"ActionID"': '65535, "InvokeID": 4294967295}`'
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: '`0`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`INVALID_COMMAND`'
+  Pre-requisites: '`ActionID 1 exists in ActionList but is not in a state where the
+    command applies`'
+  arguments:
+    '{"ActionID"': '1, "InvokeID": 12345}`'
+  label: Test_Case_Valid_ActionID_but_Invalid_State
+  option: SendCommand
+- ActionTime: '`0`'
+  Attribute_Change: '`Action state will be set to Inactive`'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: '`ActionID 2 exists in ActionList and is in a valid state for the
+    command`'
+  arguments:
+    '{"ActionID"': '2, "InvokeID": 67890}`'
+  label: Test_Case_Valid_ActionID_and_State
+  option: SendCommand
+- ActionTime: '`0`'
+  Attribute_Change: '`Action state will be set to Inactive`'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: '`ActionID 3 exists in ActionList and is in a valid state for the
+    command`
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:19†source】.'
+  arguments:
+    '{"ActionID"': 3}`
+  label: Test_Case_ActionID_with_No_InvokeID
+  option: SendCommand

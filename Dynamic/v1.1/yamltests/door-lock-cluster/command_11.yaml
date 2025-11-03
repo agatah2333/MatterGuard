@@ -1,0 +1,55 @@
+config:
+  cluster: door-lock-cluster
+  command: '11'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_11_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Holiday schedule set with minimum values
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '"HolidayIndex"': 0
+    '"LocalEndTime"': 0
+    '"LocalStartTime"': 0
+    '"OperatingModeDuringHoliday"': 0
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: max_epoch_time
+  Attribute_Change: Holiday schedule set with maximum values
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '"HolidayIndex"': NumberOfHolidaySchedulesSupported
+    '"LocalEndTime"': max_epoch_time
+    '"LocalStartTime"': max_epoch_time
+    '"OperatingModeDuringHoliday"': 255
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: 1672531200
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: Another holiday schedule exists that overlaps with this time range
+  arguments:
+    '"HolidayIndex"': 1
+    '"LocalEndTime"': 1672617600 (Jan 2, 2023)
+    '"LocalStartTime"': 1672531200 (Jan 1, 2023)
+    '"OperatingModeDuringHoliday"': 1
+  label: Test_Case_Special_Response_-_Overlapping_Schedule
+  option: SendCommand
+- ActionTime: 1672531200
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    '"HolidayIndex"': NumberOfHolidaySchedulesSupported + 1
+    '"LocalEndTime"': 1672617600 (Jan 2, 2023)
+    '"LocalStartTime"': 1672531200 (Jan 1, 2023)
+    '"OperatingModeDuringHoliday"': 1
+  label: Test_Case_Special_Response_-_Invalid_Index
+  option: SendCommand

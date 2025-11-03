@@ -1,0 +1,43 @@
+config:
+  cluster: audio-output-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: audio-output-cluster_command_0x01_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: OutputList[0].Name = "MinIndexOutput"
+  ExpectedResponse: Success
+  Pre-requisites: OutputList must have at least one entry.
+  arguments:
+    '{"Index"': '0, "Name": "MinIndexOutput"}'
+  label: Test_Case_Minimum_Index_Value
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: OutputList[255].Name = "MaxIndexOutput" (if exists)
+  ExpectedResponse: Success or Error (depending on the OutputList size)
+  Pre-requisites: OutputList must have 256 entries.
+  arguments:
+    '{"Index"': '255, "Name": "MaxIndexOutput"}'
+  label: Test_Case_Maximum_Index_Value
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: OutputList[1].Name = "Special@Output#Name!"
+  ExpectedResponse: Success
+  Pre-requisites: OutputList must have at least two entries.
+  arguments:
+    '{"Index"': '1, "Name": "Special@Output#Name!"}'
+  label: Test_Case_Special_Character_in_Name
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: OutputList[2].Name = ""
+  ExpectedResponse: Success (if empty names are allowed)
+  Pre-requisites: 'OutputList must have at least three entries.
+
+
+    These test cases cover the extreme values of the `Index` field and special values
+    for the `Name` field, ensuring comprehensive testing of the `RenameOutput` command
+    in the Audio Output Cluster【4:1†source】【4:2†source】【4:3†source】【4:10†source】.'
+  arguments:
+    '{"Index"': '2, "Name": ""}'
+  label: Test_Case_Empty_Name
+  option: SendCommand

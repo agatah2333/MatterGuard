@@ -1,0 +1,54 @@
+config:
+  attribute: '0x0010'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0010_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: NumberOfPrimaries set to 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"NumberOfPrimaries"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: NumberOfPrimaries set to 6
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"NumberOfPrimaries"': 6}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: Error (INVALID_VALUE)
+  Pre-requisites: None
+  arguments:
+    '{"NumberOfPrimaries"': 7}
+  label: Test_Case_Special_Response_-_Invalid_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: NumberOfPrimaries set to 1
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"NumberOfPrimaries"': 1}
+  label: Test_Case_Special_Response_-_Boundary_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: NumberOfPrimaries set to 5
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    For more details, refer to the Matter Application Cluster Specification document【4:0†source】.'
+  arguments:
+    '{"NumberOfPrimaries"': 5}
+  label: Test_Case_Special_Response_-_Boundary_Value
+  option: WriteAttribute

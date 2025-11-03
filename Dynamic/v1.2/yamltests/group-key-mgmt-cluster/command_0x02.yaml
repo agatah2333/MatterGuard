@@ -1,0 +1,47 @@
+config:
+  cluster: group-key-mgmt-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: group-key-mgmt-cluster_command_0x02_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`INVALID_COMMAND`'
+  Pre-requisites: '`GroupKeySetID 0 is reserved for the Identity Protection Key (IPK)
+    and cannot be removed or read directly.`'
+  arguments:
+    '{"GroupKeySetID"': 0}`
+  label: Test_Case_Minimum_Value_of_GroupKeySetID
+  option: SendCommand
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`NOT_FOUND`'
+  Pre-requisites: '`Ensure that GroupKeySetID 65535 is not associated with any Group
+    Key Set in the accessing fabric.`'
+  arguments:
+    '{"GroupKeySetID"': 65535}`
+  label: Test_Case_Maximum_Value_of_GroupKeySetID
+  option: SendCommand
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`GroupKeySet configuration will be returned with EpochKey0, EpochKey1,
+    and EpochKey2 fields replaced by null.`'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: '`Ensure that the provided GroupKeySetID is associated with an existing
+    Group Key Set in the accessing fabric.`'
+  arguments:
+    '{"GroupKeySetID"': <valid_existing_group_key_set_id>}`
+  label: Test_Case_Valid_GroupKeySetID_with_Existing_Group_Key_Set
+  option: SendCommand
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`NOT_FOUND`'
+  Pre-requisites: '`Ensure that the provided GroupKeySetID is not associated with
+    any Group Key Set in the accessing fabric.`
+
+
+    These test cases cover the extreme values of the `GroupKeySetID` field and the
+    special responses as per the command''s description.'
+  arguments:
+    '{"GroupKeySetID"': <valid_non_existing_group_key_set_id>}`
+  label: Test_Case_Valid_GroupKeySetID_with_No_Associated_Group_Key_Set
+  option: SendCommand

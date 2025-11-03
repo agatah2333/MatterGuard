@@ -1,0 +1,50 @@
+config:
+  attribute: '0x0001'
+  cluster: audio-output-cluster
+  nodeId: '0x654231'
+name: audio-output-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: CurrentOutput will be set to 0
+  ExpectedResponse: Success
+  Pre-requisites: The device must have at least one output in the OutputList.
+  arguments:
+    '{"CurrentOutput"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: CurrentOutput will be set to 255 if the device supports 256 outputs,
+    otherwise an error will be returned.
+  ExpectedResponse: Success or Error (depending on the number of outputs supported
+    by the device)
+  Pre-requisites: The device must support 256 outputs.
+  arguments:
+    '{"CurrentOutput"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: CurrentOutput will be set to the index of the HDMI output.
+  ExpectedResponse: Success
+  Pre-requisites: The OutputList must contain an HDMI output.
+  arguments:
+    '{"CurrentOutput"': <index_of_HDMI_output>}
+  label: Test_Case_Special_Response_-_HDMI_Output
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: No change, error response indicating invalid index.
+  ExpectedResponse: Error
+  Pre-requisites: 'The provided index must be outside the range of valid output indices
+    in the OutputList.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    For more detailed information, refer to the Matter Application Cluster Specification
+    document【4:0†source】.'
+  arguments:
+    '{"CurrentOutput"': <invalid_index>}
+  label: Test_Case_Special_Response_-_Invalid_Output_Index
+  option: WriteAttribute

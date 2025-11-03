@@ -1,0 +1,14 @@
+name: Thread Network Directory - RemoveNetwork Command Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Thread Network Directory
+  timeout: 180
+tests:
+- label: Send RemoveNetwork command
+  command: RemoveNetwork
+  response:
+    values:
+    - name: status
+      value: 0
+  arguments: {}

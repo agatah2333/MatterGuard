@@ -1,0 +1,6 @@
+config:
+  attribute: '0x4003'
+  cluster: onoff-cluster
+  nodeId: '0x654231'
+name: onoff-cluster_attribute_0x4003_v1.1.0.0
+tests: []

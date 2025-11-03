@@ -1,0 +1,10 @@
+config:
+  attribute: '0x0037'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0037_v1.1.0.0
+tests: []
+execution_metadata:
+  estimated_duration: 0
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

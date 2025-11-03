@@ -1,0 +1,58 @@
+config:
+  cluster: operational-credentials-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: operational-credentials-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: '`<current time>`'
+  Attribute_Change: '`NOCs table updated with new entry`'
+  ExpectedResponse: '`0` (OK)'
+  Pre-requisites: '`NOCs table not full`'
+  arguments:
+    AdminSubject: '`<900 bytes of data>`'
+    AdminVendorId: '`65535`'
+    ICACValue: '`<900 bytes of data>`'
+    NOCValue: '`<900 bytes of data>`'
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: SendCommand
+- ActionTime: '`<current time>`'
+  Attribute_Change: '`NOCs table updated with new entry`'
+  ExpectedResponse: '`0` (OK)'
+  Pre-requisites: '`NOCs table not full`'
+  arguments:
+    AdminSubject: '`<1 byte of data>`'
+    AdminVendorId: '`0`'
+    ICACValue: '`<1 byte of data>`'
+    NOCValue: '`<1 byte of data>`'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: '`<current time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`5` (TableFull)'
+  Pre-requisites: '`NOCs table full`'
+  arguments:
+    AdminSubject: '`<valid data>`'
+    AdminVendorId: '`1234`'
+    ICACValue: '`<valid data>`'
+    NOCValue: '`<valid data>`'
+  label: Test_Case_Special_Response_-_Table_Full
+  option: SendCommand
+- ActionTime: '`<current time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`1` (InvalidPublicKey)'
+  Pre-requisites: '`NOCs table not full`
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    For more detailed information, refer to the Matter 1.2 Core Specification document【4:0†source】.'
+  arguments:
+    AdminSubject: '`<valid data>`'
+    AdminVendorId: '`1234`'
+    ICACValue: '`<valid data>`'
+    NOCValue: '`<data with invalid public key>`'
+  label: Test_Case_Special_Response_-_Invalid_Public_Key
+  option: SendCommand

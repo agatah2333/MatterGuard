@@ -1,0 +1,22 @@
+{
+  "cluster_id": "0x002E",
+  "cluster_name": "Power Source Configuration",
+  "section": "11.6",
+  "description": "This cluster is used to describe the configuration and capabilities of a Device’s power system. It pro­ vides an ordering overview as well as linking to the one or more endpoints each supporting a Power Source cluster.",
+  "data_types": {},
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "Sources",
+      "details": "list[end­ max 6 N RV M",
+      "raw_line": "0x0000         Sources       list[end­     max 6          N                             RV          M"
+    }
+  },
+  "commands": {},
+  "events": {},
+  "extraction_info": {
+    "start_line": 38552,
+    "end_line": 38609,
+    "total_lines": 57
+  }
+}

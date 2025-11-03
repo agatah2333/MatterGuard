@@ -1,0 +1,44 @@
+config:
+  attribute: '0x0008'
+  cluster: fan-control-cluster
+  nodeId: '0x654231'
+name: fan-control-cluster_attribute_0x0008_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`RockSetting` will be set to 0.'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    RockSetting: 0
+  label: Test_Case_Extreme_Value_(Minimum)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`RockSetting` will be set to 7 if supported.'
+  ExpectedResponse: Success if all rocking motions are supported, otherwise CONSTRAINT_ERROR
+  Pre-requisites: '`RockSupport` attribute must have all bits set to 1.'
+  arguments:
+    RockSetting: '7 (All bits set: RockLeftRight, RockUpDown, RockRound)'
+  label: Test_Case_Extreme_Value_(Maximum)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`RockSetting` will be set to the lowest supported single bit.'
+  ExpectedResponse: If the combination is not supported, the lowest supported single
+    bit in the combination will be set, and all other bits will indicate zero.
+  Pre-requisites: '`RockSupport` attribute must not support the combination of RockLeftRight
+    and RockUpDown.'
+  arguments:
+    RockSetting: 3 (RockLeftRight and RockUpDown)
+  label: Test_Case_Special_Response_(Unsupported_Combination)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`RockSetting` will not change.'
+  ExpectedResponse: CONSTRAINT_ERROR if RockRound is not supported.
+  Pre-requisites: '`RockSupport` attribute must not support RockRound.
+
+
+    These test cases cover the extreme values and special responses for the `RockSetting`
+    attribute in the Fan Control Cluster【4:0†source】.'
+  arguments:
+    RockSetting: 4 (RockRound)
+  label: Test_Case_Special_Response_(Single_Unsupported_Bit)
+  option: WriteAttribute

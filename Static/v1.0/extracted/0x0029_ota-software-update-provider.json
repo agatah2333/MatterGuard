@@ -1,0 +1,32 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0029",
+    "name": "OTA Software Update Provider",
+    "description": "Provides software updates."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "QueryImage"
+    },
+    {
+      "id": "0x01",
+      "name": "QueryImageResponse"
+    },
+    {
+      "id": "0x02",
+      "name": "ApplyUpdateRequest"
+    },
+    {
+      "id": "0x03",
+      "name": "ApplyUpdateResponse"
+    },
+    {
+      "id": "0x04",
+      "name": "NotifyUpdateApplied"
+    }
+  ],
+  "attributes": [],
+  "events": []
+}

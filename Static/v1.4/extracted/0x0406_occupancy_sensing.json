@@ -1,0 +1,119 @@
+{
+  "source_file": "Occupancy Sensing_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0406",
+        "name": "Occupancy Sensing",
+        "description": "Detects and reports space occupancy status using multiple sensing modalities",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "Occupancy",
+            "dataType": "OccupancyBitmap",
+            "valueRange": "0-1",
+            "description": "Current occupancy status",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "OccupancySensorType",
+            "dataType": "OccupancySensorTypeEnum",
+            "valueRange": "0-3",
+            "description": "Primary sensor type classification",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "HoldTime",
+            "dataType": "uint16",
+            "valueRange": "HoldTimeLimits.HoldTimeMin-HoldTimeLimits.HoldTimeMax",
+            "description": "Global occupancy hold duration (seconds)",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0012",
+            "name": "PIRUnoccupiedToOccupiedThreshold",
+            "dataType": "uint8",
+            "valueRange": "1-254",
+            "description": "PIR activation event count threshold",
+            "privilege": "RW",
+            "writable": true
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "OccupancyChanged",
+            "parameters": [
+              {
+                "name": "NewOccupancy",
+                "dataType": "OccupancyBitmap",
+                "valueRange": "0-1"
+              }
+            ],
+            "description": "Occupancy state change notification",
+            "privilege": "INFO",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "OccupancyBitmap": {
+            "baseType": "map8",
+            "fields": {
+              "Occupied": {
+                "bit": 0
+              }
+            }
+          },
+          "OccupancySensorTypeEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "PIR",
+              "1": "Ultrasonic",
+              "2": "PIRAndUltrasonic",
+              "3": "PhysicalContact"
+            }
+          },
+          "HoldTimeLimitsStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "HoldTimeMin": "uint16",
+              "HoldTimeMax": "uint16",
+              "DefaultHoldTime": "uint16"
+            }
+          },
+          "SensorConfigProfile": {
+            "baseType": "Struct",
+            "fields": {
+              "OccupiedDelay": "uint16",
+              "UnoccupiedDelay": "uint16",
+              "ActivationThreshold": "uint8"
+            }
+          }
+        },
+        "sensorProfiles": {
+          "PIR": {
+            "occupiedToUnoccupiedDelay": "0x0010",
+            "unoccupiedToOccupiedDelay": "0x0011",
+            "activationThreshold": "0x0012"
+          },
+          "Ultrasonic": {
+            "occupiedToUnoccupiedDelay": "0x0020",
+            "unoccupiedToOccupiedDelay": "0x0021",
+            "activationThreshold": "0x0022"
+          },
+          "PhysicalContact": {
+            "occupiedToUnoccupiedDelay": "0x0030",
+            "unoccupiedToOccupiedDelay": "0x0031",
+            "activationThreshold": "0x0032"
+          }
+        }
+      }
+    ]
+  }
+}

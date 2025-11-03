@@ -1,0 +1,75 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0033",
+    "name": "General Diagnostics",
+    "description": "General system diagnostics."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Network",
+      "type": "unknown",
+      "description": "Network attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "Reboot",
+      "type": "unknown",
+      "description": "Reboot attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "UpTime",
+      "type": "uint64",
+      "description": "UpTime attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0003",
+      "name": "TotalOper",
+      "type": "unknown",
+      "description": "TotalOper attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0004",
+      "name": "BootRea",
+      "type": "unknown",
+      "description": "BootRea attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0005",
+      "name": "Active",
+      "type": "unknown",
+      "description": "Active attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0006",
+      "name": "ActiveRa",
+      "type": "unknown",
+      "description": "ActiveRa attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0007",
+      "name": "ActiveNet",
+      "type": "unknown",
+      "description": "ActiveNet attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0008",
+      "name": "TestEvent",
+      "type": "unknown",
+      "description": "TestEvent attribute",
+      "access": "R"
+    }
+  ],
+  "events": []
+}

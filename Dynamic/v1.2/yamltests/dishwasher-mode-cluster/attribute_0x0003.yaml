@@ -1,0 +1,27 @@
+config:
+  attribute: '0x0003'
+  cluster: dishwasher-mode-cluster
+  nodeId: '0x654231'
+name: dishwasher-mode-cluster_attribute_0x0003_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`CurrentMode` will be set to 0'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: '`SupportedModes` must include a mode with `Mode` field value 0'
+  arguments:
+    OnMode: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '`CurrentMode` will remain unchanged'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: '`SupportedModes` must not include a mode with `Mode` field value
+    255
+
+
+    These test cases cover the extreme values and special responses for the `OnMode`
+    attribute in the `dishwasher-mode-cluster` cluster【4:1†source】【4:2†source】.'
+  arguments:
+    OnMode: 255
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

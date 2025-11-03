@@ -1,0 +1,648 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0201",
+    "name": "Thermostat",
+    "description": "This cluster provides an interface to the functionality of a thermostat."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "SetpointRaiseLower",
+      "parameters": [
+        {
+          "name": "Mode",
+          "data_type": "enum8",
+          "value_range": {},
+          "description": "Mode parameter"
+        },
+        {
+          "name": "Amount",
+          "data_type": "temp-s8",
+          "value_range": {},
+          "description": "Amount parameter"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "SetWeeklySchedule",
+      "parameters": [
+        {
+          "name": "NumberOfTransitionsForSequence",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "NumberOfTransitionsForSequence parameter"
+        },
+        {
+          "name": "DayOfWeekForSequence",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "DayOfWeekForSequence parameter"
+        },
+        {
+          "name": "ModeForSequence",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "ModeForSequence parameter"
+        },
+        {
+          "name": "Transitions",
+          "data_type": "list",
+          "value_range": {},
+          "description": "Transitions parameter"
+        }
+      ],
+      "privilege": "A",
+      "side": "client"
+    },
+    {
+      "id": "0x02",
+      "name": "GetWeeklySchedule",
+      "parameters": [
+        {
+          "name": "DaysToReturn",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "DaysToReturn parameter"
+        },
+        {
+          "name": "ModeToReturn",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "ModeToReturn parameter"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x03",
+      "name": "ClearWeeklySchedule",
+      "parameters": [],
+      "privilege": "A",
+      "side": "client"
+    },
+    {
+      "id": "0x00",
+      "name": "GetWeeklyScheduleResponse",
+      "parameters": [
+        {
+          "name": "NumberOfTransitionsForSequence",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "NumberOfTransitionsForSequence parameter"
+        },
+        {
+          "name": "DayOfWeekForSequence",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "DayOfWeekForSequence parameter"
+        },
+        {
+          "name": "ModeForSequence",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "ModeForSequence parameter"
+        },
+        {
+          "name": "Transitions",
+          "data_type": "list",
+          "value_range": {},
+          "description": "Transitions parameter"
+        }
+      ],
+      "privilege": "V",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "LocalTemperature",
+      "data_type": "temperature",
+      "value_range": {},
+      "description": "LocalTemperature attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "OutdoorTemperature",
+      "data_type": "temperature",
+      "value_range": {},
+      "description": "OutdoorTemperature attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "Occupancy",
+      "data_type": "bitmap8",
+      "value_range": {},
+      "description": "Occupancy attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0003",
+      "name": "AbsMinHeatSetpointLimit",
+      "data_type": "temperature",
+      "value_range": {},
+      "description": "AbsMinHeatSetpointLimit attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0004",
+      "name": "AbsMaxHeatSetpointLimit",
+      "data_type": "temperature",
+      "value_range": {},
+      "description": "AbsMaxHeatSetpointLimit attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0005",
+      "name": "AbsMinCoolSetpointLimit",
+      "data_type": "temperature",
+      "value_range": {},
+      "description": "AbsMinCoolSetpointLimit attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0006",
+      "name": "AbsMaxCoolSetpointLimit",
+      "data_type": "temperature",
+      "value_range": {},
+      "description": "AbsMaxCoolSetpointLimit attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0007",
+      "name": "PICoolingDemand",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "PICoolingDemand attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0008",
+      "name": "PIHeatingDemand",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "PIHeatingDemand attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0009",
+      "name": "HVACSystemTypeConfiguration",
+      "data_type": "bitmap8",
+      "value_range": {},
+      "description": "HVACSystemTypeConfiguration attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0010",
+      "name": "LocalTemperatureCalibration",
+      "data_type": "temp-s8",
+      "value_range": {},
+      "description": "LocalTemperatureCalibration attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0011",
+      "name": "OccupiedCoolingSetpoint",
+      "data_type": "temperature",
+      "value_range": {},
+      "description": "OccupiedCoolingSetpoint attribute",
+      "privilege": "O",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0012",
+      "name": "OccupiedHeatingSetpoint",
+      "data_type": "temperature",
+      "value_range": {},
+      "description": "OccupiedHeatingSetpoint attribute",
+      "privilege": "O",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0013",
+      "name": "UnoccupiedCoolingSetpoint",
+      "data_type": "temperature",
+      "value_range": {},
+      "description": "UnoccupiedCoolingSetpoint attribute",
+      "privilege": "O",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0014",
+      "name": "UnoccupiedHeatingSetpoint",
+      "data_type": "temperature",
+      "value_range": {},
+      "description": "UnoccupiedHeatingSetpoint attribute",
+      "privilege": "O",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0015",
+      "name": "MinHeatSetpointLimit",
+      "data_type": "temperature",
+      "value_range": {},
+      "description": "MinHeatSetpointLimit attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0016",
+      "name": "MaxHeatSetpointLimit",
+      "data_type": "temperature",
+      "value_range": {},
+      "description": "MaxHeatSetpointLimit attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0017",
+      "name": "MinCoolSetpointLimit",
+      "data_type": "temperature",
+      "value_range": {},
+      "description": "MinCoolSetpointLimit attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0018",
+      "name": "MaxCoolSetpointLimit",
+      "data_type": "temperature",
+      "value_range": {},
+      "description": "MaxCoolSetpointLimit attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0019",
+      "name": "MinSetpointDeadBand",
+      "data_type": "temp-s8",
+      "value_range": {},
+      "description": "MinSetpointDeadBand attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x001A",
+      "name": "RemoteSensing",
+      "data_type": "bitmap8",
+      "value_range": {},
+      "description": "RemoteSensing attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x001B",
+      "name": "ControlSequenceOfOperation",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "ControlSequenceOfOperation attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x001C",
+      "name": "SystemMode",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "SystemMode attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x001D",
+      "name": "AlarmMask",
+      "data_type": "bitmap8",
+      "value_range": {},
+      "description": "AlarmMask attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x001E",
+      "name": "ThermostatRunningMode",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "ThermostatRunningMode attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0020",
+      "name": "StartOfWeek",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "StartOfWeek attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0021",
+      "name": "NumberOfWeeklyTransitions",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "NumberOfWeeklyTransitions attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0022",
+      "name": "NumberOfDailyTransitions",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "NumberOfDailyTransitions attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0023",
+      "name": "TemperatureSetpointHold",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "TemperatureSetpointHold attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0024",
+      "name": "TemperatureSetpointHoldDuration",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "TemperatureSetpointHoldDuration attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0025",
+      "name": "ThermostatProgrammingOperationMode",
+      "data_type": "bitmap8",
+      "value_range": {},
+      "description": "ThermostatProgrammingOperationMode attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0029",
+      "name": "ThermostatRunningState",
+      "data_type": "bitmap16",
+      "value_range": {},
+      "description": "ThermostatRunningState attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0030",
+      "name": "SetpointChangeSource",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "SetpointChangeSource attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0031",
+      "name": "SetpointChangeAmount",
+      "data_type": "temp-diff",
+      "value_range": {},
+      "description": "SetpointChangeAmount attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0032",
+      "name": "SetpointChangeSourceTimestamp",
+      "data_type": "utc",
+      "value_range": {},
+      "description": "SetpointChangeSourceTimestamp attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0034",
+      "name": "OccupiedSetback",
+      "data_type": "temp-u8",
+      "value_range": {},
+      "description": "OccupiedSetback attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0035",
+      "name": "OccupiedSetbackMin",
+      "data_type": "temp-u8",
+      "value_range": {},
+      "description": "OccupiedSetbackMin attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0036",
+      "name": "OccupiedSetbackMax",
+      "data_type": "temp-u8",
+      "value_range": {},
+      "description": "OccupiedSetbackMax attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0037",
+      "name": "UnoccupiedSetback",
+      "data_type": "temp-u8",
+      "value_range": {},
+      "description": "UnoccupiedSetback attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0038",
+      "name": "UnoccupiedSetbackMin",
+      "data_type": "temp-u8",
+      "value_range": {},
+      "description": "UnoccupiedSetbackMin attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0039",
+      "name": "UnoccupiedSetbackMax",
+      "data_type": "temp-u8",
+      "value_range": {},
+      "description": "UnoccupiedSetbackMax attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x003A",
+      "name": "EmergencyHeatDelta",
+      "data_type": "temp-u8",
+      "value_range": {},
+      "description": "EmergencyHeatDelta attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0040",
+      "name": "ACType",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "ACType attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0041",
+      "name": "ACCapacity",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "ACCapacity attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0042",
+      "name": "ACRefrigerantType",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "ACRefrigerantType attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0043",
+      "name": "ACCompressorType",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "ACCompressorType attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0044",
+      "name": "ACErrorCode",
+      "data_type": "bitmap32",
+      "value_range": {},
+      "description": "ACErrorCode attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0045",
+      "name": "ACLouverPosition",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "ACLouverPosition attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0046",
+      "name": "ACCoilTemperature",
+      "data_type": "temperature",
+      "value_range": {},
+      "description": "ACCoilTemperature attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0047",
+      "name": "ACCapacityFormat",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "ACCapacityFormat attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

@@ -1,0 +1,47 @@
+config:
+  cluster: audio-output-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: audio-output-cluster_command_0x01_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`OutputList[0].Name` = "MinIndexOutput"'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Ensure the OutputList has at least one entry.
+  arguments:
+    Index: 0
+    Name: '"MinIndexOutput"'
+  label: Test_Case_Minimum_Index_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '`OutputList[255].Name` = "MaxIndexOutput" (if exists)'
+  ExpectedResponse: SUCCESS or FAILURE (depending on the actual size of the OutputList)
+  Pre-requisites: Ensure the OutputList has at least 256 entries.
+  arguments:
+    Index: 255
+    Name: '"MaxIndexOutput"'
+  label: Test_Case_Maximum_Index_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '`OutputList[1].Name` = "Special@#&*Name"'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Ensure the OutputList has at least two entries.
+  arguments:
+    Index: 1
+    Name: '"Special@#&*Name"'
+  label: Test_Case_Special_Character_in_Name
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '`OutputList[2].Name` = ""'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Ensure the OutputList has at least three entries.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    Index: 2
+    Name: '""'
+  label: Test_Case_Empty_Name
+  option: SendCommand

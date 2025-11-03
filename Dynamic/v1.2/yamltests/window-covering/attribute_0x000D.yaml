@@ -1,0 +1,67 @@
+config:
+  attribute: '0x000D'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x000D_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: ConfigStatus = 0x00
+  ExpectedResponse: Device is not operational, lift and tilt controls are not position
+    aware, and no encoders are used.
+  Pre-requisites: None
+  arguments:
+    LiftEncoderControlled: 0
+    LiftMovementReversed: 0
+    LiftPositionAware: 0
+    Operational: 0
+    TiltEncoderControlled: 0
+    TiltPositionAware: 0
+  label: Test_Case_All_Bits_Set_to_0
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: ConfigStatus = 0x7D
+  ExpectedResponse: Device is operational, lift and tilt controls are position aware,
+    and encoders are used for both lift and tilt.
+  Pre-requisites: Device must support PositionAwareLift and PositionAwareTilt features.
+  arguments:
+    LiftEncoderControlled: 1
+    LiftMovementReversed: 1
+    LiftPositionAware: 1
+    Operational: 1
+    TiltEncoderControlled: 1
+    TiltPositionAware: 1
+  label: Test_Case_All_Bits_Set_to_1
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: ConfigStatus = 0x05
+  ExpectedResponse: Device is operational, lift movement is reversed, but lift and
+    tilt controls are not position aware, and no encoders are used.
+  Pre-requisites: None
+  arguments:
+    LiftEncoderControlled: 0
+    LiftMovementReversed: 1
+    LiftPositionAware: 0
+    Operational: 1
+    TiltEncoderControlled: 0
+    TiltPositionAware: 0
+  label: Test_Case_Special_Response_for_Lift_Movement_Reversed
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: ConfigStatus = 0x19
+  ExpectedResponse: Device is operational, lift and tilt controls are position aware,
+    but no encoders are used.
+  Pre-requisites: 'Device must support PositionAwareLift and PositionAwareTilt features.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    LiftEncoderControlled: 0
+    LiftMovementReversed: 0
+    LiftPositionAware: 1
+    Operational: 1
+    TiltEncoderControlled: 0
+    TiltPositionAware: 1
+  label: Test_Case_Special_Response_for_Position_Aware_Features
+  option: WriteAttribute

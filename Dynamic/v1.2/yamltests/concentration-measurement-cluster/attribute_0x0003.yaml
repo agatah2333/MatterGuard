@@ -1,0 +1,51 @@
+config:
+  attribute: '0x0003'
+  cluster: concentration-measurement-cluster
+  nodeId: '0x654231'
+name: concentration-measurement-cluster_attribute_0x0003_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"Tolerance": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: <None>
+  arguments:
+    '{"Tolerance"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Tolerance": 2048}'
+  ExpectedResponse: <success>
+  Pre-requisites: <None>
+  arguments:
+    '{"Tolerance"': 2048}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Tolerance": 1024}'
+  ExpectedResponse: <success>
+  Pre-requisites: <None>
+  arguments:
+    '{"Tolerance"': 1024}
+  label: Test_Case_Special_Response_-_Mid_Range_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Tolerance": 2047}'
+  ExpectedResponse: <success>
+  Pre-requisites: <None>
+  arguments:
+    '{"Tolerance"': 2047}
+  label: Test_Case_Special_Response_-_Near_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Tolerance": 1}'
+  ExpectedResponse: <success>
+  Pre-requisites: '<None>
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    values that could result in special responses. The values are chosen to ensure
+    that the system handles edge cases and typical values correctly.'
+  arguments:
+    '{"Tolerance"': 1}
+  label: Test_Case_Special_Response_-_Near_Minimum_Value
+  option: WriteAttribute

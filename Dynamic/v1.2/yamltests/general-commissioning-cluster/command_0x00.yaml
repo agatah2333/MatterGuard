@@ -1,0 +1,84 @@
+config:
+  cluster: general-commissioning-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: general-commissioning-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: COMMAND_INVALID
+  Pre-requisites: None
+  arguments:
+    CommissioningTimeout: 0
+    Discriminator: 0
+    Iterations: 1000
+    PAKEPasscodeVerifier: <minimum_length_value>
+    Salt: <minimum_length_value>
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: "- `WindowStatus`: EnhancedWindowOpen\n  - `AdminFabricIndex`:\
+    \ <current_fabric_index>\n  - `AdminVendorId`: <current_vendor_id>"
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    CommissioningTimeout: 65535
+    Discriminator: 4095
+    Iterations: 100000
+    PAKEPasscodeVerifier: <maximum_length_value>
+    Salt: <maximum_length_value>
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Busy
+  Pre-requisites: An existing commissioning window is already open.
+  arguments:
+    CommissioningTimeout: 300
+    Discriminator: 1234
+    Iterations: 5000
+    PAKEPasscodeVerifier: <valid_value>
+    Salt: <valid_value>
+  label: Test_Case_Busy_Status_(Commissioning_Window_Already_Open)
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: PAKEParameterError
+  Pre-requisites: None
+  arguments:
+    CommissioningTimeout: 300
+    Discriminator: 1234
+    Iterations: 5000
+    PAKEPasscodeVerifier: <invalid_value>
+    Salt: <valid_value>
+  label: Test_Case_PAKE_Parameter_Error_(Invalid_PAKEPasscodeVerifier)
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: PAKEParameterError
+  Pre-requisites: None
+  arguments:
+    CommissioningTimeout: 300
+    Discriminator: 1234
+    Iterations: 999
+    PAKEPasscodeVerifier: <valid_value>
+    Salt: <valid_value>
+  label: Test_Case_PAKE_Parameter_Error_(Invalid_Iterations)
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Busy
+  Pre-requisites: 'The fail-safe timer is currently armed.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    CommissioningTimeout: 300
+    Discriminator: 1234
+    Iterations: 5000
+    PAKEPasscodeVerifier: <valid_value>
+    Salt: <valid_value>
+  label: Test_Case_Fail-Safe_Timer_Armed
+  option: SendCommand

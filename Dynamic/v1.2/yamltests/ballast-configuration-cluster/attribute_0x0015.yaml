@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0015'
+  cluster: ballast-configuration-cluster
+  nodeId: '0x654231'
+name: ballast-configuration-cluster_attribute_0x0015_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: BallastFactorAdjustment set to 100
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"BallastFactorAdjustment"': 100}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: BallastFactorAdjustment set to 200
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"BallastFactorAdjustment"': 200}
+  label: Test_Case_Maximum_Value_(Assuming_MS_=_200_for_this_example)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: BallastFactorAdjustment remains unchanged
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments:
+    '{"BallastFactorAdjustment"': 99}
+  label: Test_Case_Value_Below_Minimum
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: BallastFactorAdjustment remains unchanged
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】.'
+  arguments:
+    '{"BallastFactorAdjustment"': 201}
+  label: Test_Case_Value_Above_Maximum_(Assuming_MS_=_200_for_this_example)
+  option: WriteAttribute

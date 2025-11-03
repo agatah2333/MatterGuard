@@ -1,0 +1,47 @@
+config:
+  cluster: time-synchronization-cluster
+  event: '0x0002'
+  nodeId: '0x654231'
+name: time-synchronization-cluster_event_0x0002_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '`Offset` set to -43200, `Name` set to ""'
+  ExpectedResponse: TimeZoneStatus event generated
+  Pre-requisites: Node must support TimeZone feature
+  arguments:
+    Name: '""'
+    Offset: '-43200'
+  label: Test_Case_Minimum_Offset_Value
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '`Offset` set to 50400, `Name` set to "Pacific/Kiritimati"'
+  ExpectedResponse: TimeZoneStatus event generated
+  Pre-requisites: Node must support TimeZone feature
+  arguments:
+    Name: '"Pacific/Kiritimati"'
+    Offset: 50400
+  label: Test_Case_Maximum_Offset_Value
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '`Offset` set to 0, `Name` set to ""'
+  ExpectedResponse: TimeZoneStatus event generated
+  Pre-requisites: Node must support TimeZone feature
+  arguments:
+    Name: '""'
+    Offset: 0
+  label: Test_Case_Special_Response_for_Empty_Name
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '`Offset` set to 3600, `Name` set to "A" * 64'
+  ExpectedResponse: TimeZoneStatus event generated
+  Pre-requisites: 'Node must support TimeZone feature
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    Name: '"A" * 64'
+    Offset: 3600
+  label: Test_Case_Special_Response_for_Maximum_Length_Name
+  option: SubscribeToEvent

@@ -1,0 +1,864 @@
+{
+  "cluster_id": "0x0035",
+  "cluster_name": "Thread Network Diagnostics",
+  "cluster_description": "The Thread Network Diagnostics Cluster provides a means to acquire standardized diagnostics metrics that MAY be used by a Node to assist a user or Administrator in diagnosing potential problems. The Thread Network Diagnostics Cluster attempts to centralize all metrics that are relevant to a potential Thread radio running on a Node.",
+  "revision_history": [
+    {
+      "revision": 1,
+      "description": "Initial revision"
+    },
+    {
+      "revision": 2,
+      "description": "Remove optionality from FrameErrorRate and MessageErrorRate"
+    },
+    {
+      "revision": 3,
+      "description": "Add ExtAddress and Rloc16 attributes"
+    }
+  ],
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Utility",
+    "scope": "Node",
+    "pics_code": "DGTHREAD",
+    "quality": "K"
+  },
+  "features": {
+    "PKTCNT": {
+      "bit": 0,
+      "name": "PacketCounts",
+      "summary": "Server supports the counts for the number of received and transmitted packets on the Thread interface."
+    },
+    "ERRCNT": {
+      "bit": 1,
+      "name": "ErrorCounts",
+      "summary": "Server supports the counts for the number of errors that have occurred during the reception and transmission of packets on the Thread interface."
+    },
+    "MLECNT": {
+      "bit": 2,
+      "name": "MLECounts",
+      "summary": "Server supports the counts for various MLE layer happenings."
+    },
+    "MACCNT": {
+      "bit": 3,
+      "name": "MACCounts",
+      "summary": "Server supports the counts for various MAC layer happenings."
+    }
+  },
+  "data_types": {
+    "NetworkFaultEnum": {
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "Unspecified",
+          "summary": "Indicates an unspecified fault.",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "LinkDown",
+          "summary": "Indicates the Thread link is down.",
+          "conformance": "M"
+        },
+        {
+          "value": 2,
+          "name": "HardwareFailure",
+          "summary": "Indicates there has been Thread hardware failure.",
+          "conformance": "M"
+        },
+        {
+          "value": 3,
+          "name": "NetworkJammed",
+          "summary": "Indicates the Thread network is jammed.",
+          "conformance": "M"
+        }
+      ]
+    },
+    "ConnectionStatusEnum": {
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "Connected",
+          "summary": "Node is connected",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "NotConnected",
+          "summary": "Node is not connected",
+          "conformance": "M"
+        }
+      ]
+    },
+    "RoutingRoleEnum": {
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "Unspecified",
+          "summary": "Unspecified routing role.",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "Unassigned",
+          "summary": "The Node does not currently have a role as a result of the Thread interface not currently being configured or operational.",
+          "conformance": "M"
+        },
+        {
+          "value": 2,
+          "name": "SleepyEndDevice",
+          "summary": "The Node acts as a Sleepy End Device with RX-off-when-idle sleepy radio behavior.",
+          "conformance": "M"
+        },
+        {
+          "value": 3,
+          "name": "EndDevice",
+          "summary": "The Node acts as an End Device without RX-off-when-idle sleepy radio behavior.",
+          "conformance": "M"
+        },
+        {
+          "value": 4,
+          "name": "REED",
+          "summary": "The Node acts as a Router Eligible End Device.",
+          "conformance": "M"
+        },
+        {
+          "value": 5,
+          "name": "Router",
+          "summary": "The Node acts as a Router Device.",
+          "conformance": "M"
+        },
+        {
+          "value": 6,
+          "name": "Leader",
+          "summary": "The Node acts as a Leader Device.",
+          "conformance": "M"
+        }
+      ]
+    },
+    "NeighborTableStruct": {
+      "type": "struct",
+      "fields": [
+        {
+          "id": 0,
+          "name": "ExtAddress",
+          "type": "uint64",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the IEEE 802.15.4 extended address for the neighboring Node."
+        },
+        {
+          "id": 1,
+          "name": "Age",
+          "type": "uint32",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the duration of time, in seconds, since a frame has been received from the neighboring Node."
+        },
+        {
+          "id": 2,
+          "name": "Rloc16",
+          "type": "uint16",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the RLOC16 of the neighboring Node."
+        },
+        {
+          "id": 3,
+          "name": "LinkFrameCounter",
+          "type": "uint32",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the number of link layer frames that have been received from the neighboring node. This field SHALL be reset to 0 upon a reboot of the Node."
+        },
+        {
+          "id": 4,
+          "name": "MleFrameCounter",
+          "type": "uint32",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the number of Mesh Link Establishment frames that have been received from the neighboring node. This field SHALL be reset to 0 upon a reboot of the Node."
+        },
+        {
+          "id": 5,
+          "name": "LQI",
+          "type": "uint8",
+          "constraint": "0 to 255",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the implementation specific mix of IEEE 802.15.4 PDU receive quality indicators, scaled from 0 to 255."
+        },
+        {
+          "id": 6,
+          "name": "AverageRssi",
+          "type": "int8",
+          "constraint": "-128 to 0",
+          "quality": "X",
+          "default": "null",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHOULD specify the average RSSI across all received frames from the neighboring Node since the receiving Node's last reboot. If there is no known received frames this field SHOULD have the value of null. This field SHALL have the units of dBm, having the range -128 dBm to 0 dBm."
+        },
+        {
+          "id": 7,
+          "name": "LastRssi",
+          "type": "int8",
+          "constraint": "-128 to 0",
+          "quality": "X",
+          "default": "null",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the RSSI of the most recently received frame from the neighboring Node. If there is no known last received frame the LastRssi field SHOULD have the value of null. This field SHALL have the units of dBm, having the range -128 dBm to 0 dBm."
+        },
+        {
+          "id": 8,
+          "name": "FrameErrorRate",
+          "type": "uint8",
+          "constraint": "0 to 100",
+          "quality": "",
+          "default": "0",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the percentage of received frames from the neighboring Node that have resulted in errors."
+        },
+        {
+          "id": 9,
+          "name": "MessageErrorRate",
+          "type": "uint8",
+          "constraint": "0 to 100",
+          "quality": "",
+          "default": "0",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the percentage of received messages from the neighboring Node that have resulted in errors."
+        },
+        {
+          "id": 10,
+          "name": "RxOnWhenIdle",
+          "type": "bool",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify if the neighboring Node is capable of receiving frames while the Node is in an idle state."
+        },
+        {
+          "id": 11,
+          "name": "FullThreadDevice",
+          "type": "bool",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify if the neighboring Node is a full Thread device."
+        },
+        {
+          "id": 12,
+          "name": "FullNetworkData",
+          "type": "bool",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify if the neighboring Node requires the full Network Data. If set to False, the neighboring Node only requires the stable Network Data."
+        },
+        {
+          "id": 13,
+          "name": "IsChild",
+          "type": "bool",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify if the neighboring Node is a direct child of the Node reporting the NeighborTable attribute."
+        }
+      ]
+    },
+    "RouteTableStruct": {
+      "type": "struct",
+      "fields": [
+        {
+          "id": 0,
+          "name": "ExtAddress",
+          "type": "uint64",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the IEEE 802.15.4 extended address for the Node for which this route table entry corresponds."
+        },
+        {
+          "id": 1,
+          "name": "Rloc16",
+          "type": "uint16",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the RLOC16 for the Node for which this route table entry corresponds."
+        },
+        {
+          "id": 2,
+          "name": "RouterId",
+          "type": "uint8",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the Router ID for the Node for which this route table entry corresponds."
+        },
+        {
+          "id": 3,
+          "name": "NextHop",
+          "type": "uint8",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the Router ID for the next hop in the route to the Node for which this route table entry corresponds."
+        },
+        {
+          "id": 4,
+          "name": "PathCost",
+          "type": "uint8",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This Field SHALL specify the cost of the route to the Node for which this route table entry corresponds."
+        },
+        {
+          "id": 5,
+          "name": "LQIIn",
+          "type": "uint8",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the implementation specific mix of IEEE 802.15.4 PDU receive quality indicators, scaled from 0 to 255, from the perspective of the Node reporting the neighbor table."
+        },
+        {
+          "id": 6,
+          "name": "LQIOut",
+          "type": "uint8",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the implementation specific mix of IEEE 802.15.4 PDU receive quality indicators, scaled from 0 to 255, from the perspective of the Node specified within the NextHop field."
+        },
+        {
+          "id": 7,
+          "name": "Age",
+          "type": "uint8",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the duration of time, in seconds, since a frame has been received from the Node for which this route table entry corresponds."
+        },
+        {
+          "id": 8,
+          "name": "Allocated",
+          "type": "bool",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify if the router ID as defined within the RouterId field has been allocated."
+        },
+        {
+          "id": 9,
+          "name": "LinkEstablished",
+          "type": "bool",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify if a link has been established to the Node for which this route table entry corresponds."
+        }
+      ]
+    },
+    "SecurityPolicy": {
+      "type": "struct",
+      "fields": [
+        {
+          "id": 0,
+          "name": "RotationTime",
+          "type": "uint16",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the interval of time, in hours, that Thread security keys are rotated. This attribute SHALL be null when there is no dataset configured."
+        },
+        {
+          "id": 1,
+          "name": "Flags",
+          "type": "uint16",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the flags as specified in Thread 1.3.0 section 8.10.1.15. This attribute SHALL be null when there is no dataset configured."
+        }
+      ]
+    },
+    "OperationalDatasetComponents": {
+      "type": "struct",
+      "fields": [
+        {
+          "id": 0,
+          "name": "ActiveTimestampPresent",
+          "type": "bool",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL be True if the Node has an active timestamp present, else False."
+        },
+        {
+          "id": 1,
+          "name": "PendingTimestampPresent",
+          "type": "bool",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL be True if the Node has a pending timestamp is present, else False."
+        },
+        {
+          "id": 2,
+          "name": "MasterKeyPresent",
+          "type": "bool",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL be True if the Node has the Thread master key, else False."
+        },
+        {
+          "id": 3,
+          "name": "NetworkNamePresent",
+          "type": "bool",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL be True if the Node has the Thread network's name, else False."
+        },
+        {
+          "id": 4,
+          "name": "ExtendedPanIdPresent",
+          "type": "bool",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL be True if the Node has an extended Pan ID, else False."
+        },
+        {
+          "id": 5,
+          "name": "MeshLocalPrefixPresent",
+          "type": "bool",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL be True if the Node has the mesh local prefix, else False."
+        },
+        {
+          "id": 6,
+          "name": "DelayPresent",
+          "type": "bool",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL be True if the Node has the Thread network delay set, else False."
+        },
+        {
+          "id": 7,
+          "name": "PanIdPresent",
+          "type": "bool",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL be True if the Node has a Pan ID, else False."
+        },
+        {
+          "id": 8,
+          "name": "ChannelPresent",
+          "type": "bool",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL be True if the Node has configured an operational channel for the Thread network, else False."
+        },
+        {
+          "id": 9,
+          "name": "PskcPresent",
+          "type": "bool",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL be True if the Node has been configured with the Thread network Pskc, else False."
+        },
+        {
+          "id": 10,
+          "name": "SecurityPolicyPresent",
+          "type": "bool",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL be True if the Node has been configured with the Thread network security policies, else False."
+        },
+        {
+          "id": 11,
+          "name": "ChannelMaskPresent",
+          "type": "bool",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL be True if the Node has available a mask of available channels, else False."
+        }
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Channel",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "X",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The Channel attribute SHALL indicate the 802.15.4 channel number configured on the Node's Thread interface (that is, the Active Operational Dataset's current Channel value). A value of null SHALL indicate that the Thread interface is not currently configured or operational."
+    },
+    {
+      "id": "0x0001",
+      "name": "RoutingRole",
+      "type": "RoutingRoleEnum",
+      "constraint": "all",
+      "quality": "X",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The RoutingRole attribute SHALL indicate the role that this Node has within the routing of messages through the Thread network, as defined by RoutingRoleEnum. A value of null SHALL indicate that the Thread interface is not currently configured or operational."
+    },
+    {
+      "id": "0x0002",
+      "name": "NetworkName",
+      "type": "String",
+      "constraint": "max 16",
+      "quality": "X",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The NetworkName attribute SHALL indicate a human-readable (displayable) name for the Thread network that the Node has been configured to join to. A value of null SHALL indicate that the Thread interface is not currently configured or operational."
+    },
+    {
+      "id": "0x0003",
+      "name": "PanId",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "X",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The PanId attribute SHALL indicate the 16-bit identifier of the Node on the Thread network. A value of null SHALL indicate that the Thread interface is not currently configured or operational."
+    },
+    {
+      "id": "0x0004",
+      "name": "ExtendedPanId",
+      "type": "uint64",
+      "constraint": "all",
+      "quality": "X",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The ExtendedPanId attribute SHALL indicate the unique 64-bit identifier of the Node on the Thread network. A value of null SHALL indicate that the Thread interface is not currently configured or operational."
+    },
+    {
+      "id": "0x0005",
+      "name": "MeshLocalPrefix",
+      "type": "ipv6pre",
+      "constraint": "all",
+      "quality": "X",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The MeshLocalPrefix attribute SHALL indicate the mesh-local IPv6 prefix for the Thread network that the Node has been configured to join to. A value of null SHALL indicate that the Thread interface is not currently configured or operational."
+    },
+    {
+      "id": "0x0006",
+      "name": "OverrunCount",
+      "type": "uint64",
+      "constraint": "all",
+      "quality": "C",
+      "default": "0",
+      "access": "RV",
+      "conformance": "ERRCNT",
+      "description": "The OverrunCount attribute SHALL indicate the number of packets dropped either at ingress or egress, due to lack of buffer memory to retain all packets on the ethernet network interface. The OverrunCount attribute SHALL be reset to 0 upon a reboot of the Node."
+    },
+    {
+      "id": "0x0007",
+      "name": "NeighborTable",
+      "type": "list[NeighborTableStruct]",
+      "constraint": "all",
+      "quality": "",
+      "default": "[]",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The NeighborTable attribute SHALL indicate the current list of Nodes that comprise the neighbor table on the Node."
+    },
+    {
+      "id": "0x0008",
+      "name": "RouteTable",
+      "type": "list[RouteTableStruct]",
+      "constraint": "all",
+      "quality": "",
+      "default": "[]",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The RouteTable attribute SHALL indicate the current list of router capable Nodes for which routes have been established."
+    },
+    {
+      "id": "0x0009",
+      "name": "PartitionId",
+      "type": "uint32",
+      "constraint": "all",
+      "quality": "X",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The PartitionId attribute SHALL indicate the Thread Leader Partition Id for the Thread network to which the Node is joined. This attribute SHALL be null if not attached to a Thread network."
+    },
+    {
+      "id": "0x000A",
+      "name": "Weighting",
+      "type": "uint16",
+      "constraint": "max 255",
+      "quality": "X",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The Weighting attribute SHALL indicate the Thread Leader Weight used when operating in the Leader role. This attribute SHALL be null if not attached to a Thread network."
+    },
+    {
+      "id": "0x000B",
+      "name": "DataVersion",
+      "type": "uint16",
+      "constraint": "max 255",
+      "quality": "X",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The DataVersion attribute SHALL indicate the full Network Data Version the Node currently uses. This attribute SHALL be null if not attached to a Thread network."
+    },
+    {
+      "id": "0x000C",
+      "name": "StableDataVersion",
+      "type": "uint16",
+      "constraint": "max 255",
+      "quality": "X",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The StableDataVersion attribute SHALL indicate the Network Data Version for the stable subset of data the Node currently uses. This attribute SHALL be null if not attached to a Thread network."
+    },
+    {
+      "id": "0x000D",
+      "name": "LeaderRouterId",
+      "type": "uint8",
+      "constraint": "max 62",
+      "quality": "X",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The LeaderRouterId attribute SHALL indicate the 8-bit LeaderRouterId the Node SHALL attempt to utilize upon becoming a router or leader on the Thread network. This attribute SHALL be null if not attached to a Thread network."
+    },
+    {
+      "id": "0x000E",
+      "name": "DetachedRoleCount",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "C",
+      "default": "0",
+      "access": "RV",
+      "conformance": "[MLECNT]",
+      "description": "The DetachedRoleCount attribute SHALL indicate the number of times the Node entered the OT_DEVICE_ROLE_DETACHED role as specified within the Thread specification. This value SHALL only be reset upon a Node reboot."
+    },
+    {
+      "id": "0x000F",
+      "name": "ChildRoleCount",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "C",
+      "default": "0",
+      "access": "RV",
+      "conformance": "[MLECNT]",
+      "description": "The ChildRoleCount attribute SHALL indicate the number of times the Node entered the OT_DEVICE_ROLE_CHILD role as specified within the Thread specification. This value SHALL only be reset upon a Node reboot."
+    },
+    {
+      "id": "0x0010",
+      "name": "RouterRoleCount",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "C",
+      "default": "0",
+      "access": "RV",
+      "conformance": "[MLECNT]",
+      "description": "The RouterRoleCount attribute SHALL indicate the number of times the Node entered the OT_DEVICE_ROLE_ROUTER role as specified within the Thread specification. This value SHALL only be reset upon a Node reboot."
+    },
+    {
+      "id": "0x0011",
+      "name": "LeaderRoleCount",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "C",
+      "default": "0",
+      "access": "RV",
+      "conformance": "[MLECNT]",
+      "description": "The LeaderRoleCount attribute SHALL indicate the number of times the Node entered the OT_DEVICE_ROLE_LEADER role as specified within the Thread specification. This value SHALL only be reset upon a Node reboot."
+    },
+    {
+      "id": "0x003F",
+      "name": "ExtAddress",
+      "type": "uint64",
+      "constraint": "all",
+      "quality": "X",
+      "default": "",
+      "access": "RV",
+      "conformance": "P, M",
+      "description": "This attribute SHALL indicate the IEEE 802.15.4 extended address for the Node. A value of null SHALL indicate that the extended address is not yet known."
+    },
+    {
+      "id": "0x0040",
+      "name": "Rloc16",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "X",
+      "default": "",
+      "access": "RV",
+      "conformance": "P, M",
+      "description": "This attribute SHALL indicate the RLOC16 of the Node. A value of null SHALL indicate that the Thread interface is not currently configured or operational."
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "ResetCounts",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "M",
+      "conformance": "ERRCNT",
+      "description": "Reception of this command SHALL reset the following attributes to 0: OverrunCount. This command has no associated data. Upon completion, this command SHALL send a status code set to a value of SUCCESS back to the initiator."
+    }
+  ],
+  "events": [
+    {
+      "id": "0x00",
+      "name": "ConnectionStatus",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "O",
+      "fields": [
+        {
+          "id": 0,
+          "name": "ConnectionStatus",
+          "type": "ConnectionStatusEnum",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "The ConnectionStatus Event SHALL indicate that a Node's connection status to a Thread network has changed."
+        }
+      ]
+    },
+    {
+      "id": "0x01",
+      "name": "NetworkFaultChange",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "O",
+      "fields": [
+        {
+          "id": 0,
+          "name": "Current",
+          "type": "list[NetworkFaultEnum]",
+          "constraint": "max 4",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL represent the set of faults currently detected, as per Section 11.14.5.1, NetworkFaultEnum Type."
+        },
+        {
+          "id": 1,
+          "name": "Previous",
+          "type": "list[NetworkFaultEnum]",
+          "constraint": "max 4",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL represent the set of faults detected prior to this change event, as per Section 11.14.5.1, NetworkFaultEnum Type."
+        }
+      ]
+    }
+  ]
+}

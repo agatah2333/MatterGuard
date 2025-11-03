@@ -1,0 +1,218 @@
+config:
+  attribute: '0x0000'
+  cluster: relative-humidity-measurement-cluster
+  nodeId: '0x654231'
+name: relative-humidity-measurement-cluster_attribute_0x0000_v1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '- `MeasuredValue`: 0'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    MeasuredValue: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify relative-humidity-measurement-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0405'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0405'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0405'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0405'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: <current_time>
+  Attribute_Change: '- `MeasuredValue`: 10000'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    MeasuredValue: 10000
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify relative-humidity-measurement-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0405'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0405'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0405'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0405'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: <current_time>
+  Attribute_Change: '- `MeasuredValue`: <null>'
+  ExpectedResponse: <measurement_unknown>
+  Pre-requisites: <none>
+  arguments:
+    MeasuredValue: <null>
+  label: Test_Case_Special_Response_-_Null_Value_(Measurement_Unknown)
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify relative-humidity-measurement-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0405'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0405'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0405'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0405'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: <current_time>
+  Attribute_Change: '- `MeasuredValue`: 5000'
+  ExpectedResponse: <success>
+  Pre-requisites: '<none>
+
+
+    These test cases cover the extreme values of the `MeasuredValue` field, as well
+    as a special response scenario where the measurement is unknown (null value)【4:0†source】【4:1†source】【4:4†source】.'
+  arguments:
+    MeasuredValue: 5000
+  label: Test_Case_Mid-Range_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify relative-humidity-measurement-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0405'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0405'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0405'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0405'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true

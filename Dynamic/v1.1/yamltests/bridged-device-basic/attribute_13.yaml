@@ -1,0 +1,28 @@
+config:
+  attribute: '13'
+  cluster: bridged-device-basic
+  nodeId: '0x654231'
+name: bridged-device-basic_attribute_13_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: Reachable = True
+  ExpectedResponse: No event generated if the previous value was also True.
+  Pre-requisites: 'The initial value of Reachable should be True.
+
+
+    **Test Case 1.2**'
+  arguments:
+    '{"Reachable"': True}
+  label: Test_Case_Extreme_Values
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Reachable = False
+  ExpectedResponse: ReachableChanged event generated.
+  Pre-requisites: 'The initial value of Reachable should be True.
+
+
+    **Test Case 2.2**'
+  arguments:
+    '{"Reachable"': False}
+  label: Test_Case_Special_Responses
+  option: WriteAttribute

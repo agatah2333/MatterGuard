@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0003'
+  cluster: temperature-control-cluster
+  nodeId: '0x654231'
+name: temperature-control-cluster_attribute_0x0003_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: Step = 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: MinTemperature and MaxTemperature must be set such that the difference
+    is non-negative.
+  arguments:
+    '{"Step"': 0}
+  label: Test_Case_Minimum_Value_of_Step
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Step = <MaxTemperature - MinTemperature>
+  ExpectedResponse: SUCCESS
+  Pre-requisites: MinTemperature and MaxTemperature must be set to valid values.
+  arguments:
+    '{"Step"': <MaxTemperature - MinTemperature>}
+  label: Test_Case_Maximum_Value_of_Step
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Step remains unchanged
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: MinTemperature and MaxTemperature must be set to valid values.
+  arguments:
+    '{"Step"': <MaxTemperature - MinTemperature + 1>}
+  label: Test_Case_Step_Value_Exceeding_Maximum_Constraint
+  option: WriteAttribute
+- ActionTime: <during_operation>
+  Attribute_Change: Step remains unchanged
+  ExpectedResponse: INVALID_IN_STATE
+  Pre-requisites: 'Device must be in a state where it cannot accept changes to the
+    Step attribute.
+
+
+    ### Constraints and Special Responses'
+  arguments:
+    '{"Step"': <some_value_within_constraints>}
+  label: Test_Case_Step_Value_Causing_Special_Response_(e.g.,_INVALID_IN_STATE)
+  option: WriteAttribute

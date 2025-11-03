@@ -1,0 +1,28 @@
+config:
+  attribute: '7'
+  cluster: bridged-device-basic
+  nodeId: '0x654231'
+name: bridged-device-basic_attribute_7_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": True}'
+  ExpectedResponse: <success>
+  Pre-requisites: '<device must be connected and operational>
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"Reachable"': True}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": True}'
+  ExpectedResponse: <device operational>
+  Pre-requisites: '<device must be connected and operational>
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"Reachable"': True}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

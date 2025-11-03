@@ -1,0 +1,82 @@
+config:
+  cluster: power-source-cluster
+  event: '1'
+  nodeId: '0x654231'
+name: power-source-cluster_event_1_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '`ActiveWiredFaults` will be updated to [0, 1, 2, 0, 1, 2, 0,
+    1]'
+  ExpectedResponse: <success>
+  Pre-requisites: The node must support detecting all types of wired faults.
+  arguments:
+    Current:
+    - 0
+    - 1
+    - 2
+    - 0
+    - 1
+    - 2
+    - 0
+    - 1
+    Previous:
+    - 2
+    - 1
+    - 0
+    - 2
+    - 1
+    - 0
+    - 2
+    - 1
+  label: Test_Case_Extreme_Values
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '`ActiveWiredFaults` will be updated to [1]'
+  ExpectedResponse: <over_voltage_detected>
+  Pre-requisites: The node must support detecting OverVoltage faults.
+  arguments:
+    Current:
+    - 1
+    Previous:
+    - 0
+  label: Test_Case_Special_Response_for_OverVoltage
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '`ActiveWiredFaults` will be updated to [2]'
+  ExpectedResponse: <under_voltage_detected>
+  Pre-requisites: The node must support detecting UnderVoltage faults.
+  arguments:
+    Current:
+    - 2
+    Previous:
+    - 0
+  label: Test_Case_Special_Response_for_UnderVoltage
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '`ActiveWiredFaults` will be updated to [2]'
+  ExpectedResponse: <transition_over_to_under_voltage>
+  Pre-requisites: The node must support detecting both OverVoltage and UnderVoltage
+    faults.
+  arguments:
+    Current:
+    - 2
+    Previous:
+    - 1
+  label: Test_Case_Transition_from_OverVoltage_to_UnderVoltage
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '`ActiveWiredFaults` will be updated to []'
+  ExpectedResponse: <no_faults_detected>
+  Pre-requisites: 'The node must support clearing all faults.
+
+
+    These test cases cover the extreme values and special responses for the WiredFaultChange
+    event in the Power Source Cluster.'
+  arguments:
+    Current: []
+    Previous:
+    - 0
+    - 1
+    - 2
+  label: Test_Case_No_Faults_Detected
+  option: SubscribeToEvent

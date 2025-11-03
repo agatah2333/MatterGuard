@@ -1,0 +1,232 @@
+config:
+  cluster: basic-information-cluster
+  event: '0x02'
+  nodeId: '0x654231'
+name: basic-information-cluster_event_0x02_v1.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: Related bindings, access control list entries, and other data
+    referencing the leaving Node will be removed.
+  ExpectedResponse: The receiving Node updates other nodes in the fabric by removing
+    related bindings, access control list entries, and other data referencing the
+    leaving Node.
+  Pre-requisites: The Node must be part of a fabric.
+  arguments:
+    FabricIndex: 1
+  label: Test_Case_Minimum_Value
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify basic-information-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`<current_time>`'
+  Attribute_Change: Related bindings, access control list entries, and other data
+    referencing the leaving Node will be removed.
+  ExpectedResponse: The receiving Node updates other nodes in the fabric by removing
+    related bindings, access control list entries, and other data referencing the
+    leaving Node.
+  Pre-requisites: The Node must be part of a fabric.
+  arguments:
+    FabricIndex: 254
+  label: Test_Case_Maximum_Value
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify basic-information-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`<current_time>`'
+  Attribute_Change: Related bindings, access control list entries, and other data
+    referencing the leaving Node will be removed.
+  ExpectedResponse: The receiving Node updates other nodes in the fabric by removing
+    related bindings, access control list entries, and other data referencing the
+    leaving Node.
+  Pre-requisites: The Node must be part of a fabric.
+  arguments:
+    FabricIndex: 128
+  label: Test_Case_Mid-Range_Value
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify basic-information-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`<current_time>`'
+  Attribute_Change: Related bindings, access control list entries, and other data
+    referencing the leaving Node will be removed.
+  ExpectedResponse: The receiving Node updates other nodes in the fabric by removing
+    related bindings, access control list entries, and other data referencing the
+    leaving Node.
+  Pre-requisites: 'The Node must be part of a fabric and is undergoing a factory reset.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:6†source】.'
+  arguments:
+    FabricIndex: 100 (Assuming this value is used in a scenario where the Node is
+      being factory reset)
+  label: Test_Case_Special_Response_Trigger
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify basic-information-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true

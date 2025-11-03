@@ -1,0 +1,51 @@
+config:
+  attribute: '0x0001'
+  cluster: actions-cluster
+  nodeId: '0x654231'
+name: actions-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: EndpointLists will be set to the minimum values.
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    #'
+  arguments:
+    EndpointID: 0
+    EndpointListID: 0
+  label: Test_Case_Minimum_Values
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: EndpointLists will be set to the maximum values.
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    #'
+  arguments:
+    EndpointID: 65535
+    EndpointListID: 255
+  label: Test_Case_Maximum_Values
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: EndpointLists will be set to an empty list.
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    #'
+  arguments:
+    EndpointID: (empty)
+    EndpointListID: (empty)
+  label: Test_Case_Special_Response_-_Empty_List
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: EndpointLists will not be changed.
+  ExpectedResponse: Constraint Error
+  Pre-requisites: 'None'
+  arguments:
+    EndpointID: 65536
+    EndpointListID: 256
+  label: Test_Case_Special_Response_-_Exceeding_Maximum_Constraint
+  option: WriteAttribute

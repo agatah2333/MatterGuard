@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0002'
+  cluster: rvc-run-mode-cluster
+  nodeId: '0x654231'
+name: rvc-run-mode-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '`AdminVendorId` will be set to 0x0000'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AdminVendorId: '0x0000'
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`AdminVendorId` will be set to 0xFFFF'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AdminVendorId: '0xFFFF'
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: When another commissioning is in progress
+  Attribute_Change: None
+  ExpectedResponse: Busy (0x02)
+  Pre-requisites: Another commissioning must be in progress
+  arguments:
+    AdminVendorId: <any valid value>
+  label: Test_Case_Special_Response_-_Busy
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: PAKEParameterError (0x03)
+  Pre-requisites: 'Invalid PAKE parameters must be provided
+
+
+    These test cases cover the extreme values of the constraints of the `AdminVendorId`
+    field and the values that could result in special responses as mentioned in the
+    description of the effect【4:0†source】.'
+  arguments:
+    AdminVendorId: <invalid PAKE parameter>
+  label: Test_Case_Special_Response_-_PAKE_Parameter_Error
+  option: WriteAttribute

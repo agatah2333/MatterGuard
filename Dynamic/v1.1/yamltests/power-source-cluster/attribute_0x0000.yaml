@@ -1,0 +1,6 @@
+config:
+  attribute: '0x0000'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x0000_v1.1.0.0
+tests: []

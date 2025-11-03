@@ -1,0 +1,27 @@
+{
+  "cluster_id": "0x001E",
+  "cluster_name": "Binding",
+  "section": "9.6",
+  "description": "This scope of this document is the Binding cluster as part of the Cluster Library. The NOTE         Binding cluster is meant to replace the support from the Zigbee Device Object (ZDO) for supporting the binding table. A binding represents a persistent relationship between an endpoint and one or more other local or remote endpoints. A binding does not require that the relationship exists. It is up to the node appli­",
+  "data_types": {
+    "TargetStruct": {
+      "name": "TargetStruct",
+      "definition_line": "9.6.5.1. TargetStruct Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "Binding",
+      "details": "list[Target­ desc N [] RW F VM M",
+      "raw_line": "0x0000          Binding       list[Target­ desc            N              []             RW F VM    M"
+    }
+  },
+  "commands": {},
+  "events": {},
+  "extraction_info": {
+    "start_line": 28605,
+    "end_line": 28779,
+    "total_lines": 174
+  }
+}

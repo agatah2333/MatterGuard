@@ -1,0 +1,1618 @@
+{
+  "cluster_id": "0x0300",
+  "name": "Color Control",
+  "description": "This cluster provides an interface for changing the color of a light. Color is specified according to the Commission Internationale de l'Éclairage (CIE) specification CIE 1931 Color Space. Color control is carried out in terms of x,y values, as defined by this specification. Additionally, color MAY optionally be controlled in terms of color temperature, or as hue and saturation values based on optionally variable RGB and W color points.",
+  "revision": 6,
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Application",
+    "scope": "Endpoint",
+    "pics_code": "CC",
+    "primary_transaction": "Type 1 (client to server)"
+  },
+  "features": [
+    {
+      "bit": 0,
+      "code": "HS",
+      "name": "Hue/Saturation",
+      "description": "Supports color specification via hue/saturation"
+    },
+    {
+      "bit": 1,
+      "code": "EHUE",
+      "name": "Enhanced Hue",
+      "description": "Enhanced hue is supported",
+      "conformance": "HS"
+    },
+    {
+      "bit": 2,
+      "code": "CL",
+      "name": "Color loop",
+      "description": "Color loop is supported",
+      "conformance": "EHUE"
+    },
+    {
+      "bit": 3,
+      "code": "XY",
+      "name": "XY",
+      "description": "Supports color specification via XY"
+    },
+    {
+      "bit": 4,
+      "code": "CT",
+      "name": "Color temperature",
+      "description": "Supports specification of color temperature"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "CurrentHue",
+      "type": "uint8",
+      "constraint": "0 to 254",
+      "quality": "PN",
+      "default": 0,
+      "access": "RV",
+      "conformance": "HS"
+    },
+    {
+      "id": "0x0001",
+      "name": "CurrentSaturation",
+      "type": "uint8",
+      "constraint": "0 to 254",
+      "quality": "PSN",
+      "default": 0,
+      "access": "RV",
+      "conformance": "HS"
+    },
+    {
+      "id": "0x0002",
+      "name": "RemainingTime",
+      "type": "uint16",
+      "constraint": "0 to 65534",
+      "default": 0,
+      "access": "RV",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0003",
+      "name": "CurrentX",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "quality": "PSN",
+      "default": "0x616B",
+      "default_value_note": "(0.381)",
+      "access": "RV",
+      "conformance": "XY"
+    },
+    {
+      "id": "0x0004",
+      "name": "CurrentY",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "quality": "PSN",
+      "default": "0x607D",
+      "default_value_note": "(0.377)",
+      "access": "RV",
+      "conformance": "XY"
+    },
+    {
+      "id": "0x0005",
+      "name": "DriftCompensation",
+      "type": "enum8",
+      "constraint": "0 to 4",
+      "access": "RV",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0006",
+      "name": "CompensationText",
+      "type": "string",
+      "constraint": "max 254",
+      "access": "RV",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0007",
+      "name": "ColorTemperatureMireds",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "quality": "PSN",
+      "default": "0x00FA",
+      "default_value_note": "(4000K)",
+      "access": "RV",
+      "conformance": "CT"
+    },
+    {
+      "id": "0x0008",
+      "name": "ColorMode",
+      "type": "enum8",
+      "constraint": "0 to 2",
+      "quality": "N",
+      "default": 1,
+      "access": "RV",
+      "conformance": "M"
+    },
+    {
+      "id": "0x000F",
+      "name": "Options",
+      "type": "map8",
+      "constraint": "desc",
+      "default": 0,
+      "access": "RW VO",
+      "conformance": "M"
+    },
+    {
+      "id": "0x4000",
+      "name": "EnhancedCurrentHue",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "SN",
+      "default": 0,
+      "access": "RV",
+      "conformance": "EHUE"
+    },
+    {
+      "id": "0x4001",
+      "name": "EnhancedColorMode",
+      "type": "enum8",
+      "constraint": "0 to 3",
+      "quality": "SN",
+      "default": 1,
+      "access": "RV",
+      "conformance": "M"
+    },
+    {
+      "id": "0x4002",
+      "name": "ColorLoopActive",
+      "type": "uint8",
+      "constraint": "all",
+      "quality": "SN",
+      "default": 0,
+      "access": "RV",
+      "conformance": "CL"
+    },
+    {
+      "id": "0x4003",
+      "name": "ColorLoopDirection",
+      "type": "uint8",
+      "constraint": "all",
+      "quality": "SN",
+      "default": 0,
+      "access": "RV",
+      "conformance": "CL"
+    },
+    {
+      "id": "0x4004",
+      "name": "ColorLoopTime",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "SN",
+      "default": "0x0019",
+      "access": "RV",
+      "conformance": "CL"
+    },
+    {
+      "id": "0x4005",
+      "name": "ColorLoopStartEnhancedHue",
+      "type": "uint16",
+      "constraint": "all",
+      "default": "0x2300",
+      "access": "RV",
+      "conformance": "CL"
+    },
+    {
+      "id": "0x4006",
+      "name": "ColorLoopStoredEnhancedHue",
+      "type": "uint16",
+      "constraint": "all",
+      "default": 0,
+      "access": "RV",
+      "conformance": "CL"
+    },
+    {
+      "id": "0x400A",
+      "name": "ColorCapabilities",
+      "type": "map16",
+      "constraint": "0 to 0x001F",
+      "default": 0,
+      "access": "RV",
+      "conformance": "M"
+    },
+    {
+      "id": "0x400B",
+      "name": "ColorTempPhysicalMinMireds",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "default": 0,
+      "access": "RV",
+      "conformance": "CT"
+    },
+    {
+      "id": "0x400C",
+      "name": "ColorTempPhysicalMaxMireds",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "default": "0xFEFF",
+      "access": "RV",
+      "conformance": "CT"
+    },
+    {
+      "id": "0x400D",
+      "name": "CoupleColorTempToLevelMinMireds",
+      "type": "uint16",
+      "constraint": "ColorTempPhysicalMinMireds to ColorTemperatureMireds",
+      "default": "MS",
+      "access": "RV",
+      "conformance": "CT | ColorTemperatureMireds"
+    },
+    {
+      "id": "0x4010",
+      "name": "StartUpColorTemperatureMireds",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "quality": "NX",
+      "default": "MS",
+      "access": "RW VM",
+      "conformance": "CT | ColorTemperatureMireds"
+    },
+    {
+      "id": "0x0010",
+      "name": "NumberOfPrimaries",
+      "type": "uint8",
+      "constraint": "0 to 6",
+      "quality": "FX",
+      "access": "RV",
+      "conformance": "M"
+    },
+    {
+      "id": "0x0011",
+      "name": "Primary1X",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "M0"
+    },
+    {
+      "id": "0x0012",
+      "name": "Primary1Y",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "M0"
+    },
+    {
+      "id": "0x0013",
+      "name": "Primary1Intensity",
+      "type": "uint8",
+      "constraint": "all",
+      "quality": "FX",
+      "access": "RV",
+      "conformance": "M1"
+    },
+    {
+      "id": "0x0015",
+      "name": "Primary2X",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "M1"
+    },
+    {
+      "id": "0x0016",
+      "name": "Primary2Y",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "M1"
+    },
+    {
+      "id": "0x0017",
+      "name": "Primary2Intensity",
+      "type": "uint8",
+      "constraint": "all",
+      "quality": "FX",
+      "access": "RV",
+      "conformance": "M2"
+    },
+    {
+      "id": "0x0019",
+      "name": "Primary3X",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "M2"
+    },
+    {
+      "id": "0x001A",
+      "name": "Primary3Y",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "M2"
+    },
+    {
+      "id": "0x001B",
+      "name": "Primary3Intensity",
+      "type": "uint8",
+      "constraint": "all",
+      "quality": "FX",
+      "access": "RV",
+      "conformance": "M"
+    },
+    {
+      "id": "0x0020",
+      "name": "Primary4X",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "M3"
+    },
+    {
+      "id": "0x0021",
+      "name": "Primary4Y",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "M3"
+    },
+    {
+      "id": "0x0022",
+      "name": "Primary4Intensity",
+      "type": "uint8",
+      "constraint": "all",
+      "quality": "FX",
+      "access": "RV",
+      "conformance": "M3"
+    },
+    {
+      "id": "0x0024",
+      "name": "Primary5X",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "M4"
+    },
+    {
+      "id": "0x0025",
+      "name": "Primary5Y",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "M4"
+    },
+    {
+      "id": "0x0026",
+      "name": "Primary5Intensity",
+      "type": "uint8",
+      "constraint": "all",
+      "quality": "FX",
+      "access": "RV",
+      "conformance": "M4"
+    },
+    {
+      "id": "0x0028",
+      "name": "Primary6X",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "M5"
+    },
+    {
+      "id": "0x0029",
+      "name": "Primary6Y",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "M5"
+    },
+    {
+      "id": "0x002A",
+      "name": "Primary6Intensity",
+      "type": "uint8",
+      "constraint": "all",
+      "quality": "FX",
+      "access": "RV",
+      "conformance": "M5"
+    },
+    {
+      "id": "0x0030",
+      "name": "WhitePointX",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "access": "RW VM",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0031",
+      "name": "WhitePointY",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "access": "RW VM",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0032",
+      "name": "ColorPointRX",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "access": "RW VM",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0033",
+      "name": "ColorPointRY",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "access": "RW VM",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0034",
+      "name": "ColorPointRIntensity",
+      "type": "uint8",
+      "constraint": "all",
+      "quality": "X",
+      "access": "RW VM",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0036",
+      "name": "ColorPointGX",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "access": "RW VM",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0037",
+      "name": "ColorPointGY",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "access": "RW VM",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0038",
+      "name": "ColorPointGIntensity",
+      "type": "uint8",
+      "constraint": "all",
+      "quality": "X",
+      "access": "RW VM",
+      "conformance": "O"
+    },
+    {
+      "id": "0x003A",
+      "name": "ColorPointBX",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "access": "RW VM",
+      "conformance": "O"
+    },
+    {
+      "id": "0x003B",
+      "name": "ColorPointBY",
+      "type": "uint16",
+      "constraint": "0 to 0xFEFF",
+      "access": "RW VM",
+      "conformance": "O"
+    },
+    {
+      "id": "0x003C",
+      "name": "ColorPointBIntensity",
+      "type": "uint8",
+      "constraint": "all",
+      "quality": "X",
+      "access": "RW VM",
+      "conformance": "O"
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "MoveToHue",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "HS",
+      "fields": [
+        {
+          "id": 0,
+          "name": "Hue",
+          "type": "uint8",
+          "constraint": "0 to 254",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "Direction",
+          "type": "enum8",
+          "constraint": "desc",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "TransitionTime",
+          "type": "uint16",
+          "constraint": "0 to 65534",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 4,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x01",
+      "name": "MoveHue",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "HS",
+      "fields": [
+        {
+          "id": 0,
+          "name": "MoveMode",
+          "type": "enum8",
+          "constraint": "desc",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "Rate",
+          "type": "uint8",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x02",
+      "name": "StepHue",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "HS",
+      "fields": [
+        {
+          "id": 0,
+          "name": "StepMode",
+          "type": "enum8",
+          "constraint": "desc",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "StepSize",
+          "type": "uint8",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "TransitionTime",
+          "type": "uint8",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 4,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x03",
+      "name": "MoveToSaturation",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "HS",
+      "fields": [
+        {
+          "id": 0,
+          "name": "Saturation",
+          "type": "uint8",
+          "constraint": "0 to 254",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "TransitionTime",
+          "type": "uint16",
+          "constraint": "0 to 65534",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x04",
+      "name": "MoveSaturation",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "HS",
+      "fields": [
+        {
+          "id": 0,
+          "name": "MoveMode",
+          "type": "enum8",
+          "constraint": "desc",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "Rate",
+          "type": "uint8",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x05",
+      "name": "StepSaturation",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "HS",
+      "fields": [
+        {
+          "id": 0,
+          "name": "StepMode",
+          "type": "enum8",
+          "constraint": "desc",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "StepSize",
+          "type": "uint8",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "TransitionTime",
+          "type": "uint8",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 4,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x06",
+      "name": "MoveToHueAndSaturation",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "HS",
+      "fields": [
+        {
+          "id": 0,
+          "name": "Hue",
+          "type": "uint8",
+          "constraint": "0 to 254",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "Saturation",
+          "type": "uint8",
+          "constraint": "0 to 254",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "TransitionTime",
+          "type": "uint16",
+          "constraint": "0 to 65534",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 4,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x07",
+      "name": "MoveToColor",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "XY",
+      "fields": [
+        {
+          "id": 0,
+          "name": "ColorX",
+          "type": "uint16",
+          "constraint": "0 to 0xFEFF",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "ColorY",
+          "type": "uint16",
+          "constraint": "0 to 0xFEFF",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "TransitionTime",
+          "type": "uint16",
+          "constraint": "0 to 65534",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 4,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x08",
+      "name": "MoveColor",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "XY",
+      "fields": [
+        {
+          "id": 0,
+          "name": "RateX",
+          "type": "int16",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "RateY",
+          "type": "int16",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x09",
+      "name": "StepColor",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "XY",
+      "fields": [
+        {
+          "id": 0,
+          "name": "StepX",
+          "type": "int16",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "StepY",
+          "type": "int16",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "TransitionTime",
+          "type": "uint16",
+          "constraint": "0 to 65534",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 4,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x0A",
+      "name": "MoveToColorTemperature",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "CT",
+      "fields": [
+        {
+          "id": 0,
+          "name": "ColorTemperatureMireds",
+          "type": "uint16",
+          "constraint": "0 to 0xFEFF",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "TransitionTime",
+          "type": "uint16",
+          "constraint": "0 to 65534",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x40",
+      "name": "EnhancedMoveToHue",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "EHUE",
+      "fields": [
+        {
+          "id": 0,
+          "name": "EnhancedHue",
+          "type": "uint16",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "Direction",
+          "type": "enum8",
+          "constraint": "desc",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "TransitionTime",
+          "type": "uint16",
+          "constraint": "0 to 65534",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 4,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x41",
+      "name": "EnhancedMoveHue",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "EHUE",
+      "fields": [
+        {
+          "id": 0,
+          "name": "MoveMode",
+          "type": "enum8",
+          "constraint": "desc",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "Rate",
+          "type": "uint16",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x42",
+      "name": "EnhancedStepHue",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "EHUE",
+      "fields": [
+        {
+          "id": 0,
+          "name": "StepMode",
+          "type": "enum8",
+          "constraint": "desc",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "StepSize",
+          "type": "uint16",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "TransitionTime",
+          "type": "uint16",
+          "constraint": "0 to 65534",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 4,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x43",
+      "name": "EnhancedMoveToHueAndSaturation",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "EHUE",
+      "fields": [
+        {
+          "id": 0,
+          "name": "EnhancedHue",
+          "type": "uint16",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "Saturation",
+          "type": "uint8",
+          "constraint": "0 to 254",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "TransitionTime",
+          "type": "uint16",
+          "constraint": "0 to 65534",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 4,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x44",
+      "name": "ColorLoopSet",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "CL",
+      "fields": [
+        {
+          "id": 0,
+          "name": "UpdateFlags",
+          "type": "map8",
+          "constraint": "desc",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "Action",
+          "type": "enum8",
+          "constraint": "desc",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "Direction",
+          "type": "enum8",
+          "constraint": "desc",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "Time",
+          "type": "uint16",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 4,
+          "name": "StartHue",
+          "type": "uint16",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 5,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 6,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x47",
+      "name": "StopMoveStep",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "HS | XY | CT",
+      "fields": [
+        {
+          "id": 0,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x4B",
+      "name": "MoveColorTemperature",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "CT",
+      "fields": [
+        {
+          "id": 0,
+          "name": "MoveMode",
+          "type": "map8",
+          "constraint": "desc",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "Rate",
+          "type": "uint16",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "ColorTemperatureMinimumMireds",
+          "type": "uint16",
+          "constraint": "0 to 0xFEFF",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "ColorTemperatureMaximumMireds",
+          "type": "uint16",
+          "constraint": "0 to 0xFEFF",
+          "conformance": "M"
+        },
+        {
+          "id": 4,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 5,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x4C",
+      "name": "StepColorTemperature",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "CT",
+      "fields": [
+        {
+          "id": 0,
+          "name": "StepMode",
+          "type": "map8",
+          "constraint": "desc",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "StepSize",
+          "type": "uint16",
+          "constraint": "all",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "TransitionTime",
+          "type": "uint16",
+          "constraint": "0 to 65534",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "ColorTemperatureMinimumMireds",
+          "type": "uint16",
+          "constraint": "0 to 0xFEFF",
+          "conformance": "M"
+        },
+        {
+          "id": 4,
+          "name": "ColorTemperatureMaximumMireds",
+          "type": "uint16",
+          "constraint": "0 to 0xFEFF",
+          "conformance": "M"
+        },
+        {
+          "id": 5,
+          "name": "OptionsMask",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        },
+        {
+          "id": 6,
+          "name": "OptionsOverride",
+          "type": "map8",
+          "constraint": "desc",
+          "default": 0,
+          "conformance": "M"
+        }
+      ]
+    }
+  ],
+  "data_types": [
+    {
+      "name": "DriftCompensationEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "None",
+          "description": "None"
+        },
+        {
+          "value": 1,
+          "name": "OtherOrUnknown",
+          "description": "Other / Unknown"
+        },
+        {
+          "value": 2,
+          "name": "TemperatureMonitoring",
+          "description": "Temperature monitoring"
+        },
+        {
+          "value": 3,
+          "name": "OpticalLuminanceMonitoringAndFeedback",
+          "description": "Optical luminance monitoring and feedback"
+        },
+        {
+          "value": 4,
+          "name": "OpticalColorMonitoringAndFeedback",
+          "description": "Optical color monitoring and feedback"
+        }
+      ]
+    },
+    {
+      "name": "ColorModeEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "CurrentHueAndCurrentSaturation",
+          "description": "CurrentHue and CurrentSaturation"
+        },
+        {
+          "value": 1,
+          "name": "CurrentXAndCurrentY",
+          "description": "CurrentX and CurrentY"
+        },
+        {
+          "value": 2,
+          "name": "ColorTemperatureMireds",
+          "description": "ColorTemperatureMireds"
+        }
+      ]
+    },
+    {
+      "name": "EnhancedColorModeEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "CurrentHueAndCurrentSaturation",
+          "description": "CurrentHue and CurrentSaturation"
+        },
+        {
+          "value": 1,
+          "name": "CurrentXAndCurrentY",
+          "description": "CurrentX and CurrentY"
+        },
+        {
+          "value": 2,
+          "name": "ColorTemperatureMireds",
+          "description": "ColorTemperatureMireds"
+        },
+        {
+          "value": 3,
+          "name": "EnhancedCurrentHueAndCurrentSaturation",
+          "description": "EnhancedCurrentHue and CurrentSaturation"
+        }
+      ]
+    },
+    {
+      "name": "OptionsBitmap",
+      "type": "map8",
+      "bits": [
+        {
+          "bit": 0,
+          "name": "ExecuteIfOff",
+          "summary": "0 = Do not execute command if the On/Off cluster, OnOff attribute is FALSE. 1 = Execute command if the On/Off cluster, OnOff attribute is FALSE."
+        }
+      ]
+    },
+    {
+      "name": "DirectionEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "ShortestDistance",
+          "description": "Shortest distance"
+        },
+        {
+          "value": 1,
+          "name": "LongestDistance",
+          "description": "Longest distance"
+        },
+        {
+          "value": 2,
+          "name": "Up",
+          "description": "Up"
+        },
+        {
+          "value": 3,
+          "name": "Down",
+          "description": "Down"
+        }
+      ]
+    },
+    {
+      "name": "MoveModeEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "Stop",
+          "description": "Stop"
+        },
+        {
+          "value": 1,
+          "name": "Up",
+          "description": "Up"
+        },
+        {
+          "value": 2,
+          "name": "Reserved",
+          "description": "Reserved"
+        },
+        {
+          "value": 3,
+          "name": "Down",
+          "description": "Down"
+        }
+      ]
+    },
+    {
+      "name": "StepModeEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "Reserved1",
+          "description": "Reserved"
+        },
+        {
+          "value": 1,
+          "name": "Up",
+          "description": "Up"
+        },
+        {
+          "value": 2,
+          "name": "Reserved2",
+          "description": "Reserved"
+        },
+        {
+          "value": 3,
+          "name": "Down",
+          "description": "Down"
+        }
+      ]
+    },
+    {
+      "name": "ColorLoopUpdateFlagsBitmap",
+      "type": "map8",
+      "bits": [
+        {
+          "bit": 0,
+          "name": "UpdateAction"
+        },
+        {
+          "bit": 1,
+          "name": "UpdateDirection"
+        },
+        {
+          "bit": 2,
+          "name": "UpdateTime"
+        },
+        {
+          "bit": 3,
+          "name": "UpdateStartHue"
+        }
+      ]
+    },
+    {
+      "name": "ColorLoopActionEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "DeactivateColorLoop",
+          "description": "De-activate the color loop"
+        },
+        {
+          "value": 1,
+          "name": "ActivateColorLoopFromColorLoopStartEnhancedHue",
+          "description": "Activate the color loop from the value in the ColorLoopStartEnhancedHue field"
+        },
+        {
+          "value": 2,
+          "name": "ActivateColorLoopFromEnhancedCurrentHue",
+          "description": "Activate the color loop from the value of the EnhancedCurrentHue attribute"
+        }
+      ]
+    },
+    {
+      "name": "ColorLoopDirectionEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "DecrementHue",
+          "description": "Decrement the hue in the color loop"
+        },
+        {
+          "value": 1,
+          "name": "IncrementHue",
+          "description": "Increment the hue in the color loop"
+        }
+      ]
+    }
+  ],
+  "events": []
+}

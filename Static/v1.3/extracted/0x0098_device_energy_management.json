@@ -1,0 +1,920 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0098",
+    "name": "Device Energy Management",
+    "description": "This cluster allows a client to manage the power draw of a device. An example of such a client could be an Energy Management System (EMS) which controls an Energy Smart Appliance (ESA)."
+  },
+  "derived_datatypes": [
+    {
+      "type": "enum",
+      "name": "CostTypeEnum",
+      "base_data_type": "ENUM8",
+      "description": "This data type is derived from enum8.",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "Financial",
+            "value": "0",
+            "description": "Financial cost"
+          },
+          {
+            "name": "GHGEmissions",
+            "value": "1",
+            "description": "Grid CO2e grams cost"
+          },
+          {
+            "name": "Comfort",
+            "value": "2",
+            "description": "Consumer comfort impact cost"
+          },
+          {
+            "name": "Temperature",
+            "value": "3",
+            "description": "Temperature impact cost"
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "ESATypeEnum",
+      "base_data_type": "ENUM8",
+      "description": "This data type is derived from enum8.",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "EVSE",
+            "value": "0",
+            "description": "EV Supply Equipment"
+          },
+          {
+            "name": "SpaceHeating",
+            "value": "1",
+            "description": "Space heating appliance"
+          },
+          {
+            "name": "WaterHeating",
+            "value": "2",
+            "description": "Water heating appliance"
+          },
+          {
+            "name": "SpaceCooling",
+            "value": "3",
+            "description": "Space cooling appliance"
+          },
+          {
+            "name": "SpaceHeatingCooling",
+            "value": "4",
+            "description": "Space heating and cooling appliance"
+          },
+          {
+            "name": "BatteryStorage",
+            "value": "5",
+            "description": "Battery Electric Storage System"
+          },
+          {
+            "name": "SolarPV",
+            "value": "6",
+            "description": "Solar PV inverter"
+          },
+          {
+            "name": "FridgeFreezer",
+            "value": "7",
+            "description": "Fridge / Freezer"
+          },
+          {
+            "name": "WashingMachine",
+            "value": "8",
+            "description": "Washing Machine"
+          },
+          {
+            "name": "Dishwasher",
+            "value": "9",
+            "description": "Dishwasher"
+          },
+          {
+            "name": "Cooking",
+            "value": "10",
+            "description": "Cooking appliance"
+          },
+          {
+            "name": "HomeWaterPump",
+            "value": "11",
+            "description": "Home water pump (e.g. drinking well)"
+          },
+          {
+            "name": "IrrigationWaterPump",
+            "value": "12",
+            "description": "Irrigation water pump"
+          },
+          {
+            "name": "PoolPump",
+            "value": "13",
+            "description": "Pool pump"
+          },
+          {
+            "name": "Other",
+            "value": "255",
+            "description": "Other appliance type"
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "ESAStateEnum",
+      "base_data_type": "ENUM8",
+      "description": "This data type is derived from enum8.",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "Offline",
+            "value": "0",
+            "description": "The ESA is not available to the EMS (e.g. start-up, maintenance mode)"
+          },
+          {
+            "name": "Online",
+            "value": "1",
+            "description": "The ESA is working normally and can be controlled by the EMS"
+          },
+          {
+            "name": "Fault",
+            "value": "2",
+            "description": "The ESA has developed a fault and cannot provide service"
+          },
+          {
+            "name": "PowerAdjustActive",
+            "value": "3",
+            "description": "The ESA is in the middle of a power adjustment event"
+          },
+          {
+            "name": "Paused",
+            "value": "4",
+            "description": "The ESA is currently paused by a client using the PauseRequest command"
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "OptOutStateEnum",
+      "base_data_type": "ENUM8",
+      "description": "This data type is derived from enum8.",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "NoOptOut",
+            "value": "0",
+            "description": "The user has not opted out of either local or grid optimizations"
+          },
+          {
+            "name": "LocalOptOut",
+            "value": "1",
+            "description": "The user has opted out of local EMS optimizations only"
+          },
+          {
+            "name": "GridOptOut",
+            "value": "2",
+            "description": "The user has opted out of grid EMS optimizations only"
+          },
+          {
+            "name": "OptOut",
+            "value": "3",
+            "description": "The user has opted out of all external optimizations"
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "CauseEnum",
+      "base_data_type": "ENUM8",
+      "description": "This data type is derived from enum8.",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "NormalCompletion",
+            "value": "0",
+            "description": "The ESA completed the power adjustment as requested"
+          },
+          {
+            "name": "Offline",
+            "value": "1",
+            "description": "The ESA was set to offline"
+          },
+          {
+            "name": "Fault",
+            "value": "2",
+            "description": "The ESA has developed a fault could not complete the adjustment"
+          },
+          {
+            "name": "UserOptOut",
+            "value": "3",
+            "description": "The user has disabled the ESA's flexibility capability"
+          },
+          {
+            "name": "Cancelled",
+            "value": "4",
+            "description": "The adjustment was cancelled by a client"
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "AdjustmentCauseEnum",
+      "base_data_type": "ENUM8",
+      "description": "This data type is derived from enum8.",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "LocalOptimization",
+            "value": "0",
+            "description": "The adjustment is to optimize the local energy usage"
+          },
+          {
+            "name": "GridOptimization",
+            "value": "1",
+            "description": "The adjustment is to optimize the grid energy usage"
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "ForecastUpdateReasonEnum",
+      "base_data_type": "ENUM8",
+      "description": "This data type is derived from enum8.",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "InternalOptimization",
+            "value": "0",
+            "description": "The update was due to internal ESA device optimization"
+          },
+          {
+            "name": "LocalOptimization",
+            "value": "1",
+            "description": "The update was due to local EMS optimization"
+          },
+          {
+            "name": "GridOptimization",
+            "value": "2",
+            "description": "The update was due to grid optimization"
+          }
+        ]
+      }
+    },
+    {
+      "type": "struct",
+      "name": "CostStruct",
+      "description": "This indicates a generic mechanism for expressing cost to run an appliance, in terms of financial, GHG emissions, comfort value etc.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "CostType",
+          "data_type": "CostTypeEnum",
+          "default": "0",
+          "description": "This field SHALL indicate the type of cost being represented."
+        },
+        {
+          "id": "1",
+          "name": "Value",
+          "data_type": "int32",
+          "default": "0",
+          "description": "This field SHALL indicate the value of the cost. This may be negative (indicating that it is not a cost, but a free benefit)."
+        },
+        {
+          "id": "2",
+          "name": "DecimalPoints",
+          "data_type": "uint8",
+          "default": "0",
+          "description": "This field SHALL indicate the number of digits to the right of the decimal point in the Value field."
+        },
+        {
+          "id": "3",
+          "name": "Currency",
+          "data_type": "uint16",
+          "constraint": "max 999",
+          "default": "0",
+          "conformance": "O",
+          "description": "Indicates the currency for the value in the Value field. The value of the currency field SHALL match the values defined by ISO 4217."
+        }
+      ]
+    },
+    {
+      "type": "struct",
+      "name": "PowerAdjustStruct",
+      "description": "Power adjustment structure.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "MinPower",
+          "data_type": "power-mW",
+          "default": "0",
+          "description": "This field SHALL indicate the minimum power that the ESA can have its power adjusted to."
+        },
+        {
+          "id": "1",
+          "name": "MaxPower",
+          "data_type": "power-mW",
+          "default": "0",
+          "description": "This field SHALL indicate the maximum power that the ESA can have its power adjusted to."
+        },
+        {
+          "id": "2",
+          "name": "MinDuration",
+          "data_type": "elapsed-s",
+          "default": "0",
+          "description": "This field SHALL indicate the minimum duration, in seconds, that a controller may invoke an ESA power adjustment."
+        },
+        {
+          "id": "3",
+          "name": "MaxDuration",
+          "data_type": "elapsed-s",
+          "description": "This field SHALL indicate the maximum duration, in seconds, that a controller may invoke an ESA power adjustment."
+        }
+      ]
+    },
+    {
+      "type": "struct",
+      "name": "SlotStruct",
+      "description": "This indicates a specific stage of an ESA's operation.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "MinDuration",
+          "data_type": "elapsed-s",
+          "description": "This field SHALL indicate the minimum time (in seconds) that the appliance expects to be in this slot for."
+        },
+        {
+          "id": "1",
+          "name": "MaxDuration",
+          "data_type": "elapsed-s",
+          "description": "This field SHALL indicate the maximum time (in seconds) that the appliance expects to be in this slot for."
+        },
+        {
+          "id": "2",
+          "name": "DefaultDuration",
+          "data_type": "elapsed-s",
+          "description": "This field SHALL indicate the expected time (in seconds) that the appliance expects to be in this slot for."
+        },
+        {
+          "id": "3",
+          "name": "ElapsedSlotTime",
+          "data_type": "elapsed-s",
+          "description": "This field SHALL indicate the time (in seconds) that has already elapsed whilst in this slot."
+        },
+        {
+          "id": "4",
+          "name": "RemainingSlotTime",
+          "data_type": "elapsed-s",
+          "description": "This field SHALL indicate the time (in seconds) that is estimated to be remaining."
+        },
+        {
+          "id": "5",
+          "name": "SlotIsPausable",
+          "data_type": "bool",
+          "conformance": "PAU",
+          "description": "This field SHALL indicate whether this slot can be paused."
+        },
+        {
+          "id": "6",
+          "name": "MinPauseDuration",
+          "data_type": "elapsed-s",
+          "conformance": "PAU",
+          "description": "This field SHALL indicate the shortest period that the slot can be paused for."
+        },
+        {
+          "id": "7",
+          "name": "MaxPauseDuration",
+          "data_type": "elapsed-s",
+          "conformance": "PAU",
+          "description": "This field SHALL indicate the longest period that the slot can be paused for."
+        },
+        {
+          "id": "8",
+          "name": "ManufacturerESAState",
+          "data_type": "uint16",
+          "conformance": "SFR",
+          "description": "This field SHALL indicate a manufacturer defined value indicating the state of the ESA."
+        },
+        {
+          "id": "9",
+          "name": "NominalPower",
+          "data_type": "power-mW",
+          "conformance": "PFR",
+          "description": "This field SHALL indicate the expected power that the appliance will use during this slot."
+        },
+        {
+          "id": "10",
+          "name": "MinPower",
+          "data_type": "power-mW",
+          "conformance": "PFR",
+          "description": "This field SHALL indicate the lowest power that the appliance expects to use during this slot."
+        },
+        {
+          "id": "11",
+          "name": "MaxPower",
+          "data_type": "power-mW",
+          "conformance": "PFR",
+          "description": "This field SHALL indicate the maximum power that the appliance expects to use during this slot."
+        },
+        {
+          "id": "12",
+          "name": "NominalEnergy",
+          "data_type": "energy-mWh",
+          "conformance": "PFR",
+          "description": "This field SHALL indicate the expected energy that the appliance expects to use or produce during this slot."
+        },
+        {
+          "id": "13",
+          "name": "Costs",
+          "data_type": "list[CostStruct]",
+          "constraint": "max 5",
+          "conformance": "O",
+          "description": "This field SHALL indicate the current estimated cost for operating."
+        },
+        {
+          "id": "14",
+          "name": "MinPowerAdjustment",
+          "data_type": "power-mW",
+          "conformance": "FA & PFR",
+          "description": "This field SHALL indicate the minimum power that the appliance can be requested to use."
+        },
+        {
+          "id": "15",
+          "name": "MaxPowerAdjustment",
+          "data_type": "power-mW",
+          "conformance": "FA & PFR",
+          "description": "This field SHALL indicate the maximum power that the appliance can be requested to use."
+        },
+        {
+          "id": "16",
+          "name": "MinDurationAdjustment",
+          "data_type": "elapsed-s",
+          "conformance": "FA & (PFR|SFR)",
+          "description": "This field SHALL indicate the minimum time, in seconds, that the slot can be requested to shortened to."
+        },
+        {
+          "id": "17",
+          "name": "MaxDurationAdjustment",
+          "data_type": "elapsed-s",
+          "conformance": "FA & (PFR|SFR)",
+          "description": "This field SHALL indicate the maximum time, in seconds, that the slot can be requested to extended to."
+        }
+      ]
+    },
+    {
+      "type": "struct",
+      "name": "ForecastStruct",
+      "description": "This indicates a list of 'slots' describing the overall timing of the ESA's planned energy and power use, with different power and energy demands per slot.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "ForecastId",
+          "data_type": "uint16",
+          "default": "0",
+          "description": "This field SHALL indicate the sequence number for the current forecast."
+        },
+        {
+          "id": "1",
+          "name": "ActiveSlotNumber",
+          "data_type": "uint16",
+          "quality": "X",
+          "default": "0",
+          "description": "This field SHALL indicate which element of the Slots list is currently active in the Forecast sequence."
+        },
+        {
+          "id": "2",
+          "name": "StartTime",
+          "data_type": "epoch-s",
+          "description": "This field SHALL indicate the planned start time, in UTC, for the entire Forecast."
+        },
+        {
+          "id": "3",
+          "name": "EndTime",
+          "data_type": "epoch-s",
+          "description": "This field SHALL indicate the planned end time, in UTC, for the entire Forecast."
+        },
+        {
+          "id": "4",
+          "name": "EarliestStartTime",
+          "data_type": "epoch-s",
+          "quality": "X",
+          "conformance": "STA",
+          "description": "This field SHALL indicate the earliest start time, in UTC, that the entire Forecast can be shifted to."
+        },
+        {
+          "id": "5",
+          "name": "LatestEndTime",
+          "data_type": "epoch-s",
+          "conformance": "STA",
+          "description": "This field SHALL indicate the latest end time, in UTC, for the entire Forecast."
+        },
+        {
+          "id": "6",
+          "name": "IsPauseable",
+          "data_type": "bool",
+          "description": "This field SHALL indicate that some part of the Forecast can be paused."
+        },
+        {
+          "id": "7",
+          "name": "Slots",
+          "data_type": "list[SlotStruct]",
+          "constraint": "max 10",
+          "description": "This field SHALL contain a list of SlotStructs."
+        },
+        {
+          "id": "8",
+          "name": "ForecastUpdateReason",
+          "data_type": "ForecastUpdateReasonEnum",
+          "description": "This field SHALL contain the reason the current Forecast was generated."
+        }
+      ]
+    },
+    {
+      "type": "struct",
+      "name": "SlotAdjustmentStruct",
+      "description": "Slot adjustment structure.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "SlotIndex",
+          "data_type": "uint8",
+          "description": "This field SHALL indicate the index into the Slots list within the Forecast that is to be modified."
+        },
+        {
+          "id": "1",
+          "name": "NominalPower",
+          "data_type": "power-mW",
+          "description": "This field SHALL indicate the new requested power that the ESA SHALL operate at."
+        },
+        {
+          "id": "2",
+          "name": "Duration",
+          "data_type": "elapsed-s",
+          "description": "This field SHALL indicate the new requested duration, in seconds, that the ESA SHALL extend or shorten the slot duration to."
+        }
+      ]
+    },
+    {
+      "type": "struct",
+      "name": "ConstraintsStruct",
+      "description": "The ConstraintsStruct allows a client to inform an ESA about a constraint period (such as a grid event, or perhaps excess solar PV).",
+      "fields": [
+        {
+          "id": "0",
+          "name": "StartTime",
+          "data_type": "epoch-s",
+          "description": "This field SHALL indicate the start time of the constraint period that the client wishes the ESA to compute a new Forecast."
+        },
+        {
+          "id": "1",
+          "name": "Duration",
+          "data_type": "elapsed-s",
+          "constraint": "0 to 86400",
+          "description": "This field SHALL indicate the duration of the constraint in seconds."
+        },
+        {
+          "id": "2",
+          "name": "NominalPower",
+          "data_type": "power-mW",
+          "conformance": "PFR",
+          "description": "This field SHALL indicate the nominal power that client wishes the ESA to operate at during the constrained period."
+        },
+        {
+          "id": "3",
+          "name": "MaximumEnergy",
+          "data_type": "energy-mWh",
+          "conformance": "PFR",
+          "description": "This field SHALL indicate the maximum energy that can be transferred to or from the ESA during the constraint period."
+        },
+        {
+          "id": "4",
+          "name": "LoadControl",
+          "data_type": "int8",
+          "conformance": "SFR",
+          "description": "This field SHALL indicate the turn up or turn down nature that the grid wants as the outcome by the ESA during the constraint period."
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "PowerAdjustRequest",
+      "direction": "client to server",
+      "response": "Y",
+      "conformance": "PA",
+      "parameters": [
+        {
+          "id": "0",
+          "name": "Power",
+          "data_type": "power-mW",
+          "description": "This field SHALL indicate the power that the ESA SHALL use during the adjustment period."
+        },
+        {
+          "id": "1",
+          "name": "Duration",
+          "data_type": "elapsed-s",
+          "description": "This field SHALL indicate the duration that the ESA SHALL maintain the requested power for."
+        },
+        {
+          "id": "2",
+          "name": "Cause",
+          "data_type": "AdjustmentCauseEnum",
+          "description": "This field SHALL indicate the cause of the request from the EMS."
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "CancelPowerAdjustRequest",
+      "direction": "client to server",
+      "response": "Y",
+      "conformance": "PA",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x02",
+      "name": "StartTimeAdjustRequest",
+      "direction": "client to server",
+      "response": "Y",
+      "conformance": "STA",
+      "parameters": [
+        {
+          "id": "0",
+          "name": "RequestedStartTime",
+          "data_type": "epoch-s",
+          "description": "This field SHALL indicate the requested start time, in UTC, that the client would like the appliance to shift its Forecast to."
+        },
+        {
+          "id": "1",
+          "name": "Cause",
+          "data_type": "AdjustmentCauseEnum",
+          "description": "This field SHALL indicate the cause of the request from the EMS."
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x03",
+      "name": "PauseRequest",
+      "direction": "client to server",
+      "response": "Y",
+      "conformance": "PAU",
+      "parameters": [
+        {
+          "id": "0",
+          "name": "Duration",
+          "data_type": "elapsed-s",
+          "description": "This field SHALL indicate the duration that the ESA SHALL be paused for."
+        },
+        {
+          "id": "1",
+          "name": "Cause",
+          "data_type": "AdjustmentCauseEnum",
+          "description": "This field SHALL indicate the cause of the request from the EMS."
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x04",
+      "name": "ResumeRequest",
+      "direction": "client to server",
+      "response": "Y",
+      "conformance": "PAU",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x05",
+      "name": "ModifyForecastRequest",
+      "direction": "client to server",
+      "response": "Y",
+      "conformance": "FA",
+      "parameters": [
+        {
+          "id": "0",
+          "name": "ForecastId",
+          "data_type": "uint32",
+          "description": "This field SHALL indicate the ForecastId that is to be modified."
+        },
+        {
+          "id": "1",
+          "name": "SlotAdjustments",
+          "data_type": "list[SlotAdjustmentStruct]",
+          "constraint": "max 10",
+          "description": "This field SHALL contain a list of SlotAdjustment parameters that should be modified in the corresponding Forecast with matching ForecastId."
+        },
+        {
+          "id": "2",
+          "name": "Cause",
+          "data_type": "AdjustmentCauseEnum",
+          "description": "This field SHALL indicate the cause of the request from the EMS."
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x06",
+      "name": "RequestConstraintBasedForecast",
+      "direction": "client to server",
+      "response": "Y",
+      "conformance": "CON",
+      "parameters": [
+        {
+          "id": "0",
+          "name": "Constraints",
+          "data_type": "list[ConstraintsStruct]",
+          "constraint": "max 10",
+          "description": "This field SHALL indicate the series of turn up or turn down power requests that the ESA is being asked to constrain its operation within."
+        },
+        {
+          "id": "1",
+          "name": "Cause",
+          "data_type": "AdjustmentCauseEnum",
+          "description": "This field SHALL indicate the cause of the request from the EMS."
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x07",
+      "name": "CancelRequest",
+      "direction": "client to server",
+      "response": "Y",
+      "conformance": "STA|FA|CON",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "ESAType",
+      "data_type": "ESATypeEnum",
+      "quality": "F",
+      "default": "Other",
+      "access": "RV",
+      "description": "This attribute SHALL indicate the type of ESA.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0001",
+      "name": "ESACanGenerate",
+      "data_type": "bool",
+      "quality": "F",
+      "default": "false",
+      "access": "RV",
+      "description": "This attribute SHALL indicate whether the ESA is classed as a generator or load.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0002",
+      "name": "ESAState",
+      "data_type": "ESAStateEnum",
+      "default": "0",
+      "access": "RV",
+      "description": "This attribute SHALL indicate the current state of the ESA.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0003",
+      "name": "AbsMinPower",
+      "data_type": "power-mW",
+      "default": "0",
+      "access": "RV",
+      "description": "This attribute SHALL indicate the minimum electrical power that the ESA can consume when switched on.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0004",
+      "name": "AbsMaxPower",
+      "data_type": "power-mW",
+      "default": "0",
+      "access": "RV",
+      "description": "This attribute SHALL indicate the maximum electrical power that the ESA can consume when switched on.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0005",
+      "name": "PowerAdjustmentCapability",
+      "data_type": "list[PowerAdjustStruct]",
+      "constraint": "max 8",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "PA",
+      "description": "This attribute SHALL indicate how the ESA can be adjusted at the current time.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0006",
+      "name": "Forecast",
+      "data_type": "ForecastStruct",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "PFR | SFR",
+      "description": "This attribute allows an ESA to share its intended forecast with a client (such as an Energy Management System).",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0007",
+      "name": "OptOutState",
+      "data_type": "OptOutStateEnum",
+      "default": "0",
+      "access": "RV",
+      "conformance": "PA | STA | PAU | FA | CON",
+      "description": "This attribute SHALL indicate the current Opt-Out state of the ESA.",
+      "privilege": "V",
+      "writable": false
+    }
+  ],
+  "events": [
+    {
+      "id": "0x00",
+      "name": "PowerAdjustStart",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "PA",
+      "description": "This event SHALL be generated when the Power Adjustment session is started.",
+      "fields": []
+    },
+    {
+      "id": "0x01",
+      "name": "PowerAdjustEnd",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "PA",
+      "description": "This event SHALL be generated when the Power Adjustment session ends.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "Cause",
+          "data_type": "CauseEnum",
+          "default": "NormalCompletion",
+          "description": "This field SHALL indicate the reason why the power adjustment session ended."
+        },
+        {
+          "id": "1",
+          "name": "Duration",
+          "data_type": "elapsed-s",
+          "description": "This field SHALL indicate the number of seconds that the power adjustment session lasted before ending."
+        },
+        {
+          "id": "2",
+          "name": "EnergyUse",
+          "data_type": "energy-mWh",
+          "description": "This field SHALL indicate the approximate energy used by the ESA during the session."
+        }
+      ]
+    },
+    {
+      "id": "0x02",
+      "name": "Paused",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "PAU",
+      "description": "This event SHALL be generated when the ESA enters the Paused state.",
+      "fields": []
+    },
+    {
+      "id": "0x03",
+      "name": "Resumed",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "PAU",
+      "description": "This event SHALL be generated when the ESA leaves the Paused state and resumes operation.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "Cause",
+          "data_type": "CauseEnum",
+          "default": "NormalCompletion",
+          "description": "This field SHALL indicate the reason why the pause ended."
+        }
+      ]
+    }
+  ]
+}

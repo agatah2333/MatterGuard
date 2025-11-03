@@ -1,0 +1,29 @@
+config:
+  attribute: '0x0000'
+  cluster: onoff-cluster
+  nodeId: '0x654231'
+name: onoff-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: OnOff attribute will be set to FALSE
+  ExpectedResponse: Device turns off
+  Pre-requisites: 'Device must be in the ON state initially
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"OnOff"': FALSE}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: OnOff attribute will be set to FALSE
+  ExpectedResponse: Device enters "dead front" behavior
+  Pre-requisites: 'Device must support the DeadFrontBehaviour feature and be in the
+    ON state initially
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"OnOff"': FALSE}
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: WriteAttribute

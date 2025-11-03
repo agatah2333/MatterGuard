@@ -1,0 +1,44 @@
+config:
+  attribute: '0x002A'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x002A_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Primary6Intensity set to 0
+  ExpectedResponse: Success
+  Pre-requisites: NumberOfPrimaries > 5
+  arguments:
+    '{"Primary6Intensity"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Primary6Intensity set to 255
+  ExpectedResponse: Success
+  Pre-requisites: NumberOfPrimaries > 5
+  arguments:
+    '{"Primary6Intensity"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Error - Invalid Value
+  Pre-requisites: NumberOfPrimaries > 5
+  arguments:
+    '{"Primary6Intensity"': null}
+  label: Test_Case_Special_Response_-_Invalid_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Primary6Intensity set to 128
+  ExpectedResponse: Success
+  Pre-requisites: 'NumberOfPrimaries > 5
+
+
+    These test cases cover the extreme values of the constraints of the field, as
+    well as a special response scenario and a typical value scenario. The pre-requisite
+    for all test cases is that the `NumberOfPrimaries` attribute must be greater than
+    5 for the `Primary6Intensity` attribute to be mandatory.'
+  arguments:
+    '{"Primary6Intensity"': 128}
+  label: Test_Case_Typical_Value
+  option: WriteAttribute

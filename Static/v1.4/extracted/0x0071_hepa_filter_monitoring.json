@@ -1,0 +1,97 @@
+{
+  "source_file": "HEPA Filter Monitoring_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0071",
+        "name": "HEPA Filter Monitoring",
+        "description": "Monitors HEPA filter condition and replacement requirements",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "Condition",
+            "dataType": "uint8",
+            "valueRange": "0-100",
+            "description": "Current filter condition percentage",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "DegradationDirection",
+            "dataType": "DegradationDirectionEnum",
+            "valueRange": "0-1",
+            "description": "Filter condition trend direction",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "InPlaceIndicator",
+            "dataType": "bool",
+            "valueRange": "true/false",
+            "description": "Filter installation status",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0004",
+            "name": "LastChangedTime",
+            "dataType": "epoch-s",
+            "valueRange": "UTC timestamp",
+            "description": "Last filter replacement time",
+            "privilege": "RW",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ResetCondition",
+            "parameters": [],
+            "description": "Reset filter monitoring metrics",
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "dataTypes": {
+          "DegradationDirectionEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Improving",
+              "1": "Degrading"
+            }
+          },
+          "ChangeIndicationEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Normal",
+              "1": "Warning",
+              "2": "ReplaceNow"
+            }
+          },
+          "ReplacementProductStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "ProductID": "string",
+              "IdentifierType": "ProductIdentifierTypeEnum",
+              "CompatibilityCode": "uint16"
+            }
+          },
+          "ProductIdentifierTypeEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "UPC",
+              "1": "GTIN-8",
+              "2": "EAN",
+              "3": "GTIN-14",
+              "4": "OEM"
+            }
+          }
+        },
+        "events": []
+      }
+    ]
+  }
+}

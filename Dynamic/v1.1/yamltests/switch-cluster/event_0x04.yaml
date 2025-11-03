@@ -1,0 +1,30 @@
+config:
+  cluster: switch-cluster
+  event: '0x04'
+  nodeId: '0x654231'
+name: switch-cluster_event_0x04_v1.1.0.0
+tests:
+- ActionTime: <timestamp>
+  Attribute_Change: '`CurrentPosition` will be set to 0'
+  ExpectedResponse: Event generated successfully
+  Pre-requisites: The switch must have been pressed for a long time and then released.
+  arguments:
+    PreviousPosition: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: <timestamp>
+  Attribute_Change: '`CurrentPosition` will be set to NumberOfPositions-1'
+  ExpectedResponse: Event generated successfully
+  Pre-requisites: 'The switch must have been pressed for a long time and then released.
+
+
+    These test cases cover the extreme values of the `PreviousPosition` field and
+    ensure that the event is generated correctly when the switch is released after
+    being pressed for a long time.
+
+
+    For more details, refer to the Matter Application Cluster Specification【4:0†source】.'
+  arguments:
+    PreviousPosition: NumberOfPositions-1
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SubscribeToEvent

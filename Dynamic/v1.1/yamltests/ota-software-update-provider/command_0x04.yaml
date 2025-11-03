@@ -1,0 +1,48 @@
+config:
+  cluster: ota-software-update-provider
+  command: '0x04'
+  nodeId: '0x654231'
+name: ota-software-update-provider_command_0x04_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: OTA Requestor has successfully applied a Software Image.
+  arguments:
+    SoftwareVersion: 0
+    UpdateToken: '"00000000" (8 bytes)'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: OTA Requestor has successfully applied a Software Image.
+  arguments:
+    SoftwareVersion: 4294967295 (2^32-1)
+    UpdateToken: '"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" (32 bytes)'
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Error (Invalid UpdateToken length)
+  Pre-requisites: N/A
+  arguments:
+    SoftwareVersion: 123456
+    UpdateToken: '"0000000" (7 bytes, invalid length)'
+  label: Test_Case_Special_Response_-_Invalid_UpdateToken_Length
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Error (SoftwareVersion mismatch with Basic Information Cluster)
+  Pre-requisites: 'The SoftwareVersion does not match the value in the Basic Information
+    Cluster.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:8†source】【4:12†source】【4:16†source】.'
+  arguments:
+    SoftwareVersion: 987654321
+    UpdateToken: '"12345678" (8 bytes)'
+  label: Test_Case_Special_Response_-_SoftwareVersion_Mismatch
+  option: SendCommand

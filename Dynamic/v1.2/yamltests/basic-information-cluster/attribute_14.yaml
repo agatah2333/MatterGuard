@@ -1,0 +1,27 @@
+config:
+  attribute: '14'
+  cluster: basic-information-cluster
+  nodeId: '0x654231'
+name: basic-information-cluster_attribute_14_v1.2.0.0
+tests:
+- ActionTime: '"Immediate"'
+  Attribute_Change: '{"ProductAppearance": "0x0000"}'
+  ExpectedResponse: '"Success"'
+  Pre-requisites: '"None"'
+  arguments:
+    '{"ProductAppearance"': '"0x0000"}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: '"Immediate"'
+  Attribute_Change: '{"ProductAppearance": "0xFFFF"}'
+  ExpectedResponse: '"Success"'
+  Pre-requisites: '"None"
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as per the attribute''s definition
+    in the Basic Information Cluster【4:1†source】.'
+  arguments:
+    '{"ProductAppearance"': '"0xFFFF"}'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

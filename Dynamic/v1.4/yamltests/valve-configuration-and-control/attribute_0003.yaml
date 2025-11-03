@@ -1,0 +1,26 @@
+name: Valve Configuration and Control - RemainingDuration Attribute Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Valve Configuration and Control
+  timeout: 180
+tests:
+- label: Read RemainingDuration attribute
+  command: readAttribute
+  attribute: RemainingDuration
+  response:
+    saveAs: remainingduration_value
+- label: RemainingDuration - Test minimum value (0)
+  command: readAttribute
+  attribute: RemainingDuration
+  response:
+    constraints:
+      minValue: 0
+      maxValue: 4294967295
+- label: RemainingDuration - Test maximum value (4294967295)
+  command: readAttribute
+  attribute: RemainingDuration
+  response:
+    constraints:
+      minValue: 0
+      maxValue: 4294967295

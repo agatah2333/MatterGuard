@@ -1,0 +1,6 @@
+config:
+  attribute: '0x0007'
+  cluster: concentration-measurement-cluster
+  nodeId: '0x654231'
+name: concentration-measurement-cluster_attribute_0x0007_v1.2.0.0
+tests: []

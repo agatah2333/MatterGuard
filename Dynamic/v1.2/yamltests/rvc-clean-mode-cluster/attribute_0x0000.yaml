@@ -1,0 +1,65 @@
+config:
+  attribute: '0x0000'
+  cluster: rvc-clean-mode-cluster
+  nodeId: '0x654231'
+name: rvc-clean-mode-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`SupportedModes` will be set to 2.'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: The device must support at least 2 modes.
+  arguments:
+    '{"SupportedModes"': 2}`
+  label: Test_Case_Minimum_Constraint_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`SupportedModes` will be set to 255.'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: The device must support up to 255 modes.
+  arguments:
+    '{"SupportedModes"': 255}`
+  label: Test_Case_Maximum_Constraint_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: No change.
+  ExpectedResponse: '`CleaningInProgress`'
+  Pre-requisites: The device must be in a cleaning state.
+  arguments:
+    '{"SupportedModes"': <mode_value_with_cleaning_tag>}`
+  label: Test_Case_Special_Response_-_Cleaning_In_Progress
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: No change.
+  ExpectedResponse: '`Stuck`'
+  Pre-requisites: The device must be stuck.
+  arguments:
+    '{"SupportedModes"': <mode_value_with_idle_tag>}`
+  label: Test_Case_Special_Response_-_Stuck
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: No change.
+  ExpectedResponse: '`DustBinMissing`'
+  Pre-requisites: The device must have the dust bin removed.
+  arguments:
+    '{"SupportedModes"': <mode_value_with_cleaning_tag>}`
+  label: Test_Case_Special_Response_-_Dust_Bin_Missing
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: No change.
+  ExpectedResponse: '`WaterTankEmpty`'
+  Pre-requisites: The device must have an empty water tank.
+  arguments:
+    '{"SupportedModes"': <mode_value_with_mop_tag>}`
+  label: Test_Case_Special_Response_-_Water_Tank_Empty
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: No change.
+  ExpectedResponse: '`BatteryLow`'
+  Pre-requisites: 'The device must have a low battery.
+
+
+    ### Summary'
+  arguments:
+    '{"SupportedModes"': <mode_value_with_cleaning_tag>}`
+  label: Test_Case_Special_Response_-_Battery_Low
+  option: WriteAttribute

@@ -1,0 +1,348 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0200",
+    "name": "Pump Configuration and Control",
+    "description": "SHALL support the FeatureMap bitmap attribute as defined below."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "MaxPres",
+      "data_type": "int16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0001",
+      "name": "MaxSpeed",
+      "data_type": "uint16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0002",
+      "name": "MaxFlow",
+      "data_type": "uint16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0003",
+      "name": "MinConst",
+      "data_type": "int16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0004",
+      "name": "MaxConst",
+      "data_type": "int16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0005",
+      "name": "MinComp",
+      "data_type": "int16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0006",
+      "name": "MaxComp",
+      "data_type": "int16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0007",
+      "name": "MinConst",
+      "data_type": "uint16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0008",
+      "name": "MaxConst",
+      "data_type": "uint16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0009",
+      "name": "MinConst",
+      "data_type": "uint16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x000a",
+      "name": "MaxConst",
+      "data_type": "uint16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x000b",
+      "name": "MinConst",
+      "data_type": "int16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x000c",
+      "name": "MaxConst",
+      "data_type": "int16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0010",
+      "name": "PumpSta",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0011",
+      "name": "Effective",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0012",
+      "name": "Effective",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0013",
+      "name": "Capacity",
+      "data_type": "int16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0014",
+      "name": "Speed",
+      "data_type": "uint16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0015",
+      "name": "Life",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0016",
+      "name": "Power",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0017",
+      "name": "Life",
+      "data_type": "uint32",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0020",
+      "name": "Opera",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0021",
+      "name": "Con",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0022",
+      "name": "Alarm",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    }
+  ],
+  "events": [
+    {
+      "id": "0x00",
+      "name": "SupplyVolt",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    },
+    {
+      "id": "0x01",
+      "name": "SupplyVoltage",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    },
+    {
+      "id": "0x02",
+      "name": "PowerMissing",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    },
+    {
+      "id": "0x03",
+      "name": "SystemPres",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    },
+    {
+      "id": "0x04",
+      "name": "SystemPressure",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    },
+    {
+      "id": "0x05",
+      "name": "DryRunning",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    },
+    {
+      "id": "0x06",
+      "name": "MotorTempera",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    },
+    {
+      "id": "0x07",
+      "name": "PumpMotorFatal",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    },
+    {
+      "id": "0x08",
+      "name": "ElectronicTem",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    },
+    {
+      "id": "0x09",
+      "name": "PumpBlocked",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    },
+    {
+      "id": "0x0a",
+      "name": "SensorFailure",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    },
+    {
+      "id": "0x0b",
+      "name": "ElectronicNonFa",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    },
+    {
+      "id": "0x0c",
+      "name": "ElectronicFatal",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    },
+    {
+      "id": "0x0d",
+      "name": "GeneralFault",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    },
+    {
+      "id": "0x0e",
+      "name": "Leakage",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    },
+    {
+      "id": "0x0f",
+      "name": "AirDetection",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    },
+    {
+      "id": "0x10",
+      "name": "TurbineOpera",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    }
+  ]
+}

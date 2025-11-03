@@ -1,0 +1,55 @@
+config:
+  attribute: '0x2A'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x2A_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: NeighborTableList will be updated with the minimum values.
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    ##### Test Case 1.2: Maximum Values'
+  arguments:
+    Age: 0
+    AverageRssi: '-128'
+    ExtAddress: 0
+    FrameErrorRate: 0
+    FullNetworkData: 'False'
+    FullThreadDevice: 'False'
+    IsChild: 'False'
+    LQI: 0
+    LastRssi: '-128'
+    LinkFrameCounter: 0
+    MLEFrameCounter: 0
+    MessageErrorRate: 0
+    RLOC16: 0
+    RxOnWhenIdle: 'False'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: NeighborTableList will be updated with the high frame error rate
+    value.
+  ExpectedResponse: Error or warning indicating high frame error rate.
+  Pre-requisites: 'None
+
+
+    ##### Test Case 2.2: Special Response for Low RSSI'
+  arguments:
+    Age: <valid_value>
+    AverageRssi: <valid_value>
+    ExtAddress: <valid_value>
+    FrameErrorRate: 100
+    FullNetworkData: <valid_value>
+    FullThreadDevice: <valid_value>
+    IsChild: <valid_value>
+    LQI: <valid_value>
+    LastRssi: <valid_value>
+    LinkFrameCounter: <valid_value>
+    MLEFrameCounter: <valid_value>
+    MessageErrorRate: <valid_value>
+    RLOC16: <valid_value>
+    RxOnWhenIdle: <valid_value>
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: WriteAttribute

@@ -1,0 +1,89 @@
+config:
+  cluster: group-key-mgmt-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: group-key-mgmt-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: '`<valid_time>`'
+  Attribute_Change: '`GroupKeySet` updated with provided values'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: '`GroupKeySet` must exist'
+  arguments:
+    EpochKey0: '`<16_byte_value>`'
+    EpochKey1: '`<16_byte_value>`'
+    EpochKey2: '`<16_byte_value>`'
+    EpochStartTime0: '`<valid_non_zero_value>`'
+    EpochStartTime1: '`<valid_later_value_than_EpochStartTime0>`'
+    EpochStartTime2: '`<valid_later_value_than_EpochStartTime1>`'
+  label: Test_Case_Valid_Input
+  option: SendCommand
+- ActionTime: '`<valid_time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`INVALID_COMMAND`'
+  Pre-requisites: '`None`'
+  arguments:
+    EpochKey0: '`null`'
+    EpochKey1: '`<16_byte_value>`'
+    EpochKey2: '`<16_byte_value>`'
+    EpochStartTime0: '`<valid_non_zero_value>`'
+    EpochStartTime1: '`<valid_later_value_than_EpochStartTime0>`'
+    EpochStartTime2: '`<valid_later_value_than_EpochStartTime1>`'
+  label: Test_Case_EpochKey0_Null
+  option: SendCommand
+- ActionTime: '`<valid_time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`INVALID_COMMAND`'
+  Pre-requisites: '`None`'
+  arguments:
+    EpochKey0: '`<16_byte_value>`'
+    EpochKey1: '`<16_byte_value>`'
+    EpochKey2: '`<16_byte_value>`'
+    EpochStartTime0: '`0`'
+    EpochStartTime1: '`<valid_later_value_than_EpochStartTime0>`'
+    EpochStartTime2: '`<valid_later_value_than_EpochStartTime1>`'
+  label: Test_Case_EpochStartTime0_Zero
+  option: SendCommand
+- ActionTime: '`<valid_time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`CONSTRAINT_ERROR`'
+  Pre-requisites: '`None`'
+  arguments:
+    EpochKey0: '`<not_16_byte_value>`'
+    EpochKey1: '`<16_byte_value>`'
+    EpochKey2: '`<16_byte_value>`'
+    EpochStartTime0: '`<valid_non_zero_value>`'
+    EpochStartTime1: '`<valid_later_value_than_EpochStartTime0>`'
+    EpochStartTime2: '`<valid_later_value_than_EpochStartTime1>`'
+  label: Test_Case_EpochKey0_Length_Not_16_Bytes
+  option: SendCommand
+- ActionTime: '`<valid_time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`INVALID_COMMAND`'
+  Pre-requisites: '`None`'
+  arguments:
+    EpochKey0: '`null`'
+    EpochKey1: '`<16_byte_value>`'
+    EpochKey2: '`<16_byte_value>`'
+    EpochStartTime0: '`<valid_non_zero_value>`'
+    EpochStartTime1: '`<valid_later_value_than_EpochStartTime0>`'
+    EpochStartTime2: '`<valid_later_value_than_EpochStartTime1>`'
+  label: Test_Case_EpochKey1_Not_Null_but_EpochKey0_Null
+  option: SendCommand
+- ActionTime: '`<valid_time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`RESOURCE_EXHAUSTED`'
+  Pre-requisites: '`Node has reached its maximum number of Group Key Sets`
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:5†source】【4:6†source】.'
+  arguments:
+    EpochKey0: '`<16_byte_value>`'
+    EpochKey1: '`<16_byte_value>`'
+    EpochKey2: '`<16_byte_value>`'
+    EpochStartTime0: '`<valid_non_zero_value>`'
+    EpochStartTime1: '`<valid_later_value_than_EpochStartTime0>`'
+    EpochStartTime2: '`<valid_later_value_than_EpochStartTime1>`'
+  label: Test_Case_Insufficient_Resources
+  option: SendCommand

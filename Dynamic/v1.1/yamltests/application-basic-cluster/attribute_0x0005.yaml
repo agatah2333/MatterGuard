@@ -1,0 +1,6 @@
+config:
+  attribute: '0x0005'
+  cluster: application-basic-cluster
+  nodeId: '0x654231'
+name: application-basic-cluster_attribute_0x0005_v1.1.0.0
+tests: []

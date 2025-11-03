@@ -1,0 +1,135 @@
+{
+  "source_file": "OTA Software Update Requestor_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x002A",
+        "name": "OTA Software Update Requestor",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "DefaultOTAProviders",
+            "dataType": "list[ProviderLocationStruct]",
+            "valueRange": "",
+            "description": "Preconfigured OTA provider locations",
+            "privilege": "ReadWrite",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "UpdatePossible",
+            "dataType": "bool",
+            "valueRange": "",
+            "description": "Update capability status indicator",
+            "privilege": "Read",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "UpdateState",
+            "dataType": "UpdateStateEnum",
+            "valueRange": "0-8",
+            "description": "Current firmware update state",
+            "privilege": "Read",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "UpdateStateProgress",
+            "dataType": "uint8",
+            "valueRange": "0-100",
+            "description": "Percentage completion of current state",
+            "privilege": "Read",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "AnnounceOTAProvider",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Notify available OTA provider"
+            },
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "StateTransition",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "PreviousState: UpdateStateEnum, NewState: UpdateStateEnum",
+              "description": "Update state change notification"
+            },
+            "privilege": "Info",
+            "side": "server"
+          },
+          {
+            "id": "0x01",
+            "name": "VersionApplied",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "Version: uint32, Timestamp: epoch-us",
+              "description": "New firmware activation confirmation"
+            },
+            "privilege": "Critical",
+            "side": "server"
+          },
+          {
+            "id": "0x02",
+            "name": "DownloadError",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "ErrorCode: uint16, Progress: uint8",
+              "description": "Firmware download failure report"
+            },
+            "privilege": "Info",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "AnnouncementReasonEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "SimpleAnnouncement",
+              "1": "UpdateAvailable",
+              "2": "UrgentUpdateAvailable"
+            }
+          },
+          "UpdateStateEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Unknown",
+              "1": "Idle",
+              "2": "Querying",
+              "3": "DelayedOnQuery",
+              "4": "Downloading",
+              "5": "Applying",
+              "6": "DelayedOnApply",
+              "7": "RollingBack",
+              "8": "DelayedOnUserConsent"
+            }
+          },
+          "ProviderLocationStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "providerNodeID": "node-id",
+              "endpoint": "endpoint-no",
+              "fabricIndex": "fabric-idx"
+            },
+            "description": "OTA provider location descriptor"
+          },
+          "epoch-us": {
+            "baseType": "uint64",
+            "description": "Microseconds since 2000-01-01T00:00:00Z"
+          }
+        }
+      }
+    ]
+  }
+}

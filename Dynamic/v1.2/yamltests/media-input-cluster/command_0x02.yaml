@@ -1,0 +1,30 @@
+config:
+  cluster: media-input-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: media-input-cluster_command_0x02_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: PlaybackState attribute will be set to `NotPlaying`
+  ExpectedResponse: Success
+  Pre-requisites: 'Media must be in a playing state.
+
+
+    #'
+  arguments: {}
+  label: Test_Case_Extreme_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: No attribute change
+  ExpectedResponse: InvalidStateForCommand
+  Pre-requisites: 'Media must already be in a stopped state.
+
+
+    These test cases cover the extreme values and special responses for the `Stop`
+    command in the Media Playback cluster.
+
+
+    For more detailed information, refer to the Matter 1.2 Application Cluster Specification【4:0†source】.'
+  arguments: {}
+  label: Test_Case_Special_Response
+  option: SendCommand

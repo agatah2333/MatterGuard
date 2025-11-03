@@ -1,0 +1,33 @@
+config:
+  attribute: '0x0006'
+  cluster: time-synchronization-cluster
+  nodeId: '0x654231'
+name: time-synchronization-cluster_attribute_0x0006_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '- `TrustedTimeSource`: {"FabricIndex": 0, "NodeID": 0, "Endpoint":
+    0}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    Endpoint: 0
+    FabricIndex: 0
+    NodeID: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `TrustedTimeSource`: {"FabricIndex": 254, "NodeID": 18446744073709551615,
+    "Endpoint": 255}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints and the values that
+    could result in special responses as per the attribute''s definition in the Time
+    Synchronization Cluster【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    Endpoint: 255
+    FabricIndex: 254
+    NodeID: 18446744073709551615 (0xFFFFFFFFFFFFFFFF)
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: WriteAttribute

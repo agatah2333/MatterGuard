@@ -1,0 +1,122 @@
+config:
+  attribute: '0x03'
+  cluster: software-diagnostics-cluster
+  nodeId: '0x654231'
+name: software-diagnostics-cluster_attribute_0x03_v1.1.0.0
+tests:
+- ActionTime: Not applicable
+  Attribute_Change: None
+  ExpectedResponse: Successful read with value 0
+  Pre-requisites: None
+  arguments:
+    '{"CurrentHeapHighWatermark"': 0}
+  label: Test_Case_Extreme_Values
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify software-diagnostics-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: Not applicable
+  Attribute_Change: None
+  ExpectedResponse: Successful read with maximum value
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the `CurrentHeapHighWatermark` attribute
+    and ensure that the system can handle both the minimum and maximum possible values
+    for this attribute.
+
+
+    For more details, you can refer to the Matter specification document【4:12†source】.'
+  arguments:
+    '{"CurrentHeapHighWatermark"': 2^64-1}
+  label: Test_Case_Special_Response
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify software-diagnostics-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 60
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

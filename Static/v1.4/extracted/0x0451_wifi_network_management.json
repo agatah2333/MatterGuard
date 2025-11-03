@@ -1,0 +1,62 @@
+{
+  "cluster_id": "0x0451",
+  "cluster_name": "Wi-Fi Network Management",
+  "cluster_description": "This cluster provides an interface for getting information about the Wi-Fi network that a Network Infrastructure Manager device type provides. Privileged nodes within the same fabric as a Network Infrastructure Manager can use these interfaces to request information related to the Wi-Fi Network such as SSID and Passphrase.",
+  "cluster_revision": 1,
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Application", 
+    "scope": "Endpoint",
+    "pics_code": "WIFINM"
+  },
+  "features": {},
+  "data_types": {},
+  "attributes": {
+    "0x0000": {
+      "name": "SSID",
+      "type": "octstr",
+      "constraint": "1 to 32",
+      "quality": "XN",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate the SSID of the primary Wi-Fi network provided by this device. A value of null SHALL indicate that no primary Wi-Fi network is available (e.g. because the Wi-Fi network has not yet been configured by the user)."
+    },
+    "0x0001": {
+      "name": "PassphraseSurrogate",
+      "type": "uint64",
+      "constraint": "all",
+      "quality": "XN",
+      "default": "null",
+      "access": "RM",
+      "conformance": "M",
+      "description": "This attribute SHALL contain an arbitrary numeric value; this value SHALL increase whenever the passphrase or PSK associated with the primary Wi-Fi network provided by this device changes. A value of null SHALL indicate that no primary Wi-Fi network is available."
+    }
+  },
+  "commands": {
+    "0x00": {
+      "name": "NetworkPassphraseRequest",
+      "direction": "client => server",
+      "response": "NetworkPassphraseResponse",
+      "access": "M",
+      "conformance": "M",
+      "description": "This command is used to request the current WPA-Personal passphrase or PSK associated with the Wi-Fi network provided by this device. If the command is not executed via a CASE session, the command SHALL be rejected with a status of UNSUPPORTED_ACCESS."
+    },
+    "0x01": {
+      "name": "NetworkPassphraseResponse",
+      "direction": "client <= server",
+      "response": "N",
+      "access": "",
+      "conformance": "M",
+      "description": "This command SHALL be generated in response to a NetworkPassphraseRequest command.",
+      "fields": {
+        "Passphrase": {
+          "type": "octstr",
+          "constraint": "max 64",
+          "conformance": "M"
+        }
+      }
+    }
+  },
+  "events": {}
+}

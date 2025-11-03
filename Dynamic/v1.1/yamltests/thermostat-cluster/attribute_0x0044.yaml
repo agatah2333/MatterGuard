@@ -1,0 +1,28 @@
+config:
+  attribute: '0x0044'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0044_v1.1.0.0
+tests:
+- ActionTime: '"N/A"'
+  Attribute_Change: '{"ACErrorCode": "0x00000000"}'
+  ExpectedResponse: '"SUCCESS"'
+  Pre-requisites: '"None"
+
+
+    ##### Test Case 1.2'
+  arguments:
+    '{"ACErrorCode"': '"0x00000000"}'
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: '"N/A"'
+  Attribute_Change: '{"ACErrorCode": "0x00000001"}'
+  ExpectedResponse: '"SUCCESS"'
+  Pre-requisites: '"None"
+
+
+    ##### Test Case 2.2'
+  arguments:
+    '{"ACErrorCode"': '"0x00000001"}'
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: WriteAttribute

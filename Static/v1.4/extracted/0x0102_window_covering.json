@@ -1,0 +1,403 @@
+{
+  "source_file": "window covering.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0102",
+        "name": "Window Covering",
+        "description": "The window covering cluster provides an interface for controlling and adjusting automatic window coverings such as drapery motors, automatic shades, curtains and blinds.",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "Type",
+            "dataType": "TypeEnum",
+            "valueRange": "",
+            "description": "Identifies the type of window covering",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "PhysicalClosedLimitLift",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "Maximum encoder position (cm) for lift closed limit",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "PhysicalClosedLimitTilt",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "Maximum encoder position (0.1°) for tilt closed limit",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "CurrentPositionLift",
+            "dataType": "uint16",
+            "valueRange": "InstalledOpenLimitLift to InstalledClosedLimitLift",
+            "description": "Actual lift position in centimeters",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "CurrentPositionTilt",
+            "dataType": "uint16",
+            "valueRange": "InstalledOpenLimitTilt to InstalledClosedLimitTilt",
+            "description": "Actual tilt position in tenths of a degree",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0005",
+            "name": "NumberOfActuationsLift",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "Total lift actuations since installation",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0006",
+            "name": "NumberOfActuationsTilt",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "Total tilt actuations since installation",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0007",
+            "name": "ConfigStatus",
+            "dataType": "ConfigStatusBitmap",
+            "valueRange": "",
+            "description": "Device configuration and status information",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0008",
+            "name": "CurrentPositionLiftPercentage",
+            "dataType": "uint8",
+            "valueRange": "",
+            "description": "Current lift position percentage (1% step)",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0009",
+            "name": "CurrentPositionTiltPercentage",
+            "dataType": "uint8",
+            "valueRange": "all",
+            "description": "Current tilt position percentage (1% step)",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x000A",
+            "name": "OperationalStatus",
+            "dataType": "OperationalStatusBitmap",
+            "valueRange": "0b00xxxxxx",
+            "description": "Current movement status and position awareness",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x000B",
+            "name": "TargetPositionLiftPercent100ths",
+            "dataType": "percent100ths",
+            "valueRange": "",
+            "description": "Target lift position (0.01% precision)",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x000C",
+            "name": "TargetPositionTiltPercent100ths",
+            "dataType": "percent100ths",
+            "valueRange": "",
+            "description": "Target tilt position (0.01% precision)",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x000D",
+            "name": "EndProductType",
+            "dataType": "EndProductTypeEnum",
+            "valueRange": "",
+            "description": "Detailed product type classification",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x000E",
+            "name": "CurrentPositionLiftPercent100ths",
+            "dataType": "percent100ths",
+            "valueRange": "0-10000",
+            "description": "Current lift position (0.01% precision)",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x000F",
+            "name": "CurrentPositionTiltPercent100ths",
+            "dataType": "percent100ths",
+            "valueRange": "0-10000",
+            "description": "Current tilt position (0.01% precision)",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0010",
+            "name": "InstalledOpenLimitLift",
+            "dataType": "uint16",
+            "valueRange": "0-65534",
+            "description": "Installed open limit for lift movement",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0011",
+            "name": "InstalledClosedLimitLift",
+            "dataType": "uint16",
+            "valueRange": "0-65534",
+            "description": "Installed closed limit for lift movement",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0012",
+            "name": "InstalledOpenLimitTilt",
+            "dataType": "uint16",
+            "valueRange": "0-65534",
+            "description": "Installed open limit for tilt movement",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0013",
+            "name": "InstalledClosedLimitTilt",
+            "dataType": "uint16",
+            "valueRange": "0-65534",
+            "description": "Installed closed limit for tilt movement",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0014",
+            "name": "VelocityLift",
+            "dataType": "uint16",
+            "valueRange": "",
+            "description": "Current lift movement velocity (cm/s)",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0015",
+            "name": "AccelerationTimeLift",
+            "dataType": "uint16",
+            "valueRange": "",
+            "description": "Lift acceleration time (ms)",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0016",
+            "name": "DecelerationTimeLift",
+            "dataType": "uint16",
+            "valueRange": "",
+            "description": "Lift deceleration time (ms)",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0017",
+            "name": "Mode",
+            "dataType": "ModeBitmap",
+            "valueRange": "0b0000xxxx",
+            "description": "Device operation mode configuration",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0018",
+            "name": "IntermediateSetpointsLift",
+            "dataType": "list[uint16]",
+            "valueRange": "",
+            "description": "Predefined lift position setpoints",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0019",
+            "name": "IntermediateSetpointsTilt",
+            "dataType": "list[uint16]",
+            "valueRange": "",
+            "description": "Predefined tilt position setpoints",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x001A",
+            "name": "SafetyStatus",
+            "dataType": "SafetyStatusBitmap",
+            "valueRange": "",
+            "description": "Safety sensor status and error conditions",
+            "privilege": "RV",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "UpOrOpen",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Adjusts to maximum open/up position"
+            },
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "DownOrClose",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Adjusts to maximum closed/down position"
+            },
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "StopMotion",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Stops all ongoing movements"
+            },
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x04",
+            "name": "GoToLiftValue",
+            "parameters": {
+              "dataType": "uint16",
+              "valueRange": "0 to InstalledOpenLimitLift",
+              "description": "Set absolute lift position in centimeters"
+            },
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x05",
+            "name": "GoToLiftPercentage",
+            "parameters": {
+              "dataType": "percent100ths",
+              "valueRange": "0-10000",
+              "description": "Set lift position (0.01% precision)"
+            },
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x07",
+            "name": "GoToTiltValue",
+            "parameters": {
+              "dataType": "uint16",
+              "valueRange": "0 to InstalledOpenLimitTilt",
+              "description": "Set absolute tilt position in 0.1° units"
+            },
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x08",
+            "name": "GoToTiltPercentage",
+            "parameters": {
+              "dataType": "percent100ths",
+              "valueRange": "0-10000",
+              "description": "Set tilt position (0.01% precision)"
+            },
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "TypeEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "Roller Shade",
+              "1": "Roman Shade",
+              "2": "Balloon Shade",
+              "3": "Woven Wood",
+              "4": "Pleated Shade",
+              "5": "Cellular Shade",
+              "6": "Layered Sheer",
+              "7": "Layered Shade",
+              "8": "Tilt Only Interior Blinds",
+              "9": "Tilt Only Exterior Blinds",
+              "a": "Tilt Only Exterior Blinds"
+            }
+          },
+          "ConfigStatusBitmap": {
+            "baseType": "bitmap8",
+            "fields": {
+              "0": "Operational",
+              "1": "Online",
+              "2": "Lift Position Aware",
+              "3": "Tilt Position Aware",
+              "4": "Lift Encoder Controlled",
+              "5": "Tilt Encoder Controlled"
+            }
+          },
+          "OperationalStatusBitmap": {
+            "baseType": "bitmap8",
+            "fields": {
+              "0": "Global Lift",
+              "1": "Global Tilt",
+              "2": "Lift Moving Up",
+              "3": "Lift Moving Down",
+              "4": "Tilt Moving Up",
+              "5": "Tilt Moving Down",
+              "6": "Lift Position Known",
+              "7": "Tilt Position Known"
+            }
+          },
+          "ModeBitmap": {
+            "baseType": "bitmap8",
+            "fields": {
+              "0": "Motor Direction Reversed",
+              "1": "Calibration Mode",
+              "2": "Maintenance Mode",
+              "3": "Network Disabled",
+              "4": "LEDs Disabled"
+            }
+          },
+          "SafetyStatusBitmap": {
+            "baseType": "bitmap16",
+            "fields": {
+              "0": "Obstruction Detected",
+              "1": "Temper Fault",
+              "2": "Motor Fault",
+              "3": "Manual Operation",
+              "4": "Sensor Malfunction",
+              "5": "Power Supply Issue",
+              "6": "Communication Error",
+              "7": "Position Failure"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+config:
+  attribute: '0x0000'
+  cluster: pressure-measurement-cluster
+  nodeId: '0x654231'
+name: pressure-measurement-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: '`<timestamp>`'
+  Attribute_Change: '`MeasuredValue` set to `<MinMeasuredValue>`'
+  ExpectedResponse: '`<response indicating minimum value>`'
+  Pre-requisites: Ensure `MinMeasuredValue` is defined and set.
+  arguments:
+    MeasuredValue: '`<MinMeasuredValue>`'
+  label: Test_Case_Minimum_Measured_Value
+  option: WriteAttribute
+- ActionTime: '`<timestamp>`'
+  Attribute_Change: '`MeasuredValue` set to `<MaxMeasuredValue>`'
+  ExpectedResponse: '`<response indicating maximum value>`'
+  Pre-requisites: Ensure `MaxMeasuredValue` is defined and set.
+  arguments:
+    MeasuredValue: '`<MaxMeasuredValue>`'
+  label: Test_Case_Maximum_Measured_Value
+  option: WriteAttribute
+- ActionTime: '`<timestamp>`'
+  Attribute_Change: '`MeasuredValue` remains unchanged.'
+  ExpectedResponse: '`<response indicating value out of range>`'
+  Pre-requisites: Ensure `MinMeasuredValue` is defined and set.
+  arguments:
+    MeasuredValue: '`<MinMeasuredValue - 1>`'
+  label: Test_Case_Value_Below_Minimum_Measured_Value
+  option: WriteAttribute
+- ActionTime: '`<timestamp>`'
+  Attribute_Change: '`MeasuredValue` remains unchanged.'
+  ExpectedResponse: '`<response indicating value out of range>`'
+  Pre-requisites: 'Ensure `MaxMeasuredValue` is defined and set.
+
+
+    ### Notes:
+
+    - The `MeasuredValue` attribute represents the pressure in kPa as follows: `MeasuredValue
+    = 10 x Pressure [kPa]`.
+
+    - The null value indicates that the value is not available【4:0†source】【4:7†source】【4:18†source】.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    MeasuredValue: '`<MaxMeasuredValue + 1>`'
+  label: Test_Case_Value_Above_Maximum_Measured_Value
+  option: WriteAttribute

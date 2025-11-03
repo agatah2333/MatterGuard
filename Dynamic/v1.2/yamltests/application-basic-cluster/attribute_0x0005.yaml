@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0005'
+  cluster: application-basic-cluster
+  nodeId: '0x654231'
+name: application-basic-cluster_attribute_0x0005_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"NodeLabel": ""}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"NodeLabel"': '""}'
+  label: Test_Case_Minimum_Length
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"NodeLabel": "A"*32}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"NodeLabel"': '"A"*32}'
+  label: Test_Case_Maximum_Length
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"NodeLabel": "!@#$%^&*()_+-=[]{}|;'':,.<>?/~`"}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"NodeLabel"': '"!@#$%^&*()_+-=[]{}|;'':,.<>?/~`"}'
+  label: Test_Case_Special_Characters
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"NodeLabel": "Living Room"}'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field (minimum
+    and maximum length) and special characters that could be used in the NodeLabel
+    attribute.'
+  arguments:
+    '{"NodeLabel"': '"Living Room"}'
+  label: Test_Case_Normal_String
+  option: WriteAttribute

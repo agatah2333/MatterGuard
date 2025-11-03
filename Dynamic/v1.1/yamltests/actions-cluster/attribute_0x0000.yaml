@@ -1,0 +1,34 @@
+config:
+  attribute: '0x0000'
+  cluster: actions-cluster
+  nodeId: '0x654231'
+name: actions-cluster_attribute_0x0000_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`ActionList` will include an entry with the above values.'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    ActionID: 0
+    ActionType: 0
+    EndpointListID: 0
+    InvokeID: 0
+    InvokeParameters: '""'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 255
+  Attribute_Change: '`ActionList` will include an entry with the above values.'
+  ExpectedResponse: Special handling or error due to maximum values.
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values and special responses for the `ActionList`
+    attribute in the Actions Cluster【4:4†source】.'
+  arguments:
+    ActionID: 255
+    ActionType: 255
+    EndpointListID: 255
+    InvokeID: 255
+    InvokeParameters: '"SpecialInvokeParameters"'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

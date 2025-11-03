@@ -1,0 +1,224 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x005F",
+    "name": "Microwave Oven Control",
+    "description": "This cluster defines the requirements for the Microwave Oven Control cluster. This cluster has dependencies with the Operational State and Microwave Oven Mode clusters. The Operational State cluster and the Microwave Oven Mode clusters, or derivatives of those clusters SHALL appear on the same endpoint as this cluster.",
+    "classification": {
+      "hierarchy": "Base",
+      "role": "Application",
+      "scope": "Endpoint",
+      "pics_code": "MWOCTRL"
+    },
+    "revision_history": [
+      {
+        "revision": 1,
+        "description": "Initial Release"
+      }
+    ]
+  },
+  "features": {
+    "PWRNUM": {
+      "bit": 0,
+      "code": "PWRNUM",
+      "name": "PowerAsNumber",
+      "conformance": "O.a",
+      "summary": "Power is specified as a unitless number or a percentage"
+    },
+    "WATTS": {
+      "bit": 1,
+      "code": "WATTS",
+      "name": "PowerInWatts",
+      "conformance": "P, O.a",
+      "summary": "Power is specified in Watts"
+    },
+    "PWRLMTS": {
+      "bit": 2,
+      "code": "PWRLMTS",
+      "name": "PowerNumberLimits",
+      "conformance": "[PWRNUM]",
+      "summary": "Supports the limit attributes used with the PWRNUM feature"
+    }
+  },
+  "data_types": {},
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "CookTime",
+      "type": "elapsed-s",
+      "constraint": "1 to MaxCookTime",
+      "quality": "",
+      "default": "30",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate the total cook time associated with the operation of the device. This attribute SHALL remain unchanged during the operation of the oven unless the value is changed via a command or out-of-band action."
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "MaxCookTime",
+      "type": "elapsed-s",
+      "constraint": "1 to 86400",
+      "quality": "F",
+      "default": "MS",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate the maximum value to which the CookTime attribute can be set."
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "PowerSetting",
+      "type": "uint8",
+      "constraint": "desc",
+      "quality": "",
+      "default": "desc",
+      "access": "RV",
+      "conformance": "PWRNUM",
+      "description": "This attribute SHALL indicate the power level associated with the operation of the device."
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "MinPower",
+      "type": "uint8",
+      "constraint": "1 to MaxPower",
+      "quality": "F",
+      "default": "10",
+      "access": "RV",
+      "conformance": "PWRLMTS",
+      "description": "This attribute SHALL indicate the minimum power level that can be set on the server."
+    },
+    "0x0004": {
+      "id": "0x0004",
+      "name": "MaxPower",
+      "type": "uint8",
+      "constraint": "MinPower to 100",
+      "quality": "F",
+      "default": "100",
+      "access": "RV",
+      "conformance": "PWRLMTS",
+      "description": "This attribute SHALL indicate the maximum power level that can be set on the server."
+    },
+    "0x0005": {
+      "id": "0x0005",
+      "name": "PowerStep",
+      "type": "uint8",
+      "constraint": "1 to (MaxPower - MinPower)",
+      "quality": "F",
+      "default": "10",
+      "access": "RV",
+      "conformance": "PWRLMTS",
+      "description": "This attribute SHALL indicate the increment of power that can be set on the server."
+    },
+    "0x0006": {
+      "id": "0x0006",
+      "name": "SupportedWatts",
+      "type": "list[uint16]",
+      "constraint": "1 to 10",
+      "quality": "F",
+      "default": "MS",
+      "access": "RV",
+      "conformance": "P, WATTS",
+      "description": "This attribute SHALL indicate the list of power levels (in W) supported by the server."
+    },
+    "0x0007": {
+      "id": "0x0007",
+      "name": "SelectedWattIndex",
+      "type": "uint8",
+      "constraint": "desc",
+      "quality": "",
+      "default": "MS",
+      "access": "RV",
+      "conformance": "P, WATTS",
+      "description": "This attribute SHALL indicate the index into the list of SupportedWatts of the currently selected power setting."
+    },
+    "0x0008": {
+      "id": "0x0008",
+      "name": "WattRating",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "F",
+      "default": "MS",
+      "access": "RV",
+      "conformance": "O",
+      "description": "This attribute SHALL indicate the rating, in Watts, of the microwave power of the oven. Supporting this attribute can assist clients in suggesting cooking settings for various foods and beverages."
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "SetCookingParameters",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "CookMode",
+          "type": "uint8",
+          "constraint": "desc",
+          "quality": "",
+          "default": "desc",
+          "conformance": "O.a+",
+          "description": "This field SHALL indicate the value to which the CurrentMode attribute of the Microwave Oven Mode cluster should be set."
+        },
+        {
+          "id": "1",
+          "name": "CookTime",
+          "type": "elapsed-s",
+          "constraint": "1 to MaxCookTime",
+          "quality": "",
+          "default": "30",
+          "conformance": "O.a+",
+          "description": "This field SHALL indicate the CookTime associated with the operation of the device."
+        },
+        {
+          "id": "2",
+          "name": "PowerSetting",
+          "type": "uint8",
+          "constraint": "MinPower to MaxPower",
+          "quality": "",
+          "default": "MaxPower",
+          "conformance": "[PWRNUM].a+",
+          "description": "This field SHALL indicate the PowerSetting associated with the operation of the device."
+        },
+        {
+          "id": "3",
+          "name": "WattSettingIndex",
+          "type": "uint8",
+          "constraint": "desc",
+          "quality": "",
+          "default": "MS",
+          "conformance": "[WATTS].a+",
+          "description": "This field SHALL indicate the value to which the SelectedWattIndex attribute is set."
+        },
+        {
+          "id": "4",
+          "name": "StartAfterSetting",
+          "type": "bool",
+          "constraint": "all",
+          "quality": "",
+          "default": "false",
+          "conformance": "O",
+          "description": "This field SHALL indicate whether or not oven operation SHALL be started when the command is received."
+        }
+      ],
+      "description": "This command is used to set the cooking parameters associated with the operation of the device."
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "AddMoreTime",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "O",
+      "description": "This command is used to add more time to the cooking operation."
+    }
+  },
+  "events": {},
+  "dependencies": {
+    "required_clusters": [
+      "Operational State cluster (or derivative)",
+      "Microwave Oven Mode cluster (or derivative)"
+    ],
+    "description": "The Operational State cluster and the Microwave Oven Mode clusters, or derivatives of those clusters SHALL appear on the same endpoint as this cluster."
+  }
+}

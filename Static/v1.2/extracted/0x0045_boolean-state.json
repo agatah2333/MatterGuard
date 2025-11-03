@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0045",
+    "name": "Boolean State",
+    "description": "Cluster for Boolean State functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

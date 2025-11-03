@@ -1,0 +1,18 @@
+config:
+  attribute: '6'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_6_v1.2.0.0
+tests:
+- arguments: {}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- arguments: {}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- arguments: {}
+  label: Test_Case_Special_Response_-_Enable_Auto_Relock
+  option: WriteAttribute
+- arguments: {}
+  label: Test_Case_Special_Response_-_Disable_Auto_Relock
+  option: WriteAttribute

@@ -1,0 +1,49 @@
+config:
+  attribute: '0x0022'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0022_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Primary4Intensity set to 0
+  ExpectedResponse: Success
+  Pre-requisites: NumberOfPrimaries attribute must be greater than 4
+  arguments:
+    '{"Primary4Intensity"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Primary4Intensity set to 255
+  ExpectedResponse: Success
+  Pre-requisites: NumberOfPrimaries attribute must be greater than 4
+  arguments:
+    '{"Primary4Intensity"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Primary4Intensity set to 128
+  ExpectedResponse: Success
+  Pre-requisites: NumberOfPrimaries attribute must be greater than 4
+  arguments:
+    '{"Primary4Intensity"': 128}
+  label: Test_Case_Mid-range_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Error
+  Pre-requisites: NumberOfPrimaries attribute must be greater than 4
+  arguments:
+    '{"Primary4Intensity"': 256}
+  label: Test_Case_Invalid_Value_(Above_Range)
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Error
+  Pre-requisites: 'NumberOfPrimaries attribute must be greater than 4
+
+
+    ### Summary'
+  arguments:
+    '{"Primary4Intensity"': -1}
+  label: Test_Case_Invalid_Value_(Below_Range)
+  option: WriteAttribute

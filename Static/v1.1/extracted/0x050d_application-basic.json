@@ -1,0 +1,84 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x050d",
+    "name": "Application Basic",
+    "description": "SHALL support the FeatureMap bitmap attribute as defined below."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Vendor",
+      "data_type": "string",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0001",
+      "name": "VendorID",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0002",
+      "name": "Applica",
+      "data_type": "string",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0003",
+      "name": "ProductID",
+      "data_type": "uint16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0004",
+      "name": "Applica",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0005",
+      "name": "Status",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0006",
+      "name": "Applica",
+      "data_type": "string",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0007",
+      "name": "Allowed",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    }
+  ],
+  "events": []
+}

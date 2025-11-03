@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0200",
+    "name": "Pump Configuration and Control",
+    "description": "Cluster for Pump Configuration and Control functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

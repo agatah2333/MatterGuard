@@ -1,0 +1,56 @@
+config:
+  cluster: onoff-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: onoff-cluster_command_0x02_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: OnOff attribute will be set to TRUE
+  ExpectedResponse: OnOff attribute set to TRUE
+  Pre-requisites: OnOff attribute is initially FALSE
+  arguments:
+    OffWaitTime: 0
+    OnOff: 'FALSE'
+    OnTime: 0
+  label: Test_Case_Toggle_from_Off_to_On
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: OnOff attribute will be set to FALSE, OnTime attribute will be
+    set to 0
+  ExpectedResponse: OnOff attribute set to FALSE
+  Pre-requisites: OnOff attribute is initially TRUE
+  arguments:
+    OffWaitTime: 50
+    OnOff: 'TRUE'
+    OnTime: 100
+  label: Test_Case_Toggle_from_On_to_Off
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: OnOff attribute will be set to TRUE, OffWaitTime attribute will
+    be set to 0
+  ExpectedResponse: OnOff attribute set to TRUE, OffWaitTime attribute set to 0
+  Pre-requisites: OnOff attribute is initially FALSE, OnTime and OffWaitTime attributes
+    are supported
+  arguments:
+    OffWaitTime: 100
+    OnOff: 'FALSE'
+    OnTime: 0
+  label: Test_Case_Toggle_from_Off_to_On_with_OnTime_and_OffWaitTime_Supported
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: OnOff attribute will be set to FALSE, OnTime attribute will be
+    set to 0
+  ExpectedResponse: OnOff attribute set to FALSE, OnTime attribute set to 0
+  Pre-requisites: 'OnOff attribute is initially TRUE, OnTime and OffWaitTime attributes
+    are supported
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    OffWaitTime: 0
+    OnOff: 'TRUE'
+    OnTime: 200
+  label: Test_Case_Toggle_from_On_to_Off_with_OnTime_and_OffWaitTime_Supported
+  option: SendCommand

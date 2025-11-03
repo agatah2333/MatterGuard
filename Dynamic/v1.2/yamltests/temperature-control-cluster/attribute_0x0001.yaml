@@ -1,0 +1,26 @@
+config:
+  attribute: '0x0001'
+  cluster: temperature-control-cluster
+  nodeId: '0x654231'
+name: temperature-control-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: MinTemperature set to 1
+  ExpectedResponse: SUCCESS
+  Pre-requisites: MaxTemperature must be greater than 1
+  arguments:
+    MinTemperature: 1
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: MinTemperature set to MaxTemperature - 1
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'MaxTemperature must be defined and greater than 1
+
+
+    These test cases cover the extreme values of the constraints and the values that
+    could result in special responses as mentioned in the description of the effect【4:0†source】.'
+  arguments:
+    MinTemperature: MaxTemperature - 1
+  label: Test_Case_Special_Response_Scenario
+  option: WriteAttribute

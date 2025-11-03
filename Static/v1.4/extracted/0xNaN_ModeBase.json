@@ -1,0 +1,235 @@
+{
+  "cluster_id": "n/a",
+  "cluster_name": "Mode Base",
+  "cluster_type": "Base",
+  "description": "This cluster provides an interface for controlling a characteristic of a device that can be set to one of several predefined values. For example, the light pattern of a disco ball, the mode of a massage chair, or the wash cycle of a laundry machine. The server allows the client to set a mode on the server. A mode is one of a list of options that may be presented by a client for a user choice, or understood by the client, via the mode's tags.",
+  "revision_history": [
+    {
+      "revision": 1,
+      "description": "Initial revision"
+    },
+    {
+      "revision": 2,
+      "description": "ChangeToModeResponse command: StatusText must be provided for InvalidInMode status. Require at least one standard mode tag. Define reserved ranges for base/derived clusters"
+    }
+  ],
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Application",
+    "scope": "Endpoint",
+    "pics_code": "MODB"
+  },
+  "features": {
+    "bitmap": {
+      "0": {
+        "code": "DEPONOFF",
+        "name": "OnOff",
+        "summary": "Dependency with the OnOff cluster"
+      }
+    }
+  },
+  "data_types": {
+    "ModeTagStruct": {
+      "type": "struct",
+      "description": "A Mode Tag is meant to be interpreted by the client for the purpose the cluster serves.",
+      "fields": {
+        "0": {
+          "name": "MfgCode",
+          "type": "vendor-id",
+          "constraint": "desc",
+          "conformance": "O"
+        },
+        "1": {
+          "name": "Value",
+          "type": "enum16",
+          "constraint": "all",
+          "conformance": "M"
+        }
+      }
+    },
+    "ModeOptionStruct": {
+      "type": "struct",
+      "description": "This is a struct representing a possible mode of the server.",
+      "fields": {
+        "0": {
+          "name": "Label",
+          "type": "string",
+          "constraint": "max 64",
+          "quality": "F",
+          "default": "MS",
+          "conformance": "M"
+        },
+        "1": {
+          "name": "Mode",
+          "type": "uint8",
+          "quality": "F",
+          "default": "MS",
+          "conformance": "M"
+        },
+        "2": {
+          "name": "ModeTags",
+          "type": "list[ModeTagStruct]",
+          "constraint": "max 8",
+          "quality": "F",
+          "default": "MS",
+          "conformance": "M"
+        }
+      }
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "name": "SupportedModes",
+      "type": "list[ModeOptionStruct]",
+      "constraint": "2 to 255",
+      "quality": "F",
+      "default": "MS",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL contain the list of supported modes that may be selected for the CurrentMode attribute. Each item in this list represents a unique mode as indicated by the Mode field of the ModeOptionStruct."
+    },
+    "0x0001": {
+      "name": "CurrentMode",
+      "type": "uint8",
+      "constraint": "desc",
+      "quality": "N",
+      "default": "MS",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate the current mode of the server. The value of this field SHALL match the Mode field of one of the entries in the SupportedModes attribute."
+    },
+    "0x0002": {
+      "name": "StartUpMode",
+      "type": "uint8",
+      "constraint": "desc",
+      "quality": "NX",
+      "default": "MS",
+      "access": "RW VO",
+      "conformance": "O",
+      "description": "This attribute SHALL indicate the desired startup mode for the server when it is supplied with power."
+    },
+    "0x0003": {
+      "name": "OnMode",
+      "type": "uint8",
+      "constraint": "desc",
+      "quality": "NX",
+      "default": "null",
+      "access": "RW VO",
+      "conformance": "DEPONOFF",
+      "description": "This attribute SHALL indicate whether the value of CurrentMode depends on the state of the On/Off cluster on the same endpoint."
+    }
+  },
+  "commands": {
+    "0x00": {
+      "name": "ChangeToMode",
+      "direction": "client => server",
+      "response": "ChangeToModeResponse",
+      "access": "O",
+      "conformance": "M",
+      "description": "This command is used to change device modes.",
+      "fields": {
+        "0": {
+          "name": "NewMode",
+          "type": "uint8",
+          "constraint": "desc",
+          "conformance": "M"
+        }
+      }
+    },
+    "0x01": {
+      "name": "ChangeToModeResponse",
+      "direction": "client <= server",
+      "response": "N",
+      "conformance": "M",
+      "description": "This command is sent by the device on receipt of the ChangeToMode command.",
+      "fields": {
+        "0": {
+          "name": "Status",
+          "type": "enum8",
+          "constraint": "desc",
+          "conformance": "M"
+        },
+        "1": {
+          "name": "StatusText",
+          "type": "string",
+          "constraint": "max 64",
+          "conformance": "[Status == Success], M"
+        }
+      }
+    }
+  },
+  "status_codes": {
+    "common_codes": {
+      "0x00": {
+        "name": "Success",
+        "summary": "Switching to the mode indicated by the NewMode field is allowed and possible. The CurrentMode attribute is set to the value of the NewMode field."
+      },
+      "0x01": {
+        "name": "UnsupportedMode",
+        "summary": "The value of the NewMode field doesn't match any entries in the SupportedModes attribute."
+      },
+      "0x02": {
+        "name": "GenericFailure",
+        "summary": "Generic failure code, indicating that switching to the mode indicated by the NewMode field is not allowed or not possible."
+      },
+      "0x03": {
+        "name": "InvalidInMode",
+        "summary": "The received request cannot be handled due to the current mode of the device"
+      }
+    },
+    "ranges": {
+      "0x00_to_0x3F": "CommonCodes - Common standard values defined in the generic Mode Base cluster specification",
+      "0x40_to_0x7F": "DerivedClusterCodes - Derived cluster specific standard values defined in the derived Mode Base cluster specification",
+      "0x80_to_0xBF": "MfgCodes - Manufacturer specific values"
+    }
+  },
+  "mode_namespace": {
+    "ranges": {
+      "0x0000_to_0x3FFF": "CommonTags - Common standard values defined in this cluster specification",
+      "0x4000_to_0x7FFF": "DerivedClusterTags - Derived cluster specific standard values defined in the derived cluster specification",
+      "0x8000_to_0xBFFF": "MfgTags - Manufacturer-specific values"
+    },
+    "common_mode_tags": {
+      "0x0000": {
+        "name": "Auto",
+        "description": "The device decides which options, features and setting values to use."
+      },
+      "0x0001": {
+        "name": "Quick",
+        "description": "The mode of the device is optimizing for faster completion."
+      },
+      "0x0002": {
+        "name": "Quiet",
+        "description": "The device is silent or barely audible while in this mode."
+      },
+      "0x0003": {
+        "name": "LowNoise",
+        "description": "Either the mode is inherently low noise or the device optimizes for that."
+      },
+      "0x0004": {
+        "name": "LowEnergy",
+        "description": "The device is optimizing for lower energy usage in this mode. Sometimes called 'Eco mode'."
+      },
+      "0x0005": {
+        "name": "Vacation",
+        "description": "A mode suitable for use during vacations or other extended absences."
+      },
+      "0x0006": {
+        "name": "Min",
+        "description": "The mode uses the lowest available setting value."
+      },
+      "0x0007": {
+        "name": "Max",
+        "description": "The mode uses the highest available setting value."
+      },
+      "0x0008": {
+        "name": "Night",
+        "description": "The mode is recommended or suitable for use during night time."
+      },
+      "0x0009": {
+        "name": "Day",
+        "description": "The mode is recommended or suitable for use during day time."
+      }
+    }
+  }
+}

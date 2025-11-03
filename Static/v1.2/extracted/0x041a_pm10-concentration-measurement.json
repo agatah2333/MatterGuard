@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x041a",
+    "name": "PM10 Concentration Measurement",
+    "description": "Cluster for PM10 Concentration Measurement functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

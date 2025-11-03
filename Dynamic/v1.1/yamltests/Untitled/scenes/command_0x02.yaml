@@ -1,0 +1,283 @@
+config:
+  cluster: scenes
+  command: '0x02'
+  nodeId: '0x654231'
+name: scenes_command_0x02_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: Scene entry with GroupID 0 and SceneID 0 will be removed.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Scene entry with GroupID 0 and SceneID 0 exists in the Scene Table.
+  arguments: {}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify scenes cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: Scene entry with GroupID <max_value> and SceneID <max_value> will
+    be removed.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Scene entry with GroupID <max_value> and SceneID <max_value> exists
+    in the Scene Table.
+  arguments: {}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify scenes cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: ILLEGAL_COMMAND
+  Pre-requisites: GroupID <non_zero_value_not_in_group_table> does not exist in the
+    Group Table.
+  arguments: {}
+  label: Test_Case_Special_Response_-_ILLEGAL_COMMAND
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify scenes cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: NOT_FOUND
+  Pre-requisites: GroupID <valid_group_id> exists in the Group Table, but SceneID
+    <non_existent_scene_id> does not exist in the Scene Table for this GroupID.
+  arguments: {}
+  label: Test_Case_Special_Response_-_NOT_FOUND
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify scenes cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: Scene entry with GroupID <valid_group_id> and SceneID <valid_scene_id>
+    will be removed.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Scene entry with GroupID <valid_group_id> and SceneID <valid_scene_id>
+    exists in the Scene Table.
+
+
+    ### Summary
+
+    - There are 5 test cases in the command.
+
+    - The range of each field is {"GroupID": [0, <max_value>], "SceneID": [0, <max_value>]}.
+
+
+    These test cases cover the extreme values of the constraints and the special responses
+    as mentioned in the description of the effect for the `RemoveScene` command in
+    the Scenes cluster【4:0†source】【4:5†source】.'
+  arguments: {}
+  label: Test_Case_Special_Response_-_SUCCESS
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify scenes cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 150
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

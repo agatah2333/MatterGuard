@@ -1,0 +1,127 @@
+{
+  "source_file": "OTA Software Update Provider_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0029",
+        "name": "OTA Software Update Provider",
+        "attributes": [],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "QueryImage",
+            "parameters": {
+              "VendorID": {
+                "dataType": "vendor-id",
+                "valueRange": ""
+              },
+              "ProductID": {
+                "dataType": "uint16",
+                "valueRange": ""
+              },
+              "SoftwareVersion": {
+                "dataType": "uint32",
+                "valueRange": ""
+              },
+              "ProtocolsSupported": {
+                "dataType": "list[DownloadProtocolEnum]",
+                "valueRange": "max 8"
+              }
+            },
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "QueryImageResponse",
+            "parameters": {},
+            "privilege": "Operate",
+            "direction": "client ⇐ server"
+          },
+          {
+            "id": "0x02",
+            "name": "ApplyUpdateRequest",
+            "parameters": {
+              "UpdateToken": {
+                "dataType": "octstr",
+                "valueRange": "8-32"
+              },
+              "NewVersion": {
+                "dataType": "uint32",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x03",
+            "name": "ApplyUpdateResponse",
+            "parameters": {
+              "Action": {
+                "dataType": "ApplyUpdateActionEnum",
+                "valueRange": ""
+              },
+              "DelayedActionTime": {
+                "dataType": "uint32",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Operate",
+            "direction": "client ⇐ server"
+          },
+          {
+            "id": "0x04",
+            "name": "NotifyUpdateApplied",
+            "parameters": {
+              "UpdateToken": {
+                "dataType": "octstr",
+                "valueRange": "8-32"
+              },
+              "SoftwareVersion": {
+                "dataType": "uint32",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "StatusEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "UpdateAvailable",
+              "1": "Busy",
+              "2": "NotAvailable",
+              "3": "DownloadProtocolNotSupported"
+            }
+          },
+          "ApplyUpdateActionEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Proceed",
+              "1": "AwaitNextAction",
+              "2": "Discontinue"
+            }
+          },
+          "DownloadProtocolEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "BDXSynchronous",
+              "1": "BDXAsynchronous",
+              "2": "HTTPS",
+              "3": "VendorSpecific"
+            }
+          },
+          "vendor-id": {
+            "baseType": "uint16",
+            "description": "Vendor identifier"
+          }
+        }
+      }
+    ]
+  }
+}

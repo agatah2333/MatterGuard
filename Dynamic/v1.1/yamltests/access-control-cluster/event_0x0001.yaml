@@ -1,0 +1,37 @@
+config:
+  cluster: access-control-cluster
+  event: '0x0001'
+  nodeId: '0x654231'
+name: access-control-cluster_event_0x0001_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: AccessControlExtensionStruct will be updated with the provided
+    `LatestValue`.
+  ExpectedResponse: Success
+  Pre-requisites: The node must be in a state where it can accept changes to the Access
+    Control Extension.
+  arguments:
+    AdminNodeID: '0x0000000000000001'
+    AdminPasscodeID: 0
+    ChangeType: Added
+    LatestValue:
+      Example structure with minimum values: null
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: AccessControlExtensionStruct will be removed.
+  ExpectedResponse: Success
+  Pre-requisites: 'The node must have an existing Access Control Extension that matches
+    the `LatestValue` to be removed.
+
+
+    These test cases cover the extreme values and special responses for the event
+    ID 0x0001 of the Access Control Cluster【4:0†source】【4:1†source】【4:4†source】【4:5†source】.'
+  arguments:
+    AdminNodeID: '0xFFFFFFFFFFFFFFFF'
+    AdminPasscodeID: 65535
+    ChangeType: Removed
+    LatestValue:
+      Example structure with maximum values: null
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: SubscribeToEvent

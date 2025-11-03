@@ -1,0 +1,59 @@
+config:
+  cluster: time-synchronization-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: time-synchronization-cluster_command_0x02_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`TimeZone` attribute will be updated to [{"TimeZone": "UTC-12",
+    "Offset": -43200}]'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    TimeZone:
+    - Offset: -43200
+      TimeZone: UTC-12
+  label: Test_Case_Minimum_TimeZone_List_Size
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '`TimeZone` attribute will be updated to [{"TimeZone": "UTC-12",
+    "Offset": -43200}, {"TimeZone": "UTC+14", "Offset": 50400}]'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    TimeZone:
+    - Offset: -43200
+      TimeZone: UTC-12
+    - Offset: 50400
+      TimeZone: UTC+14
+  label: Test_Case_Maximum_TimeZone_List_Size
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '`TimeZone` attribute will not be updated'
+  ExpectedResponse: RESOURCE_EXHAUSTED
+  Pre-requisites: None
+  arguments:
+    TimeZone:
+    - Offset: -43200
+      TimeZone: UTC-12
+    - Offset: 50400
+      TimeZone: UTC+14
+    - Offset: 0
+      TimeZone: UTC+0
+  label: Test_Case_Exceeding_Maximum_TimeZone_List_Size
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '`TimeZone` attribute will not be updated'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the `TimeZone`
+    field and the values that could result in special responses as mentioned in the
+    description of the effect【4:0†source】【4:5†source】.'
+  arguments:
+    TimeZone:
+    - Offset: 99999
+      TimeZone: InvalidZone
+  label: Test_Case_Invalid_TimeZone_Offset
+  option: SendCommand

@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0020'
+  cluster: pump-configuration-and-control-cluster
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_attribute_0x0020_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: OperationMode will be set to "Normal"
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"OperationMode"': 0}
+  label: Test_Case_Extreme_Value_(Minimum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: OperationMode will be set to "Local"
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"OperationMode"': 3}
+  label: Test_Case_Extreme_Value_(Maximum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: The device does not support the operation mode value 4
+  arguments:
+    '{"OperationMode"': 4}
+  label: Test_Case_Special_Response_(CONSTRAINT_ERROR)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: OperationMode will be set to "Normal"
+  ExpectedResponse: Success
+  Pre-requisites: 'A remote sensor is connected to the pump
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:10†source】【4:11†source】【4:12†source】.'
+  arguments:
+    '{"OperationMode"': 0}
+  label: Test_Case_Special_Response_(Normal_with_Remote_Sensor)
+  option: WriteAttribute

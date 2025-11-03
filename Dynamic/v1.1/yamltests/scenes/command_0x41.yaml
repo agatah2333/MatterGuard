@@ -1,0 +1,34 @@
+config:
+  cluster: scenes
+  command: '0x41'
+  nodeId: '0x654231'
+name: scenes_command_0x41_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: The scene corresponding to `GroupID` 0 and `SceneID` 0 will be
+    retrieved.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The scene with `GroupID` 0 and `SceneID` 0 must exist in the Scene
+    Table.
+  arguments:
+    GroupID: 0
+    SceneID: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: ILLEGAL_COMMAND
+  Pre-requisites: 'The `GroupID` provided must not exist in the Group Table.
+
+
+    These test cases cover the extreme values and special responses for the EnhancedViewScene
+    command in the Scenes cluster.
+
+
+    For more detailed information, refer to the Matter Application Cluster Specification
+    document【4:0†source】.'
+  arguments:
+    GroupID: <non-zero value not in Group Table>
+    SceneID: <any value>
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SendCommand

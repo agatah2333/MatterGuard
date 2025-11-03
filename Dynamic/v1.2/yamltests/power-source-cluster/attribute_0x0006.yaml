@@ -1,0 +1,59 @@
+config:
+  attribute: '0x0006'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x0006_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: WiredAssessedInputFrequency = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"WiredAssessedInputFrequency"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: WiredAssessedInputFrequency = 65535
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"WiredAssessedInputFrequency"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: WiredAssessedInputFrequency = NULL
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"WiredAssessedInputFrequency"': NULL}
+  label: Test_Case_Special_Value_(NULL)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: WiredAssessedInputFrequency = 50
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"WiredAssessedInputFrequency"': 50}
+  label: Test_Case_Typical_Operating_Frequency
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Error
+  Pre-requisites: None
+  arguments:
+    '{"WiredAssessedInputFrequency"': -1}
+  label: Test_Case_Frequency_Out_of_Range_(Negative_Value)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Error
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field, as
+    well as special values that could result in specific responses as mentioned in
+    the description of the effect.'
+  arguments:
+    '{"WiredAssessedInputFrequency"': 70000}
+  label: Test_Case_Frequency_Out_of_Range_(Above_Maximum)
+  option: WriteAttribute

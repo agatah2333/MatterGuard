@@ -1,0 +1,57 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x03'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x03_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"PumpStatus": "SystemPressureLow"}'
+  ExpectedResponse: '"SystemPressureLow event triggered"'
+  Pre-requisites: Ensure the pump is operational and monitoring system pressure.
+  arguments:
+    '{"SystemPressure"': -3276.7}
+  label: Test_Case_Extreme_Low_Value
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '{"PumpStatus": "Normal"}'
+  ExpectedResponse: '"No event triggered"'
+  Pre-requisites: Ensure the pump is operational and monitoring system pressure.
+  arguments:
+    '{"SystemPressure"': 3276.7}
+  label: Test_Case_Extreme_High_Value
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '{"PumpStatus": "SystemPressureLow"}'
+  ExpectedResponse: '"SystemPressureLow event triggered"'
+  Pre-requisites: Ensure the pump is operational and monitoring system pressure.
+  arguments:
+    '{"SystemPressure"': 0.1}
+  label: Test_Case_Boundary_Value_Just_Below_Threshold
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '{"PumpStatus": "Normal"}'
+  ExpectedResponse: '"No event triggered"'
+  Pre-requisites: Ensure the pump is operational and monitoring system pressure.
+  arguments:
+    '{"SystemPressure"': 0.2}
+  label: Test_Case_Boundary_Value_Just_Above_Threshold
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '{"PumpStatus": "Normal"}'
+  ExpectedResponse: '"No event triggered"'
+  Pre-requisites: Ensure the pump is operational and monitoring system pressure.
+  arguments:
+    '{"SystemPressure"': 1000.0}
+  label: Test_Case_Normal_Operating_Value
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '{"PumpStatus": "SystemPressureLow"}'
+  ExpectedResponse: '"SystemPressureLow event triggered"'
+  Pre-requisites: 'Ensure the pump is operational and monitoring system pressure.
+
+
+    ### Summary'
+  arguments:
+    '{"SystemPressure"': 0.0}
+  label: Test_Case_Special_Response_Value_(Zero_Pressure)
+  option: SubscribeToEvent

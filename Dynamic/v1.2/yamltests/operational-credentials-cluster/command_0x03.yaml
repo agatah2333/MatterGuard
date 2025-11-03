@@ -1,0 +1,62 @@
+config:
+  cluster: operational-credentials-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: operational-credentials-cluster_command_0x03_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '`WindowStatus` to `EnhancedWindowOpen`'
+  ExpectedResponse: Success
+  Pre-requisites: Node is not currently in commissioning mode, and fail-safe timer
+    is not armed.
+  arguments:
+    CommissioningTimeout: 0
+    Discriminator: 0
+    Iterations: 1000
+    PAKEPasscodeVerifier: <minimum_length_value>
+    Salt: <minimum_length_value>
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: '`WindowStatus` to `EnhancedWindowOpen`'
+  ExpectedResponse: Success
+  Pre-requisites: Node is not currently in commissioning mode, and fail-safe timer
+    is not armed.
+  arguments:
+    CommissioningTimeout: 65535
+    Discriminator: 4095
+    Iterations: 100000
+    PAKEPasscodeVerifier: <maximum_length_value>
+    Salt: <maximum_length_value>
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: PAKEParameterError
+  Pre-requisites: Node is not currently in commissioning mode, and fail-safe timer
+    is not armed.
+  arguments:
+    CommissioningTimeout: 300
+    Discriminator: 100
+    Iterations: 5000
+    PAKEPasscodeVerifier: <invalid_format_value>
+    Salt: <valid_value>
+  label: Test_Case_PAKEParameterError
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Busy
+  Pre-requisites: 'Node is currently in commissioning mode or fail-safe timer is armed.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】.'
+  arguments:
+    CommissioningTimeout: 300
+    Discriminator: 100
+    Iterations: 5000
+    PAKEPasscodeVerifier: <valid_value>
+    Salt: <valid_value>
+  label: Test_Case_Busy_Status
+  option: SendCommand

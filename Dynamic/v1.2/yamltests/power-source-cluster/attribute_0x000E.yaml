@@ -1,0 +1,28 @@
+config:
+  attribute: '0x000E'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x000E_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: ActiveBatChargeFaults will be an empty list
+  ExpectedResponse: No active faults
+  Pre-requisites: 'None
+
+
+    **Test Case 1.2: Maximum Value**'
+  arguments:
+    '{"ActiveBatChargeFaults"': '[]}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: ActiveBatChargeFaults will contain [1]
+  ExpectedResponse: OverTemp fault is active
+  Pre-requisites: 'None
+
+
+    **Test Case 2.2: Fault Cleared**'
+  arguments:
+    '{"ActiveBatChargeFaults"': '[1]}'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

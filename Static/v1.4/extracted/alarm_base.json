@@ -1,0 +1,134 @@
+{
+  "cluster_information": {
+    "cluster_id": "n/a",
+    "name": "Alarm Base",
+    "description": "This cluster is a base cluster from which clusters for particular alarms for a device type can be derived. Each derivation SHALL define the values for the AlarmBitmap data type used in this cluster. Each derivation SHALL define which alarms are latched."
+  },
+  "derived_datatypes": [
+    {
+      "type": "bitmap",
+      "name": "AlarmBitmap",
+      "base_data_type": "MAP32",
+      "description": "Bitmap data type with values defined by the derived cluster. The meaning of each bit position SHALL be consistent for all attributes in a derived cluster."
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "Reset",
+      "parameters": [
+        {
+          "name": "Alarms",
+          "data_type": "AlarmBitmap",
+          "value_range": {},
+          "description": "Bitmap where each bit set corresponds to an alarm that should be reset",
+          "default": "0"
+        }
+      ],
+      "privilege": "O",
+      "side": "client",
+      "conformance": "RESET"
+    },
+    {
+      "id": "0x01",
+      "name": "ModifyEnabledAlarms",
+      "parameters": [
+        {
+          "name": "Mask",
+          "data_type": "AlarmBitmap",
+          "value_range": {},
+          "description": "Bitmap where each bit set corresponds to an alarm that should be enabled (1) or suppressed (0)",
+          "default": "0"
+        }
+      ],
+      "privilege": "O",
+      "side": "client",
+      "optional": true
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Mask",
+      "data_type": "AlarmBitmap",
+      "value_range": {},
+      "description": "Bitmap where each bit set corresponds to an alarm that shall be enabled",
+      "privilege": "V",
+      "writable": false,
+      "default": "0"
+    },
+    {
+      "id": "0x0001",
+      "name": "Latch",
+      "data_type": "AlarmBitmap",
+      "value_range": {},
+      "description": "Bitmap where each bit set indicates that the corresponding alarm will be latched when set and requires explicit reset",
+      "privilege": "V",
+      "writable": false,
+      "default": "0",
+      "conformance": "RESET"
+    },
+    {
+      "id": "0x0002",
+      "name": "State",
+      "data_type": "AlarmBitmap",
+      "value_range": {},
+      "description": "Bitmap where each bit represents the state of an alarm. True means active, false means inactive",
+      "privilege": "V",
+      "writable": false,
+      "default": "0"
+    },
+    {
+      "id": "0x0003",
+      "name": "Supported",
+      "data_type": "AlarmBitmap",
+      "value_range": {},
+      "description": "Bitmap where each bit represents whether an alarm is supported. True means supported, false means not supported",
+      "privilege": "V",
+      "writable": false,
+      "default": "0"
+    }
+  ],
+  "events": [
+    {
+      "id": "0x00",
+      "name": "Notify",
+      "priority": "INFO",
+      "fields": [
+        {
+          "name": "Active",
+          "data_type": "AlarmBitmap",
+          "description": "Alarms that have become active",
+          "default": "0"
+        },
+        {
+          "name": "Inactive",
+          "data_type": "AlarmBitmap",
+          "description": "Alarms that have become inactive",
+          "default": "0"
+        },
+        {
+          "name": "State",
+          "data_type": "AlarmBitmap",
+          "description": "Current state of all alarms",
+          "default": "0"
+        },
+        {
+          "name": "Mask",
+          "data_type": "AlarmBitmap",
+          "description": "Current mask of enabled alarms",
+          "default": "0"
+        }
+      ],
+      "privilege": "V"
+    }
+  ],
+  "features": [
+    {
+      "bit": 0,
+      "code": "RESET",
+      "name": "Reset",
+      "description": "Supports the ability to reset alarms"
+    }
+  ]
+}

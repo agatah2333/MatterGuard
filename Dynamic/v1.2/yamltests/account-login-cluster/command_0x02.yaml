@@ -1,0 +1,6 @@
+config:
+  cluster: account-login-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: account-login-cluster_command_0x02_v1.2.0.0
+tests: []

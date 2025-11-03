@@ -1,0 +1,14 @@
+config:
+  attribute: '0x000A'
+  cluster: fan-control-cluster
+  nodeId: '0x654231'
+name: fan-control-cluster_attribute_0x000A_v1.1.0.0
+tests:
+- arguments: {}
+  option: WriteAttribute
+- arguments: {}
+  option: WriteAttribute
+- arguments: {}
+  option: WriteAttribute
+- arguments: {}
+  option: WriteAttribute

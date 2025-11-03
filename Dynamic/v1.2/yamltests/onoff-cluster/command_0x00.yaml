@@ -1,0 +1,32 @@
+config:
+  cluster: onoff-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: onoff-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: "- `OnOff`: FALSE\n  - `OnTime`: 0"
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Device should be in the On state.
+  arguments:
+    OffWaitTime: '0xFFFF'
+    OnOff: 'TRUE'
+    OnTime: '0xFFFF'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: "- `OnOff`: FALSE\n  - `OnTime`: 0"
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Device should be in the Off state.
+
+
+    These test cases cover the extreme values and special responses for the `Off`
+    command in the On/Off cluster. The expected behavior is derived from the specification
+    that states the `OnOff` attribute should be set to `FALSE` and the `OnTime` attribute
+    should be set to `0` upon receiving the `Off` command【4:0†source】【4:1†source】.'
+  arguments:
+    OffWaitTime: 0
+    OnOff: 'FALSE'
+    OnTime: 0
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SendCommand

@@ -1,0 +1,673 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0008",
+    "name": "Level Control",
+    "description": "This cluster provides an interface for controlling a characteristic of a device that can be set to a level, for example the brightness of a light, the degree of closure of a door, or the power output of a heater.",
+    "classification": {
+      "hierarchy": "Base",
+      "role": "Application",
+      "scope": "Endpoint",
+      "pics_code": "LVL"
+    },
+    "revision_history": [
+      {
+        "revision": 1,
+        "description": "Global mandatory ClusterRevision attribute added"
+      },
+      {
+        "revision": 2,
+        "description": "Added Options attribute, state change table; ZLO 1.0; Base cluster (no change) CCB 2085 1775 2281 2147"
+      },
+      {
+        "revision": 3,
+        "description": "CCB 2574 2616 2659 2702 2814 2818 2819 2898"
+      },
+      {
+        "revision": 4,
+        "description": "FeatureMap support with On/Off, Lighting and Frequency features"
+      },
+      {
+        "revision": 5,
+        "description": "New data model format and notation"
+      }
+    ],
+    "derived_clusters": [
+      {
+        "cluster_id": "0x001C",
+        "name": "Pulse Width Modulation",
+        "hierarchy": "Derived",
+        "conformance": "P",
+        "note": "Pulse Width Modulation cluster is provisional"
+      }
+    ]
+  },
+  "features": {
+    "OO": {
+      "bit": 0,
+      "code": "OO",
+      "name": "OnOff",
+      "default": 1,
+      "conformance": "O",
+      "summary": "Dependency with the On/Off cluster"
+    },
+    "LT": {
+      "bit": 1,
+      "code": "LT",
+      "name": "Lighting",
+      "default": 0,
+      "conformance": "O",
+      "summary": "Behavior that supports lighting applications"
+    },
+    "FQ": {
+      "bit": 2,
+      "code": "FQ",
+      "name": "Frequency",
+      "default": 0,
+      "conformance": "P",
+      "summary": "Supports frequency attributes and behavior. The Pulse Width Modulation cluster was created for frequency control."
+    }
+  },
+  "derived_data_types": {
+    "bitmaps": {
+      "OptionsBitmap": {
+        "type": "map8",
+        "bits": {
+          "0": {
+            "name": "ExecuteIfOff",
+            "summary": "Dependency on On/Off cluster",
+            "conformance": "LT | OO",
+            "description": "This bit indicates if this cluster has a dependency with the On/Off cluster."
+          },
+          "1": {
+            "name": "CoupleColorTempToLevel",
+            "summary": "Dependency on Color Control cluster",
+            "conformance": "LT",
+            "description": "This bit indicates if this cluster has a dependency with the Color Control cluster."
+          }
+        }
+      }
+    },
+    "enums": {
+      "MoveModeEnum": {
+        "type": "enum8",
+        "values": {
+          "0": {
+            "name": "Up",
+            "summary": "Increase the level",
+            "conformance": "M"
+          },
+          "1": {
+            "name": "Down",
+            "summary": "Decrease the level",
+            "conformance": "M"
+          }
+        }
+      },
+      "StepModeEnum": {
+        "type": "enum8",
+        "values": {
+          "0": {
+            "name": "Up",
+            "summary": "Step upwards",
+            "conformance": "M"
+          },
+          "1": {
+            "name": "Down",
+            "summary": "Step downwards",
+            "conformance": "M"
+          }
+        }
+      }
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "name": "CurrentLevel",
+      "type": "uint8",
+      "constraint": "MinLevel to MaxLevel",
+      "quality": "SNX",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate the current level of this device. The meaning of 'level' is device dependent."
+    },
+    "0x0001": {
+      "name": "RemainingTime",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "",
+      "default": "0",
+      "access": "RV",
+      "conformance": "LT",
+      "description": "This attribute SHALL indicate the time remaining until the current command is complete - it is specified in 1/10ths of a second."
+    },
+    "0x0002": {
+      "name": "MinLevel",
+      "type": "uint8",
+      "constraint": "1 to MaxLevel [LT] / 0 to MaxLevel [!LT]",
+      "quality": "",
+      "default": "1 [LT] / 0 [!LT]",
+      "access": "RV",
+      "conformance": "[LT] / [!LT]",
+      "description": "This attribute SHALL indicate the minimum value of CurrentLevel that is capable of being assigned."
+    },
+    "0x0003": {
+      "name": "MaxLevel",
+      "type": "uint8",
+      "constraint": "MinLevel to 254",
+      "quality": "",
+      "default": "254",
+      "access": "RV",
+      "conformance": "O",
+      "description": "This attribute SHALL indicate the maximum value of CurrentLevel that is capable of being assigned."
+    },
+    "0x0004": {
+      "name": "CurrentFrequency",
+      "type": "uint16",
+      "constraint": "MinFrequency to MaxFrequency",
+      "quality": "PS",
+      "default": "0",
+      "access": "RV",
+      "conformance": "FQ",
+      "description": "This attribute SHALL indicate the frequency at which the device is at CurrentLevel. A CurrentFrequency of 0 is unknown."
+    },
+    "0x0005": {
+      "name": "MinFrequency",
+      "type": "uint16",
+      "constraint": "0 to MaxFrequency",
+      "quality": "",
+      "default": "0",
+      "access": "RV",
+      "conformance": "FQ",
+      "description": "This attribute SHALL indicate the minimum value of CurrentFrequency that is capable of being assigned. MinFrequency SHALL be less than or equal to MaxFrequency. A value of 0 indicates undefined."
+    },
+    "0x0006": {
+      "name": "MaxFrequency",
+      "type": "uint16",
+      "constraint": "min MinFrequency",
+      "quality": "",
+      "default": "0",
+      "access": "RV",
+      "conformance": "FQ",
+      "description": "This attribute SHALL indicate the maximum value of CurrentFrequency that is capable of being assigned. MaxFrequency SHALL be greater than or equal to MinFrequency. A value of 0 indicates undefined."
+    },
+    "0x000F": {
+      "name": "Options",
+      "type": "OptionsBitmap",
+      "constraint": "desc",
+      "quality": "",
+      "default": "0",
+      "access": "RW VO",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate the selected options of the device. The Options attribute is a bitmap that determines the default behavior of some cluster commands. This attribute is meant to be changed only during commissioning."
+    },
+    "0x0010": {
+      "name": "OnOffTransitionTime",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "",
+      "default": "0",
+      "access": "RW VO",
+      "conformance": "O",
+      "description": "This attribute SHALL indicate the time taken to move to or from the target level when On or Off commands are received by an On/Off cluster on the same endpoint. It is specified in 1/10ths of a second."
+    },
+    "0x0011": {
+      "name": "OnLevel",
+      "type": "uint8",
+      "constraint": "MinLevel to MaxLevel",
+      "quality": "X",
+      "default": "null",
+      "access": "RW VO",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate the value that the CurrentLevel attribute is set to when the OnOff attribute of an On/Off cluster on the same endpoint is set to TRUE, as a result of processing an On/Off cluster command. If the OnLevel attribute is not implemented, or is set to the null value, it has no effect."
+    },
+    "0x0012": {
+      "name": "OnTransitionTime",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "X",
+      "default": "null",
+      "access": "RW VO",
+      "conformance": "O",
+      "description": "This attribute SHALL indicate the time taken to move the current level from the minimum level to the maximum level when an On command is received by an On/Off cluster on the same endpoint. It is specified in 1/10ths of a second."
+    },
+    "0x0013": {
+      "name": "OffTransitionTime",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "X",
+      "default": "null",
+      "access": "RW VO",
+      "conformance": "O",
+      "description": "This attribute SHALL indicate the time taken to move the current level from the maximum level to the minimum level when an Off command is received by an On/Off cluster on the same endpoint. It is specified in 1/10ths of a second."
+    },
+    "0x0014": {
+      "name": "DefaultMoveRate",
+      "type": "uint8",
+      "constraint": "all",
+      "quality": "X",
+      "default": "MS",
+      "access": "RW VO",
+      "conformance": "O",
+      "description": "This attribute SHALL indicate the movement rate, in units per second, when a Move command is received with a null value Rate parameter."
+    },
+    "0x4000": {
+      "name": "StartUpCurrentLevel",
+      "type": "uint8",
+      "constraint": "desc",
+      "quality": "XN",
+      "default": "MS",
+      "access": "RW VM",
+      "conformance": "LT",
+      "description": "This attribute SHALL indicate the desired startup level for a device when it is supplied with power and this level SHALL be reflected in the CurrentLevel attribute. Values: 0=set to minimum, null=previous value, other=set to this value."
+    }
+  },
+  "commands": {
+    "0x00": {
+      "name": "MoveToLevel",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "parameters": [
+        {
+          "id": 0,
+          "name": "Level",
+          "type": "uint8",
+          "constraint": "0 to 254",
+          "quality": "",
+          "default": "",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "TransitionTime",
+          "type": "uint16",
+          "constraint": "all",
+          "quality": "X",
+          "default": "",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "OptionsMask",
+          "type": "OptionsBitmap",
+          "constraint": "desc",
+          "quality": "",
+          "default": "0",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsOverride",
+          "type": "OptionsBitmap",
+          "constraint": "desc",
+          "quality": "",
+          "default": "0",
+          "conformance": "M"
+        }
+      ],
+      "description": "On receipt of this command, a device SHALL move from its current level to the value given in the Level field. The movement SHALL be as continuous as technically practical, and the time taken SHALL be equal to the TransitionTime field (in tenths of a second)."
+    },
+    "0x01": {
+      "name": "Move",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "parameters": [
+        {
+          "id": 0,
+          "name": "MoveMode",
+          "type": "MoveModeEnum",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "Rate",
+          "type": "uint8",
+          "constraint": "all",
+          "quality": "X",
+          "default": "",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "OptionsMask",
+          "type": "OptionsBitmap",
+          "constraint": "desc",
+          "quality": "",
+          "default": "0",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsOverride",
+          "type": "OptionsBitmap",
+          "constraint": "desc",
+          "quality": "",
+          "default": "0",
+          "conformance": "M"
+        }
+      ],
+      "description": "On receipt of this command, a device SHALL move from its current level in an up or down direction in a continuous fashion. The Rate field indicates the rate of movement in units per second."
+    },
+    "0x02": {
+      "name": "Step",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "parameters": [
+        {
+          "id": 0,
+          "name": "StepMode",
+          "type": "StepModeEnum",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "StepSize",
+          "type": "uint8",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "TransitionTime",
+          "type": "uint16",
+          "constraint": "all",
+          "quality": "X",
+          "default": "",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsMask",
+          "type": "OptionsBitmap",
+          "constraint": "desc",
+          "quality": "",
+          "default": "0",
+          "conformance": "M"
+        },
+        {
+          "id": 4,
+          "name": "OptionsOverride",
+          "type": "OptionsBitmap",
+          "constraint": "desc",
+          "quality": "",
+          "default": "0",
+          "conformance": "M"
+        }
+      ],
+      "description": "On receipt of this command, a device SHALL move from its current level in an up or down direction by the specified StepSize. The TransitionTime field indicates the time to perform the step in tenths of a second."
+    },
+    "0x03": {
+      "name": "Stop",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "parameters": [
+        {
+          "id": 0,
+          "name": "OptionsMask",
+          "type": "OptionsBitmap",
+          "constraint": "desc",
+          "quality": "",
+          "default": "0",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "OptionsOverride",
+          "type": "OptionsBitmap",
+          "constraint": "desc",
+          "quality": "",
+          "default": "0",
+          "conformance": "M"
+        }
+      ],
+      "description": "Upon receipt of this command, any MoveToLevel, Move or Step command (and their 'with On/Off' variants) currently in process SHALL be terminated. The value of CurrentLevel SHALL be left at its value upon receipt of the Stop command, and RemainingTime SHALL be set to zero."
+    },
+    "0x04": {
+      "name": "MoveToLevelWithOnOff",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "parameters": [
+        {
+          "id": 0,
+          "name": "Level",
+          "type": "uint8",
+          "constraint": "0 to 254",
+          "quality": "",
+          "default": "",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "TransitionTime",
+          "type": "uint16",
+          "constraint": "all",
+          "quality": "X",
+          "default": "",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "OptionsMask",
+          "type": "OptionsBitmap",
+          "constraint": "desc",
+          "quality": "",
+          "default": "0",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsOverride",
+          "type": "OptionsBitmap",
+          "constraint": "desc",
+          "quality": "",
+          "default": "0",
+          "conformance": "M"
+        }
+      ],
+      "description": "Same as MoveToLevel command but also affects OnOff attribute. Before setting CurrentLevel above minimum, OnOff is set to TRUE. If CurrentLevel is set to minimum, OnOff is set to FALSE."
+    },
+    "0x05": {
+      "name": "MoveWithOnOff",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "parameters": [
+        {
+          "id": 0,
+          "name": "MoveMode",
+          "type": "MoveModeEnum",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "Rate",
+          "type": "uint8",
+          "constraint": "all",
+          "quality": "X",
+          "default": "",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "OptionsMask",
+          "type": "OptionsBitmap",
+          "constraint": "desc",
+          "quality": "",
+          "default": "0",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsOverride",
+          "type": "OptionsBitmap",
+          "constraint": "desc",
+          "quality": "",
+          "default": "0",
+          "conformance": "M"
+        }
+      ],
+      "description": "Same as Move command but also affects OnOff attribute. Before setting CurrentLevel above minimum, OnOff is set to TRUE. If CurrentLevel is set to minimum, OnOff is set to FALSE."
+    },
+    "0x06": {
+      "name": "StepWithOnOff",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "parameters": [
+        {
+          "id": 0,
+          "name": "StepMode",
+          "type": "StepModeEnum",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "StepSize",
+          "type": "uint8",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M"
+        },
+        {
+          "id": 2,
+          "name": "TransitionTime",
+          "type": "uint16",
+          "constraint": "all",
+          "quality": "X",
+          "default": "",
+          "conformance": "M"
+        },
+        {
+          "id": 3,
+          "name": "OptionsMask",
+          "type": "OptionsBitmap",
+          "constraint": "desc",
+          "quality": "",
+          "default": "0",
+          "conformance": "M"
+        },
+        {
+          "id": 4,
+          "name": "OptionsOverride",
+          "type": "OptionsBitmap",
+          "constraint": "desc",
+          "quality": "",
+          "default": "0",
+          "conformance": "M"
+        }
+      ],
+      "description": "Same as Step command but also affects OnOff attribute. Before setting CurrentLevel above minimum, OnOff is set to TRUE. If CurrentLevel is set to minimum, OnOff is set to FALSE."
+    },
+    "0x07": {
+      "name": "StopWithOnOff",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "parameters": [
+        {
+          "id": 0,
+          "name": "OptionsMask",
+          "type": "OptionsBitmap",
+          "constraint": "desc",
+          "quality": "",
+          "default": "0",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "OptionsOverride",
+          "type": "OptionsBitmap",
+          "constraint": "desc",
+          "quality": "",
+          "default": "0",
+          "conformance": "M"
+        }
+      ],
+      "description": "Same as Stop command. Both Stop commands are identical, because the dependency on On/Off is determined by the original command that is being stopped."
+    },
+    "0x08": {
+      "name": "MoveToClosestFrequency",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "FQ",
+      "parameters": [
+        {
+          "id": 0,
+          "name": "Frequency",
+          "type": "uint16",
+          "constraint": "all",
+          "quality": "",
+          "default": "0",
+          "conformance": "M"
+        }
+      ],
+      "description": "Upon receipt of this command, the device SHALL change its current frequency to the requested frequency, or to the closest frequency that it can generate. If the device cannot approximate the frequency, it SHALL return a CONSTRAINT_ERROR."
+    }
+  },
+  "events": {},
+  "scene_table_extensions": [
+    {
+      "attribute": "CurrentLevel",
+      "order": 1
+    },
+    {
+      "attribute": "CurrentFrequency", 
+      "order": 2
+    }
+  ],
+  "special_behavior": {
+    "on_off_integration": {
+      "description": "Level Control cluster can integrate with On/Off cluster when both are on the same endpoint",
+      "command_sets": {
+        "without_on_off": {
+          "commands": ["MoveToLevel", "Move", "Step", "Stop"],
+          "behavior": "SHALL NOT affect the OnOff attribute"
+        },
+        "with_on_off": {
+          "commands": ["MoveToLevelWithOnOff", "MoveWithOnOff", "StepWithOnOff", "StopWithOnOff"],
+          "behavior": "SHALL affect the OnOff attribute - sets OnOff to TRUE when level > minimum, FALSE when level = minimum"
+        }
+      }
+    },
+    "lighting_feature": {
+      "current_level_constraints": {
+        "0x00": "SHALL NOT be used",
+        "0x01": "SHALL indicate the minimum level that can be attained on a device",
+        "0xFE": "SHALL indicate the maximum level that can be attained on a device",
+        "null": "SHALL represent an undefined value"
+      }
+    },
+    "frequency_feature": {
+      "note": "The Frequency feature is provisional"
+    }
+  }
+}

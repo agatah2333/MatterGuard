@@ -1,0 +1,239 @@
+{
+  "cluster": {
+    "id": "0x0406",
+    "name": "Occupancy Sensing",
+    "description": "The server cluster provides an interface to occupancy sensing functionality, including configuration and provision of notifications of occupancy status.",
+    "classification": {
+      "hierarchy": "Base",
+      "role": "Application", 
+      "scope": "Endpoint",
+      "pics_code": "OCC"
+    },
+    "revision": {
+      "current": 4,
+      "history": [
+        {
+          "revision": 1,
+          "description": "Mandatory global ClusterRevision attribute added"
+        },
+        {
+          "revision": 2,
+          "description": "Physical Contact Occupancy feature with mandatory OccupancySensorTypeBitmap"
+        },
+        {
+          "revision": 3,
+          "description": "New data model format and notation"
+        },
+        {
+          "revision": 4,
+          "description": "Remove nullable from PhysicalContact delay attributes and ability to not report transitions"
+        }
+      ]
+    },
+    "data_types": [
+      {
+        "name": "OccupancyBitmap",
+        "type": "map8",
+        "bits": [
+          {
+            "bit": 0,
+            "name": "Occupied",
+            "summary": "Indicates the sensed occupancy state",
+            "conformance": "M",
+            "description": "If this bit is set, it SHALL indicate the occupied state else if the bit if not set, it SHALL indicate the unoccupied state."
+          }
+        ]
+      },
+      {
+        "name": "OccupancySensorTypeBitmap",
+        "type": "map8",
+        "bits": [
+          {
+            "bit": 0,
+            "name": "PIR",
+            "summary": "Indicates a passive infrared sensor.",
+            "conformance": "M"
+          },
+          {
+            "bit": 1,
+            "name": "Ultrasonic",
+            "summary": "Indicates a ultrasonic sensor.",
+            "conformance": "M"
+          },
+          {
+            "bit": 2,
+            "name": "PhysicalContact",
+            "summary": "Indicates a physical contact sensor.",
+            "conformance": "M"
+          }
+        ]
+      },
+      {
+        "name": "OccupancySensorTypeEnum",
+        "type": "enum8",
+        "values": [
+          {
+            "value": 0,
+            "name": "PIR",
+            "summary": "Indicates a passive infrared sensor.",
+            "conformance": "M"
+          },
+          {
+            "value": 1,
+            "name": "Ultrasonic",
+            "summary": "Indicates a ultrasonic sensor.",
+            "conformance": "M"
+          },
+          {
+            "value": 2,
+            "name": "PIRAndUltrasonic",
+            "summary": "Indicates a passive infrared and ultrasonic sensor.",
+            "conformance": "M"
+          },
+          {
+            "value": 3,
+            "name": "PhysicalContact",
+            "summary": "Indicates a physical contact sensor.",
+            "conformance": "M"
+          }
+        ]
+      }
+    ],
+    "attributes": [
+      {
+        "id": "0x0000",
+        "name": "Occupancy",
+        "type": "OccupancyBitmap",
+        "constraint": "0 to 1",
+        "quality": "P",
+        "default": null,
+        "access": "RV",
+        "conformance": "M",
+        "description": "This attribute indicates the sensed (processed) status of occupancy."
+      },
+      {
+        "id": "0x0001", 
+        "name": "OccupancySensorType",
+        "type": "OccupancySensorTypeEnum",
+        "constraint": "desc",
+        "quality": null,
+        "default": "MS",
+        "access": "RV",
+        "conformance": "M",
+        "description": "This attribute specifies the type of the occupancy sensor."
+      },
+      {
+        "id": "0x0002",
+        "name": "OccupancySensorTypeBitmap", 
+        "type": "OccupancySensorTypeBitmap",
+        "constraint": "0 to 7",
+        "quality": null,
+        "default": null,
+        "access": "RV", 
+        "conformance": "M",
+        "description": "This attribute specifies the types of the occupancy sensor. Each bit position, if set, indicates the corresponding sensing capability is implemented."
+      },
+      {
+        "id": "0x0010",
+        "name": "PIROccupiedToUnoccupiedDelay",
+        "type": "uint16",
+        "constraint": "all",
+        "quality": null,
+        "default": "0",
+        "access": "RW VM",
+        "conformance": "O",
+        "description": "This attribute specifies the time delay, in seconds, before the PIR sensor changes to its unoccupied state after the last detection of movement in the sensed area."
+      },
+      {
+        "id": "0x0011",
+        "name": "PIRUnoccupiedToOccupiedDelay",
+        "type": "uint16",
+        "constraint": "all",
+        "quality": null,
+        "default": "0",
+        "access": "RW VM",
+        "conformance": "PIRUnoccupiedToOccupiedThreshold, O",
+        "description": "This attribute specifies the time delay, in seconds, before the PIR sensor changes to its occupied state after the detection of movement in the sensed area."
+      },
+      {
+        "id": "0x0012",
+        "name": "PIRUnoccupiedToOccupiedThreshold",
+        "type": "uint8",
+        "constraint": "1 to 254",
+        "quality": null,
+        "default": "1",
+        "access": "RW VM",
+        "conformance": "PIRUnoccupiedToOccupiedDelay, O",
+        "description": "This attribute specifies the number of movement detection events that must occur in the period PIRUnoccupiedToOccupiedDelay, before the PIR sensor changes to its occupied state."
+      },
+      {
+        "id": "0x0020",
+        "name": "UltrasonicOccupiedToUnoccupiedDelay",
+        "type": "uint16",
+        "constraint": "all",
+        "quality": null,
+        "default": "0",
+        "access": "RW VM",
+        "conformance": "O",
+        "description": "This attribute specifies the time delay, in seconds, before the Ultrasonic sensor changes to its unoccupied state after the last detection of movement in the sensed area."
+      },
+      {
+        "id": "0x0021",
+        "name": "UltrasonicUnoccupiedToOccupiedDelay",
+        "type": "uint16",
+        "constraint": "all",
+        "quality": null,
+        "default": "0",
+        "access": "RW VM",
+        "conformance": "UltrasonicUnoccupiedToOccupiedThreshold, O",
+        "description": "This attribute specifies the time delay, in seconds, before the Ultrasonic sensor changes to its occupied state after the detection of movement in the sensed area."
+      },
+      {
+        "id": "0x0022",
+        "name": "UltrasonicUnoccupiedToOccupiedThreshold",
+        "type": "uint8",
+        "constraint": "1 to 254",
+        "quality": null,
+        "default": "1",
+        "access": "RW VM",
+        "conformance": "UltrasonicUnoccupiedToOccupiedDelay, O",
+        "description": "This attribute specifies the number of movement detection events that must occur in the period UltrasonicUnoccupiedToOccupiedDelay, before the Ultrasonic sensor changes to its occupied state."
+      },
+      {
+        "id": "0x0030",
+        "name": "PhysicalContactOccupiedToUnoccupiedDelay",
+        "type": "uint16",
+        "constraint": "all",
+        "quality": null,
+        "default": "0",
+        "access": "RW VM",
+        "conformance": "O",
+        "description": "This attribute specifies the time delay, in seconds, before the physical contact occupancy sensor changes to its unoccupied state after detecting the unoccupied event."
+      },
+      {
+        "id": "0x0031",
+        "name": "PhysicalContactUnoccupiedToOccupiedDelay",
+        "type": "uint16",
+        "constraint": "all",
+        "quality": null,
+        "default": "0",
+        "access": "RW VM",
+        "conformance": "O",
+        "description": "This attribute specifies the time delay, in seconds, before the physical contact sensor changes to its occupied state after the detection of the occupied event."
+      },
+      {
+        "id": "0x0032",
+        "name": "PhysicalContactUnoccupiedToOccupiedThreshold",
+        "type": "uint8",
+        "constraint": "1 to 254",
+        "quality": null,
+        "default": "1",
+        "access": "RW VM",
+        "conformance": "PhysicalContactUnoccupiedToOccupiedDelay, O",
+        "description": "This attribute specifies the number of movement detection events that must occur in the period PhysicalContactUnoccupiedToOccupiedDelay, before the PhysicalContact sensor changes to its occupied state."
+      }
+    ],
+    "commands": [],
+    "events": []
+  }
+}

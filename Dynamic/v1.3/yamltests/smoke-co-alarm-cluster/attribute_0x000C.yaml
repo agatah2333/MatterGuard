@@ -1,0 +1,315 @@
+config:
+  attribute: '0x000C'
+  cluster: 0xsmoke-co-alarm-cluster
+  nodeId: '0x654231'
+  node_id: 305414945
+  endpoint: 1
+name: smoke-co-alarm-cluster_attribute_0x000C_v1.3.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '- `EndOfServiceAlert`: Expired'
+  ExpectedResponse: EndOfServiceAlert triggered
+  Pre-requisites: None
+  arguments:
+    ExpiryDate: 0 (Epoch time for 1970-01-01T00:00:00Z)
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+  cluster: 0xsmoke-co-alarm-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xsmoke-co-alarm-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xSMOKE
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xSMOKE
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xSMOKE
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xSMOKE
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 2147483647
+  Attribute_Change: '- `EndOfServiceAlert`: Expired'
+  ExpectedResponse: EndOfServiceAlert triggered
+  Pre-requisites: None
+  arguments:
+    ExpiryDate: 2147483647 (Epoch time for 2038-01-19T03:14:07Z)
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+  cluster: 0xsmoke-co-alarm-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xsmoke-co-alarm-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xSMOKE
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xSMOKE
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xSMOKE
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xSMOKE
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 2147483646
+  Attribute_Change: '- `EndOfServiceAlert`: Normal'
+  ExpectedResponse: No alert triggered
+  Pre-requisites: None
+  arguments:
+    ExpiryDate: 2147483646 (Epoch time for 2038-01-19T03:14:06Z)
+  label: Test_Case_Just_Before_Expiry
+  option: WriteAttribute
+  cluster: 0xsmoke-co-alarm-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xsmoke-co-alarm-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xSMOKE
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xSMOKE
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xSMOKE
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xSMOKE
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 2147483648
+  Attribute_Change: '- `EndOfServiceAlert`: Expired'
+  ExpectedResponse: EndOfServiceAlert triggered
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the `ExpiryDate` field and the values
+    that could result in special responses as mentioned in the description of the
+    effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    ExpiryDate: 2147483647 (Epoch time for 2038-01-19T03:14:07Z)
+  label: Test_Case_Just_After_Expiry
+  option: WriteAttribute
+  cluster: 0xsmoke-co-alarm-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xsmoke-co-alarm-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xSMOKE
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xSMOKE
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xSMOKE
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xSMOKE
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+v13_validation:
+  strict_spec_compliance: true
+  validate_all_fields: true
+  check_conformance_requirements: true
+  validate_data_constraints: true
+  matter_version: 1.3.0.0
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

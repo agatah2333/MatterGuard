@@ -1,0 +1,49 @@
+config:
+  attribute: '0x0002'
+  cluster: network-commissioning-cluster
+  nodeId: '0x654231'
+name: network-commissioning-cluster_attribute_0x0002_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`AdminVendorId` set to 0x0000'
+  ExpectedResponse: Success
+  Pre-requisites: '`WindowStatus` must be set to either EnhancedWindowOpen or BasicWindowOpen'
+  arguments:
+    AdminVendorId: '0x0000'
+    WindowStatus: 1 (EnhancedWindowOpen)
+  label: Test_Case_Extreme_Value_(Minimum_Vendor_ID)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`AdminVendorId` set to 0xFFFF'
+  ExpectedResponse: Success
+  Pre-requisites: '`WindowStatus` must be set to either EnhancedWindowOpen or BasicWindowOpen'
+  arguments:
+    AdminVendorId: '0xFFFF'
+    WindowStatus: 2 (BasicWindowOpen)
+  label: Test_Case_Extreme_Value_(Maximum_Vendor_ID)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`AdminVendorId` set to null'
+  ExpectedResponse: '`AdminVendorId` should be null'
+  Pre-requisites: '`WindowStatus` must be set to WindowNotOpen'
+  arguments:
+    AdminVendorId: N/A (should be null)
+    WindowStatus: 0 (WindowNotOpen)
+  label: Test_Case_Special_Response_(Window_Not_Open)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`AdminVendorId` remains unchanged'
+  ExpectedResponse: '`AdminVendorId` remains 0x1234 even if the fabric is removed'
+  Pre-requisites: '`WindowStatus` must be set to either EnhancedWindowOpen or BasicWindowOpen,
+    and the fabric for the Administrator that opened the window must be removed while
+    the commissioning window is still open
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    AdminVendorId: 0x1234 (example Vendor ID)
+    WindowStatus: 1 (EnhancedWindowOpen)
+  label: Test_Case_Special_Response_(Fabric_Removed)
+  option: WriteAttribute

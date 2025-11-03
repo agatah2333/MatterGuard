@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x005c",
+    "name": "Smoke CO Alarm",
+    "description": "Cluster for Smoke CO Alarm functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

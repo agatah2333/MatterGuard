@@ -1,0 +1,203 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0301",
+    "name": "Ballast Configuration",
+    "description": "This cluster is used for configuring a lighting ballast."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "PhysicalMinLevel",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "PhysicalMinLevel attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "PhysicalMaxLevel",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "PhysicalMaxLevel attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "BallastStatus",
+      "data_type": "bitmap8",
+      "value_range": {},
+      "description": "BallastStatus attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0010",
+      "name": "MinLevel",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "MinLevel attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0011",
+      "name": "MaxLevel",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "MaxLevel attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0012",
+      "name": "PowerOnLevel",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "PowerOnLevel attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0013",
+      "name": "PowerOnFadeTime",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "PowerOnFadeTime attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0014",
+      "name": "IntrinsicBallastFactor",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "IntrinsicBallastFactor attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0015",
+      "name": "BallastFactorAdjustment",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "BallastFactorAdjustment attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0020",
+      "name": "LampQuantity",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "LampQuantity attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0030",
+      "name": "LampType",
+      "data_type": "string",
+      "value_range": {
+        "max": "16"
+      },
+      "description": "LampType attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0031",
+      "name": "LampManufacturer",
+      "data_type": "string",
+      "value_range": {
+        "max": "16"
+      },
+      "description": "LampManufacturer attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0032",
+      "name": "LampRatedHours",
+      "data_type": "uint24",
+      "value_range": {},
+      "description": "LampRatedHours attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0033",
+      "name": "LampBurnHours",
+      "data_type": "uint24",
+      "value_range": {},
+      "description": "LampBurnHours attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0034",
+      "name": "LampAlarmMode",
+      "data_type": "bitmap8",
+      "value_range": {},
+      "description": "LampAlarmMode attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0035",
+      "name": "LampBurnHoursTripPoint",
+      "data_type": "uint24",
+      "value_range": {},
+      "description": "LampBurnHoursTripPoint attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0002'
+  cluster: operational-credentials-cluster
+  nodeId: '0x654231'
+name: operational-credentials-cluster_attribute_0x0002_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: None (Read-only attribute)
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"AdminVendorId"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None (Read-only attribute)
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"AdminVendorId"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None (Read-only attribute)
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"AdminVendorId"': 12345}
+  label: Test_Case_Special_Value_(Example_Vendor_ID)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None (Read-only attribute)
+  ExpectedResponse: Error (Invalid value)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    a special value that could be used in a real-world scenario. The invalid value
+    test case ensures that the system correctly handles out-of-range values.'
+  arguments:
+    '{"AdminVendorId"': 70000}
+  label: Test_Case_Invalid_Value_(Out_of_Range)
+  option: WriteAttribute

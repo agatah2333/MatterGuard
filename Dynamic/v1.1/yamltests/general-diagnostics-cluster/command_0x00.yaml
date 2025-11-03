@@ -1,0 +1,37 @@
+config:
+  cluster: general-diagnostics-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: general-diagnostics-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: "- `CurrentHeapHighWatermark`: 0\n  - `StackFreeMinimum`: 0 for\
+    \ all threads"
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    CurrentHeapUsed: 0
+    StackFreeCurrent: 0
+  label: Test_Case_Extreme_Values
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: "- `CurrentHeapHighWatermark`: UINT64_MAX\n  - `StackFreeMinimum`:\
+    \ UINT64_MAX for all threads"
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    ### References
+
+    - Matter Specification R1.0, Connectivity Standards Alliance Document 22-27349,
+    Sep. 28, 2022【4:0†source】.'
+  arguments:
+    CurrentHeapUsed: UINT64_MAX
+    StackFreeCurrent: UINT64_MAX
+  label: Test_Case_Special_Response
+  option: SendCommand

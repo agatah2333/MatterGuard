@@ -1,0 +1,27 @@
+config:
+  attribute: '0x0009'
+  cluster: fan-control-cluster
+  nodeId: '0x654231'
+name: fan-control-cluster_attribute_0x0009_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: WindSupport = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"WindBitmap"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: WindSupport = 3
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values and special responses for the `WindSupport`
+    attribute in the Fan Control Cluster. The values are based on the constraints
+    and descriptions provided in the specification【4:0†source】.'
+  arguments:
+    '{"WindBitmap"': 3}
+  label: Test_Case_Special_Responses_Based_on_Description
+  option: WriteAttribute

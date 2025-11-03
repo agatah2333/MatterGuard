@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0003'
+  cluster: fan-control-cluster
+  nodeId: '0x654231'
+name: fan-control-cluster_attribute_0x0003_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: PercentCurrent = 0
+  ExpectedResponse: Fan is off
+  Pre-requisites: None
+  arguments:
+    '{"PercentCurrent"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: PercentCurrent = 100
+  ExpectedResponse: Fan is operating at maximum speed
+  Pre-requisites: None
+  arguments:
+    '{"PercentCurrent"': 100}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: PercentCurrent = 0
+  ExpectedResponse: Fan is off
+  Pre-requisites: None
+  arguments:
+    '{"PercentCurrent"': 0}
+  label: Test_Case_Special_Response_-_Fan_Off
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: PercentCurrent = 50
+  ExpectedResponse: Fan is operating at 50% speed
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:2†source】【4:7†source】【4:8†source】【4:9†source】.'
+  arguments:
+    '{"PercentCurrent"': 50}
+  label: Test_Case_Special_Response_-_Fan_Operating
+  option: WriteAttribute

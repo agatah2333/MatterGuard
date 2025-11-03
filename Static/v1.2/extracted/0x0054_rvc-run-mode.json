@@ -1,0 +1,204 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0054",
+    "name": "RVC Run Mode",
+    "description": "This cluster is derived from the Mode Base cluster to define specifics for Robotic Vacuum Cleaner devices. It also defines a namespace for the running modes of these devices. Commands and attributes for controlling the running mode of an RVC device."
+  },
+  "derived_datatypes": [
+    {
+      "type": "struct",
+      "name": "ModeOptionStruct",
+      "fields": [
+        {
+          "name": "Label",
+          "data_type": "string",
+          "description": "A human-readable string for the mode option"
+        },
+        {
+          "name": "Mode",
+          "data_type": "uint8",
+          "description": "The mode value"
+        },
+        {
+          "name": "ModeTags",
+          "data_type": "list[ModeTagStruct]",
+          "description": "Tags that describe the mode"
+        }
+      ]
+    },
+    {
+      "type": "struct",
+      "name": "ModeTagStruct",
+      "fields": [
+        {
+          "name": "MfgCode",
+          "data_type": "vendor-id",
+          "description": "Manufacturer code for vendor-specific tags"
+        },
+        {
+          "name": "Value",
+          "data_type": "enum16",
+          "description": "The tag value"
+        }
+      ]
+    },
+    {
+      "type": "enum",
+      "name": "StatusEnum",
+      "base_data_type": "enum8",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "Success",
+            "value": "0x00",
+            "description": "Command succeeded"
+          },
+          {
+            "name": "UnsupportedMode",
+            "value": "0x01",
+            "description": "The mode is not supported"
+          },
+          {
+            "name": "GenericFailure",
+            "value": "0x02",
+            "description": "Generic failure"
+          },
+          {
+            "name": "Stuck",
+            "value": "0x41",
+            "description": "Device is stuck and cannot proceed"
+          },
+          {
+            "name": "DustBinMissing",
+            "value": "0x42",
+            "description": "Device dust bin is missing"
+          },
+          {
+            "name": "DustBinFull",
+            "value": "0x43",
+            "description": "Device dust bin is full"
+          },
+          {
+            "name": "WaterTankEmpty",
+            "value": "0x44",
+            "description": "Device water tank is empty"
+          },
+          {
+            "name": "WaterTankMissing",
+            "value": "0x45",
+            "description": "Device water tank is missing"
+          },
+          {
+            "name": "WaterTankLidOpen",
+            "value": "0x46",
+            "description": "Device water tank lid is open"
+          },
+          {
+            "name": "MopCleaningPadMissing",
+            "value": "0x47",
+            "description": "Device mop cleaning pad is missing"
+          },
+          {
+            "name": "BatteryLow",
+            "value": "0x48",
+            "description": "Device battery is low"
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "ModeTagEnum",
+      "base_data_type": "enum16",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "Idle",
+            "value": "0x4000",
+            "description": "The device is not performing any of the main operations of the other modes. However, auxiliary actions, such as seeking the charger or charging, may occur"
+          },
+          {
+            "name": "Cleaning",
+            "value": "0x4001",
+            "description": "The device was asked to clean so it may be actively running, or paused due to an error, due to a pause command, or for recharging etc. If currently paused and the device can resume it will continue to clean"
+          }
+        ]
+      }
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "ChangeToMode",
+      "parameters": [
+        {
+          "name": "NewMode",
+          "data_type": "uint8",
+          "value_range": {},
+          "description": "The mode to change to"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "ChangeToModeResponse",
+      "parameters": [
+        {
+          "name": "Status",
+          "data_type": "StatusEnum",
+          "value_range": {},
+          "description": "The status of the mode change request"
+        },
+        {
+          "name": "StatusText",
+          "data_type": "string",
+          "value_range": {},
+          "description": "Optional descriptive text for the status"
+        }
+      ],
+      "privilege": "",
+      "side": "server"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "SupportedModes",
+      "data_type": "list[ModeOptionStruct]",
+      "value_range": {},
+      "description": "List of supported modes that the device can be set to",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0001",
+      "name": "CurrentMode",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "The current mode of the device",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0002",
+      "name": "StartUpMode",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "The mode that the device should start in when powered on",
+      "privilege": "V",
+      "writable": true
+    },
+    {
+      "id": "0x0003",
+      "name": "OnMode",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "The mode that the device should be set to when the On/Off cluster's OnOff attribute becomes TRUE",
+      "privilege": "V",
+      "writable": true
+    }
+  ],
+  "events": []
+}

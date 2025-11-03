@@ -1,0 +1,27 @@
+name: Total Volatile Organic Compounds Concentration Measurement - PeakMeasuredValueWindow
+  Attribute Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Total Volatile Organic Compounds Concentration Measurement
+  timeout: 180
+tests:
+- label: Read PeakMeasuredValueWindow attribute
+  command: readAttribute
+  attribute: PeakMeasuredValueWindow
+  response:
+    saveAs: peakmeasuredvaluewindow_value
+- label: PeakMeasuredValueWindow - Test minimum value (0)
+  command: readAttribute
+  attribute: PeakMeasuredValueWindow
+  response:
+    constraints:
+      minValue: 0
+      maxValue: 4294967295
+- label: PeakMeasuredValueWindow - Test maximum value (4294967295)
+  command: readAttribute
+  attribute: PeakMeasuredValueWindow
+  response:
+    constraints:
+      minValue: 0
+      maxValue: 4294967295

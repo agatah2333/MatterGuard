@@ -1,0 +1,128 @@
+{
+  "source_file": "Software Diagnostics_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0034",
+        "name": "Software Diagnostics",
+        "dataTypes": {
+          "ThreadMetricsStruct": {
+            "type": "struct",
+            "fields": {
+              "ID": {
+                "type": "uint64",
+                "valueRange": "all"
+              },
+              "Name": {
+                "type": "string",
+                "valueRange": "max 8",
+                "maxLength": 8
+              },
+              "StackFreeCurrent": {
+                "type": "uint32",
+                "valueRange": "all"
+              },
+              "StackFreeMinimum": {
+                "type": "uint32",
+                "valueRange": "all"
+              },
+              "StackSize": {
+                "type": "uint32",
+                "valueRange": "all"
+              }
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "ThreadMetrics",
+            "dataType": {
+              "type": "list",
+              "elementType": {
+                "type": "struct",
+                "fields": "ThreadMetricsStruct"
+              }
+            },
+            "valueRange": "N/A",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentHeapFree",
+            "dataType": {
+              "type": "uint64"
+            },
+            "valueRange": "N/A",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0002",
+            "name": "CurrentHeapUsed",
+            "dataType": {
+              "type": "uint64"
+            },
+            "valueRange": "N/A",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0003",
+            "name": "CurrentHeapHighWatermark",
+            "dataType": {
+              "type": "uint64"
+            },
+            "valueRange": "N/A",
+            "writable": false,
+            "privilege": "Read"
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ResetWatermarks",
+            "parameters": {
+              "dataType": {
+                "type": "void"
+              }
+            },
+            "privilege": "Operate",
+            "direction": "clientToServer"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "SoftwareFault",
+            "parameters": {
+              "dataType": {
+                "type": "struct",
+                "fields": {
+                  "ID": {
+                    "type": "uint64",
+                    "valueRange": "all"
+                  },
+                  "Name": {
+                    "type": "string",
+                    "valueRange": "max 8",
+                    "maxLength": 8
+                  },
+                  "FaultRecording": {
+                    "type": "octstr",
+                    "valueRange": "max 1024",
+                    "maxLength": 1024
+                  }
+                }
+              }
+            },
+            "privilege": "INFO",
+            "side": "V"
+          }
+        ]
+      }
+    ]
+  }
+}

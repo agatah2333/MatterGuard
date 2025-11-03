@@ -1,0 +1,29 @@
+config:
+  attribute: '0x0034'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0034_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '{"ColorPointRIntensity": 0}'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"ColorPointRIntensity"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '{"ColorPointRIntensity": "null"}'
+  ExpectedResponse: Invalid value
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values and special responses for the `ColorPointRIntensity`
+    attribute in the Color Control Cluster.'
+  arguments:
+    '{"ColorPointRIntensity"': '"null"}'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

@@ -1,0 +1,55 @@
+config:
+  attribute: '0x0009'
+  cluster: time-synchronization-cluster
+  nodeId: '0x654231'
+name: time-synchronization-cluster_attribute_0x0009_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: Granularity set to NoTimeGranularity (0)
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Node is not currently synchronized with a UTC Time source.
+  arguments:
+    '{"Granularity"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Granularity set to MicrosecondsGranularity (4)
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Node is synchronized to an upstream source using a highly precise
+    time-synchronization protocol such as PTP.
+  arguments:
+    '{"Granularity"': 4}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Granularity set to MinutesGranularity (1)
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Node was synchronized to an upstream source in the past, but sufficient
+    clock drift has occurred such that the clock error is now > 5 seconds.
+  arguments:
+    '{"Granularity"': 1}
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Granularity set to SecondsGranularity (2)
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Node is synchronized to an upstream source using a low-resolution
+    protocol. UTC Time is accurate to ± 5 seconds.
+  arguments:
+    '{"Granularity"': 2}
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Granularity set to MillisecondsGranularity (3)
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Node is synchronized to an upstream source using a high-resolution
+    time-synchronization protocol such as NTP, or has built-in GNSS with some amount
+    of jitter applying its GNSS timestamp. UTC Time is accurate to ± 50ms.
+
+
+    These test cases cover the extreme values and special responses for the Granularity
+    attribute in the Time Synchronization Cluster【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"Granularity"': 3}
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: WriteAttribute

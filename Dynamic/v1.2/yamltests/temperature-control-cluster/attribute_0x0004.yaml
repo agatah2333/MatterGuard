@@ -1,0 +1,49 @@
+config:
+  attribute: '0x0004'
+  cluster: temperature-control-cluster
+  nodeId: '0x654231'
+name: temperature-control-cluster_attribute_0x0004_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"SelectedTemperatureLevel": 0}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"SelectedTemperatureLevel"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"SelectedTemperatureLevel": 31}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"SelectedTemperatureLevel"': 31}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"SelectedTemperatureLevel": 30}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"SelectedTemperatureLevel"': 30}
+  label: Test_Case_Value_Just_Below_Maximum
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"SelectedTemperatureLevel": 1}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"SelectedTemperatureLevel"': 1}
+  label: Test_Case_Value_Just_Above_Minimum
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"SelectedTemperatureLevel": 15}'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    ### Summary'
+  arguments:
+    '{"SelectedTemperatureLevel"': 15}
+  label: Test_Case_Mid-Range_Value
+  option: WriteAttribute

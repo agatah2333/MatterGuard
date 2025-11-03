@@ -1,0 +1,29 @@
+config:
+  attribute: '0x0003'
+  cluster: application-basic-cluster
+  nodeId: '0x654231'
+name: application-basic-cluster_attribute_0x0003_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: ProductID set to 0
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"ProductID"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: ProductID set to 12345
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the `ProductID` attribute and a typical
+    value that might be used in practice.'
+  arguments:
+    '{"ProductID"': 12345}
+  label: Test_Case_Special_Responses
+  option: WriteAttribute

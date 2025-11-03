@@ -1,0 +1,221 @@
+config:
+  attribute: '0'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_0_v1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: LockState = 0
+  ExpectedResponse: Lock state is not fully locked
+  Pre-requisites: Lock hardware must support reporting the lock state
+  arguments:
+    '{"LockState"': 0}
+  label: Test_Case_Extreme_Value_(Minimum)
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify door-lock-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: LockState = 2
+  ExpectedResponse: Lock state is fully unlocked
+  Pre-requisites: Lock hardware must support reporting the lock state
+  arguments:
+    '{"LockState"': 2}
+  label: Test_Case_Extreme_Value_(Maximum)
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify door-lock-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: LockState = NULL
+  ExpectedResponse: Lock state is unknown
+  Pre-requisites: Lock hardware must not know the status of the locking mechanism
+    (e.g., after a power cycle)
+  arguments:
+    '{"LockState"': NULL}
+  label: Test_Case_Special_Response_(NULL)
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify door-lock-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: LockState = 0
+  ExpectedResponse: Lock state is not fully locked, indicating partial security
+  Pre-requisites: 'Lock hardware must be in a state where it is partially secured
+    (e.g., deadbolt partially extended)
+
+
+    These test cases cover the extreme values and special responses for the `LockState`
+    attribute of the Door Lock cluster as specified in the Matter Application Cluster
+    Specification【4:0†source】.'
+  arguments:
+    '{"LockState"': 0}
+  label: Test_Case_Special_Response_(Not_Fully_Locked)
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify door-lock-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true

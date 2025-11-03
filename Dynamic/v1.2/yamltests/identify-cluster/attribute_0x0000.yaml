@@ -1,0 +1,42 @@
+config:
+  attribute: '0x0000'
+  cluster: identify-cluster
+  nodeId: '0x654231'
+name: identify-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: IdentifyTime = 0
+  ExpectedResponse: Device stops identifying itself.
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyTime"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 65535
+  Attribute_Change: IdentifyTime = 65535
+  ExpectedResponse: Device identifies itself for 65535 seconds.
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyTime"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 1
+  Attribute_Change: IdentifyTime = 1
+  ExpectedResponse: Device starts identifying itself.
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyTime"': 1}
+  label: Test_Case_Special_Response_-_Start_Identification
+  option: WriteAttribute
+- ActionTime: 10
+  Attribute_Change: IdentifyTime = 10
+  ExpectedResponse: Device continues identifying itself for 10 more seconds.
+  Pre-requisites: 'Device is already in identification state.
+
+
+    These test cases cover the extreme values of the `IdentifyTime` field and the
+    values that result in special responses as described in the specification【4:0†source】.'
+  arguments:
+    '{"IdentifyTime"': 10}
+  label: Test_Case_Special_Response_-_Continue_Identification
+  option: WriteAttribute

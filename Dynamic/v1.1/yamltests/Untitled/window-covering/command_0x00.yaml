@@ -1,0 +1,135 @@
+config:
+  cluster: window-covering
+  command: '0x00'
+  nodeId: '0x654231'
+name: window-covering_command_0x00_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: "- `TargetPositionLiftPercent100ths` to 0.00%\n  - `TargetPositionTiltPercent100ths`\
+    \ to 0.00%\n  - `CurrentPositionLiftPercent100ths` to 0.00%\n  - `CurrentPositionTiltPercent100ths`\
+    \ to 0.00%\n  - `CurrentPositionLiftPercentage` to 0%\n  - `CurrentPositionTiltPercentage`\
+    \ to 0%"
+  ExpectedResponse: Success
+  Pre-requisites: Position Aware feature must be supported
+  arguments:
+    CurrentPositionLiftPercent100ths: 0.00%
+    CurrentPositionLiftPercentage: 0%
+    CurrentPositionTiltPercent100ths: 0.00%
+    CurrentPositionTiltPercentage: 0%
+    TargetPositionLiftPercent100ths: 0.00%
+    TargetPositionTiltPercent100ths: 0.00%
+  label: Test_Case_Extreme_Values_(Minimum)
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify window-covering cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: Immediate
+  Attribute_Change: "- `TargetPositionLiftPercent100ths` to 0.00%\n  - `TargetPositionTiltPercent100ths`\
+    \ to 0.00%\n  - `CurrentPositionLiftPercent100ths` to 0.00%\n  - `CurrentPositionTiltPercent100ths`\
+    \ to 0.00%\n  - `CurrentPositionLiftPercentage` to 0%\n  - `CurrentPositionTiltPercentage`\
+    \ to 0%"
+  ExpectedResponse: Success
+  Pre-requisites: 'Position Aware feature must be supported
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    CurrentPositionLiftPercent100ths: 50.00%
+    CurrentPositionLiftPercentage: 50%
+    CurrentPositionTiltPercent100ths: 50.00%
+    CurrentPositionTiltPercentage: 50%
+    TargetPositionLiftPercent100ths: 0.00%
+    TargetPositionTiltPercent100ths: 0.00%
+  label: Test_Case_Special_Response_(Position_Aware_Device)
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify window-covering cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 60
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

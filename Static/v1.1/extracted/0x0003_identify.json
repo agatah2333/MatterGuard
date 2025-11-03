@@ -1,0 +1,59 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0003",
+    "name": "Identify",
+    "description": "SHALL support the Feature Map global attribute with these bits defined:\n\nBit                          Code                         Name                          Description\n\n0                            QRY                          Query                         Multicast query for\n                                                                                        identification state\n\n\n1."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "Identify",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "IdentifyQuery",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x40",
+      "name": "TriggerEffect",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x00",
+      "name": "Identify",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Identify",
+      "data_type": "uint16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0001",
+      "name": "Identify",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    }
+  ],
+  "events": []
+}

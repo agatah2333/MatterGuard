@@ -1,0 +1,22 @@
+{
+  "cluster_id": "0x0041",
+  "cluster_name": "User Label",
+  "section": "9.9",
+  "description": "This cluster provides a feature to tag an endpoint with zero or more labels.",
+  "data_types": {},
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "LabelList",
+      "details": "list[Label­ min 4 per N empty RW VM M",
+      "raw_line": "0x0000         LabelList     list[Label­   min 4 per      N              empty          RW VM       M"
+    }
+  },
+  "commands": {},
+  "events": {},
+  "extraction_info": {
+    "start_line": 28916,
+    "end_line": 28964,
+    "total_lines": 48
+  }
+}

@@ -1,0 +1,42 @@
+config:
+  attribute: '0x02'
+  cluster: ethernet-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: ethernet-network-diagnostics-cluster_attribute_0x02_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: PacketRxCount will be set to 0
+  ExpectedResponse: Success
+  Pre-requisites: Node has just rebooted
+  arguments:
+    '{"PacketRxCount"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: PacketRxCount will be set to 18446744073709551615
+  ExpectedResponse: Success
+  Pre-requisites: Node has been running for a long time without reboot
+  arguments:
+    '{"PacketRxCount"': 18446744073709551615}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: PacketRxCount will be reset to 0
+  ExpectedResponse: Success
+  Pre-requisites: Node is rebooted
+  arguments:
+    '{"PacketRxCount"': 123456789}
+  label: Test_Case_Special_Response_-_Reboot
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: PacketRxCount will be incremented by the number of packets received
+  ExpectedResponse: Success
+  Pre-requisites: 'Node is operational and receiving packets
+
+
+    These test cases cover the extreme values of the `PacketRxCount` field and scenarios
+    that could result in special responses as described in the attribute''s effect.'
+  arguments:
+    '{"PacketRxCount"': 1000}
+  label: Test_Case_Special_Response_-_Increment
+  option: WriteAttribute

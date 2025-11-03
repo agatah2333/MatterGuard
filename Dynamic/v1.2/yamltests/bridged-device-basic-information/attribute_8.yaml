@@ -1,0 +1,43 @@
+config:
+  attribute: '8'
+  cluster: bridged-device-basic-information
+  nodeId: '0x654231'
+name: bridged-device-basic-information_attribute_8_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: <error_code_for_empty_string>
+  Pre-requisites: None
+  arguments:
+    HardwareVersionString: '""'
+  label: Test_Case_Minimum_Length
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `HardwareVersionString`: "A" * 64'
+  ExpectedResponse: <success_code>
+  Pre-requisites: None
+  arguments:
+    HardwareVersionString: '"A" * 64'
+  label: Test_Case_Maximum_Length
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `HardwareVersionString`: "!@#$%^&*()_+-=[]{}|;'':,.<>/?"'
+  ExpectedResponse: <success_code>
+  Pre-requisites: None
+  arguments:
+    HardwareVersionString: '"!@#$%^&*()_+-=[]{}|;'':,.<>/?"'
+  label: Test_Case_Special_Characters
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `HardwareVersionString`: "版本1.0"'
+  ExpectedResponse: <success_code>
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field (minimum
+    and maximum length) and special values (special characters and Unicode characters)
+    that could result in special responses.'
+  arguments:
+    HardwareVersionString: '"版本1.0"'
+  label: Test_Case_Unicode_Characters
+  option: WriteAttribute

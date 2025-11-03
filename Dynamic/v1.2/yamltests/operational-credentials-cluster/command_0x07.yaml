@@ -1,0 +1,36 @@
+config:
+  cluster: operational-credentials-cluster
+  command: '0x07'
+  nodeId: '0x654231'
+name: operational-credentials-cluster_command_0x07_v1.2.0.0
+tests:
+- ActionTime: 0
+  ExpectedResponse: Success
+  arguments: {}
+  label: Test_Case_Extreme_Values_of_Constraints
+  option: SendCommand
+- ActionTime: 65535
+  ExpectedResponse: Success
+  arguments: {}
+  label: Test_Case_Extreme_Values_of_Constraints
+  option: SendCommand
+- ActionTime: 300
+  ExpectedResponse: PAKEParameterError
+  arguments: {}
+  label: Test_Case_Special_Response_-_PAKEParameterError
+  option: SendCommand
+- ActionTime: 300
+  ExpectedResponse: Busy
+  arguments: {}
+  label: Test_Case_Special_Response_-_Busy_(Commissioning_window_already_open)
+  option: SendCommand
+- ActionTime: 300
+  ExpectedResponse: Busy
+  arguments: {}
+  label: Test_Case_Special_Response_-_Busy_(Fail-safe_timer_armed)
+  option: SendCommand
+- ActionTime: 300
+  ExpectedResponse: COMMAND_INVALID
+  arguments: {}
+  label: Test_Case_Special_Response_-_COMMAND_INVALID
+  option: SendCommand

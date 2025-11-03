@@ -1,0 +1,25 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0045",
+    "name": "Boolean State",
+    "description": "This cluster provides an interface to a boolean state called StateValue."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "StateValue",
+      "data_type": "bool",
+      "value_range": {
+        "min": "false",
+        "max": "true"
+      },
+      "description": "StateValue attribute",
+      "privilege": "A",
+      "writable": false,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

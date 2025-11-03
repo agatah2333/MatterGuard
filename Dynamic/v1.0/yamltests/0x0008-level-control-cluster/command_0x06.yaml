@@ -1,0 +1,353 @@
+config:
+  node_id: 305414945
+  cluster: '0x0008'
+  endpoint: 1
+tests:
+- label: test_stepwithonoff_StepMode_up
+  cluster: '0x0008'
+  command: '0x06'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+  expected: SUCCESS
+- label: test_stepwithonoff_StepMode_down
+  cluster: '0x0008'
+  command: '0x06'
+  arguments:
+    StepMode: 1
+    StepSize: 1
+    TransitionTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+  expected: SUCCESS
+- label: test_stepwithonoff_StepSize_minimum_boundary
+  cluster: '0x0008'
+  command: '0x06'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+  expected: SUCCESS
+- label: test_stepwithonoff_StepSize_maximum_boundary
+  cluster: '0x0008'
+  command: '0x06'
+  arguments:
+    StepMode: 0
+    StepSize: 254
+    TransitionTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+  expected: SUCCESS
+- label: test_stepwithonoff_StepSize_midrange
+  cluster: '0x0008'
+  command: '0x06'
+  arguments:
+    StepMode: 0
+    StepSize: 127
+    TransitionTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+  expected: SUCCESS
+- label: test_stepwithonoff_StepSize_below_minimum
+  cluster: '0x0008'
+  command: '0x06'
+  arguments:
+    StepMode: 0
+    StepSize: 0
+    TransitionTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_stepwithonoff_StepSize_above_maximum
+  cluster: '0x0008'
+  command: '0x06'
+  arguments:
+    StepMode: 0
+    StepSize: 255
+    TransitionTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_stepwithonoff_TransitionTime_minimum_boundary
+  cluster: '0x0008'
+  command: '0x06'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+  expected: SUCCESS
+- label: test_stepwithonoff_TransitionTime_maximum_boundary
+  cluster: '0x0008'
+  command: '0x06'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 65534
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+  expected: SUCCESS
+- label: test_stepwithonoff_TransitionTime_midrange
+  cluster: '0x0008'
+  command: '0x06'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 32767
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+  expected: SUCCESS
+- label: test_stepwithonoff_TransitionTime_null_value
+  cluster: '0x0008'
+  command: '0x06'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 65535
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+  expected: SUCCESS
+- label: test_stepwithonoff_TransitionTime_above_maximum
+  cluster: '0x0008'
+  command: '0x06'
+  arguments:
+    StepMode: 0
+    StepSize: 1
+    TransitionTime: 65535
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1

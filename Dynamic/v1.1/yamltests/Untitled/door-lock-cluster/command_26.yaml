@@ -1,0 +1,35 @@
+config:
+  cluster: door-lock-cluster
+  command: '26'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_26_v1.1.0.0
+tests:
+- ActionTime: N/A
+  ExpectedResponse: SUCCESS
+  arguments: {}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: SendCommand
+- ActionTime: N/A
+  ExpectedResponse: INVALID_COMMAND
+  arguments: {}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: SendCommand
+- ActionTime: N/A
+  ExpectedResponse: SUCCESS
+  arguments: {}
+  label: Test_Case_Special_Response_for_Clearing_All_Credentials
+  option: SendCommand
+- ActionTime: N/A
+  ExpectedResponse: DUPLICATE
+  arguments: {}
+  label: Test_Case_Special_Response_for_Duplicate_Credential
+  option: SendCommand
+- ActionTime: N/A
+  ExpectedResponse: OCCUPIED
+  arguments: {}
+  label: Test_Case_Special_Response_for_Occupied_Slot
+  option: SendCommand
+execution_metadata:
+  estimated_duration: 150
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

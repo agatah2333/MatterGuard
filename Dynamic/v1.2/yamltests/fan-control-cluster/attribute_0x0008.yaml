@@ -1,0 +1,44 @@
+config:
+  attribute: '0x0008'
+  cluster: fan-control-cluster
+  nodeId: '0x654231'
+name: fan-control-cluster_attribute_0x0008_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: None (error response)
+  ExpectedResponse: '`CONSTRAINT_ERROR` (if any unsupported bit is set)'
+  Pre-requisites: Ensure that the server does not support all rocking motions.
+  arguments:
+    RockSetting: '`0b111` (All bits set)'
+  label: Test_Case_Extreme_Value_(All_Bits_Set)
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`RockSetting` set to `0b001`'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: Ensure that RockLeftRight is supported by the server.
+  arguments:
+    RockSetting: '`0b001` (Only RockLeftRight set)'
+  label: Test_Case_Single_Supported_Bit_Set
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`RockSetting` set to `0b001` (if RockRound is not supported)'
+  ExpectedResponse: '`SUCCESS` with only the lowest supported bit set'
+  Pre-requisites: Ensure that RockLeftRight is supported but RockRound is not supported
+    by the server.
+  arguments:
+    RockSetting: '`0b101` (RockLeftRight and RockRound set)'
+  label: Test_Case_Combination_of_Supported_and_Unsupported_Bits
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`RockSetting` set to `0b000`'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values, valid single bit settings, combinations
+    of supported and unsupported bits, and the default value scenario for the `RockSetting`
+    attribute【4:0†source】【4:7†source】.'
+  arguments:
+    RockSetting: '`0b000` (No rocking motion)'
+  label: Test_Case_No_Bits_Set_(Default_Value)
+  option: WriteAttribute

@@ -1,0 +1,41 @@
+config:
+  attribute: '0x03'
+  cluster: wifi-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: wifi-network-diagnostics-cluster_attribute_0x03_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `ChannelNumber`: 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    ChannelNumber: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `ChannelNumber`: 65535'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    ChannelNumber: 65535
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `ChannelNumber`: Null'
+  ExpectedResponse: 'Null'
+  Pre-requisites: Interface is not currently configured or operational
+  arguments: {}
+  label: Test_Case_Special_Response_-_Null_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `ChannelNumber`: 6'
+  ExpectedResponse: Success
+  Pre-requisites: 'Interface is configured and operational
+
+
+    These test cases cover the extreme values of the `ChannelNumber` field and special
+    responses as per the provided context.'
+  arguments:
+    ChannelNumber: 6
+  label: Test_Case_Special_Response_-_Specific_Channel_Number
+  option: WriteAttribute

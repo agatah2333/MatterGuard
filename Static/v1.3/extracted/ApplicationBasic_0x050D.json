@@ -1,0 +1,116 @@
+{
+  "id": "0x050D",
+  "name": "Application Basic",
+  "description": "This cluster provides information about a Content App running on a Video Player device which is represented as an endpoint. The cluster server for this cluster should be supported on each endpoint that represents a Content App on a Video Player device. This cluster provides identification information about the Content App such as vendor and product.",
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Application",
+    "scope": "Endpoint",
+    "picsCode": "APBSC"
+  },
+  "revision": {
+    "current": 1,
+    "history": [
+      {
+        "revision": 1,
+        "description": "Initial Release"
+      }
+    ]
+  },
+  "features": {},
+  "dataTypes": {
+    "ApplicationStatusEnum": {
+      "type": "enum8",
+      "values": {
+        "0": {"name": "Stopped", "summary": "Application is not running.", "conformance": "M"},
+        "1": {"name": "ActiveVisibleFocus", "summary": "Application is running, is visible to the user, and is the active target for input.", "conformance": "M"},
+        "2": {"name": "ActiveHidden", "summary": "Application is running but not visible to the user.", "conformance": "M"},
+        "3": {"name": "ActiveVisibleNotFocus", "summary": "Application is running and visible, but is not the active target for input.", "conformance": "M"}
+      }
+    },
+    "ApplicationStruct": {
+      "type": "struct",
+      "description": "This indicates a global identifier for an Application given a catalog.",
+      "fields": {
+        "0": {"name": "CatalogVendorID", "type": "uint16", "constraint": "all", "conformance": "M"},
+        "1": {"name": "ApplicationID", "type": "string", "constraint": "all", "conformance": "M"}
+      }
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "name": "VendorName",
+      "type": "string",
+      "constraint": "max 32",
+      "quality": "F",
+      "default": "empty",
+      "access": "RV",
+      "conformance": "O",
+      "description": "This attribute SHALL specify a human readable (displayable) name of the vendor for the Content App."
+    },
+    "0x0001": {
+      "name": "VendorID",
+      "type": "vendor-id",
+      "constraint": "all",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "O",
+      "description": "This attribute, if present, SHALL specify the Connectivity Standards Alliance assigned Vendor ID for the Content App."
+    },
+    "0x0002": {
+      "name": "ApplicationName",
+      "type": "string",
+      "constraint": "desc",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL specify a human readable (displayable) name of the Content App assigned by the vendor. For example, 'NPR On Demand'. The maximum length of the ApplicationName attribute is 256 bytes of UTF-8 characters."
+    },
+    "0x0003": {
+      "name": "ProductID",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "O",
+      "description": "This attribute, if present, SHALL specify a numeric ID assigned by the vendor to identify a specific Content App made by them. If the Content App is certified by the Connectivity Standards Alliance, then this would be the Product ID as specified by the vendor for the certification."
+    },
+    "0x0004": {
+      "name": "Application",
+      "type": "ApplicationStruct",
+      "constraint": "desc",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL specify a Content App which consists of an Application ID using a specified catalog."
+    },
+    "0x0005": {
+      "name": "Status",
+      "type": "ApplicationStatusEnum",
+      "constraint": "desc",
+      "default": "MS",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL specify the current running status of the application."
+    },
+    "0x0006": {
+      "name": "ApplicationVersion",
+      "type": "string",
+      "constraint": "max 32",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL specify a human readable (displayable) version of the Content App assigned by the vendor. The maximum length of the ApplicationVersion attribute is 32 bytes of UTF-8 characters."
+    },
+    "0x0007": {
+      "name": "AllowedVendorList",
+      "type": "list[vendor-id]",
+      "quality": "F",
+      "access": "RA",
+      "conformance": "M",
+      "description": "This attribute is a list of vendor IDs. Each entry is a vendor-id."
+    }
+  },
+  "commands": {},
+  "events": {}
+}

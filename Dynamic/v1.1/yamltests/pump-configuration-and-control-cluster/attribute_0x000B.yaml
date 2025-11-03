@@ -1,0 +1,42 @@
+config:
+  attribute: '0x000B'
+  cluster: pump-configuration-and-control-cluster
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_attribute_0x000B_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"LifetimeRunningHours": 0}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"LifetimeRunningHours"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LifetimeRunningHours": 16,777,214}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"LifetimeRunningHours"': 16,777,214}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LifetimeRunningHours": 0}'
+  ExpectedResponse: Success, with rollover to 0
+  Pre-requisites: None
+  arguments:
+    '{"LifetimeRunningHours"': 16,777,215}
+  label: Test_Case_Value_Causing_Rollover
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LifetimeRunningHours": null}'
+  ExpectedResponse: Success, indicating null value
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special response of rollover as mentioned in the attribute description【4:0†source】.'
+  arguments:
+    '{"LifetimeRunningHours"': null}
+  label: Test_Case_Null_Value_Indication
+  option: WriteAttribute

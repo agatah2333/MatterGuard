@@ -1,0 +1,93 @@
+{
+  "source_file": "Content Launcher_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x050A",
+        "name": "Content Launcher",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "AcceptHeader",
+            "dataType": "list[string]",
+            "valueRange": "",
+            "description": "This attribute SHALL provide a list of content types supported by the Video Player or Content App.",
+            "privilege": "N",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "SupportedStreamingProtocols",
+            "dataType": "map32",
+            "valueRange": "",
+            "description": "This attribute SHALL provide information about supported streaming protocols.",
+            "privilege": "N",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "LaunchContent",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "ContentSearchStruct, bool, string, PlaybackPreferencesStruct, bool",
+              "description": "Parameters for launching content: [ContentSearch, AutoPlay, Data, Preferences, UseContext]"
+            },
+            "privilege": "O",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x01",
+            "name": "LaunchURL",
+            "parameters": {
+              "dataType": "string",
+              "valueRange": "",
+              "description": "URL to launch content from"
+            },
+            "privilege": "O",
+            "direction": "server → client"
+          },
+          {
+            "id": "0x02",
+            "name": "LauncherResponse",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "StatusEnum, octstr",
+              "description": "Response containing status and optional app data"
+            },
+            "privilege": "N",
+            "direction": "client ↔ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "ContentSearchStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "contentIdentifier": "string",
+              "contentType": "string"
+            }
+          },
+          "PlaybackPreferencesStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "textTrack": "string",
+              "audioTrack": "string",
+              "playbackPosition": "uint64"
+            }
+          },
+          "StatusEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Success",
+              "1": "InvalidContent",
+              "2": "UnsupportedProtocol"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

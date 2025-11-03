@@ -1,0 +1,47 @@
+config:
+  cluster: group-key-mgmt-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: group-key-mgmt-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: GroupTable updated with GroupID 1 and empty GroupName
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    GroupID: 1
+    GroupName: '""'
+  label: Test_Case_Minimum_GroupID_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: GroupTable updated with GroupID <max> and GroupName "TestGroup"
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    GroupID: <max>
+    GroupName: '"TestGroup"'
+  label: Test_Case_Maximum_GroupID_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: GroupTable updated with GroupID 1 and GroupName "UpdatedGroup"
+  ExpectedResponse: SUCCESS
+  Pre-requisites: GroupID 1 already exists in GroupTable
+  arguments:
+    GroupID: 1
+    GroupName: '"UpdatedGroup"'
+  label: Test_Case_GroupID_Already_Exists
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: GroupTable updated with GroupID 2 and GroupName ignored
+  ExpectedResponse: SUCCESS (GroupName ignored)
+  Pre-requisites: 'Server does not support group names
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:10†source】【4:15†source】.'
+  arguments:
+    GroupID: 2
+    GroupName: '"UnsupportedGroupName"'
+  label: Test_Case_Unsupported_GroupName
+  option: SendCommand

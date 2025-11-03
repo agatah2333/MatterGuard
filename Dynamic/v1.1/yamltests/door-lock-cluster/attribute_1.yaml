@@ -1,0 +1,43 @@
+config:
+  attribute: '1'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_1_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '`LockState` will be set to 0'
+  ExpectedResponse: '"Lock state is not fully locked"'
+  Pre-requisites: The lock must be in a state where it can report its status.
+  arguments:
+    LockState: 0
+  label: Test_Case_Extreme_Value_(Minimum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '`LockState` will be set to 2'
+  ExpectedResponse: '"Lock state is fully unlocked"'
+  Pre-requisites: The lock must be in a state where it can report its status.
+  arguments:
+    LockState: 2
+  label: Test_Case_Extreme_Value_(Maximum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '`LockState` will be set to 1'
+  ExpectedResponse: '"Lock state is fully locked"'
+  Pre-requisites: The lock must be in a state where it can report its status.
+  arguments:
+    LockState: 1
+  label: Test_Case_Special_Response_(Fully_Locked)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '`LockState` will be set to NULL'
+  ExpectedResponse: '"Lock hardware does not currently know the status of the locking
+    mechanism"'
+  Pre-requisites: 'The lock must have experienced a power cycle or similar event that
+    causes it to lose its state.
+
+
+    These test cases cover the extreme values and special responses for the `LockState`
+    attribute of the Door Lock cluster【4:2†source】【4:3†source】.'
+  arguments: {}
+  label: Test_Case_Special_Response_(Unknown_State)
+  option: WriteAttribute

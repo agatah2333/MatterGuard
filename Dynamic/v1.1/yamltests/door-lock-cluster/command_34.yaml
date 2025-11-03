@@ -1,0 +1,48 @@
+config:
+  cluster: door-lock-cluster
+  command: '34'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_34_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: The door will unlock and relock immediately.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The door lock must support the "Unlock with Timeout" command.
+  arguments:
+    PINCode: '""'
+    Timeout: 0
+  label: Test_Case_Minimum_Timeout_Value
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: The door will unlock and relock after 65535 seconds.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The door lock must support the "Unlock with Timeout" command.
+  arguments:
+    PINCode: '""'
+    Timeout: 65535
+  label: Test_Case_Maximum_Timeout_Value
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None, as the command will fail.
+  ExpectedResponse: FAILURE
+  Pre-requisites: The `RequirePINForRemoteOperation` attribute must be set to True,
+    and the provided PIN code must be invalid.
+  arguments:
+    PINCode: '"1234"'
+    Timeout: 60
+  label: Test_Case_Invalid_PIN_Code
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: The door will unlock and relock after 60 seconds.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'The `RequirePINForRemoteOperation` attribute must be set to True,
+    and the provided PIN code must be valid.
+
+
+    These test cases cover the extreme values of the `Timeout` field and scenarios
+    where the `PINCode` field affects the response of the command.'
+  arguments:
+    PINCode: '"5678"'
+    Timeout: 60
+  label: Test_Case_Valid_PIN_Code
+  option: SendCommand

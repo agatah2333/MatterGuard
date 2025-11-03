@@ -1,0 +1,49 @@
+config:
+  attribute: '0x0003'
+  cluster: time-synchronization-cluster
+  nodeId: '0x654231'
+name: time-synchronization-cluster_attribute_0x0003_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: ConnectMaxTimeSeconds set to 0
+  ExpectedResponse: Immediate failure or success indication
+  Pre-requisites: None
+  arguments:
+    '{"ConnectMaxTimeSeconds"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 255
+  Attribute_Change: ConnectMaxTimeSeconds set to 255
+  ExpectedResponse: Maximum wait time before failure or success indication
+  Pre-requisites: None
+  arguments:
+    '{"ConnectMaxTimeSeconds"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 100
+  Attribute_Change: ConnectMaxTimeSeconds set to 100
+  ExpectedResponse: Timeout indication after 100 seconds
+  Pre-requisites: None
+  arguments:
+    '{"ConnectMaxTimeSeconds"': 100}
+  label: Test_Case_Special_Response_Value_(e.g.,_Timeout)
+  option: WriteAttribute
+- ActionTime: 254
+  Attribute_Change: ConnectMaxTimeSeconds set to 254
+  ExpectedResponse: Near maximum wait time before failure or success indication
+  Pre-requisites: None
+  arguments:
+    '{"ConnectMaxTimeSeconds"': 254}
+  label: Test_Case_Boundary_Value_(Just_Below_Maximum)
+  option: WriteAttribute
+- ActionTime: 1
+  Attribute_Change: ConnectMaxTimeSeconds set to 1
+  ExpectedResponse: Minimal wait time before failure or success indication
+  Pre-requisites: 'None
+
+
+    ### Summary'
+  arguments:
+    '{"ConnectMaxTimeSeconds"': 1}
+  label: Test_Case_Boundary_Value_(Just_Above_Minimum)
+  option: WriteAttribute

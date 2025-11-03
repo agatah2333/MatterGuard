@@ -1,0 +1,321 @@
+config:
+  cluster: 0xgroups-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+  node_id: 305414945
+  endpoint: 1
+name: groups-cluster_command_0x01_v1.3.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: Group Table will be updated with GroupID 1 and an empty GroupName.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The server does not require security material for the group ID.
+  arguments:
+    GroupID: 1
+    GroupName: '""'
+  label: Test_Case_Minimum_GroupID_and_Empty_GroupName
+  option: SendCommand
+  cluster: 0xgroups-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xgroups-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xGROUPS
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xGROUPS
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xGROUPS
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xGROUPS
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: Group Table will be updated with GroupID 65535 and GroupName "AAAAAAAAAAAAAAAA".
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The server supports group names and has available resources to add
+    the group.
+  arguments:
+    GroupID: 65535
+    GroupName: '"A" * 16'
+  label: Test_Case_Maximum_GroupID_and_Maximum_Length_GroupName
+  option: SendCommand
+  cluster: 0xgroups-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xgroups-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xGROUPS
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xGROUPS
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xGROUPS
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xGROUPS
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: GroupName associated with the existing GroupID will be updated
+    to "ExistingGroup".
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The GroupID already exists in the Group Table.
+  arguments:
+    GroupID: <existing_group_id>
+    GroupName: '"ExistingGroup"'
+  label: Test_Case_GroupID_Already_Exists
+  option: SendCommand
+  cluster: 0xgroups-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xgroups-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xGROUPS
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xGROUPS
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xGROUPS
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xGROUPS
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: No change.
+  ExpectedResponse: RESOURCE_EXHAUSTED
+  Pre-requisites: 'The server has no available resources to add the new group.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    GroupID: <new_group_id>
+    GroupName: '"NewGroup"'
+  label: Test_Case_No_Available_Resources
+  option: SendCommand
+  cluster: 0xgroups-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xgroups-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xGROUPS
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xGROUPS
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xGROUPS
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xGROUPS
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+v13_validation:
+  strict_spec_compliance: true
+  validate_all_fields: true
+  check_conformance_requirements: true
+  validate_data_constraints: true
+  matter_version: 1.3.0.0
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

@@ -1,0 +1,59 @@
+config:
+  cluster: access-control-cluster
+  event: '0x0000'
+  nodeId: '0x654231'
+name: access-control-cluster_event_0x0000_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: ACL attribute, entry added
+  ExpectedResponse: Event generated with ChangeType Added
+  Pre-requisites: None
+  arguments:
+    AdminNodeID: '0x0000000000000000'
+    AdminPasscodeID: '0x0000'
+    ChangeType: Added
+  label: Test_Case_Extreme_Values_(Minimum)
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: ACL attribute, entry removed
+  ExpectedResponse: Event generated with ChangeType Removed
+  Pre-requisites: None
+  arguments:
+    AdminNodeID: '0xFFFFFFFFFFFFFFFF'
+    AdminPasscodeID: '0xFFFF'
+    ChangeType: Removed
+  label: Test_Case_Extreme_Values_(Maximum)
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: ACL attribute, entry changed
+  ExpectedResponse: Event generated with ChangeType Changed
+  Pre-requisites: Existing entry in ACL
+  arguments:
+    AdminNodeID: '0x123456789ABCDEF0'
+    AdminPasscodeID: '0x1234'
+    ChangeType: Changed
+    LatestValue:
+      AuthMode: CASE
+      FabricIndex: 1
+      Privilege: Manage
+      Subjects:
+      - 1229782938247303441
+      Targets:
+      - Endpoint: 1
+  label: Test_Case_Special_Response_(ChangeType_Changed)
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Error response with CONSTRAINT_ERROR
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:3†source】【4:6†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    AdminNodeID: '0x123456789ABCDEF0'
+    AdminPasscodeID: '0x1234'
+    ChangeType: Invalid
+  label: Test_Case_Special_Response_(Invalid_ChangeType)
+  option: SubscribeToEvent

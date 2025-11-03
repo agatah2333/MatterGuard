@@ -1,0 +1,52 @@
+config:
+  attribute: '0x001F'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x001F_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`{"EndpointList": []}`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"EndpointList"': '[]}`'
+  label: Test_Case_Minimum_Value_(Empty_List)
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`{"EndpointList": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+    14, 15, 16]}`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`Ensure the node has at least 16 endpoints available.`'
+  arguments:
+    '{"EndpointList"': '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]}`'
+  label: Test_Case_Maximum_Value_(List_with_16_Endpoints)
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`{"EndpointList": [1]}`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"EndpointList"': '[1]}`'
+  label: Test_Case_Special_Case_(Single_Endpoint)
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`{"EndpointList": [2, 3, 4]}`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`Ensure endpoints 2, 3, and 4 are available and have the same order.`'
+  arguments:
+    '{"EndpointList"': '[2, 3, 4]}`'
+  label: Test_Case_Special_Case_(Multiple_Endpoints_with_Same_Order)
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`<error: list size exceeds maximum limit>`'
+  Pre-requisites: '`None`
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"EndpointList"': '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}`'
+  label: Test_Case_Invalid_Case_(Exceeding_Maximum_List_Size)
+  option: WriteAttribute

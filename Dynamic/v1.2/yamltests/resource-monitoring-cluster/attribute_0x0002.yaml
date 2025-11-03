@@ -1,0 +1,44 @@
+config:
+  attribute: '0x0002'
+  cluster: resource-monitoring-cluster
+  nodeId: '0x654231'
+name: resource-monitoring-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '`AdminVendorId` will be set to 0x0000'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AdminVendorId: '0x0000'
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`AdminVendorId` will be set to 0xFFFF'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AdminVendorId: '0xFFFF'
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`AdminVendorId` will remain unchanged'
+  ExpectedResponse: Vendor ID Not Recognized
+  Pre-requisites: The system must have a list of recognized vendor IDs that does not
+    include 0x1234
+  arguments:
+    AdminVendorId: '0x1234'
+  label: Test_Case_Special_Response_-_Vendor_ID_Not_Recognized
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`AdminVendorId` will remain unchanged'
+  ExpectedResponse: Vendor ID Already in Use
+  Pre-requisites: 'The system must have another resource already using the vendor
+    ID 0x5678
+
+
+    These test cases cover the extreme values of the `AdminVendorId` field and the
+    special responses that could be triggered based on the description of the effect.'
+  arguments:
+    AdminVendorId: '0x5678'
+  label: Test_Case_Special_Response_-_Vendor_ID_Already_in_Use
+  option: WriteAttribute

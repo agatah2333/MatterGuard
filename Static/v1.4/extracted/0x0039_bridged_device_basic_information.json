@@ -1,0 +1,299 @@
+{
+  "source_file": "Bridged Device Basic Information_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0039",
+        "name": "Bridged Device Basic Information",
+        "dataTypes": {
+          "CapabilityMinimaStruct": {
+            "type": "struct",
+            "fields": "Not specified"
+          },
+          "ProductAppearanceStruct": {
+            "type": "struct",
+            "fields": "Not specified"
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "DataModelRevision",
+            "dataType": "uint16",
+            "valueRange": "1-65535",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0001",
+            "name": "VendorName",
+            "dataType": {
+              "type": "string",
+              "maxLength": 128
+            },
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0002",
+            "name": "VendorID",
+            "dataType": "vendor-id",
+            "valueRange": "0-65535",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0003",
+            "name": "ProductName",
+            "dataType": {
+              "type": "string",
+              "maxLength": 64
+            },
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0004",
+            "name": "ProductID",
+            "dataType": "uint16",
+            "valueRange": "0-65535",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0005",
+            "name": "NodeLabel",
+            "dataType": {
+              "type": "string",
+              "maxLength": 32
+            },
+            "writable": true,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0006",
+            "name": "Location",
+            "dataType": {
+              "type": "string",
+              "format": "ISO 3166-1 alpha-2"
+            },
+            "writable": true,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0007",
+            "name": "HardwareVersion",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0008",
+            "name": "HardwareVersionString",
+            "dataType": {
+              "type": "string",
+              "maxLength": 64
+            },
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0009",
+            "name": "SoftwareVersion",
+            "dataType": "uint32",
+            "valueRange": "0-4294967295",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x000A",
+            "name": "SoftwareVersionString",
+            "dataType": {
+              "type": "string",
+              "maxLength": 64
+            },
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x000B",
+            "name": "ManufacturingDate",
+            "dataType": {
+              "type": "string",
+              "maxLength": 16
+            },
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x000C",
+            "name": "PartNumber",
+            "dataType": {
+              "type": "string",
+              "maxLength": 32
+            },
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x000D",
+            "name": "ProductURL",
+            "dataType": {
+              "type": "string",
+              "maxLength": 256
+            },
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x000E",
+            "name": "ProductLabel",
+            "dataType": {
+              "type": "string",
+              "maxLength": 64
+            },
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x000F",
+            "name": "SerialNumber",
+            "dataType": {
+              "type": "string",
+              "maxLength": 32
+            },
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0010",
+            "name": "LocalConfigDisabled",
+            "dataType": "bool",
+            "writable": true,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0011",
+            "name": "Reachable",
+            "dataType": "bool",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0012",
+            "name": "UniqueID",
+            "dataType": {
+              "type": "string",
+              "maxLength": 32
+            },
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0013",
+            "name": "CapabilityMinima",
+            "dataType": {
+              "type": "struct",
+              "name": "CapabilityMinimaStruct"
+            },
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0014",
+            "name": "ProductAppearance",
+            "dataType": {
+              "type": "struct",
+              "name": "ProductAppearanceStruct"
+            },
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0015",
+            "name": "SpecificationVersion",
+            "dataType": "uint32",
+            "valueRange": "0-4294967295",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0016",
+            "name": "MaxPathsPerInvoke",
+            "dataType": "uint16",
+            "valueRange": "1-65535",
+            "writable": false,
+            "privilege": "Read"
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x80",
+            "name": "KeepActive",
+            "parameters": {
+              "StayActiveDuration": {
+                "type": "uint32",
+                "valueRange": "all"
+              },
+              "TimeoutMs": {
+                "type": "uint32",
+                "valueRange": "30000-3600000"
+              }
+            },
+            "privilege": "O",
+            "direction": "clientToServer"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "StartUp",
+            "parameters": {},
+            "privilege": "O",
+            "side": "INFO"
+          },
+          {
+            "id": "0x01",
+            "name": "ShutDown",
+            "parameters": {},
+            "privilege": "O",
+            "side": "INFO"
+          },
+          {
+            "id": "0x02",
+            "name": "Leave",
+            "parameters": {
+              "FabricIndex": {
+                "type": "unknown",
+                "valueRange": "X"
+              }
+            },
+            "privilege": "O",
+            "side": "INFO"
+          },
+          {
+            "id": "0x03",
+            "name": "ReachableChanged",
+            "parameters": {},
+            "privilege": "M",
+            "side": "INFO"
+          },
+          {
+            "id": "0x80",
+            "name": "ActiveChanged",
+            "parameters": {
+              "PromisedActiveDuration": {
+                "type": "uint32",
+                "valueRange": "desc"
+              }
+            },
+            "privilege": "INFO",
+            "side": "V BIS"
+          }
+        ]
+      }
+    ]
+  }
+}

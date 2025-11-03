@@ -1,0 +1,166 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0003",
+    "name": "Identify",
+    "description": "This cluster supports an endpoint identification state (e.g., flashing a light), that indicates to an observer (e.g., an installer) which of several nodes and/or endpoints it is."
+  },
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "Identify",
+      "direction": "client",
+      "response": null,
+      "privilege": "O",
+      "side": "client",
+      "parameters": [
+        {
+          "name": "IdentifyTime",
+          "type": "uint16",
+          "constraint": "[0, 65535]",
+          "description": "Time in seconds during which the endpoint will identify itself"
+        }
+      ]
+    },
+    {
+      "id": "0x40",
+      "name": "TriggerEffect",
+      "direction": "client",
+      "response": null,
+      "privilege": "O",
+      "side": "client",
+      "parameters": [
+        {
+          "name": "EffectIdentifier",
+          "type": "enum8",
+          "constraint": "desc",
+          "description": "Effect to trigger"
+        },
+        {
+          "name": "EffectVariant",
+          "type": "enum8",
+          "constraint": "desc",
+          "description": "Variant of effect"
+        }
+      ]
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "IdentifyTime",
+      "type": "uint16",
+      "constraint": "[0, 65535]",
+      "quality": "N",
+      "default": "0",
+      "access": "RW",
+      "conformance": "M",
+      "description": "Time in seconds during which the endpoint will identify itself"
+    },
+    {
+      "id": "0x0001",
+      "name": "IdentifyType",
+      "type": "enum8",
+      "constraint": "desc",
+      "quality": "",
+      "default": "0",
+      "access": "R",
+      "conformance": "M",
+      "description": "Type of identification being performed"
+    }
+  ],
+  "events": [],
+  "derived_datatypes": [
+    {
+      "type": "enum",
+      "name": "IdentifyTypeEnum",
+      "base_data_type": "ENUM8",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "None",
+            "value": "0x00",
+            "description": "No presentation"
+          },
+          {
+            "name": "Light",
+            "value": "0x01",
+            "description": "Light output of a lighting product"
+          },
+          {
+            "name": "VisibleIndicator",
+            "value": "0x02",
+            "description": "Typically a small LED"
+          },
+          {
+            "name": "AudibleBeep",
+            "value": "0x03",
+            "description": "Audible beep"
+          },
+          {
+            "name": "Display",
+            "value": "0x04",
+            "description": "Presentation will be visible on display screen"
+          },
+          {
+            "name": "Actuator",
+            "value": "0x05",
+            "description": "Presentation will be conveyed by actuator functionality"
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "EffectIdentifierEnum",
+      "base_data_type": "ENUM8",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "Blink",
+            "value": "0x00",
+            "description": "Light is turned on/off once"
+          },
+          {
+            "name": "Breathe",
+            "value": "0x01",
+            "description": "Light is turned on/off over 1 second and repeated 15 times"
+          },
+          {
+            "name": "Okay",
+            "value": "0x02",
+            "description": "Colored light turns green for 1 second; non-colored light flashes twice"
+          },
+          {
+            "name": "ChannelChange",
+            "value": "0x0b",
+            "description": "Colored light turns orange for 8 seconds"
+          },
+          {
+            "name": "FinishEffect",
+            "value": "0xfe",
+            "description": "Complete the current effect sequence before terminating"
+          },
+          {
+            "name": "StopEffect",
+            "value": "0xff",
+            "description": "Terminate the effect as soon as possible"
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "EffectVariantEnum",
+      "base_data_type": "ENUM8",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "Default",
+            "value": "0x00",
+            "description": "Default variant"
+          }
+        ]
+      }
+    }
+  ]
+}

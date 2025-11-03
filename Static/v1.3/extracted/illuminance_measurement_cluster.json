@@ -1,0 +1,115 @@
+{
+  "cluster": {
+    "id": "0x0400",
+    "name": "Illuminance Measurement",
+    "description": "The Illuminance Measurement cluster provides an interface to illuminance measurement functionality, including configuration and provision of notifications of illuminance measurements.",
+    "classification": {
+      "hierarchy": "Base",
+      "role": "Application", 
+      "scope": "Endpoint",
+      "pics_code": "ILL"
+    },
+    "revision": {
+      "current": 3,
+      "history": [
+        {
+          "revision": 1,
+          "description": "Mandatory global ClusterRevision attribute added; CCB 2048 2049 2050"
+        },
+        {
+          "revision": 2,
+          "description": "CCB 2167"
+        },
+        {
+          "revision": 3,
+          "description": "New data model format and notation"
+        }
+      ]
+    },
+    "data_types": [
+      {
+        "name": "LightSensorTypeEnum",
+        "type": "enum8",
+        "values": [
+          {
+            "value": 0,
+            "name": "Photodiode",
+            "summary": "Indicates photodiode sensor type",
+            "conformance": "M"
+          },
+          {
+            "value": 1,
+            "name": "CMOS", 
+            "summary": "Indicates CMOS sensor type",
+            "conformance": "M"
+          },
+          {
+            "value": "64 to 254",
+            "name": "MS",
+            "summary": "Reserved for manufacturer specific light sensor types",
+            "conformance": "O"
+          }
+        ]
+      }
+    ],
+    "attributes": [
+      {
+        "id": "0x0000",
+        "name": "MeasuredValue",
+        "type": "uint16",
+        "constraint": "0, MinMeasuredValue to MaxMeasuredValue",
+        "quality": "PX",
+        "default": "0",
+        "access": "RV",
+        "conformance": "M",
+        "description": "The MeasuredValue attribute represents the illuminance in Lux (symbol lx) as follows: MeasuredValue = 10,000 x log10(illuminance) + 1, where 1 lx <= illuminance <= 3.576 Mlx, corresponding to a MeasuredValue in the range 1 to 0xFFFE. 0 indicates a value of illuminance that is too low to be measured, MinMeasuredValue <= MeasuredValue <= MaxMeasuredValue under normal circumstances, null indicates that the illuminance measurement is invalid."
+      },
+      {
+        "id": "0x0001", 
+        "name": "MinMeasuredValue",
+        "type": "uint16",
+        "constraint": "1 to MaxMeasuredValue-1",
+        "quality": "X",
+        "default": null,
+        "access": "RV",
+        "conformance": "M",
+        "description": "The MinMeasuredValue attribute indicates the minimum value of MeasuredValue that can be measured. A value of null indicates that this attribute is not defined."
+      },
+      {
+        "id": "0x0002",
+        "name": "MaxMeasuredValue", 
+        "type": "uint16",
+        "constraint": "MinMeasuredValue+1 to 65534",
+        "quality": "X",
+        "default": null,
+        "access": "RV", 
+        "conformance": "M",
+        "description": "The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue that can be measured. A value of null indicates that this attribute is not defined."
+      },
+      {
+        "id": "0x0003",
+        "name": "Tolerance",
+        "type": "uint16",
+        "constraint": "0 to 2048",
+        "quality": null,
+        "default": null,
+        "access": "RV",
+        "conformance": "O",
+        "description": "See Measured Value."
+      },
+      {
+        "id": "0x0004",
+        "name": "LightSensorType",
+        "type": "LightSensorTypeEnum",
+        "constraint": "all",
+        "quality": "X",
+        "default": "null",
+        "access": "RV",
+        "conformance": "O", 
+        "description": "The LightSensorType attribute specifies the electronic type of the light sensor. This attribute SHALL be set to one of the non-reserved values listed in LightSensorTypeEnum or null in case the sensor type is unknown."
+      }
+    ],
+    "commands": [],
+    "events": []
+  }
+}

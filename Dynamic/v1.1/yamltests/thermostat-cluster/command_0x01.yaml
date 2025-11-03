@@ -1,0 +1,31 @@
+config:
+  cluster: thermostat-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: thermostat-cluster_command_0x01_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: OnOff attribute will be set to TRUE.
+  ExpectedResponse: The OnOff attribute is set to TRUE.
+  Pre-requisites: 'The OnTime and OffWaitTime attributes are supported and OnTime
+    is set to 0.
+
+
+    #'
+  arguments: {}
+  label: Test_Case_Extreme_Values
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: OnOff attribute will be set to TRUE, and OffWaitTime will be set
+    to 0 if OnTime is 0.
+  ExpectedResponse: The OnOff attribute is set to TRUE, and if OnTime is 0, OffWaitTime
+    is set to 0.
+  Pre-requisites: 'The OnTime and OffWaitTime attributes are supported and OnTime
+    is set to 0.
+
+
+    These test cases cover the extreme values and special responses as per the command''s
+    description【4:0†source】.'
+  arguments: {}
+  label: Test_Case_Special_Response
+  option: SendCommand

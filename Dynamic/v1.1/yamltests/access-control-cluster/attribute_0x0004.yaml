@@ -1,0 +1,47 @@
+config:
+  attribute: '0x0004'
+  cluster: access-control-cluster
+  nodeId: '0x654231'
+name: access-control-cluster_attribute_0x0004_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '`AccessControlEntriesPerFabric` will be set to 3'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AccessControlEntriesPerFabric: 3
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`AccessControlEntriesPerFabric` will be set to 4'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AccessControlEntriesPerFabric: 4
+  label: Test_Case_Just_Above_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`AccessControlEntriesPerFabric` will be set to 10'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AccessControlEntriesPerFabric: 10
+  label: Test_Case_Typical_Operational_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`AccessControlEntriesPerFabric` will be set to 65535'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    typical operational values. The values of the field that could result in special
+    responses (like errors) are not applicable here as the provided context does not
+    specify any special error conditions for this attribute beyond the minimum constraint.
+
+
+    For more detailed information, refer to the Matter Core Specification document【4:0†source】.'
+  arguments:
+    AccessControlEntriesPerFabric: 65535 (assuming 16-bit unsigned integer max value)
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute

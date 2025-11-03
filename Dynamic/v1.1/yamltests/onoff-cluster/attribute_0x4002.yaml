@@ -1,0 +1,28 @@
+config:
+  attribute: '0x4002'
+  cluster: onoff-cluster
+  nodeId: '0x654231'
+name: onoff-cluster_attribute_0x4002_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`OffWaitTime` = 0'
+  ExpectedResponse: The server should set the `OffWaitTime` attribute to 0.
+  Pre-requisites: 'The device should be in the ''Timed On'' state.
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"OffWaitTime"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 1
+  Attribute_Change: '`OffWaitTime` = 1'
+  ExpectedResponse: The server should set the `OffWaitTime` attribute to 1.
+  Pre-requisites: 'The device should be in the ''Timed On'' state.
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"OffWaitTime"': 1}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

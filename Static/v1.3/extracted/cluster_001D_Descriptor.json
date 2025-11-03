@@ -1,0 +1,51 @@
+{
+  "cluster_id": "0x001D",
+  "cluster_name": "Descriptor",
+  "section": "9.5",
+  "description": "The Descriptor cluster is meant to replace the support from the Zigbee Device NOTE Object (ZDO) for describing a node, its endpoints and clusters. This cluster describes an endpoint instance on the node, independently from other endpoints, but also allows composition of endpoints to conform to complex device type patterns.",
+  "data_types": {
+    "DeviceTypeStruct": {
+      "name": "DeviceTypeStruct",
+      "definition_line": "9.5.5.1. DeviceTypeStruct Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "Device­",
+      "details": "list[Device­ min 1 F desc RV M",
+      "raw_line": "0x0000           Device­      list[Device­ min 1           F              desc           RV         M"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "ServerList",
+      "details": "list[cluster- F empty RV M",
+      "raw_line": "0x0001           ServerList list[cluster-                  F              empty          RV         M"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "ClientList",
+      "details": "list[cluster- F empty RV M",
+      "raw_line": "0x0002           ClientList   list[cluster-                F              empty          RV         M"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "PartsList",
+      "details": "list[end­ empty RV M",
+      "raw_line": "0x0003           PartsList    list[end­                                   empty          RV         M"
+    },
+    "0x0004": {
+      "id": "0x0004",
+      "name": "TagList",
+      "details": "list[Seman­ 1 to 6 F MS RV TAGLIST",
+      "raw_line": "0x0004           TagList      list[Seman­ 1 to 6           F              MS             RV         TAGLIST"
+    }
+  },
+  "commands": {},
+  "events": {},
+  "extraction_info": {
+    "start_line": 28417,
+    "end_line": 28605,
+    "total_lines": 188
+  }
+}

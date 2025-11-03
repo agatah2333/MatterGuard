@@ -1,0 +1,137 @@
+{
+  "cluster_id": "0x0036",
+  "cluster_name": "Wi-Fi Network Diagnostics",
+  "section": "11.15",
+  "description": "The Wi-Fi Network Diagnostics Cluster provides a means to acquire standardized diagnostics met­ rics that MAY be used by a Node to assist a user or Administrator in diagnosing potential problems. The Wi-Fi Network Diagnostics Cluster attempts to centralize all metrics that are relevant to a potential Wi-Fi radio running on a Node.",
+  "data_types": {
+    "SecurityTypeEnum": {
+      "name": "SecurityTypeEnum",
+      "definition_line": "11.15.5.1. SecurityTypeEnum Type"
+    },
+    "WiFiVersionEnum": {
+      "name": "WiFiVersionEnum",
+      "definition_line": "11.15.5.2. WiFiVersionEnum Type"
+    },
+    "AssociationFailureCauseEnum": {
+      "name": "AssociationFailureCauseEnum",
+      "definition_line": "11.15.5.3. AssociationFailureCauseEnum Type"
+    },
+    "ConnectionStatusEnum": {
+      "name": "ConnectionStatusEnum",
+      "definition_line": "11.15.5.4. ConnectionStatusEnum Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "BSSID",
+      "details": "octstr 6 X null RV M",
+      "raw_line": "0x0000         BSSID         octstr        6              X              null           RV         M"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "Security­",
+      "details": "Security­ all X null RV M",
+      "raw_line": "0x0001         Security­     Security­     all            X              null           RV         M"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "WiFiVer­",
+      "details": "WiFiVer­ all X null RV M",
+      "raw_line": "0x0002         WiFiVer­      WiFiVer­      all            X              null           RV         M"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "Channel­",
+      "details": "uint16 all X null RV M",
+      "raw_line": "0x0003         Channel­      uint16        all            X              null           RV         M"
+    },
+    "0x0004": {
+      "id": "0x0004",
+      "name": "RSSI",
+      "details": "int8 -120 to 0 XC null RV M",
+      "raw_line": "0x0004         RSSI          int8          -120 to 0      XC             null           RV         M"
+    },
+    "0x0005": {
+      "id": "0x0005",
+      "name": "Beacon­",
+      "details": "uint32 all XC 0 RV ERRCNT",
+      "raw_line": "0x0005         Beacon­       uint32        all            XC             0              RV         ERRCNT"
+    },
+    "0x0006": {
+      "id": "0x0006",
+      "name": "BeaconRx­",
+      "details": "uint32 all XC 0 RV PKTCNT",
+      "raw_line": "0x0006         BeaconRx­ uint32            all            XC             0              RV         PKTCNT"
+    },
+    "0x0007": {
+      "id": "0x0007",
+      "name": "Packet­",
+      "details": "uint32 all XC 0 RV PKTCNT",
+      "raw_line": "0x0007         Packet­       uint32        all            XC             0              RV         PKTCNT"
+    },
+    "0x0008": {
+      "id": "0x0008",
+      "name": "Packet­",
+      "details": "uint32 all XC 0 RV PKTCNT",
+      "raw_line": "0x0008         Packet­       uint32        all            XC             0              RV         PKTCNT"
+    },
+    "0x0009": {
+      "id": "0x0009",
+      "name": "PacketUni­",
+      "details": "uint32 all XC 0 RV PKTCNT",
+      "raw_line": "0x0009         PacketUni­ uint32           all            XC             0              RV         PKTCNT"
+    },
+    "0x000A": {
+      "id": "0x000A",
+      "name": "PacketUni­",
+      "details": "uint32 all XC 0 RV PKTCNT",
+      "raw_line": "0x000A         PacketUni­ uint32           all            XC             0              RV         PKTCNT"
+    },
+    "0x000B": {
+      "id": "0x000B",
+      "name": "Current­",
+      "details": "uint64 all XC 0 RV O",
+      "raw_line": "0x000B         Current­      uint64        all            XC             0              RV         O"
+    },
+    "0x000C": {
+      "id": "0x000C",
+      "name": "Overrun­",
+      "details": "uint64 all XC 0 RV ERRCNT",
+      "raw_line": "0x000C         Overrun­      uint64        all            XC             0              RV         ERRCNT"
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "ResetCounts",
+      "details": "client ⇒ server Y O ERRCNT",
+      "raw_line": "0x00               ResetCounts        client ⇒ server Y                       O                 ERRCNT"
+    }
+  },
+  "events": {
+    "0x00": {
+      "id": "0x00",
+      "name": "Disconnection",
+      "details": "info V O",
+      "raw_line": "0x00                   Disconnection          info                    V                         O"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "AssociationFail­",
+      "details": "info V O",
+      "raw_line": "0x01                   AssociationFail­       info                    V                         O"
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "ConnectionStatus",
+      "details": "info V O",
+      "raw_line": "0x02                   ConnectionStatus info                          V                         O"
+    }
+  },
+  "extraction_info": {
+    "start_line": 44869,
+    "end_line": 45308,
+    "total_lines": 439
+  }
+}

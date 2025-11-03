@@ -1,0 +1,13 @@
+name: Total Volatile Organic Compounds Concentration Measurement - MeasurementUnit
+  Attribute Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Total Volatile Organic Compounds Concentration Measurement
+  timeout: 180
+tests:
+- label: Read MeasurementUnit attribute
+  command: readAttribute
+  attribute: MeasurementUnit
+  response:
+    saveAs: measurementunit_value

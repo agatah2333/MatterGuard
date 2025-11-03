@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0003'
+  cluster: access-control-cluster
+  nodeId: '0x654231'
+name: access-control-cluster_attribute_0x0003_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"TargetsPerAccessControlEntry"': 3}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"TargetsPerAccessControlEntry"': 4}
+  label: Test_Case_Just_Above_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"TargetsPerAccessControlEntry"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Constraint Error
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:3†source】【4:5†source】【4:7†source】【4:8†source】.'
+  arguments:
+    '{"TargetsPerAccessControlEntry"': 2}
+  label: Test_Case_Below_Minimum_Value_(Invalid_Case)
+  option: WriteAttribute

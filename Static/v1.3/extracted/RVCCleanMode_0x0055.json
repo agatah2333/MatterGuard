@@ -1,0 +1,196 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0055",
+    "name": "RVC Clean Mode",
+    "description": "Commands and attributes for controlling the cleaning type of an RVC device. This cluster is derived from the Mode Base cluster to define specifics for Robotic Vacuum Cleaner devices. It also defines a namespace for the cleaning type for these devices.",
+    "classification": {
+      "hierarchy": "Mode Base",
+      "role": "Application", 
+      "scope": "Endpoint",
+      "pics_code": "RVCCLEANM"
+    },
+    "revision_history": [
+      {
+        "revision": 1,
+        "description": "Initial Release"
+      },
+      {
+        "revision": 2,
+        "description": "Add constraint about changing cleaning modes while the RVC Run Mode cluster is in a non-Idle mode. ChangeToModeResponse command: StatusText must be provided for InvalidInMode status. Deprecate the OnMode attribute and the related feature map bit."
+      }
+    ]
+  },
+  "features": {
+    "DEPONOFF": {
+      "bit": 0,
+      "code": "DEPONOFF",
+      "name": "OnOff",
+      "conformance": "D",
+      "summary": "OnOff feature (deprecated)"
+    }
+  },
+  "derived_data_types": {
+    "enums": {},
+    "structs": {
+      "ModeOptionStruct": {
+        "description": "Derived from Mode Base cluster",
+        "fields": {
+          "0": {
+            "name": "Label",
+            "type": "string",
+            "conformance": "M"
+          },
+          "1": {
+            "name": "Mode",
+            "type": "uint8",
+            "conformance": "M"
+          },
+          "2": {
+            "name": "ModeTags",
+            "type": "list[ModeTagStruct]",
+            "constraint": "1 to 8",
+            "conformance": "M"
+          }
+        }
+      }
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "SupportedModes",
+      "type": "list[ModeOptionStruct]",
+      "constraint": "desc",
+      "quality": "",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "List of supported modes. At least one entry SHALL include the Vacuum and/or the Mop mode tag in the ModeTags field list."
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "CurrentMode",
+      "type": "uint8",
+      "constraint": "desc",
+      "quality": "",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "Current mode of the device"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "StartUpMode",
+      "type": "uint8",
+      "constraint": "desc",
+      "quality": "X",
+      "default": "",
+      "access": "RW",
+      "conformance": "X",
+      "description": "Startup mode attribute (not supported in this cluster)"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "OnMode",
+      "type": "uint8",
+      "constraint": "desc",
+      "quality": "",
+      "default": "",
+      "access": "RW",
+      "conformance": "D",
+      "description": "OnMode attribute (deprecated)"
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "ChangeToMode",
+      "direction": "client => server",
+      "response": "ChangeToModeResponse",
+      "access": "O",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "NewMode",
+          "type": "uint8",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "The mode to change to"
+        }
+      ],
+      "description": "Change the device to the indicated mode. This cluster SHALL NOT permit changing its mode while the RVC Run Mode cluster's CurrentMode attribute is set to a mode without the Idle mode tag."
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "ChangeToModeResponse",
+      "direction": "client <= server",
+      "response": "N",
+      "access": "",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "Status",
+          "type": "enum8",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "Status of the mode change request"
+        },
+        {
+          "id": "1",
+          "name": "StatusText",
+          "type": "string",
+          "constraint": "max 64",
+          "quality": "",
+          "default": "",
+          "conformance": "O",
+          "description": "Text description of the status"
+        }
+      ],
+      "description": "Response to ChangeToMode command"
+    }
+  },
+  "events": {},
+  "cluster_namespace": {
+    "status_codes": {
+      "0x40": {
+        "name": "CleaningInProgress",
+        "description": "Cleaning is in progress and cannot change modes"
+      }
+    },
+    "mode_tags": {
+      "0x4000": {
+        "name": "DeepClean",
+        "description": "While in this mode, the device is optimizing for improved cleaning."
+      },
+      "0x4001": {
+        "name": "Vacuum",
+        "description": "The device's vacuuming feature is enabled in this mode."
+      },
+      "0x4002": {
+        "name": "Mop",
+        "description": "The device's mopping feature is enabled in this mode."
+      }
+    }
+  },
+  "mode_change_restrictions": "This cluster SHALL NOT permit changing its mode while the RVC Run Mode cluster's CurrentMode attribute is set to a mode without the Idle mode tag. The ChangeToModeResponse command SHALL have the StatusCode field set to the InvalidInMode value if this restriction prevents a mode change.",
+  "mode_examples": [
+    {
+      "mode": "Turbo, Vacuum Only",
+      "tags": ["0x4000 (Deep Clean)", "0x4001 (Vacuum)"]
+    },
+    {
+      "mode": "Mop Only",
+      "tags": ["0x4002 (Mop)", "0x0003 (Low Noise)"]
+    },
+    {
+      "mode": "Rapid Vacuum and Mop",
+      "tags": ["0x0001 (Quick)", "0x4001 (Vacuum)", "0x4002 (Mop)"]
+    }
+  ]
+}

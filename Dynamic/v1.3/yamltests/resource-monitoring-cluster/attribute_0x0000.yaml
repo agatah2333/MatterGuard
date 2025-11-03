@@ -1,0 +1,327 @@
+config:
+  attribute: '0x0000'
+  cluster: 0xresource-monitoring-cluster
+  nodeId: '0x654231'
+  node_id: 305414945
+  endpoint: 1
+name: resource-monitoring-cluster_attribute_0x0000_v1.3.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`AvailableEndpoints` will be set to an empty list.'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AvailableEndpoints: []
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+  cluster: 0xresource-monitoring-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xresource-monitoring-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xRESOURCE
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xRESOURCE
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xRESOURCE
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xRESOURCE
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: '`AvailableEndpoints` will be set to a list containing 20 endpoint
+    numbers.'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AvailableEndpoints:
+    - 1
+    - 2
+    - 3
+    - '...'
+    - 20
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+  cluster: 0xresource-monitoring-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xresource-monitoring-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xRESOURCE
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xRESOURCE
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xRESOURCE
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xRESOURCE
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: '`AvailableEndpoints` will be set to a list containing a single
+    endpoint number.'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AvailableEndpoints:
+    - 1
+  label: Test_Case_Special_Response_-_Single_Endpoint
+  option: WriteAttribute
+  cluster: 0xresource-monitoring-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xresource-monitoring-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xRESOURCE
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xRESOURCE
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xRESOURCE
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xRESOURCE
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Error (Duplicate entries not allowed)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】 .'
+  arguments:
+    AvailableEndpoints:
+    - 1
+    - 1
+    - 2
+    - 2
+  label: Test_Case_Special_Response_-_Duplicate_Endpoints
+  option: WriteAttribute
+  cluster: 0xresource-monitoring-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xresource-monitoring-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xRESOURCE
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xRESOURCE
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xRESOURCE
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xRESOURCE
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+v13_validation:
+  strict_spec_compliance: true
+  validate_all_fields: true
+  check_conformance_requirements: true
+  validate_data_constraints: true
+  matter_version: 1.3.0.0
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

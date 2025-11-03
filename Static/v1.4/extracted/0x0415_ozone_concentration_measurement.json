@@ -1,0 +1,120 @@
+{
+  "source_file": "Ozone Concentration Measurement_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0415",
+        "name": "Ozone Concentration Measurement",
+        "description": "Monitors and reports ozone (O₃) concentration levels with environmental safety analytics",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "MeasuredValue",
+            "dataType": "float",
+            "valueRange": "MinMeasuredValue-MaxMeasuredValue",
+            "description": "Current ozone concentration measurement",
+            "privilege": "R",
+            "writable": true,
+            "unitConversion": {
+              "ppm_to_μg/m³": "value * 1960",
+              "ppb_to_μg/m³": "value * 1.96"
+            }
+          },
+          {
+            "id": "0x0003",
+            "name": "PeakMeasuredValue",
+            "dataType": "float",
+            "valueRange": "dynamic",
+            "description": "Maximum 1-hour average concentration",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0008",
+            "name": "MeasurementUnit",
+            "dataType": "MeasurementUnitEnum",
+            "valueRange": "0-7",
+            "description": "Concentration measurement unit",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x000A",
+            "name": "LevelValue",
+            "dataType": "LevelValueEnum",
+            "valueRange": "0-4",
+            "description": "Air quality impact level",
+            "privilege": "R",
+            "writable": true
+          }
+        ],
+        "dataTypes": {
+          "OzoneMeasurement": {
+            "baseType": "Struct",
+            "fields": {
+              "value": "float",
+              "unit": "MeasurementUnitEnum",
+              "uncertainty": "float",
+              "exposureDuration": "uint16"
+            }
+          },
+          "MeasurementUnitEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "ppm",
+              "1": "ppb",
+              "2": "μg/m³",
+              "3": "mg/m³",
+              "4-7": "Reserved"
+            }
+          },
+          "LevelValueEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Unknown",
+              "1": "Good (<0.05ppm)",
+              "2": "Moderate (0.05-0.07ppm)",
+              "3": "Unhealthy (0.07-0.1ppm)",
+              "4": "Hazardous (>0.1ppm)"
+            }
+          }
+        },
+        "safetyStandards": {
+          "EPA": {
+            "8hMax": 0.07,
+            "unit": "ppm"
+          },
+          "WHO": {
+            "guideline": 0.05,
+            "unit": "ppm"
+          },
+          "OSHA": {
+            "PEL": 0.1,
+            "unit": "ppm"
+          }
+        },
+        "analytics": {
+          "exposureRisk": {
+            "formula": "ERI = (C × T) / (TLV × 60)",
+            "interpretation": {
+              "<1": "Safe",
+              "1-2": "Caution",
+              ">2": "Danger"
+            }
+          }
+        },
+        "validationRules": [
+          {
+            "rule": "MaxMeasuredValue > MinMeasuredValue + measurementResolution",
+            "errorCode": "INVALID_RANGE"
+          },
+          {
+            "rule": "PeakMeasuredValueWindow ≤ 604800",
+            "errorCode": "WINDOW_EXCEEDED"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+config:
+  attribute: '0x0003'
+  cluster: operational-state-rvc-cluster
+  nodeId: '0x654231'
+name: operational-state-rvc-cluster_attribute_0x0003_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: "- `OperationalStateID`: 0x00\n  - `OperationalStateLabel`: \"\
+    \""
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    OperationalStateID: '0x00'
+    OperationalStateLabel: '""'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: "- `OperationalStateID`: 0x42\n  - `OperationalStateLabel`: \"\
+    Docked\""
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values and special responses for the `OperationalStateID`
+    and `OperationalStateLabel` fields of the `operational-state-rvc-cluster` cluster.
+
+
+    For more detailed information, you can refer to the Matter 1.2 Application Cluster
+    Specification document【4:0†source】.'
+  arguments:
+    OperationalStateID: '0x42'
+    OperationalStateLabel: '"Docked"'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

@@ -1,0 +1,149 @@
+{
+  "cluster_id": "0x0025",
+  "cluster_name": "Actions",
+  "section": "9.14",
+  "description": "This cluster provides a standardized way for a Node (typically a Bridge, but could be any Node) to expose • Information about logical grouping of endpoints on the Node (example: lights in a room) • Information about named actions that can be performed on such a group of endpoints (exam­ Matter Specification R1.3                        Connectivity Standards Alliance Document 23-27349 April 17, 2024",
+  "data_types": {
+    "CommandBits": {
+      "name": "CommandBits",
+      "definition_line": "9.14.4.1. CommandBits Type"
+    },
+    "ActionTypeEnum": {
+      "name": "ActionTypeEnum",
+      "definition_line": "9.14.4.2. ActionTypeEnum Type"
+    },
+    "ActionStateEnum": {
+      "name": "ActionStateEnum",
+      "definition_line": "9.14.4.3. ActionStateEnum Type"
+    },
+    "ActionErrorEnum": {
+      "name": "ActionErrorEnum",
+      "definition_line": "9.14.4.4. ActionErrorEnum Type"
+    },
+    "EndpointListTypeEnum": {
+      "name": "EndpointListTypeEnum",
+      "definition_line": "9.14.4.5. EndpointListTypeEnum Type"
+    },
+    "ActionStruct": {
+      "name": "ActionStruct",
+      "definition_line": "9.14.4.6. ActionStruct Type"
+    },
+    "EndpointListStruct": {
+      "name": "EndpointListStruct",
+      "definition_line": "9.14.4.7. EndpointListStruct Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "ActionList",
+      "details": "list[Action­ max 256 empty RV M",
+      "raw_line": "0x0000         ActionList list[Action­ max 256                           empty          RV         M"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "End­",
+      "details": "list[End­ max 256 empty RV M",
+      "raw_line": "0x0001         End­          list[End­     max 256                       empty          RV         M"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "SetupURL",
+      "details": "string max 512 empty RV O",
+      "raw_line": "0x0002         SetupURL string             max 512                       empty          RV         O"
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "InstantAction",
+      "details": "client ⇒ server Y O desc",
+      "raw_line": "0x00               InstantAction client ⇒ server Y                              O                 desc"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "InstantAction­",
+      "details": "client ⇒ server Y O desc",
+      "raw_line": "0x01               InstantAction­ client ⇒ server Y                             O                 desc"
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "StartAction",
+      "details": "client ⇒ server Y O desc",
+      "raw_line": "0x02               StartAction          client ⇒ server Y                       O                 desc"
+    },
+    "0x03": {
+      "id": "0x03",
+      "name": "StartAction­",
+      "details": "client ⇒ server Y O desc",
+      "raw_line": "0x03               StartAction­         client ⇒ server Y                       O                 desc"
+    },
+    "0x04": {
+      "id": "0x04",
+      "name": "StopAction",
+      "details": "client ⇒ server Y O desc",
+      "raw_line": "0x04               StopAction           client ⇒ server Y                       O                 desc"
+    },
+    "0x05": {
+      "id": "0x05",
+      "name": "PauseAction",
+      "details": "client ⇒ server Y O desc",
+      "raw_line": "0x05               PauseAction          client ⇒ server Y                       O                 desc"
+    },
+    "0x06": {
+      "id": "0x06",
+      "name": "PauseAction­",
+      "details": "client ⇒ server Y O desc",
+      "raw_line": "0x06               PauseAction­         client ⇒ server Y                       O                 desc"
+    },
+    "0x07": {
+      "id": "0x07",
+      "name": "ResumeAction",
+      "details": "client ⇒ server Y O desc",
+      "raw_line": "0x07               ResumeAction client ⇒ server Y                               O                 desc"
+    },
+    "0x08": {
+      "id": "0x08",
+      "name": "EnableAction",
+      "details": "client ⇒ server Y O desc",
+      "raw_line": "0x08               EnableAction         client ⇒ server Y                       O                 desc"
+    },
+    "0x09": {
+      "id": "0x09",
+      "name": "EnableAction­",
+      "details": "client ⇒ server Y O desc",
+      "raw_line": "0x09               EnableAction­ client ⇒ server Y                              O                 desc"
+    },
+    "0x0A": {
+      "id": "0x0A",
+      "name": "DisableAction",
+      "details": "client ⇒ server Y O desc",
+      "raw_line": "0x0A               DisableAction client ⇒ server Y                            O                 desc"
+    },
+    "0x0B": {
+      "id": "0x0B",
+      "name": "DisableAction­",
+      "details": "client ⇒ server Y O desc",
+      "raw_line": "0x0B               DisableAction­ client ⇒ server Y                           O                 desc"
+    }
+  },
+  "events": {
+    "0x00": {
+      "id": "0x00",
+      "name": "StateChanged",
+      "details": "INFO V M",
+      "raw_line": "0x00                   StateChanged           INFO                    V                         M"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "ActionFailed",
+      "details": "INFO V M",
+      "raw_line": "0x01                   ActionFailed           INFO                    V                         M"
+    }
+  },
+  "extraction_info": {
+    "start_line": 30727,
+    "end_line": 32458,
+    "total_lines": 1731
+  }
+}

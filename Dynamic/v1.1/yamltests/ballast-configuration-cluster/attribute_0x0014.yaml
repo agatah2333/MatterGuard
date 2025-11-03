@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0014'
+  cluster: ballast-configuration-cluster
+  nodeId: '0x654231'
+name: ballast-configuration-cluster_attribute_0x0014_v1.1.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`IntrinsicBallastFactor = 0`'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"IntrinsicBallastFactor"': 0}`
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`IntrinsicBallastFactor = 255`'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"IntrinsicBallastFactor"': 255}`
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`IntrinsicBallastFactor = null`'
+  ExpectedResponse: '`Invalid Value`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"IntrinsicBallastFactor"': null}`
+  label: Test_Case_Null_Value_(Special_Case)
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`IntrinsicBallastFactor = 128`'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: '`None`
+
+
+    These test cases cover the extreme values of the constraints of the field, as
+    well as a special response case for the null value, which indicates an invalid
+    value according to the specification【4:0†source】.'
+  arguments:
+    '{"IntrinsicBallastFactor"': 128}`
+  label: Test_Case_Typical_Valid_Value
+  option: WriteAttribute

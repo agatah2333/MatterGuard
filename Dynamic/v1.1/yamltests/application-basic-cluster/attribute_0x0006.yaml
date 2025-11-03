@@ -1,0 +1,51 @@
+config:
+  attribute: '0x0006'
+  cluster: application-basic-cluster
+  nodeId: '0x654231'
+name: application-basic-cluster_attribute_0x0006_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: ApplicationVersion set to an empty string
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ApplicationVersion"': '""}'
+  label: Test_Case_Minimum_Length_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: ApplicationVersion set to a string of 32 'A's
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ApplicationVersion"': '"A" * 32}'
+  label: Test_Case_Maximum_Length_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: Error (value exceeds maximum length constraint)
+  Pre-requisites: None
+  arguments:
+    '{"ApplicationVersion"': '"A" * 33}'
+  label: Test_Case_Exceeding_Maximum_Length_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: ApplicationVersion set to "!@#$%^&*()_+{}|:\"<>?"
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ApplicationVersion"': '"!@#$%^&*()_+{}|:\"<>?"}'
+  label: Test_Case_Special_Characters
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: ApplicationVersion set to "1234567890"
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    '{"ApplicationVersion"': '"1234567890"}'
+  label: Test_Case_Numeric_String
+  option: WriteAttribute

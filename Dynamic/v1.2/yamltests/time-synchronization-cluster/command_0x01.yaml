@@ -1,0 +1,26 @@
+config:
+  cluster: time-synchronization-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: time-synchronization-cluster_command_0x01_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  ExpectedResponse: SUCCESS
+  arguments: {}
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: Immediate
+  ExpectedResponse: SUCCESS
+  arguments: {}
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: Immediate
+  ExpectedResponse: TimeNotAccepted
+  arguments: {}
+  label: Test_Case_Special_Case_-_Invalid_NodeID
+  option: SendCommand
+- ActionTime: Immediate
+  ExpectedResponse: TimeNotAccepted
+  arguments: {}
+  label: Test_Case_Special_Case_-_Endpoint_Not_Present
+  option: SendCommand

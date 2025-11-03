@@ -1,0 +1,328 @@
+{
+  "source_file": "Time Synchronization_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0038",
+        "name": "Time Synchronization",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "UTCTime",
+            "dataType": "epoch-us",
+            "valueRange": "",
+            "description": "Current UTC time in microseconds since epoch",
+            "privilege": "Read",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "Granularity",
+            "dataType": "GranularityEnum",
+            "valueRange": "0-4",
+            "description": "Time synchronization accuracy level",
+            "privilege": "Read",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "TimeSource",
+            "dataType": "TimeSourceEnum",
+            "valueRange": "0-16",
+            "description": "Source of time synchronization",
+            "privilege": "Read",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "TrustedTimeSource",
+            "dataType": "TrustedTimeSourceStruct",
+            "valueRange": "",
+            "description": "Trusted time source configuration",
+            "privilege": "Read",
+            "writable": true
+          },
+          {
+            "id": "0x0004",
+            "name": "DefaultNTP",
+            "dataType": "string",
+            "valueRange": "max 128",
+            "description": "Default NTP server address",
+            "privilege": "Read",
+            "writable": true
+          },
+          {
+            "id": "0x0005",
+            "name": "TimeZone",
+            "dataType": "list[TimeZoneStruct]",
+            "valueRange": "1-2",
+            "description": "Time zone configuration entries",
+            "privilege": "Read",
+            "writable": true
+          },
+          {
+            "id": "0x0006",
+            "name": "DSTOffset",
+            "dataType": "list[DSTOffsetStruct]",
+            "valueRange": "",
+            "description": "Daylight saving time offsets",
+            "privilege": "Read",
+            "writable": true
+          },
+          {
+            "id": "0x0007",
+            "name": "LocalTime",
+            "dataType": "epoch-us",
+            "valueRange": "",
+            "description": "Computed local time in microseconds",
+            "privilege": "Read",
+            "writable": true
+          },
+          {
+            "id": "0x0008",
+            "name": "TimeZoneDatabase",
+            "dataType": "TimeZoneDatabaseEnum",
+            "valueRange": "0-2",
+            "description": "Time zone database availability",
+            "privilege": "Read",
+            "writable": true
+          },
+          {
+            "id": "0x0009",
+            "name": "NTPServerAvailable",
+            "dataType": "bool",
+            "valueRange": "",
+            "description": "NTP server operational status",
+            "privilege": "Read",
+            "writable": true
+          },
+          {
+            "id": "0x000A",
+            "name": "TimeZoneListMaxSize",
+            "dataType": "uint8",
+            "valueRange": "1-2",
+            "description": "Maximum time zone entries supported",
+            "privilege": "Read",
+            "writable": false
+          },
+          {
+            "id": "0x000B",
+            "name": "DSTOffsetListMaxSize",
+            "dataType": "uint8",
+            "valueRange": "min 1",
+            "description": "Maximum DST offset entries supported",
+            "privilege": "Read",
+            "writable": false
+          },
+          {
+            "id": "0x000C",
+            "name": "SupportsDNSResolve",
+            "dataType": "bool",
+            "valueRange": "",
+            "description": "DNS resolution capability status",
+            "privilege": "Read",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "SetUTCTime",
+            "parameters": {
+              "UTCTime": {
+                "dataType": "epoch-us",
+                "valueRange": ""
+              },
+              "Granularity": {
+                "dataType": "GranularityEnum",
+                "valueRange": "0-4"
+              },
+              "TimeSource": {
+                "dataType": "TimeSourceEnum",
+                "valueRange": "0-16"
+              }
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "SetTrustedTimeSource",
+            "parameters": {
+              "TrustedTimeSource": {
+                "dataType": "TrustedTimeSourceStruct",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "SetTimeZone",
+            "parameters": {
+              "TimeZone": {
+                "dataType": "list[TimeZoneStruct]",
+                "valueRange": "1-2"
+              }
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x04",
+            "name": "SetDSTOffset",
+            "parameters": {
+              "DSTOffset": {
+                "dataType": "list[DSTOffsetStruct]",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x05",
+            "name": "SetDefaultNTP",
+            "parameters": {
+              "DefaultNTP": {
+                "dataType": "string",
+                "valueRange": "max 128"
+              }
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "DSTTableEmpty",
+            "parameters": {
+              "dataType": "None",
+              "valueRange": "",
+              "description": "DST offset list empty notification"
+            },
+            "privilege": "Info",
+            "side": "server"
+          },
+          {
+            "id": "0x01",
+            "name": "DSTStatus",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "DSTOffsetActive: bool",
+              "description": "Daylight saving time application status"
+            },
+            "privilege": "Read",
+            "side": "server"
+          },
+          {
+            "id": "0x02",
+            "name": "TimeZoneStatus",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "Offset: int32(-43200-50400), Name: string(64)",
+              "description": "Current time zone information"
+            },
+            "privilege": "Read",
+            "side": "server"
+          },
+          {
+            "id": "0x03",
+            "name": "TimeFailure",
+            "parameters": {
+              "dataType": "None",
+              "valueRange": "",
+              "description": "Time synchronization failure alert"
+            },
+            "privilege": "Read",
+            "side": "server"
+          },
+          {
+            "id": "0x04",
+            "name": "MissingTrustedTimeSource",
+            "parameters": {
+              "dataType": "None",
+              "valueRange": "",
+              "description": "Trusted time source unavailable"
+            },
+            "privilege": "Read",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "GranularityEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "NoTimeGranularity",
+              "1": "MinutesGranularity",
+              "2": "SecondsGranularity",
+              "3": "MillisecondsGranularity",
+              "4": "MicrosecondsGranularity"
+            }
+          },
+          "TimeSourceEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "None",
+              "1": "Unknown",
+              "2": "Admin",
+              "3": "NodeTimeCluster",
+              "4": "SNTP",
+              "5": "GPS",
+              "6": "TerrestrialRadio",
+              "7": "Cellular",
+              "8": "NTP",
+              "9": "MANET",
+              "10": "CDMA",
+              "11": "FTSP",
+              "12": "DCF77",
+              "13": "MSF",
+              "14": "WWVB",
+              "15": "IRIG",
+              "16": "PowerLine"
+            }
+          },
+          "TimeZoneDatabaseEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "None",
+              "1": "Partial",
+              "2": "Full"
+            }
+          },
+          "TrustedTimeSourceStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "FabricIndex": "fabric-idx",
+              "NodeID": "node-id",
+              "Endpoint": "endpoint-no"
+            }
+          },
+          "TimeZoneStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "Offset": "int32",
+              "ValidAt": "epoch-us",
+              "Name": "string(64)"
+            }
+          },
+          "DSTOffsetStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "Offset": "int32",
+              "ValidStarting": "epoch-us",
+              "ValidUntil": "epoch-us"
+            }
+          },
+          "epoch-us": {
+            "baseType": "uint64",
+            "description": "Microseconds since 2000-01-01T00:00:00Z"
+          }
+        }
+      }
+    ]
+  }
+}

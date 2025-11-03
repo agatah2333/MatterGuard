@@ -1,0 +1,28 @@
+config:
+  attribute: '0x0007'
+  cluster: fan-control-cluster
+  nodeId: '0x654231'
+name: fan-control-cluster_attribute_0x0007_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: RockSupport = 0
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"RockSupport"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: RockSupport = 1
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"RockSupport"': 1}
+  label: Test_Case_Special_Responses_Based_on_Description
+  option: WriteAttribute

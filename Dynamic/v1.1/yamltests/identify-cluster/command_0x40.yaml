@@ -1,0 +1,6 @@
+config:
+  cluster: identify-cluster
+  command: '0x40'
+  nodeId: '0x654231'
+name: identify-cluster_command_0x40_v1.1.0.0
+tests: []

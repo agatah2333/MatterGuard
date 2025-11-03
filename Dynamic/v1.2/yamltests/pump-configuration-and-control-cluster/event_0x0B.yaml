@@ -1,0 +1,30 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x0B'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x0B_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '- `PumpStatus`: Bit corresponding to ElectronicNonFatalFailure
+    set to 1'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    ErrorState: 0 (minimum value)
+  label: Test_Case_Extreme_Value_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: '- `PumpStatus`: Bit corresponding to ElectronicNonFatalFailure
+    set to 1'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the `ErrorState` field and ensure
+    that the system responds correctly to both the minimum and maximum values. The
+    expected response is a successful update of the `PumpStatus` attribute to reflect
+    the non-fatal electronic failure.'
+  arguments:
+    ErrorState: 255 (maximum value)
+  label: Test_Case_Special_Response_Value
+  option: SubscribeToEvent

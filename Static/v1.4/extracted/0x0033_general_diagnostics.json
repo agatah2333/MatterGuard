@@ -1,0 +1,583 @@
+{
+  "id": "0x0033",
+  "name": "General Diagnostics",
+  "description": "The General Diagnostics Cluster, along with other diagnostics clusters, provide a means to acquire standardized diagnostics metrics that MAY be used by a Node to assist a user or Administrator in diagnosing potential problems.",
+  "revision": 2,
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Utility",
+    "scope": "Node",
+    "pics_code": "DGGEN"
+  },
+  "features": [
+    {
+      "bit": 0,
+      "code": "DMTEST",
+      "name": "DataModelTest",
+      "conformance": "desc",
+      "summary": "Support specific testing needs for extended Data Model features"
+    }
+  ],
+  "data_types": {
+    "enums": [
+      {
+        "name": "HardwareFaultEnum",
+        "type": "enum8",
+        "values": [
+          {
+            "value": 0,
+            "name": "Unspecified",
+            "summary": "The Node has encountered an unspecified fault.",
+            "conformance": "M"
+          },
+          {
+            "value": 1,
+            "name": "Radio",
+            "summary": "The Node has encountered a fault with at least one of its radios.",
+            "conformance": "O"
+          },
+          {
+            "value": 2,
+            "name": "Sensor",
+            "summary": "The Node has encountered a fault with at least one of its sensors.",
+            "conformance": "O"
+          },
+          {
+            "value": 3,
+            "name": "ResettableOverTemp",
+            "summary": "The Node has encountered an over-temperature fault that is resettable.",
+            "conformance": "O"
+          },
+          {
+            "value": 4,
+            "name": "NonResettableOverTemp",
+            "summary": "The Node has encountered an over-temperature fault that is not resettable.",
+            "conformance": "O"
+          },
+          {
+            "value": 5,
+            "name": "PowerSource",
+            "summary": "The Node has encountered a fault with at least one of its power sources.",
+            "conformance": "O"
+          },
+          {
+            "value": 6,
+            "name": "VisualDisplayFault",
+            "summary": "The Node has encountered a fault with at least one of its visual displays.",
+            "conformance": "O"
+          },
+          {
+            "value": 7,
+            "name": "AudioOutputFault",
+            "summary": "The Node has encountered a fault with at least one of its audio outputs.",
+            "conformance": "O"
+          },
+          {
+            "value": 8,
+            "name": "UserInterfaceFault",
+            "summary": "The Node has encountered a fault with at least one of its user interfaces.",
+            "conformance": "O"
+          },
+          {
+            "value": 9,
+            "name": "NonVolatileMemoryError",
+            "summary": "The Node has encountered a fault with its non-volatile memory.",
+            "conformance": "O"
+          },
+          {
+            "value": 10,
+            "name": "TamperDetected",
+            "summary": "The Node has encountered disallowed physical tampering.",
+            "conformance": "O"
+          }
+        ]
+      },
+      {
+        "name": "RadioFaultEnum",
+        "type": "enum8",
+        "values": [
+          {
+            "value": 0,
+            "name": "Unspecified",
+            "summary": "The Node has encountered an unspecified radio fault.",
+            "conformance": "M"
+          },
+          {
+            "value": 1,
+            "name": "WiFiFault",
+            "summary": "The Node has encountered a fault with its Wi-Fi radio.",
+            "conformance": "O"
+          },
+          {
+            "value": 2,
+            "name": "CellularFault",
+            "summary": "The Node has encountered a fault with its cellular radio.",
+            "conformance": "O"
+          },
+          {
+            "value": 3,
+            "name": "ThreadFault",
+            "summary": "The Node has encountered a fault with its 802.15.4 radio.",
+            "conformance": "O"
+          },
+          {
+            "value": 4,
+            "name": "NFCFault",
+            "summary": "The Node has encountered a fault with its NFC radio.",
+            "conformance": "O"
+          },
+          {
+            "value": 5,
+            "name": "BLEFault",
+            "summary": "The Node has encountered a fault with its BLE radio.",
+            "conformance": "O"
+          },
+          {
+            "value": 6,
+            "name": "EthernetFault",
+            "summary": "The Node has encountered a fault with its Ethernet controller.",
+            "conformance": "O"
+          }
+        ]
+      },
+      {
+        "name": "NetworkFaultEnum",
+        "type": "enum8",
+        "values": [
+          {
+            "value": 0,
+            "name": "Unspecified",
+            "summary": "The Node has encountered an unspecified fault.",
+            "conformance": "M"
+          },
+          {
+            "value": 1,
+            "name": "HardwareFailure",
+            "summary": "The Node has encountered a network fault as a result of a hardware failure.",
+            "conformance": "O"
+          },
+          {
+            "value": 2,
+            "name": "NetworkJammed",
+            "summary": "The Node has encountered a network fault as a result of a jammed network.",
+            "conformance": "O"
+          },
+          {
+            "value": 3,
+            "name": "ConnectionFailed",
+            "summary": "The Node has encountered a network fault as a result of a failure to establish a connection.",
+            "conformance": "O"
+          }
+        ]
+      },
+      {
+        "name": "InterfaceTypeEnum",
+        "type": "enum8",
+        "values": [
+          {
+            "value": 0,
+            "name": "Unspecified",
+            "summary": "Indicates an interface of an unspecified type.",
+            "conformance": "M"
+          },
+          {
+            "value": 1,
+            "name": "WiFi",
+            "summary": "Indicates a Wi-Fi interface.",
+            "conformance": "O"
+          },
+          {
+            "value": 2,
+            "name": "Ethernet",
+            "summary": "Indicates a Ethernet interface.",
+            "conformance": "O"
+          },
+          {
+            "value": 3,
+            "name": "Cellular",
+            "summary": "Indicates a Cellular interface.",
+            "conformance": "O"
+          },
+          {
+            "value": 4,
+            "name": "Thread",
+            "summary": "Indicates a Thread interface.",
+            "conformance": "O"
+          }
+        ]
+      },
+      {
+        "name": "BootReasonEnum",
+        "type": "enum8",
+        "values": [
+          {
+            "value": 0,
+            "name": "Unspecified",
+            "summary": "The Node is unable to identify the Power-On reason as one of the other provided enumeration values.",
+            "conformance": "M"
+          },
+          {
+            "value": 1,
+            "name": "PowerOnReboot",
+            "summary": "The Node has booted as the result of physical interaction with the device resulting in a reboot.",
+            "conformance": "M"
+          },
+          {
+            "value": 2,
+            "name": "BrownOutReset",
+            "summary": "The Node has rebooted as the result of a brown-out of the Node's power supply.",
+            "conformance": "M"
+          },
+          {
+            "value": 3,
+            "name": "SoftwareWatchdogReset",
+            "summary": "The Node has rebooted as the result of a software watchdog timer.",
+            "conformance": "M"
+          },
+          {
+            "value": 4,
+            "name": "HardwareWatchdogReset",
+            "summary": "The Node has rebooted as the result of a hardware watchdog timer.",
+            "conformance": "M"
+          },
+          {
+            "value": 5,
+            "name": "SoftwareUpdateCompleted",
+            "summary": "The Node has rebooted as the result of a completed software update.",
+            "conformance": "M"
+          },
+          {
+            "value": 6,
+            "name": "SoftwareReset",
+            "summary": "The Node has rebooted as the result of a software initiated reboot.",
+            "conformance": "M"
+          }
+        ]
+      }
+    ],
+    "structs": [
+      {
+        "name": "NetworkInterface",
+        "fields": [
+          {
+            "id": 0,
+            "name": "Name",
+            "type": "string",
+            "constraint": "max 32",
+            "conformance": "M"
+          },
+          {
+            "id": 1,
+            "name": "IsOperational",
+            "type": "bool",
+            "conformance": "M"
+          },
+          {
+            "id": 2,
+            "name": "OffPremiseServicesReachableIPv4",
+            "type": "bool",
+            "quality": "X",
+            "default": "null",
+            "conformance": "M"
+          },
+          {
+            "id": 3,
+            "name": "OffPremiseServicesReachableIPv6",
+            "type": "bool",
+            "quality": "X",
+            "default": "null",
+            "conformance": "M"
+          },
+          {
+            "id": 4,
+            "name": "HardwareAddress",
+            "type": "HardwareAddress",
+            "conformance": "M"
+          },
+          {
+            "id": 5,
+            "name": "IPv4Addresses",
+            "type": "list[ipv4adr]",
+            "constraint": "max 4",
+            "conformance": "M"
+          },
+          {
+            "id": 6,
+            "name": "IPv6Addresses",
+            "type": "list[ipv6adr]",
+            "constraint": "max 8",
+            "conformance": "M"
+          },
+          {
+            "id": 7,
+            "name": "Type",
+            "type": "InterfaceTypeEnum",
+            "conformance": "M"
+          }
+        ]
+      }
+    ]
+  },
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "NetworkInterfaces",
+      "type": "list[NetworkInterface]",
+      "constraint": "max 8",
+      "access": "RV",
+      "conformance": "M"
+    },
+    {
+      "id": "0x0001",
+      "name": "RebootCount",
+      "type": "uint16",
+      "quality": "N",
+      "access": "RV",
+      "conformance": "M"
+    },
+    {
+      "id": "0x0002",
+      "name": "UpTime",
+      "type": "uint64",
+      "quality": "C",
+      "access": "RV",
+      "conformance": "M"
+    },
+    {
+      "id": "0x0003",
+      "name": "TotalOperationalHours",
+      "type": "uint32",
+      "quality": "NC",
+      "access": "RV",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0004",
+      "name": "BootReason",
+      "type": "BootReasonEnum",
+      "access": "RV",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0005",
+      "name": "ActiveHardwareFaults",
+      "type": "list[HardwareFaultEnum]",
+      "constraint": "max 11",
+      "access": "RV",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0006",
+      "name": "ActiveRadioFaults",
+      "type": "list[RadioFaultEnum]",
+      "constraint": "max 7",
+      "access": "RV",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0007",
+      "name": "ActiveNetworkFaults",
+      "type": "list[NetworkFaultEnum]",
+      "constraint": "max 4",
+      "access": "RV",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0008",
+      "name": "TestEventTriggersEnabled",
+      "type": "bool",
+      "constraint": "all",
+      "access": "RV",
+      "conformance": "M"
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "TestEventTrigger",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "M",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": 0,
+          "name": "EnableKey",
+          "type": "octstr",
+          "constraint": "16",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "EventTrigger",
+          "type": "uint64",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x01",
+      "name": "TimeSnapshot",
+      "direction": "client => server",
+      "response": "TimeSnapshotResponse",
+      "access": "O",
+      "conformance": "M"
+    },
+    {
+      "id": "0x02",
+      "name": "TimeSnapshotResponse",
+      "direction": "client <= server",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0x00",
+          "name": "SystemTimeMs",
+          "type": "system-ms",
+          "constraint": "all",
+          "default": "MS",
+          "conformance": "M"
+        },
+        {
+          "id": "0x01",
+          "name": "PosixTimeMs",
+          "type": "posix-ms",
+          "constraint": "all",
+          "quality": "X",
+          "default": "null",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x03",
+      "name": "PayloadTestRequest",
+      "direction": "client => server",
+      "response": "PayloadTestResponse",
+      "access": "M",
+      "conformance": "DMTEST",
+      "fields": [
+        {
+          "id": "0x00",
+          "name": "EnableKey",
+          "type": "octstr",
+          "constraint": "16",
+          "conformance": "M"
+        },
+        {
+          "id": "0x01",
+          "name": "Value",
+          "type": "uint8",
+          "conformance": "M"
+        },
+        {
+          "id": "0x02",
+          "name": "Count",
+          "type": "uint16",
+          "constraint": "max 2048",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x04",
+      "name": "PayloadTestResponse",
+      "direction": "server => client",
+      "conformance": "DMTEST",
+      "fields": [
+        {
+          "id": "0x00",
+          "name": "Payload",
+          "type": "octstr",
+          "constraint": "max 2048",
+          "conformance": "M"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "0x00",
+      "name": "HardwareFaultChange",
+      "priority": "CRITICAL",
+      "access": "V",
+      "conformance": "O",
+      "fields": [
+        {
+          "id": 0,
+          "name": "Current",
+          "type": "list[HardwareFaultEnum]",
+          "constraint": "max 11",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "Previous",
+          "type": "list[HardwareFaultEnum]",
+          "constraint": "max 11",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x01",
+      "name": "RadioFaultChange",
+      "priority": "CRITICAL",
+      "access": "V",
+      "conformance": "O",
+      "fields": [
+        {
+          "id": 0,
+          "name": "Current",
+          "type": "list[RadioFaultEnum]",
+          "constraint": "max 7",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "Previous",
+          "type": "list[RadioFaultEnum]",
+          "constraint": "max 7",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x02",
+      "name": "NetworkFaultChange",
+      "priority": "CRITICAL",
+      "access": "V",
+      "conformance": "O",
+      "fields": [
+        {
+          "id": 0,
+          "name": "Current",
+          "type": "list[NetworkFaultEnum]",
+          "constraint": "max 4",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "Previous",
+          "type": "list[NetworkFaultEnum]",
+          "constraint": "max 4",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "id": "0x03",
+      "name": "BootReason",
+      "priority": "CRITICAL",
+      "access": "V",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": 0,
+          "name": "BootReason",
+          "type": "BootReasonEnum",
+          "conformance": "M"
+        }
+      ]
+    }
+  ]
+}

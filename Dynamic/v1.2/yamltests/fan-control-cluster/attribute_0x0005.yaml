@@ -1,0 +1,41 @@
+config:
+  attribute: '0x0005'
+  cluster: fan-control-cluster
+  nodeId: '0x654231'
+name: fan-control-cluster_attribute_0x0005_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `FanMode`: Off'
+  ExpectedResponse: Success
+  Pre-requisites: '`SpeedMax` should be greater than or equal to 1'
+  arguments:
+    SpeedSetting: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `FanMode`: High'
+  ExpectedResponse: Success
+  Pre-requisites: '`SpeedMax` should be set to a valid maximum speed value'
+  arguments:
+    SpeedSetting: '`SpeedMax`'
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `FanMode`: No change'
+  ExpectedResponse: No change in `SpeedSetting`
+  Pre-requisites: '`SpeedSetting` should be writable'
+  arguments: {}
+  label: Test_Case_Special_Response_-_Auto_Mode
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `FanMode`: Off'
+  ExpectedResponse: Success
+  Pre-requisites: '`SpeedMax` should be greater than or equal to 1
+
+
+    These test cases cover the extreme values of the `SpeedSetting` attribute and
+    the special responses as per the provided context【4:0†source】【4:6†source】【4:10†source】.'
+  arguments:
+    SpeedSetting: 0
+  label: Test_Case_Special_Response_-_Off_Mode
+  option: WriteAttribute

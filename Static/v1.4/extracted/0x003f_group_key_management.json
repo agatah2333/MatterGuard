@@ -1,0 +1,412 @@
+{
+  "cluster_id": "0x003F",
+  "cluster_name": "GroupKeyManagement",
+  "cluster_description": "The Group Key Management cluster manages group keys for the node. The cluster is scoped to the node and is a singleton for the node. This cluster maintains a list of groups supported by the node. Each group list entry supports a single group, with a single group ID and single group key. Duplicate groups are not allowed in the list. Additions or removal of a group entry are performed via modifications of the list. Such modifications require Administer privilege.",
+  "revision_history": [
+    {
+      "revision": 1,
+      "description": "Initial revision"
+    },
+    {
+      "revision": 2,
+      "description": "Clarify KeySetWrite validation and behavior on invalid epoch key lengths"
+    }
+  ],
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Utility",
+    "scope": "Node",
+    "pics_code": "GRPKEY",
+    "quality": ""
+  },
+  "features": {
+    "CS": {
+      "bit": 0,
+      "name": "CacheAndSync",
+      "summary": "The ability to support CacheAndSync security policy and MCSP.",
+      "conformance": "P"
+    }
+  },
+  "data_types": {
+    "GroupKeySecurityPolicyEnum": {
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "TrustFirst",
+          "summary": "Message counter synchronization using trust-first",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "CacheAndSync",
+          "summary": "Message counter synchronization using cache-and-sync",
+          "conformance": "CS"
+        }
+      ]
+    },
+    "GroupKeyMulticastPolicyEnum": {
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "PerGroupID",
+          "summary": "Indicates filtering of multicast messages for a specific Group ID",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "AllNodes",
+          "summary": "Indicates not filtering of multicast messages",
+          "conformance": "M"
+        }
+      ]
+    },
+    "GroupKeyMapStruct": {
+      "type": "struct",
+      "access_quality": "Fabric Scoped",
+      "fields": [
+        {
+          "id": 1,
+          "name": "GroupId",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field uniquely identifies the group within the scope of the given Fabric."
+        },
+        {
+          "id": 2,
+          "name": "GroupKeySetID",
+          "type": "uint16",
+          "constraint": "1 to 65535",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field references the set of group keys that generate operational group keys for use with this group, as specified in Group Key Set ID. A GroupKeyMapStruct SHALL NOT accept GroupKeySetID of 0, which is reserved for the IPK."
+        }
+      ]
+    },
+    "GroupKeySetStruct": {
+      "type": "struct",
+      "fields": [
+        {
+          "id": 0,
+          "name": "GroupKeySetID",
+          "type": "uint16",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field SHALL provide the fabric-unique index for the associated group key set, as specified in Group Key Set ID."
+        },
+        {
+          "id": 1,
+          "name": "GroupKeySecurityPolicy",
+          "type": "GroupKeySecurityPolicyEnum",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "access": "S",
+          "conformance": "M",
+          "description": "This field SHALL provide the security policy for an operational group key set. When CacheAndSync is not supported in the FeatureMap of this cluster, any action attempting to set CacheAndSync in the GroupKeySecurityPolicy field SHALL fail with an INVALID_COMMAND error."
+        },
+        {
+          "id": 2,
+          "name": "EpochKey0",
+          "type": "octstr",
+          "constraint": "16",
+          "quality": "X",
+          "default": "",
+          "access": "S",
+          "conformance": "M",
+          "description": "This field, if not null, SHALL be the root credential used in the derivation of an operational group key for epoch slot 0 of the given group key set. If EpochKey0 is not null, EpochStartTime0 SHALL NOT be null."
+        },
+        {
+          "id": 3,
+          "name": "EpochStartTime0",
+          "type": "epoch-us",
+          "constraint": "all",
+          "quality": "X",
+          "default": "",
+          "access": "S",
+          "conformance": "M",
+          "description": "This field, if not null, SHALL define when EpochKey0 becomes valid as specified by Epoch Keys. Units are absolute UTC time in microseconds encoded using the epoch-us representation."
+        },
+        {
+          "id": 4,
+          "name": "EpochKey1",
+          "type": "octstr",
+          "constraint": "16",
+          "quality": "X",
+          "default": "",
+          "access": "S",
+          "conformance": "M",
+          "description": "This field, if not null, SHALL be the root credential used in the derivation of an operational group key for epoch slot 1 of the given group key set. If EpochKey1 is not null, EpochStartTime1 SHALL NOT be null."
+        },
+        {
+          "id": 5,
+          "name": "EpochStartTime1",
+          "type": "epoch-us",
+          "constraint": "all",
+          "quality": "X",
+          "default": "",
+          "access": "S",
+          "conformance": "M",
+          "description": "This field, if not null, SHALL define when EpochKey1 becomes valid as specified by Epoch Keys. Units are absolute UTC time in microseconds encoded using the epoch-us representation."
+        },
+        {
+          "id": 6,
+          "name": "EpochKey2",
+          "type": "octstr",
+          "constraint": "16",
+          "quality": "X",
+          "default": "",
+          "access": "S",
+          "conformance": "M",
+          "description": "This field, if not null, SHALL be the root credential used in the derivation of an operational group key for epoch slot 2 of the given group key set. If EpochKey2 is not null, EpochStartTime2 SHALL NOT be null."
+        },
+        {
+          "id": 7,
+          "name": "EpochStartTime2",
+          "type": "epoch-us",
+          "constraint": "all",
+          "quality": "X",
+          "default": "",
+          "access": "S",
+          "conformance": "M",
+          "description": "This field, if not null, SHALL define when EpochKey2 becomes valid as specified by Epoch Keys. Units are absolute UTC time in microseconds encoded using the epoch-us representation."
+        },
+        {
+          "id": 8,
+          "name": "GroupKeyMulticastPolicy",
+          "type": "GroupKeyMulticastPolicyEnum",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "access": "S",
+          "conformance": "P, M",
+          "description": "This field specifies how the IPv6 Multicast Address SHALL be formed for groups using this operational group key set. The PerGroupID method maximizes filtering of multicast messages, so that receiving nodes receive only multicast messages for groups to which they are subscribed. The AllNodes method minimizes the number of multicast addresses to which a receiver node needs to subscribe."
+        }
+      ]
+    },
+    "GroupInfoMapStruct": {
+      "type": "struct",
+      "access_quality": "Fabric Scoped",
+      "fields": [
+        {
+          "id": 1,
+          "name": "GroupId",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field uniquely identifies the group within the scope of the given Fabric."
+        },
+        {
+          "id": 2,
+          "name": "Endpoints",
+          "type": "list[endpoint-no]",
+          "constraint": "min 1",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M",
+          "description": "This field provides the list of Endpoint IDs on the Node to which messages to this group SHALL be forwarded."
+        },
+        {
+          "id": 3,
+          "name": "GroupName",
+          "type": "string",
+          "constraint": "max 16",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "O",
+          "description": "This field provides a name for the group. This field SHALL contain the last GroupName written for a given GroupId on any Endpoint via the Groups cluster."
+        }
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "GroupKeyMap",
+      "type": "list[GroupKeyMapStruct]",
+      "constraint": "desc",
+      "quality": "N",
+      "default": "empty",
+      "access": "RW VM F",
+      "conformance": "M",
+      "description": "This attribute is a list of GroupKeyMapStruct entries. Each entry associates a logical Group Id with a particular group key set."
+    },
+    {
+      "id": "0x0001",
+      "name": "GroupTable",
+      "type": "list[GroupInfoMapStruct]",
+      "constraint": "desc",
+      "quality": "",
+      "default": "empty",
+      "access": "RVF",
+      "conformance": "M",
+      "description": "This attribute is a list of GroupInfoMapStruct entries. Each entry provides read-only information about how a given logical Group ID maps to a particular set of endpoints, and a name for the group. The content of this attribute reflects data managed via the Groups cluster, and is in general terms referred to as the 'node-wide Group Table'. The GroupTable SHALL NOT contain any entry whose GroupInfoMapStruct has an empty Endpoints list."
+    },
+    {
+      "id": "0x0002",
+      "name": "MaxGroupsPerFabric",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "F",
+      "default": "0",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate the maximum number of groups that this node supports per fabric. The value of this attribute SHALL be set to be no less than the required minimum supported groups as specified in Group Limits. The length of the GroupKeyMap and GroupTable list attributes SHALL NOT exceed the value of the MaxGroupsPerFabric attribute multiplied by the number of supported fabrics."
+    },
+    {
+      "id": "0x0003",
+      "name": "MaxGroupKeysPerFabric",
+      "type": "uint16",
+      "constraint": "1 to 65535",
+      "quality": "F",
+      "default": "1",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate the maximum number of group key sets this node supports per fabric. The value of this attribute SHALL be set according to the minimum number of group key sets to support as specified in Group Limits."
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "KeySetWrite",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "AF",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": 0,
+          "name": "GroupKeySet",
+          "type": "GroupKeySetStruct",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL contain the Group Key Set to write or update."
+        }
+      ],
+      "description": "This command is used by Administrators to set the state of a given Group Key Set, including atomically updating the state of all epoch keys. All commands in this cluster SHALL be scoped to the accessing fabric."
+    },
+    {
+      "id": "0x01",
+      "name": "KeySetRead",
+      "direction": "client ⇒ server",
+      "response": "KeySetReadResponse",
+      "access": "AF",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": 0,
+          "name": "GroupKeySetID",
+          "type": "uint16",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the Group Key Set ID to read."
+        }
+      ],
+      "description": "This command is used by Administrators to read the state of a given Group Key Set. If there exists a Group Key Set associated with the accessing fabric which has the same GroupKeySetID as that provided in the GroupKeySetID field, then the contents of that Group Key Set SHALL be sent in a KeySetReadResponse command, but with the EpochKey0, EpochKey1 and EpochKey2 fields replaced by null."
+    },
+    {
+      "id": "0x02",
+      "name": "KeySetReadResponse",
+      "direction": "client ⇐ server",
+      "response": "N",
+      "access": "",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": 0,
+          "name": "GroupKeySet",
+          "type": "GroupKeySetStruct",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL contain the configuration of the requested Group Key Set, with the EpochKey0, EpochKey1 and EpochKey2 key contents replaced by null."
+        }
+      ],
+      "description": "This command SHALL be generated in response to the KeySetRead command, if a valid Group Key Set was found. It SHALL contain the configuration of the requested Group Key Set, with the EpochKey0, EpochKey1 and EpochKey2 key contents replaced by null."
+    },
+    {
+      "id": "0x03",
+      "name": "KeySetRemove",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "AF",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": 0,
+          "name": "GroupKeySetID",
+          "type": "uint16",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL specify the Group Key Set ID to remove."
+        }
+      ],
+      "description": "This command is used by Administrators to remove all state of a given Group Key Set. If there exists a Group Key Set associated with the accessing fabric which has the same GroupKeySetID as that provided in the GroupKeySetID field, then the contents of that Group Key Set SHALL be removed, including all epoch keys it contains. This command SHALL fail with an INVALID_COMMAND status code if the GroupKeySetID being removed is 0, which is the Key Set associated with the Identity Protection Key (IPK)."
+    },
+    {
+      "id": "0x04",
+      "name": "KeySetReadAllIndices",
+      "direction": "client ⇒ server",
+      "response": "KeySetReadAllIndicesResponse",
+      "access": "AF",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": 0,
+          "name": "DoNotUse",
+          "type": "",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "conformance": "X",
+          "description": "This field is not used."
+        }
+      ],
+      "description": "This command is used by Administrators to query a list of all Group Key Sets associated with the accessing fabric. Upon receipt, this command SHALL iterate all stored GroupKeySetStruct associated with the accessing fabric and generate a KeySetReadAllIndicesResponse command containing the list of GroupKeySetID values from those structs."
+    },
+    {
+      "id": "0x05",
+      "name": "KeySetReadAllIndicesResponse",
+      "direction": "client ⇐ server",
+      "response": "N",
+      "access": "",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": 0,
+          "name": "GroupKeySetIDs",
+          "type": "list[uint16]",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field references the set of group keys that generate operational group keys for use with the accessing fabric. Each entry in GroupKeySetIDs is a GroupKeySetID field."
+        }
+      ],
+      "description": "This command SHALL be generated in response to KeySetReadAllIndices and it SHALL contain the list of GroupKeySetID for all Group Key Sets associated with the scoped Fabric."
+    }
+  ],
+  "events": []
+}

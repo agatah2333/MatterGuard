@@ -1,0 +1,48 @@
+config:
+  cluster: rvc-clean-mode-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: rvc-clean-mode-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentMode`: 0x00'
+  ExpectedResponse: "- `Status`: 0x00 (Success)\n  - `StatusText`: \"Mode changed\
+    \ successfully\""
+  Pre-requisites: '- The mode 0x00 should be a valid mode in the `SupportedMode` attribute
+    list.'
+  arguments:
+    NewMode: '0x00'
+  label: Test_Case_Minimum_Value_of_NewMode
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '- None'
+  ExpectedResponse: "- `Status`: 0x01 (UnsupportedMode)\n  - `StatusText`: \"\""
+  Pre-requisites: '- The mode 0xFF should not be in the `SupportedMode` attribute
+    list.'
+  arguments:
+    NewMode: '0xFF'
+  label: Test_Case_Maximum_Value_of_NewMode
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '- None'
+  ExpectedResponse: "- `Status`: 0x40 (CleaningInProgress)\n  - `StatusText`: \"Cleaning\
+    \ is currently in progress\""
+  Pre-requisites: '- The device should be in a state where cleaning is already in
+    progress.'
+  arguments:
+    NewMode: '0x40'
+  label: Test_Case_Special_Response_-_Cleaning_in_Progress
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '- None'
+  ExpectedResponse: "- `Status`: 0x43 (DustBinFull)\n  - `StatusText`: \"Dust bin\
+    \ is full, please empty it\""
+  Pre-requisites: '- The device should detect that the dust bin is full.
+
+
+    These test cases cover the extreme values of the `NewMode` field and special responses
+    as per the provided context【4:0†source】【4:3†source】【4:6†source】【4:14†source】.'
+  arguments:
+    NewMode: '0x43'
+  label: Test_Case_Special_Response_-_Dust_Bin_Full
+  option: SendCommand

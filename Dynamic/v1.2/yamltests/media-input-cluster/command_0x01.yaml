@@ -1,0 +1,43 @@
+config:
+  cluster: media-input-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: media-input-cluster_command_0x01_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '{"PlaybackState": 1}'
+  ExpectedResponse: Success
+  Pre-requisites: Media is currently playing.
+  arguments:
+    '{"PlaybackState"': 0}
+  label: Test_Case_Minimum_Value_of_PlaybackState
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: InvalidStateForCommand
+  Pre-requisites: Media is currently buffering.
+  arguments:
+    '{"PlaybackState"': 3}
+  label: Test_Case_Maximum_Value_of_PlaybackState
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: InvalidStateForCommand
+  Pre-requisites: Media is not currently playing.
+  arguments:
+    '{"PlaybackState"': 2}
+  label: Test_Case_Special_Response_-_Media_Not_Playing
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: '{"PlaybackState": 1}'
+  ExpectedResponse: Success
+  Pre-requisites: 'Media is currently paused.
+
+
+    These test cases cover the extreme values of the `PlaybackState` field and the
+    special responses as mentioned in the description of the effect of the `Pause`
+    command【4:0†source】【4:13†source】【4:14†source】.'
+  arguments:
+    '{"PlaybackState"': 1}
+  label: Test_Case_Special_Response_-_Media_Paused
+  option: SendCommand

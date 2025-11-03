@@ -1,0 +1,39 @@
+config:
+  attribute: '0x0000'
+  cluster: refrigerator-and-temperature-controlled-cabinet-mode-cluster
+  nodeId: '0x654231'
+name: refrigerator-and-temperature-controlled-cabinet-mode-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: SupportedModes will include modes with tags Auto, RapidCool, and
+    RapidFreeze.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    Mode:
+    - Auto
+    - RapidCool
+    - RapidFreeze
+    ModeTags:
+    - 0
+    - 16384
+    - 16385
+  label: Test_Case_Extreme_Values
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: SupportedModes will not change due to the invalid mode tag.
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values and special responses for the `SupportedModes`
+    attribute in the "Refrigerator and Temperature Controlled Cabinet Mode" cluster【4:0†source】【4:1†source】【4:5†source】.'
+  arguments:
+    Mode:
+    - Auto
+    - RapidCool
+    - RapidFreeze
+    - InvalidMode
+    ModeTags: '[0x0000, 0x4000, 0x4001, 0xFFFF] (0xFFFF is an invalid mode tag)'
+  label: Test_Case_Special_Responses
+  option: WriteAttribute

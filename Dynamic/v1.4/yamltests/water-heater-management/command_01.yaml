@@ -1,0 +1,14 @@
+name: Water Heater Management - CancelBoost Command Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Water Heater Management
+  timeout: 180
+tests:
+- label: Send CancelBoost command
+  command: CancelBoost
+  response:
+    values:
+    - name: status
+      value: 0
+  arguments: {}

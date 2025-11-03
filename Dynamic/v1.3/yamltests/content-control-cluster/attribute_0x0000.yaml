@@ -1,0 +1,173 @@
+config:
+  attribute: '0x0000'
+  cluster: 0xcontent-control-cluster
+  nodeId: '0x654231'
+  node_id: 305414945
+  endpoint: 1
+name: content-control-cluster_attribute_0x0000_v1.3.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`Enabled` attribute will be set to FALSE.'
+  ExpectedResponse: Content Control feature is turned off.
+  Pre-requisites: Content Control feature must be initially turned on.
+  arguments: {}
+  option: WriteAttribute
+  label: test_unknown_case_0
+  cluster: 0xcontent-control-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xcontent-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xCONTENT
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xCONTENT
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xCONTENT
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xCONTENT
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: '`Enabled` attribute will be set to TRUE.'
+  ExpectedResponse: Content Control feature is turned on.
+  Pre-requisites: 'Content Control feature must be initially turned off.
+
+
+    These test cases cover the extreme values of the `Enabled` field, which are `TRUE`
+    and `FALSE`, as well as the expected responses when toggling the Content Control
+    feature.
+
+
+    ### References
+
+    - The `Enabled` attribute indicates whether the Content Control feature implemented
+    on a media device is turned off (FALSE) or turned on (TRUE)【4:0†source】.'
+  arguments: {}
+  option: WriteAttribute
+  label: test_unknown_case_1
+  cluster: 0xcontent-control-cluster
+  response:
+    timeout: 10
+    validation:
+      strict_spec_compliance: true
+      matter_version: 1.3.0.0
+  expected: SUCCESS
+  timeout: 30
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable via Descriptor cluster
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+    matter_version: 1.3.0.0
+  validation:
+    spec_compliance:
+      matter_version: 1.3.0.0
+      strict_mode: true
+      validate_data_types: true
+      validate_constraints: true
+  setup_sequence:
+  - step: 1
+    description: Verify 0xcontent-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: 0xCONTENT
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xCONTENT
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xCONTENT
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: 0xCONTENT
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+v13_validation:
+  strict_spec_compliance: true
+  validate_all_fields: true
+  check_conformance_requirements: true
+  validate_data_constraints: true
+  matter_version: 1.3.0.0
+execution_metadata:
+  estimated_duration: 60
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

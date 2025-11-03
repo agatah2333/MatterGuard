@@ -1,0 +1,43 @@
+config:
+  cluster: level-control-cluster
+  command: '0x08'
+  nodeId: '0x654231'
+name: level-control-cluster_command_0x08_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: CurrentFrequency set to 0 or closest possible frequency
+  ExpectedResponse: Success or closest frequency
+  Pre-requisites: None
+  arguments:
+    Frequency: 0
+  label: Test_Case_Minimum_Frequency
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: CurrentFrequency set to 65535 or closest possible frequency
+  ExpectedResponse: Success or closest frequency
+  Pre-requisites: None
+  arguments:
+    Frequency: 65535
+  label: Test_Case_Maximum_Frequency
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: The device should not support the given frequency value
+  arguments:
+    Frequency: <unsupported_frequency_value>
+  label: Test_Case_Frequency_That_Cannot_Be_Approximated
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: CurrentFrequency set to 32768 or closest possible frequency
+  ExpectedResponse: Success or closest frequency
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the frequency field, as well as a
+    special case where the frequency cannot be approximated by the device, leading
+    to a `CONSTRAINT_ERROR` response【4:0†source】【4:3†source】.'
+  arguments:
+    Frequency: 32768
+  label: Test_Case_Mid-Range_Frequency
+  option: SendCommand

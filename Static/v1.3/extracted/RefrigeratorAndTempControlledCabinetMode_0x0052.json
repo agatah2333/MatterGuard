@@ -1,0 +1,176 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0052",
+    "name": "Refrigerator And Temperature Controlled Cabinet Mode",
+    "description": "This cluster is derived from the Mode Base cluster, defining additional mode tags and namespaced enumerated values for refrigerator and temperature controlled cabinet devices.",
+    "classification": {
+      "hierarchy": "Mode Base",
+      "role": "Application",
+      "scope": "Endpoint",
+      "pics_code": "TCCM"
+    },
+    "revision_history": [
+      {
+        "revision": 1,
+        "description": "Initial Release"
+      },
+      {
+        "revision": 2,
+        "description": "ChangeToModeResponse command: StatusText must be provided for InvalidInMode status"
+      }
+    ]
+  },
+  "features": {},
+  "derived_data_types": {
+    "structs": {
+      "ModeOptionStruct": {
+        "description": "Derived from Mode Base cluster",
+        "fields": {
+          "0": {
+            "name": "Label",
+            "type": "string",
+            "conformance": "M"
+          },
+          "1": {
+            "name": "Mode",
+            "type": "uint8",
+            "conformance": "M"
+          },
+          "2": {
+            "name": "ModeTags",
+            "type": "list[ModeTagStruct]",
+            "constraint": "1 to 8",
+            "conformance": "M"
+          }
+        }
+      }
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "SupportedModes",
+      "type": "list[ModeOptionStruct]",
+      "constraint": "desc",
+      "quality": "",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "List of supported modes. At least one entry SHALL include the Auto mode tag in the ModeTags field list."
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "CurrentMode",
+      "type": "uint8",
+      "constraint": "desc",
+      "quality": "",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "Current mode of the device"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "StartUpMode",
+      "type": "uint8",
+      "constraint": "desc",
+      "quality": "",
+      "default": "",
+      "access": "RW",
+      "conformance": "P",
+      "description": "StartUpMode attribute"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "OnMode",
+      "type": "uint8",
+      "constraint": "desc",
+      "quality": "",
+      "default": "",
+      "access": "RW",
+      "conformance": "P",
+      "description": "OnMode attribute"
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "ChangeToMode",
+      "direction": "client => server",
+      "response": "ChangeToModeResponse",
+      "access": "O",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "NewMode",
+          "type": "uint8",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "The mode to change to"
+        }
+      ],
+      "description": "Change the device to the indicated mode."
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "ChangeToModeResponse",
+      "direction": "client <= server",
+      "response": "N",
+      "access": "",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "Status",
+          "type": "enum8",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "Status of the mode change request"
+        },
+        {
+          "id": "1",
+          "name": "StatusText",
+          "type": "string",
+          "constraint": "max 64",
+          "quality": "",
+          "default": "",
+          "conformance": "O",
+          "description": "Text description of the status"
+        }
+      ],
+      "description": "Response to ChangeToMode command"
+    }
+  },
+  "events": {},
+  "cluster_namespace": {
+    "mode_tags": {
+      "0x4000": {
+        "name": "RapidCool",
+        "description": "This mode reduces the temperature rapidly, typically above freezing grade."
+      },
+      "0x4001": {
+        "name": "RapidFreeze",
+        "description": "This mode reduces the temperature rapidly, below freezing grade."
+      }
+    }
+  },
+  "mode_examples": [
+    {
+      "mode": "Normal",
+      "tags": ["0x0000 (Auto)"]
+    },
+    {
+      "mode": "Energy Save",
+      "tags": ["0x0004 (LowEnergy)"]
+    },
+    {
+      "mode": "Rapid Cool",
+      "tags": ["0x4000 (RapidCool)"]
+    }
+  ]
+}

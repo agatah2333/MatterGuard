@@ -1,0 +1,53 @@
+config:
+  attribute: '0x0002'
+  cluster: actions-cluster
+  nodeId: '0x654231'
+name: actions-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    #'
+  arguments:
+    '{"SetupURL"': '""}'
+  label: Test_Case_Minimum_Length
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    #'
+  arguments:
+    '{"SetupURL"': '"<512_characters_string>"}'
+  label: Test_Case_Maximum_Length
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Provides information about the various actions which the cluster
+    provides.
+  Pre-requisites: 'None
+
+
+    #'
+  arguments:
+    '{"SetupURL"': '"https://domain.example/Matter/bridgev1/Actions"}'
+  label: Test_Case_Valid_URL_without_Suffix
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Provides information about the specific action with ActionID 12345.
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:2†source】【4:3†source】.'
+  arguments:
+    '{"SetupURL"': '"https://domain.example/Matter/bridgev1/Actions/?a=12345"}'
+  label: Test_Case_Valid_URL_with_Suffix
+  option: WriteAttribute

@@ -1,0 +1,43 @@
+config:
+  attribute: '0x000B'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x000B_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatVoltage": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"BatVoltage"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatVoltage": 4294967295}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"BatVoltage"': 4294967295}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatVoltage": <value_above_nominal_range>}'
+  ExpectedResponse: <BatteryOverVoltage>
+  Pre-requisites: <none>
+  arguments:
+    '{"BatVoltage"': <value_above_nominal_range>}
+  label: Test_Case_Special_Response_-_OverVoltage
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatVoltage": <value_below_nominal_range>}'
+  ExpectedResponse: <BatteryUnderVoltage>
+  Pre-requisites: '<none>
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:3†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"BatVoltage"': <value_below_nominal_range>}
+  label: Test_Case_Special_Response_-_UnderVoltage
+  option: WriteAttribute

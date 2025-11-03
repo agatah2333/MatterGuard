@@ -1,0 +1,28 @@
+config:
+  attribute: '0x0001'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: AdminFabricIndex set to 0
+  ExpectedResponse: Success
+  Pre-requisites: 'WindowStatus attribute is not set to WindowNotOpen
+
+
+    **Test Case 1.2: Maximum Value**'
+  arguments:
+    '{"AdminFabricIndex"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: AdminFabricIndex set to null
+  ExpectedResponse: Success
+  Pre-requisites: 'WindowStatus attribute is set to WindowNotOpen
+
+
+    **Test Case 2.2: Null Value When Fabric is Removed During Open Commissioning Window**'
+  arguments:
+    '{"AdminFabricIndex"': '"null"}'
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: WriteAttribute

@@ -1,0 +1,76 @@
+{
+  "source_file": "Energy EVSE Mode_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x009D",
+        "name": "Energy EVSE Mode",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SupportedModes",
+            "dataType": "list[ModeOptionStruct]",
+            "valueRange": "",
+            "description": "At least one entry in the SupportedModes attribute SHALL include the Manual mode tag in the ModeTags field list.",
+            "privilege": "M",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentMode",
+            "dataType": "ModeOptionStruct",
+            "valueRange": "",
+            "description": "The value of this field SHALL match the Mode field of one of the entries in the SupportedModes attribute.",
+            "privilege": "M",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "StartUpMode",
+            "dataType": "ModeOptionStruct",
+            "valueRange": "",
+            "description": "This attribute is used to set the mode at startup.",
+            "privilege": "M",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "OnMode",
+            "dataType": "ModeOptionStruct",
+            "valueRange": "",
+            "description": "This attribute is used to set the mode when the device is turned on.",
+            "privilege": "M",
+            "writable": true
+          }
+        ],
+        "commands": [],
+        "events": [],
+        "dataTypes": {
+          "ModeOptionStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "Mode": {
+                "type": "uint8",
+                "description": "Mode identifier"
+              },
+              "ModeTags": {
+                "type": "list[ModeTagEnum]",
+                "description": "List of associated mode tags"
+              }
+            }
+          },
+          "ModeTagEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Auto",
+              "1": "Manual",
+              "2": "Scheduled",
+              "3": "LoadShifting"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

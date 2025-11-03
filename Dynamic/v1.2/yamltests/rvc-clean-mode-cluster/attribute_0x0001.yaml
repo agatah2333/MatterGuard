@@ -1,0 +1,58 @@
+config:
+  attribute: '0x0001'
+  cluster: rvc-clean-mode-cluster
+  nodeId: '0x654231'
+name: rvc-clean-mode-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: "0\n  - **ExpectedResponse**: Success\n  - **Which Attribute Will Be\
+    \ Changed and the Value of the Attribute**: `CurrentMode` will be set to 0\n \
+    \ - **Any Pre-requisites**: SupportedModes must include a mode with `Mode` value\
+    \ 0"
+  Attribute_Change: "`CurrentMode` will be set to 0\n  - **Any Pre-requisites**: SupportedModes\
+    \ must include a mode with `Mode` value 0"
+  ExpectedResponse: "Success\n  - **Which Attribute Will Be Changed and the Value\
+    \ of the Attribute**: `CurrentMode` will be set to 0\n  - **Any Pre-requisites**:\
+    \ SupportedModes must include a mode with `Mode` value 0"
+  Pre-requisites: SupportedModes must include a mode with `Mode` value 0
+  arguments:
+    '**ActionTime**': 0
+    '**Any Pre-requisites**': SupportedModes must include a mode with `Mode` value
+      0
+    '**ExpectedResponse**': Success
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': '`CurrentMode`
+      will be set to 0'
+    CurrentMode: 0
+    SupportedModes:
+    - Label: Mode0
+      Mode: 0
+      ModeTags:
+      - 16384
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: "0\n  - **ExpectedResponse**: CleaningInProgress (0x40)\n  - **Which\
+    \ Attribute Will Be Changed and the Value of the Attribute**: `CurrentMode` will\
+    \ be set to 1\n  - **Any Pre-requisites**: SupportedModes must include a mode\
+    \ with `Mode` value 1 and `ModeTags` containing 0x4001 (Cleaning)"
+  Attribute_Change: "`CurrentMode` will be set to 1\n  - **Any Pre-requisites**: SupportedModes\
+    \ must include a mode with `Mode` value 1 and `ModeTags` containing 0x4001 (Cleaning)"
+  ExpectedResponse: "CleaningInProgress (0x40)\n  - **Which Attribute Will Be Changed\
+    \ and the Value of the Attribute**: `CurrentMode` will be set to 1\n  - **Any\
+    \ Pre-requisites**: SupportedModes must include a mode with `Mode` value 1 and\
+    \ `ModeTags` containing 0x4001 (Cleaning)"
+  Pre-requisites: SupportedModes must include a mode with `Mode` value 1 and `ModeTags`
+    containing 0x4001 (Cleaning)
+  arguments:
+    '**ActionTime**': 0
+    '**Any Pre-requisites**': SupportedModes must include a mode with `Mode` value
+      1 and `ModeTags` containing 0x4001 (Cleaning)
+    '**ExpectedResponse**': CleaningInProgress (0x40)
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': '`CurrentMode`
+      will be set to 1'
+    CurrentMode: 1
+    SupportedModes:
+    - Label: Cleaning
+      Mode: 1
+      ModeTags:
+      - 16385
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

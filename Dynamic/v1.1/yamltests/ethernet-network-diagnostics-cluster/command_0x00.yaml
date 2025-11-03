@@ -1,0 +1,26 @@
+config:
+  cluster: ethernet-network-diagnostics-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: ethernet-network-diagnostics-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: "- `PacketRxCount`: 0\n  - `PacketTxCount`: 0\n  - `TxErrCount`:\
+    \ 0\n  - `CollisionCount`: 0\n  - `OverrunCount`: 0"
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments: {}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: "- `PacketRxCount`: 0\n  - `PacketTxCount`: 0\n  - `TxErrCount`:\
+    \ 0\n  - `CollisionCount`: 0\n  - `OverrunCount`: 0"
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Attributes should have non-zero values before the command is sent
+    to observe the reset effect.
+
+
+    ### Explanation'
+  arguments: {}
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: SendCommand

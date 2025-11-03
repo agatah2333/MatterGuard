@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0404",
+    "name": "Flow Measurement",
+    "description": "Cluster for Flow Measurement functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

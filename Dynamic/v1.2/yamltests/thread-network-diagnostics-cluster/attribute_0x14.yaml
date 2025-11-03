@@ -1,0 +1,56 @@
+config:
+  attribute: '0x14'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x14_v1.2.0.0
+tests:
+- ActionTime: '`0`'
+  Attribute_Change: '`NeighborTable` will be updated with the provided values.'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: '`Thread network should be operational and the node should have
+    neighbors.`'
+  arguments:
+    Age: '`0xFFFFFFFF`'
+    AverageRssi: '`0x7F`'
+    ExtAddress: '`0xFFFFFFFFFFFFFFFF`'
+    FrameErrorRate: '`0xFF`'
+    FullNetworkData: '`True`'
+    FullThreadDevice: '`True`'
+    IsChild: '`True`'
+    LastRssi: '`0x7F`'
+    LinkFrameCounter: '`0xFFFFFFFF`'
+    LinkQuality: '`0xFF`'
+    MessageErrorRate: '`0xFF`'
+    MleFrameCounter: '`0xFFFFFFFF`'
+    NeighborTable: ''
+    Rloc16: '`0xFFFF`'
+    RxOnWhenIdle: '`True`'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: '`0`'
+  Attribute_Change: '`NeighborTable` will be updated with the provided values.'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: '`Thread network should be operational and the node should have
+    neighbors.`
+
+
+    These test cases cover the extreme values and special responses for the `NeighborTable`
+    attribute in the Thread Network Diagnostics Cluster.'
+  arguments:
+    Age: '`0`'
+    AverageRssi: '`-128`'
+    ExtAddress: '`0x0000000000000000`'
+    FrameErrorRate: '`0`'
+    FullNetworkData: '`False`'
+    FullThreadDevice: '`False`'
+    IsChild: '`False`'
+    LastRssi: '`-128`'
+    LinkFrameCounter: '`0`'
+    LinkQuality: '`0`'
+    MessageErrorRate: '`0`'
+    MleFrameCounter: '`0`'
+    NeighborTable: ''
+    Rloc16: '`0x0000`'
+    RxOnWhenIdle: '`False`'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

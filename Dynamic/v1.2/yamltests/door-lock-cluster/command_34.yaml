@@ -1,0 +1,18 @@
+config:
+  cluster: door-lock-cluster
+  command: '34'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_34_v1.2.0.0
+tests:
+- arguments: {}
+  label: Test_Case_Minimum_User_ID
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Maximum_User_ID
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Duplicate_RFID_Code
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Out_of_Range_User_ID
+  option: SendCommand

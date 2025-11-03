@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0002'
+  cluster: group-key-mgmt-cluster
+  nodeId: '0x654231'
+name: group-key-mgmt-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '`MaxGroupsPerFabric` will be set to 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    MaxGroupsPerFabric: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`MaxGroupsPerFabric` will be set to 65535'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    MaxGroupsPerFabric: 65535
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: No change
+  ExpectedResponse: Error - Value below minimum supported groups
+  Pre-requisites: The minimum supported groups value must be known
+  arguments:
+    MaxGroupsPerFabric: <below_minimum_supported_groups_value>
+  label: Test_Case_Special_Response_-_Below_Minimum_Supported_Groups
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: No change
+  ExpectedResponse: Error - Value above maximum supported groups
+  Pre-requisites: 'The maximum supported groups value must be known
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:10†source】.'
+  arguments:
+    MaxGroupsPerFabric: <above_maximum_supported_groups_value>
+  label: Test_Case_Special_Response_-_Above_Maximum_Supported_Groups
+  option: WriteAttribute

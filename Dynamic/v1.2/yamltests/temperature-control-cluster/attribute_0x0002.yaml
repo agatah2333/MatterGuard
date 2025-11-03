@@ -1,0 +1,41 @@
+config:
+  attribute: '0x0002'
+  cluster: temperature-control-cluster
+  nodeId: '0x654231'
+name: temperature-control-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: MaxTemperature will be set to MinTemperature + 1
+  ExpectedResponse: SUCCESS
+  Pre-requisites: MinTemperature must be defined and less than MaxTemperature
+  arguments:
+    '{"MaxTemperature"': MinTemperature + 1}
+  label: Test_Case_Minimum_Value_of_the_Constraint
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: MaxTemperature will be set to MaxTemperature
+  ExpectedResponse: SUCCESS
+  Pre-requisites: MaxTemperature must be defined and greater than MinTemperature
+  arguments:
+    '{"MaxTemperature"': MaxTemperature}
+  label: Test_Case_Maximum_Value_of_the_Constraint
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: No change
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: MinTemperature must be defined
+  arguments:
+    '{"MaxTemperature"': MinTemperature}
+  label: Test_Case_Value_Causing_CONSTRAINT_ERROR
+  option: WriteAttribute
+- ActionTime: <during_operation>
+  Attribute_Change: No change
+  ExpectedResponse: INVALID_IN_STATE
+  Pre-requisites: 'Device must be in a state where it cannot accept changes to MaxTemperature
+
+
+    ### Summary'
+  arguments:
+    '{"MaxTemperature"': <valid_value_within_constraints>}
+  label: Test_Case_Value_Causing_INVALID_IN_STATE
+  option: WriteAttribute

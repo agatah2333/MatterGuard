@@ -1,0 +1,58 @@
+config:
+  cluster: software-diagnostics-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: software-diagnostics-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: "- `CurrentHeapHighWatermark` = `CurrentHeapUsed`\n  - `StackFreeMinimum`\
+    \ = `StackFreeCurrent` for every thread"
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    FaultRecording: '""'
+    ID: 0
+    Name: '""'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: "- `CurrentHeapHighWatermark` = `CurrentHeapUsed`\n  - `StackFreeMinimum`\
+    \ = `StackFreeCurrent` for every thread"
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    FaultRecording: <1024_bytes_data>
+    ID: 2^64-1
+    Name: '"ABCDEFGH"'
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: "- `CurrentHeapHighWatermark` = `CurrentHeapUsed`\n  - `StackFreeMinimum`\
+    \ = `StackFreeCurrent` for every thread"
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    FaultRecording: <valid_fault_recording>
+    ID: <valid_thread_id>
+    Name: '""'
+  label: Test_Case_Special_Response_-_Empty_Name
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: "- `CurrentHeapHighWatermark` = `CurrentHeapUsed`\n  - `StackFreeMinimum`\
+    \ = `StackFreeCurrent` for every thread"
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    For more detailed information, refer to the Matter 1.2 Core Specification document【4:0†source】.'
+  arguments:
+    FaultRecording: <1024_bytes_data>
+    ID: <valid_thread_id>
+    Name: <valid_name>
+  label: Test_Case_Special_Response_-_Maximum_FaultRecording
+  option: SendCommand

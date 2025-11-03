@@ -1,0 +1,43 @@
+config:
+  cluster: laundry-washer-mode-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: laundry-washer-mode-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: CurrentMode will be set to 0
+  ExpectedResponse: Success
+  Pre-requisites: SupportedModes attribute must include mode 0
+  arguments:
+    '{"NewMode"': 0}
+  label: Test_Case_Minimum_Value
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: UnsupportedMode
+  Pre-requisites: SupportedModes attribute must not include mode 255
+  arguments:
+    '{"NewMode"': 255}
+  label: Test_Case_Maximum_Value
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: UnsupportedMode
+  Pre-requisites: SupportedModes attribute must not include mode 100
+  arguments:
+    '{"NewMode"': 100}
+  label: Test_Case_Unsupported_Mode
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: InvalidInMode
+  Pre-requisites: 'The device must be in a mode that does not allow switching to mode
+    50
+
+
+    These test cases cover the extreme values of the `NewMode` field and the special
+    responses as per the provided context【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"NewMode"': 50}
+  label: Test_Case_Invalid_In_Current_Mode
+  option: SendCommand

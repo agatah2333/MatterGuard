@@ -1,0 +1,99 @@
+{
+  "source_file": "Application Launcher_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x050C",
+        "name": "Application Launcher",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "CatalogList",
+            "dataType": "list[uint16]",
+            "valueRange": "N",
+            "description": "This attribute SHALL specify the list of supported application catalogs.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentApp",
+            "dataType": "ApplicationEPStruct",
+            "valueRange": "desc",
+            "description": "This attribute SHALL specify the current in-focus application.",
+            "privilege": "R",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "LaunchApp",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "Application: ApplicationStruct, Data: octstr(MS)",
+              "description": "Application: Specifies the Application to launch | Data: Optional app-specific data"
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "StopApp",
+            "parameters": {
+              "dataType": "ApplicationStruct",
+              "valueRange": "desc",
+              "description": "Specifies the Application to stop"
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "HideApp",
+            "parameters": {
+              "dataType": "ApplicationStruct",
+              "valueRange": "desc",
+              "description": "Specifies the Application to hide"
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x03",
+            "name": "LauncherResponse",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "Status: StatusEnum, Data: octstr(MS)",
+              "description": "Status: Command execution status | Data: Optional app-specific data"
+            },
+            "privilege": "N",
+            "direction": "client ⇐ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "ApplicationStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "CatalogVendorID": "uint16",
+              "ApplicationID": "string"
+            }
+          },
+          "ApplicationEPStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "Application": "ApplicationStruct",
+              "Endpoint": "endpoint-no"
+            }
+          },
+          "StatusEnum": {
+            "baseType": "enum8",
+            "valueRange": "0-5"
+          }
+        }
+      }
+    ]
+  }
+}

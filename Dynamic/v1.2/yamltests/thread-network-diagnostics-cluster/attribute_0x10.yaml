@@ -1,0 +1,43 @@
+config:
+  attribute: '0x10'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x10_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: OverrunCount set to 0
+  ExpectedResponse: Success
+  Pre-requisites: Node should be freshly rebooted or OverrunCount should be reset.
+  arguments:
+    '{"OverrunCount"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: OverrunCount set to 4294967295
+  ExpectedResponse: Success
+  Pre-requisites: Simulate a condition where the buffer memory is completely exhausted.
+  arguments:
+    '{"OverrunCount"': 4294967295}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: After Node Reboot
+  Attribute_Change: OverrunCount reset to 0
+  ExpectedResponse: Success
+  Pre-requisites: Node should be rebooted.
+  arguments:
+    '{"OverrunCount"': 0}
+  label: Test_Case_Special_Response_-_Reset_to_0
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: OverrunCount set to 1000
+  ExpectedResponse: Success
+  Pre-requisites: 'Simulate a condition where 1000 packets are dropped due to buffer
+    memory issues.
+
+
+    These test cases cover the extreme values of the `OverrunCount` attribute and
+    the special response of resetting the count to 0 upon a Node reboot【4:3†source】【4:4†source】【4:5†source】【4:6†source】.'
+  arguments:
+    '{"OverrunCount"': 1000}
+  label: Test_Case_Incremental_Value
+  option: WriteAttribute

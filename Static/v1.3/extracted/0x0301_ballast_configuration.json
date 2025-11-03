@@ -1,0 +1,203 @@
+{
+  "cluster_id": "0x0301",
+  "name": "Ballast Configuration",
+  "description": "This cluster is used for configuring a lighting ballast.",
+  "revision": 4,
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Application",
+    "scope": "Endpoint",
+    "pics_code": "BC"
+  },
+  "conformance": "P",
+  "note": "Support for Ballast Configuration cluster is provisional.",
+  "features": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "PhysicalMinLevel",
+      "type": "uint8",
+      "constraint": "1 to 254",
+      "default": 1,
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL specify the minimum light output the ballast can achieve according to the dimming light curve"
+    },
+    {
+      "id": "0x0001",
+      "name": "PhysicalMaxLevel",
+      "type": "uint8",
+      "constraint": "1 to 254",
+      "default": 254,
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL specify the maximum light output the ballast can achieve according to the dimming light curve"
+    },
+    {
+      "id": "0x0002",
+      "name": "BallastStatus",
+      "type": "BallastStatusBitmap",
+      "constraint": "all",
+      "default": 0,
+      "access": "RV",
+      "conformance": "O",
+      "description": "This attribute SHALL specify the status of various aspects of the ballast or the connected lights"
+    },
+    {
+      "id": "0x0010",
+      "name": "MinLevel",
+      "type": "uint8",
+      "constraint": "PhysicalMinLevel to MaxLevel",
+      "default": "PhysicalMinLevel",
+      "access": "RW VM",
+      "conformance": "M",
+      "description": "This attribute SHALL specify the light output of the ballast according to the dimming light curve when the Level Control Cluster's CurrentLevel attribute equals to 1 (and the On/Off Cluster's OnOff attribute equals to TRUE)"
+    },
+    {
+      "id": "0x0011",
+      "name": "MaxLevel",
+      "type": "uint8",
+      "constraint": "MinLevel to PhysicalMaxLevel",
+      "default": "PhysicalMaxLevel",
+      "access": "RW VM",
+      "conformance": "M",
+      "description": "This attribute SHALL specify the light output of the ballast according to the dimming light curve when the Level Control Cluster's CurrentLevel attribute equals to 254 (and the On/Off Cluster's OnOff attribute equals to TRUE)"
+    },
+    {
+      "id": "0x0012",
+      "name": "PowerOnLevel",
+      "conformance": "D",
+      "deprecated": true
+    },
+    {
+      "id": "0x0013",
+      "name": "PowerOnFadeTime",
+      "conformance": "D",
+      "deprecated": true
+    },
+    {
+      "id": "0x0014",
+      "name": "IntrinsicBallastFactor",
+      "type": "uint8",
+      "constraint": "all",
+      "quality": "X",
+      "access": "RW VM",
+      "conformance": "O",
+      "description": "This attribute SHALL specify the ballast factor, as a percentage, of the ballast/lamp combination, prior to any adjustment. A value of null indicates in invalid value."
+    },
+    {
+      "id": "0x0015",
+      "name": "BallastFactorAdjustment",
+      "type": "uint8",
+      "constraint": "100 to MS",
+      "quality": "X",
+      "default": "null",
+      "access": "RW VM",
+      "conformance": "O",
+      "description": "This attribute SHALL specify the multiplication factor, as a percentage, to be applied to the configured light output of the lamps. A typical use for this attribute is to compensate for reduction in efficiency over the lifetime of a lamp. The value of null indicates that ballast factor scaling is not in use."
+    },
+    {
+      "id": "0x0020",
+      "name": "LampQuantity",
+      "type": "uint8",
+      "constraint": "all",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL specify the number of lamps connected to this ballast. (Note: this number does not take into account whether lamps are actually in their sockets or not)"
+    },
+    {
+      "id": "0x0030",
+      "name": "LampType",
+      "type": "string",
+      "constraint": "max 16",
+      "default": "\"\"",
+      "access": "RW VM",
+      "conformance": "O",
+      "description": "This attribute SHALL specify the type of lamps (including their wattage) connected to the ballast"
+    },
+    {
+      "id": "0x0031",
+      "name": "LampManufacturer",
+      "type": "string",
+      "constraint": "max 16",
+      "default": "\"\"",
+      "access": "RW VM",
+      "conformance": "O",
+      "description": "This attribute SHALL specify the name of the manufacturer of the currently connected lamps"
+    },
+    {
+      "id": "0x0032",
+      "name": "LampRatedHours",
+      "type": "uint24",
+      "constraint": "all",
+      "quality": "X",
+      "default": "null",
+      "access": "RW VM",
+      "conformance": "O",
+      "description": "This attribute SHALL specify the number of hours of use the lamps are rated for by the manufacturer. A value of null indicates an invalid or unknown time."
+    },
+    {
+      "id": "0x0033",
+      "name": "LampBurnHours",
+      "type": "uint24",
+      "constraint": "all",
+      "quality": "X",
+      "default": 0,
+      "access": "RW VM",
+      "conformance": "O",
+      "description": "This attribute SHALL specify the length of time, in hours, the currently connected lamps have been operated, cumulative since the last re-lamping. Burn hours SHALL NOT be accumulated if the lamps are off. A value of null indicates an invalid or unknown time."
+    },
+    {
+      "id": "0x0034",
+      "name": "LampAlarmMode",
+      "type": "LampAlarmModeBitmap",
+      "constraint": "all",
+      "default": 0,
+      "access": "RW VM",
+      "conformance": "O",
+      "description": "This attribute SHALL specify which attributes MAY cause an alarm notification to be generated. A 1 in each bit position means that its associated attribute is able to generate an alarm."
+    },
+    {
+      "id": "0x0035",
+      "name": "LampBurnHoursTripPoint",
+      "type": "uint24",
+      "constraint": "all",
+      "quality": "X",
+      "default": "null",
+      "access": "RW VM",
+      "conformance": "O",
+      "description": "This attribute SHALL specify the number of hours the LampBurnHours attribute MAY reach before an alarm is generated. The Alarm Code field included in the generated alarm SHALL be 0x01. If this attribute has the value of null, then this alarm SHALL NOT be generated."
+    }
+  ],
+  "commands": [],
+  "data_types": [
+    {
+      "name": "BallastStatusBitmap",
+      "type": "map8",
+      "bits": [
+        {
+          "bit": 0,
+          "name": "BallastNonOperational",
+          "summary": "This bit SHALL indicate whether the ballast is operational. 0 = The ballast is fully operational, 1 = The ballast is not fully operational"
+        },
+        {
+          "bit": 1,
+          "name": "LampFailure",
+          "summary": "This bit SHALL indicate whether all lamps is operational. 0 = All lamps are operational, 1 = One or more lamp is not in its socket or is faulty"
+        }
+      ]
+    },
+    {
+      "name": "LampAlarmModeBitmap",
+      "type": "map8",
+      "bits": [
+        {
+          "bit": 0,
+          "name": "LampBurnHours",
+          "summary": "This bit SHALL indicate that the LampBurnHours attribute MAY generate an alarm"
+        }
+      ]
+    }
+  ],
+  "events": []
+}

@@ -1,0 +1,229 @@
+{
+  "cluster_id": "0x0200",
+  "cluster_name": "Pump Configuration and Control",
+  "revision": 4,
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Application",
+    "scope": "Endpoint",
+    "pics_code": "PCC"
+  },
+  "summary": "The Pump Configuration and Control cluster provides an interface for the setup and control of pump devices, and the automatic reporting of pump status information. Note that control of pump speed is not included – speed is controlled by the On/Off and Level Control clusters.",
+  "dependencies": [
+    {
+      "cluster": "On/Off and Level Control clusters",
+      "description": "Used by a pump device to turn it on and off and control its setpoint"
+    },
+    {
+      "cluster": "Pressure Measurement, Flow Measurement, Temperature Measurement",
+      "description": "Client clusters used for connection to remote sensor devices for external measurements"
+    }
+  ],
+  "features": {
+    "0": {
+      "code": "PRSCONST",
+      "name": "ConstantPressure",
+      "conformance": "O.a+",
+      "summary": "Supports operating in constant pressure mode"
+    },
+    "1": {
+      "code": "PRSCOMP",
+      "name": "CompensatedPressure",
+      "conformance": "O.a+",
+      "summary": "Supports operating in compensated pressure mode"
+    },
+    "2": {
+      "code": "FLW",
+      "name": "ConstantFlow",
+      "conformance": "O.a+",
+      "summary": "Supports operating in constant flow mode"
+    },
+    "3": {
+      "code": "SPD",
+      "name": "ConstantSpeed",
+      "conformance": "O.a+",
+      "summary": "Supports operating in constant speed mode"
+    },
+    "4": {
+      "code": "TEMP",
+      "name": "ConstantTemperature",
+      "conformance": "O.a+",
+      "summary": "Supports operating in constant temperature mode"
+    },
+    "5": {
+      "code": "AUTO",
+      "name": "Automatic",
+      "conformance": "O",
+      "summary": "Supports operating in automatic mode"
+    },
+    "6": {
+      "code": "LOCAL",
+      "name": "LocalOperation",
+      "conformance": "O",
+      "summary": "Supports operating using local settings"
+    }
+  },
+  "data_types": {
+    "PumpStatusBitmap": {
+      "type": "map16",
+      "bits": {
+        "0": "DeviceFault - A fault related to the system or pump device is detected",
+        "1": "SupplyFault - A fault related to the supply to the pump is detected",
+        "2": "SpeedLow - Setpoint is too low to achieve",
+        "3": "SpeedHigh - Setpoint is too high to achieve",
+        "4": "LocalOverride - Device control is overridden by hardware",
+        "5": "Running - Pump is currently running",
+        "6": "RemotePressure - A remote pressure sensor is used for regulation",
+        "7": "RemoteFlow - A remote flow sensor is used for regulation",
+        "8": "RemoteTemperature - A remote temperature sensor is used for regulation"
+      }
+    },
+    "OperationModeEnum": {
+      "type": "enum8",
+      "values": {
+        "0": "Normal - The pump is controlled by a setpoint",
+        "1": "Minimum - Run at minimum possible speed",
+        "2": "Maximum - Run at maximum possible speed",
+        "3": "Local - Run with local settings"
+      }
+    },
+    "ControlModeEnum": {
+      "type": "enum8",
+      "values": {
+        "0": "ConstantSpeed - Running at constant speed",
+        "1": "ConstantPressure - Regulate speed to maintain constant differential pressure",
+        "2": "ProportionalPressure - Regulate speed to maintain constant differential pressure (compensated)",
+        "3": "ConstantFlow - Regulate speed to maintain constant flow",
+        "5": "ConstantTemperature - Regulate speed to maintain constant temperature",
+        "7": "Automatic - Operation automatically optimized"
+      }
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "name": "MaxPressure",
+      "type": "int16",
+      "constraint": "all",
+      "quality": "XF",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M",
+      "description": "Maximum pressure the pump can achieve (-3,276.7 to 3,276.7 kPa, steps of 0.1 kPa)"
+    },
+    "0x0001": {
+      "name": "MaxSpeed",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "XF",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M",
+      "description": "Maximum speed the pump can achieve (0 to 65,534 RPM, steps of 1 RPM)"
+    },
+    "0x0002": {
+      "name": "MaxFlow",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "XF",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M",
+      "description": "Maximum flow the pump can achieve (0 to 6,553.4 m³/h, steps of 0.1 m³/h)"
+    },
+    "0x0010": {
+      "name": "PumpStatus",
+      "type": "PumpStatusBitmap",
+      "constraint": "desc",
+      "quality": "P",
+      "default": "0",
+      "access": "RV",
+      "conformance": "O",
+      "description": "Activity status of the pump functions"
+    },
+    "0x0011": {
+      "name": "EffectiveOperationMode",
+      "type": "OperationModeEnum",
+      "constraint": "desc",
+      "quality": "N",
+      "default": "desc",
+      "access": "RV",
+      "conformance": "M",
+      "description": "Current effective operation mode of the pump"
+    },
+    "0x0012": {
+      "name": "EffectiveControlMode",
+      "type": "ControlModeEnum",
+      "constraint": "desc",
+      "quality": "N",
+      "default": "desc",
+      "access": "RV",
+      "conformance": "M",
+      "description": "Current effective control mode of the pump"
+    },
+    "0x0013": {
+      "name": "Capacity",
+      "type": "int16",
+      "constraint": "all",
+      "quality": "XP",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M",
+      "description": "Current capacity of the pump"
+    },
+    "0x0020": {
+      "name": "OperationMode",
+      "type": "OperationModeEnum",
+      "constraint": "desc",
+      "quality": "N",
+      "default": "0",
+      "access": "RW VM",
+      "conformance": "M",
+      "description": "Operation mode of the pump"
+    },
+    "0x0021": {
+      "name": "ControlMode",
+      "type": "ControlModeEnum",
+      "constraint": "desc",
+      "quality": "N",
+      "default": "0",
+      "access": "RW VM",
+      "conformance": "O",
+      "description": "Control mode of the pump"
+    }
+  },
+  "commands": {},
+  "events": {
+    "supply_voltage_low": "Supply voltage too low",
+    "supply_voltage_high": "Supply voltage too high",
+    "power_missing_phase": "Power missing phase",
+    "system_pressure_low": "System pressure too low",
+    "system_pressure_high": "System pressure too high",
+    "dry_running": "Dry running detected",
+    "motor_temperature_high": "Motor temperature too high",
+    "pump_motor_fatal_failure": "Pump motor has fatal failure",
+    "electronic_temperature_high": "Electronic temperature too high",
+    "pump_blocked": "Pump is blocked",
+    "sensor_failure": "Sensor failure",
+    "electronic_non_fatal_failure": "Electronic non fatal failure",
+    "electronic_fatal_failure": "Electronic fatal failure",
+    "general_fault": "General fault"
+  },
+  "revision_history": [
+    {
+      "revision": 1,
+      "description": "Mandatory global ClusterRevision attribute added"
+    },
+    {
+      "revision": 2,
+      "description": "All Hubs changes"
+    },
+    {
+      "revision": 3,
+      "description": "New data model format and notation, added additional events"
+    },
+    {
+      "revision": 4,
+      "description": "Added feature map"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0015'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x0015_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Normal operation, indicating the battery is depleted.
+  Pre-requisites: Battery must be present and recognized by the system.
+  arguments:
+    '{"BatTimeRemaining"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Special response indicating the time remaining is unknown.
+  Pre-requisites: Battery must be present and recognized by the system.
+  arguments:
+    '{"BatTimeRemaining"': 4294967295}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Normal operation, indicating 1 hour of battery time remaining.
+  Pre-requisites: Battery must be present and recognized by the system.
+  arguments:
+    '{"BatTimeRemaining"': 3600}
+  label: Test_Case_Typical_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Special response indicating the time remaining is unknown.
+  Pre-requisites: 'Battery must be present and recognized by the system.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special value that could result in a special response as mentioned in the
+    description of the effect.'
+  arguments:
+    '{"BatTimeRemaining"': 4294967295}
+  label: Test_Case_Special_Value_(Unknown_Time_Remaining)
+  option: WriteAttribute

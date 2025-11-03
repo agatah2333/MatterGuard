@@ -1,0 +1,157 @@
+config:
+  node_id: 305414945
+  cluster: '0x0006'
+  endpoint: 1
+tests:
+- label: test_onwithtimedoff_OnTime_minimum_boundary
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 0
+    OffWaitTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_onwithtimedoff_OnTime_maximum_boundary
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 65535
+    OffWaitTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_onwithtimedoff_OnTime_midrange
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 32767
+    OffWaitTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_onwithtimedoff_OnTime_above_maximum
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 65536
+    OffWaitTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+- label: test_onwithtimedoff_OffWaitTime_minimum_boundary
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 0
+    OffWaitTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_onwithtimedoff_OffWaitTime_maximum_boundary
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 0
+    OffWaitTime: 65535
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_onwithtimedoff_OffWaitTime_midrange
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 0
+    OffWaitTime: 32767
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_onwithtimedoff_OffWaitTime_above_maximum
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 0
+    OffWaitTime: 65536
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []

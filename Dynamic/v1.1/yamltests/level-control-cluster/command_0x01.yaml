@@ -1,0 +1,43 @@
+config:
+  cluster: level-control-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: level-control-cluster_command_0x01_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: CurrentLevel will increase at the minimum rate.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"MoveMode"': '0x00, "Rate": 0, "OptionsMask": 0, "OptionsOverride": 0}'
+  label: Test_Case_Minimum_Rate,_Move_Up
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: CurrentLevel will increase at the maximum rate.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"MoveMode"': '0x00, "Rate": 254, "OptionsMask": 0, "OptionsOverride": 0}'
+  label: Test_Case_Maximum_Rate,_Move_Up
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: CurrentLevel will decrease at the minimum rate.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"MoveMode"': '0x01, "Rate": 0, "OptionsMask": 0, "OptionsOverride": 0}'
+  label: Test_Case_Minimum_Rate,_Move_Down
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: CurrentLevel will decrease at the maximum rate.
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    '{"MoveMode"': '0x01, "Rate": 254, "OptionsMask": 0, "OptionsOverride": 0}'
+  label: Test_Case_Maximum_Rate,_Move_Down
+  option: SendCommand

@@ -1,0 +1,340 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0006",
+    "name": "On/Off",
+    "description": "Attributes and commands for turning devices on and off.",
+    "classification": {
+      "hierarchy": "Base",
+      "role": "Application", 
+      "scope": "Endpoint",
+      "pics_code": "OO"
+    },
+    "revision_history": [
+      {
+        "revision": 1,
+        "description": "Global mandatory ClusterRevision attribute added; CCB 1555"
+      },
+      {
+        "revision": 2, 
+        "description": "ZLO 1.0: StartUpOnOff"
+      },
+      {
+        "revision": 3,
+        "description": "FeatureMap global attribute support with Level Control and Lighting feature"
+      },
+      {
+        "revision": 4,
+        "description": "New data model format and notation"
+      },
+      {
+        "revision": 5,
+        "description": "Addition of Dead Front behavior and associated FeatureMap entry"
+      },
+      {
+        "revision": 6,
+        "description": "Addition of OffOnly feature and associated FeatureMap entry"
+      }
+    ]
+  },
+  "features": {
+    "LT": {
+      "bit": 0,
+      "code": "LT",
+      "name": "Lighting",
+      "conformance": "[!OFFONLY]",
+      "summary": "Behavior that supports lighting applications."
+    },
+    "DF": {
+      "bit": 1,
+      "code": "DF", 
+      "name": "DeadFrontBehavior",
+      "conformance": "[!OFFONLY]",
+      "summary": "Device has Dead Front behavior"
+    },
+    "OFFONLY": {
+      "bit": 2,
+      "code": "OFFONLY",
+      "name": "OffOnly", 
+      "conformance": "[!(LT | DF)]",
+      "summary": "Device supports the OffOnly feature"
+    }
+  },
+  "derived_data_types": {
+    "enums": {
+      "OnOffControlBitmap": {
+        "type": "map8",
+        "values": {
+          "0": {
+            "name": "AcceptOnlyWhenOn",
+            "summary": "Indicates a command is only accepted when in On state.",
+            "conformance": "M"
+          }
+        }
+      },
+      "StartUpOnOffEnum": {
+        "type": "enum8",
+        "values": {
+          "0": {
+            "name": "Off",
+            "summary": "Set the OnOff attribute to FALSE",
+            "conformance": "M"
+          },
+          "1": {
+            "name": "On", 
+            "summary": "Set the OnOff attribute to TRUE",
+            "conformance": "M"
+          },
+          "2": {
+            "name": "Toggle",
+            "summary": "If the previous value of the OnOff attribute is equal to FALSE, set the OnOff attribute to TRUE. If the previous value of the OnOff attribute is equal to TRUE, set the OnOff attribute to FALSE (toggle).",
+            "conformance": "M"
+          }
+        }
+      },
+      "EffectIdentifierEnum": {
+        "type": "enum8",
+        "values": {
+          "0x00": {
+            "name": "DelayedAllOff",
+            "summary": "Delayed All Off",
+            "conformance": "M"
+          },
+          "0x01": {
+            "name": "DyingLight",
+            "summary": "Dying Light", 
+            "conformance": "M"
+          }
+        }
+      },
+      "DelayedAllOffEffectVariantEnum": {
+        "type": "enum8",
+        "values": {
+          "0x00": {
+            "name": "DelayedOffFastFade",
+            "summary": "Fade to off in 0.8 seconds",
+            "conformance": "M"
+          },
+          "0x01": {
+            "name": "NoFade",
+            "summary": "No fade",
+            "conformance": "M"
+          },
+          "0x02": {
+            "name": "DelayedOffSlowFade", 
+            "summary": "50% dim down in 0.8 seconds then fade to off in 12 seconds",
+            "conformance": "M"
+          }
+        }
+      },
+      "DyingLightEffectVariantEnum": {
+        "type": "enum8",
+        "values": {
+          "0x00": {
+            "name": "DyingLightFadeOff",
+            "summary": "20% dim up in 0.5s then fade to off in 1 second",
+            "conformance": "M"
+          }
+        }
+      }
+    },
+    "structs": {}
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "OnOff",
+      "type": "bool", 
+      "constraint": "all",
+      "quality": "SN",
+      "default": "FALSE",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute indicates whether the device type implemented on the endpoint is turned off or turned on, in these cases the value of the OnOff attribute equals FALSE, or TRUE respectively."
+    },
+    "0x4000": {
+      "id": "0x4000",
+      "name": "GlobalSceneControl",
+      "type": "bool",
+      "constraint": "all", 
+      "quality": "",
+      "default": "TRUE",
+      "access": "RV",
+      "conformance": "LT",
+      "description": "In order to support the use case where the user gets back the last setting of a set of devices (e.g. level settings for lights), a global scene is introduced which is stored when the devices are turned off and recalled when the devices are turned on. The global scene is defined as the scene that is stored with group identifier 0 and scene identifier 0. This attribute is defined in order to prevent a second Off command storing the all-devices-off situation as a global scene, and to prevent a second On command destroying the current settings by going back to the global scene. This attribute SHALL be set to TRUE after the reception of a command which causes the OnOff attribute to be set to TRUE, such as a standard On command, a MoveToLevel(WithOnOff) command, a RecallScene command or a OnWithRecallGlobalScene command. This attribute is set to FALSE after reception of a OffWithEffect command."
+    },
+    "0x4001": {
+      "id": "0x4001", 
+      "name": "OnTime",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "",
+      "default": "0",
+      "access": "RW VO",
+      "conformance": "LT",
+      "description": "This attribute specifies the length of time (in 1/10ths second) that the On state SHALL be maintained before automatically transitioning to the Off state when using the OnWithTimedOff command. This attribute can be written at any time, but writing a value only has effect when in the Timed On state."
+    },
+    "0x4002": {
+      "id": "0x4002",
+      "name": "OffWaitTime", 
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "",
+      "default": "0",
+      "access": "RW VO",
+      "conformance": "LT",
+      "description": "This attribute specifies the length of time (in 1/10ths second) that the Off state SHALL be guarded to prevent another OnWithTimedOff command turning the server back to its On state (e.g., when leaving a room, the lights are turned off but an occupancy sensor detects the leaving person and attempts to turn the lights back on). This attribute can be written at any time, but writing a value only has an effect when in the Timed On state followed by a transition to the Delayed Off state, or in the Delayed Off state."
+    },
+    "0x4003": {
+      "id": "0x4003",
+      "name": "StartUpOnOff",
+      "type": "StartUpOnOffEnum",
+      "constraint": "desc",
+      "quality": "XN", 
+      "default": "MS",
+      "access": "RW VM",
+      "conformance": "LT",
+      "description": "This attribute SHALL define the desired startup behavior of a device when it is supplied with power and this state SHALL be reflected in the OnOff attribute. If the value is null, the OnOff attribute is set to its previous value. Otherwise, the behavior is defined in the table defining StartUpOnOffEnum. This behavior does not apply to reboots associated with OTA. After an OTA restart, the OnOff attribute SHALL return to its value prior to the restart."
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "Off",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "fields": [],
+      "description": "On receipt of the Off command, a server SHALL set the OnOff attribute to FALSE. Additionally, when the OnTime attribute is supported, the server SHALL set the OnTime attribute to 0."
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "On",
+      "direction": "client => server", 
+      "response": "Y",
+      "access": "O",
+      "conformance": "!OFFONLY",
+      "fields": [],
+      "description": "If the OffOnly feature is supported, on receipt of the On command, an UNSUPPORTED_COMMAND failure status response SHALL be sent. Otherwise, on receipt of the On command, a server SHALL set the OnOff attribute to TRUE. Additionally, when the OnTime and OffWaitTime attributes are both supported, if the value of the OnTime attribute is equal to 0, the server SHALL set the OffWaitTime attribute to 0."
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "Toggle",
+      "direction": "client => server",
+      "response": "Y", 
+      "access": "O",
+      "conformance": "!OFFONLY",
+      "fields": [],
+      "description": "If the OffOnly feature is supported, on receipt of the Toggle command, an UNSUPPORTED_COMMAND failure status response SHALL be sent. Otherwise, on receipt of the Toggle command, if the value of the OnOff attribute is equal to FALSE, the server SHALL set the OnOff attribute to TRUE, otherwise, the server SHALL set the OnOff attribute to FALSE. Additionally, when the OnTime and OffWaitTime attributes are both supported, if the value of the OnOff attribute is equal to FALSE and if the value of the OnTime attribute is equal to 0, the server SHALL set the OffWaitTime attribute to 0. If the value of the OnOff attribute is equal to TRUE, the server SHALL set the OnTime attribute to 0."
+    },
+    "0x40": {
+      "id": "0x40",
+      "name": "OffWithEffect",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "LT",
+      "fields": [
+        {
+          "id": "0",
+          "name": "EffectIdentifier",
+          "type": "EffectIdentifierEnum",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field specifies the fading effect to use when turning the device off. This field SHALL contain one of the non-reserved values listed in EffectIdentifierEnum."
+        },
+        {
+          "id": "1", 
+          "name": "EffectVariant",
+          "type": "enum8",
+          "constraint": "desc",
+          "quality": "",
+          "default": "0",
+          "conformance": "M", 
+          "description": "This field is used to indicate which variant of the effect, indicated in the EffectIdentifier field, SHOULD be triggered. If the server does not support the given variant, it SHALL use the default variant. This field is dependent on the value of the EffectIdentifier field and SHALL contain one of the non-reserved values listed in either DelayedAllOffEffectVariantEnum or DyingLightEffectVariantEnum."
+        }
+      ],
+      "description": "The OffWithEffect command allows devices to be turned off using enhanced ways of fading. On receipt of the OffWithEffect command the server SHALL check the value of the GlobalSceneControl attribute. If the GlobalSceneControl attribute is equal to TRUE, the server SHALL store its settings in its global scene then set the GlobalSceneControl attribute to FALSE, then set the OnOff attribute to FALSE and if the OnTime attribute is supported set the OnTime attribute to 0. If the GlobalSceneControl attribute is equal to FALSE, the server SHALL only set the OnOff attribute to FALSE."
+    },
+    "0x41": {
+      "id": "0x41",
+      "name": "OnWithRecallGlobalScene",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O", 
+      "conformance": "LT",
+      "fields": [],
+      "description": "This command allows the recall of the settings when the device was turned off. On receipt of the OnWithRecallGlobalScene command, if the GlobalSceneControl attribute is equal to TRUE, the server SHALL discard the command. If the GlobalSceneControl attribute is equal to FALSE, the Scene cluster server on the same endpoint SHALL recall its global scene, updating the OnOff attribute accordingly. The OnOff server SHALL then set the GlobalSceneControl attribute to TRUE. Additionally, when the OnTime and OffWaitTime attributes are both supported, if the value of the OnTime attribute is equal to 0, the server SHALL set the OffWaitTime attribute to 0."
+    },
+    "0x42": {
+      "id": "0x42",
+      "name": "OnWithTimedOff",
+      "direction": "client => server",
+      "response": "Y", 
+      "access": "O",
+      "conformance": "LT",
+      "fields": [
+        {
+          "id": "0",
+          "name": "OnOffControl",
+          "type": "OnOffControlBitmap",
+          "constraint": "0 to 1",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field contains information on how the server is to be operated. AcceptOnlyWhenOn Bit: This bit specifies whether the OnWithTimedOff command is to be processed unconditionally or only when the OnOff attribute is equal to TRUE. If this sub-field is set to 1, the OnWithTimedOff command SHALL only be accepted if the OnOff attribute is equal to TRUE. If this sub-field is set to 0, the OnWithTimedOff command SHALL be processed unconditionally."
+        },
+        {
+          "id": "1",
+          "name": "OnTime", 
+          "type": "uint16",
+          "constraint": "max 0xFFFE",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field is used to adjust the value of the OnTime attribute."
+        },
+        {
+          "id": "2",
+          "name": "OffWaitTime",
+          "type": "uint16",
+          "constraint": "max 0xFFFE", 
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field is used to adjust the value of the OffWaitTime attribute."
+        }
+      ],
+      "description": "This command allows devices to be turned on for a specific duration with a guarded off duration so that SHOULD the device be subsequently turned off, further OnWithTimedOff commands, received during this time, are prevented from turning the devices back on. Further OnWithTimedOff commands received while the server is turned on, will update the period that the device is turned on. On receipt of this command, if the AcceptOnlyWhenOn sub-field of the OnOffControl field is set to 1, and the value of the OnOff attribute is equal to FALSE, the command SHALL be discarded. If the value of the OffWaitTime attribute is greater than zero and the value of the OnOff attribute is equal to FALSE, then the server SHALL set the OffWaitTime attribute to the minimum of the OffWaitTime attribute and the value specified in the OffWaitTime field. In all other cases, the server SHALL set the OnTime attribute to the maximum of the OnTime attribute and the value specified in the OnTime field, set the OffWaitTime attribute to the value specified in the OffWaitTime field and set the OnOff attribute to TRUE."
+    }
+  },
+  "events": {},
+  "scene_table_extensions": {
+    "OnOff": {
+      "description": "If the Scenes Management server cluster is implemented on the same endpoint, the OnOff attribute SHALL be part of the ExtensionFieldSetStruct of the Scene Table."
+    }
+  },
+  "state_machine": {
+    "description": "The operation of the On/Off cluster with respect to the On, Off, and OnWithTimedOff commands is illustrated in On/Off Cluster Operation State Machine. The cluster supports four states: On, Off, Timed On, and Delayed Off.",
+    "states": [
+      {
+        "name": "On",
+        "description": "OnOff := TRUE"
+      },
+      {
+        "name": "Off", 
+        "description": "OnOff := FALSE"
+      },
+      {
+        "name": "Timed On",
+        "description": "OnOff := TRUE, OnTime decrements every 1/10th second unless value equals 0xFFFF"
+      },
+      {
+        "name": "Delayed Off",
+        "description": "OnOff := FALSE, OffWaitTime decrements every 1/10th second unless value equals 0xFFFF"
+      }
+    ]
+  }
+}

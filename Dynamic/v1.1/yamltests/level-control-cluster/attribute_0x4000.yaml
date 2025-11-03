@@ -1,0 +1,42 @@
+config:
+  attribute: '0x4000'
+  cluster: level-control-cluster
+  nodeId: '0x654231'
+name: level-control-cluster_attribute_0x4000_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: N/A
+  Pre-requisites: N/A
+  arguments:
+    '{"GlobalSceneControl"': TRUE}
+  label: Test_Case_Extreme_Value_(TRUE)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: N/A
+  Pre-requisites: N/A
+  arguments:
+    '{"GlobalSceneControl"': FALSE}
+  label: Test_Case_Extreme_Value_(FALSE)
+  option: WriteAttribute
+- ActionTime: After receiving an On command
+  Attribute_Change: GlobalSceneControl = TRUE
+  ExpectedResponse: GlobalSceneControl attribute is set to TRUE
+  Pre-requisites: On command received
+  arguments:
+    '{"GlobalSceneControl"': TRUE}
+  label: Test_Case_Special_Response_(Set_to_TRUE_after_On_command)
+  option: WriteAttribute
+- ActionTime: After receiving an OffWithEffect command
+  Attribute_Change: GlobalSceneControl = FALSE
+  ExpectedResponse: GlobalSceneControl attribute is set to FALSE
+  Pre-requisites: 'OffWithEffect command received
+
+
+    These test cases cover the extreme values of the field and the special responses
+    as mentioned in the provided context【4:0†source】【4:1†source】【4:2†source】【4:3†source】.'
+  arguments:
+    '{"GlobalSceneControl"': FALSE}
+  label: Test_Case_Special_Response_(Set_to_FALSE_after_OffWithEffect_command)
+  option: WriteAttribute

@@ -1,0 +1,25 @@
+config:
+  cluster: administrator-commissioning-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: administrator-commissioning-cluster_command_0x02_v1.1.0.0
+tests:
+- ActionTime: Not applicable
+  Attribute_Change: None
+  ExpectedResponse: Success or Busy
+  Pre-requisites: An active commissioning window must be present.
+  arguments: {}
+  label: Test_Case_Extreme_Values_of_Constraints
+  option: SendCommand
+- ActionTime: Not applicable
+  Attribute_Change: None
+  ExpectedResponse: Busy
+  Pre-requisites: 'The fail-safe timer is currently armed.
+
+
+    These test cases cover the scenarios where the `RevokeCommissioning` command is
+    issued under different conditions, ensuring that the command behaves as expected
+    according to the specification【4:0†source】【4:1†source】【4:4†source】【4:9†source】.'
+  arguments: {}
+  label: Test_Case_Special_Responses
+  option: SendCommand

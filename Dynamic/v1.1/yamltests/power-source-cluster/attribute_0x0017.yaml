@@ -1,0 +1,44 @@
+config:
+  attribute: '0x0017'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x0017_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: BatTimeRemaining = 0
+  ExpectedResponse: Success
+  Pre-requisites: Battery is present and measurable.
+  arguments:
+    '{"BatTimeRemaining"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: '0xFFFFFFFF'
+  Attribute_Change: BatTimeRemaining = 0xFFFFFFFF
+  ExpectedResponse: Success
+  Pre-requisites: Battery is present and measurable.
+  arguments:
+    '{"BatTimeRemaining"': 0xFFFFFFFF}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 300
+  Attribute_Change: BatTimeRemaining = 300
+  ExpectedResponse: Low Battery Warning
+  Pre-requisites: Battery is present and measurable. The system should have a threshold
+    for low battery warning set around 300 seconds.
+  arguments:
+    '{"BatTimeRemaining"': 300}
+  label: Test_Case_Special_Response_-_Low_Battery_Warning
+  option: WriteAttribute
+- ActionTime: 60
+  Attribute_Change: BatTimeRemaining = 60
+  ExpectedResponse: Battery Replacement Needed
+  Pre-requisites: 'Battery is present and measurable. The system should have a threshold
+    for battery replacement warning set around 60 seconds.
+
+
+    These test cases cover the extreme values of the `BatTimeRemaining` field and
+    special responses based on the description of the effect.'
+  arguments:
+    '{"BatTimeRemaining"': 60}
+  label: Test_Case_Special_Response_-_Battery_Replacement_Needed
+  option: WriteAttribute

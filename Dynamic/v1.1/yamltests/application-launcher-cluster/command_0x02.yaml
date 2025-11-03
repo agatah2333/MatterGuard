@@ -1,0 +1,51 @@
+config:
+  cluster: application-launcher-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: application-launcher-cluster_command_0x02_v1.1.0.0
+tests:
+- ActionTime: "N/A\n  - **ExpectedResponse**: 1 (APP_NOT_AVAILABLE)\n  - **Which Attribute\
+    \ Will Be Changed and the Value of the Attribute**: Status attribute to APP_NOT_AVAILABLE\n\
+    \  - **Any Pre-requisites**: The application with CatalogVendorID 0 and ApplicationID\
+    \ \"\" does not exist."
+  Attribute_Change: "Status attribute to APP_NOT_AVAILABLE\n  - **Any Pre-requisites**:\
+    \ The application with CatalogVendorID 0 and ApplicationID \"\" does not exist."
+  ExpectedResponse: "1 (APP_NOT_AVAILABLE)\n  - **Which Attribute Will Be Changed\
+    \ and the Value of the Attribute**: Status attribute to APP_NOT_AVAILABLE\n  -\
+    \ **Any Pre-requisites**: The application with CatalogVendorID 0 and ApplicationID\
+    \ \"\" does not exist."
+  Pre-requisites: The application with CatalogVendorID 0 and ApplicationID "" does
+    not exist.
+  arguments:
+    '**ActionTime**': N/A
+    '**Any Pre-requisites**': The application with CatalogVendorID 0 and ApplicationID
+      "" does not exist.
+    '**ExpectedResponse**': 1 (APP_NOT_AVAILABLE)
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': Status attribute
+      to APP_NOT_AVAILABLE
+    '{"CatalogVendorID"': '0, "ApplicationID": ""}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: "N/A\n  - **ExpectedResponse**: 0 (SUCCESS)\n  - **Which Attribute Will\
+    \ Be Changed and the Value of the Attribute**: Status attribute to ACTIVE_HIDDEN\
+    \ or STOPPED\n  - **Any Pre-requisites**: The application with CatalogVendorID\
+    \ 1 and ApplicationID \"existing_app\" exists and is currently active."
+  Attribute_Change: "Status attribute to ACTIVE_HIDDEN or STOPPED\n  - **Any Pre-requisites**:\
+    \ The application with CatalogVendorID 1 and ApplicationID \"existing_app\" exists\
+    \ and is currently active."
+  ExpectedResponse: "0 (SUCCESS)\n  - **Which Attribute Will Be Changed and the Value\
+    \ of the Attribute**: Status attribute to ACTIVE_HIDDEN or STOPPED\n  - **Any\
+    \ Pre-requisites**: The application with CatalogVendorID 1 and ApplicationID \"\
+    existing_app\" exists and is currently active."
+  Pre-requisites: The application with CatalogVendorID 1 and ApplicationID "existing_app"
+    exists and is currently active.
+  arguments:
+    '**ActionTime**': N/A
+    '**Any Pre-requisites**': The application with CatalogVendorID 1 and ApplicationID
+      "existing_app" exists and is currently active.
+    '**ExpectedResponse**': 0 (SUCCESS)
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': Status attribute
+      to ACTIVE_HIDDEN or STOPPED
+    '{"CatalogVendorID"': '1, "ApplicationID": "existing_app"}'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SendCommand

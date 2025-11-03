@@ -1,0 +1,45 @@
+config:
+  attribute: '0x0038'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0038_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: UnoccupiedSetbackMin set to 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    UnoccupiedSetbackMin: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: UnoccupiedSetbackMin set to UnoccupiedSetbackMax
+  ExpectedResponse: SUCCESS
+  Pre-requisites: UnoccupiedSetbackMax must be set to 25.4°C
+  arguments:
+    UnoccupiedSetbackMin: UnoccupiedSetbackMax (assuming UnoccupiedSetbackMax is 25.4°C
+      for this example)
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments:
+    UnoccupiedSetbackMin: -1 (below the minimum constraint)
+  label: Test_Case_Special_Response_-_Below_Minimum_Constraint
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'UnoccupiedSetbackMax must be set to 25.4°C
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    UnoccupiedSetbackMin: 26 (above the maximum constraint assuming UnoccupiedSetbackMax
+      is 25.4°C)
+  label: Test_Case_Special_Response_-_Above_Maximum_Constraint
+  option: WriteAttribute

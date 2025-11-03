@@ -1,0 +1,36 @@
+config:
+  attribute: '0x0008'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x0008_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '`WiredMaximumCurrent` will be set to 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    WiredMaximumCurrent: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`WiredMaximumCurrent` will be set to 4294967295'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    WiredMaximumCurrent: 4294967295
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`WiredMaximumCurrent` will be set to 2147483648'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    a mid-range value to ensure the system handles typical values correctly. The expected
+    responses are based on the assumption that the system will successfully update
+    the attribute within the valid range.'
+  arguments:
+    WiredMaximumCurrent: 2147483648 (mid-range value)
+  label: Test_Case_Special_Response_Scenario
+  option: WriteAttribute

@@ -1,0 +1,14 @@
+config:
+  node_id: 305414945
+  cluster: '0x0406'
+  endpoint: 1
+tests:
+- label: read_occupancysensortype
+  cluster: '0x0406'
+  attribute: '0x0001'
+  operation: read
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS

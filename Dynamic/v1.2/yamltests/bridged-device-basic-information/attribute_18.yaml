@@ -1,0 +1,39 @@
+config:
+  attribute: '18'
+  cluster: bridged-device-basic-information
+  nodeId: '0x654231'
+name: bridged-device-basic-information_attribute_18_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": True}'
+  ExpectedResponse: <success>
+  Pre-requisites: <None>
+  arguments:
+    '{"Reachable"': True}
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": False}'
+  ExpectedResponse: <success>
+  Pre-requisites: <None>
+  arguments:
+    '{"Reachable"': False}
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": True}'
+  ExpectedResponse: <communication_success>
+  Pre-requisites: <Device is actually reachable>
+  arguments:
+    '{"Reachable"': True}
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": False}'
+  ExpectedResponse: <communication_failure>
+  Pre-requisites: '<Device is actually unreachable>
+
+
+    These test cases cover the extreme values of the `Reachable` attribute (True and
+    False) and the special responses that could result from these values, such as
+    successful or failed communication attempts.'
+  arguments:
+    '{"Reachable"': False}
+  option: WriteAttribute

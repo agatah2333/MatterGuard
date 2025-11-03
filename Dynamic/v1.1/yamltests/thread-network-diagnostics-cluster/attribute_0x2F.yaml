@@ -1,0 +1,28 @@
+config:
+  attribute: '0x2F'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x2F_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: ActiveNetworkFaults will be an empty list
+  ExpectedResponse: No active faults
+  Pre-requisites: 'Node has no detected faults
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"ActiveNetworkFaults"': '[]}'
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: ActiveNetworkFaults will contain the value 0
+  ExpectedResponse: Unspecified fault detected
+  Pre-requisites: 'Node has detected an unspecified fault
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"ActiveNetworkFaults"': '[0]}'
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: WriteAttribute

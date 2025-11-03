@@ -1,0 +1,45 @@
+config:
+  cluster: dishwasher-alarm-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: dishwasher-alarm-cluster_command_0x01_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: Mask attribute will be set to 0x00000000
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"Mask"': 0x00000000}
+  label: Test_Case_Minimum_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: Mask attribute will be set to 0xFFFFFFFF
+  ExpectedResponse: SUCCESS
+  Pre-requisites: All alarms must be supported by the server.
+  arguments:
+    '{"Mask"': 0xFFFFFFFF}
+  label: Test_Case_Maximum_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: INVALID_COMMAND
+  Pre-requisites: The server does not support the alarm corresponding to the highest
+    bit.
+  arguments:
+    '{"Mask"': 0x80000000}
+  label: Test_Case_Unknown_Alarm_Bit_Set
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: INVALID_COMMAND
+  Pre-requisites: 'The server supports the alarm corresponding to the lowest bit but
+    not the highest bit.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】.'
+  arguments:
+    '{"Mask"': 0x80000001}
+  label: Test_Case_Mixed_Known_and_Unknown_Alarms
+  option: SendCommand

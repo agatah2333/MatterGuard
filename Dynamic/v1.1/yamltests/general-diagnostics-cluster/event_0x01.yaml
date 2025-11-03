@@ -1,0 +1,28 @@
+config:
+  cluster: general-diagnostics-cluster
+  event: '0x01'
+  nodeId: '0x654231'
+name: general-diagnostics-cluster_event_0x01_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Event generated with SoftwareVersion set to 0
+  Pre-requisites: 'Node should be in a state where it can generate a ShutDown event
+
+
+    **Test Case 2:**'
+  arguments:
+    '{"SoftwareVersion"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Event generated with SoftwareVersion set to 1
+  Pre-requisites: 'Node should be in a state where it can generate a ShutDown event
+
+
+    **Test Case 4:**'
+  arguments:
+    '{"SoftwareVersion"': 1}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SubscribeToEvent

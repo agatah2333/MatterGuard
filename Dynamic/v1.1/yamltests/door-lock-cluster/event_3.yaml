@@ -1,0 +1,67 @@
+config:
+  cluster: door-lock-cluster
+  event: '3'
+  nodeId: '0x654231'
+name: door-lock-cluster_event_3_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Credentials: []
+    FabricIndex: 0
+    LockOperationType: 0
+    OperationError: 0
+    OperationSource: 0
+    SourceNode: 0
+    UserIndex: 0
+  label: Test_Case_Extreme_Values
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Credentials: []
+    FabricIndex: 65535
+    LockOperationType: 3
+    OperationError: 10
+    OperationSource: 255
+    SourceNode: 18446744073709551615
+    UserIndex: 65535
+  label: Test_Case_Extreme_Values
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: CRITICAL
+  Pre-requisites: None
+  arguments:
+    Credentials: []
+    FabricIndex: 1
+    LockOperationType: 0
+    OperationError: 1 (DisabledUserDenied)
+    OperationSource: 0
+    SourceNode: 1
+    UserIndex: 1
+  label: Test_Case_Special_Response_Scenario
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: INFO
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:3†source】【4:17†source】.'
+  arguments:
+    Credentials: []
+    FabricIndex: 2
+    LockOperationType: 1
+    OperationError: 2 (InvalidPIN)
+    OperationSource: 1
+    SourceNode: 2
+    UserIndex: 2
+  label: Test_Case_Special_Response_Scenario
+  option: SubscribeToEvent

@@ -1,0 +1,30 @@
+config:
+  attribute: '0x000A'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x000A_v1.1.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`ActiveWiredFaults: [0]`'
+  ExpectedResponse: '`The Node detects an unspecified fault on this wired power source.`'
+  Pre-requisites: '`The power source must be wired.`
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"ActiveWiredFaults"': '[0]}`'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`ActiveWiredFaults: [1]`'
+  ExpectedResponse: '`The Node detects the supplied voltage is above the maximum supported
+    value for this wired power source.`'
+  Pre-requisites: '`The power source must be wired.`
+
+
+    These test cases cover the extreme values and special responses for the `ActiveWiredFaults`
+    attribute in the Power Source Cluster.'
+  arguments:
+    '{"ActiveWiredFaults"': '[1]}`'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

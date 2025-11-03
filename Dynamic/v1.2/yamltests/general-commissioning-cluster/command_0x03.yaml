@@ -1,0 +1,14 @@
+config:
+  cluster: general-commissioning-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: general-commissioning-cluster_command_0x03_v1.2.0.0
+tests:
+- arguments: {}
+  option: SendCommand
+- arguments: {}
+  option: SendCommand
+- arguments: {}
+  option: SendCommand
+- arguments: {}
+  option: SendCommand

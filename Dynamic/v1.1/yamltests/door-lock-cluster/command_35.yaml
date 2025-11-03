@@ -1,0 +1,6 @@
+config:
+  cluster: door-lock-cluster
+  command: '35'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_35_v1.1.0.0
+tests: []

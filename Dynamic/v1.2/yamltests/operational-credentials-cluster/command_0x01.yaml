@@ -1,0 +1,24 @@
+config:
+  cluster: operational-credentials-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: operational-credentials-cluster_command_0x01_v1.2.0.0
+tests:
+- arguments: {}
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Invalid_PAKEPasscodeVerifier
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Invalid_Iterations
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Commissioning_Window_Already_Open
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Fail-Safe_Timer_Armed
+  option: SendCommand

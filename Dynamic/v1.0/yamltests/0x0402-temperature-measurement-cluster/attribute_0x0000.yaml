@@ -1,0 +1,217 @@
+config:
+  attribute: '0x0000'
+  cluster: temperature-measurement-cluster
+  nodeId: '0x654231'
+name: temperature-measurement-cluster_attribute_0x0000_v1.0.0
+tests:
+- ActionTime: <current_timestamp>
+  Attribute_Change: '- `MeasuredValue`: -27315'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    MeasuredValue: '-27315'
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify temperature-measurement-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0402'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0402'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0402'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0402'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: <current_timestamp>
+  Attribute_Change: '- `MeasuredValue`: 32767'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    MeasuredValue: 32767
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify temperature-measurement-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0402'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0402'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0402'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0402'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: <current_timestamp>
+  Attribute_Change: '- `MeasuredValue`: null'
+  ExpectedResponse: Temperature is unknown
+  Pre-requisites: None
+  arguments: {}
+  label: Test_Case_Null_Value_(Special_Response)
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify temperature-measurement-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0402'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0402'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0402'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0402'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: <current_timestamp>
+  Attribute_Change: '- `MeasuredValue`: 2500'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the `MeasuredValue`
+    field and the special response for the null value as mentioned in the description【4:0†source】【4:13†source】.'
+  arguments:
+    MeasuredValue: 2500 (representing 25.00°C)
+  label: Test_Case_Mid-range_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify temperature-measurement-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0402'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0402'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0402'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0402'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true

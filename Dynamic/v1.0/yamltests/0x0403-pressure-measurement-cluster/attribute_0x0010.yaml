@@ -1,0 +1,232 @@
+config:
+  attribute: '0x0010'
+  cluster: pressure-measurement-cluster
+  nodeId: '0x654231'
+name: pressure-measurement-cluster_attribute_0x0010_v1.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`ScaledValue` will be set to `-32767`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`MinScaledValue` and `MaxScaledValue` must be set appropriately.'
+  arguments:
+    MaxScaledValue: '`-32766`'
+    MinScaledValue: '`-32767`'
+    Scale: '`0`'
+    ScaledValue: '`-32767`'
+  label: Test_Case_Minimum_ScaledValue
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify pressure-measurement-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0403'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0403'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0403'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0403'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`ScaledValue` will be set to `32767`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`MinScaledValue` and `MaxScaledValue` must be set appropriately.'
+  arguments:
+    MaxScaledValue: '`32767`'
+    MinScaledValue: '`32766`'
+    Scale: '`0`'
+    ScaledValue: '`32767`'
+  label: Test_Case_Maximum_ScaledValue
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify pressure-measurement-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0403'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0403'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0403'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0403'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`ScaledValue` will be set to `null`'
+  ExpectedResponse: '`<null_value_response>`'
+  Pre-requisites: None
+  arguments:
+    MaxScaledValue: '`32767`'
+    MinScaledValue: '`-32767`'
+    Scale: '`0`'
+    ScaledValue: '`null`'
+  label: Test_Case_Special_Response_for_Null_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify pressure-measurement-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0403'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0403'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0403'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0403'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`ScaledValue` will be set to `1000` and interpreted as `10^2
+    * 1000 = 100000`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    MaxScaledValue: '`32767`'
+    MinScaledValue: '`-32767`'
+    Scale: '`2`'
+    ScaledValue: '`1000`'
+  label: Test_Case_Special_Response_for_Scale_Impact
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify pressure-measurement-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0403'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0403'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0403'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0403'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true

@@ -1,0 +1,28 @@
+config:
+  attribute: '0x0015'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0015_v1.1.0.0
+tests:
+- ActionTime: '"N/A"'
+  Attribute_Change: '"MinHeatSetpointLimit set to AbsMinHeatSetpointLimit"'
+  ExpectedResponse: '"SUCCESS"'
+  Pre-requisites: '"Thermostat must support heating mode"
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"MinHeatSetpointLimit"': '"AbsMinHeatSetpointLimit"}'
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: '"N/A"'
+  Attribute_Change: '"MinHeatSetpointLimit remains unchanged"'
+  ExpectedResponse: '"CONSTRAINT_ERROR"'
+  Pre-requisites: '"Thermostat must support heating mode"
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"MinHeatSetpointLimit"': '"AbsMinHeatSetpointLimit - 1"}'
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: WriteAttribute

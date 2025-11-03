@@ -1,0 +1,46 @@
+config:
+  attribute: '0x0016'
+  cluster: pump-configuration-and-control-cluster
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_attribute_0x0016_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `Power`: 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Power: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `Power`: 16,777,214'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Power: 16,777,214
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `Power`: Null'
+  ExpectedResponse: Error (Constraint Error)
+  Pre-requisites: None
+  arguments:
+    Power: 16,777,215
+  label: Test_Case_Invalid_Value_(Above_Maximum)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `Power`: Null'
+  ExpectedResponse: Success
+  Pre-requisites: 'Measurement of power consumption is not done in the pump
+
+
+    These test cases cover the extreme values of the constraints of the `Power` field
+    and the special response when the value is null.
+
+
+    ### References
+
+    - Matter Application Cluster Specification【4:0†source】.'
+  arguments: {}
+  label: Test_Case_Special_Response_(Null_Value)
+  option: WriteAttribute

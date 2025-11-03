@@ -1,0 +1,55 @@
+config:
+  cluster: time-synchronization-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: time-synchronization-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: "- `UTCTime`: 0\n  - `Granularity`: NoTimeGranularity\n  - `TimeSource`:\
+    \ None"
+  ExpectedResponse: 0x00 (SUCCESS)
+  Pre-requisites: None
+  arguments:
+    Granularity: 0 (NoTimeGranularity)
+    TimeSource: 0 (None)
+    UtcTime: 0
+  label: Test_Case_Minimum_UtcTime
+  option: SendCommand
+- ActionTime: 18446744073709551615
+  Attribute_Change: "- `UTCTime`: 18446744073709551615\n  - `Granularity`: MillisecondsGranularity\n\
+    \  - `TimeSource`: External"
+  ExpectedResponse: 0x00 (SUCCESS)
+  Pre-requisites: None
+  arguments:
+    Granularity: 3 (MillisecondsGranularity)
+    TimeSource: 3 (External)
+    UtcTime: 18446744073709551615
+  label: Test_Case_Maximum_UtcTime
+  option: SendCommand
+- ActionTime: 123456789
+  Attribute_Change: None
+  ExpectedResponse: 0x02 (TimeNotAccepted)
+  Pre-requisites: The server's current Granularity is higher than SecondsGranularity
+    and does not accept the new time.
+  arguments:
+    Granularity: 2 (SecondsGranularity)
+    TimeSource: 1 (Admin)
+    UtcTime: 123456789
+  label: Test_Case_Special_Response_-_TimeNotAccepted
+  option: SendCommand
+- ActionTime: 987654321
+  Attribute_Change: "- `UTCTime`: 987654321\n  - `Granularity`: MinutesGranularity\n\
+    \  - `TimeSource`: Admin"
+  ExpectedResponse: 0x00 (SUCCESS)
+  Pre-requisites: 'The server''s current Granularity is NoTimeGranularity.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    Granularity: 0 (NoTimeGranularity)
+    TimeSource: 2 (NodeTimeCluster)
+    UtcTime: 987654321
+  label: Test_Case_Valid_Time_Update_with_NoTimeGranularity
+  option: SendCommand

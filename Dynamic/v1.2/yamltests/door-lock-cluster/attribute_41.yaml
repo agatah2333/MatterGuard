@@ -1,0 +1,26 @@
+config:
+  attribute: '41'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_41_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`KeypadOperationEventMask` will be set to 0x00.'
+  ExpectedResponse: No keypad operation events will be transmitted.
+  Pre-requisites: The device should support the `KeypadOperationEventMask` attribute.
+  arguments:
+    KeypadOperationEventMask: '0x00'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`KeypadOperationEventMask` will be set to 0xFF.'
+  ExpectedResponse: All keypad operation events will be transmitted.
+  Pre-requisites: 'The device should support the `KeypadOperationEventMask` attribute.
+
+
+    These test cases cover the extreme values of the `KeypadOperationEventMask` attribute
+    and the special response scenarios as per the attribute''s description.'
+  arguments:
+    KeypadOperationEventMask: '0xFF'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

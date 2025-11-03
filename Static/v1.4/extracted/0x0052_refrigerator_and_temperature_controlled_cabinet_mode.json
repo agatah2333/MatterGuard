@@ -1,0 +1,94 @@
+{
+  "source_file": "Refrigerator And Temperature Controlled Cabinet Mode_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0052",
+        "name": "Refrigerator And Temperature Controlled Cabinet Mode",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SupportedModes",
+            "dataType": "list[ModeOptionStruct]",
+            "valueRange": "At least one entry SHALL include the Auto mode tag",
+            "description": "Indicates the supported modes for the device.",
+            "privilege": "",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentMode",
+            "dataType": "uint8",
+            "valueRange": "",
+            "description": "Indicates the current mode of the device.",
+            "privilege": "",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "StartUpMode",
+            "dataType": "uint8",
+            "valueRange": "",
+            "description": "Indicates the startup mode of the device.",
+            "privilege": "",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "OnMode",
+            "dataType": "uint8",
+            "valueRange": "",
+            "description": "Indicates the on mode of the device.",
+            "privilege": "",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ChangeToMode",
+            "parameters": {
+              "dataType": "uint8",
+              "valueRange": "",
+              "description": "On receipt of this command, if the NewMode field indicates a valid mode transition within the supported list, the server SHALL set the CurrentMode attribute to the NewMode value."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "Notify",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "ActiveAlarms: AlarmBitmap, InactiveAlarms: AlarmBitmap, Mask: AlarmBitmap, NewState: AlarmBitmap",
+              "description": "Reports alarm state changes"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "ModeOptionStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "Label": "string",
+              "Mode": "uint8",
+              "ModeTags": "list[uint8] (1-8 elements)"
+            }
+          },
+          "AlarmBitmap": {
+            "baseType": "bitmap32",
+            "valueRange": {
+              "0x00000001": "TemperatureAlert",
+              "0x00000002": "DoorOpenAlert",
+              "0x00000004": "PowerFailure"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

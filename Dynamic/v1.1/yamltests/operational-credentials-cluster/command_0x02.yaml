@@ -1,0 +1,35 @@
+config:
+  cluster: operational-credentials-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: operational-credentials-cluster_command_0x02_v1.1.0.0
+tests:
+- ActionTime: <minimum_value>
+  Attribute_Change: '<attribute_name>: <new_value>'
+  ExpectedResponse: <success_or_specific_error>
+  Pre-requisites: <none_or_specific_conditions>
+  arguments:
+    CommissioningTimeout: 0
+    Discriminator: 0
+    Iterations: 1000
+    PAKEPasscodeVerifier: <minimum_length_value>
+    Salt: <minimum_length_value>
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: <maximum_value>
+  Attribute_Change: '<attribute_name>: <new_value>'
+  ExpectedResponse: <PAKEParameterError_or_Busy>
+  Pre-requisites: '<commissioning_window_already_open_or_fail_safe_timer_armed>
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:0†source】【4:0†source】【4:0†source】【4:0†source】.'
+  arguments:
+    CommissioningTimeout: 65535
+    Discriminator: 2047
+    Iterations: 100000
+    PAKEPasscodeVerifier: <maximum_length_value>
+    Salt: <maximum_length_value>
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SendCommand

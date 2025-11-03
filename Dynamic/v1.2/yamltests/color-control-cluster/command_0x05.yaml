@@ -1,0 +1,26 @@
+config:
+  cluster: color-control-cluster
+  command: '0x05'
+  nodeId: '0x654231'
+name: color-control-cluster_command_0x05_v1.2.0.0
+tests:
+- ActionTime: 0
+  ExpectedResponse: No change in saturation.
+  arguments: {}
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: 1000 ms
+  ExpectedResponse: Saturation increased by 254.
+  arguments: {}
+  label: Test_Case_Maximum_StepSize
+  option: SendCommand
+- ActionTime: 655340 ms
+  ExpectedResponse: Saturation decreased by 50 over 65534 tenths of a second.
+  arguments: {}
+  label: Test_Case_Maximum_TransitionTime
+  option: SendCommand
+- ActionTime: 5000 ms
+  ExpectedResponse: No change in saturation.
+  arguments: {}
+  label: Test_Case_Special_Response_(StepSize_=_0)
+  option: SendCommand

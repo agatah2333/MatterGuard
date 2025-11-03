@@ -1,0 +1,1192 @@
+test_metadata:
+  version: 1.0.0
+  matter_spec_version: '1.0'
+  description: Refined test cases for color-control cluster command 0x43
+  extraction_method: systematic_cluster_analysis
+config:
+  cluster: color-control-cluster
+  cluster_id: '0x0300'
+  command_id: '0x43'
+  nodeId: '0x654231'
+  endpoint: 1
+name: color-control_cluster_command_0x43_refined_v1.0.0
+test_info:
+  total_test_cases: 16
+  test_focus:
+  - Extreme values of constraints
+  - Special response scenarios
+  - Error conditions
+test_summary: '- There are 16 test cases in the sendcommand
+
+  - The range of each field is {"EnhancedHue": "[0, 255]", "Saturation": "[0, 255]",
+  "TransitionTime": "[0, 255]", "OptionsMask": "[0, 255]", "OptionsOverride": "[0,
+  255]"}'
+tests:
+- test_id: TC_EnhancedMoveToHueAndSaturation_001
+  label: Test_Case_Basic_EnhancedMoveToHueAndSaturation
+  description: Basic test for EnhancedMoveToHueAndSaturation command
+  test_type: normal_operation
+  Pre-requisites:
+  - Device supports EnhancedMoveToHueAndSaturation command
+  option: SendCommand
+  arguments:
+    EnhancedHue: 0
+    Saturation: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: Command executed successfully
+  formatted_output: 'Test case 1:
+
+    - Value of each field: {"EnhancedHue": 0, "Saturation": 0, "TransitionTime": 0,
+    "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: Command executed
+    successfully
+
+    - Any pre-requisites: Device supports EnhancedMoveToHueAndSaturation command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_EnhancedMoveToHueAndSaturation_002
+  label: Test_Case_Min_EnhancedHue
+  description: Test EnhancedMoveToHueAndSaturation with minimum EnhancedHue value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports EnhancedMoveToHueAndSaturation command
+  option: SendCommand
+  arguments:
+    EnhancedHue: 0
+    Saturation: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: EnhancedHue set to minimum value
+  formatted_output: 'Test case 2:
+
+    - Value of each field: {"EnhancedHue": 0, "Saturation": 0, "TransitionTime": 0,
+    "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: EnhancedHue
+    set to minimum value
+
+    - Any pre-requisites: Device supports EnhancedMoveToHueAndSaturation command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_EnhancedMoveToHueAndSaturation_003
+  label: Test_Case_Max_EnhancedHue
+  description: Test EnhancedMoveToHueAndSaturation with maximum EnhancedHue value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports EnhancedMoveToHueAndSaturation command
+  option: SendCommand
+  arguments:
+    EnhancedHue: 255
+    Saturation: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: EnhancedHue set to maximum value
+  formatted_output: 'Test case 3:
+
+    - Value of each field: {"EnhancedHue": 255, "Saturation": 0, "TransitionTime":
+    0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: EnhancedHue
+    set to maximum value
+
+    - Any pre-requisites: Device supports EnhancedMoveToHueAndSaturation command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_EnhancedMoveToHueAndSaturation_004
+  label: Test_Case_Null_EnhancedHue
+  description: Test EnhancedMoveToHueAndSaturation with null EnhancedHue value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null EnhancedHue handling
+  option: SendCommand
+  arguments:
+    EnhancedHue: 255
+    Saturation: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for EnhancedHue
+  formatted_output: 'Test case 4:
+
+    - Value of each field: {"EnhancedHue": 255, "Saturation": 0, "TransitionTime":
+    0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for EnhancedHue
+
+    - Any pre-requisites: Device supports null EnhancedHue handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_EnhancedMoveToHueAndSaturation_005
+  label: Test_Case_Min_Saturation
+  description: Test EnhancedMoveToHueAndSaturation with minimum Saturation value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports EnhancedMoveToHueAndSaturation command
+  option: SendCommand
+  arguments:
+    EnhancedHue: 0
+    Saturation: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: Saturation set to minimum value
+  formatted_output: 'Test case 5:
+
+    - Value of each field: {"EnhancedHue": 0, "Saturation": 0, "TransitionTime": 0,
+    "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: Saturation set
+    to minimum value
+
+    - Any pre-requisites: Device supports EnhancedMoveToHueAndSaturation command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_EnhancedMoveToHueAndSaturation_006
+  label: Test_Case_Max_Saturation
+  description: Test EnhancedMoveToHueAndSaturation with maximum Saturation value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports EnhancedMoveToHueAndSaturation command
+  option: SendCommand
+  arguments:
+    EnhancedHue: 0
+    Saturation: 255
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: Saturation set to maximum value
+  formatted_output: 'Test case 6:
+
+    - Value of each field: {"EnhancedHue": 0, "Saturation": 255, "TransitionTime":
+    0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: Saturation set
+    to maximum value
+
+    - Any pre-requisites: Device supports EnhancedMoveToHueAndSaturation command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_EnhancedMoveToHueAndSaturation_007
+  label: Test_Case_Null_Saturation
+  description: Test EnhancedMoveToHueAndSaturation with null Saturation value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null Saturation handling
+  option: SendCommand
+  arguments:
+    EnhancedHue: 0
+    Saturation: 255
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for Saturation
+  formatted_output: 'Test case 7:
+
+    - Value of each field: {"EnhancedHue": 0, "Saturation": 255, "TransitionTime":
+    0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for Saturation
+
+    - Any pre-requisites: Device supports null Saturation handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_EnhancedMoveToHueAndSaturation_008
+  label: Test_Case_Min_TransitionTime
+  description: Test EnhancedMoveToHueAndSaturation with minimum TransitionTime value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports EnhancedMoveToHueAndSaturation command
+  option: SendCommand
+  arguments:
+    EnhancedHue: 0
+    Saturation: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: TransitionTime set to minimum value
+  formatted_output: 'Test case 8:
+
+    - Value of each field: {"EnhancedHue": 0, "Saturation": 0, "TransitionTime": 0,
+    "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: TransitionTime
+    set to minimum value
+
+    - Any pre-requisites: Device supports EnhancedMoveToHueAndSaturation command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_EnhancedMoveToHueAndSaturation_009
+  label: Test_Case_Max_TransitionTime
+  description: Test EnhancedMoveToHueAndSaturation with maximum TransitionTime value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports EnhancedMoveToHueAndSaturation command
+  option: SendCommand
+  arguments:
+    EnhancedHue: 0
+    Saturation: 0
+    TransitionTime: 255
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 255
+  ExpectedResponse: Success
+  Attribute_Change: TransitionTime set to maximum value
+  formatted_output: 'Test case 9:
+
+    - Value of each field: {"EnhancedHue": 0, "Saturation": 0, "TransitionTime": 255,
+    "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 255
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: TransitionTime
+    set to maximum value
+
+    - Any pre-requisites: Device supports EnhancedMoveToHueAndSaturation command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_EnhancedMoveToHueAndSaturation_010
+  label: Test_Case_Null_TransitionTime
+  description: Test EnhancedMoveToHueAndSaturation with null TransitionTime value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null TransitionTime handling
+  option: SendCommand
+  arguments:
+    EnhancedHue: 0
+    Saturation: 0
+    TransitionTime: 255
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for TransitionTime
+  formatted_output: 'Test case 10:
+
+    - Value of each field: {"EnhancedHue": 0, "Saturation": 0, "TransitionTime": 255,
+    "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for TransitionTime
+
+    - Any pre-requisites: Device supports null TransitionTime handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_EnhancedMoveToHueAndSaturation_011
+  label: Test_Case_Min_OptionsMask
+  description: Test EnhancedMoveToHueAndSaturation with minimum OptionsMask value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports EnhancedMoveToHueAndSaturation command
+  option: SendCommand
+  arguments:
+    EnhancedHue: 0
+    Saturation: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: OptionsMask set to minimum value
+  formatted_output: 'Test case 11:
+
+    - Value of each field: {"EnhancedHue": 0, "Saturation": 0, "TransitionTime": 0,
+    "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: OptionsMask
+    set to minimum value
+
+    - Any pre-requisites: Device supports EnhancedMoveToHueAndSaturation command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_EnhancedMoveToHueAndSaturation_012
+  label: Test_Case_Max_OptionsMask
+  description: Test EnhancedMoveToHueAndSaturation with maximum OptionsMask value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports EnhancedMoveToHueAndSaturation command
+  option: SendCommand
+  arguments:
+    EnhancedHue: 0
+    Saturation: 0
+    TransitionTime: 0
+    OptionsMask: 255
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: OptionsMask set to maximum value
+  formatted_output: 'Test case 12:
+
+    - Value of each field: {"EnhancedHue": 0, "Saturation": 0, "TransitionTime": 0,
+    "OptionsMask": 255, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: OptionsMask
+    set to maximum value
+
+    - Any pre-requisites: Device supports EnhancedMoveToHueAndSaturation command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_EnhancedMoveToHueAndSaturation_013
+  label: Test_Case_Null_OptionsMask
+  description: Test EnhancedMoveToHueAndSaturation with null OptionsMask value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null OptionsMask handling
+  option: SendCommand
+  arguments:
+    EnhancedHue: 0
+    Saturation: 0
+    TransitionTime: 0
+    OptionsMask: 255
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for OptionsMask
+  formatted_output: 'Test case 13:
+
+    - Value of each field: {"EnhancedHue": 0, "Saturation": 0, "TransitionTime": 0,
+    "OptionsMask": 255, "OptionsOverride": 0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for OptionsMask
+
+    - Any pre-requisites: Device supports null OptionsMask handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_EnhancedMoveToHueAndSaturation_014
+  label: Test_Case_Min_OptionsOverride
+  description: Test EnhancedMoveToHueAndSaturation with minimum OptionsOverride value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports EnhancedMoveToHueAndSaturation command
+  option: SendCommand
+  arguments:
+    EnhancedHue: 0
+    Saturation: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: OptionsOverride set to minimum value
+  formatted_output: 'Test case 14:
+
+    - Value of each field: {"EnhancedHue": 0, "Saturation": 0, "TransitionTime": 0,
+    "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: OptionsOverride
+    set to minimum value
+
+    - Any pre-requisites: Device supports EnhancedMoveToHueAndSaturation command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_EnhancedMoveToHueAndSaturation_015
+  label: Test_Case_Max_OptionsOverride
+  description: Test EnhancedMoveToHueAndSaturation with maximum OptionsOverride value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports EnhancedMoveToHueAndSaturation command
+  option: SendCommand
+  arguments:
+    EnhancedHue: 0
+    Saturation: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 255
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: OptionsOverride set to maximum value
+  formatted_output: 'Test case 15:
+
+    - Value of each field: {"EnhancedHue": 0, "Saturation": 0, "TransitionTime": 0,
+    "OptionsMask": 0, "OptionsOverride": 255}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: OptionsOverride
+    set to maximum value
+
+    - Any pre-requisites: Device supports EnhancedMoveToHueAndSaturation command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_EnhancedMoveToHueAndSaturation_016
+  label: Test_Case_Null_OptionsOverride
+  description: Test EnhancedMoveToHueAndSaturation with null OptionsOverride value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null OptionsOverride handling
+  option: SendCommand
+  arguments:
+    EnhancedHue: 0
+    Saturation: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 255
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for OptionsOverride
+  formatted_output: 'Test case 16:
+
+    - Value of each field: {"EnhancedHue": 0, "Saturation": 0, "TransitionTime": 0,
+    "OptionsMask": 0, "OptionsOverride": 255}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for OptionsOverride
+
+    - Any pre-requisites: Device supports null OptionsOverride handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true

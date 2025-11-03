@@ -1,0 +1,37 @@
+config:
+  attribute: '0x000F'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x000F_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`BatTimeToFullCharge` will be set to 0.'
+  ExpectedResponse: Immediate response indicating the battery is fully charged.
+  Pre-requisites: The battery must be in a state where it can be fully charged.
+  arguments:
+    '{"BatTimeToFullCharge"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: 4294967295
+  Attribute_Change: '`BatTimeToFullCharge` will be set to 4294967295.'
+  ExpectedResponse: Response indicating the maximum possible time for full charge.
+  Pre-requisites: The battery must be in a state where it can take a long time to
+    charge.
+  arguments:
+    '{"BatTimeToFullCharge"': 4294967295}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: 'NULL'
+  Attribute_Change: '`BatTimeToFullCharge` will be set to NULL.'
+  ExpectedResponse: Response indicating the Node is unable to assess the time to full
+    charge.
+  Pre-requisites: 'The Node must be in a state where it cannot determine the charge
+    time.
+
+
+    These test cases cover the extreme values of the constraints and the special response
+    scenarios for the `BatTimeToFullCharge` attribute in the Power Source Cluster.'
+  arguments:
+    '{"BatTimeToFullCharge"': NULL}
+  label: Test_Case_Special_Response_-_Unable_to_Assess
+  option: WriteAttribute

@@ -1,0 +1,26 @@
+config:
+  cluster: onoff-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: onoff-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: OnOff attribute will be set to FALSE.
+  ExpectedResponse: The OnOff attribute should be set to FALSE.
+  Pre-requisites: The device should be in the On state.
+  arguments: {}
+  label: Test_Case_Extreme_Value_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: "- OnOff attribute will be set to FALSE.\n  - OnTime attribute\
+    \ will be set to 0 (if supported)."
+  ExpectedResponse: The OnOff attribute should be set to FALSE, and if the OnTime
+    attribute is supported, it should be set to 0.
+  Pre-requisites: "- The device should be in the On state.\n  - The OnTime attribute\
+    \ should be supported.\n\nThese test cases cover the scenarios where the command\
+    \ is executed under normal conditions and when special attributes (like OnTime)\
+    \ are supported and need to be reset.\n\nFor more details, refer to the Matter\
+    \ Application Cluster Specification【4:0†source】."
+  arguments: {}
+  label: Test_Case_Special_Response_Based_on_Description_of_the_Effect
+  option: SendCommand

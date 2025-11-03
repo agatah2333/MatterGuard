@@ -1,0 +1,49 @@
+config:
+  attribute: '0x0000'
+  cluster: network-commissioning-cluster
+  nodeId: '0x654231'
+name: network-commissioning-cluster_attribute_0x0000_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: Device should support at least one network configuration entry.
+  arguments:
+    '{"MaxNetworks"': 1}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: Device should support up to 255 network configuration entries.
+  arguments:
+    '{"MaxNetworks"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: Device should support at least two network configuration entries.
+  arguments:
+    '{"MaxNetworks"': 2}
+  label: Test_Case_Special_Response_-_Just_Above_Minimum
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: 'Device should support up to 128 network configuration entries.
+
+
+    These test cases cover the extreme values of the constraints of the `MaxNetworks`
+    field and values that could result in special responses based on the description
+    of the effect.
+
+
+    ### References
+
+    - Matter Specification R1.0, Connectivity Standards Alliance Document 22-27349,
+    Sep. 28, 2022【4:0†source】.'
+  arguments:
+    '{"MaxNetworks"': 128}
+  label: Test_Case_Special_Response_-_Mid_Range
+  option: WriteAttribute

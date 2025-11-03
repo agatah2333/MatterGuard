@@ -1,0 +1,28 @@
+{
+  "cluster_id": "0x002B",
+  "cluster_name": "Localization Configuration",
+  "section": "11.3",
+  "description": "Nodes should be expected to be deployed to any and all regions of the world. These global regions may have differing common languages, units of measurements, and numerical formatting stan­ dards. As such, Nodes that visually or audibly convey information need a mechanism by which they can be configured to use a user’s preferred language, units, etc. This cluster supports an interface to a Node. It provides attributes for determining and configuring",
+  "data_types": {},
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "ActiveLo­",
+      "details": "string max 35 N MS RW VM M",
+      "raw_line": "0x0000         ActiveLo­     string         max 35        N              MS             RW VM       M"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "Support­",
+      "details": "list[string] max F MS RV M",
+      "raw_line": "0x0001         Support­      list[string]   max           F              MS             RV          M"
+    }
+  },
+  "commands": {},
+  "events": {},
+  "extraction_info": {
+    "start_line": 38219,
+    "end_line": 38290,
+    "total_lines": 71
+  }
+}

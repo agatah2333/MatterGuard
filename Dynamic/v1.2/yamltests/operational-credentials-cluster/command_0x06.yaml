@@ -1,0 +1,47 @@
+config:
+  cluster: operational-credentials-cluster
+  command: '0x06'
+  nodeId: '0x654231'
+name: operational-credentials-cluster_command_0x06_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: COMMAND_INVALID
+  Pre-requisites: None
+  arguments:
+    '{"CommissioningTimeout"': '0, "PAKEPasscodeVerifier": "<16-byte string>", "Discriminator":
+      0, "Iterations": 1000, "Salt": "<16-byte string>"}'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: 65535
+  Attribute_Change: Commissioning window opened
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"CommissioningTimeout"': '65535, "PAKEPasscodeVerifier": "<32-byte string>",
+      "Discriminator": 4095, "Iterations": 100000, "Salt": "<32-byte string>"}'
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: 300
+  Attribute_Change: None
+  ExpectedResponse: PAKEParameterError
+  Pre-requisites: None
+  arguments:
+    '{"CommissioningTimeout"': '300, "PAKEPasscodeVerifier": "<invalid string>", "Discriminator":
+      100, "Iterations": 5000, "Salt": "<16-byte string>"}'
+  label: Test_Case_Invalid_PAKEPasscodeVerifier
+  option: SendCommand
+- ActionTime: 300
+  Attribute_Change: None
+  ExpectedResponse: Busy
+  Pre-requisites: 'Commissioning window already open or fail-safe timer armed
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:2†source】【4:3†source】.'
+  arguments:
+    '{"CommissioningTimeout"': '300, "PAKEPasscodeVerifier": "<16-byte string>", "Discriminator":
+      100, "Iterations": 5000, "Salt": "<16-byte string>"}'
+  label: Test_Case_Busy_Status
+  option: SendCommand

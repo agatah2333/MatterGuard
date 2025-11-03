@@ -1,0 +1,104 @@
+{
+  "source_file": "Dishwasher Mode_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0059",
+        "name": "Dishwasher Mode",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SupportedModes",
+            "dataType": "list[ModeOptionStruct]",
+            "valueRange": "At least one entry must include the Normal mode tag",
+            "description": "This attribute contains the list of supported modes that may be selected for the CurrentMode attribute.",
+            "privilege": "Read",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentMode",
+            "dataType": "uint8",
+            "valueRange": "Must match the Mode field of one of the entries in the SupportedModes attribute",
+            "description": "This attribute indicates the current mode of the server.",
+            "privilege": "Read",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "StartUpMode",
+            "dataType": "uint8",
+            "valueRange": "Must match the Mode field of one of the entries in the SupportedModes attribute",
+            "description": "Indicates the desired startup mode for the server when it is supplied with power.",
+            "privilege": "Read/Write",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "OnMode",
+            "dataType": "uint8",
+            "valueRange": "Must match the Mode field of one of the entries in the SupportedModes attribute",
+            "description": "Indicates whether the value of CurrentMode depends on the state of the On/Off cluster on the same endpoint.",
+            "privilege": "Read/Write",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ChangeToMode",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "NewMode: uint8(0-255)",
+              "description": "Indicates a valid mode transition within the supported list."
+            },
+            "privilege": "Manage",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x01",
+            "name": "ChangeToModeResponse",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "Status: uint8(0-255), StatusText: string(max 64)",
+              "description": "Response to mode change request"
+            },
+            "privilege": "Manage",
+            "direction": "client → server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "ModeOptionStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "Label": {
+                "type": "string",
+                "valueRange": "max 64"
+              },
+              "Mode": {
+                "type": "uint8",
+                "valueRange": "0-255"
+              },
+              "ModeTags": {
+                "type": "list[ModeTagStruct]",
+                "valueRange": "max 8"
+              }
+            }
+          },
+          "ModeTagStruct": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Normal",
+              "1": "Eco",
+              "2": "Heavy",
+              "3": "Rinse"
+            }
+          }
+        },
+        "description": "This cluster is derived from the Mode Base cluster and defines additional mode tags and namespaced enumerated values for dishwasher devices."
+      }
+    ]
+  }
+}

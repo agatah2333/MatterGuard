@@ -1,0 +1,29 @@
+config:
+  cluster: software-diagnostics-cluster
+  event: '0x00'
+  nodeId: '0x654231'
+name: software-diagnostics-cluster_event_0x00_v1.1.0.0
+tests:
+- ActionTime: '`After boot or reboot process`'
+  Attribute_Change: '`SoftwareVersion attribute of the Basic Information Cluster set
+    to 0`'
+  ExpectedResponse: '`StartUp event generated`'
+  Pre-requisites: '`Node has completed a boot or reboot process`'
+  arguments:
+    SoftwareVersion: '`0`'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: '`After boot or reboot process`'
+  Attribute_Change: '`SoftwareVersion attribute of the Basic Information Cluster set
+    to 4294967295`'
+  ExpectedResponse: '`StartUp event generated`'
+  Pre-requisites: '`Node has completed a boot or reboot process`
+
+
+    These test cases cover the extreme values of the `SoftwareVersion` field and ensure
+    that the StartUp event is generated correctly after a boot or reboot process,
+    with the `SoftwareVersion` attribute being set appropriately.'
+  arguments:
+    SoftwareVersion: '`4294967295`'
+  label: Test_Case_Special_Response_Values
+  option: SubscribeToEvent

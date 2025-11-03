@@ -1,0 +1,6 @@
+config:
+  cluster: operational-state-rvc-cluster
+  event: '0x00'
+  nodeId: '0x654231'
+name: operational-state-rvc-cluster_event_0x00_v1.2.0.0
+tests: []

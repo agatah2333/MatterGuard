@@ -1,0 +1,133 @@
+{
+  "source_file": "Thread Border Router Management_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0452",
+        "name": "Thread Border Router Management",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "BorderRouterName",
+            "dataType": "string",
+            "valueRange": "1-63",
+            "description": "Indicates a user-friendly name identifying the device model or product of the Border Router.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "BorderAgentID",
+            "dataType": "octstr",
+            "valueRange": "16",
+            "description": "Indicates a 16-byte globally unique ID for a Thread Border Router device.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "ThreadVersion",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "Indicates the Thread version supported by the Thread interface configured by the cluster instance.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "InterfaceEnabled",
+            "dataType": "bool",
+            "valueRange": "all",
+            "description": "Indicates whether the associated IEEE 802.15.4 Thread interface is enabled or disabled.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "ActiveDatasetTimestamp",
+            "dataType": "uint64",
+            "valueRange": "all",
+            "description": "Timestamp value extracted from the Active Dataset value configured by the Thread Node.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0005",
+            "name": "PendingDatasetTimestamp",
+            "dataType": "uint64",
+            "valueRange": "all",
+            "description": "Timestamp value extracted from the Pending Dataset value configured by the Thread Node.",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "GetActiveDatasetRequest",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "This command is used to request the active operational dataset of the Thread network to which the border router is connected."
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "GetPendingDatasetRequest",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "This command is used to request the pending dataset of the Thread network to which the border router is connected."
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "DatasetResponse",
+            "parameters": {
+              "dataType": "octstr",
+              "valueRange": "max 254",
+              "description": "This command is sent in response to GetActiveDatasetRequest or GetPendingDatasetRequest command."
+            },
+            "privilege": "N",
+            "direction": "server ⇒ client"
+          },
+          {
+            "id": "0x03",
+            "name": "SetActiveDatasetRequest",
+            "parameters": {
+              "dataType": "octstr",
+              "valueRange": "max 254",
+              "description": "This command is used to set the active Dataset of the Thread network to which the Border Router is connected."
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x04",
+            "name": "SetPendingDatasetRequest",
+            "parameters": {
+              "dataType": "octstr",
+              "valueRange": "max 254",
+              "description": "This command is used to set or update the pending Dataset of the Thread network to which the Border Router is connected."
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "OperationalDataset": {
+            "baseType": "octstr",
+            "valueRange": "max 254",
+            "description": "Thread network operational dataset structure"
+          }
+        }
+      }
+    ]
+  }
+}

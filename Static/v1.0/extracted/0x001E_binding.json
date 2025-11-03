@@ -1,0 +1,55 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x001E",
+    "name": "Binding",
+    "description": "A binding represents a persistent relationship between an endpoint and one or more other local or remote endpoints."
+  },
+  "derived_datatypes": [
+    {
+      "type": "struct",
+      "name": "TargetStruct",
+      "base_data_type": "STRUCT",
+      "value_range": {
+        "struct_fields": [
+          {
+            "name": "Node",
+            "data_type": "node-id",
+            "description": "This is the remote target node ID. If the Endpoint field is present, this field SHALL be present."
+          },
+          {
+            "name": "Group",
+            "data_type": "uint16",
+            "description": "This is the target group ID that represents remote endpoints. If the Endpoint field is present, this field SHALL NOT be present."
+          },
+          {
+            "name": "Endpoint",
+            "data_type": "uint16",
+            "description": "This is the remote endpoint that the local endpoint is bound to. If the Group field is present, this field SHALL NOT be present."
+          },
+          {
+            "name": "Cluster",
+            "data_type": "uint32",
+            "description": "This is the cluster ID (client & server) on the local and target endpoint(s)."
+          }
+        ]
+      }
+    }
+  ],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Binding",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "Each entry SHALL represent a binding.",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

@@ -1,0 +1,51 @@
+config:
+  attribute: '0x0001'
+  cluster: application-launcher-cluster
+  nodeId: '0x654231'
+name: application-launcher-cluster_attribute_0x0001_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '`CurrentApp` will be set to {CatalogVendorID: 0, ApplicationID:
+    "", Endpoint: 0}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    ApplicationID: '""'
+    CatalogVendorID: 0
+    Endpoint: 0
+  label: Test_Case_Minimum_Values
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '`CurrentApp` will be set to {CatalogVendorID: 65535, ApplicationID:
+    "A" * 256, Endpoint: 65535}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    ApplicationID: '"A" * 256 (maximum length string)'
+    CatalogVendorID: 65535
+    Endpoint: 65535
+  label: Test_Case_Maximum_Values
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '`CurrentApp` will be set to null'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments: {}
+  label: Test_Case_Special_Response_-_No_Current_In-Focus_Application
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '`CurrentApp` will remain unchanged'
+  ExpectedResponse: APP_NOT_AVAILABLE
+  Pre-requisites: 'The application "NonExistentApp" with CatalogVendorID 1234 should
+    not exist on the device.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:5†source】.'
+  arguments:
+    ApplicationID: '"NonExistentApp"'
+    CatalogVendorID: 1234
+    Endpoint: 1
+  label: Test_Case_Special_Response_-_Application_Not_Available
+  option: WriteAttribute

@@ -1,0 +1,58 @@
+config:
+  attribute: '19'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_19_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"LockState": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: <None>
+  arguments:
+    '{"LockState"': 0}
+  label: Test_Case_Extreme_Value_-_Not_Fully_Locked
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LockState": 1}'
+  ExpectedResponse: <success>
+  Pre-requisites: <None>
+  arguments:
+    '{"LockState"': 1}
+  label: Test_Case_Extreme_Value_-_Locked
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LockState": 2}'
+  ExpectedResponse: <success>
+  Pre-requisites: <None>
+  arguments:
+    '{"LockState"': 2}
+  label: Test_Case_Extreme_Value_-_Unlocked
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LockState": NULL}'
+  ExpectedResponse: <error_unknown_status>
+  Pre-requisites: <Lock hardware does not currently know the status of the locking
+    mechanism, e.g., after a power cycle>
+  arguments:
+    '{"LockState"': NULL}
+  label: Test_Case_Special_Response_-_Unknown_Status
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LockState": 1}'
+  ExpectedResponse: <success>
+  Pre-requisites: <Lock was previously in "Not Fully Locked" state>
+  arguments:
+    '{"LockState"': 1}
+  label: Test_Case_Special_Response_-_Transition_to_Locked
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LockState": 2}'
+  ExpectedResponse: <success>
+  Pre-requisites: '<Lock was previously in "Locked" state>
+
+
+    ### Summary'
+  arguments:
+    '{"LockState"': 2}
+  label: Test_Case_Special_Response_-_Transition_to_Unlocked
+  option: WriteAttribute

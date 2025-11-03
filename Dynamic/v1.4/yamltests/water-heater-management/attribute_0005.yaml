@@ -1,0 +1,12 @@
+name: Water Heater Management - BoostState Attribute Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Water Heater Management
+  timeout: 180
+tests:
+- label: Read BoostState attribute
+  command: readAttribute
+  attribute: BoostState
+  response:
+    saveAs: booststate_value

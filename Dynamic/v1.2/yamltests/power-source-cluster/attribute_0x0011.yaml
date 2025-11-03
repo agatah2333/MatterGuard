@@ -1,0 +1,33 @@
+config:
+  attribute: '0x0011'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x0011_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`{"MinScaledValue": -32767}`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`MaxScaledValue must be greater than -32767`'
+  arguments:
+    '{"MinScaledValue"': -32767}`
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`{"MinScaledValue": <MaxScaledValue-1>}`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`MaxScaledValue must be set to a value greater than -32767`'
+  arguments:
+    '{"MinScaledValue"': <MaxScaledValue-1>}`
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`{"MinScaledValue": <some_special_value>}`'
+  ExpectedResponse: '`<special_response>`'
+  Pre-requisites: '`MaxScaledValue must be set to a value greater than <some_special_value>`
+
+
+    ### Summary'
+  arguments:
+    '{"MinScaledValue"': <some_special_value>}`
+  label: Test_Case_Value_Causing_Special_Response
+  option: WriteAttribute

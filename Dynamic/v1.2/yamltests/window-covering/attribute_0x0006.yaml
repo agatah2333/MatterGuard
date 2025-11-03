@@ -1,0 +1,50 @@
+config:
+  attribute: '0x0006'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0006_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '{"CurrentPositionLift": 0}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'InstalledOpenLimitLift must be greater than 0
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"CurrentPositionLift"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '{"CurrentPositionLift": No change}'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'InstalledOpenLimitLift must be set to a specific value
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"CurrentPositionLift"': InstalledOpenLimitLift + 1}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '{"CurrentPositionTilt": 0}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'InstalledOpenLimitTilt must be greater than 0
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"CurrentPositionTilt"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '{"CurrentPositionTilt": No change}'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'InstalledOpenLimitTilt must be set to a specific value
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"CurrentPositionTilt"': InstalledOpenLimitTilt + 1}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

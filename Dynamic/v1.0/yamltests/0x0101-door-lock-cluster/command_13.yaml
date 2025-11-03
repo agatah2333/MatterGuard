@@ -1,0 +1,118 @@
+config:
+  cluster: door-lock-cluster
+  command: '13'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_13_v1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: The holiday schedule at index 0 will be cleared.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The holiday schedule at index 0 must exist.
+  arguments:
+    HolidayIndex: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify door-lock-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: No attribute will be changed.
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'The holiday schedule index provided is out of the valid range.
+
+
+    These test cases cover the extreme values and special responses for the "Clear
+    Holiday Schedule" command in the Door Lock cluster.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments:
+    HolidayIndex: NumberOfHolidaySchedulesSupportedPerUser + 1
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify door-lock-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true

@@ -1,0 +1,45 @@
+config:
+  cluster: door-lock-cluster
+  command: '0'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_0_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`LockState` to `Locked`'
+  ExpectedResponse: '`SUCCESS` if `RequirePINForRemoteOperation` is `False`, otherwise
+    `INVALID_COMMAND`'
+  Pre-requisites: '`RequirePINForRemoteOperation` attribute should be checked.'
+  arguments:
+    PINCode: '`""` (empty string)'
+  label: Test_Case_Minimum_Value_of_PINCode
+  option: SendCommand
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`LockState` to `Locked`'
+  ExpectedResponse: '`SUCCESS` if the PIN is correct, otherwise `INVALID_COMMAND`'
+  Pre-requisites: '`RequirePINForRemoteOperation` attribute should be checked.'
+  arguments:
+    PINCode: '`<maximum_length_string>` (e.g., "12345678901234567890" if the max length
+      is 20)'
+  label: Test_Case_Maximum_Length_of_PINCode
+  option: SendCommand
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`WrongCodeEntryLimit` counter incremented'
+  ExpectedResponse: '`INVALID_COMMAND`'
+  Pre-requisites: '`RequirePINForRemoteOperation` attribute should be checked.'
+  arguments:
+    PINCode: '`"0000"` (assuming "0000" is an invalid PIN)'
+  label: Test_Case_Invalid_PINCode
+  option: SendCommand
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`LockState` to `Locked`'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: '`RequirePINForRemoteOperation` attribute should be checked.
+
+
+    These test cases cover the extreme values of the constraints of the `PINCode`
+    field and the values that could result in special responses as mentioned in the
+    description of the effect【4:0†source】【4:5†source】【4:6†source】【4:7†source】.'
+  arguments:
+    PINCode: '`"1234"` (assuming "1234" is a valid PIN)'
+  label: Test_Case_Valid_PINCode
+  option: SendCommand

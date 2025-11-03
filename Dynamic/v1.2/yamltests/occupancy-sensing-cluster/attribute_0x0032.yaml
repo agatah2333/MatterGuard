@@ -1,0 +1,49 @@
+config:
+  attribute: '0x0032'
+  cluster: occupancy-sensing-cluster
+  nodeId: '0x654231'
+name: occupancy-sensing-cluster_attribute_0x0032_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"PhysicalContactUnoccupiedToOccupiedThreshold": 1}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"PhysicalContactUnoccupiedToOccupiedThreshold"': 1}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"PhysicalContactUnoccupiedToOccupiedThreshold": 254}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"PhysicalContactUnoccupiedToOccupiedThreshold"': 254}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"PhysicalContactUnoccupiedToOccupiedThreshold": 1}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"PhysicalContactUnoccupiedToOccupiedThreshold"': 1}
+  label: Test_Case_Default_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Error (Value out of range)
+  Pre-requisites: None
+  arguments:
+    '{"PhysicalContactUnoccupiedToOccupiedThreshold"': 0}
+  label: Test_Case_Special_Response_-_Below_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Error (Value out of range)
+  Pre-requisites: 'None
+
+
+    ### Summary'
+  arguments:
+    '{"PhysicalContactUnoccupiedToOccupiedThreshold"': 255}
+  label: Test_Case_Special_Response_-_Above_Maximum_Value
+  option: WriteAttribute

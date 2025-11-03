@@ -1,0 +1,44 @@
+config:
+  cluster: account-login-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: account-login-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: SetupPIN with a valid PIN code or null if accounts do not match.
+  Pre-requisites: Ensure the TempAccountIdentifier is valid and exists in the system.
+  arguments:
+    '{"TempAccountIdentifier"': '"A".repeat(16)}'
+  label: Test_Case_Minimum_Length_of_TempAccountIdentifier
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: SetupPIN with a valid PIN code or null if accounts do not match.
+  Pre-requisites: Ensure the TempAccountIdentifier is valid and exists in the system.
+  arguments:
+    '{"TempAccountIdentifier"': '"A".repeat(100)}'
+  label: Test_Case_Maximum_Length_of_TempAccountIdentifier
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: SetupPIN with a valid PIN code.
+  Pre-requisites: Ensure the TempAccountIdentifier matches an active user account.
+  arguments:
+    '{"TempAccountIdentifier"': '"ValidAccount12345"}'
+  label: Test_Case_Valid_TempAccountIdentifier_with_Matching_Account
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: SetupPIN as null.
+  Pre-requisites: 'Ensure the TempAccountIdentifier does not match any active user
+    account.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:6†source】【4:16†source】.'
+  arguments:
+    '{"TempAccountIdentifier"': '"NonMatchingAccount"}'
+  label: Test_Case_Valid_TempAccountIdentifier_with_No_Matching_Account
+  option: SendCommand

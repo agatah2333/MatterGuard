@@ -1,0 +1,21 @@
+config:
+  node_id: 305414945
+  cluster: '0x0504'
+  endpoint: 1
+tests:
+- label: test_changechannelresponse
+  cluster: '0x0504'
+  command: '0x01'
+  arguments: {}
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS

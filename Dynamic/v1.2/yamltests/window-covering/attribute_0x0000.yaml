@@ -1,0 +1,6 @@
+config:
+  attribute: '0x0000'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0000_v1.2.0.0
+tests: []

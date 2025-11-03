@@ -1,0 +1,6 @@
+config:
+  cluster: media-playback-cluster
+  command: '0x0B'
+  nodeId: '0x654231'
+name: media-playback-cluster_command_0x0B_v1.2.0.0
+tests: []

@@ -1,0 +1,51 @@
+config:
+  attribute: '0x0005'
+  cluster: temperature-control-cluster
+  nodeId: '0x654231'
+name: temperature-control-cluster_attribute_0x0005_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: SupportedTemperatureLevels will be set to an empty list.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"SupportedTemperatureLevels"': '[]}'
+  label: Test_Case_Minimum_Constraint_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: SupportedTemperatureLevels will be set to a list of 32 levels.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"SupportedTemperatureLevels"': '["Level1", "Level2", ..., "Level32"]}'
+  label: Test_Case_Maximum_Constraint_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: SupportedTemperatureLevels will remain unchanged.
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments:
+    '{"SupportedTemperatureLevels"': '["Level1", "Level2", ..., "Level33"]}'
+  label: Test_Case_Special_Response_-_Exceeding_Maximum_Constraint
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: SupportedTemperatureLevels will remain unchanged.
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments:
+    '{"SupportedTemperatureLevels"': '["Cold", "Warm", "Hot", "Warm"]}'
+  label: Test_Case_Special_Response_-_Duplicate_Values
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: SupportedTemperatureLevels will remain unchanged.
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"SupportedTemperatureLevels"': '["Cold", "Warm", "Hot", "Invalid@Level"]}'
+  label: Test_Case_Special_Response_-_Invalid_Characters
+  option: WriteAttribute

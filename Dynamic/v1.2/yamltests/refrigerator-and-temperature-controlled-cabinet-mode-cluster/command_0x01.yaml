@@ -1,0 +1,47 @@
+config:
+  cluster: refrigerator-and-temperature-controlled-cabinet-mode-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: refrigerator-and-temperature-controlled-cabinet-mode-cluster_command_0x01_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '`CurrentMode` will be set to the value of `NewMode`'
+  ExpectedResponse: Success
+  Pre-requisites: '`NewMode` must be different from `CurrentMode`'
+  arguments:
+    Status: '0x00'
+    StatusText: '"Success"'
+  label: Test_Case_Extreme_Value_of_Status_Field_(Minimum)
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: No attribute will be changed
+  ExpectedResponse: Manufacturer specific error
+  Pre-requisites: None
+  arguments:
+    Status: '0xBF'
+    StatusText: '"Manufacturer Specific Error"'
+  label: Test_Case_Extreme_Value_of_Status_Field_(Maximum)
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: No attribute will be changed
+  ExpectedResponse: UnsupportedMode
+  Pre-requisites: '`NewMode` must not match any entries in the `SupportedMode` attribute
+    list'
+  arguments:
+    Status: '0x01'
+    StatusText: '""'
+  label: Test_Case_Special_Response_for_Unsupported_Mode
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: No attribute will be changed
+  ExpectedResponse: InvalidInMode
+  Pre-requisites: 'The request cannot be handled due to the current mode of the device
+
+
+    These test cases cover the extreme values of the `Status` field and the special
+    responses as mentioned in the description of the effect【4:1†source】【4:2†source】【4:3†source】【4:4†source】.'
+  arguments:
+    Status: '0x03'
+    StatusText: '"Invalid in current mode"'
+  label: Test_Case_Special_Response_for_Invalid_In_Mode
+  option: SendCommand

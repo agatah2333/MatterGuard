@@ -1,0 +1,75 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x009F",
+    "name": "Device Energy Management Mode",
+    "description": "This cluster is derived from the Mode Base cluster, defining additional mode tags and namespaced enumerated values for Device Energy Management devices."
+  },
+  "derived_datatypes": [
+    {
+      "type": "enum",
+      "name": "ModeTag",
+      "base_data_type": "ENUM16",
+      "description": "The derived cluster specific ModeTag values.",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "NoOptimization",
+            "value": "0x4000",
+            "description": "The device prohibits optimization of energy usage management: its energy usage is determined only by the user configuration and internal device needs. This tag cannot be included with any of the other tags defined below in a mode."
+          },
+          {
+            "name": "DeviceOptimization",
+            "value": "0x4001",
+            "description": "The device is permitted to manage its own energy usage. For example, using tariff information it may obtain."
+          },
+          {
+            "name": "LocalOptimization",
+            "value": "0x4002",
+            "description": "The device permits management of energy usage by an energy manager to optimize the local energy usage."
+          },
+          {
+            "name": "GridOptimization",
+            "value": "0x4003",
+            "description": "The device permits management of energy usage by an energy manager to optimize the grid energy usage."
+          }
+        ]
+      }
+    }
+  ],
+  "commands": [],
+  "attributes": [],
+  "events": [],
+  "mode_constraints": {
+    "description": "The table below lists the changes relative to the Mode Base cluster for the fields of the ModeOptionStruct type.",
+    "constraints": [
+      {
+        "field_id": "2",
+        "field_name": "ModeTags",
+        "constraint": "1 to 8",
+        "conformance": "M"
+      }
+    ]
+  },
+  "mode_examples": [
+    {
+      "mode_name": "No Energy Management (Forecast reporting only)",
+      "tags": ["0x4000 (NoOptimization)"]
+    },
+    {
+      "mode_name": "Device Energy Management",
+      "tags": ["0x4001 (DeviceOptimization)"]
+    },
+    {
+      "mode_name": "Home Energy Management",
+      "tags": ["0x4001 (DeviceOptimization)", "0x4002 (LocalOptimization)"]
+    },
+    {
+      "mode_name": "Grid Energy Management",
+      "tags": ["0x4003 (GridOptimization)"]
+    },
+    {
+      "mode_name": "Full Energy Management",
+      "tags": ["0x4001 (DeviceOptimization)", "0x4002 (LocalOptimization)", "0x4003 (GridOptimization)"]
+    }
+  ]
+}

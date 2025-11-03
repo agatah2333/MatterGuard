@@ -1,0 +1,460 @@
+{
+  "id": "0x0102",
+  "name": "Window Covering",
+  "description": "The window covering cluster provides an interface for controlling and adjusting automatic window coverings such as drapery motors, automatic shades, curtains and blinds.",
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Application", 
+    "scope": "Endpoint",
+    "picsCode": "WNCV"
+  },
+  "revision": {
+    "current": 5,
+    "history": [
+      {
+        "revision": 1,
+        "description": "Mandatory global ClusterRevision attribute added; CCB 1994 1995 1996 1997 2086 2094 2095 2096 2097"
+      },
+      {
+        "revision": 2,
+        "description": "CCB 2328"
+      },
+      {
+        "revision": 3,
+        "description": "CCB 2477 2555 2845 3028"
+      },
+      {
+        "revision": 4,
+        "description": "All Hubs changes with FeatureMap & OperationalStatus attribute"
+      },
+      {
+        "revision": 5,
+        "description": "New data model format and notation. Created plus clarified PositionAware and AbsolutePosition features. General cleanup of functionality."
+      }
+    ]
+  },
+  "features": {
+    "LF": {
+      "bit": 0,
+      "code": "LF",
+      "name": "Lift",
+      "conformance": "O.a+",
+      "summary": "Lift control and behavior for lifting/sliding window coverings"
+    },
+    "TL": {
+      "bit": 1,
+      "code": "TL", 
+      "name": "Tilt",
+      "conformance": "O.a+",
+      "summary": "Tilt control and behavior for tilting window coverings"
+    },
+    "PA_LF": {
+      "bit": 2,
+      "code": "PA_LF",
+      "name": "PositionAwareLift",
+      "conformance": "[LF]",
+      "summary": "Position aware lift control is supported."
+    },
+    "ABS": {
+      "bit": 3,
+      "code": "ABS",
+      "name": "AbsolutePosition",
+      "conformance": "O",
+      "summary": "Absolute positioning is supported."
+    },
+    "PA_TL": {
+      "bit": 4,
+      "code": "PA_TL",
+      "name": "PositionAwareTilt",
+      "conformance": "[TL]",
+      "summary": "Position aware tilt control is supported."
+    }
+  },
+  "dataTypes": {
+    "ConfigStatusBitmap": {
+      "type": "map8",
+      "bits": {
+        "0": {"name": "Operational", "summary": "Device is operational."},
+        "1": {"name": "OnlineReserved", "summary": "Deprecated and reserved."},
+        "2": {"name": "LiftMovementReversed", "summary": "The lift movement is reversed."},
+        "3": {"name": "LiftPositionAware", "summary": "Supports the PositionAwareLift feature (PA_LF)."},
+        "4": {"name": "TiltPositionAware", "summary": "Supports the PositionAwareTilt feature (PA_TL)."},
+        "5": {"name": "LiftEncoderControlled", "summary": "Uses an encoder for lift."},
+        "6": {"name": "TiltEncoderControlled", "summary": "Uses an encoder for tilt."}
+      }
+    },
+    "ModeBitmap": {
+      "type": "map8",
+      "bits": {
+        "0": {"name": "MotorDirectionReversed", "summary": "Reverse the lift direction."},
+        "1": {"name": "CalibrationMode", "summary": "Perform a calibration."},
+        "2": {"name": "MaintenanceMode", "summary": "Freeze all motions for maintenance."},
+        "3": {"name": "LedFeedback", "summary": "Control the LEDs feedback."}
+      }
+    },
+    "OperationalStatusBitmap": {
+      "type": "map8",
+      "description": "The OperationalStatusBitmap is using several internal operational state fields (composed of 2 bits) following this definition: 00b = Currently not moving, 01b = Currently opening (e.g. moving from closed to open), 10b = Currently closing (e.g. moving from open to closed), 11b = Reserved",
+      "bits": {
+        "0..1": {"name": "Global", "summary": "Global operational state."},
+        "2..3": {"name": "Lift", "summary": "Lift operational state."},
+        "4..5": {"name": "Tilt", "summary": "Tilt operational state."}
+      }
+    },
+    "SafetyStatusBitmap": {
+      "type": "map16",
+      "bits": {
+        "0": {"name": "RemoteLockout", "summary": "Movement commands are ignored (locked out). e.g. not granted authorization, outside some time/date range."},
+        "1": {"name": "TamperDetection", "summary": "Tampering detected on sensors or any other safety equipment. Ex: a device has been forcedly moved without its actuator(s)."},
+        "2": {"name": "FailedCommunication", "summary": "Communication failure to sensors or other safety equipment."},
+        "3": {"name": "PositionFailure", "summary": "Device has failed to reach the desired position. e.g. with position aware device, time expired before TargetPosition is reached."},
+        "4": {"name": "ThermalProtection", "summary": "Motor(s) and/or electric circuit thermal protection activated."},
+        "5": {"name": "ObstacleDetected", "summary": "An obstacle is preventing actuator movement."},
+        "6": {"name": "Power", "summary": "Device has power related issue or limitation e.g. device is running w/ the help of a backup battery or power might not be fully available at the moment."},
+        "7": {"name": "StopInput", "summary": "Local safety sensor (not a direct obstacle) is preventing movements (e.g. Safety EU Standard EN60335)."},
+        "8": {"name": "MotorJammed", "summary": "Mechanical problem related to the motor(s) detected."},
+        "9": {"name": "HardwareFailure", "summary": "PCB, fuse and other electrics problems."},
+        "10": {"name": "ManualOperation", "summary": "Actuator is manually operated and is preventing actuator movement (e.g. actuator is disengaged/decoupled)."},
+        "11": {"name": "Protection", "summary": "Protection is activated."}
+      }
+    },
+    "TypeEnum": {
+      "type": "enum8",
+      "values": {
+        "0": {"name": "RollerShade", "summary": "RollerShade", "conformance": "LF"},
+        "1": {"name": "RollerShade2Motor", "summary": "RollerShade - 2 Motor", "conformance": "LF"},
+        "2": {"name": "RollerShadeExterior", "summary": "RollerShade - Exterior", "conformance": "LF"},
+        "3": {"name": "RollerShadeExterior2Motor", "summary": "RollerShade - Exterior - 2 Motor", "conformance": "LF"},
+        "4": {"name": "Drapery", "summary": "Drapery (curtain)", "conformance": "LF"},
+        "5": {"name": "Awning", "summary": "Awning", "conformance": "LF"},
+        "6": {"name": "Shutter", "summary": "Shutter", "conformance": "LF | TL"},
+        "7": {"name": "TiltBlindTiltOnly", "summary": "Tilt Blind - Tilt Only", "conformance": "TL"},
+        "8": {"name": "TiltBlindLiftAndTilt", "summary": "Tilt Blind - Lift & Tilt", "conformance": "LF & TL"},
+        "9": {"name": "ProjectorScreen", "summary": "Projector Screen", "conformance": "LF"},
+        "255": {"name": "Unknown", "summary": "Unknown", "conformance": "O"}
+      }
+    },
+    "EndProductTypeEnum": {
+      "type": "enum8",
+      "values": {
+        "0": {"name": "RollerShade", "summary": "Simple Roller Shade", "conformance": "LF"},
+        "1": {"name": "RomanShade", "summary": "Roman Shade", "conformance": "LF"},
+        "2": {"name": "BalloonShade", "summary": "Balloon Shade", "conformance": "LF"},
+        "3": {"name": "WovenWood", "summary": "Woven Wood", "conformance": "LF"},
+        "4": {"name": "PleatedShade", "summary": "Pleated Shade", "conformance": "LF"},
+        "5": {"name": "CellularShade", "summary": "Cellular Shade", "conformance": "LF"},
+        "6": {"name": "LayeredShade", "summary": "Layered Shade", "conformance": "LF"},
+        "7": {"name": "LayeredShade2D", "summary": "Layered Shade 2D", "conformance": "LF"},
+        "8": {"name": "SheerShade", "summary": "Sheer Shade", "conformance": "LF & TL"},
+        "9": {"name": "TiltOnlyInteriorBlind", "summary": "Tilt Only Interior Blind", "conformance": "TL"},
+        "10": {"name": "InteriorBlind", "summary": "Interior Blind", "conformance": "LF & TL"},
+        "11": {"name": "VerticalBlindStripCurtain", "summary": "Vertical Blind, Strip Curtain", "conformance": "LF & TL"},
+        "12": {"name": "InteriorVenetianBlind", "summary": "Interior Venetian Blind", "conformance": "LF & TL"},
+        "13": {"name": "ExteriorVenetianBlind", "summary": "Exterior Venetian Blind", "conformance": "LF & TL"},
+        "14": {"name": "LateralLeftCurtain", "summary": "Lateral Left Curtain", "conformance": "LF"},
+        "15": {"name": "LateralRightCurtain", "summary": "Lateral Right Curtain", "conformance": "LF"},
+        "16": {"name": "CentralCurtain", "summary": "Central Curtain", "conformance": "LF"},
+        "17": {"name": "RollerShutter", "summary": "Roller Shutter", "conformance": "LF"},
+        "18": {"name": "ExteriorVerticalScreen", "summary": "Exterior Vertical Screen", "conformance": "LF"},
+        "19": {"name": "AwningTerracePatio", "summary": "Awning Terrace (Patio)", "conformance": "LF"},
+        "20": {"name": "AwningVerticalScreen", "summary": "Awning Vertical Screen", "conformance": "LF"},
+        "21": {"name": "TiltOnlyPergola", "summary": "Tilt Only Pergola", "conformance": "LF | TL"},
+        "22": {"name": "SwingingShutter", "summary": "Swinging Shutter", "conformance": "LF | TL"},
+        "23": {"name": "SlidingShutter", "summary": "Sliding Shutter", "conformance": "LF | TL"},
+        "255": {"name": "Unknown", "summary": "Unknown", "conformance": "O"}
+      }
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "name": "Type",
+      "type": "TypeEnum",
+      "constraint": "desc",
+      "quality": "F",
+      "default": "0",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL identify the type of window covering."
+    },
+    "0x0001": {
+      "name": "PhysicalClosedLimitLift",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "F",
+      "default": "0",
+      "access": "RV",
+      "conformance": "[LF & PA_LF & ABS]",
+      "description": "This attribute SHALL indicate the maximum possible encoder position possible (Unit cm, centimeters) to position the height of the window covering lift."
+    },
+    "0x0002": {
+      "name": "PhysicalClosedLimitTilt",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "F",
+      "default": "0",
+      "access": "RV",
+      "conformance": "[TL & PA_TL & ABS]",
+      "description": "This attribute SHALL indicate the maximum possible encoder position possible (Unit 0.1°, tenths of a degree) to position the angle of the window covering tilt."
+    },
+    "0x0003": {
+      "name": "CurrentPositionLift",
+      "type": "uint16",
+      "constraint": "InstalledOpenLimitLift to InstalledClosedLimitLift",
+      "quality": "XN",
+      "default": "null",
+      "access": "RV",
+      "conformance": "[LF & PA_LF & ABS]",
+      "description": "This attribute SHALL indicate the actual lift position (Unit cm, centimeters) of the window covering from the fully-open position."
+    },
+    "0x0004": {
+      "name": "CurrentPositionTilt",
+      "type": "uint16",
+      "constraint": "InstalledOpenLimitTilt to InstalledClosedLimitTilt",
+      "quality": "XN",
+      "default": "null",
+      "access": "RV",
+      "conformance": "[TL & PA_TL & ABS]",
+      "description": "This attribute SHALL indicate the actual tilt position (Unit 0.1°, tenths of a degree) of the window covering from the fully-open position."
+    },
+    "0x0005": {
+      "name": "NumberOfActuationsLift",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "N",
+      "default": "0",
+      "access": "RV",
+      "conformance": "[LF]",
+      "description": "This attribute SHALL indicate the total number of lift/slide actuations applied to the window covering since the device was installed."
+    },
+    "0x0006": {
+      "name": "NumberOfActuationsTilt",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "N",
+      "default": "0",
+      "access": "RV",
+      "conformance": "[TL]",
+      "description": "This attribute SHALL indicate the total number of tilt actuations applied to the window covering since the device was installed."
+    },
+    "0x0007": {
+      "name": "ConfigStatus",
+      "type": "ConfigStatusBitmap",
+      "constraint": "desc",
+      "quality": "N",
+      "default": "desc",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute specifies the configuration and status information of the window covering."
+    },
+    "0x0008": {
+      "name": "CurrentPositionLiftPercentage",
+      "type": "percent",
+      "quality": "XNSP",
+      "default": "null",
+      "access": "RV",
+      "conformance": "[LF & PA_LF]",
+      "description": "This attribute SHALL indicate the actual position as a percentage from 0% to 100% with 1% default step."
+    },
+    "0x0009": {
+      "name": "CurrentPositionTiltPercentage",
+      "type": "percent",
+      "constraint": "0 to 100",
+      "quality": "XNSP",
+      "default": "null",
+      "access": "RV",
+      "conformance": "[TL & PA_TL]",
+      "description": "This attribute SHALL indicate the actual position as a percentage from 0% to 100% with 1% default step."
+    },
+    "0x000A": {
+      "name": "OperationalStatus",
+      "type": "OperationalStatusBitmap",
+      "constraint": "0b00xxxxxx",
+      "quality": "P",
+      "default": "0",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate the currently ongoing operations and applies to all type of devices."
+    },
+    "0x000B": {
+      "name": "TargetPositionLiftPercent100ths",
+      "type": "percent100ths",
+      "quality": "XSP",
+      "default": "null",
+      "access": "RV",
+      "conformance": "LF & PA_LF",
+      "description": "This attribute SHALL indicate the position where the window covering lift will go or is moving to as a percentage (Unit 0.01%)."
+    },
+    "0x000C": {
+      "name": "TargetPositionTiltPercent100ths",
+      "type": "percent100ths",
+      "quality": "XSP",
+      "default": "null",
+      "access": "RV",
+      "conformance": "TL & PA_TL",
+      "description": "This attribute SHALL indicate the position where the window covering tilt will go or is moving to as a percentage (Unit 0.01%)."
+    },
+    "0x000D": {
+      "name": "EndProductType",
+      "type": "EndProductTypeEnum",
+      "constraint": "desc",
+      "quality": "F",
+      "default": "0",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHOULD provide more detail about the product type than can be determined from the main category indicated by the Type attribute."
+    },
+    "0x000E": {
+      "name": "CurrentPositionLiftPercent100ths",
+      "type": "percent100ths",
+      "constraint": "0 to 10000",
+      "quality": "XNP",
+      "default": "null",
+      "access": "RV",
+      "conformance": "LF & PA_LF",
+      "description": "This attribute SHALL indicate the actual position as a percentage with a minimal step of 0.01%. E.g Max 10000 equals 100.00%."
+    },
+    "0x000F": {
+      "name": "CurrentPositionTiltPercent100ths",
+      "type": "percent100ths",
+      "constraint": "0 to 10000",
+      "quality": "XNP",
+      "default": "null",
+      "access": "RV",
+      "conformance": "TL & PA_TL",
+      "description": "This attribute SHALL indicate the actual position as a percentage with a minimal step of 0.01%. E.g Max 10000 equals 100.00%."
+    },
+    "0x0010": {
+      "name": "InstalledOpenLimitLift",
+      "type": "uint16",
+      "constraint": "0 to 65534",
+      "quality": "N",
+      "default": "0",
+      "access": "RV",
+      "conformance": "LF & PA_LF & ABS",
+      "description": "This attribute SHALL indicate the open limit for lifting the window covering whether position (in centimeters) is encoded or timed."
+    },
+    "0x0011": {
+      "name": "InstalledClosedLimitLift",
+      "type": "uint16",
+      "constraint": "0 to 65534",
+      "quality": "N",
+      "default": "65534",
+      "access": "RV",
+      "conformance": "LF & PA_LF & ABS",
+      "description": "This attribute SHALL indicate the closed limit for lifting the window covering whether position (in centimeters) is encoded or timed."
+    },
+    "0x0012": {
+      "name": "InstalledOpenLimitTilt",
+      "type": "uint16",
+      "constraint": "0 to 65534",
+      "quality": "N",
+      "default": "0",
+      "access": "RV",
+      "conformance": "TL & PA_TL & ABS",
+      "description": "This attribute SHALL indicate the open limit for tilting the window covering whether position (in tenth of a degree) is encoded or timed."
+    },
+    "0x0013": {
+      "name": "InstalledClosedLimitTilt",
+      "type": "uint16",
+      "constraint": "0 to 65534",
+      "quality": "N",
+      "default": "65534",
+      "access": "RV",
+      "conformance": "TL & PA_TL & ABS",
+      "description": "This attribute SHALL indicate the closed limit for tilting the window covering whether position (in tenth of a degree) is encoded or timed."
+    },
+    "0x0017": {
+      "name": "Mode",
+      "type": "ModeBitmap",
+      "constraint": "0b0000xxxx",
+      "quality": "N",
+      "default": "0",
+      "access": "RW VM",
+      "conformance": "M",
+      "description": "The Mode attribute allows configuration of the window covering, such as: reversing the motor direction, placing the window covering into calibration mode, placing the motor into maintenance mode, disabling the network, and disabling status LEDs."
+    },
+    "0x001A": {
+      "name": "SafetyStatus",
+      "type": "SafetyStatusBitmap",
+      "constraint": "desc",
+      "quality": "P",
+      "default": "0",
+      "access": "RV",
+      "conformance": "O",
+      "description": "The SafetyStatus attribute reflects the state of the safety sensors and the common issues preventing movements."
+    }
+  },
+  "commands": {
+    "0x00": {
+      "name": "UpOrOpen",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "description": "Upon receipt of this command, the window covering will adjust its position so the physical lift/slide and tilt is at the maximum open/up position. This will happen as fast as possible."
+    },
+    "0x01": {
+      "name": "DownOrClose",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "description": "Upon receipt of this command, the window covering will adjust its position so the physical lift/slide and tilt is at the maximum closed/down position. This will happen as fast as possible."
+    },
+    "0x02": {
+      "name": "StopMotion",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "description": "Upon receipt of this command, the window covering will stop any adjusting to the physical tilt and lift/slide that is currently occurring."
+    },
+    "0x04": {
+      "name": "GoToLiftValue",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "[LF & ABS]",
+      "description": "This command causes the window covering to adjust the lift position to the specified value.",
+      "fields": {
+        "0": {"name": "LiftValue", "type": "uint16", "constraint": "desc", "conformance": "M"}
+      }
+    },
+    "0x05": {
+      "name": "GoToLiftPercentage",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "LF & PA_LF, [LF]",
+      "description": "Upon receipt of this command, the server will adjust the window covering to the lift/slide percentage specified in the payload of this command.",
+      "fields": {
+        "0": {"name": "LiftPercentageValue", "type": "percent", "constraint": "desc", "conformance": "O.a"},
+        "1": {"name": "LiftPercent100thsValue", "type": "percent100ths", "constraint": "desc", "conformance": "O.a"}
+      }
+    },
+    "0x07": {
+      "name": "GoToTiltValue",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "[TL & ABS]",
+      "description": "This command causes the window covering to adjust the tilt position to the specified value.",
+      "fields": {
+        "0": {"name": "TiltValue", "type": "uint16", "constraint": "desc", "conformance": "M"}
+      }
+    },
+    "0x08": {
+      "name": "GoToTiltPercentage",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "TL & PA_TL, [TL]",
+      "description": "Upon receipt of this command, the server will adjust the window covering to the tilt percentage specified in the payload of this command.",
+      "fields": {
+        "0": {"name": "TiltPercentageValue", "type": "percent", "constraint": "desc", "conformance": "O.a"},
+        "1": {"name": "TiltPercent100thsValue", "type": "percent100ths", "constraint": "desc", "conformance": "O.a"}
+      }
+    }
+  },
+  "events": {}
+}

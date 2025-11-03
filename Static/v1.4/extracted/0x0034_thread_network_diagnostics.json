@@ -1,0 +1,662 @@
+{
+  "source_file": "Thread Network Diagnostics_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0034",
+        "name": "Thread Network Diagnostics",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "Channel",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "The Channel attribute indicates the current operating channel.",
+            "privilege": "RV",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "Routing-Role",
+            "dataType": "RoutingRoleEnum",
+            "valueRange": "all",
+            "description": "The Routing-Role attribute indicates the current routing role of the device.",
+            "privilege": "RV",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "Network-Name",
+            "dataType": "string",
+            "valueRange": "max 16",
+            "description": "The Network-Name attribute indicates the name of the network.",
+            "privilege": "RV",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "PanId",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "The PanId attribute indicates the PAN ID of the network.",
+            "privilege": "RV",
+            "writable": true
+          },
+          {
+            "id": "0x0004",
+            "name": "Extended-PanId",
+            "dataType": "uint64",
+            "valueRange": "all",
+            "description": "The Extended-PanId attribute indicates the extended PAN ID of the network.",
+            "privilege": "RV",
+            "writable": true
+          },
+          {
+            "id": "0x0005",
+            "name": "MeshLocalPrefix",
+            "dataType": "ipv6pre",
+            "valueRange": "ipv6pre",
+            "description": "The MeshLocalPrefix attribute indicates the mesh-local prefix of the network.",
+            "privilege": "RV",
+            "writable": true
+          },
+          {
+            "id": "0x0006",
+            "name": "OverrunCount",
+            "dataType": "uint64",
+            "valueRange": "all",
+            "description": "The OverrunCount attribute indicates the number of overruns.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0007",
+            "name": "NeighborTable",
+            "dataType": "list[NeighborTableStruct]",
+            "valueRange": "all",
+            "description": "The NeighborTable attribute provides a list of neighbor table entries.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0008",
+            "name": "RouteTable",
+            "dataType": "list[RouteTableStruct]",
+            "valueRange": "all",
+            "description": "The RouteTable attribute provides a list of route table entries.",
+            "privilege": "RV",
+            "writable": true
+          },
+          {
+            "id": "0x0009",
+            "name": "PartitionId",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The PartitionId attribute indicates the partition ID of the network.",
+            "privilege": "RV",
+            "writable": true
+          },
+          {
+            "id": "0x000A",
+            "name": "Weighting",
+            "dataType": "uint8",
+            "valueRange": "all",
+            "description": "The Weighting attribute indicates the weighting of the device.",
+            "privilege": "RV",
+            "writable": true
+          },
+          {
+            "id": "0x000B",
+            "name": "DataVersion",
+            "dataType": "uint8",
+            "valueRange": "max 255",
+            "description": "The DataVersion attribute indicates the data version of the network.",
+            "privilege": "RV",
+            "writable": true
+          },
+          {
+            "id": "0x000C",
+            "name": "StableDataVersion",
+            "dataType": "uint8",
+            "valueRange": "max 255",
+            "description": "The StableDataVersion attribute indicates the stable data version of the network.",
+            "privilege": "RV",
+            "writable": true
+          },
+          {
+            "id": "0x000D",
+            "name": "LeaderRouterId",
+            "dataType": "uint8",
+            "valueRange": "max 62",
+            "description": "The LeaderRouterId attribute indicates the router ID of the leader.",
+            "privilege": "RV",
+            "writable": true
+          },
+          {
+            "id": "0x000E",
+            "name": "DetachedRoleCount",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "The DetachedRoleCount attribute indicates the number of times the device has been in the detached role.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x000F",
+            "name": "ChildRoleCount",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "The ChildRoleCount attribute indicates the number of times the device has been in the child role.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0010",
+            "name": "RouterRoleCount",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "The RouterRoleCount attribute indicates the number of times the device has been in the router role.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0011",
+            "name": "LeaderRoleCount",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "The LeaderRoleCount attribute indicates the number of times the device has been in the leader role.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0012",
+            "name": "AttachAttemptCount",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "The AttachAttemptCount attribute indicates the number of attach attempts made by the device.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0013",
+            "name": "PartitionIdChangeCount",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "The PartitionIdChangeCount attribute indicates the number of times the partition ID has changed.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0014",
+            "name": "BetterPartitionAttachAttemptCount",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "The BetterPartitionAttachAttemptCount attribute indicates the number of attempts to attach to a better partition.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0015",
+            "name": "ParentChangeCount",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "The ParentChangeCount attribute indicates the number of times the parent has changed.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0016",
+            "name": "TxTotalCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The TxTotalCount attribute indicates the total number of transmissions.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0017",
+            "name": "TxUnicastCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The TxUnicastCount attribute indicates the total number of unicast transmissions.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0018",
+            "name": "TxBroadcastCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The TxBroadcastCount attribute indicates the total number of broadcast transmissions.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0019",
+            "name": "TxAckRequestedCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The TxAckRequestedCount attribute indicates the number of transmissions where an acknowledgment was requested.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x001A",
+            "name": "TxAckedCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The TxAckedCount attribute indicates the number of transmissions that were acknowledged.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x001B",
+            "name": "TxNoAckRequestedCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The TxNoAckRequestedCount attribute indicates the number of transmissions where no acknowledgment was requested.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x001C",
+            "name": "TxDataCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The TxDataCount attribute indicates the number of data transmissions.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x001D",
+            "name": "TxDataPollCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The TxDataPollCount attribute indicates the number of data poll transmissions.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x001E",
+            "name": "TxBeaconRequestCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The TxBeaconRequestCount attribute indicates the number of beacon request transmissions.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x001F",
+            "name": "TxOtherCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The TxOtherCount attribute indicates the number of other transmissions.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0020",
+            "name": "TxRetryCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The TxRetryCount attribute indicates the number of transmission retries.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0021",
+            "name": "TxDirectMaxRetryExpiryCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The TxDirectMaxRetryExpiryCount attribute indicates the number of direct transmission retries that reached the maximum retry limit.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0022",
+            "name": "TxIndirectMaxRetryExpiryCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The TxIndirectMaxRetryExpiryCount attribute indicates the number of indirect transmission retries that reached the maximum retry limit.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0023",
+            "name": "TxErrCcaCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The TxErrCcaCount attribute indicates the number of CCA errors during transmission.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0024",
+            "name": "TxErrAbortCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The TxErrAbortCount attribute indicates the number of aborted transmissions.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0025",
+            "name": "TxErrBusyChannelCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The TxErrBusyChannelCount attribute indicates the number of transmissions that failed due to a busy channel.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0026",
+            "name": "RxTotalCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The RxTotalCount attribute indicates the total number of receptions.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0027",
+            "name": "RxUnicastCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The RxUnicastCount attribute indicates the total number of unicast receptions.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0028",
+            "name": "RxBroadcastCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The RxBroadcastCount attribute indicates the total number of broadcast receptions.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0029",
+            "name": "RxDataCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The RxDataCount attribute indicates the number of data receptions.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x002A",
+            "name": "RxDataPollCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x002B",
+            "name": "RxBeaconCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The RxBeaconCount attribute indicates the number of beacon receptions.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x002C",
+            "name": "RxBeaconRequestCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The RxBeaconRequestCount attribute indicates the number of beacon request receptions.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x002D",
+            "name": "RxOtherCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The RxOtherCount attribute indicates the number of other receptions.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x002E",
+            "name": "RxAddressFilteredCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The RxAddressFilteredCount attribute indicates the number of receptions filtered by address.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x002F",
+            "name": "RxDestAddrFilteredCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The RxDestAddrFilteredCount attribute indicates the number of receptions filtered by destination address.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0030",
+            "name": "RxDuplicatedCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The RxDuplicatedCount attribute indicates the number of duplicated receptions.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0031",
+            "name": "RxErrNoFrameCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The RxErrNoFrameCount attribute indicates the number of receptions with no frame.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0032",
+            "name": "RxErrUnknownNeighborCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The RxErrUnknownNeighborCount attribute indicates the number of receptions from unknown neighbors.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0033",
+            "name": "RxErrInvalidSrcAddrCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The RxErrInvalidSrcAddrCount attribute indicates the number of receptions with invalid source addresses.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0034",
+            "name": "RxErrSecCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The RxErrSecCount attribute indicates the number of receptions with security errors.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0035",
+            "name": "RxErrFcsCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The RxErrFcsCount attribute indicates the number of receptions with FCS errors.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0036",
+            "name": "RxErrOtherCount",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The RxErrOtherCount attribute indicates the number of receptions with other errors.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0037",
+            "name": "ActiveTimestamp",
+            "dataType": "uint64",
+            "valueRange": "all",
+            "description": "The ActiveTimestamp attribute indicates the active timestamp of the network.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0038",
+            "name": "PendingTimestamp",
+            "dataType": "uint64",
+            "valueRange": "all",
+            "description": "The PendingTimestamp attribute indicates the pending timestamp of the network.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x0039",
+            "name": "Delay",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "description": "The Delay attribute indicates the delay time for pending operations.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x003A",
+            "name": "SecurityPolicy",
+            "dataType": "SecurityPolicy",
+            "valueRange": "all",
+            "description": "The SecurityPolicy attribute indicates the security policy of the network.",
+            "privilege": "RV",
+            "writable": true
+          },
+          {
+            "id": "0x003B",
+            "name": "ChannelPage0Mask",
+            "dataType": "Operational-Dataset-Components",
+            "valueRange": "all",
+            "description": "The ChannelPage0Mask attribute indicates the channel page 0 mask of the network.",
+            "privilege": "RV",
+            "writable": true
+          },
+          {
+            "id": "0x003C",
+            "name": "ActiveNetworkFaultsList",
+            "dataType": "octstr",
+            "valueRange": "max 4",
+            "description": "The ActiveNetworkFaultsList attribute indicates the list of active network faults.",
+            "privilege": "RV",
+            "writable": false
+          },
+          {
+            "id": "0x003E",
+            "name": "Rloc16",
+            "dataType": "list[NetworkFaultEnum]",
+            "valueRange": "all",
+            "description": "The Rloc16 attribute indicates the RLOC16 of the device.",
+            "privilege": "RV",
+            "writable": true
+          },
+          {
+            "id": "0x003F",
+            "name": "ExtAddress",
+            "dataType": "uint64",
+            "valueRange": "all",
+            "description": "The ExtAddress attribute indicates the extended address of the device.",
+            "privilege": "RV",
+            "writable": true
+          },
+          {
+            "id": "0x0040",
+            "name": "Rloc16",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "The Rloc16 attribute indicates the RLOC16 of the device.",
+            "privilege": "RV",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ResetWatermarks",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Receipt of this command SHALL reset the following values which track high and lower watermarks."
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "ConnectionStatus",
+            "parameters": {
+              "dataType": "enum8",
+              "valueRange": "ConnectionStatusEnum",
+              "description": "The ConnectionStatus Event SHALL indicate that a Node’s connection status to a Thread network has changed."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x01",
+            "name": "NetworkFaultChange",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "Current: list[NetworkFaultEnum], Previous: list[NetworkFaultEnum]",
+              "description": "Reports changes in network fault status"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "ThreadMetricsStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "ID": "uint64",
+              "Name": "string(max 8)",
+              "StackFreeCurrent": "uint32",
+              "StackFreeMinimum": "uint32",
+              "StackSize": "uint32"
+            }
+          },
+          "RoutingRoleEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Child",
+              "1": "Router",
+              "2": "Leader"
+            }
+          },
+          "NetworkFaultEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "LinkDown",
+              "1": "HardwareFailure",
+              "2": "NetworkCongestion",
+              "3": "Unspecified"
+            }
+          },
+          "SecurityPolicy": {
+            "baseType": "Struct",
+            "fields": {
+              "RotationTime": "uint16",
+              "Flags": "bitmap16"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

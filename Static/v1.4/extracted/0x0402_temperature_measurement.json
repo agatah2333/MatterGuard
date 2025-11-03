@@ -1,0 +1,65 @@
+{
+  "source_file": "Temperature Measurement_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0402",
+        "name": "Temperature Measurement",
+        "description": "Provides temperature measurement capabilities with sensor configuration",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "MeasuredValue",
+            "dataType": "int16",
+            "valueRange": "MinMeasuredValue-MaxMeasuredValue",
+            "description": "Temperature in 0.1°C (MeasuredValue = (Temp × 10) + 2731.5)",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "MinMeasuredValue",
+            "dataType": "int16",
+            "valueRange": "-27315-32766",
+            "description": "Minimum measurable temperature (-273.15°C to 3276.6°C)",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "MaxMeasuredValue",
+            "dataType": "int16",
+            "valueRange": "MinMeasuredValue+1-32767",
+            "description": "Maximum measurable temperature",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "Tolerance",
+            "dataType": "uint16",
+            "valueRange": "0-2048",
+            "description": "Measurement tolerance in 0.1°C units",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "dataTypes": {
+          "TemperatureValueStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "RawValue": "int16",
+              "Celsius": {
+                "calculation": "(RawValue / 10) - 273.15",
+                "unit": "°C"
+              }
+            }
+          }
+        },
+        "commands": [],
+        "events": []
+      }
+    ]
+  }
+}

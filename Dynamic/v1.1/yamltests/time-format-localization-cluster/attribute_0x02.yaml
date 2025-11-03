@@ -1,0 +1,57 @@
+config:
+  attribute: '0x02'
+  cluster: time-format-localization-cluster
+  nodeId: '0x654231'
+name: time-format-localization-cluster_attribute_0x02_v1.1.0.0
+tests:
+- ActionTime: "0\n  - **ExpectedResponse**: SUCCESS\n  - **Which Attribute Will Be\
+    \ Changed and the Value of the Attribute**: SupportedCalendarTypes will be set\
+    \ to [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]\n  - **Any Pre-requisites**: The Node\
+    \ must support all calendar types."
+  Attribute_Change: "SupportedCalendarTypes will be set to [0, 1, 2, 3, 4, 5, 6, 7,\
+    \ 8, 9, 10, 11]\n  - **Any Pre-requisites**: The Node must support all calendar\
+    \ types."
+  ExpectedResponse: "SUCCESS\n  - **Which Attribute Will Be Changed and the Value\
+    \ of the Attribute**: SupportedCalendarTypes will be set to [0, 1, 2, 3, 4, 5,\
+    \ 6, 7, 8, 9, 10, 11]\n  - **Any Pre-requisites**: The Node must support all calendar\
+    \ types."
+  Pre-requisites: The Node must support all calendar types.
+  arguments:
+    '**ActionTime**': 0
+    '**Any Pre-requisites**': The Node must support all calendar types.
+    '**ExpectedResponse**': SUCCESS
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': SupportedCalendarTypes
+      will be set to [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    '{"SupportedCalendarTypes"': '[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: "0\n  - **ExpectedResponse**: CONSTRAINT_ERROR\n  - **Which Attribute\
+    \ Will Be Changed and the Value of the Attribute**: None, as the command will\
+    \ fail.\n  - **Any Pre-requisites**: The Node must check for duplicate entries\
+    \ in the list.\n\nThese test cases cover the extreme values of the constraints\
+    \ of the field and the values that could result in special responses as mentioned\
+    \ in the description of the effect."
+  Attribute_Change: "None, as the command will fail.\n  - **Any Pre-requisites**:\
+    \ The Node must check for duplicate entries in the list.\n\nThese test cases cover\
+    \ the extreme values of the constraints of the field and the values that could\
+    \ result in special responses as mentioned in the description of the effect."
+  ExpectedResponse: "CONSTRAINT_ERROR\n  - **Which Attribute Will Be Changed and the\
+    \ Value of the Attribute**: None, as the command will fail.\n  - **Any Pre-requisites**:\
+    \ The Node must check for duplicate entries in the list.\n\nThese test cases cover\
+    \ the extreme values of the constraints of the field and the values that could\
+    \ result in special responses as mentioned in the description of the effect."
+  Pre-requisites: 'The Node must check for duplicate entries in the list.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    '**ActionTime**': 0
+    '**Any Pre-requisites**': The Node must check for duplicate entries in the list.
+    '**ExpectedResponse**': CONSTRAINT_ERROR
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': None, as
+      the command will fail.
+    '{"SupportedCalendarTypes"': '[0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

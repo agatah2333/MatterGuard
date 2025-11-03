@@ -1,0 +1,45 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x050b",
+    "name": "Audio Output",
+    "description": "SHALL support the FeatureMap bitmap attribute as defined below."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "SelectOutput",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "RenameOutput",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "OutputList",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0001",
+      "name": "Cur",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    }
+  ],
+  "events": []
+}

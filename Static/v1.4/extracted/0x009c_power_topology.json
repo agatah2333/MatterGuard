@@ -1,0 +1,46 @@
+{
+  "source_file": "Power Topology_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x009C",
+        "name": "Power Topology",
+        "dataTypes": {
+          "PowerTopologyStruct": {
+            "type": "struct",
+            "fields": "Not specified"
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "AvailableEndpoints",
+            "dataType": {
+              "type": "list",
+              "elementType": "endpoint-no",
+              "maxLength": 20
+            },
+            "valueRange": "max 20",
+            "writable": false,
+            "privilege": "F"
+          },
+          {
+            "id": "0x0001",
+            "name": "ActiveEndpoints",
+            "dataType": {
+              "type": "list",
+              "elementType": "endpoint-no",
+              "maxLength": 20
+            },
+            "valueRange": "max 20",
+            "writable": false,
+            "privilege": "N"
+          }
+        ],
+        "commands": [],
+        "events": []
+      }
+    ]
+  }
+}

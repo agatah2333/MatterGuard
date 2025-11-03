@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0004'
+  cluster: access-control-cluster
+  nodeId: '0x654231'
+name: access-control-cluster_attribute_0x0004_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"AccessControlEntriesPerFabric"': 4}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"AccessControlEntriesPerFabric"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"AccessControlEntriesPerFabric"': 5}
+  label: Test_Case_Special_Response_-_Just_Above_Minimum
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:3†source】【4:6†source】【4:10†source】.'
+  arguments:
+    '{"AccessControlEntriesPerFabric"': 65534}
+  label: Test_Case_Special_Response_-_Just_Below_Maximum
+  option: WriteAttribute

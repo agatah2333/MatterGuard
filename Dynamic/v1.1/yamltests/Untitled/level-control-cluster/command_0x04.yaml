@@ -1,0 +1,621 @@
+config:
+  node_id: 305414945
+  cluster: '0x0008'
+  endpoint: 1
+tests:
+- label: test_level_minimum_boundary
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 1
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_level_maximum_boundary
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 254
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_level_midrange
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 127
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_level_below_minimum
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_level_above_maximum
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 255
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_transitiontime_minimum_boundary
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 1
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_transitiontime_maximum_boundary
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 1
+    TransitionTime: 65534
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_transitiontime_midrange
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 1
+    TransitionTime: 32767
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_transitiontime_above_maximum
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 1
+    TransitionTime: 65535
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_transitiontime_null_value
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 1
+    TransitionTime: 65535
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_optionsmask_minimum_boundary
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 1
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_optionsmask_maximum_boundary
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 1
+    TransitionTime: 0
+    OptionsMask: 255
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_optionsmask_midrange
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 1
+    TransitionTime: 0
+    OptionsMask: 127
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_optionsmask_above_maximum
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 1
+    TransitionTime: 0
+    OptionsMask: 256
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_optionsoverride_minimum_boundary
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 1
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_optionsoverride_maximum_boundary
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 1
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 255
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_optionsoverride_midrange
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 1
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 127
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+- label: test_optionsoverride_above_maximum
+  cluster: '0x0008'
+  command: '0x04'
+  arguments:
+    Level: 1
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 256
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+execution_metadata:
+  estimated_duration: 540
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

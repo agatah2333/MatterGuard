@@ -1,0 +1,44 @@
+config:
+  attribute: '0x08'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x08_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"FrameErrorRate": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"FrameErrorRate"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"FrameErrorRate": 100}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"FrameErrorRate"': 100}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"FrameErrorRate": 50}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"FrameErrorRate"': 50}
+  label: Test_Case_Special_Response_-_Mid_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"FrameErrorRate": 1}'
+  ExpectedResponse: <success>
+  Pre-requisites: '<none>
+
+
+    These test cases cover the extreme values of the constraints of the `FrameErrorRate`
+    field and values that could result in special responses. The expected responses
+    and attribute changes are based on the assumption that the system will handle
+    these values correctly and update the attribute accordingly.'
+  arguments:
+    '{"FrameErrorRate"': 1}
+  label: Test_Case_Special_Response_-_Edge_Case
+  option: WriteAttribute

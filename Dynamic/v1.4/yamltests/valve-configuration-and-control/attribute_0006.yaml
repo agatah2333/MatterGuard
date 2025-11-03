@@ -1,0 +1,26 @@
+name: Valve Configuration and Control - CurrentLevel Attribute Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Valve Configuration and Control
+  timeout: 180
+tests:
+- label: Read CurrentLevel attribute
+  command: readAttribute
+  attribute: CurrentLevel
+  response:
+    saveAs: currentlevel_value
+- label: CurrentLevel - Test minimum value (0)
+  command: readAttribute
+  attribute: CurrentLevel
+  response:
+    constraints:
+      minValue: 0
+      maxValue: 255
+- label: CurrentLevel - Test maximum value (255)
+  command: readAttribute
+  attribute: CurrentLevel
+  response:
+    constraints:
+      minValue: 0
+      maxValue: 255

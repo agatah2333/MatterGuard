@@ -1,0 +1,126 @@
+{
+  "source_file": "Ethernet Network Diagnostics_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0037",
+        "name": "Ethernet Network Diagnostics",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "PHYRate",
+            "dataType": "PHYRateEnum",
+            "valueRange": "0-9",
+            "description": "Indicates current nominal physical layer speed",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "FullDuplex",
+            "dataType": "bool",
+            "valueRange": "",
+            "description": "Indicates full-duplex operation mode status",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "PacketRxCount",
+            "dataType": "uint64",
+            "valueRange": "",
+            "description": "Total received packets counter",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "PacketTxCount",
+            "dataType": "uint64",
+            "valueRange": "",
+            "description": "Total transmitted packets counter",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "TxErrCount",
+            "dataType": "uint64",
+            "valueRange": "",
+            "description": "Transmission error counter",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0005",
+            "name": "CollisionCount",
+            "dataType": "uint64",
+            "valueRange": "",
+            "description": "Ethernet collision events counter",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0006",
+            "name": "OverrunCount",
+            "dataType": "uint64",
+            "valueRange": "",
+            "description": "Buffer overrun occurrences counter",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0007",
+            "name": "CarrierDetect",
+            "dataType": "bool",
+            "valueRange": "",
+            "description": "Carrier signal detection status",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0008",
+            "name": "TimeSinceReset",
+            "dataType": "uint64",
+            "valueRange": "",
+            "description": "Milliseconds since last interface reset",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ResetCounts",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Resets OverrunCount and other diagnostic counters"
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "PHYRateEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "10BASE-T",
+              "1": "100BASE-T",
+              "2": "1000BASE-T",
+              "3": "2.5GBASE-T",
+              "4": "5GBASE-T",
+              "5": "10GBASE-T",
+              "6": "25GBASE-T",
+              "7": "40GBASE-T",
+              "8": "50GBASE-T",
+              "9": "100GBASE-T"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

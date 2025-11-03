@@ -1,0 +1,31 @@
+config:
+  attribute: '0x0008'
+  cluster: time-synchronization-cluster
+  nodeId: '0x654231'
+name: time-synchronization-cluster_attribute_0x0008_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '- `HardwareVersionString`: "A" * 32'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    HardwareVersionString: '"A" * 32 (32 characters)'
+  label: Test_Case_Extreme_Value_(Maximum_Length)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `HardwareVersionString`: ""'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    For more detailed information, you can refer to the Matter specification documents【4:0†source】
+    .'
+  arguments:
+    HardwareVersionString: '""'
+  label: Test_Case_Special_Response_(Empty_String)
+  option: WriteAttribute

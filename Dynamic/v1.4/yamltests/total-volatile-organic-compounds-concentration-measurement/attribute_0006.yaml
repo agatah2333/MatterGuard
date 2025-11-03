@@ -1,0 +1,27 @@
+name: Total Volatile Organic Compounds Concentration Measurement - AverageMeasuredValueWindow
+  Attribute Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Total Volatile Organic Compounds Concentration Measurement
+  timeout: 180
+tests:
+- label: Read AverageMeasuredValueWindow attribute
+  command: readAttribute
+  attribute: AverageMeasuredValueWindow
+  response:
+    saveAs: averagemeasuredvaluewindow_value
+- label: AverageMeasuredValueWindow - Test minimum value (0)
+  command: readAttribute
+  attribute: AverageMeasuredValueWindow
+  response:
+    constraints:
+      minValue: 0
+      maxValue: 4294967295
+- label: AverageMeasuredValueWindow - Test maximum value (4294967295)
+  command: readAttribute
+  attribute: AverageMeasuredValueWindow
+  response:
+    constraints:
+      minValue: 0
+      maxValue: 4294967295

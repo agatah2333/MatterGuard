@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0006",
+    "name": "On/Off",
+    "description": ""
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

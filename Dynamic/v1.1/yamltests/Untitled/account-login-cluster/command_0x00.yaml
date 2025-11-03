@@ -1,0 +1,226 @@
+config:
+  cluster: account-login-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: account-login-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: SetupPIN with 11 characters
+  Pre-requisites: The account associated with the TempAccountIdentifier matches the
+    active account on the Content App.
+  arguments:
+    TempAccountIdentifier: '"A".repeat(16)'
+  label: Test_Case_Minimum_Length_TempAccountIdentifier
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify account-login-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x050E'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x050E'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x050E'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x050E'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: SetupPIN with 11 characters
+  Pre-requisites: The account associated with the TempAccountIdentifier matches the
+    active account on the Content App.
+  arguments:
+    TempAccountIdentifier: '"A".repeat(100)'
+  label: Test_Case_Maximum_Length_TempAccountIdentifier
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify account-login-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x050E'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x050E'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x050E'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x050E'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: 'null'
+  Pre-requisites: The account associated with the TempAccountIdentifier does not match
+    the active account on the Content App.
+  arguments:
+    TempAccountIdentifier: '"B".repeat(16)'
+  label: Test_Case_Account_Mismatch
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify account-login-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x050E'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x050E'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x050E'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x050E'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: FAILURE (rate limiting)
+  Pre-requisites: 'More than 10 unique requests in a 10-minute period.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:8†source】【4:9†source】.'
+  arguments:
+    TempAccountIdentifier: '"C".repeat(16)'
+  label: Test_Case_Rate_Limiting
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify account-login-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x050E'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x050E'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x050E'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x050E'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

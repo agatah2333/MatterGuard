@@ -1,0 +1,50 @@
+config:
+  attribute: '0x0011'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0011_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: OccupiedCoolingSetpoint set to 16°C
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Ensure the thermostat is in an occupied state.
+  arguments:
+    '{"OccupiedCoolingSetpoint"': 16°C}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: OccupiedCoolingSetpoint set to 32°C
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Ensure the thermostat is in an occupied state.
+  arguments:
+    '{"OccupiedCoolingSetpoint"': 32°C}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: Ensure the thermostat is in an occupied state.
+  arguments:
+    '{"OccupiedCoolingSetpoint"': 15°C}
+  label: Test_Case_Value_Below_Minimum_Constraint
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: Ensure the thermostat is in an occupied state.
+  arguments:
+    '{"OccupiedCoolingSetpoint"': 33°C}
+  label: Test_Case_Value_Above_Maximum_Constraint
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: OccupiedCoolingSetpoint set to 24°C
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Ensure the occupancy status of the room is unknown.
+
+
+    These test cases cover the extreme values of the constraints and the special responses
+    mentioned in the description of the effect for the `OccupiedCoolingSetpoint` attribute.'
+  arguments:
+    '{"OccupiedCoolingSetpoint"': 24°C}
+  label: Test_Case_Special_Response_for_Unknown_Occupancy
+  option: WriteAttribute

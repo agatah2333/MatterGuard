@@ -1,0 +1,198 @@
+{
+  "source_file": "ICDManagement_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0046",
+        "name": "ICDManagement",
+        "dataTypes": {
+          "UserActiveModeTriggerBitmap": {
+            "type": "bitmap",
+            "baseType": "map32",
+            "values": {
+              "0": "UserButtonPress",
+              "1": "TouchSensorActivation",
+              "2": "MotionDetection",
+              "3": "VoiceCommand",
+              "4": "ProximitySensor",
+              "5": "LightSensorThreshold",
+              "6": "TemperatureChange",
+              "7": "ScheduleTrigger",
+              "8": "RemoteSignal",
+              "9": "BatteryStatusChange",
+              "10": "NetworkActivity"
+            }
+          },
+          "ClientTypeEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "Permanent",
+              "1": "Ephemeral"
+            }
+          },
+          "MonitoringRegistrationStruct": {
+            "type": "struct",
+            "fields": {
+              "CheckInNodeID": {
+                "type": "node-id",
+                "valueRange": "all"
+              },
+              "MonitoredSubject": {
+                "type": "subject-id",
+                "valueRange": "all"
+              },
+              "ClientType": {
+                "type": "enum8",
+                "values": {
+                  "0": "Permanent",
+                  "1": "Ephemeral"
+                }
+              }
+            }
+          },
+          "OperatingModeEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "Idle",
+              "1": "Active",
+              "2": "Standby"
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "IdleModeDuration",
+            "dataType": "uint32",
+            "valueRange": "1-64800",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0001",
+            "name": "ActiveModeDuration",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0002",
+            "name": "ActiveModeThreshold",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0003",
+            "name": "RegisteredClients",
+            "dataType": {
+              "type": "list",
+              "elementType": {
+                "type": "struct",
+                "fields": "MonitoringRegistrationStruct"
+              }
+            },
+            "valueRange": "",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0004",
+            "name": "ICDCounter",
+            "dataType": "uint32",
+            "valueRange": "all",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0005",
+            "name": "ClientsSupportedPerFabric",
+            "dataType": "uint16",
+            "valueRange": "min 1",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0006",
+            "name": "UserActiveModeTriggerHint",
+            "dataType": {
+              "type": "bitmap",
+              "fields": "UserActiveModeTriggerBitmap"
+            },
+            "valueRange": "",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0007",
+            "name": "UserActiveModeTriggerInstruction",
+            "dataType": {
+              "type": "string",
+              "maxLength": 128
+            },
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0008",
+            "name": "OperatingMode",
+            "dataType": {
+              "type": "enum8",
+              "fields": "OperatingModeEnum"
+            },
+            "valueRange": "all",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0009",
+            "name": "MaximumCheckInBackoff",
+            "dataType": "uint32",
+            "valueRange": "IdleModeDuration-64800",
+            "writable": false,
+            "privilege": "Read"
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "RegisterClient",
+            "parameters": {
+              "dataType": {
+                "type": "void"
+              }
+            },
+            "privilege": "M",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x02",
+            "name": "UnregisterClient",
+            "parameters": {
+              "dataType": {
+                "type": "void"
+              }
+            },
+            "privilege": "M",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x03",
+            "name": "StayActiveRequest",
+            "parameters": {
+              "dataType": {
+                "type": "void"
+              }
+            },
+            "privilege": "M",
+            "direction": "clientToServer"
+          }
+        ],
+        "events": []
+      }
+    ]
+  }
+}

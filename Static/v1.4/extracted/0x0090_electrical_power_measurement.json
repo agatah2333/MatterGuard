@@ -1,0 +1,414 @@
+{
+  "cluster_id": "0x0090",
+  "cluster_name": "Electrical Power Measurement",
+  "cluster_description": "This cluster provides a mechanism for querying data about electrical power as measured by the server.",
+  "cluster_revision": 1,
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Application", 
+    "scope": "Endpoint",
+    "pics_code": "EPM"
+  },
+  "features": {
+    "DIRC": {
+      "bit": 0,
+      "code": "DIRC",
+      "name": "DirectCurrent",
+      "conformance": "O.a+",
+      "summary": "Supports measurement of direct current"
+    },
+    "ALTC": {
+      "bit": 1,
+      "code": "ALTC", 
+      "name": "AlternatingCurrent",
+      "conformance": "O.a+",
+      "summary": "Supports measurement of alternating current"
+    },
+    "POLY": {
+      "bit": 2,
+      "code": "POLY",
+      "name": "PolyphasePower",
+      "conformance": "[ALTC]",
+      "summary": "Supports polyphase measurements"
+    },
+    "HARM": {
+      "bit": 3,
+      "code": "HARM",
+      "name": "Harmonics",
+      "conformance": "[ALTC]",
+      "summary": "Supports measurement of AC harmonics"
+    },
+    "PWRQ": {
+      "bit": 4,
+      "code": "PWRQ",
+      "name": "PowerQuality",
+      "conformance": "[ALTC]",
+      "summary": "Supports measurement of AC harmonic phases"
+    }
+  },
+  "data_types": {
+    "PowerModeEnum": {
+      "type": "enum8",
+      "description": "This data type is derived from enum8.",
+      "values": {
+        "0": {
+          "name": "Unknown",
+          "summary": "",
+          "conformance": "M"
+        },
+        "1": {
+          "name": "DC",
+          "summary": "Direct current",
+          "conformance": "M"
+        },
+        "2": {
+          "name": "AC",
+          "summary": "Alternating current, either single-phase or polyphase",
+          "conformance": "M"
+        }
+      }
+    },
+    "MeasurementRangeStruct": {
+      "type": "struct",
+      "description": "This struct SHALL indicate the maximum and minimum values of a given measurement type during a measurement period, along with the observation times of these values.",
+      "fields": {
+        "0": {
+          "name": "MeasurementType",
+          "type": "MeasurementTypeEnum",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M"
+        },
+        "1": {
+          "name": "Min",
+          "type": "int64",
+          "constraint": "-2^62 to 2^62",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M"
+        },
+        "2": {
+          "name": "Max",
+          "type": "int64",
+          "constraint": "-2^62 to 2^62",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "M"
+        },
+        "3": {
+          "name": "StartTimestamp",
+          "type": "epoch-s",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "EndTimestamp"
+        },
+        "4": {
+          "name": "EndTimestamp",
+          "type": "epoch-s",
+          "constraint": "min (StartTimestamp + 1)",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "desc"
+        },
+        "5": {
+          "name": "MinTimestamp",
+          "type": "epoch-s",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "EndTimestamp"
+        },
+        "6": {
+          "name": "MaxTimestamp",
+          "type": "epoch-s",
+          "constraint": "min (MinTimestamp + 1)",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "EndTimestamp"
+        },
+        "7": {
+          "name": "StartSystime",
+          "type": "systime-ms",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "EndSystime"
+        },
+        "8": {
+          "name": "EndSystime",
+          "type": "systime-ms",
+          "constraint": "min (StartSystime + 1)",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "desc"
+        },
+        "9": {
+          "name": "MinSystime",
+          "type": "systime-ms",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "EndSystime"
+        },
+        "10": {
+          "name": "MaxSystime",
+          "type": "systime-ms",
+          "constraint": "min (MinSystime + 1)",
+          "quality": "",
+          "default": "",
+          "access": "",
+          "conformance": "EndSystime"
+        }
+      }
+    },
+    "HarmonicMeasurementStruct": {
+      "type": "struct",
+      "description": "",
+      "fields": {
+        "0": {
+          "name": "Order",
+          "type": "uint8",
+          "constraint": "min 1",
+          "quality": "",
+          "default": "1",
+          "access": "",
+          "conformance": "M"
+        },
+        "1": {
+          "name": "Measurement",
+          "type": "int64",
+          "constraint": "-2^62 to 2^62",
+          "quality": "X",
+          "default": "null",
+          "access": "",
+          "conformance": "M"
+        }
+      }
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "name": "PowerMode",
+      "type": "PowerModeEnum",
+      "constraint": "",
+      "quality": "",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This SHALL indicate the current mode of the server. For some servers, such as an EV, this may change depending on the mode of charging or discharging."
+    },
+    "0x0001": {
+      "name": "NumberOfMeasurementTypes",
+      "type": "uint8",
+      "constraint": "min 1",
+      "quality": "F",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This SHALL indicate the maximum number of measurement types the server is capable of reporting."
+    },
+    "0x0002": {
+      "name": "Accuracy",
+      "type": "list[MeasurementAccuracyStruct]",
+      "constraint": "1 to NumberOfMeasurementTypes",
+      "quality": "F",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This SHALL indicate a list of accuracy specifications for the measurement types supported by the server. There SHALL be an entry for ActivePower, as well as any other measurement types implemented by this server."
+    },
+    "0x0003": {
+      "name": "Ranges",
+      "type": "list[MeasurementRangeStruct]",
+      "constraint": "0 to NumberOfMeasurementTypes",
+      "quality": "Q",
+      "default": "empty",
+      "access": "RV",
+      "conformance": "O",
+      "description": "This SHALL indicate a list of measured ranges for different measurement types. Each measurement type SHALL have at most one entry in this list, representing the range of measurements in the most recent measurement period."
+    },
+    "0x0004": {
+      "name": "Voltage",
+      "type": "voltage-mV",
+      "constraint": "-2^62 to 2^62",
+      "quality": "XQ",
+      "default": "null",
+      "access": "RV",
+      "conformance": "O",
+      "description": "This SHALL indicate the most recent Voltage reading in millivolts (mV)."
+    },
+    "0x0005": {
+      "name": "ActiveCurrent",
+      "type": "amperage-mA",
+      "constraint": "-2^62 to 2^62",
+      "quality": "XQ",
+      "default": "null",
+      "access": "RV",
+      "conformance": "O",
+      "description": "This SHALL indicate the most recent ActiveCurrent reading in milliamps (mA). A positive value represents current flowing into the server, while a negative value represents current flowing out of the server."
+    },
+    "0x0006": {
+      "name": "ReactiveCurrent",
+      "type": "amperage-mA",
+      "constraint": "-2^62 to 2^62",
+      "quality": "XQ",
+      "default": "null",
+      "access": "RV",
+      "conformance": "[ALTC]",
+      "description": "This SHALL indicate the most recent ReactiveCurrent reading in milliamps (mA). A positive value represents current flowing into the server, while a negative value represents current flowing out of the server."
+    },
+    "0x0007": {
+      "name": "ApparentCurrent",
+      "type": "amperage-mA",
+      "constraint": "0 to 2^62",
+      "quality": "XQ",
+      "default": "null",
+      "access": "RV",
+      "conformance": "[ALTC]",
+      "description": "This SHALL indicate the most recent ApparentCurrent (square root sum of the squares of active and reactive currents) reading in milliamps (mA)."
+    },
+    "0x0008": {
+      "name": "ActivePower",
+      "type": "power-mW",
+      "constraint": "-2^62 to 2^62",
+      "quality": "XQ",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This SHALL indicate the most recent ActivePower reading in milliwatts (mW). A positive value represents power imported, while a negative value represents power exported."
+    },
+    "0x0009": {
+      "name": "ReactivePower",
+      "type": "power-mW",
+      "constraint": "-2^62 to 2^62",
+      "quality": "XQ",
+      "default": "null",
+      "access": "RV",
+      "conformance": "[ALTC]",
+      "description": "This SHALL indicate the most recent ReactivePower reading in millivolt-amps reactive (mVAR). A positive value represents power imported, while a negative value represents power exported."
+    },
+    "0x000A": {
+      "name": "ApparentPower",
+      "type": "power-mW",
+      "constraint": "-2^62 to 2^62",
+      "quality": "XQ",
+      "default": "null",
+      "access": "RV",
+      "conformance": "[ALTC]",
+      "description": "This SHALL indicate the most recent ApparentPower reading in millivolt-amps (mVA). A positive value represents power imported, while a negative value represents power exported."
+    },
+    "0x000B": {
+      "name": "RMSVoltage",
+      "type": "voltage-mV",
+      "constraint": "-2^62 to 2^62",
+      "quality": "XQ",
+      "default": "null",
+      "access": "RV",
+      "conformance": "[ALTC]",
+      "description": "This SHALL indicate the most recent RMSVoltage reading in millivolts (mV)."
+    },
+    "0x000C": {
+      "name": "RMSCurrent",
+      "type": "amperage-mA",
+      "constraint": "-2^62 to 2^62",
+      "quality": "XQ",
+      "default": "null",
+      "access": "RV",
+      "conformance": "[ALTC]",
+      "description": "This SHALL indicate the most recent RMSCurrent reading in milliamps (mA). A positive value represents current flowing into the server, while a negative value represents current flowing out of the server."
+    },
+    "0x000D": {
+      "name": "RMSPower",
+      "type": "power-mW",
+      "constraint": "-2^62 to 2^62",
+      "quality": "XQ",
+      "default": "null",
+      "access": "RV",
+      "conformance": "[ALTC]",
+      "description": "This SHALL indicate the most recent RMSPower reading in milliwatts (mW). A positive value represents power imported, while a negative value represents power exported."
+    },
+    "0x000E": {
+      "name": "Frequency",
+      "type": "int64",
+      "constraint": "0 to 1000000",
+      "quality": "XQ",
+      "default": "null",
+      "access": "RV",
+      "conformance": "[ALTC]",
+      "description": "This SHALL indicate the most recent Frequency reading in millihertz (mHz)."
+    },
+    "0x000F": {
+      "name": "HarmonicCurrents",
+      "type": "list[HarmonicMeasurementStruct]",
+      "constraint": "desc",
+      "quality": "XQ",
+      "default": "null",
+      "access": "RV",
+      "conformance": "HARM",
+      "description": "This SHALL indicate a list of HarmonicMeasurementStruct values, with each HarmonicMeasurementStruct representing the harmonic current reading for the harmonic order specified by Order."
+    },
+    "0x0010": {
+      "name": "HarmonicPhases",
+      "type": "list[HarmonicMeasurementStruct]",
+      "constraint": "desc",
+      "quality": "XQ",
+      "default": "null",
+      "access": "RV",
+      "conformance": "PWRQ",
+      "description": "This SHALL indicate a list of HarmonicMeasurementStruct values, with each HarmonicMeasurementStruct representing the most recent phase of the harmonic current reading for the harmonic order specified by Order."
+    },
+    "0x0011": {
+      "name": "PowerFactor",
+      "type": "int64",
+      "constraint": "-10000 to 10000",
+      "quality": "XQ",
+      "default": "null",
+      "access": "RV",
+      "conformance": "[ALTC]",
+      "description": "This SHALL indicate the Power Factor ratio in +/- 1/100ths of a percent."
+    },
+    "0x0012": {
+      "name": "NeutralCurrent",
+      "type": "amperage-mA",
+      "constraint": "-2^62 to 2^62",
+      "quality": "XQ",
+      "default": "null",
+      "access": "RV",
+      "conformance": "[POLY]",
+      "description": "This SHALL indicate the most recent NeutralCurrent reading in milliamps (mA). Typically this is a derived value, taking the magnitude of the vector sum of phase currents."
+    }
+  },
+  "commands": {},
+  "events": {
+    "0": {
+      "name": "MeasurementPeriodRanges",
+      "priority": "INFO",
+      "quality": "",
+      "access": "V",
+      "conformance": "Ranges",
+      "description": "If supported, this event SHALL be generated at the end of a measurement period. The start and end times for measurement periods SHALL be determined by the server, and MAY represent overlapping periods.",
+      "fields": {
+        "0": {
+          "name": "Ranges",
+          "type": "list[MeasurementRangeStruct]",
+          "constraint": "",
+          "quality": "",
+          "default": "RV",
+          "conformance": "M"
+        }
+      }
+    }
+  }
+}

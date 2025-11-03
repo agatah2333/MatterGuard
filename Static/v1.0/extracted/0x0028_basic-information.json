@@ -1,0 +1,279 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0028",
+    "name": "Basic Information",
+    "description": "This cluster provides attributes and events for determining basic information about Nodes, which supports both Commissioning and operational determination of Node characteristics, such as Vendor ID, Product ID and serial number, which apply to the whole Node."
+  },
+  "derived_datatypes": [
+    {
+      "type": "struct",
+      "name": "CapabilityMinimaStruct",
+      "base_data_type": "STRUCT",
+      "value_range": {
+        "struct_fields": [
+          {
+            "name": "CaseSessionsPerFabric",
+            "data_type": "uint16",
+            "description": "This field SHALL indicate the actual minimum number of concurrent CASE sessions that are supported per fabric."
+          },
+          {
+            "name": "SubscriptionsPerFabric",
+            "data_type": "uint16",
+            "description": "This field SHALL indicate the actual minimum number of concurrent subscriptions supported per fabric."
+          }
+        ]
+      }
+    }
+  ],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "DataModelRevision",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "The data model revision of the Node",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "VendorName",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "32"
+      },
+      "description": "The vendor name in human readable text",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "VendorID",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "The vendor identifier",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "ProductName",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "32"
+      },
+      "description": "The product name in human readable text",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "ProductID",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "The product identifier",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "NodeLabel",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "32"
+      },
+      "description": "The Node Label assigned by the user",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "Location",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "The location of the Node",
+      "privilege": "V",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "HardwareVersion",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "The hardware version of the Node",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "HardwareVersionString",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "The hardware version string of the Node",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "SoftwareVersion",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "The software version of the Node",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "SoftwareVersionString",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "The software version string of the Node",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "ManufacturingDate",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "The manufacturing date of the Node",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "PartNumber",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "32"
+      },
+      "description": "The part number of the Node",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "ProductURL",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "256"
+      },
+      "description": "The product URL of the Node",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "ProductLabel",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "64"
+      },
+      "description": "The product label of the Node",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "SerialNumber",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "32"
+      },
+      "description": "The serial number of the Node",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "LocalConfigDisabled",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "Indicates whether local configuration is disabled",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "Reachable",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "Indicates whether the Node is reachable",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "UniqueID",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "32"
+      },
+      "description": "The unique identifier of the Node",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

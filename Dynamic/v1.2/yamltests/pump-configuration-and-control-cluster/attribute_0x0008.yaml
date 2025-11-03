@@ -1,0 +1,48 @@
+config:
+  attribute: '0x0008'
+  cluster: pump-configuration-and-control-cluster
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_attribute_0x0008_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: MaxConstSpeed = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"MaxConstSpeed"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: MaxConstSpeed = 65534
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"MaxConstSpeed"': 65534}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: MaxConstSpeed = null
+  ExpectedResponse: Error (Constraint Error)
+  Pre-requisites: None
+  arguments:
+    '{"MaxConstSpeed"': 65535}
+  label: Test_Case_Invalid_Value_(Above_Maximum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: MaxConstSpeed = null
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special condition where the value is null, which is mentioned in the attribute
+    description.
+
+
+    ### References
+
+    - Matter Application Cluster Specification R1.2【4:0†source】'
+  arguments:
+    '{"MaxConstSpeed"': null}
+  label: Test_Case_Special_Condition_(Null_Value)
+  option: WriteAttribute

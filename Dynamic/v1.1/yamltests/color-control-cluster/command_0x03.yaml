@@ -1,0 +1,6 @@
+config:
+  cluster: color-control-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: color-control-cluster_command_0x03_v1.1.0.0
+tests: []

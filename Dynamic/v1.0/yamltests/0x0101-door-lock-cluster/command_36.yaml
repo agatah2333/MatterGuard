@@ -1,0 +1,266 @@
+config:
+  cluster: door-lock-cluster
+  command: '36'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_36_v1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: RFID Code set to "0000000000000000" for User ID 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments: {}
+  label: Test_Case_Extreme_Values_of_Constraints
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify door-lock-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 0
+  Attribute_Change: RFID Code set to "FFFFFFFFFFFFFFFF" for User ID <# of RFID Users
+    Supported attribute>
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments: {}
+  label: Test_Case_Extreme_Values_of_Constraints
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify door-lock-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments: {}
+  label: Test_Case_Special_Response_-_CONSTRAINT_ERROR
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify door-lock-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: DUPLICATE
+  Pre-requisites: RFID Code "1234567890ABCDEF" already exists for another user
+  arguments: {}
+  label: Test_Case_Special_Response_-_DUPLICATE
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify door-lock-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 0
+  Attribute_Change: RFID Code set to "A1B2C3D4E5F6G7H8" for User ID 2
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints and the special responses
+    as mentioned in the command description【4:0†source】【4:8†source】【4:9†source】.'
+  arguments: {}
+  label: Test_Case_Valid_Case
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify door-lock-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true

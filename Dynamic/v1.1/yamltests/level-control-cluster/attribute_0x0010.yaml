@@ -1,0 +1,31 @@
+config:
+  attribute: '0x0010'
+  cluster: level-control-cluster
+  nodeId: '0x654231'
+name: level-control-cluster_attribute_0x0010_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`CurrentLevel` will change instantly to the target level.'
+  ExpectedResponse: The transition should happen instantly.
+  Pre-requisites: The device must support variable transition times.
+  arguments:
+    '{"OnOffTransitionTime"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 65535
+  Attribute_Change: '`CurrentLevel` will change to the target level over 6553.5 seconds.'
+  ExpectedResponse: The transition should take the maximum possible time (6553.5 seconds).
+  Pre-requisites: 'The device must support long transition times.
+
+
+    These test cases cover the extreme values of the `OnOffTransitionTime` attribute
+    and ensure that the device handles both instant and maximum duration transitions
+    correctly.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments:
+    '{"OnOffTransitionTime"': 65535}
+  label: Test_Case_Special_Response_Values
+  option: WriteAttribute

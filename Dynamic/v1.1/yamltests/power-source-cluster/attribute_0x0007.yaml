@@ -1,0 +1,52 @@
+config:
+  attribute: '0x0007'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x0007_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"WiredNominalVoltage": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"WiredNominalVoltage"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"WiredNominalVoltage": 4294967295}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"WiredNominalVoltage"': 4294967295}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"WiredNominalVoltage": 120}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"WiredNominalVoltage"': 120}
+  label: Test_Case_Typical_Nominal_Voltage_for_Household_(e.g.,_120V)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"WiredNominalVoltage": 240}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"WiredNominalVoltage"': 240}
+  label: Test_Case_Typical_Nominal_Voltage_for_Industrial_Use_(e.g.,_240V)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"WiredNominalVoltage": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: '<none>
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    typical values that could be used in real-world scenarios. The expected responses
+    and attribute changes are based on the assumption that the system will accept
+    any uint32 value for the `WiredNominalVoltage` attribute.'
+  arguments:
+    '{"WiredNominalVoltage"': 0}
+  label: Test_Case_Zero_Voltage_(Edge_Case)
+  option: WriteAttribute

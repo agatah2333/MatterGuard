@@ -1,0 +1,108 @@
+{
+  "source_file": "Activated Carbon Filter Monitoring_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0072",
+        "name": "Activated Carbon Filter Monitoring",
+        "description": "Monitors activated carbon filter condition and replacement status",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "Condition",
+            "dataType": "uint8",
+            "valueRange": "0-100",
+            "description": "Filter adsorption capacity percentage",
+            "privilege": "R",
+            "writable": true,
+            "unitConversion": {
+              "formula": "Capacity% = 100 - Condition",
+              "example": "Condition 30 → 70% remaining capacity"
+            }
+          },
+          {
+            "id": "0x0001",
+            "name": "DegradationDirection",
+            "dataType": "DegradationDirectionEnum",
+            "valueRange": "0-1",
+            "description": "Filter performance trend direction",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "InPlaceIndicator",
+            "dataType": "bool",
+            "valueRange": "true/false",
+            "description": "Filter installation verification",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0004",
+            "name": "LastChangedTime",
+            "dataType": "epoch-s",
+            "valueRange": "UTC timestamp",
+            "description": "Last filter replacement timestamp",
+            "privilege": "RW",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ResetCondition",
+            "parameters": [],
+            "description": "Reset filter monitoring after replacement",
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "dataTypes": {
+          "DegradationDirectionEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Regenerating",
+              "1": "Depleting"
+            }
+          },
+          "ChangeIndicationEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Normal",
+              "1": "AdsorptionWarning",
+              "2": "ReplaceImmediately"
+            }
+          },
+          "ReplacementProductStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "ProductCode": "string(20)",
+              "Certification": "CarbonFilterCertEnum",
+              "SurfaceArea": "uint16"
+            }
+          },
+          "CarbonFilterCertEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "NSF-42",
+              "1": "CARB",
+              "2": "ISO-9001",
+              "3": "Custom"
+            }
+          }
+        },
+        "lifecycleManagement": {
+          "capacityDecayModel": {
+            "formula": "remainingDays = (currentCondition / degradationRate) × humidityFactor",
+            "variables": {
+              "degradationRate": "configurable 1-5% per day",
+              "humidityFactor": "environmental compensation 0.8-1.2"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

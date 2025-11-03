@@ -1,0 +1,6 @@
+config:
+  cluster: wifi-network-diagnostics-cluster
+  event: '0x02'
+  nodeId: '0x654231'
+name: wifi-network-diagnostics-cluster_event_0x02_v1.1.0.0
+tests: []

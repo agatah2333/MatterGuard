@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0000'
+  cluster: application-launcher-cluster
+  nodeId: '0x654231'
+name: application-launcher-cluster_attribute_0x0000_v1.1.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`CatalogList` will be set to `[0x0000]`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: None
+  arguments:
+    CatalogList: '`[0x0000]`'
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`CatalogList` will be set to `[0xFFFF]`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: None
+  arguments:
+    CatalogList: '`[0xFFFF]`'
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`CatalogList` will be set to `[0x0000]`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: None
+  arguments:
+    CatalogList: '`[0x0000]`'
+  label: Test_Case_Special_Value_(DIAL_Registry)
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`CatalogList` will be set to `[0x0000, 0x1234, 0xFFFF]`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special value that could result in specific responses as mentioned in the
+    description of the effect【4:0†source】【4:2†source】【4:3†source】【4:14†source】.'
+  arguments:
+    CatalogList: '`[0x0000, 0x1234, 0xFFFF]`'
+  label: Test_Case_Multiple_Values
+  option: WriteAttribute

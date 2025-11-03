@@ -1,0 +1,42 @@
+config:
+  attribute: '12'
+  cluster: basic-information-cluster
+  nodeId: '0x654231'
+name: basic-information-cluster_attribute_12_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": True}'
+  ExpectedResponse: <success>
+  Pre-requisites: <device is online and functional>
+  arguments:
+    '{"Reachable"': True}
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": False}'
+  ExpectedResponse: <success>
+  Pre-requisites: <device is offline or disconnected>
+  arguments:
+    '{"Reachable"': False}
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": True}'
+  ExpectedResponse: <communication_success>
+  Pre-requisites: <device was previously marked as unreachable>
+  arguments:
+    '{"Reachable"': True}
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": False}'
+  ExpectedResponse: <communication_failure>
+  Pre-requisites: '<device was previously marked as reachable but is now disconnected>
+
+
+    These test cases cover the extreme values of the `Reachable` attribute (True and
+    False) and the special responses that could result from changes in the reachability
+    status of the device.
+
+
+    For more detailed information, you can refer to the Matter specification document【4:12†source】.'
+  arguments:
+    '{"Reachable"': False}
+  option: WriteAttribute

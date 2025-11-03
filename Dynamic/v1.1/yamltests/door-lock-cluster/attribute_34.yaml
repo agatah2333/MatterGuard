@@ -1,0 +1,42 @@
+config:
+  attribute: '34'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_34_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: WrongCodeEntryLimit = 1
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"WrongCodeEntryLimit"': 1}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: WrongCodeEntryLimit = 255
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"WrongCodeEntryLimit"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments:
+    '{"WrongCodeEntryLimit"': 0}
+  label: Test_Case_Special_Response_(Constraint_Error)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: WrongCodeEntryLimit = 128
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special response mentioned in the description of the effect【4:0†source】.'
+  arguments:
+    '{"WrongCodeEntryLimit"': 128}
+  label: Test_Case_Mid-Range_Value
+  option: WriteAttribute

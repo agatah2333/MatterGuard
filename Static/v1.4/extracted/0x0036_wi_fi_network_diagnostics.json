@@ -1,0 +1,220 @@
+{
+  "source_file": "Wi-Fi Network Management_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0036",
+        "name": "Wi-Fi Network Diagnostics",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "BSSID",
+            "dataType": "octstr",
+            "valueRange": "length 6",
+            "description": "This attribute SHALL indicate the BSSID of the Wi-Fi network.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "SecurityType",
+            "dataType": "SecurityTypeEnum",
+            "valueRange": "0-5",
+            "description": "This attribute SHALL indicate the security type of the Wi-Fi network.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "WiFiVersion",
+            "dataType": "WiFiVersionEnum",
+            "valueRange": "0-6",
+            "description": "This attribute SHALL indicate the Wi-Fi version used by the network.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "ChannelNumber",
+            "dataType": "uint8",
+            "valueRange": "1-14",
+            "description": "This attribute SHALL indicate the channel number of the Wi-Fi network.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "RSSI",
+            "dataType": "int8",
+            "valueRange": "-128 to 127",
+            "description": "This attribute SHALL indicate the received signal strength indicator (RSSI) of the Wi-Fi network.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0005",
+            "name": "BeaconLostCount",
+            "dataType": "uint32",
+            "valueRange": "0-4294967295",
+            "description": "This attribute SHALL indicate the number of beacons lost.",
+            "privilege": "O",
+            "writable": false
+          },
+          {
+            "id": "0x0006",
+            "name": "BeaconRxCount",
+            "dataType": "uint32",
+            "valueRange": "0-4294967295",
+            "description": "This attribute SHALL indicate the number of beacons received.",
+            "privilege": "O",
+            "writable": false
+          },
+          {
+            "id": "0x0007",
+            "name": "PacketMulticastRxCount",
+            "dataType": "uint32",
+            "valueRange": "0-4294967295",
+            "description": "This attribute SHALL indicate the number of multicast packets received.",
+            "privilege": "O",
+            "writable": false
+          },
+          {
+            "id": "0x0008",
+            "name": "PacketMulticastTxCount",
+            "dataType": "uint32",
+            "valueRange": "0-4294967295",
+            "description": "This attribute SHALL indicate the number of multicast packets transmitted.",
+            "privilege": "O",
+            "writable": false
+          },
+          {
+            "id": "0x0009",
+            "name": "PacketUnicastRxCount",
+            "dataType": "uint32",
+            "valueRange": "0-4294967295",
+            "description": "This attribute SHALL indicate the number of unicast packets received.",
+            "privilege": "O",
+            "writable": false
+          },
+          {
+            "id": "0x000A",
+            "name": "PacketUnicastTxCount",
+            "dataType": "uint32",
+            "valueRange": "0-4294967295",
+            "description": "This attribute SHALL indicate the number of unicast packets transmitted.",
+            "privilege": "O",
+            "writable": false
+          },
+          {
+            "id": "0x000B",
+            "name": "CurrentMaxRate",
+            "dataType": "uint64",
+            "valueRange": "0-4294967295",
+            "description": "This attribute SHALL indicate the current maximum data rate.",
+            "privilege": "O",
+            "writable": false
+          },
+          {
+            "id": "0x000C",
+            "name": "OverrunCount",
+            "dataType": "uint64",
+            "valueRange": "0-4294967295",
+            "description": "This attribute SHALL indicate the number of overruns.",
+            "privilege": "O",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ResetCounts",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Reception of this command SHALL reset the following attributes to 0: OverrunCount."
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "ConnectionStatus",
+            "parameters": {
+              "dataType": "enum8",
+              "valueRange": "ConnectionStatusEnum",
+              "description": "The ConnectionStatus Event SHALL indicate that a Node’s connection status to a Thread network has changed."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x01",
+            "name": "AssociationFailure",
+            "parameters": {
+              "dataType": "AssociationFailureCauseEnum",
+              "valueRange": "0-3",
+              "description": "Indicates failure reason for association attempts"
+            },
+            "privilege": "V",
+            "side": "server"
+          },
+          {
+            "id": "0x02",
+            "name": "WiFiConnectionStatus",
+            "parameters": {
+              "dataType": "ConnectionStatusEnum",
+              "valueRange": "0-1",
+              "description": "Reports changes in Wi-Fi connection status"
+            },
+            "privilege": "V",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "SecurityTypeEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "None",
+              "1": "WEP",
+              "2": "WPA",
+              "3": "WPA2",
+              "4": "WPA3",
+              "5": "MixedMode"
+            }
+          },
+          "WiFiVersionEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "802.11a",
+              "1": "802.11b",
+              "2": "802.11g",
+              "3": "802.11n",
+              "4": "802.11ac",
+              "5": "802.11ax",
+              "6": "Future"
+            }
+          },
+          "AssociationFailureCauseEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "AuthenticationFailed",
+              "1": "AssociationTimeout",
+              "2": "APNotFound",
+              "3": "Unspecified"
+            }
+          },
+          "ConnectionStatusEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Disconnected",
+              "1": "Connected"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

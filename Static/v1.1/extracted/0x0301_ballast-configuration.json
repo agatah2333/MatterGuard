@@ -1,0 +1,156 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0301",
+    "name": "Ballast Configuration",
+    "description": ""
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "PhysicalMinLevel",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0001",
+      "name": "PhysicalMaxLevel",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0002",
+      "name": "BallastStatus",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0010",
+      "name": "MinLevel",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0011",
+      "name": "MaxLevel",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0012",
+      "name": "PowerOnLevel",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0013",
+      "name": "PowerOnFadeTime",
+      "data_type": "uint16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0014",
+      "name": "IntrinsicBallastFactor",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0015",
+      "name": "BallastFactorAdjustment",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0020",
+      "name": "LampQuantity",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0030",
+      "name": "LampType",
+      "data_type": "string",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0031",
+      "name": "LampManufacturer",
+      "data_type": "string",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0032",
+      "name": "LampRatedHours",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0033",
+      "name": "LampBurnHours",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0034",
+      "name": "LampAlarmMode",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0035",
+      "name": "LampBurnHoursTrip",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    }
+  ],
+  "events": []
+}

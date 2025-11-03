@@ -1,0 +1,28 @@
+config:
+  attribute: '0x0010'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0010_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: LocalTemperatureCalibration set to -2.5°C
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Thermostat server supports the LocalTemperatureCalibration attribute.
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"LocalTemperatureCalibration"': -2.5}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: LocalTemperatureCalibration set to -2.5°C (lower limit)
+  ExpectedResponse: SUCCESS (with adjustment)
+  Pre-requisites: 'Thermostat server supports the LocalTemperatureCalibration attribute.
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"LocalTemperatureCalibration"': -3.0}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

@@ -1,0 +1,12 @@
+name: Valve Configuration and Control - AutoCloseTime Attribute Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Valve Configuration and Control
+  timeout: 180
+tests:
+- label: Read AutoCloseTime attribute
+  command: readAttribute
+  attribute: AutoCloseTime
+  response:
+    saveAs: autoclosetime_value

@@ -1,0 +1,55 @@
+config:
+  attribute: '0x08'
+  cluster: ethernet-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: ethernet-network-diagnostics-cluster_attribute_0x08_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: TimeSinceReset = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"TimeSinceReset"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: TimeSinceReset = 18446744073709551615
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"TimeSinceReset"': 18446744073709551615}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: TimeSinceReset = 1440
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"TimeSinceReset"': 1440}
+  label: Test_Case_Typical_Operational_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: TimeSinceReset = 18446744073709551614
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"TimeSinceReset"': 18446744073709551614}
+  label: Test_Case_Edge_Case_-_Just_Before_Overflow
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: TimeSinceReset = 0
+  ExpectedResponse: Success
+  Pre-requisites: 'The attribute was previously set to a high value (e.g., 1000000)
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    typical operational values that could be encountered in real-world scenarios.
+    The expected responses are based on the assumption that the system handles the
+    full range of uint64 values correctly.
+
+
+    For further details, refer to the Matter 1.2 Core Specification document【4:0†source】.'
+  arguments:
+    '{"TimeSinceReset"': 0}
+  label: Test_Case_Reset_After_Long_Uptime
+  option: WriteAttribute

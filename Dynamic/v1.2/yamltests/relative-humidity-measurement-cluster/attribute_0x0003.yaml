@@ -1,0 +1,49 @@
+config:
+  attribute: '0x0003'
+  cluster: relative-humidity-measurement-cluster
+  nodeId: '0x654231'
+name: relative-humidity-measurement-cluster_attribute_0x0003_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: Tolerance set to 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Tolerance: 0
+  label: Test_Case_Minimum_Value_of_Tolerance
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: Tolerance set to 2048
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Tolerance: 2048
+  label: Test_Case_Maximum_Value_of_Tolerance
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: Tolerance set to 1024
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Tolerance: 1024
+  label: Test_Case_Mid-Range_Value_of_Tolerance
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: Tolerance set to 2048
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    a mid-range value to ensure the system handles typical values correctly. The special
+    response is not explicitly mentioned in the provided context, so the maximum value
+    is used as a potential edge case.
+
+
+    ### References
+
+    - Matter-1.2-Application-Cluster-Specification.pdf【4:0†source】'
+  arguments:
+    Tolerance: 2048
+  label: Test_Case_Special_Value_Leading_to_Specific_Response
+  option: WriteAttribute

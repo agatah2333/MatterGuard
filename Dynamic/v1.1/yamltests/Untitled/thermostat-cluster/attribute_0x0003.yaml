@@ -1,0 +1,274 @@
+config:
+  attribute: '0x0003'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0003_v1.1.0.0
+tests:
+- ActionTime: '`0`'
+  Attribute_Change: '`AbsMinHeatSetpointLimit: 7°C`'
+  ExpectedResponse: '`CONSTRAINT_ERROR`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"AbsMinHeatSetpointLimit"': -273.15}`
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify thermostat-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`0`'
+  Attribute_Change: '`AbsMinHeatSetpointLimit: 7°C`'
+  ExpectedResponse: '`CONSTRAINT_ERROR`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"AbsMinHeatSetpointLimit"': 1000}`
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify thermostat-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`0`'
+  Attribute_Change: '`AbsMinHeatSetpointLimit: 7°C`'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"AbsMinHeatSetpointLimit"': 7}`
+  label: Test_Case_Valid_Minimum_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify thermostat-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`0`'
+  Attribute_Change: '`AbsMinHeatSetpointLimit: 7°C`'
+  ExpectedResponse: '`CONSTRAINT_ERROR`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"AbsMinHeatSetpointLimit"': 6}`
+  label: Test_Case_Below_Valid_Minimum_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify thermostat-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`0`'
+  Attribute_Change: '`AbsMinHeatSetpointLimit: 8°C`'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: '`None`
+
+
+    These test cases cover the extreme values of the constraints and the values that
+    could result in special responses as mentioned in the description of the effect【4:1†source】.'
+  arguments:
+    '{"AbsMinHeatSetpointLimit"': 8}`
+  label: Test_Case_Above_Valid_Minimum_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify thermostat-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 150
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

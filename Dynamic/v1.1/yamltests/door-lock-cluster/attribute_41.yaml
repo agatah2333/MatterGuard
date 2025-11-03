@@ -1,0 +1,43 @@
+config:
+  attribute: '41'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_41_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: KeypadOperationEventMask will be set to 0x0000
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"KeypadOperationEventMask"': 0x0000}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: KeypadOperationEventMask will be set to 0xFFFF
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"KeypadOperationEventMask"': 0xFFFF}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments:
+    '{"KeypadOperationEventMask"': 0x10000}  // Out of range value
+  label: Test_Case_Special_Response_-_Invalid_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: KeypadOperationEventMask will be set to 0x00FF
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    '{"KeypadOperationEventMask"': 0x00FF}  // Only lower 8 bits set
+  label: Test_Case_Special_Response_-_Specific_Bitmask
+  option: WriteAttribute

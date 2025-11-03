@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0071",
+    "name": "HEPA Filter Monitoring",
+    "description": "Cluster for HEPA Filter Monitoring functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

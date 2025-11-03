@@ -1,0 +1,377 @@
+{
+  "source_file": "Joint Fabric Datastore.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0752",
+        "name": "Joint Fabric Datastore Cluster",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "AnchorRootCA",
+            "dataType": "octstr",
+            "valueRange": "",
+            "description": "Anchor Root CA certificate for fabric signing",
+            "privilege": "FabricScoped",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "AnchorNodeID",
+            "dataType": "node-id",
+            "valueRange": "",
+            "description": "Node identifier of fabric anchor root CA",
+            "privilege": "FabricScoped",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "AnchorVendorID",
+            "dataType": "vendor-id",
+            "valueRange": "",
+            "description": "Vendor identifier of fabric anchor root CA",
+            "privilege": "FabricScoped",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "FriendlyName",
+            "dataType": "string",
+            "valueRange": "max 32",
+            "description": "Human-readable fabric identifier",
+            "privilege": "FabricScoped",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "GroupKeySetList",
+            "dataType": "list[GroupKeySetStruct]",
+            "valueRange": "",
+            "description": "Active group encryption keysets",
+            "privilege": "FabricScoped",
+            "writable": false
+          },
+          {
+            "id": "0x0005",
+            "name": "GroupList",
+            "dataType": "list[GroupInformationEntry]",
+            "valueRange": "",
+            "description": "Configured fabric groups",
+            "privilege": "FabricScoped",
+            "writable": false
+          },
+          {
+            "id": "0x0006",
+            "name": "NodeList",
+            "dataType": "list[NodeInformationEntry]",
+            "valueRange": "",
+            "description": "Registered fabric nodes",
+            "privilege": "FabricScoped",
+            "writable": false
+          },
+          {
+            "id": "0x0007",
+            "name": "AdminList",
+            "dataType": "list[AdminInformationEntry]",
+            "valueRange": "",
+            "description": "Fabric administrator entries",
+            "privilege": "FabricScoped",
+            "writable": false
+          },
+          {
+            "id": "0x0008",
+            "name": "StatusEntry",
+            "dataType": "StatusEntryStruct",
+            "valueRange": "",
+            "description": "Current fabric datastore state",
+            "privilege": "FabricScoped",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "AddKeySet",
+            "parameters": {
+              "GroupKeySet": {
+                "dataType": "GroupKeySetStruct",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "UpdateKeySet",
+            "parameters": {
+              "GroupKeySet": {
+                "dataType": "GroupKeySetStruct",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "RemoveKeySet",
+            "parameters": {
+              "GroupKeySetID": {
+                "dataType": "uint16",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x03",
+            "name": "AddGroup",
+            "parameters": {
+              "GroupEntry": {
+                "dataType": "GroupInformationEntry",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x04",
+            "name": "UpdateGroup",
+            "parameters": {
+              "GroupEntry": {
+                "dataType": "GroupInformationEntry",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x05",
+            "name": "RemoveGroup",
+            "parameters": {
+              "GroupID": {
+                "dataType": "group-id",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x06",
+            "name": "AddAdmin",
+            "parameters": {
+              "AdminEntry": {
+                "dataType": "AdminInformationEntry",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x07",
+            "name": "UpdateAdmin",
+            "parameters": {
+              "NodeID": "node-id",
+              "FriendlyName": "string(max 32)",
+              "ICAC": "octstr"
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x08",
+            "name": "RemoveAdmin",
+            "parameters": {
+              "NodeID": {
+                "dataType": "node-id",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x09",
+            "name": "AddPendingNode",
+            "parameters": {
+              "NodeID": "node-id",
+              "FriendlyName": "string(max 32)"
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x0A",
+            "name": "RefreshNode",
+            "parameters": {
+              "NodeID": {
+                "dataType": "node-id",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x0B",
+            "name": "UpdateNode",
+            "parameters": {
+              "NodeID": "node-id",
+              "FriendlyName": "string(max 32)"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x0E",
+            "name": "AddGroupIDToEndpointForNode",
+            "parameters": {
+              "NodeID": "node-id",
+              "EndpointID": "endpoint-id",
+              "GroupID": "group-id"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x0F",
+            "name": "RemoveGroupIDFromEndpointForNode",
+            "parameters": {
+              "NodeID": "node-id",
+              "EndpointID": "endpoint-id",
+              "GroupID": "group-id"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x10",
+            "name": "AddBindingToEndpointForNode",
+            "parameters": {
+              "NodeID": "node-id",
+              "EndpointID": "endpoint-id",
+              "Binding": "TargetStruct"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x11",
+            "name": "RemoveBindingFromEndpointForNode",
+            "parameters": {
+              "ListID": "uint16",
+              "EndpointID": "endpoint-id",
+              "NodeID": "node-id"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x12",
+            "name": "AddACLToNode",
+            "parameters": {
+              "NodeID": "node-id",
+              "ACLEntry": "AccessControlEntryStruct"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x13",
+            "name": "RemoveACLFromNode",
+            "parameters": {
+              "NodeID": "node-id",
+              "ACLEntry": "AccessControlEntryStruct"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "GroupKeySetStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "GroupKeySetID": "uint16",
+              "GroupKeySecurityPolicy": "uint16",
+              "EpochKey0": "octstr(16)",
+              "EpochStartTime0": "uint64",
+              "EpochKey1": "octstr(16)",
+              "EpochStartTime1": "uint64"
+            }
+          },
+          "GroupInformationEntry": {
+            "baseType": "Struct",
+            "fields": {
+              "GroupID": "group-id",
+              "GroupName": "string(max 32)",
+              "FeatureFlags": "bitmap32"
+            }
+          },
+          "AdminInformationEntry": {
+            "baseType": "Struct",
+            "fields": {
+              "AdminNodeID": "node-id",
+              "AdminVendorID": "vendor-id",
+              "FriendlyName": "string(max 32)",
+              "ICACertificate": "octstr"
+            }
+          },
+          "NodeInformationEntry": {
+            "baseType": "Struct",
+            "fields": {
+              "NodeID": "node-id",
+              "VendorID": "vendor-id",
+              "ProductID": "uint16",
+              "FriendlyName": "string(max 32)",
+              "LastUpdateTime": "epoch-us"
+            }
+          },
+          "StatusEntryStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "FabricState": "uint8",
+              "LastConfigurationNumber": "uint32",
+              "UpdateTimestamp": "epoch-us"
+            }
+          },
+          "TargetStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "Node": "node-id",
+              "Endpoint": "endpoint-id",
+              "Cluster": "cluster-id"
+            }
+          },
+          "group-id": {
+            "baseType": "uint16",
+            "description": "Group identifier"
+          },
+          "node-id": {
+            "baseType": "uint64",
+            "description": "Node identifier"
+          },
+          "endpoint-id": {
+            "baseType": "uint16",
+            "description": "Endpoint identifier"
+          },
+          "cluster-id": {
+            "baseType": "uint32",
+            "description": "Cluster identifier"
+          },
+          "epoch-us": {
+            "baseType": "uint64",
+            "description": "Microseconds since 2000-01-01T00:00:00Z"
+          }
+        }
+      }
+    ]
+  }
+}

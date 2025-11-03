@@ -1,0 +1,42 @@
+config:
+  attribute: '0x0003'
+  cluster: pump-configuration-and-control-cluster
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_attribute_0x0003_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Tolerance will be set to 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Tolerance: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Tolerance will be set to 2048
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Tolerance: 2048
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Tolerance will be set to 1024
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Tolerance: 1024
+  label: Test_Case_Special_Response_-_Mid_Range_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Tolerance will be set to 2047
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    values that could result in special responses as per the attribute''s description.'
+  arguments:
+    Tolerance: 2047
+  label: Test_Case_Special_Response_-_Near_Maximum_Value
+  option: WriteAttribute

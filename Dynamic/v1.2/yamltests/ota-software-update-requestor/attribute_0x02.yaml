@@ -1,0 +1,6 @@
+config:
+  attribute: '0x02'
+  cluster: ota-software-update-requestor
+  nodeId: '0x654231'
+name: ota-software-update-requestor_attribute_0x02_v1.2.0.0
+tests: []

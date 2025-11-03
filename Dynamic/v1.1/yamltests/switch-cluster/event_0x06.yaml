@@ -1,0 +1,51 @@
+config:
+  cluster: switch-cluster
+  event: '0x06'
+  nodeId: '0x654231'
+name: switch-cluster_event_0x06_v1.1.0.0
+tests:
+- ActionTime: <timestamp>
+  Attribute_Change: '`CurrentPosition` will be set to 0'
+  ExpectedResponse: Event generated successfully
+  Pre-requisites: '`NumberOfPositions` should be at least 2, `MultiPressMax` should
+    be at least 1'
+  arguments:
+    PreviousPosition: 0
+    TotalNumberOfPressesCounted: 1
+  label: Test_Case_Minimum_Values
+  option: SubscribeToEvent
+- ActionTime: <timestamp>
+  Attribute_Change: '`CurrentPosition` will be set to NumberOfPositions-1'
+  ExpectedResponse: Event generated successfully
+  Pre-requisites: '`NumberOfPositions` should be set to its maximum value, `MultiPressMax`
+    should be set to its maximum value'
+  arguments:
+    PreviousPosition: NumberOfPositions-1
+    TotalNumberOfPressesCounted: MultiPressMax
+  label: Test_Case_Maximum_Values
+  option: SubscribeToEvent
+- ActionTime: <timestamp>
+  Attribute_Change: '`CurrentPosition` will be set to 1'
+  ExpectedResponse: Event generated successfully, indicating a single press
+  Pre-requisites: '`NumberOfPositions` should be at least 2, `MultiPressMax` should
+    be at least 1'
+  arguments:
+    PreviousPosition: 1
+    TotalNumberOfPressesCounted: 1
+  label: Test_Case_Special_Response_for_Single_Press
+  option: SubscribeToEvent
+- ActionTime: <timestamp>
+  Attribute_Change: '`CurrentPosition` will be set to 2'
+  ExpectedResponse: Event generated successfully, indicating a double press
+  Pre-requisites: '`NumberOfPositions` should be at least 3, `MultiPressMax` should
+    be at least 2
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    PreviousPosition: 2
+    TotalNumberOfPressesCounted: 2
+  label: Test_Case_Special_Response_for_Double_Press
+  option: SubscribeToEvent

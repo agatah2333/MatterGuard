@@ -1,0 +1,254 @@
+{
+  "cluster_id": "0x0081",
+  "cluster_name": "Valve Configuration and Control",
+  "revision": 1,
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Application",
+    "scope": "Endpoint",
+    "pics_code": "VALCC"
+  },
+  "summary": "This cluster is used to configure a valve.",
+  "new_in_version": "Matter 1.4",
+  "features": {
+    "0": {
+      "code": "TS",
+      "name": "TimeSync",
+      "conformance": "desc",
+      "summary": "UTC time is used for time indications"
+    },
+    "1": {
+      "code": "LVL",
+      "name": "Level",
+      "conformance": "O",
+      "summary": "Device supports setting the specific position of the valve"
+    }
+  },
+  "feature_notes": {
+    "TimeSync": "This feature SHALL indicate that the valve uses Time Synchronization and UTC time to indicate duration and auto close time. This feature SHALL NOT be supported unless the device supports the Time Synchronization cluster.",
+    "Level": "This feature SHALL indicate that the valve is capable of being adjusted to a specific position, as a percentage, of its full range of motion."
+  },
+  "data_types": {
+    "ValveFaultBitmap": {
+      "type": "map16",
+      "bits": {
+        "0": "GeneralFault - Unspecified fault detected",
+        "1": "Blocked - Valve is blocked",
+        "2": "Leaking - Valve has detected a leak",
+        "3": "NotConnected - No valve is connected to controller",
+        "4": "ShortCircuit - Short circuit is detected",
+        "5": "CurrentExceeded - The available current has been exceeded"
+      }
+    },
+    "ValveStateEnum": {
+      "type": "enum8",
+      "values": {
+        "0": "Closed - Valve is in closed position",
+        "1": "Open - Valve is in open position",
+        "2": "Transitioning - Valve is transitioning between closed and open positions or between levels"
+      }
+    }
+  },
+  "status_codes": {
+    "FailureDueToFault": {
+      "code": "0x02",
+      "description": "The requested action could not be performed due to a fault on the valve"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "name": "OpenDuration",
+      "type": "elapsed-s",
+      "constraint": "min 1",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M",
+      "description": "Total duration, in seconds, for which the valve will remain open for this current opening. Null indicates duration is not set."
+    },
+    "0x0001": {
+      "name": "DefaultOpenDuration",
+      "type": "elapsed-s",
+      "constraint": "min 1",
+      "quality": "XN",
+      "default": "null",
+      "access": "RW VO",
+      "conformance": "M",
+      "description": "Default duration, in seconds, for which the valve will remain open, if OpenDuration field is not present in Open command. Null indicates duration is not set."
+    },
+    "0x0002": {
+      "name": "AutoCloseTime",
+      "type": "epoch-us",
+      "constraint": "all",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "TS",
+      "description": "UTC time when the valve will close, depending on OpenDuration value. Null when OpenDuration is null, valve lacks synchronized UTCTime, or valve is closed."
+    },
+    "0x0003": {
+      "name": "RemainingDuration",
+      "type": "elapsed-s",
+      "constraint": "all",
+      "quality": "XQ",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M",
+      "description": "Remaining duration, in seconds, until the valve closes. Null when OpenDuration is null or valve is closed."
+    },
+    "0x0004": {
+      "name": "CurrentState",
+      "type": "ValveStateEnum",
+      "constraint": "all",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M",
+      "description": "Current state of the valve. Null indicates current state is not known."
+    },
+    "0x0005": {
+      "name": "TargetState",
+      "type": "ValveStateEnum",
+      "constraint": "all",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M",
+      "description": "Target state, while changing the state, of the valve. Null indicates no target position is set."
+    },
+    "0x0006": {
+      "name": "CurrentLevel",
+      "type": "percent",
+      "constraint": "all",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "LVL",
+      "description": "Current level of the valve as a percentage (0=fully closed, 100=fully open). Null indicates current state is not known."
+    },
+    "0x0007": {
+      "name": "TargetLevel",
+      "type": "percent",
+      "constraint": "all",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "LVL",
+      "description": "Target level of the valve as a percentage. Null indicates no target position is set."
+    },
+    "0x0008": {
+      "name": "DefaultOpenLevel",
+      "type": "percent",
+      "constraint": "1 to 100",
+      "quality": "N",
+      "default": "100",
+      "access": "RW VO",
+      "conformance": "[LVL]",
+      "description": "Default value used for TargetLevel attribute when valve transitions from closed to open state via Open command without TargetLevel field."
+    },
+    "0x0009": {
+      "name": "ValveFault",
+      "type": "ValveFaultBitmap",
+      "constraint": "all",
+      "default": "0",
+      "access": "RV",
+      "conformance": "O",
+      "description": "Indicates any faults registered by the valve."
+    },
+    "0x000A": {
+      "name": "LevelStep",
+      "type": "uint8",
+      "constraint": "1 to 50",
+      "quality": "F",
+      "default": "1",
+      "access": "RV",
+      "conformance": "[LVL]",
+      "description": "Step size the valve can support. Values 0 and 100 are always supported regardless of this attribute."
+    }
+  },
+  "commands": {
+    "0x00": {
+      "name": "Open",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "description": "Used to set the valve to its open position",
+      "fields": {
+        "0": {
+          "name": "OpenDuration",
+          "type": "elapsed-s",
+          "constraint": "min 1",
+          "quality": "X",
+          "conformance": "O",
+          "description": "Duration that the valve will remain open for this specific Open command. Null indicates duration is not set."
+        },
+        "1": {
+          "name": "TargetLevel",
+          "type": "percent",
+          "constraint": "min 1",
+          "conformance": "[LVL]",
+          "description": "Target level used for this specific Open command"
+        }
+      },
+      "effect_on_receipt": "Sets TargetState to Open, CurrentState to Transitioning. Handles OpenDuration and TargetLevel fields. Starts movement towards target and countdown. When complete, sets CurrentState to Open."
+    },
+    "0x01": {
+      "name": "Close",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "description": "Used to set the valve to its closed position",
+      "fields": {},
+      "effect_on_receipt": "Sets OpenDuration and RemainingDuration to null. Sets TargetState to Closed, CurrentState to Transitioning. If Level feature supported, sets TargetLevel to 0. Starts movement towards closed position. When complete, sets CurrentState to Closed."
+    }
+  },
+  "events": {
+    "0x00": {
+      "name": "ValveStateChanged",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "O",
+      "description": "Generated when the valve state changed. For level changes, after the end of movement, for state changes when the new state has been reached.",
+      "fields": {
+        "0": {
+          "name": "ValveState",
+          "type": "ValveStateEnum",
+          "constraint": "all",
+          "conformance": "M",
+          "description": "New state of the valve"
+        },
+        "1": {
+          "name": "ValveLevel",
+          "type": "percent",
+          "constraint": "all",
+          "conformance": "LVL",
+          "description": "New level of the valve"
+        }
+      }
+    },
+    "0x01": {
+      "name": "ValveFault",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "O",
+      "description": "Generated when the valve registers or clears a fault, e.g. not being able to transition to the requested target level or state.",
+      "fields": {
+        "0": {
+          "name": "ValveFault",
+          "type": "ValveFaultBitmap",
+          "constraint": "all",
+          "conformance": "M",
+          "description": "Value of the ValveFault attribute at the time this event is generated"
+        }
+      }
+    }
+  },
+  "revision_history": [
+    {
+      "revision": 1,
+      "description": "Initial revision"
+    }
+  ]
+}

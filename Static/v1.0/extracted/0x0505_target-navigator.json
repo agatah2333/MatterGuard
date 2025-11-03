@@ -1,0 +1,50 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0505",
+    "name": "Target Navigator",
+    "description": "Provides an interface for UX navigation within a set of targets on a device or endpoint."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "NavigateTarget",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "NavigateTargetResponse",
+      "parameters": [],
+      "privilege": "V",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "TargetList",
+      "data_type": "list[TargetInfo]",
+      "value_range": {},
+      "description": "The TargetList attribute SHALL represent a list of targets that can be navigated to within the experience presented to the user by the Endpoint.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "CurrentTarget",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "The CurrentTarget attribute SHALL represent the Identifier for the target which is currently in foreground on the corresponding Endpoint, or null to indicate that no target is in the foreground.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

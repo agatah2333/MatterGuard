@@ -1,0 +1,203 @@
+{
+  "source_file": "Fan Control_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0202",
+        "name": "Fan Control",
+        "description": "This cluster specifies an interface to control the speed of a fan.",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "FanMode",
+            "dataType": "FanModeEnum",
+            "valueRange": "0-6",
+            "description": "Indicates the current speed mode of the fan.",
+            "privilege": "Operate",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "FanModeSequence",
+            "dataType": "FanModeSequenceEnum",
+            "valueRange": "0-5",
+            "description": "Indicates the fan speed ranges that are supported.",
+            "privilege": "View",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "PercentSetting",
+            "dataType": "uint8",
+            "valueRange": "0-100",
+            "description": "Indicates the speed setting for the fan.",
+            "privilege": "Operate",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "PercentCurrent",
+            "dataType": "uint8",
+            "valueRange": "0-100",
+            "description": "Indicates the actual currently operating fan speed.",
+            "privilege": "View",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "SpeedMax",
+            "dataType": "uint8",
+            "valueRange": "1-100",
+            "description": "Indicates the maximum speed of the fan.",
+            "privilege": "View",
+            "writable": false
+          },
+          {
+            "id": "0x0005",
+            "name": "SpeedSetting",
+            "dataType": "uint8",
+            "valueRange": "0-SpeedMax",
+            "description": "Indicates the speed setting for the fan.",
+            "privilege": "Operate",
+            "writable": true
+          },
+          {
+            "id": "0x0006",
+            "name": "SpeedCurrent",
+            "dataType": "uint8",
+            "valueRange": "0-SpeedMax",
+            "description": "Indicates the actual currently operating fan speed.",
+            "privilege": "View",
+            "writable": false
+          },
+          {
+            "id": "0x0007",
+            "name": "RockSupport",
+            "dataType": "RockBitmap",
+            "valueRange": "0-2",
+            "description": "Indicates the rocking movement support of the fan.",
+            "privilege": "View",
+            "writable": false
+          },
+          {
+            "id": "0x0008",
+            "name": "RockSetting",
+            "dataType": "RockBitmap",
+            "valueRange": "0-2",
+            "description": "Indicates the current rocking setting of the fan.",
+            "privilege": "Operate",
+            "writable": true
+          },
+          {
+            "id": "0x0009",
+            "name": "WindSupport",
+            "dataType": "WindBitmap",
+            "valueRange": "0-1",
+            "description": "Indicates the wind emulation support of the fan.",
+            "privilege": "View",
+            "writable": false
+          },
+          {
+            "id": "0x000A",
+            "name": "WindSetting",
+            "dataType": "WindBitmap",
+            "valueRange": "0-1",
+            "description": "Indicates the current wind setting of the fan.",
+            "privilege": "Operate",
+            "writable": true
+          },
+          {
+            "id": "0x000B",
+            "name": "AirflowDirection",
+            "dataType": "AirflowDirectionEnum",
+            "valueRange": "0-1",
+            "description": "Indicates the direction of airflow.",
+            "privilege": "Operate",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "Step",
+            "parameters": {
+              "Direction": {
+                "dataType": "StepDirectionEnum",
+                "valueRange": "0-1",
+                "description": "Indicates whether the fan speed increases or decreases."
+              },
+              "Wrap": {
+                "dataType": "bool",
+                "valueRange": "false-true",
+                "description": "Indicates if the fan speed wraps between highest and lowest step value."
+              },
+              "LowestOff": {
+                "dataType": "bool",
+                "valueRange": "true-false",
+                "description": "Indicates that the fan being off is included as a step value."
+              }
+            },
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "RockBitmap": {
+            "baseType": "bitmap8",
+            "fields": {
+              "0": "Rocking Disabled",
+              "1": "Horizontal Rocking",
+              "2": "Vertical Rocking"
+            }
+          },
+          "WindBitmap": {
+            "baseType": "bitmap8",
+            "fields": {
+              "0": "Natural Wind Disabled",
+              "1": "Natural Wind Enabled"
+            }
+          },
+          "StepDirectionEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "Decrease",
+              "1": "Increase"
+            }
+          },
+          "AirflowDirectionEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "Forward",
+              "1": "Reverse"
+            }
+          },
+          "FanModeEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "Off",
+              "1": "Low",
+              "2": "Medium",
+              "3": "High",
+              "4": "Auto",
+              "5": "Smart",
+              "6": "Custom"
+            }
+          },
+          "FanModeSequenceEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "Off/Low/Medium/High",
+              "1": "Off/Medium/High",
+              "2": "Off/Low/High",
+              "3": "Off/Low/Medium/Auto",
+              "4": "Off/Medium/Auto",
+              "5": "Off/High/Auto"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+config:
+  attribute: '0x0001'
+  cluster: descriptor-cluster
+  nodeId: '0x654231'
+name: descriptor-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: "\"N/A\"\n  - **ExpectedResponse**: \"Empty list\"\n  - **Which Attribute\
+    \ Will Be Changed and the Value of the Attribute**: \"ServerList remains empty\"\
+    \n  - **Any Pre-requisites**: \"None\""
+  Attribute_Change: "\"ServerList remains empty\"\n  - **Any Pre-requisites**: \"\
+    None\""
+  ExpectedResponse: "\"Empty list\"\n  - **Which Attribute Will Be Changed and the\
+    \ Value of the Attribute**: \"ServerList remains empty\"\n  - **Any Pre-requisites**:\
+    \ \"None\""
+  Pre-requisites: '"None"'
+  arguments:
+    '**ActionTime**': '"N/A"'
+    '**Any Pre-requisites**': '"None"'
+    '**ExpectedResponse**': '"Empty list"'
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': '"ServerList
+      remains empty"'
+    '{"ServerList"': '"[]"}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: "\"N/A\"\n  - **ExpectedResponse**: \"List of cluster IDs\"\n  - **Which\
+    \ Attribute Will Be Changed and the Value of the Attribute**: \"ServerList updated\
+    \ to [0x0006, 0x0008, 0x0019]\"\n  - **Any Pre-requisites**: \"Clusters with IDs\
+    \ 0x0006, 0x0008, and 0x0019 must be present on the endpoint\"\n\nThese test cases\
+    \ cover the extreme values and special responses for the `ServerList` attribute\
+    \ of the Descriptor Cluster. The first test case checks the behavior with an empty\
+    \ list, while the second test case checks the behavior with a list of specific\
+    \ cluster IDs."
+  Attribute_Change: "\"ServerList updated to [0x0006, 0x0008, 0x0019]\"\n  - **Any\
+    \ Pre-requisites**: \"Clusters with IDs 0x0006, 0x0008, and 0x0019 must be present\
+    \ on the endpoint\"\n\nThese test cases cover the extreme values and special responses\
+    \ for the `ServerList` attribute of the Descriptor Cluster. The first test case\
+    \ checks the behavior with an empty list, while the second test case checks the\
+    \ behavior with a list of specific cluster IDs."
+  ExpectedResponse: "\"List of cluster IDs\"\n  - **Which Attribute Will Be Changed\
+    \ and the Value of the Attribute**: \"ServerList updated to [0x0006, 0x0008, 0x0019]\"\
+    \n  - **Any Pre-requisites**: \"Clusters with IDs 0x0006, 0x0008, and 0x0019 must\
+    \ be present on the endpoint\"\n\nThese test cases cover the extreme values and\
+    \ special responses for the `ServerList` attribute of the Descriptor Cluster.\
+    \ The first test case checks the behavior with an empty list, while the second\
+    \ test case checks the behavior with a list of specific cluster IDs."
+  Pre-requisites: '"Clusters with IDs 0x0006, 0x0008, and 0x0019 must be present on
+    the endpoint"
+
+
+    These test cases cover the extreme values and special responses for the `ServerList`
+    attribute of the Descriptor Cluster. The first test case checks the behavior with
+    an empty list, while the second test case checks the behavior with a list of specific
+    cluster IDs.'
+  arguments:
+    '**ActionTime**': '"N/A"'
+    '**Any Pre-requisites**': '"Clusters with IDs 0x0006, 0x0008, and 0x0019 must
+      be present on the endpoint"'
+    '**ExpectedResponse**': '"List of cluster IDs"'
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': '"ServerList
+      updated to [0x0006, 0x0008, 0x0019]"'
+    '{"ServerList"': '"[0x0006, 0x0008, 0x0019]"}'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

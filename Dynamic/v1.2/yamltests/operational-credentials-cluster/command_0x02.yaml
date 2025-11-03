@@ -1,0 +1,29 @@
+config:
+  cluster: operational-credentials-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: operational-credentials-cluster_command_0x02_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`WindowStatus` will be set to `WindowNotOpen`'
+  ExpectedResponse: Success
+  Pre-requisites: A commissioning window must be open before invoking this command.
+  arguments: {}
+  label: Test_Case_Extreme_Value_of_Constraints
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: No change in attributes
+  ExpectedResponse: '`WindowNotOpen` status code'
+  Pre-requisites: 'No commissioning window should be open before invoking this command.
+
+
+    These test cases cover the scenarios where the `RevokeCommissioning` command is
+    used under different conditions, ensuring that the command behaves as expected
+    both when a commissioning window is open and when it is not.
+
+
+    For more detailed information, you can refer to the Matter 1.2 Core Specification
+    document【4:0†source】.'
+  arguments: {}
+  label: Test_Case_Special_Response_Scenario
+  option: SendCommand

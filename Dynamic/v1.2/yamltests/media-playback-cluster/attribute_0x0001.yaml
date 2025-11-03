@@ -1,0 +1,42 @@
+config:
+  attribute: '0x0001'
+  cluster: media-playback-cluster
+  nodeId: '0x654231'
+name: media-playback-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: StartTime set to 0
+  ExpectedResponse: Success
+  Pre-requisites: Media with a fixed start time
+  arguments:
+    '{"StartTime"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 18446744073709551615
+  Attribute_Change: StartTime set to 18446744073709551615
+  ExpectedResponse: Success
+  Pre-requisites: Media with a fixed start time
+  arguments:
+    '{"StartTime"': 18446744073709551615}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 'null'
+  Attribute_Change: StartTime set to null
+  ExpectedResponse: Success
+  Pre-requisites: Media where start time does not apply (e.g., video-on-demand)
+  arguments:
+    '{"StartTime"': null}
+  label: Test_Case_Null_Value
+  option: WriteAttribute
+- ActionTime: 'null'
+  Attribute_Change: StartTime set to null
+  ExpectedResponse: Success
+  Pre-requisites: 'Live media with no known duration and where seek is not supported
+
+
+    These test cases cover the extreme values of the `StartTime` attribute and the
+    special response scenarios as described in the specification【4:0†source】.'
+  arguments:
+    '{"StartTime"': null}
+  label: Test_Case_Special_Response_-_Live_Media
+  option: WriteAttribute

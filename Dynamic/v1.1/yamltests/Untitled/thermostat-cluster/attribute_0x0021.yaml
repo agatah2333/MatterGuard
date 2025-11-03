@@ -1,0 +1,175 @@
+config:
+  attribute: '0x0021'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0021_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: NumberOfWeeklyTransitions = 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"NumberOfWeeklyTransitions"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify thermostat-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: <current_time>
+  Attribute_Change: NumberOfWeeklyTransitions = 255
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"NumberOfWeeklyTransitions"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify thermostat-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: <current_time>
+  Attribute_Change: NumberOfWeeklyTransitions = 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    These test cases ensure that the attribute behaves correctly at its boundary values
+    and default state. The expected response for reading the attribute is always `SUCCESS`
+    since it is a read-only attribute.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:1†source】.'
+  arguments:
+    '{"NumberOfWeeklyTransitions"': 0}
+  label: Test_Case_Default_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify thermostat-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 90
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

@@ -1,0 +1,207 @@
+{
+  "cluster_information": {
+    "cluster_id": "n/a",
+    "name": "Mode Base",
+    "description": "This cluster provides an interface for controlling a characteristic of a device that can be set to one of several predefined values. For example, the light pattern of a disco ball, the mode of a massage chair, or the wash cycle of a laundry machine. The server allows the client to set a mode on the server. A mode is one of a list of options that may be presented by a client for a user choice, or understood by the client, via the mode's tags."
+  },
+  "derived_datatypes": [
+    {
+      "type": "enum",
+      "name": "ModeTag",
+      "base_data_type": "ENUM16",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "Auto",
+            "value": "0x0000",
+            "description": "Auto mode tag"
+          },
+          {
+            "name": "Quick",
+            "value": "0x0001",
+            "description": "Quick mode tag"
+          },
+          {
+            "name": "Quiet",
+            "value": "0x0002",
+            "description": "Quiet mode tag"
+          },
+          {
+            "name": "LowNoise",
+            "value": "0x0003",
+            "description": "Low noise mode tag"
+          },
+          {
+            "name": "LowEnergy",
+            "value": "0x0004",
+            "description": "Low energy mode tag"
+          },
+          {
+            "name": "Vacation",
+            "value": "0x0005",
+            "description": "Vacation mode tag"
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "StatusCodeEnum",
+      "base_data_type": "ENUM8",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "Success",
+            "value": "0x00",
+            "description": "Generic success status"
+          },
+          {
+            "name": "UnsupportedMode",
+            "value": "0x01",
+            "description": "Mode not supported"
+          },
+          {
+            "name": "GenericFailure",
+            "value": "0x02",
+            "description": "Generic failure"
+          },
+          {
+            "name": "InvalidInMode",
+            "value": "0x03",
+            "description": "Unable to change to mode due to current mode restrictions"
+          }
+        ]
+      }
+    },
+    {
+      "type": "struct",
+      "name": "ModeTagStruct",
+      "fields": [
+        {
+          "name": "MfgCode",
+          "data_type": "vendor-id",
+          "description": "Manufacturer's VendorID that determines the meaning of the Value field",
+          "optional": true
+        },
+        {
+          "name": "Value",
+          "data_type": "enum16",
+          "description": "Mode tag within a mode tag namespace which is either manufacturer specific or standard"
+        }
+      ]
+    },
+    {
+      "type": "struct",
+      "name": "ModeOptionStruct",
+      "fields": [
+        {
+          "name": "Label",
+          "data_type": "string",
+          "max_length": 64,
+          "description": "Readable text that describes the mode option"
+        },
+        {
+          "name": "Mode",
+          "data_type": "uint8",
+          "description": "Mode option identifier"
+        },
+        {
+          "name": "ModeTags",
+          "data_type": "list[ModeTagStruct]",
+          "max_count": 8,
+          "description": "List of tags associated with the mode option"
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "ChangeToMode",
+      "parameters": [
+        {
+          "name": "NewMode",
+          "data_type": "uint8",
+          "value_range": {},
+          "description": "The mode to change to"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "ChangeToModeResponse",
+      "parameters": [
+        {
+          "name": "Status",
+          "data_type": "StatusCodeEnum",
+          "value_range": {},
+          "description": "Status code for the mode change operation"
+        },
+        {
+          "name": "StatusText",
+          "data_type": "string",
+          "max_length": 64,
+          "value_range": {},
+          "description": "Human readable text describing the status"
+        }
+      ],
+      "privilege": "",
+      "side": "server"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "SupportedModes",
+      "data_type": "list[ModeOptionStruct]",
+      "value_range": {
+        "min_count": "2",
+        "max_count": "255"
+      },
+      "description": "List of supported modes that may be selected for the CurrentMode attribute",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0001",
+      "name": "CurrentMode",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "Current mode of the server",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0002",
+      "name": "StartUpMode",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "Desired startup mode for the server when it is supplied with power",
+      "privilege": "V",
+      "writable": true,
+      "optional": true
+    },
+    {
+      "id": "0x0003",
+      "name": "OnMode",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "Mode that this cluster will be set to when the OnOff cluster changes to On",
+      "privilege": "V",
+      "writable": true,
+      "default": "null",
+      "conformance": "DEPONOFF"
+    }
+  ],
+  "events": [],
+  "features": [
+    {
+      "bit": 0,
+      "code": "DEPONOFF",
+      "name": "OnOff",
+      "description": "Dependency with the OnOff cluster"
+    }
+  ]
+}

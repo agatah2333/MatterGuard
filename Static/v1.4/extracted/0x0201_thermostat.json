@@ -1,0 +1,804 @@
+{
+  "source_file": "thermostat.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0201",
+        "name": "Thermostat",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "LocalTemperature",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "当前本地温度（0.1°C精度）",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "OutdoorTemperature",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "室外温度测量值（0.1°C精度）",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "Occupancy",
+            "dataType": "OccupancyBitmap",
+            "valueRange": "bitmap8",
+            "description": "空间占用状态位图（bit0=占用状态）",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "AbsMinHeatSetpointLimit",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "加热设定点绝对最小值",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "AbsMaxHeatSetpointLimit",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "加热设定点绝对最大值",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0005",
+            "name": "AbsMinCoolSetpointLimit",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "制冷设定点绝对最小值",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0006",
+            "name": "AbsMaxCoolSetpointLimit",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "制冷设定点绝对最大值",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0007",
+            "name": "PICoolingDemand",
+            "dataType": "uint8",
+            "valueRange": "0-100%",
+            "description": "PI算法制冷需求百分比",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0008",
+            "name": "PIHeatingDemand",
+            "dataType": "uint8",
+            "valueRange": "0-100%",
+            "description": "PI算法制热需求百分比",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0009",
+            "name": "HVACSystemTypeConfiguration",
+            "dataType": "bitmap8",
+            "valueRange": "bitmap",
+            "description": "HVAC系统类型配置（bit0=4管系统, bit1=热泵）",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x000A",
+            "name": "LocalTemperatureCalibration",
+            "dataType": "int8",
+            "valueRange": "-8 to +8",
+            "description": "本地温度校准偏移（0.1°C步进）",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0011",
+            "name": "OccupiedCoolingSetpoint",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "占用模式制冷设定点",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0012",
+            "name": "OccupiedHeatingSetpoint",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "占用模式制热设定点",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0013",
+            "name": "UnoccupiedCoolingSetpoint",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "非占用模式制冷设定点",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0014",
+            "name": "UnoccupiedHeatingSetpoint",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "非占用模式制热设定点",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0015",
+            "name": "MinHeatSetpointLimit",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "当前加热设定点最小值",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0016",
+            "name": "MaxHeatSetpointLimit",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "当前加热设定点最大值",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0017",
+            "name": "MinCoolSetpointLimit",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "当前制冷设定点最小值",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0018",
+            "name": "MaxCoolSetpointLimit",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "当前制冷设定点最大值",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0019",
+            "name": "MinSetpointDeadBand",
+            "dataType": "uint8",
+            "valueRange": "0-25.5°C",
+            "description": "冷热设定点最小死区（0.5°C步进）",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x001A",
+            "name": "RemoteSensing",
+            "dataType": "bitmap8",
+            "valueRange": "bitmap",
+            "description": "远程传感器配置（bit0=本地温度, bit1=室外温度）",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x001B",
+            "name": "ControlSequenceOfOperation",
+            "dataType": "enum8",
+            "valueRange": "0-4",
+            "description": "控制操作序列模式",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x001C",
+            "name": "SystemMode",
+            "dataType": "enum8",
+            "valueRange": "0-8",
+            "description": "系统运行模式选择",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x001D",
+            "name": "AlarmMask",
+            "dataType": "bitmap8",
+            "valueRange": "bitmap",
+            "description": "报警屏蔽设置（bit0=初滤报警, bit1=空气过滤报警）",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x001E",
+            "name": "ThermostatRunningMode",
+            "dataType": "enum8",
+            "valueRange": "0-3",
+            "description": "当前运行模式状态",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0020",
+            "name": "StartOfWeek",
+            "dataType": "enum8",
+            "valueRange": "0-6",
+            "description": "周起始日设置（0=周日，6=周六）",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0021",
+            "name": "NumberOfWeeklyTransitions",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "周计划转换次数",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0022",
+            "name": "NumberOfDailyTransitions",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "日计划转换次数",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0023",
+            "name": "TemperatureSetpointHold",
+            "dataType": "enum8",
+            "valueRange": "0-2",
+            "description": "温度设定点保持模式（0=临时，1=永久）",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0024",
+            "name": "TemperatureSetpointHoldDuration",
+            "dataType": "uint16",
+            "valueRange": "0-65535分钟",
+            "description": "临时保持模式持续时间",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0025",
+            "name": "ThermostatProgrammingOperationMode",
+            "dataType": "bitmap8",
+            "valueRange": "bitmap",
+            "description": "编程模式设置（bit0=周计划启用, bit1=临时保持启用）",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0029",
+            "name": "ThermostatRunningState",
+            "dataType": "bitmap16",
+            "valueRange": "bitmap",
+            "description": "运行状态指示（bit0=制热开启, bit1=制冷开启）",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x002A",
+            "name": "SetpointChangeSource",
+            "dataType": "enum8",
+            "valueRange": "0-7",
+            "description": "设定点变更来源（0=手动，1=计划，2=外部）",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x002B",
+            "name": "SetpointChangeAmount",
+            "dataType": "int16",
+            "valueRange": "-32768 to 32767",
+            "description": "设定点调整量（0.1°C单位）",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x002C",
+            "name": "SetpointChangeSourceTimestamp",
+            "dataType": "UTC",
+            "valueRange": "32位时间戳",
+            "description": "最后一次设定点变更时间",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0034",
+            "name": "OccupiedSetback",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "占用模式回差温度（0.1°C精度）",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0035",
+            "name": "OccupiedSetbackMin",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "占用模式最小回差温度",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0036",
+            "name": "OccupiedSetbackMax",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "占用模式最大回差温度",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0037",
+            "name": "UnoccupiedSetback",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "非占用模式回差温度",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0038",
+            "name": "UnoccupiedSetbackMin",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "非占用模式最小回差温度",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0039",
+            "name": "UnoccupiedSetbackMax",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "非占用模式最大回差温度",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x003A",
+            "name": "EmergencyHeatDelta",
+            "dataType": "int8",
+            "valueRange": "-128 to +127",
+            "description": "应急制热温度增量（0.5°C步进）",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0040",
+            "name": "ACType",
+            "dataType": "ACTypeEnum",
+            "valueRange": "0-5",
+            "description": "空调类型配置",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0041",
+            "name": "ACCapacity",
+            "dataType": "uint16",
+            "valueRange": "0-65535 W",
+            "description": "空调额定功率",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0042",
+            "name": "ACRefrigerantType",
+            "dataType": "ACRefrigerantEnum",
+            "valueRange": "0-7",
+            "description": "冷媒类型配置",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0043",
+            "name": "ACCompressorType",
+            "dataType": "ACCompressorEnum",
+            "valueRange": "0-3",
+            "description": "压缩机类型配置",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0044",
+            "name": "ACErrorCode",
+            "dataType": "ACErrorBitmap",
+            "valueRange": "bitmap32",
+            "description": "空调错误代码位图",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0045",
+            "name": "ACLouverPosition",
+            "dataType": "ACLouverEnum",
+            "valueRange": "0-5",
+            "description": "导风板位置设置",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0046",
+            "name": "ACCoilTemperature",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "空调盘管温度（0.1°C精度）",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0047",
+            "name": "ACCapacityFormat",
+            "dataType": "ACCapacityFormatEnum",
+            "valueRange": "0-2",
+            "description": "功率单位格式（0=瓦特，1=BTU/h）",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0048",
+            "name": "PresetTypes",
+            "dataType": "PresetTypeBitmap",
+            "valueRange": "bitmap8",
+            "description": "预设类型支持位图（bit0=离家，bit1=睡眠）",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0049",
+            "name": "ScheduleTypes",
+            "dataType": "ScheduleTypeBitmap",
+            "valueRange": "bitmap8",
+            "description": "计划类型支持位图（bit0=周计划，bit1=临时覆盖）",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x004A",
+            "name": "NumberOfPresets",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "存储的预设配置数量",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x004B",
+            "name": "NumberOfSchedules",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "存储的计划配置数量",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x004C",
+            "name": "ScheduleTransitionTime",
+            "dataType": "uint16",
+            "valueRange": "0-65535分钟",
+            "description": "计划转换时间（从午夜开始的分钟数）",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x004D",
+            "name": "ScheduleTransitionTemperature",
+            "dataType": "int16",
+            "valueRange": "-3276.7°C to 3276.7°C",
+            "description": "计划转换目标温度",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x004E",
+            "name": "ActivePresetHandle",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "当前激活的预设索引",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x004F",
+            "name": "ActiveScheduleHandle",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "当前激活的计划索引",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0050",
+            "name": "Presets",
+            "dataType": "PresetStruct",
+            "valueRange": "max 512 bytes",
+            "description": "预设配置存储区（包含温度/模式参数）",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0051",
+            "name": "Schedules",
+            "dataType": "ScheduleStruct",
+            "valueRange": "max 1024 bytes",
+            "description": "计划配置存储区（包含时间/温度参数）",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0052",
+            "name": "SetpointHoldExpiryTimestamp",
+            "dataType": "UTC",
+            "valueRange": "32位时间戳",
+            "description": "设定点保持到期时间（UNIX纪元）",
+            "privilege": "RW",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "SetpointRaiseLower",
+            "parameters": {
+              "dataType": "SetpointAdjustMode",
+              "valueRange": {
+                "0": "Lower",
+                "1": "Raise"
+              },
+              "description": "Adjusts heating/cooling setpoints by 0.5°C increments"
+            },
+            "privilege": "RW",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x01",
+            "name": "SetWeeklySchedule",
+            "parameters": {
+              "dataType": "WeeklySchedule",
+              "valueRange": {
+                "NumberOfTransitions": "1-28",
+                "DayOfWeekBitmap": "bitmap8",
+                "TransitionTime": "minutes since midnight (0-1439)",
+                "HeatSetpoint": "int16 (x0.1°C)",
+                "CoolSetpoint": "int16 (x0.1°C)"
+              },
+              "description": "Sets weekly schedule with up to 28 transitions"
+            },
+            "privilege": "RW",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x02",
+            "name": "GetWeeklySchedule",
+            "parameters": {
+              "dataType": "ScheduleRequest",
+              "valueRange": {
+                "DaysToReturn": "bitmap8",
+                "ModeToReturn": "enum8 (0=Heat,1=Cool,2=Both)"
+              },
+              "description": "Requests schedule data for specified days"
+            },
+            "privilege": "R",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x03",
+            "name": "GetWeeklyScheduleResponse",
+            "parameters": {
+              "dataType": "WeeklyScheduleResponse",
+              "valueRange": {
+                "NumberOfTransitions": "0-28",
+                "ScheduleData": "list[TransitionRecord]"
+              },
+              "description": "Returns requested schedule data"
+            },
+            "privilege": "R",
+            "direction": "server → client"
+          },
+          {
+            "id": "0x04",
+            "name": "ClearWeeklySchedule",
+            "parameters": {
+              "dataType": "none",
+              "valueRange": "N/A",
+              "description": "Clears all scheduled transitions"
+            },
+            "privilege": "RW",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x05",
+            "name": "SetActiveSchedule",
+            "parameters": {
+              "dataType": "uint8",
+              "valueRange": "0-255",
+              "description": "Activates schedule by index (0=default)"
+            },
+            "privilege": "RW",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x06",
+            "name": "GetRelayStatusLog",
+            "parameters": {
+              "dataType": "RelayLogRequest",
+              "valueRange": {
+                "LogType": "enum8 (0=All,1=Heat,2=Cool)",
+                "MaxEntries": "1-255"
+              },
+              "description": "Requests relay activation history"
+            },
+            "privilege": "R",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x07",
+            "name": "GetRelayStatusLogResponse",
+            "parameters": {
+              "dataType": "RelayLog",
+              "valueRange": {
+                "EntryCount": "0-255",
+                "LogEntries": "list[RelayLogEntry]"
+              },
+              "description": "Returns relay status log data"
+            },
+            "privilege": "R",
+            "direction": "server → client"
+          },
+          {
+            "id": "0x08",
+            "name": "SetActiveScheduleRequest",
+            "parameters": {
+              "dataType": "ScheduleActivation",
+              "valueRange": {
+                "ScheduleIndex": "0-255",
+                "ActivationTime": "UTC timestamp"
+              },
+              "description": "Schedules future activation of a preset schedule"
+            },
+            "privilege": "RW",
+            "direction": "client → server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "Temperature": {
+            "baseType": "int16",
+            "unit": "°C",
+            "scale": 0.1,
+            "range": "-273.15°C to 327.67°C"
+          },
+          "OccupancyBitmap": {
+            "baseType": "bitmap8",
+            "fields": {
+              "Occupied": 0,
+              "RemoteSensorOccupied": 1,
+              "UnoccupiedToOccupiedDelayActive": 2,
+              "OccupiedToUnoccupiedDelayActive": 3
+            }
+          },
+          "ControlSequenceOfOperation": {
+            "baseType": "enum8",
+            "values": {
+              "0": "CoolingOnly",
+              "1": "HeatingOnly",
+              "2": "CoolingReheat",
+              "3": "HeatingCooling4Pipes",
+              "4": "HeatingCoolingChangeover4Pipes"
+            }
+          },
+          "SystemMode": {
+            "baseType": "enum8",
+            "values": {
+              "0": "Off",
+              "1": "Auto",
+              "2": "Cool",
+              "3": "Heat",
+              "4": "EmergencyHeat",
+              "5": "Precooling",
+              "6": "FanOnly",
+              "7": "Dry",
+              "8": "Sleep"
+            }
+          },
+          "WeeklyScheduleStruct": {
+            "baseType": "struct",
+            "fields": {
+              "TransitionCount": "uint8",
+              "DayOfWeek": "bitmap8",
+              "TransitionTime": "uint16",
+              "HeatSetpoint": "int16",
+              "CoolSetpoint": "int16"
+            }
+          },
+          "ThermostatRunningState": {
+            "baseType": "bitmap16",
+            "fields": {
+              "HeatOn": 0,
+              "CoolOn": 1,
+              "FanOn": 2,
+              "HeatSecondStage": 3,
+              "CoolSecondStage": 4,
+              "FanSecondStage": 5,
+              "FanThirdStage": 6
+            }
+          },
+          "ACTypeEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "SplitSystem",
+              "1": "WindowUnit",
+              "2": "Portable",
+              "3": "MiniSplit",
+              "4": "CentralAir"
+            }
+          },
+          "ACRefrigerantEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "R22",
+              "1": "R410A",
+              "2": "R32",
+              "3": "R290",
+              "4": "R134a"
+            }
+          },
+          "ACErrorBitmap": {
+            "baseType": "bitmap32",
+            "fields": {
+              "CompressorFault": 0,
+              "FanMotorFault": 1,
+              "TemperatureSensorFault": 2,
+              "RefrigerantLeak": 3,
+              "HighPressure": 4,
+              "LowPressure": 5
+            }
+          },
+          "PresetStruct": {
+            "baseType": "struct",
+            "fields": [
+              {
+                "name": "PresetID",
+                "type": "uint8"
+              },
+              {
+                "name": "HeatSetpoint",
+                "type": "int16"
+              },
+              {
+                "name": "CoolSetpoint",
+                "type": "int16"
+              },
+              {
+                "name": "FanMode",
+                "type": "enum8"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

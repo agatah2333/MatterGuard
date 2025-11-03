@@ -1,0 +1,18 @@
+config:
+  cluster: level-control-cluster
+  command: '0x06'
+  nodeId: '0x654231'
+name: level-control-cluster_command_0x06_v1.1.0.0
+tests:
+- arguments: {}
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Special_Response_-_StepMode_Up
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Special_Response_-_StepMode_Down
+  option: SendCommand

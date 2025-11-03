@@ -1,0 +1,48 @@
+config:
+  cluster: ota-software-update-provider
+  command: '0x02'
+  nodeId: '0x654231'
+name: ota-software-update-provider_command_0x02_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`UpdateState` to `Applying`'
+  ExpectedResponse: Proceed
+  Pre-requisites: None
+  arguments:
+    NewVersion: 0
+    UpdateToken: 8 bytes (e.g., `0x0000000000000000`)
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: 86400 (24 hours)
+  Attribute_Change: '`UpdateState` to `AwaitingNextAction`'
+  ExpectedResponse: AwaitNextAction
+  Pre-requisites: None
+  arguments:
+    NewVersion: 2^32-1 (4294967295)
+    UpdateToken: 32 bytes (e.g., `0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF`)
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: '`UpdateState` to `Idle`'
+  ExpectedResponse: Discontinue
+  Pre-requisites: None
+  arguments:
+    NewVersion: 123456789
+    UpdateToken: 16 bytes (e.g., `0x1234567890ABCDEF`)
+  label: Test_Case_Special_Response_-_Discontinue
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: '`UpdateState` to `Applying`'
+  ExpectedResponse: Proceed (OTA Provider should assume the OTA Requestor has a Software
+    Image ready to apply)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:3†source】【4:10†source】【4:16†source】.'
+  arguments:
+    NewVersion: 987654321
+    UpdateToken: 8 bytes (e.g., `0x0000000000000000`) (Assume this token is invalid)
+  label: Test_Case_Special_Response_-_Invalid_UpdateToken
+  option: SendCommand

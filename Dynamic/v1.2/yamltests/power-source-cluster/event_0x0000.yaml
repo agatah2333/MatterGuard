@@ -1,0 +1,61 @@
+config:
+  cluster: power-source-cluster
+  event: '0x0000'
+  nodeId: '0x654231'
+name: power-source-cluster_event_0x0000_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: No change in `ActiveWiredFaults`.
+  ExpectedResponse: Event generated with no change in faults.
+  Pre-requisites: Initial state of `ActiveWiredFaults` is [0].
+  arguments:
+    Current:
+    - 0
+    Previous:
+    - 0
+  label: Test_Case_Extreme_Value_(Minimum)
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: No change in `ActiveWiredFaults`.
+  ExpectedResponse: Event generated with no change in faults.
+  Pre-requisites: Initial state of `ActiveWiredFaults` is [0, 1, 2].
+  arguments:
+    Current:
+    - 0
+    - 1
+    - 2
+    Previous:
+    - 0
+    - 1
+    - 2
+  label: Test_Case_Extreme_Value_(Maximum)
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: '`ActiveWiredFaults` updated to [0, 1].'
+  ExpectedResponse: Event generated indicating OverVoltage fault added.
+  Pre-requisites: Initial state of `ActiveWiredFaults` is [0].
+  arguments:
+    Current:
+    - 0
+    - 1
+    Previous:
+    - 0
+  label: Test_Case_Special_Response_(Fault_Added)
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: '`ActiveWiredFaults` updated to [0].'
+  ExpectedResponse: Event generated indicating OverVoltage fault removed.
+  Pre-requisites: 'Initial state of `ActiveWiredFaults` is [0, 1].
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:0†source】.'
+  arguments:
+    Current:
+    - 0
+    Previous:
+    - 0
+    - 1
+  label: Test_Case_Special_Response_(Fault_Removed)
+  option: SubscribeToEvent

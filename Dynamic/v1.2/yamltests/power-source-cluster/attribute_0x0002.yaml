@@ -1,0 +1,55 @@
+config:
+  attribute: '0x0002'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: None, this is a read-only attribute.
+  ExpectedResponse: The power source with Order 0 should be selected first if available.
+  Pre-requisites: The power source must be available.
+  arguments:
+    '{"Order"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None, this is a read-only attribute.
+  ExpectedResponse: The power source with Order 255 should be selected last if no
+    other sources are available.
+  Pre-requisites: The power source must be available.
+  arguments:
+    '{"Order"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None, this is a read-only attribute.
+  ExpectedResponse: The power source with Order 128 should be selected based on its
+    relative order compared to other sources.
+  Pre-requisites: The power source must be available.
+  arguments:
+    '{"Order"': 128}
+  label: Test_Case_Mid-Range_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None, this is a read-only attribute.
+  ExpectedResponse: If multiple sources have the same order, the system should handle
+    them without preference.
+  Pre-requisites: Multiple power sources must be available with the same order value.
+  arguments:
+    '{"Order"': '1, "Order": 1}'
+  label: Test_Case_Special_Case_-_Equal_Order_Values
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None, this is a read-only attribute.
+  ExpectedResponse: If the power source with Order 0 is unavailable, the next available
+    source should be selected.
+  Pre-requisites: 'The power source with Order 0 must be unavailable.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    '{"Order"': 0}
+  label: Test_Case_Special_Case_-_Unavailable_Source
+  option: WriteAttribute

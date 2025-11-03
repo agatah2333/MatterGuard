@@ -1,0 +1,44 @@
+config:
+  cluster: operational-state-rvc-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: operational-state-rvc-cluster_command_0x01_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: OperationalState set to Stopped
+  ExpectedResponse: NoError
+  Pre-requisites: Device is in any state other than Stopped
+  arguments:
+    '{"OperationalStateID"': 0x00}
+  label: Test_Case_Extreme_Value_(OperationalStateID_=_0x00)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: CommandInvalidInState
+  Pre-requisites: Device is in Error state
+  arguments:
+    '{"OperationalStateID"': 0x03}
+  label: Test_Case_Extreme_Value_(OperationalStateID_=_0x03)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: OperationalState set to Stopped
+  ExpectedResponse: NoError
+  Pre-requisites: Device is in Running state
+  arguments:
+    '{"OperationalStateID"': 0x01}
+  label: Test_Case_Special_Response_(Device_Running)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: OperationalState set to Stopped
+  ExpectedResponse: NoError
+  Pre-requisites: 'Device is in Paused state
+
+
+    These test cases cover the extreme values of the `OperationalStateID` field and
+    the special responses based on the device''s current state. The expected responses
+    and attribute changes are derived from the command''s behavior as specified in
+    the document【4:0†source】.'
+  arguments:
+    '{"OperationalStateID"': 0x02}
+  label: Test_Case_Special_Response_(Device_Paused)
+  option: SendCommand

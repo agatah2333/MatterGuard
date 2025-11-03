@@ -1,0 +1,52 @@
+config:
+  attribute: '49'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_49_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: RemoteOperationEventMask will be set to 0x0000.
+  ExpectedResponse: No remote operation events will be transmitted.
+  Pre-requisites: The device should support the RemoteOperationEventMask attribute.
+  arguments:
+    '{"RemoteOperationEventMask"': 0x0000}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: RemoteOperationEventMask will be set to 0xFFFF.
+  ExpectedResponse: All remote operation events will be transmitted.
+  Pre-requisites: The device should support the RemoteOperationEventMask attribute.
+  arguments:
+    '{"RemoteOperationEventMask"': 0xFFFF}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: RemoteOperationEventMask will be set to 0x0008.
+  ExpectedResponse: Only remote lock events with an invalid code error will be transmitted.
+  Pre-requisites: The device should support the RemoteOperationEventMask attribute.
+  arguments:
+    '{"RemoteOperationEventMask"': 0x0008}
+  label: Test_Case_Special_Response_-_Invalid_Code_Error
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: RemoteOperationEventMask will be set to 0x0010.
+  ExpectedResponse: Only remote lock events with an invalid schedule error will be
+    transmitted.
+  Pre-requisites: The device should support the RemoteOperationEventMask attribute.
+  arguments:
+    '{"RemoteOperationEventMask"': 0x0010}
+  label: Test_Case_Special_Response_-_Invalid_Schedule_Error
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: RemoteOperationEventMask will be set to 0x0080.
+  ExpectedResponse: Only non-access user operation events from remote sources will
+    be transmitted.
+  Pre-requisites: 'The device should support the RemoteOperationEventMask attribute.
+
+
+    These test cases cover the extreme values and special responses for the `RemoteOperationEventMask`
+    attribute in the Door Lock cluster【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"RemoteOperationEventMask"': 0x0080}
+  label: Test_Case_Special_Response_-_Non-Access_User_Operation_Event
+  option: WriteAttribute

@@ -1,0 +1,29 @@
+config:
+  attribute: '0x0000'
+  cluster: fixed-label-cluster
+  nodeId: '0x654231'
+name: fixed-label-cluster_attribute_0x0000_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '- `LabelList`: [{"Label": "A" * 16, "Value": "B" * 16}]'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Label: '"A" * 16 (16 characters)'
+    Value: '"B" * 16 (16 characters)'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `LabelList`: [{"Label": "room", "Value": "bedroom 2"}]'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:19†source】【4:3†source】.'
+  arguments:
+    Label: '"room"'
+    Value: '"bedroom 2"'
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: WriteAttribute

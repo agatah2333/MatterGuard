@@ -1,0 +1,87 @@
+{
+  "id": "0x050E",
+  "name": "Account Login",
+  "description": "This cluster provides commands that facilitate user account login on a Content App or a node. For example, a Content App running on a Video Player device, which is represented as an endpoint, can use this cluster to help make the user account on the Content App match the user account on the Client.",
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Application",
+    "scope": "Endpoint",
+    "picsCode": "ALOGIN"
+  },
+  "revision": {
+    "current": 2,
+    "history": [
+      {
+        "revision": 1,
+        "description": "Initial Release"
+      },
+      {
+        "revision": 2,
+        "description": "Add support for 8 character PIN code, Add Node to Login, Logout commands. Add LoggedOut event."
+      }
+    ]
+  },
+  "features": {},
+  "dataTypes": {},
+  "attributes": {},
+  "commands": {
+    "0x00": {
+      "name": "GetSetupPIN",
+      "direction": "client ⇒ server",
+      "response": "GetSetupPINResponse",
+      "access": "AFT",
+      "conformance": "M",
+      "description": "The purpose of this command is to determine if the active user account of the given Content App matches the active user account of a given Commissionee, and when it does, return a Setup PIN code which can be used for password-authenticated session establishment (PASE) with the Commissionee.",
+      "fields": {
+        "0": {"name": "TempAccountIdentifier", "type": "string", "constraint": "16 to 100", "conformance": "M"}
+      }
+    },
+    "0x01": {
+      "name": "GetSetupPINResponse", 
+      "direction": "client ⇐ server",
+      "response": "N",
+      "access": "F",
+      "conformance": "M",
+      "description": "This message is sent in response to the GetSetupPIN command, and contains the Setup PIN code, or null when the account identified in the request does not match the active account of the running Content App.",
+      "fields": {
+        "0": {"name": "SetupPIN", "type": "string", "constraint": "desc", "conformance": "M"}
+      }
+    },
+    "0x02": {
+      "name": "Login",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "AFT",
+      "conformance": "M",
+      "description": "The purpose of this command is to allow the Content App to assume the user account of a given Commissionee by leveraging the Setup PIN code input by the user during the commissioning process.",
+      "fields": {
+        "0": {"name": "TempAccountIdentifier", "type": "string", "constraint": "16 to 100", "conformance": "M"},
+        "1": {"name": "SetupPIN", "type": "string", "constraint": "min 8", "conformance": "M"},
+        "2": {"name": "Node", "type": "node-id", "conformance": "O"}
+      }
+    },
+    "0x03": {
+      "name": "Logout",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "OFT",
+      "conformance": "M",
+      "description": "The purpose of this command is to instruct the Content App to clear the current user account. This command SHOULD be used by clients of a Content App to indicate the end of a user session.",
+      "fields": {
+        "0": {"name": "Node", "type": "node-id", "conformance": "O"}
+      }
+    }
+  },
+  "events": {
+    "0x00": {
+      "name": "LoggedOut",
+      "priority": "CRITICAL",
+      "access": "AS",
+      "conformance": "O",
+      "description": "This event can be used by the Content App to indicate that the current user has logged out. In response to this event, the Fabric Admin SHALL remove access to this Content App by the specified Node. If no Node is provided, then the Fabric Admin SHALL remove access to all non-Admin Nodes.",
+      "fields": {
+        "0": {"name": "Node", "type": "node-id", "constraint": "all", "conformance": "O"}
+      }
+    }
+  }
+}

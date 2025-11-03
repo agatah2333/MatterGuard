@@ -1,0 +1,273 @@
+{
+  "source_file": "Device Energy Management_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0098",
+        "name": "Device Energy Management",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "ESAType",
+            "dataType": "ESATypeEnum",
+            "valueRange": "",
+            "description": "This attribute SHALL indicate the type of ESA.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "ESACanGenerate",
+            "dataType": "bool",
+            "valueRange": "",
+            "description": "This attribute SHALL indicate whether the ESA is classed as a generator or load.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "ESAState",
+            "dataType": "ESAStateEnum",
+            "valueRange": "",
+            "description": "This attribute indicates the current state of the ESA.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "AbsMinPower",
+            "dataType": "power-mW",
+            "valueRange": "",
+            "description": "This attribute indicates the absolute minimum power.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "AbsMaxPower",
+            "dataType": "power-mW",
+            "valueRange": "Min AbsMinPower",
+            "description": "This attribute indicates the absolute maximum power.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0005",
+            "name": "PowerAdjustmentCapability",
+            "dataType": "PowerAdjustCapabilityStruct",
+            "valueRange": "",
+            "description": "This attribute indicates the power adjustment capability.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0006",
+            "name": "Forecast",
+            "dataType": "ForecastStruct",
+            "valueRange": "",
+            "description": "This attribute provides the forecast data.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0007",
+            "name": "OptOutState",
+            "dataType": "OptOutStateEnum",
+            "valueRange": "",
+            "description": "This attribute indicates the opt-out state.",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "PowerAdjustRequest",
+            "parameters": {
+              "dataType": "power-mW",
+              "valueRange": "",
+              "description": "Allows a client to request an adjustment in the power consumption of an ESA for a specified duration."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "CancelPowerAdjustRequest",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Allows a client to cancel a previous power adjustment request."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "StartTimeAdjustRequest",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Allows a client to request an adjustment in the start time of an ESA operation."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x03",
+            "name": "PauseRequest",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Allows a client to request pausing the ESA operation."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x04",
+            "name": "ResumeRequest",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Allows a client to request resuming the ESA operation."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x05",
+            "name": "ModifyForecastRequest",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Allows a client to modify the forecast of an ESA operation."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x06",
+            "name": "RequestConstraintBasedForecast",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Allows a client to request a forecast based on constraints."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x07",
+            "name": "CancelRequest",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Allows a client to request cancellation of a previous adjustment request."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "PowerAdjustStart",
+            "parameters": {
+              "dataType": "CauseEnum",
+              "valueRange": "",
+              "description": "This event SHALL be generated when the Power Adjustment session is started."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x01",
+            "name": "PowerAdjustEnd",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "CauseEnum, elapsed-s, energy-mWh",
+              "description": "This event SHALL be generated when the Power Adjustment session ends."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x02",
+            "name": "Paused",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "This event SHALL be generated when the ESA enters the Paused state."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x03",
+            "name": "Resumed",
+            "parameters": {
+              "dataType": "CauseEnum",
+              "valueRange": "",
+              "description": "This event SHALL be generated when the ESA leaves the Paused state and resumes operation."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "ESATypeEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Unspecified",
+              "1": "HVAC",
+              "2": "WaterHeater",
+              "3": "EVCharger"
+            }
+          },
+          "ESAStateEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Inactive",
+              "1": "Active",
+              "2": "Paused"
+            }
+          },
+          "PowerAdjustCapabilityStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "MinPower": "power-mW",
+              "MaxPower": "power-mW",
+              "StepSize": "power-mW",
+              "ResponseTime": "uint32"
+            }
+          },
+          "ForecastStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "StartTime": "epoch-us",
+              "Duration": "uint32",
+              "PowerProfile": "list[PowerProfileEntry]"
+            }
+          },
+          "OptOutStateEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "OptedIn",
+              "1": "OptedOut"
+            }
+          },
+          "CauseEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "NormalCompletion",
+              "1": "UserCancel",
+              "2": "SystemOverride"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

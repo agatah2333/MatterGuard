@@ -1,0 +1,61 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x003F",
+    "name": "Group Key Management",
+    "description": "Manages group messaging security keys."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "KeySetWrite"
+    },
+    {
+      "id": "0x01",
+      "name": "KeySetRead"
+    },
+    {
+      "id": "0x02",
+      "name": "KeySetReadResponse"
+    },
+    {
+      "id": "0x03",
+      "name": "KeySetRemove"
+    },
+    {
+      "id": "0x04",
+      "name": "KeySetReadAllIndices"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Group",
+      "type": "unknown",
+      "description": "Group attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "GroupT",
+      "type": "unknown",
+      "description": "GroupT attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "Max",
+      "type": "unknown",
+      "description": "Max attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0003",
+      "name": "MaxGroup",
+      "type": "unknown",
+      "description": "MaxGroup attribute",
+      "access": "R"
+    }
+  ],
+  "events": []
+}

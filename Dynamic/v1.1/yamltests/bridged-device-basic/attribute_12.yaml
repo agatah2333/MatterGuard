@@ -1,0 +1,43 @@
+config:
+  attribute: '12'
+  cluster: bridged-device-basic
+  nodeId: '0x654231'
+name: bridged-device-basic_attribute_12_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": true}'
+  ExpectedResponse: <success>
+  Pre-requisites: The bridged device must be connected and operational.
+  arguments:
+    '{"Reachable"': true}
+  label: Test_Case_Extreme_Value_(True)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": false}'
+  ExpectedResponse: <success>
+  Pre-requisites: The bridged device must be disconnected or powered off.
+  arguments:
+    '{"Reachable"': false}
+  label: Test_Case_Extreme_Value_(False)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": false}'
+  ExpectedResponse: ReachableChanged event triggered
+  Pre-requisites: The bridged device must transition from a reachable state to an
+    unreachable state.
+  arguments:
+    '{"Reachable"': false}
+  label: Test_Case_Special_Response_(ReachableChanged_Event)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": true}'
+  ExpectedResponse: ReachableChanged event triggered
+  Pre-requisites: 'The bridged device must transition from an unreachable state to
+    a reachable state.
+
+
+    ### Summary'
+  arguments:
+    '{"Reachable"': true}
+  label: Test_Case_Special_Response_(ReachableChanged_Event)
+  option: WriteAttribute

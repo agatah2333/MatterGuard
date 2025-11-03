@@ -1,0 +1,884 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0062",
+    "name": "Scenes Management",
+    "description": "Attributes and commands for setting up and recalling scenes. Each scene corresponds to a set of stored values of specified attributes for one or more clusters on the same end point as the Scenes Management cluster.",
+    "classification": {
+      "hierarchy": "Base",
+      "role": "Application", 
+      "scope": "Endpoint",
+      "pics_code": "S"
+    },
+    "revision_history": [
+      {
+        "revision": 1,
+        "description": "Based on the ZCL Scenes Cluster, Updated the Cluster ID to 0x0062, the name to Scenes Management, removed the provisional status; Removed attributes SceneCount, CurrentScene, CurrentGroup, SceneValid, and NameSupport; Removed Explicit, TableSize and FabricScenes features; Removed EnhancedAddScene, EnhancedAddSceneResponse, EnhancedViewScene, EnhancedViewSceneResponse; TransitionTime field changed milliseconds in AddScene, ViewSceneResponse and RecallScene"
+      }
+    ]
+  },
+  "features": {
+    "SN": {
+      "bit": 0,
+      "code": "SN",
+      "name": "SceneNames",
+      "conformance": "O",
+      "summary": "The ability to store a name for a scene."
+    }
+  },
+  "derived_data_types": {
+    "enums": {},
+    "structs": {
+      "SceneInfoStruct": {
+        "description": "Fabric scoped scene information structure",
+        "access_quality": "Fabric Scoped",
+        "fields": {
+          "0": {
+            "id": "0",
+            "name": "SceneCount",
+            "type": "uint8",
+            "constraint": "all",
+            "quality": "",
+            "default": "0",
+            "access": "",
+            "conformance": "M",
+            "description": "This field SHALL indicate the number of scenes currently used in the server's Scene Table on the endpoint where the Scenes Management cluster appears. This only includes the count for the associated fabric."
+          },
+          "1": {
+            "id": "1",
+            "name": "CurrentScene", 
+            "type": "uint8",
+            "constraint": "desc",
+            "quality": "",
+            "default": "0xFF",
+            "access": "S",
+            "conformance": "M",
+            "description": "This field SHALL indicate the scene identifier of the scene last invoked on the associated fabric. If no scene has been invoked, the value of this field SHALL be 0xFF, the undefined scene identifier."
+          },
+          "2": {
+            "id": "2",
+            "name": "CurrentGroup",
+            "type": "group-id",
+            "constraint": "all",
+            "quality": "",
+            "default": "0",
+            "access": "S",
+            "conformance": "M",
+            "description": "This field SHALL indicate the group identifier of the scene last invoked on the associated fabric, or 0 if the scene last invoked is not associated with a group."
+          },
+          "3": {
+            "id": "3",
+            "name": "SceneValid",
+            "type": "bool",
+            "constraint": "all",
+            "quality": "",
+            "default": "False",
+            "access": "S",
+            "conformance": "M",
+            "description": "This field SHALL indicate whether the state of the server corresponds to that associated with the CurrentScene and CurrentGroup fields of the SceneInfoStruct they belong to. TRUE indicates that these fields are valid, FALSE indicates that they are not valid."
+          },
+          "4": {
+            "id": "4",
+            "name": "RemainingCapacity",
+            "type": "uint8",
+            "constraint": "max 253",
+            "quality": "",
+            "default": "MS",
+            "access": "",
+            "conformance": "M",
+            "description": "This field SHALL indicate the remaining capacity of the Scene Table on this endpoint for the accessing fabric."
+          }
+        }
+      },
+      "AttributeValuePairStruct": {
+        "description": "This data type indicates a combination of an identifier and the value of an attribute",
+        "fields": {
+          "0": {
+            "id": "0",
+            "name": "AttributeID",
+            "type": "attribute-id",
+            "constraint": "all",
+            "quality": "",
+            "default": "",
+            "access": "",
+            "conformance": "M",
+            "description": "This field SHALL be present for all instances in a given ExtensionFieldSetStruct. The AttributeID field SHALL NOT refer to an attribute without the Scenes (S) designation in the Quality column of the cluster specification."
+          },
+          "1": {
+            "id": "1",
+            "name": "ValueUnsigned8",
+            "type": "uint8",
+            "constraint": "",
+            "quality": "",
+            "default": "",
+            "access": "",
+            "conformance": "O.a",
+            "description": "Value for uint8, bool, map8 data types"
+          },
+          "2": {
+            "id": "2",
+            "name": "ValueSigned8",
+            "type": "int8",
+            "constraint": "",
+            "quality": "",
+            "default": "",
+            "access": "",
+            "conformance": "O.a",
+            "description": "Value for int8 data types"
+          },
+          "3": {
+            "id": "3",
+            "name": "ValueUnsigned16",
+            "type": "uint16",
+            "constraint": "",
+            "quality": "",
+            "default": "",
+            "access": "",
+            "conformance": "O.a",
+            "description": "Value for uint16, map16 data types"
+          },
+          "4": {
+            "id": "4",
+            "name": "ValueSigned16",
+            "type": "int16",
+            "constraint": "",
+            "quality": "",
+            "default": "",
+            "access": "",
+            "conformance": "O.a",
+            "description": "Value for int16 data types"
+          },
+          "5": {
+            "id": "5",
+            "name": "ValueUnsigned32",
+            "type": "uint32",
+            "constraint": "",
+            "quality": "",
+            "default": "",
+            "access": "",
+            "conformance": "O.a",
+            "description": "Value for uint32, uint24, map32 data types"
+          },
+          "6": {
+            "id": "6",
+            "name": "ValueSigned32",
+            "type": "int32",
+            "constraint": "",
+            "quality": "",
+            "default": "",
+            "access": "",
+            "conformance": "O.a",
+            "description": "Value for int32, int24 data types"
+          },
+          "7": {
+            "id": "7",
+            "name": "ValueUnsigned64",
+            "type": "uint64",
+            "constraint": "",
+            "quality": "",
+            "default": "",
+            "access": "",
+            "conformance": "O.a",
+            "description": "Value for uint64, uint56, uint48, map64 data types"
+          },
+          "8": {
+            "id": "8",
+            "name": "ValueSigned64",
+            "type": "int64",
+            "constraint": "",
+            "quality": "",
+            "default": "",
+            "access": "",
+            "conformance": "O.a",
+            "description": "Value for int64, int56, int48 data types"
+          }
+        }
+      },
+      "ExtensionFieldSetStruct": {
+        "description": "This data type indicates for a given cluster a set of attributes and their values",
+        "fields": {
+          "0": {
+            "id": "0",
+            "name": "ClusterID",
+            "type": "cluster-id",
+            "constraint": "all",
+            "quality": "",
+            "default": "",
+            "access": "",
+            "conformance": "M",
+            "description": "This field SHALL indicate the cluster-id of the cluster whose attributes are in the AttributeValueList field."
+          },
+          "1": {
+            "id": "1",
+            "name": "AttributeValueList",
+            "type": "list[AttributeValuePairStruct]",
+            "constraint": "desc",
+            "quality": "",
+            "default": "",
+            "access": "",
+            "conformance": "M",
+            "description": "This field SHALL indicate a set of attributes and their values which are stored as part of a scene. Attributes which do not have the Scenes (S) designation in the Quality column of their cluster specification SHALL NOT be used in the AttributeValueList field."
+          }
+        }
+      }
+    },
+    "bitmaps": {
+      "CopyModeBitmap": {
+        "type": "map8",
+        "values": {
+          "0": {
+            "name": "CopyAllScenes",
+            "summary": "Copy all scenes in the scene table",
+            "conformance": "M"
+          }
+        }
+      }
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "LastConfiguredBy",
+      "type": "node-id",
+      "constraint": "all",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "O",
+      "description": "This attribute SHALL indicate the Node ID of the node that last configured the Scene Table. The null value indicates that the server has not been configured, or that the identifier of the node that last configured the Scenes Management cluster is not known. The Node ID is scoped to the accessing fabric."
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "SceneTableSize",
+      "type": "uint16",
+      "constraint": "desc",
+      "quality": "F",
+      "default": "16",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate the number of entries in the Scene Table on this endpoint. This is the total across all fabrics; note that a single fabric cannot use all those entries. The minimum size of this table SHALL be 16, unless a device type in which this cluster is used, defines a larger value in the device type definition."
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "FabricSceneInfo",
+      "type": "list[SceneInfoStruct]",
+      "constraint": "desc",
+      "quality": "",
+      "default": "",
+      "access": "RVF",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate a list of fabric scoped information about scenes on this endpoint. The number of list entries for this attribute SHALL NOT exceed the number of supported fabrics by the device."
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "AddScene",
+      "direction": "client => server",
+      "response": "AddSceneResponse",
+      "access": "FM",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "GroupID",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the group identifier in the Group Table."
+        },
+        {
+          "id": "1",
+          "name": "SceneID",
+          "type": "uint8",
+          "constraint": "max 254",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the scene identifier in the Scene Table."
+        },
+        {
+          "id": "2",
+          "name": "TransitionTime",
+          "type": "uint32",
+          "constraint": "max 60000000",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the transition time of the scene, measured in milliseconds."
+        },
+        {
+          "id": "3",
+          "name": "SceneName",
+          "type": "string",
+          "constraint": "max 16",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the name of the scene."
+        },
+        {
+          "id": "4",
+          "name": "ExtensionFieldSetStructs",
+          "type": "list[ExtensionFieldSetStruct]",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL contains the list of extension fields."
+        }
+      ],
+      "description": "This command allows a client to add a scene to the Scene Table."
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "ViewScene",
+      "direction": "client => server",
+      "response": "ViewSceneResponse",
+      "access": "FO",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "GroupID",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the group identifier in the Group Table."
+        },
+        {
+          "id": "1",
+          "name": "SceneID",
+          "type": "uint8",
+          "constraint": "max 254",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the scene identifier in the Scene Table."
+        }
+      ],
+      "description": "This command allows a client to view the details of a scene in the Scene Table."
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "RemoveScene",
+      "direction": "client => server",
+      "response": "RemoveSceneResponse",
+      "access": "FM",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "GroupID",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the group identifier in the Group Table."
+        },
+        {
+          "id": "1",
+          "name": "SceneID",
+          "type": "uint8",
+          "constraint": "max 254",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the scene identifier in the Scene Table."
+        }
+      ],
+      "description": "This command allows a client to remove a scene from the Scene Table."
+    },
+    "0x03": {
+      "id": "0x03",
+      "name": "RemoveAllScenes",
+      "direction": "client => server",
+      "response": "RemoveAllScenesResponse",
+      "access": "FM",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "GroupID",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the group identifier in the Group Table."
+        }
+      ],
+      "description": "This command allows a client to remove all scenes associated with a group from the Scene Table."
+    },
+    "0x04": {
+      "id": "0x04",
+      "name": "StoreScene",
+      "direction": "client => server",
+      "response": "StoreSceneResponse",
+      "access": "FM",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "GroupID",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the group identifier in the Group Table."
+        },
+        {
+          "id": "1",
+          "name": "SceneID",
+          "type": "uint8",
+          "constraint": "max 254",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the scene identifier in the Scene Table."
+        }
+      ],
+      "description": "This command allows a client to store the current state of clusters as a scene in the Scene Table."
+    },
+    "0x05": {
+      "id": "0x05",
+      "name": "RecallScene",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "FO",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "GroupID",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the group identifier in the Group Table."
+        },
+        {
+          "id": "1",
+          "name": "SceneID",
+          "type": "uint8",
+          "constraint": "max 254",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the scene identifier in the Scene Table."
+        },
+        {
+          "id": "2",
+          "name": "TransitionTime",
+          "type": "uint32",
+          "constraint": "max 60000000",
+          "quality": "X",
+          "default": "",
+          "conformance": "O",
+          "description": "This field SHALL indicate the transition time of the scene, measured in milliseconds."
+        }
+      ],
+      "description": "This command allows a client to recall a scene from the Scene Table."
+    },
+    "0x06": {
+      "id": "0x06",
+      "name": "GetSceneMembership",
+      "direction": "client => server",
+      "response": "GetSceneMembershipResponse",
+      "access": "FO",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "GroupID",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the group identifier in the Group Table."
+        }
+      ],
+      "description": "This command can be used to get the used scene identifiers within a certain group, for the endpoint that implements this cluster."
+    },
+    "0x40": {
+      "id": "0x40",
+      "name": "CopyScene",
+      "direction": "client => server",
+      "response": "CopySceneResponse",
+      "access": "FM",
+      "conformance": "O",
+      "fields": [
+        {
+          "id": "0",
+          "name": "Mode",
+          "type": "CopyModeBitmap",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL contain the information of how the scene copy is to proceed."
+        },
+        {
+          "id": "1",
+          "name": "GroupIdentifierFrom",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the identifier of the group from which the scene is to be copied."
+        },
+        {
+          "id": "2",
+          "name": "SceneIdentifierFrom",
+          "type": "uint8",
+          "constraint": "max 254",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the identifier of the scene from which the scene is to be copied."
+        },
+        {
+          "id": "3",
+          "name": "GroupIdentifierTo",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the identifier of the group to which the scene is to be copied."
+        },
+        {
+          "id": "4",
+          "name": "SceneIdentifierTo",
+          "type": "uint8",
+          "constraint": "max 254",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL indicate the identifier of the scene to which the scene is to be copied."
+        }
+      ],
+      "description": "This command allows a client to efficiently copy scenes from one group/scene identifier pair to another group/scene identifier pair."
+    }
+  },
+  "responses": {
+    "0x00": {
+      "id": "0x00",
+      "name": "AddSceneResponse",
+      "direction": "client <= server",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "Status",
+          "type": "status",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL be set according to the Effect on Receipt section for AddScene command."
+        },
+        {
+          "id": "1",
+          "name": "GroupID",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "The GroupID field SHALL be set to the corresponding field of the received AddScene command."
+        },
+        {
+          "id": "2",
+          "name": "SceneID",
+          "type": "uint8",
+          "constraint": "max 254",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "The SceneID field SHALL be set to the corresponding field of the received AddScene command."
+        }
+      ],
+      "description": "This command is generated in response to a received AddScene command."
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "ViewSceneResponse",
+      "direction": "client <= server",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "Status",
+          "type": "status",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL be set according to the Effect on Receipt section for ViewScene command."
+        },
+        {
+          "id": "1",
+          "name": "GroupID",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "The GroupID field SHALL be set to the corresponding field of the received ViewScene command."
+        },
+        {
+          "id": "2",
+          "name": "SceneID",
+          "type": "uint8",
+          "constraint": "max 254",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "The SceneID field SHALL be set to the corresponding field of the received ViewScene command."
+        },
+        {
+          "id": "3",
+          "name": "TransitionTime",
+          "type": "uint32",
+          "constraint": "max 60000000",
+          "quality": "",
+          "default": "",
+          "conformance": "desc",
+          "description": "If the status is SUCCESS, this field SHALL be copied from the corresponding field in the Scene Table entry, otherwise it SHALL be omitted."
+        },
+        {
+          "id": "4",
+          "name": "SceneName",
+          "type": "string",
+          "constraint": "max 16",
+          "quality": "",
+          "default": "",
+          "conformance": "desc",
+          "description": "If the status is SUCCESS, this field SHALL be copied from the corresponding field in the Scene Table entry, otherwise it SHALL be omitted."
+        },
+        {
+          "id": "5",
+          "name": "ExtensionFieldSetStructs",
+          "type": "list[ExtensionFieldSetStruct]",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "conformance": "desc",
+          "description": "If the status is SUCCESS, this field SHALL be copied from the corresponding field in the Scene Table entry, otherwise it SHALL be omitted."
+        }
+      ],
+      "description": "This command is generated in response to a received ViewScene command."
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "RemoveSceneResponse",
+      "direction": "client <= server",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "Status",
+          "type": "status",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL be set according to the Effect on Receipt section for RemoveScene command."
+        },
+        {
+          "id": "1",
+          "name": "GroupID",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "The GroupID field SHALL be set to the corresponding field of the received RemoveScene command."
+        },
+        {
+          "id": "2",
+          "name": "SceneID",
+          "type": "uint8",
+          "constraint": "max 254",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "The SceneID field SHALL be set to the corresponding field of the received RemoveScene command."
+        }
+      ],
+      "description": "This command is generated in response to a received RemoveScene command."
+    },
+    "0x03": {
+      "id": "0x03",
+      "name": "RemoveAllScenesResponse",
+      "direction": "client <= server",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "Status",
+          "type": "status",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL be set according to the Effect on Receipt section for RemoveAllScenes command."
+        },
+        {
+          "id": "1",
+          "name": "GroupID",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "The GroupID field SHALL be set to the corresponding field of the received RemoveAllScenes command."
+        }
+      ],
+      "description": "This command is generated in response to a received RemoveAllScenes command."
+    },
+    "0x04": {
+      "id": "0x04",
+      "name": "StoreSceneResponse",
+      "direction": "client <= server",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "Status",
+          "type": "status",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL be set according to the Effect on Receipt section for StoreScene command."
+        },
+        {
+          "id": "1",
+          "name": "GroupID",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "The GroupID field SHALL be set to the corresponding field of the received StoreScene command."
+        },
+        {
+          "id": "2",
+          "name": "SceneID",
+          "type": "uint8",
+          "constraint": "max 254",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "The SceneID field SHALL be set to the corresponding field of the received StoreScene command."
+        }
+      ],
+      "description": "This command is generated in response to a received StoreScene command."
+    },
+    "0x06": {
+      "id": "0x06",
+      "name": "GetSceneMembershipResponse",
+      "direction": "client <= server",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "Status",
+          "type": "status",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL be set according to the Effect on Receipt section for GetSceneMembership command."
+        },
+        {
+          "id": "1",
+          "name": "Capacity",
+          "type": "uint8",
+          "constraint": "all",
+          "quality": "X",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL contain the remaining capacity of the Scene Table of the server (for all groups for the accessing fabric)."
+        },
+        {
+          "id": "2",
+          "name": "GroupID",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL be set to the corresponding field of the received GetSceneMembership command."
+        },
+        {
+          "id": "3",
+          "name": "SceneList",
+          "type": "list[uint8]",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "conformance": "Status==Success",
+          "description": "If the status is not SUCCESS then this field SHALL be omitted, else this field SHALL contain the identifiers of all the scenes in the Scene Table with the corresponding Group ID."
+        }
+      ],
+      "description": "This command is generated in response to a received GetSceneMembership command."
+    },
+    "0x40": {
+      "id": "0x40",
+      "name": "CopySceneResponse",
+      "direction": "client <= server",
+      "conformance": "CopyScene",
+      "fields": [
+        {
+          "id": "0",
+          "name": "Status",
+          "type": "status",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL be set according to the Effect on Receipt section for the CopyScene command."
+        },
+        {
+          "id": "1",
+          "name": "GroupIdentifierFrom",
+          "type": "group-id",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL be set to the same values as in the corresponding fields of the received CopyScene command."
+        },
+        {
+          "id": "2",
+          "name": "SceneIdentifierFrom",
+          "type": "uint8",
+          "constraint": "max 254",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL be set to the same values as in the corresponding fields of the received CopyScene command."
+        }
+      ],
+      "description": "The CopySceneResponse command is generated in response to a received CopyScene command."
+    }
+  },
+  "events": {},
+  "scene_table_extensions": {
+    "description": "Any endpoint that implements the Scenes Management server cluster SHALL also implement the Groups server cluster."
+  },
+  "dependencies": {
+    "Groups": "Any endpoint that implements the Scenes Management server cluster SHALL also implement the Groups server cluster."
+  }
+}

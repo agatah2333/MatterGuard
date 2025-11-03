@@ -1,0 +1,29 @@
+config:
+  attribute: '0x12'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x12_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: PartitionId = 0
+  ExpectedResponse: Success
+  Pre-requisites: 'Node is attached to a Thread network.
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"PartitionId"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: PartitionId = null
+  ExpectedResponse: Success
+  Pre-requisites: 'Node is not attached to a Thread network.
+
+
+    These test cases cover the extreme values of the `PartitionId` attribute and the
+    special response when the Node is not attached to a Thread network【4:0†source】【4:2†source】【4:4†source】.'
+  arguments:
+    '{"PartitionId"': null}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

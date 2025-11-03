@@ -1,0 +1,139 @@
+{
+  "source_file": "Key Pad Input_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0509",
+        "name": "Keypad Input",
+        "attributes": [],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "SendKey",
+            "parameters": {
+              "dataType": "CecKeyCodeEnum",
+              "valueRange": "",
+              "description": "This field SHALL indicate the key code to process."
+            },
+            "privilege": "Optional",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x01",
+            "name": "SendKeyResponse",
+            "parameters": {
+              "dataType": "StatusEnum",
+              "valueRange": "",
+              "description": "This field SHALL indicate the status of the request."
+            },
+            "privilege": "Mandatory",
+            "direction": "server → client"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "StatusEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Success",
+              "1": "UnsupportedKey",
+              "2": "InvalidKeyInCurrentState"
+            }
+          },
+          "CecKeyCodeEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0x00": "Select",
+              "0x01": "Up",
+              "0x02": "Down",
+              "0x03": "Left",
+              "0x04": "Right",
+              "0x05": "RightUp",
+              "0x06": "RightDown",
+              "0x07": "LeftUp",
+              "0x08": "LeftDown",
+              "0x09": "RootMenu",
+              "0x0A": "SetupMenu",
+              "0x0B": "ContentsMenu",
+              "0x0C": "FavoriteMenu",
+              "0x0D": "Exit",
+              "0x10": "MediaTopMenu",
+              "0x11": "MediaContextSensitiveMenu",
+              "0x1D": "NumberEntryMode",
+              "0x1E": "Number11",
+              "0x1F": "Number12",
+              "0x20": "Number0OrNumber10",
+              "0x21": "Numbers1",
+              "0x22": "Numbers2",
+              "0x23": "Numbers3",
+              "0x24": "Numbers4",
+              "0x25": "Numbers5",
+              "0x26": "Numbers6",
+              "0x27": "Numbers7",
+              "0x28": "Numbers8",
+              "0x29": "Numbers9",
+              "0x2A": "Dot",
+              "0x2B": "Enter",
+              "0x2C": "Clear",
+              "0x2F": "NextFavorite",
+              "0x30": "ChannelUp",
+              "0x31": "ChannelDown",
+              "0x32": "PreviousChannel",
+              "0x33": "SoundSelect",
+              "0x34": "InputSelect",
+              "0x35": "DisplayInformation",
+              "0x36": "Help",
+              "0x37": "PageUp",
+              "0x38": "PageDown",
+              "0x40": "Power",
+              "0x41": "VolumeUp",
+              "0x42": "VolumeDown",
+              "0x43": "Mute",
+              "0x44": "Play",
+              "0x45": "Stop",
+              "0x46": "Pause",
+              "0x47": "Record",
+              "0x48": "Rewind",
+              "0x49": "FastForward",
+              "0x4A": "Eject",
+              "0x4B": "Forward",
+              "0x4C": "Backward",
+              "0x4D": "StopRecord",
+              "0x4E": "PauseRecord",
+              "0x4F": "Reserved",
+              "0x50": "Angle",
+              "0x51": "SubPicture",
+              "0x52": "VideoOnDemand",
+              "0x53": "ElectronicProgramGuide",
+              "0x54": "TimerProgramming",
+              "0x55": "InitialConfiguration",
+              "0x56": "SelectBroadcastType",
+              "0x57": "SelectSoundPresentation",
+              "0x60": "PlayFunction",
+              "0x61": "PausePlayFunction",
+              "0x62": "RecordFunction",
+              "0x63": "PauseRecordFunction",
+              "0x64": "StopFunction",
+              "0x65": "MuteFunction",
+              "0x66": "RestoreVolumeFunction",
+              "0x67": "TuneFunction",
+              "0x68": "SelectMediaFunction",
+              "0x69": "SelectAvInputFunction",
+              "0x6A": "SelectAudioInputFunction",
+              "0x6B": "PowerToggleFunction",
+              "0x6C": "PowerOffFunction",
+              "0x6D": "PowerOnFunction",
+              "0x71": "F1Blue",
+              "0x72": "F2Red",
+              "0x73": "F3Green",
+              "0x74": "F4Yellow",
+              "0x75": "F5",
+              "0x76": "Data"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

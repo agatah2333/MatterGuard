@@ -1,0 +1,26 @@
+config:
+  cluster: media-playback-cluster
+  command: '0x04'
+  nodeId: '0x654231'
+name: media-playback-cluster_command_0x04_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: CurrentState attribute will be set to the state corresponding
+    to the previous media item.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Media playback should be in a state where there is a previous item
+    to go back to.
+  arguments: {}
+  label: Test_Case_Extreme_Value_(No_specific_fields)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: No attribute change.
+  ExpectedResponse: INVALID_STATE_FOR_COMMAND
+  Pre-requisites: 'Media playback should be in a state where the "Previous" command
+    is not valid (e.g., already at the first item).
+
+
+    ### Summary of Expected Responses'
+  arguments: {}
+  label: Test_Case_Special_Response_(Invalid_State_for_Command)
+  option: SendCommand

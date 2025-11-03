@@ -1,0 +1,364 @@
+{
+  "base_cluster_info": {
+    "cluster_name": "Concentration Measurement Clusters",
+    "cluster_description": "The server cluster provides an interface to concentration measurement functionality. This cluster SHALL to be used via an alias to a specific substance (see Cluster IDs).",
+    "revision": 3,
+    "revision_history": [
+      {
+        "revision": 1,
+        "description": "Mandatory global ClusterRevision attribute added"
+      },
+      {
+        "revision": 2,
+        "description": "CCB 2882"
+      },
+      {
+        "revision": 3,
+        "description": "Cluster redesigned to add support for Level Indication, Peak/Average Measurement, Medium/Unit of Measurement and Uncertainty."
+      }
+    ],
+    "classification": {
+      "hierarchy": "Base",
+      "role": "Application",
+      "scope": "Endpoint",
+      "pics_code": "CONC"
+    }
+  },
+  "cluster_aliases": [
+    {
+      "cluster_id": "0x040C",
+      "cluster_name": "Carbon Monoxide Concentration Measurement",
+      "pics_code": "CMOCONC"
+    },
+    {
+      "cluster_id": "0x040D",
+      "cluster_name": "Carbon Dioxide Concentration Measurement",
+      "pics_code": "CDOCONC"
+    },
+    {
+      "cluster_id": "0x0413",
+      "cluster_name": "Nitrogen Dioxide Concentration Measurement",
+      "pics_code": "NDOCONC"
+    },
+    {
+      "cluster_id": "0x0415",
+      "cluster_name": "Ozone Concentration Measurement",
+      "pics_code": "OZCONC"
+    },
+    {
+      "cluster_id": "0x042A",
+      "cluster_name": "PM2.5 Concentration Measurement",
+      "pics_code": "PMICONC"
+    },
+    {
+      "cluster_id": "0x042B",
+      "cluster_name": "Formaldehyde Concentration Measurement",
+      "pics_code": "FLDCONC"
+    },
+    {
+      "cluster_id": "0x042C",
+      "cluster_name": "PM1 Concentration Measurement",
+      "pics_code": "PMHCONC"
+    },
+    {
+      "cluster_id": "0x042D",
+      "cluster_name": "PM10 Concentration Measurement",
+      "pics_code": "PMKCONC"
+    },
+    {
+      "cluster_id": "0x042E",
+      "cluster_name": "Total Volatile Organic Compounds Concentration Measurement",
+      "pics_code": "TVOCCONC"
+    },
+    {
+      "cluster_id": "0x042F",
+      "cluster_name": "Radon Concentration Measurement",
+      "pics_code": "RNCONC"
+    }
+  ],
+  "features": [
+    {
+      "bit": 0,
+      "code": "MEA",
+      "feature": "NumericMeasurement",
+      "conformance": "O.a+",
+      "summary": "Cluster supports numeric measurement of substance"
+    },
+    {
+      "bit": 1,
+      "code": "LEV",
+      "feature": "LevelIndication",
+      "conformance": "O.a+",
+      "summary": "Cluster supports basic level indication for substance using the ConcentrationLevel enum"
+    },
+    {
+      "bit": 2,
+      "code": "MED",
+      "feature": "MediumLevel",
+      "conformance": "[LEV]",
+      "summary": "Cluster supports the Medium Concentration Level"
+    },
+    {
+      "bit": 3,
+      "code": "CRI",
+      "feature": "CriticalLevel",
+      "conformance": "[LEV]",
+      "summary": "Cluster supports the Critical Concentration Level"
+    },
+    {
+      "bit": 4,
+      "code": "PEA",
+      "feature": "PeakMeasurement",
+      "conformance": "[MEA]",
+      "summary": "Cluster supports peak numeric measurement of substance"
+    },
+    {
+      "bit": 5,
+      "code": "AVG",
+      "feature": "AverageMeasurement",
+      "conformance": "[MEA]",
+      "summary": "Cluster supports average numeric measurement of substance"
+    }
+  ],
+  "data_types": [
+    {
+      "name": "MeasurementUnitEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "PPM",
+          "summary": "Parts per Million (10^6)",
+          "conformance": "MEA"
+        },
+        {
+          "value": 1,
+          "name": "PPB",
+          "summary": "Parts per Billion (10^9)",
+          "conformance": "MEA"
+        },
+        {
+          "value": 2,
+          "name": "PPT",
+          "summary": "Parts per Trillion (10^12)",
+          "conformance": "MEA"
+        },
+        {
+          "value": 3,
+          "name": "MGM3",
+          "summary": "Milligram per m^3",
+          "conformance": "MEA"
+        },
+        {
+          "value": 4,
+          "name": "UGM3",
+          "summary": "Microgram per m^3",
+          "conformance": "MEA"
+        },
+        {
+          "value": 5,
+          "name": "NGM3",
+          "summary": "Nanogram per m^3",
+          "conformance": "MEA"
+        },
+        {
+          "value": 6,
+          "name": "PM3",
+          "summary": "Particles per m^3",
+          "conformance": "MEA"
+        },
+        {
+          "value": 7,
+          "name": "BQM3",
+          "summary": "Becquerel per m^3",
+          "conformance": "MEA"
+        }
+      ]
+    },
+    {
+      "name": "MeasurementMediumEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "Air",
+          "summary": "The measurement is being made in Air",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "Water",
+          "summary": "The measurement is being made in Water",
+          "conformance": "M"
+        },
+        {
+          "value": 2,
+          "name": "Soil",
+          "summary": "The measurement is being made in Soil",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "name": "LevelValueEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "Unknown",
+          "summary": "The level is Unknown",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "Low",
+          "summary": "The level is considered Low",
+          "conformance": "M"
+        },
+        {
+          "value": 2,
+          "name": "Medium",
+          "summary": "The level is considered Medium",
+          "conformance": "MED"
+        },
+        {
+          "value": 3,
+          "name": "High",
+          "summary": "The level is considered High",
+          "conformance": "M"
+        },
+        {
+          "value": 4,
+          "name": "Critical",
+          "summary": "The level is considered Critical",
+          "conformance": "CRI"
+        }
+      ]
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "MeasuredValue",
+      "type": "single",
+      "constraint": "MinMeasuredValue to MaxMeasuredValue",
+      "quality": "XP",
+      "default": "null",
+      "access": "RV",
+      "conformance": "MEA",
+      "description": "This attribute SHALL represent the most recent measurement as a single-precision floating-point number. MeasuredValue's unit is represented by MeasurementUnit. A value of null indicates that the measurement is unknown or outside the valid range. MinMeasuredValue and MaxMeasuredValue define the valid range for MeasuredValue."
+    },
+    {
+      "id": "0x0001",
+      "name": "MinMeasuredValue",
+      "type": "single",
+      "constraint": "all",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "MEA",
+      "description": "This attribute SHALL represent the minimum value of MeasuredValue that is capable of being measured. A MinMeasuredValue of null indicates that the MinMeasuredValue is not defined."
+    },
+    {
+      "id": "0x0002",
+      "name": "MaxMeasuredValue",
+      "type": "single",
+      "constraint": "min MinMeasuredValue",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "MEA",
+      "description": "This attribute SHALL represent the maximum value of MeasuredValue that is capable of being measured. A MaxMeasuredValue of null indicates that the MaxMeasuredValue is not defined."
+    },
+    {
+      "id": "0x0003",
+      "name": "PeakMeasuredValue",
+      "type": "single",
+      "constraint": "MinMeasuredValue to MaxMeasuredValue",
+      "quality": "XP",
+      "default": "null",
+      "access": "RV",
+      "conformance": "PEA",
+      "description": "This attribute SHALL represent the maximum value of MeasuredValue that has been measured during the PeakMeasuredValueWindow. If this attribute is provided, the PeakMeasuredValueWindow attribute SHALL also be provided."
+    },
+    {
+      "id": "0x0004",
+      "name": "PeakMeasuredValueWindow",
+      "type": "elapsed-s",
+      "constraint": "max 604800",
+      "quality": "P",
+      "default": "1",
+      "access": "RV",
+      "conformance": "PEA",
+      "description": "This attribute SHALL represent the window of time used for determining the PeakMeasuredValue. The value is in seconds."
+    },
+    {
+      "id": "0x0005",
+      "name": "AverageMeasuredValue",
+      "type": "single",
+      "constraint": "MinMeasuredValue to MaxMeasuredValue",
+      "quality": "XP",
+      "default": "null",
+      "access": "RV",
+      "conformance": "AVG",
+      "description": "This attribute SHALL represent the average value of MeasuredValue that has been measured during the AverageMeasuredValueWindow. If this attribute is provided, the AverageMeasuredValueWindow attribute SHALL also be provided."
+    },
+    {
+      "id": "0x0006",
+      "name": "AverageMeasuredValueWindow",
+      "type": "elapsed-s",
+      "constraint": "max 604800",
+      "quality": "P",
+      "default": "1",
+      "access": "RV",
+      "conformance": "AVG",
+      "description": "This attribute SHALL represent the window of time used for determining the AverageMeasuredValue. The value is in seconds."
+    },
+    {
+      "id": "0x0007",
+      "name": "Uncertainty",
+      "type": "single",
+      "constraint": "MS",
+      "quality": "",
+      "default": "MS",
+      "access": "RV",
+      "conformance": "[MEA]",
+      "description": "This attribute SHALL represent the range of error or deviation that can be found in MeasuredValue and PeakMeasuredValue. This is considered a +/- value and should be considered to be in MeasurementUnit."
+    },
+    {
+      "id": "0x0008",
+      "name": "MeasurementUnit",
+      "type": "MeasurementUnitEnum",
+      "constraint": "",
+      "quality": "F",
+      "default": "MS",
+      "access": "RV",
+      "conformance": "MEA",
+      "description": "This attribute SHALL represent the unit of MeasuredValue. See MeasurementUnitEnum."
+    },
+    {
+      "id": "0x0009",
+      "name": "MeasurementMedium",
+      "type": "MeasurementMediumEnum",
+      "constraint": "",
+      "quality": "F",
+      "default": "MS",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL represent the medium in which MeasuredValue is being measured. See MeasurementMediumEnum."
+    },
+    {
+      "id": "0x000A",
+      "name": "LevelValue",
+      "type": "LevelValueEnum",
+      "constraint": "",
+      "quality": "",
+      "default": "0",
+      "access": "RV",
+      "conformance": "LEV",
+      "description": "This attribute SHALL represent the level of the substance detected. See LevelValueEnum."
+    }
+  ],
+  "commands": [],
+  "events": []
+}

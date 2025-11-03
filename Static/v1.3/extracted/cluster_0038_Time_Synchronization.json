@@ -1,0 +1,191 @@
+{
+  "cluster_id": "0x0038",
+  "cluster_name": "Time Synchronization",
+  "section": "11.17",
+  "description": "Accurate time is required for a number of reasons, including scheduling, display and validating security materials. Matter Specification R1.3                        Connectivity Standards Alliance Document 23-27349 April 17, 2024 This section describes a mechanism for Nodes to achieve and maintain time synchronization. The Time Synchronization cluster provides attributes for reading a Node’s current time. It also allows",
+  "data_types": {
+    "GranularityEnum": {
+      "name": "GranularityEnum",
+      "definition_line": "11.17.6.1. GranularityEnum Type"
+    },
+    "TimeSourceEnum": {
+      "name": "TimeSourceEnum",
+      "definition_line": "11.17.6.2. TimeSourceEnum Type"
+    },
+    "TimeZoneDatabaseEnum": {
+      "name": "TimeZoneDatabaseEnum",
+      "definition_line": "11.17.6.3. TimeZoneDatabaseEnum Type"
+    },
+    "TrustedTimeSourceStruct": {
+      "name": "TrustedTimeSourceStruct",
+      "definition_line": "11.17.6.4. TrustedTimeSourceStruct Type"
+    },
+    "FabricScopedTrustedTimeSourceStruct": {
+      "name": "FabricScopedTrustedTimeSourceStruct",
+      "definition_line": "11.17.6.5. FabricScopedTrustedTimeSourceStruct Type"
+    },
+    "TimeZoneStruct": {
+      "name": "TimeZoneStruct",
+      "definition_line": "11.17.6.6. TimeZoneStruct Type"
+    },
+    "DSTOffsetStruct": {
+      "name": "DSTOffsetStruct",
+      "definition_line": "11.17.6.7. DSTOffsetStruct Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "UTCTime",
+      "details": "epoch-us all XC null RV M",
+      "raw_line": "0x0000         UTCTime       epoch-us      all            XC             null           RV          M"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "Granular­",
+      "details": "Granulari­ desc NoTime­ RV M",
+      "raw_line": "0x0001         Granular­ Granulari­ desc                                 NoTime­        RV          M"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "Time­",
+      "details": "Time­ desc None RV O",
+      "raw_line": "0x0002         Time­         Time­         desc                          None           RV          O"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "Trusted­",
+      "details": "Trusted­ all XN null RV TSC",
+      "raw_line": "0x0003         Trusted­      Trusted­      all            XN             null           RV          TSC"
+    },
+    "0x0004": {
+      "id": "0x0004",
+      "name": "Default­",
+      "details": "string max 128 XN null RV NTPC",
+      "raw_line": "0x0004         Default­      string        max 128        XN             null           RV          NTPC"
+    },
+    "0x0005": {
+      "id": "0x0005",
+      "name": "TimeZone",
+      "details": "list[Time­ 1 to 2 N [{0,0}] RV TZ",
+      "raw_line": "0x0005         TimeZone list[Time­         1 to 2         N              [{0,0}]        RV          TZ"
+    },
+    "0x0006": {
+      "id": "0x0006",
+      "name": "DSTOffset",
+      "details": "list[DSTOff­ N [] RV TZ",
+      "raw_line": "0x0006         DSTOffset list[DSTOff­                     N              []             RV          TZ"
+    },
+    "0x0007": {
+      "id": "0x0007",
+      "name": "LocalTime",
+      "details": "epoch-us all XC null RV TZ",
+      "raw_line": "0x0007         LocalTime epoch-us          all            XC             null           RV          TZ"
+    },
+    "0x0008": {
+      "id": "0x0008",
+      "name": "TimeZone­",
+      "details": "TimeZone­ all F None RV TZ",
+      "raw_line": "0x0008         TimeZone­ TimeZone­ all                    F              None           RV          TZ"
+    },
+    "0x0009": {
+      "id": "0x0009",
+      "name": "NTPServer",
+      "details": "bool all False RV NTPS",
+      "raw_line": "0x0009         NTPServer bool              all                           False          RV          NTPS"
+    },
+    "0x000A": {
+      "id": "0x000A",
+      "name": "Time­",
+      "details": "uint8 1 to 2 F RV TZ",
+      "raw_line": "0x000A         Time­         uint8         1 to 2         F                             RV          TZ"
+    },
+    "0x000B": {
+      "id": "0x000B",
+      "name": "DSTOff­",
+      "details": "uint8 min 1 F RV TZ",
+      "raw_line": "0x000B         DSTOff­       uint8         min 1          F                             RV          TZ"
+    },
+    "0x000C": {
+      "id": "0x000C",
+      "name": "Supports­",
+      "details": "bool all F False RV NTPC",
+      "raw_line": "0x000C         Supports­     bool          all            F              False          RV          NTPC"
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "SetUTCTime",
+      "details": "client ⇒ server Y A M",
+      "raw_line": "0x00               SetUTCTime         client ⇒ server Y                       A                 M"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "SetTrusted­",
+      "details": "client ⇒ server Y AF TSC",
+      "raw_line": "0x01               SetTrusted­        client ⇒ server Y                       AF                TSC"
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "SetTimeZone",
+      "details": "client ⇒ server SetTime­ M TZ",
+      "raw_line": "0x02               SetTimeZone        client ⇒ server SetTime­                M                 TZ"
+    },
+    "0x03": {
+      "id": "0x03",
+      "name": "SetTime­",
+      "details": "client ⇐ server N TZ",
+      "raw_line": "0x03               SetTime­           client ⇐ server N                                         TZ"
+    },
+    "0x04": {
+      "id": "0x04",
+      "name": "SetDSTOffset",
+      "details": "client ⇒ server Y M TZ",
+      "raw_line": "0x04               SetDSTOffset       client ⇒ server Y                       M                 TZ"
+    },
+    "0x05": {
+      "id": "0x05",
+      "name": "SetDefaultNTP",
+      "details": "client ⇒ server Y A NTPC",
+      "raw_line": "0x05               SetDefaultNTP client ⇒ server Y                            A                 NTPC"
+    }
+  },
+  "events": {
+    "0x00": {
+      "id": "0x00",
+      "name": "DSTTableEmpty",
+      "details": "INFO V TZ",
+      "raw_line": "0x00                   DSTTableEmpty            INFO                   V                        TZ"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "DSTStatus",
+      "details": "INFO V TZ",
+      "raw_line": "0x01                   DSTStatus                INFO                   V                        TZ"
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "TimeZoneStatus",
+      "details": "INFO V TZ",
+      "raw_line": "0x02                   TimeZoneStatus           INFO                   V                        TZ"
+    },
+    "0x03": {
+      "id": "0x03",
+      "name": "TimeFailure",
+      "details": "INFO V M",
+      "raw_line": "0x03                   TimeFailure            INFO                    V                         M"
+    },
+    "0x04": {
+      "id": "0x04",
+      "name": "MissingTrusted­",
+      "details": "INFO V TSC",
+      "raw_line": "0x04                   MissingTrusted­        INFO                    V                         TSC"
+    }
+  },
+  "extraction_info": {
+    "start_line": 45528,
+    "end_line": 46740,
+    "total_lines": 1212
+  }
+}

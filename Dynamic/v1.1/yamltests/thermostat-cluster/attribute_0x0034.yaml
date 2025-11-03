@@ -1,0 +1,14 @@
+config:
+  attribute: '0x0034'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0034_v1.1.0.0
+tests:
+- arguments: {}
+  option: WriteAttribute
+- arguments: {}
+  option: WriteAttribute
+- arguments: {}
+  option: WriteAttribute
+- arguments: {}
+  option: WriteAttribute

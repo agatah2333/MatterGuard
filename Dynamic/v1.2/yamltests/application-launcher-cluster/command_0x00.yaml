@@ -1,0 +1,54 @@
+config:
+  cluster: application-launcher-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: application-launcher-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: CurrentApp = null
+  ExpectedResponse: LauncherResponse with Status = AppNotAvailable
+  Pre-requisites: None
+  arguments:
+    Application.ApplicationID: '""'
+    Application.CatalogVendorID: '0x0000'
+    Data: '""'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: CurrentApp = null
+  ExpectedResponse: LauncherResponse with Status = SystemBusy
+  Pre-requisites: None
+  arguments:
+    Application.ApplicationID: '"MaxAppID"'
+    Application.CatalogVendorID: '0xFFFF'
+    Data: '"FF" (hex representation of maximum octet string)'
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: 'CurrentApp = {CatalogVendorID: 0x0001, ApplicationID: "ValidApp",
+    Endpoint: <corresponding endpoint>}'
+  ExpectedResponse: LauncherResponse with Status = Success
+  Pre-requisites: Application "ValidApp" must be available in the catalog with VendorID
+    0x0001
+  arguments:
+    Application.ApplicationID: '"ValidApp"'
+    Application.CatalogVendorID: '0x0001'
+    Data: '"01" (hex representation of some valid data)'
+  label: Test_Case_Valid_Application_Launch
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: CurrentApp = null
+  ExpectedResponse: LauncherResponse with Status = AppNotAvailable
+  Pre-requisites: 'Application "NonExistentApp" must not be available in the catalog
+    with VendorID 0x0002
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:7†source】.'
+  arguments:
+    Application.ApplicationID: '"NonExistentApp"'
+    Application.CatalogVendorID: '0x0002'
+    Data: '""'
+  label: Test_Case_Application_Not_Available
+  option: SendCommand

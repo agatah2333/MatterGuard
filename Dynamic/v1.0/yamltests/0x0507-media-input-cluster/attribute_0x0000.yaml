@@ -1,0 +1,14 @@
+config:
+  node_id: 305414945
+  cluster: '0x0507'
+  endpoint: 1
+tests:
+- label: read_inputlist
+  cluster: '0x0507'
+  attribute: '0x0000'
+  operation: read
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS

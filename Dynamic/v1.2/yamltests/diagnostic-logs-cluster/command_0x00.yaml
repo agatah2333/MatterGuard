@@ -1,0 +1,51 @@
+config:
+  cluster: diagnostic-logs-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: diagnostic-logs-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: LogContent will be populated with logs.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Intent: 0
+    RequestedProtocol: 0
+    TransferFileDesignator: '""'
+  label: Test_Case_Extreme_Values_of_Constraints
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: BDX transfer initiated.
+  ExpectedResponse: Success
+  Pre-requisites: Node supports BDX.
+  arguments:
+    Intent: 2
+    RequestedProtocol: 1
+    TransferFileDesignator: '"A" * 32'
+  label: Test_Case_Extreme_Values_of_Constraints
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: NoLogs
+  Pre-requisites: Node has no logs of the requested type.
+  arguments:
+    Intent: 1
+    RequestedProtocol: 0
+    TransferFileDesignator: '""'
+  label: Test_Case_Special_Response_-_No_Logs
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: Denied
+  Pre-requisites: 'Node is denying the transfer for any reason.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:9†source】.'
+  arguments:
+    Intent: 0
+    RequestedProtocol: 1
+    TransferFileDesignator: '"logfile"'
+  label: Test_Case_Special_Response_-_Denied
+  option: SendCommand

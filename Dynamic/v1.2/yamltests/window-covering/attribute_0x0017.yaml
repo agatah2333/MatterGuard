@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0017'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0017_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: CurrentPositionLift will be set to 0
+  ExpectedResponse: Success
+  Pre-requisites: InstalledOpenLimitLift must be 0
+  arguments:
+    '{"CurrentPositionLift"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: CurrentPositionLift will be set to InstalledClosedLimitLift
+  ExpectedResponse: Success
+  Pre-requisites: InstalledClosedLimitLift must be defined
+  arguments:
+    '{"CurrentPositionLift"': InstalledClosedLimitLift}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments:
+    '{"CurrentPositionLift"': -1}
+  label: Test_Case_Out_of_Bounds_(Below_Minimum)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'InstalledClosedLimitLift must be defined
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:4†source】【4:6†source】【4:7†source】.'
+  arguments:
+    '{"CurrentPositionLift"': InstalledClosedLimitLift + 1}
+  label: Test_Case_Out_of_Bounds_(Above_Maximum)
+  option: WriteAttribute

@@ -1,0 +1,216 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0061",
+    "name": "RVC Operational State",
+    "description": "This cluster provides an interface for monitoring the operational state of a Robotic Vacuum Cleaner. It is derived from the Operational State cluster.",
+    "classification": {
+      "hierarchy": "Operational State",
+      "role": "Application",
+      "scope": "Endpoint",
+      "pics_code": "RVCOPSTATE"
+    },
+    "revision_history": [
+      {
+        "revision": 1,
+        "description": "Initial release"
+      },
+      {
+        "revision": 2,
+        "description": "The Pause and Resume commands are usable in all compatible states. Deprecate the Start and Stop commands. Add the GoHome command."
+      }
+    ]
+  },
+  "features": {},
+  "data_types": {
+    "enums": {
+      "OperationalStateEnum": {
+        "type": "enum8",
+        "description": "Additional operational states for RVC",
+        "values": {
+          "0x40": {
+            "name": "SeekingCharger",
+            "summary": "The device is en route to the charging dock",
+            "conformance": "M"
+          },
+          "0x41": {
+            "name": "Charging",
+            "summary": "The device is charging",
+            "conformance": "M"
+          },
+          "0x42": {
+            "name": "Docked",
+            "summary": "The device is on the dock, not charging",
+            "conformance": "M"
+          }
+        }
+      },
+      "ErrorStateEnum": {
+        "type": "enum8", 
+        "description": "Additional error states for RVC",
+        "values": {
+          "0x40": {
+            "name": "FailedToFindChargingDock",
+            "summary": "The device has failed to find or reach the charging dock",
+            "conformance": "M"
+          },
+          "0x41": {
+            "name": "Stuck",
+            "summary": "The device is stuck and requires manual intervention",
+            "conformance": "M"
+          },
+          "0x42": {
+            "name": "DustBinMissing",
+            "summary": "The device has detected that its dust bin is missing",
+            "conformance": "M"
+          },
+          "0x43": {
+            "name": "DustBinFull",
+            "summary": "The device has detected that its dust bin is full",
+            "conformance": "M"
+          },
+          "0x44": {
+            "name": "WaterTankEmpty",
+            "summary": "The device has detected that its water tank is empty",
+            "conformance": "M"
+          },
+          "0x45": {
+            "name": "WaterTankMissing",
+            "summary": "The device has detected that its water tank is missing",
+            "conformance": "M"
+          },
+          "0x46": {
+            "name": "WaterTankLidOpen",
+            "summary": "The device has detected that its water tank lid is open",
+            "conformance": "M"
+          },
+          "0x47": {
+            "name": "MopCleaningPadMissing",
+            "summary": "The device has detected that its cleaning pad is missing",
+            "conformance": "M"
+          }
+        }
+      }
+    }
+  },
+  "attributes": {
+    "note": "This cluster inherits all attributes from the Operational State cluster"
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "Pause",
+      "direction": "client => server",
+      "response": "OperationalCommandResponse",
+      "access": "O",
+      "conformance": "M",
+      "description": "Pause the device operation. See pause compatibility table for supported states."
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "Stop",
+      "direction": "client => server",
+      "response": "OperationalCommandResponse",
+      "access": "O",
+      "conformance": "D",
+      "description": "Stop the device operation (deprecated)"
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "Start",
+      "direction": "client => server",
+      "response": "OperationalCommandResponse",
+      "access": "O",
+      "conformance": "D",
+      "description": "Start the device operation (deprecated)"
+    },
+    "0x03": {
+      "id": "0x03",
+      "name": "Resume",
+      "direction": "client => server",
+      "response": "OperationalCommandResponse",
+      "access": "O",
+      "conformance": "O",
+      "description": "Resume the device operation. See resume compatibility table for supported states."
+    },
+    "0x04": {
+      "id": "0x04",
+      "name": "OperationalCommandResponse",
+      "direction": "client <= server",
+      "response": "N",
+      "access": "",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "ErrorStateID",
+          "type": "ErrorStateEnum",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "Error state ID"
+        }
+      ]
+    },
+    "0x80": {
+      "id": "0x80",
+      "name": "GoHome",
+      "direction": "client => server",
+      "response": "OperationalCommandResponse",
+      "access": "O",
+      "conformance": "P, O",
+      "description": "On receipt of this command, the device SHALL start seeking the charging dock, if possible in the current state of the device."
+    }
+  },
+  "events": {},
+  "state_compatibility": {
+    "pause_compatibility": [
+      {
+        "state_value": "0x40",
+        "state_name": "SeekingCharger",
+        "pause_compatible": "Y",
+        "notes": ""
+      },
+      {
+        "state_value": "0x41",
+        "state_name": "Charging", 
+        "pause_compatible": "N",
+        "notes": ""
+      },
+      {
+        "state_value": "0x42",
+        "state_name": "Docked",
+        "pause_compatible": "N",
+        "notes": ""
+      }
+    ],
+    "resume_compatibility": [
+      {
+        "state_value": "0x40",
+        "state_name": "SeekingCharger",
+        "resume_compatible": "N",
+        "notes": ""
+      },
+      {
+        "state_value": "0x41",
+        "state_name": "Charging",
+        "resume_compatible": "Y",
+        "notes": "While in the Charging state, the device SHALL NOT attempt to resume unless it transitioned to this state while operating and can resume"
+      },
+      {
+        "state_value": "0x42",
+        "state_name": "Docked",
+        "resume_compatible": "Y",
+        "notes": "While in the Docked state, the device SHALL NOT attempt to resume unless it transitioned to this state while operating and can resume"
+      }
+    ]
+  },
+  "go_home_command_behavior": {
+    "success": [
+      "The OperationalState attribute SHALL be set to SeekingCharger",
+      "The device SHALL respond with an OperationalCommandResponse command with an ErrorStateID of NoError"
+    ],
+    "already_seeking_charger": "If this command is received when already in the SeekingCharger state the device SHALL respond with an OperationalCommandResponse command with an ErrorStateID of NoError but the command SHALL have no other effect",
+    "invalid_state": "A device that receives this command in any state which does not allow seeking the charger, such as Charging or Docked, SHALL respond with an OperationalCommandResponse command with an ErrorStateID of CommandInvalidInState and SHALL have no other effect"
+  }
+}

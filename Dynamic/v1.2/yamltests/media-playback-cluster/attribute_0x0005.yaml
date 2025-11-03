@@ -1,0 +1,41 @@
+config:
+  attribute: '0x0005'
+  cluster: media-playback-cluster
+  nodeId: '0x654231'
+name: media-playback-cluster_attribute_0x0005_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`SeekRangeEnd` will be set to 0'
+  ExpectedResponse: Success
+  Pre-requisites: Media should be loaded and ready for playback
+  arguments:
+    SeekRangeEnd: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`SeekRangeEnd` will be set to 18446744073709551615'
+  ExpectedResponse: Success
+  Pre-requisites: Media should be loaded and ready for playback
+  arguments:
+    SeekRangeEnd: 18446744073709551615 (maximum value of uint64)
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`SeekRangeEnd` will be set to null'
+  ExpectedResponse: Success
+  Pre-requisites: Media should be live streaming content with an associated StartTime
+  arguments: {}
+  label: Test_Case_Null_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: No change
+  ExpectedResponse: SeekOutOfRange
+  Pre-requisites: 'Media should be loaded and ready for playback
+
+
+    These test cases cover the extreme values of the `SeekRangeEnd` attribute and
+    the special response when the value is out of the allowed range【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    SeekRangeEnd: 18446744073709551616 (one more than the maximum value of uint64)
+  label: Test_Case_Special_Response_-_Seek_Out_of_Range
+  option: WriteAttribute

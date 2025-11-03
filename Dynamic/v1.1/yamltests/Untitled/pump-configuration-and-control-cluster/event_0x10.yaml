@@ -1,0 +1,120 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x10'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x10_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '- `PumpStatus`: 0 (No fault)'
+  ExpectedResponse: No sensor failure detected
+  Pre-requisites: None
+  arguments:
+    SensorFailure: 0
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify pump-configuration-and-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 0
+  Attribute_Change: '- `PumpStatus`: 1 (DeviceFault bit set)'
+  ExpectedResponse: Sensor failure detected
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the `SensorFailure` field (0 and
+    1) and the expected responses based on the description of the event.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments:
+    SensorFailure: 1
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify pump-configuration-and-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 60
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

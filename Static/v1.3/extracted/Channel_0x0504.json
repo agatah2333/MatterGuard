@@ -1,0 +1,303 @@
+{
+  "id": "0x0504",
+  "name": "Channel",
+  "description": "This cluster provides an interface for controlling the current Channel on a device or endpoint. This cluster server would be supported on Video Player devices or endpoints that allow Channel control such as a Content App. This cluster provides a list of available channels and provides commands for absolute and relative channel changes.",
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Application",
+    "scope": "Endpoint",
+    "picsCode": "CHANNEL"
+  },
+  "revision": {
+    "current": 2,
+    "history": [
+      {
+        "revision": 1,
+        "description": "Initial Release"
+      },
+      {
+        "revision": 2,
+        "description": "Add EG and RP features, Identifier and Type to Channel Info for Over-the-Top (OTT) channel support."
+      }
+    ]
+  },
+  "features": {
+    "CL": {
+      "bit": 0,
+      "code": "CL",
+      "name": "ChannelList",
+      "summary": "Provides list of available channels."
+    },
+    "LI": {
+      "bit": 1,
+      "code": "LI",
+      "name": "LineupInfo",
+      "summary": "Provides lineup info, which is a reference to an external source of lineup information."
+    },
+    "EG": {
+      "bit": 2,
+      "code": "EG",
+      "name": "ElectronicGuide",
+      "summary": "Provides electronic program guide information."
+    },
+    "RP": {
+      "bit": 3,
+      "code": "RP",
+      "name": "RecordProgram",
+      "summary": "Provides ability to record program."
+    }
+  },
+  "dataTypes": {
+    "RecordingFlagBitmap": {
+      "type": "map8",
+      "bits": {
+        "0": {"name": "Scheduled", "summary": "The program is scheduled for recording.", "conformance": "M"},
+        "1": {"name": "RecordSeries", "summary": "The program series is scheduled for recording.", "conformance": "M"},
+        "2": {"name": "Recorded", "summary": "The program is recorded and available to be played.", "conformance": "M"}
+      }
+    },
+    "LineupInfoTypeEnum": {
+      "type": "enum8",
+      "values": {
+        "0": {"name": "MSO", "summary": "Multi System Operator", "conformance": "M"}
+      }
+    },
+    "StatusEnum": {
+      "type": "enum8",
+      "values": {
+        "0": {"name": "Success", "summary": "Command succeeded", "conformance": "M"},
+        "1": {"name": "MultipleMatches", "summary": "More than one equal match for the ChannelInfoStruct passed in.", "conformance": "M"},
+        "2": {"name": "NoMatches", "summary": "No matches for the ChannelInfoStruct passed in.", "conformance": "M"}
+      }
+    },
+    "ChannelTypeEnum": {
+      "type": "enum8",
+      "values": {
+        "0": {"name": "Satellite", "summary": "The channel is sourced from a satellite provider.", "conformance": "M"},
+        "1": {"name": "Cable", "summary": "The channel is sourced from a cable provider.", "conformance": "M"},
+        "2": {"name": "Terrestrial", "summary": "The channel is sourced from a terrestrial provider.", "conformance": "M"},
+        "3": {"name": "OTT", "summary": "The channel is sourced from an OTT provider.", "conformance": "M"}
+      }
+    },
+    "ChannelInfoStruct": {
+      "type": "struct",
+      "description": "This indicates a channel in a channel lineup. While the major and minor numbers in the ChannelInfoStruct support use of ATSC channel format, a lineup MAY use other formats which can map into these numeric values.",
+      "fields": {
+        "0": {"name": "MajorNumber", "type": "uint16", "constraint": "all", "conformance": "M"},
+        "1": {"name": "MinorNumber", "type": "uint16", "constraint": "all", "conformance": "M"},
+        "2": {"name": "Name", "type": "string", "default": "empty", "conformance": "O"},
+        "3": {"name": "CallSign", "type": "string", "default": "empty", "conformance": "O"},
+        "4": {"name": "AffiliateCallSign", "type": "string", "default": "empty", "conformance": "O"},
+        "5": {"name": "Identifier", "type": "string", "default": "empty", "conformance": "O"},
+        "6": {"name": "Type", "type": "ChannelTypeEnum", "default": "empty", "conformance": "O"}
+      }
+    },
+    "LineupInfoStruct": {
+      "type": "struct",
+      "description": "The Lineup Info allows references to external lineup sources like Gracenote. The combination of OperatorName, LineupName, and PostalCode MUST uniquely identify a lineup.",
+      "fields": {
+        "0": {"name": "OperatorName", "type": "string", "conformance": "M"},
+        "1": {"name": "LineupName", "type": "string", "default": "empty", "conformance": "O"},
+        "2": {"name": "PostalCode", "type": "string", "default": "empty", "conformance": "O"},
+        "3": {"name": "LineupInfoType", "type": "LineupInfoTypeEnum", "constraint": "desc", "conformance": "M"}
+      }
+    },
+    "ProgramStruct": {
+      "type": "struct",
+      "description": "This indicates a program within an electronic program guide (EPG).",
+      "fields": {
+        "0": {"name": "Identifier", "type": "string", "constraint": "max 255", "conformance": "M"},
+        "1": {"name": "Channel", "type": "ChannelInfoStruct", "conformance": "M"},
+        "2": {"name": "StartTime", "type": "epoch-s", "conformance": "M"},
+        "3": {"name": "EndTime", "type": "epoch-s", "conformance": "M"},
+        "4": {"name": "Title", "type": "string", "constraint": "max 255", "conformance": "M"},
+        "5": {"name": "Subtitle", "type": "string", "constraint": "max 255", "default": "empty", "conformance": "O"},
+        "6": {"name": "Description", "type": "string", "constraint": "max 8192", "default": "empty", "conformance": "O"},
+        "7": {"name": "AudioLanguages", "type": "list[string]", "constraint": "max 10 [max 50]", "default": "empty", "conformance": "O"},
+        "8": {"name": "Ratings", "type": "list[string]", "constraint": "max 255", "default": "empty", "conformance": "O"},
+        "9": {"name": "ThumbnailUrl", "type": "string", "constraint": "max 8192", "default": "empty", "conformance": "O"},
+        "10": {"name": "PosterArtUrl", "type": "string", "constraint": "max 8192", "default": "empty", "conformance": "O"},
+        "11": {"name": "DvbiUrl", "type": "string", "constraint": "max 8192", "default": "empty", "conformance": "O"},
+        "12": {"name": "ReleaseDate", "type": "string", "constraint": "max 30", "default": "empty", "conformance": "O"},
+        "13": {"name": "ParentalGuidanceText", "type": "string", "constraint": "max 255", "default": "empty", "conformance": "O"},
+        "14": {"name": "RecordingFlag", "type": "RecordingFlagBitmap", "conformance": "RP"},
+        "15": {"name": "SeriesInfo", "type": "SeriesInfoStruct", "quality": "X", "default": "null", "conformance": "O"},
+        "16": {"name": "CategoryList", "type": "list[ProgramCategoryStruct]", "constraint": "max 255", "default": "empty", "conformance": "O"},
+        "17": {"name": "CastList", "type": "list[ProgramCastStruct]", "constraint": "max 255", "default": "empty", "conformance": "O"},
+        "18": {"name": "ExternalIDList", "type": "list[AdditionalInfoStruct]", "constraint": "max 255", "default": "empty", "conformance": "O"}
+      }
+    },
+    "ProgramCategoryStruct": {
+      "type": "struct",
+      "description": "This object defines the category associated to a program.",
+      "fields": {
+        "0": {"name": "Category", "type": "string", "constraint": "max 256", "conformance": "M"},
+        "1": {"name": "SubCategory", "type": "string", "constraint": "max 256", "default": "empty", "conformance": "O"}
+      }
+    },
+    "SeriesInfoStruct": {
+      "type": "struct",
+      "description": "This object provides the episode information related to a program.",
+      "fields": {
+        "0": {"name": "Season", "type": "string", "constraint": "max 256", "conformance": "M"},
+        "1": {"name": "Episode", "type": "string", "constraint": "max 256", "conformance": "M"}
+      }
+    },
+    "ProgramCastStruct": {
+      "type": "struct",
+      "description": "This object provides the cast information related to a program.",
+      "fields": {
+        "0": {"name": "Name", "type": "string", "constraint": "max 256", "conformance": "M"},
+        "1": {"name": "Role", "type": "string", "constraint": "max 256", "conformance": "M"}
+      }
+    },
+    "PageTokenStruct": {
+      "type": "struct",
+      "description": "This object defines the pagination structure.",
+      "fields": {
+        "0": {"name": "Limit", "type": "uint16", "constraint": "all", "default": "0", "conformance": "O"},
+        "1": {"name": "After", "type": "string", "constraint": "max 8192", "default": "empty", "conformance": "O"},
+        "2": {"name": "Before", "type": "string", "constraint": "max 8192", "default": "empty", "conformance": "O"}
+      }
+    },
+    "ChannelPagingStruct": {
+      "type": "struct",
+      "description": "This object defines the paging structure that includes the previous and next pagination tokens.",
+      "fields": {
+        "0": {"name": "PreviousToken", "type": "PageTokenStruct", "quality": "X", "default": "null", "conformance": "O"},
+        "1": {"name": "NextToken", "type": "PageTokenStruct", "quality": "X", "default": "null", "conformance": "O"}
+      }
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "name": "ChannelList",
+      "type": "list[ChannelInfoStruct]",
+      "default": "empty",
+      "access": "RV",
+      "conformance": "CL",
+      "description": "This attribute SHALL provide the list of supported channels."
+    },
+    "0x0001": {
+      "name": "Lineup",
+      "type": "LineupInfoStruct",
+      "constraint": "desc",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "LI",
+      "description": "This attribute SHALL identify the channel lineup using external data sources."
+    },
+    "0x0002": {
+      "name": "CurrentChannel",
+      "type": "ChannelInfoStruct",
+      "constraint": "desc",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "O",
+      "description": "This attribute SHALL contain the current channel. When supported but a channel is not currently tuned to (if a content application is in foreground), the value of the field SHALL be null."
+    }
+  },
+  "commands": {
+    "0x00": {
+      "name": "ChangeChannel",
+      "direction": "client ⇒ server",
+      "response": "ChangeChannelResponse",
+      "access": "O",
+      "conformance": "CL | LI",
+      "description": "Change the channel to the channel case-insensitive exact matching the value passed as an argument.",
+      "fields": {
+        "0": {"name": "Match", "type": "string", "conformance": "M"}
+      }
+    },
+    "0x01": {
+      "name": "ChangeChannelResponse",
+      "direction": "client ⇐ server",
+      "response": "N",
+      "conformance": "CL | LI",
+      "description": "This command SHALL be generated in response to a ChangeChannel command.",
+      "fields": {
+        "0": {"name": "Status", "type": "StatusEnum", "constraint": "desc", "conformance": "M"},
+        "1": {"name": "Data", "type": "string", "constraint": "any", "conformance": "O"}
+      }
+    },
+    "0x02": {
+      "name": "ChangeChannelByNumber",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "description": "Change the channel to the channel with the given Number in the ChannelList attribute.",
+      "fields": {
+        "0": {"name": "MajorNumber", "type": "uint16", "constraint": "all", "conformance": "M"},
+        "1": {"name": "MinorNumber", "type": "uint16", "constraint": "all", "conformance": "M"}
+      }
+    },
+    "0x03": {
+      "name": "SkipChannel",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "description": "This command provides channel up and channel down functionality, but allows channel index jumps of size Count.",
+      "fields": {
+        "0": {"name": "Count", "type": "int16", "constraint": "all", "conformance": "M"}
+      }
+    },
+    "0x04": {
+      "name": "GetProgramGuide",
+      "direction": "client ⇒ server",
+      "response": "ProgramGuideResponse",
+      "access": "O",
+      "quality": "L",
+      "conformance": "EG",
+      "description": "This command retrieves the program guide. It accepts several filter parameters to return specific schedule and program information from a content app.",
+      "fields": {
+        "0": {"name": "StartTime", "type": "epoch-s", "conformance": "M"},
+        "1": {"name": "EndTime", "type": "epoch-s", "conformance": "M"},
+        "2": {"name": "ChannelList", "type": "list[ChannelInfoStruct]", "constraint": "max 255", "default": "empty", "conformance": "O"},
+        "3": {"name": "PageToken", "type": "PageTokenStruct", "quality": "X", "default": "null", "conformance": "O"},
+        "5": {"name": "RecordingFlag", "type": "RecordingFlagBitmap", "quality": "X", "default": "null", "conformance": "O"},
+        "6": {"name": "ExternalIDList", "type": "list[AdditionalInfoStruct]", "constraint": "max 255", "default": "empty", "conformance": "O"},
+        "7": {"name": "Data", "type": "octstr", "constraint": "max 8092", "default": "MS", "conformance": "O"}
+      }
+    },
+    "0x05": {
+      "name": "ProgramGuideResponse",
+      "direction": "client ⇐ server",
+      "response": "N",
+      "quality": "L",
+      "conformance": "EG",
+      "description": "This command is a response to the GetProgramGuide command.",
+      "fields": {
+        "0": {"name": "Paging", "type": "ChannelPagingStruct", "conformance": "M"},
+        "1": {"name": "ProgramList", "type": "list[ProgramStruct]", "default": "empty", "conformance": "M"}
+      }
+    },
+    "0x06": {
+      "name": "RecordProgram",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "O",
+      "quality": "L",
+      "conformance": "RP & EG",
+      "description": "Record a specific program or series when it goes live. This functionality enables DVR recording features.",
+      "fields": {
+        "0": {"name": "ProgramIdentifier", "type": "string", "constraint": "max 255", "conformance": "M"},
+        "1": {"name": "ShouldRecordSeries", "type": "bool", "conformance": "M"},
+        "2": {"name": "ExternalIDList", "type": "list[AdditionalInfoStruct]", "constraint": "max 255", "default": "empty", "conformance": "O"},
+        "3": {"name": "Data", "type": "octstr", "constraint": "max 8092", "default": "MS", "conformance": "O"}
+      }
+    },
+    "0x07": {
+      "name": "CancelRecordProgram",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "O",
+      "quality": "L",
+      "conformance": "RP & EG"
+    }
+  },
+  "events": {}
+}

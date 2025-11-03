@@ -1,0 +1,47 @@
+config:
+  cluster: account-login-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: account-login-cluster_command_0x02_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: User account will be logged in.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Valid SetupPIN for the given TempAccountIdentifier.
+  arguments:
+    SetupPIN: '"12345678901"'
+    TempAccountIdentifier: '"A" * 16'
+  label: Test_Case_Minimum_Length_for_TempAccountIdentifier
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: User account will be logged in.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Valid SetupPIN for the given TempAccountIdentifier.
+  arguments:
+    SetupPIN: '"12345678901"'
+    TempAccountIdentifier: '"A" * 100'
+  label: Test_Case_Maximum_Length_for_TempAccountIdentifier
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: FAILURE
+  Pre-requisites: Invalid SetupPIN for the given TempAccountIdentifier.
+  arguments:
+    SetupPIN: '"00000000000"'
+    TempAccountIdentifier: '"A" * 16'
+  label: Test_Case_Invalid_SetupPIN
+  option: SendCommand
+- ActionTime: Within 10 minutes after 10 unique requests
+  Attribute_Change: None
+  ExpectedResponse: FAILURE
+  Pre-requisites: 'More than 10 unique requests within 10 minutes.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:6†source】【4:8†source】【4:14†source】【4:19†source】.'
+  arguments:
+    SetupPIN: '"12345678901"'
+    TempAccountIdentifier: '"A" * 16'
+  label: Test_Case_Rate_Limiting
+  option: SendCommand

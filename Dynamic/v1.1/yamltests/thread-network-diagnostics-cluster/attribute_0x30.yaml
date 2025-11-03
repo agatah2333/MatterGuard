@@ -1,0 +1,29 @@
+config:
+  attribute: '0x30'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x30_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`ActiveNetworkFaults` remains []'
+  ExpectedResponse: No active faults
+  Pre-requisites: 'Node has no detected faults
+
+
+    ##### Test Case 1.2'
+  arguments:
+    ActiveNetworkFaults: []
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`ActiveNetworkFaults` remains [1]'
+  ExpectedResponse: LinkDown fault is active
+  Pre-requisites: 'Node has detected a LinkDown fault
+
+
+    ##### Test Case 2.2'
+  arguments:
+    ActiveNetworkFaults:
+    - 1
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

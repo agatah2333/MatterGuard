@@ -1,0 +1,39 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0204",
+    "name": "Thermostat User Interface Configuration",
+    "description": ""
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Tempera",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0001",
+      "name": "Keypad",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0002",
+      "name": "Sched",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    }
+  ],
+  "events": []
+}

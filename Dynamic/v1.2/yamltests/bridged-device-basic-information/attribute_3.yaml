@@ -1,0 +1,47 @@
+config:
+  attribute: '3'
+  cluster: bridged-device-basic-information
+  nodeId: '0x654231'
+name: bridged-device-basic-information_attribute_3_v1.2.0.0
+tests:
+- ActionTime: "N/A\n  - **ExpectedResponse**: Error or default handling for empty\
+    \ string\n  - **Which Attribute Will Be Changed and the Value of the Attribute**:\
+    \ N/A\n  - **Any Pre-requisites**: N/A"
+  Attribute_Change: "N/A\n  - **Any Pre-requisites**: N/A"
+  ExpectedResponse: "Error or default handling for empty string\n  - **Which Attribute\
+    \ Will Be Changed and the Value of the Attribute**: N/A\n  - **Any Pre-requisites**:\
+    \ N/A"
+  Pre-requisites: N/A
+  arguments:
+    '**ActionTime**': N/A
+    '**Any Pre-requisites**': N/A
+    '**ExpectedResponse**': Error or default handling for empty string
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': N/A
+    '{"ProductName"': '""}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: "N/A\n  - **ExpectedResponse**: Error or truncation to fit within the\
+    \ allowed length\n  - **Which Attribute Will Be Changed and the Value of the Attribute**:\
+    \ N/A\n  - **Any Pre-requisites**: N/A\n\nThese test cases cover the scenarios\
+    \ of extreme values and special responses for the ProductName attribute in the\
+    \ Bridged Device Basic Information cluster【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】."
+  Attribute_Change: "N/A\n  - **Any Pre-requisites**: N/A\n\nThese test cases cover\
+    \ the scenarios of extreme values and special responses for the ProductName attribute\
+    \ in the Bridged Device Basic Information cluster【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】."
+  ExpectedResponse: "Error or truncation to fit within the allowed length\n  - **Which\
+    \ Attribute Will Be Changed and the Value of the Attribute**: N/A\n  - **Any Pre-requisites**:\
+    \ N/A\n\nThese test cases cover the scenarios of extreme values and special responses\
+    \ for the ProductName attribute in the Bridged Device Basic Information cluster【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】."
+  Pre-requisites: 'N/A
+
+
+    These test cases cover the scenarios of extreme values and special responses for
+    the ProductName attribute in the Bridged Device Basic Information cluster【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】.'
+  arguments:
+    '**ActionTime**': N/A
+    '**Any Pre-requisites**': N/A
+    '**ExpectedResponse**': Error or truncation to fit within the allowed length
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': N/A
+    '{"ProductName"': '"A very long product name that exceeds the typical length"}'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

@@ -1,0 +1,43 @@
+config:
+  cluster: target-navigator-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: target-navigator-cluster_command_0x01_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: The target exists in the TargetList.
+  arguments:
+    '{"Status"': '0, "Data": ""}'
+  label: Test_Case_Extreme_Value_(Success)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: TargetNotFound
+  Pre-requisites: The target does not exist in the TargetList.
+  arguments:
+    '{"Status"': '1, "Data": ""}'
+  label: Test_Case_Extreme_Value_(TargetNotFound)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: NotAllowed
+  Pre-requisites: The target request is not allowed in the current state.
+  arguments:
+    '{"Status"': '2, "Data": ""}'
+  label: Test_Case_Extreme_Value_(NotAllowed)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success with optional data
+  Pre-requisites: 'The target exists in the TargetList and optional data is provided.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"Status"': '0, "Data": "Optional data"}'
+  label: Test_Case_Special_Response_(Optional_Data_Field)
+  option: SendCommand

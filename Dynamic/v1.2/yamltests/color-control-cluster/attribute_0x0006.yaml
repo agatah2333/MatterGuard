@@ -1,0 +1,56 @@
+config:
+  attribute: '0x0006'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0006_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"CompensationText"': '""}'
+  label: Test_Case_Minimum_Length
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"CompensationText"': '"<string of 254 characters>"}'
+  label: Test_Case_Maximum_Length
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"CompensationText"': '"<string with special characters like !@#$%^&*()>"}'
+  label: Test_Case_Special_Characters
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: 'Failure (Error: String too long)'
+  Pre-requisites: None
+  arguments:
+    '{"CompensationText"': '"<string of 255 characters>"}'
+  label: Test_Case_Exceeding_Maximum_Length
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: 'Failure (Error: Null value not allowed)'
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    ### References
+
+    - Matter Application Cluster Specification【4:0†source】.'
+  arguments:
+    '{"CompensationText"': null}
+  label: Test_Case_Null_Value
+  option: WriteAttribute

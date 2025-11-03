@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0056",
+    "name": "Temperature Control",
+    "description": "Cluster for Temperature Control functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

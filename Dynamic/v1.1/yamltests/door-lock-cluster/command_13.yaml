@@ -1,0 +1,44 @@
+config:
+  cluster: door-lock-cluster
+  command: '13'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_13_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: The holiday schedule at index 1 will be cleared.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: At least one holiday schedule must be supported.
+  arguments:
+    '{"HolidayIndex"': 1}
+  label: Test_Case_Minimum_Value
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: The holiday schedule at the maximum supported index will be cleared.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The maximum number of holiday schedules must be supported.
+  arguments:
+    '{"HolidayIndex"': NumberOfHolidaySchedulesSupported}
+  label: Test_Case_Maximum_Value
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: The holiday index must be out of the supported range.
+  arguments:
+    '{"HolidayIndex"': NumberOfHolidaySchedulesSupported + 1}
+  label: Test_Case_Invalid_Index_(Out_of_Range)
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: All holiday schedules will be cleared.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'The device must support the special value 0xFFFE for clearing all
+    schedules.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:7†source】【4:10†source】【4:16†source】.'
+  arguments:
+    '{"HolidayIndex"': 0xFFFE}
+  label: Test_Case_Special_Response_(Clearing_All_Schedules)
+  option: SendCommand

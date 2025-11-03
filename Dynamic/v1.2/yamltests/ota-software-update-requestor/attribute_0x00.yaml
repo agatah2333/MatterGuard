@@ -1,0 +1,49 @@
+config:
+  attribute: '0x00'
+  cluster: ota-software-update-requestor
+  nodeId: '0x654231'
+name: ota-software-update-requestor_attribute_0x00_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`DefaultOTAProviders` will be set to `[{ProviderNodeID: 0, Endpoint:
+    0}]`'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Endpoint: 0
+    ProviderNodeID: 0
+  label: Test_Case_Minimum_Values
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`DefaultOTAProviders` will be set to `[{ProviderNodeID: 0xFFFFFFFFFFFFFFFF,
+    Endpoint: 255}]`'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Endpoint: 255
+    ProviderNodeID: '0xFFFFFFFFFFFFFFFF'
+  label: Test_Case_Maximum_Values
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: '`DefaultOTAProviders` already contains an entry for the same fabric.'
+  arguments:
+    Endpoint: 1
+    ProviderNodeID: 12345
+  label: Test_Case_Special_Response_-_Duplicate_Entry_for_Fabric
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: INVALID_VALUE
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:5†source】【4:6†source】【4:7†source】.'
+  arguments:
+    Endpoint: 256
+    ProviderNodeID: 67890
+  label: Test_Case_Special_Response_-_Invalid_Endpoint
+  option: WriteAttribute

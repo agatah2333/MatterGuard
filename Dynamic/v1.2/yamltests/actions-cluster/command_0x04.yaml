@@ -1,0 +1,33 @@
+config:
+  cluster: actions-cluster
+  command: '0x04'
+  nodeId: '0x654231'
+name: actions-cluster_command_0x04_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `ActionState` attribute will be set to `Stopped`'
+  ExpectedResponse: Success
+  Pre-requisites: '- The action with `ActionID` 0x0000 must exist and be in a state
+    that can be stopped.'
+  arguments:
+    ActionID: '0x0000'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '- No attribute will be changed as the action ID is invalid.'
+  ExpectedResponse: Error (e.g., `InvalidActionID`)
+  Pre-requisites: '- The action with `ActionID` 0xFFFF does not exist.
+
+
+    These test cases cover the extreme values of the `ActionID` field and a special
+    response scenario where an invalid `ActionID` is provided.
+
+
+    ### References
+
+    - The details of the `StopAction` command and its constraints are derived from
+    the Matter 1.2 Core Specification【4:0†source】.'
+  arguments:
+    ActionID: '0xFFFF'
+  label: Test_Case_Special_Response_Based_on_Field_Value
+  option: SendCommand

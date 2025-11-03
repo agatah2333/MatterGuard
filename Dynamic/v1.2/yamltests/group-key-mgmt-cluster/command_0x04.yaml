@@ -1,0 +1,29 @@
+config:
+  cluster: group-key-mgmt-cluster
+  command: '0x04'
+  nodeId: '0x654231'
+name: group-key-mgmt-cluster_command_0x04_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`INVALID_COMMAND`'
+  Pre-requisites: '`None`
+
+
+    #'
+  arguments:
+    GroupKeySetID: '`0`'
+  label: Test_Case_Extreme_Value_(Minimum)
+  option: SendCommand
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`NOT_FOUND`'
+  Pre-requisites: '`None`
+
+
+    These test cases cover the extreme values of the `GroupKeySetID` field and the
+    special response scenarios as described in the specification【4:0†source】【4:1†source】.'
+  arguments:
+    GroupKeySetID: '`65535`'
+  label: Test_Case_Special_Response_(Not_Found)
+  option: SendCommand

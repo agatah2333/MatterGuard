@@ -1,0 +1,47 @@
+config:
+  attribute: '0x0006'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0006_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"NumberOfActuationsTilt": 0}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"NumberOfActuationsTilt"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"NumberOfActuationsTilt": 65535}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"NumberOfActuationsTilt"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"NumberOfActuationsTilt": 65534}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"NumberOfActuationsTilt"': 65534}
+  label: Test_Case_Special_Response_-_Just_Below_Overflow
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Error (Value out of range)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments:
+    '{"NumberOfActuationsTilt"': 65536}
+  label: Test_Case_Special_Response_-_Overflow_Attempt
+  option: WriteAttribute

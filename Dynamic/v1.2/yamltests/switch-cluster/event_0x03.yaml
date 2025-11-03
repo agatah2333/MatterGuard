@@ -1,0 +1,45 @@
+config:
+  cluster: switch-cluster
+  event: '0x03'
+  nodeId: '0x654231'
+name: switch-cluster_event_0x03_v1.2.0.0
+tests:
+- ActionTime: '`<timestamp>`'
+  Attribute_Change: '`CurrentPosition attribute set to 0`'
+  ExpectedResponse: '`ShortRelease event generated`'
+  Pre-requisites: '`NumberOfPositions >= 1`'
+  arguments:
+    '{"PreviousPosition"': 0}`
+  label: Test_Case_Extreme_Value_(Minimum)
+  option: SubscribeToEvent
+- ActionTime: '`<timestamp>`'
+  Attribute_Change: '`CurrentPosition attribute set to NumberOfPositions-1`'
+  ExpectedResponse: '`ShortRelease event generated`'
+  Pre-requisites: '`NumberOfPositions >= 1`'
+  arguments:
+    '{"PreviousPosition"': NumberOfPositions-1}`
+  label: Test_Case_Extreme_Value_(Maximum)
+  option: SubscribeToEvent
+- ActionTime: '`<timestamp>`'
+  Attribute_Change: '`CurrentPosition attribute set to <PreviousPosition>`'
+  ExpectedResponse: '`ShortRelease event generated if no LongPress event had been
+    generated since the previous InitialPress event`'
+  Pre-requisites: '`Server supports MSL feature`'
+  arguments:
+    '{"PreviousPosition"': <any valid value>}`
+  label: Test_Case_Special_Response_(MSL_Feature_Supported)
+  option: SubscribeToEvent
+- ActionTime: '`<timestamp>`'
+  Attribute_Change: '`CurrentPosition attribute set to <PreviousPosition>`'
+  ExpectedResponse: '`ShortRelease event generated even if the switch was pressed
+    for a long time`'
+  Pre-requisites: '`Server does not support MSL feature`
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】.'
+  arguments:
+    '{"PreviousPosition"': <any valid value>}`
+  label: Test_Case_Special_Response_(MSL_Feature_Not_Supported)
+  option: SubscribeToEvent

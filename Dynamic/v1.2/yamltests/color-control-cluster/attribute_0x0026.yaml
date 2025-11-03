@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0026'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0026_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '{"ColorTemperatureMireds": 0}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ColorTemperatureMireds"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '{"ColorTemperatureMireds": 0xFEFF}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ColorTemperatureMireds"': 0xFEFF}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '{"ColorTemperatureMireds": 0x00FA}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ColorTemperatureMireds"': 0x00FA}
+  label: Test_Case_Default_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Error (Out of Range)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    '{"ColorTemperatureMireds"': 0xFFFF}
+  label: Test_Case_Special_Response_Value
+  option: WriteAttribute

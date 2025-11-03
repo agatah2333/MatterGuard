@@ -1,0 +1,39 @@
+config:
+  attribute: '0x4001'
+  cluster: onoff-cluster
+  nodeId: '0x654231'
+name: onoff-cluster_attribute_0x4001_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: OnOff attribute will be set to FALSE immediately.
+  ExpectedResponse: Device turns off immediately after turning on.
+  Pre-requisites: Device is initially off.
+  arguments: {}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 65535 (6553.5 seconds or approximately 1 hour 49 minutes)
+  Attribute_Change: OnOff attribute will remain TRUE for 6553.5 seconds.
+  ExpectedResponse: Device stays on for the maximum possible time.
+  Pre-requisites: Device is initially off.
+  arguments: {}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 1 (0.1 seconds)
+  Attribute_Change: OnOff attribute will be set to FALSE after 0.1 seconds.
+  ExpectedResponse: Device turns off almost immediately after turning on.
+  Pre-requisites: Device is initially off.
+  arguments: {}
+  label: Test_Case_Special_Value_(Immediate_Off)
+  option: WriteAttribute
+- ActionTime: 15000 (1500 seconds or 25 minutes)
+  Attribute_Change: OnOff attribute will remain TRUE for 1500 seconds.
+  ExpectedResponse: Device stays on for 25 minutes.
+  Pre-requisites: 'Device is initially off.
+
+
+    These test cases cover the extreme values of the OnTime attribute and special
+    values that could result in specific responses as described in the attribute''s
+    effect.'
+  arguments: {}
+  label: Test_Case_Special_Value_(Long_Duration)
+  option: WriteAttribute

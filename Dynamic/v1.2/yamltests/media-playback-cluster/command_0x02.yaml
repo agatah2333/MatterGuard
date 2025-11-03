@@ -1,0 +1,31 @@
+config:
+  cluster: media-playback-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: media-playback-cluster_command_0x02_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '- `CurrentState` attribute will be changed to `NotPlaying`'
+  ExpectedResponse: Success
+  Pre-requisites: '- Media must be in a playing state.'
+  arguments: {}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '- No attribute change as the command will not be executed.'
+  ExpectedResponse: NotActive
+  Pre-requisites: '- Media endpoint must not be active for playback.
+
+
+    These test cases cover the scenarios where the `Stop` command is issued under
+    normal conditions and when the media endpoint is not active, which should result
+    in a special response.
+
+
+    ### References
+
+    - The `Stop` command details and expected responses are derived from the Matter
+    1.2 Application Cluster Specification【4:0†source】.'
+  arguments: {}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SendCommand

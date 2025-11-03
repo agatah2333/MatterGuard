@@ -1,0 +1,28 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x03'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x03_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '- `PumpStatus`: SystemPressureLow bit set to 1'
+  ExpectedResponse: SystemPressureLow event triggered
+  Pre-requisites: '- Ensure the pump is operational and monitoring system pressure.'
+  arguments:
+    SystemPressure: -3276.7 kPa
+  label: Test_Case_Extreme_Low_Value
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '- `PumpStatus`: SystemPressureLow bit set to 1'
+  ExpectedResponse: SystemPressureLow event triggered
+  Pre-requisites: '- Ensure the pump is operational and monitoring system pressure.
+
+
+    These test cases cover the extreme low value of the system pressure and a specific
+    threshold value that would trigger the SystemPressureLow event, as mentioned in
+    the provided context【4:0†source】.'
+  arguments:
+    SystemPressure: <threshold_value> (specific value that triggers the SystemPressureLow
+      event as per vendor-specific implementation)
+  label: Test_Case_Special_Response_Value
+  option: SubscribeToEvent

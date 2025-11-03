@@ -1,0 +1,46 @@
+config:
+  cluster: operational-credentials-cluster
+  command: '0x0b'
+  nodeId: '0x654231'
+name: operational-credentials-cluster_command_0x0b_v1.1.0.0
+tests:
+- ActionTime: <max_value>
+  Attribute_Change: '{"OperationalCredentials": "<new_values>"}'
+  ExpectedResponse: <success>
+  Pre-requisites: <device_not_full>
+  arguments: {}
+  label: Test_Case_Extreme_Values
+  option: SendCommand
+- ActionTime: <valid_value>
+  Attribute_Change: <none>
+  ExpectedResponse: <FabricConflict>
+  Pre-requisites: <fabric_already_exists>
+  arguments: {}
+  label: Test_Case_Fabric_Conflict
+  option: SendCommand
+- ActionTime: <valid_value>
+  Attribute_Change: <none>
+  ExpectedResponse: <TableFull>
+  Pre-requisites: <device_table_full>
+  arguments: {}
+  label: Test_Case_Table_Full
+  option: SendCommand
+- ActionTime: <valid_value>
+  Attribute_Change: <none>
+  ExpectedResponse: <InvalidAdminSubject>
+  Pre-requisites: <valid_context>
+  arguments: {}
+  label: Test_Case_Invalid_Admin_Subject
+  option: SendCommand
+- ActionTime: <min_value>
+  Attribute_Change: '{"OperationalCredentials": "<new_values>"}'
+  ExpectedResponse: <success>
+  Pre-requisites: '<device_not_full>
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:17†source】【4:18†source】.'
+  arguments: {}
+  label: Test_Case_Minimum_Values
+  option: SendCommand

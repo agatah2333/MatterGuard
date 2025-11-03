@@ -1,0 +1,121 @@
+{
+  "cluster_id": "0x0204",
+  "name": "Thermostat User Interface Configuration",
+  "description": "This cluster provides an interface to allow configuration of the user interface for a thermostat, or a thermostat controller device, that supports a keypad and LCD screen.",
+  "features": [],
+  "data_types": [
+    {
+      "name": "TemperatureDisplayModeEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "Celsius",
+          "summary": "Temperature displayed in °C",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "Fahrenheit",
+          "summary": "Temperature displayed in °F",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "name": "KeypadLockoutEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "NoLockout",
+          "summary": "All functionality available to the user",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "Lockout1",
+          "summary": "Level 1 reduced functionality",
+          "conformance": "M"
+        },
+        {
+          "value": 2,
+          "name": "Lockout2",
+          "summary": "Level 2 reduced functionality",
+          "conformance": "M"
+        },
+        {
+          "value": 3,
+          "name": "Lockout3",
+          "summary": "Level 3 reduced functionality",
+          "conformance": "M"
+        },
+        {
+          "value": 4,
+          "name": "Lockout4",
+          "summary": "Level 4 reduced functionality",
+          "conformance": "M"
+        },
+        {
+          "value": 5,
+          "name": "Lockout5",
+          "summary": "Least functionality available to the user",
+          "conformance": "M"
+        }
+      ],
+      "description": "The interpretation of the various levels is device-dependent."
+    },
+    {
+      "name": "ScheduleProgrammingVisibilityEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "ScheduleProgrammingPermitted",
+          "summary": "Local schedule programming functionality is enabled at the thermostat",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "ScheduleProgrammingDenied",
+          "summary": "Local schedule programming functionality is disabled at the thermostat",
+          "conformance": "M"
+        }
+      ]
+    }
+  ],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "TemperatureDisplayMode",
+      "type": "TemperatureDisplayModeEnum",
+      "constraint": "desc",
+      "default": "Celsius",
+      "access": "RW VO",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate the units of the temperature displayed on the thermostat screen."
+    },
+    {
+      "id": "0x0001",
+      "name": "KeypadLockout",
+      "type": "KeypadLockoutEnum",
+      "constraint": "desc",
+      "default": "NoLockout",
+      "access": "RW VM",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate the level of functionality that is available to the user via the keypad."
+    },
+    {
+      "id": "0x0002",
+      "name": "ScheduleProgrammingVisibility",
+      "type": "ScheduleProgrammingVisibilityEnum",
+      "constraint": "desc",
+      "default": "ScheduleProgrammingPermitted",
+      "access": "RW VM",
+      "conformance": "O",
+      "description": "This attribute is used to hide the weekly schedule programming functionality or menu on a thermostat from a user to prevent local user programming of the weekly schedule."
+    }
+  ],
+  "events": []
+}

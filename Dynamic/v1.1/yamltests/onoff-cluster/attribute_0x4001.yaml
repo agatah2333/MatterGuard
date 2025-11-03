@@ -1,0 +1,48 @@
+config:
+  attribute: '0x4001'
+  cluster: onoff-cluster
+  nodeId: '0x654231'
+name: onoff-cluster_attribute_0x4001_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`OnTime` = 0'
+  ExpectedResponse: The `OnTime` attribute is set to 0.
+  Pre-requisites: None
+  arguments:
+    OnTime: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 65535
+  Attribute_Change: '`OnTime` = 65535'
+  ExpectedResponse: The `OnTime` attribute is set to 65535.
+  Pre-requisites: None
+  arguments:
+    OnTime: 65535
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 1000
+  Attribute_Change: "- `OnTime` = 1000\n  - `OffWaitTime` = 500\n  - `OnOff` = TRUE"
+  ExpectedResponse: The `OnTime` attribute is set to 1000, `OffWaitTime` is set to
+    500, and `OnOff` is set to TRUE.
+  Pre-requisites: The `OnOff` attribute must be FALSE before the command is received.
+  arguments:
+    OffWaitTime: 500
+    OnTime: 1000
+  label: Test_Case_Special_Response_-_OnWithTimedOff_Command_with_OnOff_=_FALSE
+  option: WriteAttribute
+- ActionTime: 2000
+  Attribute_Change: "- `OnTime` = 2000\n  - `OffWaitTime` = 3000\n  - `OnOff` = TRUE"
+  ExpectedResponse: The `OnTime` attribute is set to 2000, `OffWaitTime` is set to
+    the minimum of the current `OffWaitTime` and the specified `OffWaitTime` (3000),
+    and `OnOff` is set to TRUE.
+  Pre-requisites: 'The `OnOff` attribute must be FALSE and `OffWaitTime` must be greater
+    than 0 before the command is received.
+
+
+    These test cases cover the extreme values of the `OnTime` attribute and the special
+    responses as described in the provided context【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    OffWaitTime: 3000
+    OnTime: 2000
+  label: Test_Case_Special_Response_-_OnWithTimedOff_Command_with_OffWaitTime_>_0_and_OnOff_=_FALSE
+  option: WriteAttribute

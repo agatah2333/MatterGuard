@@ -1,0 +1,73 @@
+config:
+  cluster: channel-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: channel-cluster_command_0x03_v1.1.0.0
+tests:
+- ActionTime: "\"N/A\"\n  - **ExpectedResponse**: \"LauncherResponse\"\n  - **Which\
+    \ Attribute Will Be Changed and the Value of the Attribute**: {\"Status\": \"\
+    ACTIVE_VISIBLE_FOCUS\", \"CurrentApp\": \"new_application\"}\n  - **Any Pre-requisites**:\
+    \ \"Application Platform feature supported\""
+  Attribute_Change: "{\"Status\": \"ACTIVE_VISIBLE_FOCUS\", \"CurrentApp\": \"new_application\"\
+    }\n  - **Any Pre-requisites**: \"Application Platform feature supported\""
+  ExpectedResponse: "\"LauncherResponse\"\n  - **Which Attribute Will Be Changed and\
+    \ the Value of the Attribute**: {\"Status\": \"ACTIVE_VISIBLE_FOCUS\", \"CurrentApp\"\
+    : \"new_application\"}\n  - **Any Pre-requisites**: \"Application Platform feature\
+    \ supported\""
+  Pre-requisites: '"Application Platform feature supported"'
+  arguments:
+    '**ActionTime**': '"N/A"'
+    '**Any Pre-requisites**': '"Application Platform feature supported"'
+    '**ExpectedResponse**': '"LauncherResponse"'
+    '**Which Attribute Will Be Changed and the Value of the Attribute**':
+      CurrentApp: new_application
+      Status: ACTIVE_VISIBLE_FOCUS
+    '{"Application"': '"max_value", "Data": "max_length_octstr"}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: "\"N/A\"\n  - **ExpectedResponse**: \"LauncherResponse\"\n  - **Which\
+    \ Attribute Will Be Changed and the Value of the Attribute**: {\"Status\": \"\
+    ACTIVE_VISIBLE_FOCUS\", \"CurrentApp\": \"special_application\"}\n  - **Any Pre-requisites**:\
+    \ \"Application Platform feature supported\"\n\nThese test cases cover the extreme\
+    \ values and special responses for the `LauncherResponse` command in the Channel\
+    \ Cluster. The values for \"max_value\", \"max_length_octstr\", \"special_value\"\
+    , and \"special_data\" should be replaced with the actual maximum and special\
+    \ values as defined in the specification.\n\nFor more detailed information, refer\
+    \ to the Matter Application Cluster Specification document【4:0†source】."
+  Attribute_Change: "{\"Status\": \"ACTIVE_VISIBLE_FOCUS\", \"CurrentApp\": \"special_application\"\
+    }\n  - **Any Pre-requisites**: \"Application Platform feature supported\"\n\n\
+    These test cases cover the extreme values and special responses for the `LauncherResponse`\
+    \ command in the Channel Cluster. The values for \"max_value\", \"max_length_octstr\"\
+    , \"special_value\", and \"special_data\" should be replaced with the actual maximum\
+    \ and special values as defined in the specification.\n\nFor more detailed information,\
+    \ refer to the Matter Application Cluster Specification document【4:0†source】."
+  ExpectedResponse: "\"LauncherResponse\"\n  - **Which Attribute Will Be Changed and\
+    \ the Value of the Attribute**: {\"Status\": \"ACTIVE_VISIBLE_FOCUS\", \"CurrentApp\"\
+    : \"special_application\"}\n  - **Any Pre-requisites**: \"Application Platform\
+    \ feature supported\"\n\nThese test cases cover the extreme values and special\
+    \ responses for the `LauncherResponse` command in the Channel Cluster. The values\
+    \ for \"max_value\", \"max_length_octstr\", \"special_value\", and \"special_data\"\
+    \ should be replaced with the actual maximum and special values as defined in\
+    \ the specification.\n\nFor more detailed information, refer to the Matter Application\
+    \ Cluster Specification document【4:0†source】."
+  Pre-requisites: '"Application Platform feature supported"
+
+
+    These test cases cover the extreme values and special responses for the `LauncherResponse`
+    command in the Channel Cluster. The values for "max_value", "max_length_octstr",
+    "special_value", and "special_data" should be replaced with the actual maximum
+    and special values as defined in the specification.
+
+
+    For more detailed information, refer to the Matter Application Cluster Specification
+    document【4:0†source】.'
+  arguments:
+    '**ActionTime**': '"N/A"'
+    '**Any Pre-requisites**': '"Application Platform feature supported"'
+    '**ExpectedResponse**': '"LauncherResponse"'
+    '**Which Attribute Will Be Changed and the Value of the Attribute**':
+      CurrentApp: special_application
+      Status: ACTIVE_VISIBLE_FOCUS
+    '{"Application"': '"special_value", "Data": "special_data"}'
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: SendCommand

@@ -1,0 +1,80 @@
+{
+  "cluster": {
+    "id": "0x0405",
+    "name": "Relative Humidity Measurement",
+    "description": "This is a base cluster. The server cluster provides an interface to water content measurement functionality. The measurement is reportable and may be configured for reporting. Water content measurements currently is, but are not limited to relative humidity.",
+    "classification": {
+      "hierarchy": "Base",
+      "role": "Application", 
+      "scope": "Endpoint",
+      "pics_code": "RH"
+    },
+    "revision": {
+      "current": 3,
+      "history": [
+        {
+          "revision": 1,
+          "description": "Mandatory global ClusterRevision attribute added"
+        },
+        {
+          "revision": 2,
+          "description": "CCB 2241"
+        },
+        {
+          "revision": 3,
+          "description": "New data model format and notation"
+        }
+      ]
+    },
+    "measurement_type": "Percentage of water in the air",
+    "data_types": [],
+    "attributes": [
+      {
+        "id": "0x0000",
+        "name": "MeasuredValue",
+        "type": "uint16",
+        "constraint": "MinMeasuredValue to MaxMeasuredValue",
+        "quality": "XP",
+        "default": null,
+        "access": "RV",
+        "conformance": "M",
+        "description": "MeasuredValue represents the water content in % as follows: MeasuredValue = 100 x water content. Where 0% <= water content <= 100%, corresponding to a MeasuredValue in the range 0 to 10000. The maximum resolution this format allows is 0.01%. The null value indicates that the measurement is unknown. MeasuredValue is updated continuously as new measurements are made."
+      },
+      {
+        "id": "0x0001", 
+        "name": "MinMeasuredValue",
+        "type": "uint16",
+        "constraint": "0 to MaxMeasuredValue-1",
+        "quality": "X",
+        "default": null,
+        "access": "RV",
+        "conformance": "M",
+        "description": "The MinMeasuredValue attribute indicates the minimum value of MeasuredValue that can be measured. The null value means this attribute is not defined."
+      },
+      {
+        "id": "0x0002",
+        "name": "MaxMeasuredValue", 
+        "type": "uint16",
+        "constraint": "MinMeasuredValue+1 to 10000",
+        "quality": "X",
+        "default": null,
+        "access": "RV", 
+        "conformance": "M",
+        "description": "The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue that can be measured. The null value means this attribute is not defined."
+      },
+      {
+        "id": "0x0003",
+        "name": "Tolerance",
+        "type": "uint16",
+        "constraint": "0 to 2048",
+        "quality": null,
+        "default": null,
+        "access": "RV",
+        "conformance": "O",
+        "description": "See Measured Value."
+      }
+    ],
+    "commands": [],
+    "events": []
+  }
+}

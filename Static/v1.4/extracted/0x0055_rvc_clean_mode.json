@@ -1,0 +1,72 @@
+{
+  "source_file": "RVC Clean Mode_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0055",
+        "name": "RVC Clean Mode",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SupportedModes",
+            "dataType": "list[ModeOptionStruct]",
+            "valueRange": "2-255",
+            "description": "This attribute SHALL contain the list of supported modes that may be selected for the CurrentMode attribute. Each item in this list represents a unique mode as indicated by the Mode field of the ModeOptionStruct.",
+            "privilege": "RVM",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentMode",
+            "dataType": "uint8",
+            "valueRange": "",
+            "description": "This attribute SHALL indicate the current mode of the server.",
+            "privilege": "RVM",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "StartUpMode",
+            "dataType": "uint8",
+            "valueRange": "",
+            "description": "This attribute SHALL indicate the desired startup mode for the server when it is supplied with power.",
+            "privilege": "RWVO",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "OnMode",
+            "dataType": "uint8",
+            "valueRange": "",
+            "description": "This attribute SHALL indicate whether the value of CurrentMode depends on the state of the On/Off cluster on the same endpoint.",
+            "privilege": "RWVODEPONOFF",
+            "writable": true
+          }
+        ],
+        "commands": [],
+        "events": [],
+        "dataTypes": {
+          "ModeOptionStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "Label": {
+                "type": "string",
+                "valueRange": "Mandatory"
+              },
+              "Mode": {
+                "type": "uint8",
+                "valueRange": "Mandatory"
+              },
+              "ModeTags": {
+                "type": "list",
+                "elementType": "string",
+                "valueRange": "1-8"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

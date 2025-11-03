@@ -1,0 +1,51 @@
+config:
+  attribute: '0x04'
+  cluster: icd-management-cluster
+  nodeId: '0x654231'
+name: icd-management-cluster_attribute_0x04_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: No change, error response.
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments:
+    '{"CheckInInterval"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: CheckInInterval set to 86400
+  ExpectedResponse: MAX_INTERVAL_REACHED
+  Pre-requisites: None
+  arguments:
+    '{"CheckInInterval"': 86400}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: CheckInInterval set to 3600
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"CheckInInterval"': 3600}
+  label: Test_Case_Typical_Value_within_Range
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: CheckInInterval set to 1
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"CheckInInterval"': 1}
+  label: Test_Case_Edge_Case_Just_Above_Minimum
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: CheckInInterval set to 86399
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    '{"CheckInInterval"': 86399}
+  label: Test_Case_Edge_Case_Just_Below_Maximum
+  option: WriteAttribute

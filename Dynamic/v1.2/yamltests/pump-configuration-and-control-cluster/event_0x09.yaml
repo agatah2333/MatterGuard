@@ -1,0 +1,39 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x09'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x09_v1.2.0.0
+tests:
+- ActionTime: 0 (minimum possible value)
+  Attribute_Change: '`PumpStatus` attribute will be updated to indicate a blocked
+    pump.'
+  ExpectedResponse: PumpBlocked event triggered with minimum action time.
+  Pre-requisites: Pump must be in an operational state.
+  arguments:
+    Access: V
+    Conformance: O
+    EventID: '0x09'
+    Priority: CRITICAL
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: 65535 (maximum possible value)
+  Attribute_Change: '`PumpStatus` attribute will be updated to indicate a blocked
+    pump.'
+  ExpectedResponse: PumpBlocked event triggered with maximum action time.
+  Pre-requisites: 'Pump must be in an operational state.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments:
+    Access: V
+    Conformance: O
+    EventID: '0x09'
+    Priority: CRITICAL
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: SubscribeToEvent

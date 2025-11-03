@@ -1,0 +1,42 @@
+config:
+  attribute: '0x17'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x17_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '{"DetachedRoleCount": 0}'
+  ExpectedResponse: Success
+  Pre-requisites: Node rebooted
+  arguments:
+    '{"DetachedRoleCount"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '{"DetachedRoleCount": 4294967295}'
+  ExpectedResponse: Success
+  Pre-requisites: Node has been running for a long time without reboot
+  arguments:
+    '{"DetachedRoleCount"': 4294967295}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '{"DetachedRoleCount": 4294967294}'
+  ExpectedResponse: Success
+  Pre-requisites: Node has been running for a long time without reboot
+  arguments:
+    '{"DetachedRoleCount"': 4294967294}
+  label: Test_Case_Special_Response_-_Just_Before_Overflow
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: N/A
+  ExpectedResponse: Error (Value out of range)
+  Pre-requisites: 'N/A
+
+
+    These test cases cover the extreme values of the `DetachedRoleCount` attribute
+    and the special responses related to its constraints.'
+  arguments:
+    '{"DetachedRoleCount"': 4294967296}
+  label: Test_Case_Special_Response_-_Overflow
+  option: WriteAttribute

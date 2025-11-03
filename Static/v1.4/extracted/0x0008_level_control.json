@@ -1,0 +1,387 @@
+{
+  "source_file": "Level Control_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0008",
+        "name": "Level Control",
+        "description": "This cluster provides an interface for controlling a characteristic of a device that can be set to a level, for example the brightness of a light, the degree of closure of a door, or the power output of a heater.",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "CurrentLevel",
+            "dataType": "uint8",
+            "valueRange": "MinLevel to MaxLevel",
+            "description": "The current level of the device.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "RemainingTime",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "The time remaining for the current level transition.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "MinLevel",
+            "dataType": "uint8",
+            "valueRange": "1-254",
+            "description": "The minimum level that can be set.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "MaxLevel",
+            "dataType": "uint8",
+            "valueRange": "MinLevel-254",
+            "description": "The maximum level that can be set.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "CurrentFrequency",
+            "dataType": "uint16",
+            "valueRange": "MinFrequency to MaxFrequency",
+            "description": "The current frequency of the device.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0005",
+            "name": "MinFrequency",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "The minimum frequency that can be set.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0006",
+            "name": "MaxFrequency",
+            "dataType": "uint16",
+            "valueRange": "min MinFrequency",
+            "description": "The maximum frequency that can be set.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0010",
+            "name": "OnOffTransitionTime",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "The time taken to move to or from the target level when On or Off commands are received.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0011",
+            "name": "OnLevel",
+            "dataType": "uint8",
+            "valueRange": "all",
+            "description": "The level to which the device is set when turned on.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0012",
+            "name": "OnTransitionTime",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "The time taken to move from the minimum level to the maximum level when an On command is received.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0013",
+            "name": "OffTransitionTime",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "The time taken to move from the maximum level to the minimum level when an Off command is received.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0014",
+            "name": "DefaultMoveRate",
+            "dataType": "uint8",
+            "valueRange": "all",
+            "description": "The default rate at which the level changes.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0015",
+            "name": "Options",
+            "dataType": "map8",
+            "valueRange": "OptionsBitmap",
+            "description": "The selected options of the device.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x4000",
+            "name": "StartUpCurrentLevel",
+            "dataType": "uint8",
+            "valueRange": "desc",
+            "description": "The level to which the device is set at startup.",
+            "privilege": "RW",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "MoveToLevel",
+            "parameters": [
+              {
+                "name": "Level",
+                "dataType": "uint8",
+                "valueRange": "max 254"
+              },
+              {
+                "name": "TransitionTime",
+                "dataType": "uint16",
+                "valueRange": "all"
+              },
+              {
+                "name": "OptionsMask",
+                "dataType": "OptionsBitmap"
+              },
+              {
+                "name": "OptionsOverride",
+                "dataType": "OptionsBitmap"
+              }
+            ],
+            "description": "On receipt of this command, a device SHALL move from its current level to the value given in the Level field.",
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "Move",
+            "parameters": [
+              {
+                "name": "MoveMode",
+                "dataType": "MoveModeEnum"
+              },
+              {
+                "name": "Rate",
+                "dataType": "uint8",
+                "valueRange": "all"
+              },
+              {
+                "name": "OptionsMask",
+                "dataType": "OptionsBitmap"
+              },
+              {
+                "name": "OptionsOverride",
+                "dataType": "OptionsBitmap"
+              }
+            ],
+            "description": "On receipt of this command, a device SHALL move from its current level in an up or down direction in a continuous fashion.",
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "Step",
+            "parameters": [
+              {
+                "name": "StepMode",
+                "dataType": "StepModeEnum"
+              },
+              {
+                "name": "StepSize",
+                "dataType": "uint8",
+                "valueRange": "all"
+              },
+              {
+                "name": "TransitionTime",
+                "dataType": "uint16",
+                "valueRange": "all"
+              },
+              {
+                "name": "OptionsMask",
+                "dataType": "OptionsBitmap"
+              },
+              {
+                "name": "OptionsOverride",
+                "dataType": "OptionsBitmap"
+              }
+            ],
+            "description": "On receipt of this command, a device SHALL move from its current level in an up or down direction as detailed below.",
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x03",
+            "name": "Stop",
+            "parameters": [
+              {
+                "name": "OptionsMask",
+                "dataType": "OptionsBitmap"
+              },
+              {
+                "name": "OptionsOverride",
+                "dataType": "OptionsBitmap"
+              }
+            ],
+            "description": "Upon receipt of this command, any MoveToLevel, Move or Step command (and their 'with On/Off' variants) currently in process SHALL be terminated.",
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x04",
+            "name": "MoveToLevelWithOnOff",
+            "parameters": [
+              {
+                "name": "Level",
+                "dataType": "uint8",
+                "valueRange": "max 254"
+              },
+              {
+                "name": "TransitionTime",
+                "dataType": "uint16",
+                "valueRange": "all"
+              },
+              {
+                "name": "OptionsMask",
+                "dataType": "OptionsBitmap"
+              },
+              {
+                "name": "OptionsOverride",
+                "dataType": "OptionsBitmap"
+              }
+            ],
+            "description": "Identical to MoveToLevel, with additional effects on the OnOff attribute.",
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x05",
+            "name": "MoveWithOnOff",
+            "parameters": [
+              {
+                "name": "MoveMode",
+                "dataType": "MoveModeEnum"
+              },
+              {
+                "name": "Rate",
+                "dataType": "uint8",
+                "valueRange": "all"
+              },
+              {
+                "name": "OptionsMask",
+                "dataType": "OptionsBitmap"
+              },
+              {
+                "name": "OptionsOverride",
+                "dataType": "OptionsBitmap"
+              }
+            ],
+            "description": "Identical to Move, with additional effects on the OnOff attribute.",
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x06",
+            "name": "StepWithOnOff",
+            "parameters": [
+              {
+                "name": "StepMode",
+                "dataType": "StepModeEnum"
+              },
+              {
+                "name": "StepSize",
+                "dataType": "uint8",
+                "valueRange": "all"
+              },
+              {
+                "name": "TransitionTime",
+                "dataType": "uint16",
+                "valueRange": "all"
+              },
+              {
+                "name": "OptionsMask",
+                "dataType": "OptionsBitmap"
+              },
+              {
+                "name": "OptionsOverride",
+                "dataType": "OptionsBitmap"
+              }
+            ],
+            "description": "Identical to Step, with additional effects on the OnOff attribute.",
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x07",
+            "name": "StopWithOnOff",
+            "parameters": [
+              {
+                "name": "OptionsMask",
+                "dataType": "OptionsBitmap"
+              },
+              {
+                "name": "OptionsOverride",
+                "dataType": "OptionsBitmap"
+              }
+            ],
+            "description": "Identical to Stop, with additional effects on the OnOff attribute.",
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x08",
+            "name": "MoveToClosestFrequency",
+            "parameters": [
+              {
+                "name": "Frequency",
+                "dataType": "uint16",
+                "valueRange": "all"
+              }
+            ],
+            "description": "Upon receipt of this command, the device SHALL change its current frequency to the requested frequency, or to the closest frequency that it can generate.",
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "dataTypes": {
+          "OptionsBitmap": {
+            "baseType": "map8",
+            "fields": {
+              "ExecuteIfOff": {
+                "bit": 0
+              },
+              "CoupleColorTempToLevel": {
+                "bit": 1
+              }
+            }
+          },
+          "MoveModeEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Up",
+              "1": "Down"
+            }
+          },
+          "StepModeEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Up",
+              "1": "Down"
+            }
+          }
+        },
+        "events": []
+      }
+    ]
+  }
+}

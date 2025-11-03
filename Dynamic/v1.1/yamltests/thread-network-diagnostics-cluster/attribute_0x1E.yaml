@@ -1,0 +1,43 @@
+config:
+  attribute: '0x1E'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x1E_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: ActiveNetworkFaults will be an empty list
+  ExpectedResponse: No active faults
+  Pre-requisites: Node has no detected faults
+  arguments:
+    '{"NetworkFault"': '[]}'
+  label: Test_Case_Extreme_Value_(Empty_List)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: ActiveNetworkFaults will contain [0, 1, 2, 3]
+  ExpectedResponse: All possible faults are active
+  Pre-requisites: Node detects all possible faults
+  arguments:
+    '{"NetworkFault"': '[0, 1, 2, 3]}'
+  label: Test_Case_Extreme_Value_(Maximum_List_Size)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: ActiveNetworkFaults will contain [1]
+  ExpectedResponse: Link down fault detected
+  Pre-requisites: Node detects a link down fault
+  arguments:
+    '{"NetworkFault"': '[1]}'
+  label: Test_Case_Special_Response_(Link_Down)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: ActiveNetworkFaults will contain [3]
+  ExpectedResponse: Network jammed fault detected
+  Pre-requisites: 'Node detects a network jammed fault
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:5†source】.'
+  arguments:
+    '{"NetworkFault"': '[3]}'
+  label: Test_Case_Special_Response_(Network_Jammed)
+  option: WriteAttribute

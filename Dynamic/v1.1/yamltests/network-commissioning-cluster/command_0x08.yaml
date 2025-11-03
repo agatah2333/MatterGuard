@@ -1,0 +1,48 @@
+config:
+  cluster: network-commissioning-cluster
+  command: '0x08'
+  nodeId: '0x654231'
+name: network-commissioning-cluster_command_0x08_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '`LastNetworkID` set to "A"'
+  ExpectedResponse: Success
+  Pre-requisites: Fail-safe context must be armed
+  arguments:
+    Breadcrumb: 0
+    NetworkID: '"A" (1 octet)'
+  label: Test_Case_Minimum_Length_NetworkID
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '`LastNetworkID` set to "A" * 32'
+  ExpectedResponse: Success
+  Pre-requisites: Fail-safe context must be armed
+  arguments:
+    Breadcrumb: 0
+    NetworkID: '"A" * 32 (32 octets)'
+  label: Test_Case_Maximum_Length_NetworkID
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: BUSY
+  Pre-requisites: Server is currently attempting to connect in the background or proceeding
+    with a prior ConnectNetwork
+  arguments:
+    Breadcrumb: 0
+    NetworkID: '"BusyNetwork"'
+  label: Test_Case_Busy_Status_Code
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: FAILSAFE_REQUIRED
+  Pre-requisites: 'Command received without an armed fail-safe context
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    Breadcrumb: 0
+    NetworkID: '"FailsafeNetwork"'
+  label: Test_Case_Failsafe_Required_Status_Code
+  option: SendCommand

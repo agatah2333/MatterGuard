@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0006'
+  cluster: level-control-cluster
+  nodeId: '0x654231'
+name: level-control-cluster_attribute_0x0006_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: MaxFrequency set to 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"MaxFrequency"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: MaxFrequency set to 65535
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"MaxFrequency"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments:
+    '{"MaxFrequency"': 70000}
+  label: Test_Case_Special_Response_-_Constraint_Error
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: MaxFrequency set to closest supported frequency
+  ExpectedResponse: Manufacturer specific response
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:2†source】【4:3†source】【4:5†source】【4:6†source】.'
+  arguments:
+    '{"MaxFrequency"': 50000}
+  label: Test_Case_Special_Response_-_Manufacturer_Specific_Decision
+  option: WriteAttribute

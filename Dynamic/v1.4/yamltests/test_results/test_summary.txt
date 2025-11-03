@@ -1,0 +1,9 @@
+Matter SDK Dynamic Test Execution Summary
+==================================================
+
+Execution Time: 2025-10-14T15:51:23.370539
+Total Tests: 1
+Passed: 1
+Failed: 0
+Success Rate: 100.00%
+

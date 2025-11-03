@@ -1,0 +1,486 @@
+{
+  "source_file": "Power Source_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x002F",
+        "name": "Power Source",
+        "dataTypes": {
+          "WiredFaultEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "Unspecified",
+              "1": "OverVoltage",
+              "2": "UnderVoltage"
+            }
+          },
+          "BatFaultEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "Unspecified",
+              "1": "OverTemp",
+              "2": "UnderTemp"
+            }
+          },
+          "BatChargeFaultEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "Unspecified",
+              "1": "AmbientTooHot",
+              "2": "AmbientTooCold",
+              "3": "BatteryTooHot",
+              "4": "BatteryTooCold",
+              "5": "BatteryAbsent",
+              "6": "BatteryOverVoltage",
+              "7": "BatteryUnderVoltage",
+              "8": "ChargerOverVoltage",
+              "9": "ChargerUnderVoltage",
+              "10": "SafetyTimeout"
+            }
+          },
+          "BatReplaceabilityEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "Unspecified",
+              "1": "NotReplaceable",
+              "2": "UserReplaceable",
+              "3": "FactoryReplaceable"
+            }
+          },
+          "BatApprovedChemistryEnum": {
+            "type": "enum16",
+            "values": {
+              "0": "Unspecified",
+              "1": "Alkaline",
+              "2": "LithiumCarbonFluoride",
+              "3": "LithiumChromiumOxide",
+              "4": "LithiumCopperOxide",
+              "5": "LithiumIronDisulfide",
+              "6": "LithiumManganeseDioxide",
+              "7": "LithiumThionylChloride",
+              "8": "Magnesium",
+              "9": "MercuryOxide",
+              "10": "NickelOxyhydride",
+              "11": "SilverOxide",
+              "12": "ZincAir",
+              "13": "ZincCarbon",
+              "14": "ZincChloride",
+              "15": "ZincManganeseDioxide",
+              "16": "LeadAcid",
+              "17": "LithiumCobaltOxide",
+              "18": "LithiumIon",
+              "19": "LithiumIonPolymer",
+              "20": "LithiumIronPhosphate",
+              "21": "LithiumSulfur",
+              "22": "LithiumTitanate",
+              "23": "NickelCadmium",
+              "24": "NickelHydrogen",
+              "25": "NickelIron",
+              "26": "NickelMetalHydride",
+              "27": "NickelZinc",
+              "28": "SilverZinc",
+              "29": "SodiumIon",
+              "30": "SodiumSulfur",
+              "31": "ZincBromide",
+              "32": "ZincCerium"
+            }
+          },
+          "BatChargeStateEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "Unknown",
+              "1": "IsCharging",
+              "2": "IsAtFullCharge",
+              "3": "IsNotCharging"
+            }
+          },
+          "PowerSourceStatusEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "Unspecified",
+              "1": "Active",
+              "2": "Standby",
+              "3": "Unavailable"
+            }
+          },
+          "WiredCurrentTypeEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "AC",
+              "1": "DC"
+            }
+          },
+          "BatCommonDesignationEnum": {
+            "type": "enum16",
+            "values": {
+              "0": "Unspecified",
+              "1": "AAA",
+              "2": "AA",
+              "3": "C",
+              "4": "D",
+              "5": "4v5",
+              "6": "6v0",
+              "7": "9v0",
+              "8": "1_2AA",
+              "9": "AAAA",
+              "10": "A",
+              "11": "B",
+              "12": "F",
+              "13": "N",
+              "14": "No6",
+              "15": "SubC",
+              "16": "A23",
+              "17": "A27",
+              "18": "BA5800",
+              "19": "Duplex",
+              "20": "4SR44",
+              "21": "523",
+              "22": "531",
+              "23": "15v0",
+              "24": "22v5",
+              "25": "30v0",
+              "26": "45v0",
+              "27": "67v5",
+              "28": "CR2",
+              "29": "2CR5",
+              "30": "CR_P2",
+              "31": "CR_V3",
+              "32": "SR41",
+              "33": "SR43",
+              "34": "SR44",
+              "35": "SR45",
+              "36": "SR48",
+              "37": "SR54",
+              "38": "SR55",
+              "39": "SR57",
+              "40": "SR58",
+              "41": "SR59",
+              "42": "SR60",
+              "43": "SR63",
+              "44": "SR64",
+              "45": "SR65",
+              "46": "SR66",
+              "47": "SR67",
+              "48": "SR68",
+              "49": "SR69",
+              "50": "SR516",
+              "51": "SR731",
+              "52": "SR712",
+              "53": "LR932",
+              "54": "A5",
+              "55": "A10",
+              "56": "A13",
+              "57": "A312",
+              "58": "A675",
+              "59": "AC41E",
+              "60": "10180",
+              "61": "10280",
+              "62": "10440",
+              "63": "14250",
+              "64": "14430",
+              "65": "14500",
+              "66": "14650",
+              "67": "15270",
+              "68": "16340",
+              "69": "RCR123A",
+              "70": "17500",
+              "71": "17670",
+              "72": "18350",
+              "73": "18500",
+              "74": "18650",
+              "75": "19670",
+              "76": "25500",
+              "77": "26650",
+              "78": "32600"
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "Status",
+            "dataType": "PowerSourceStatusEnum",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0001",
+            "name": "Order",
+            "dataType": "uint8",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0002",
+            "name": "Description",
+            "dataType": "char_string",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0003",
+            "name": "WiredAssessedInputVoltage",
+            "dataType": "int32",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0004",
+            "name": "WiredAssessedInputFrequency",
+            "dataType": "int32",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0005",
+            "name": "WiredCurrentType",
+            "dataType": "WiredCurrentTypeEnum",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0006",
+            "name": "WiredAssessedCurrent",
+            "dataType": "int32",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0007",
+            "name": "WiredNominalVoltage",
+            "dataType": "int32",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0008",
+            "name": "WiredMaximumCurrent",
+            "dataType": "int32",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0009",
+            "name": "WiredPresent",
+            "dataType": "bool",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x000A",
+            "name": "ActiveWiredFaults",
+            "dataType": {
+              "type": "list",
+              "elementType": "WiredFaultEnum"
+            },
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x000B",
+            "name": "BatVoltage",
+            "dataType": "int32",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x000C",
+            "name": "BatPercentRemaining",
+            "dataType": "int8",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x000D",
+            "name": "BatTimeRemaining",
+            "dataType": "int32",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x000E",
+            "name": "BatChargeState",
+            "dataType": "BatChargeStateEnum",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x000F",
+            "name": "BatReplacementNeeded",
+            "dataType": "bool",
+            "writable": false,
+            "privilege": "RV"
+          },
+          {
+            "id": "0x0010",
+            "name": "BatReplacementability",
+            "dataType": "BatReplaceabilityEnum",
+            "writable": false,
+            "privilege": "RV"
+          },
+          {
+            "id": "0x0011",
+            "name": "BatPresent",
+            "dataType": "bool",
+            "writable": false,
+            "privilege": "RV"
+          },
+          {
+            "id": "0x0012",
+            "name": "ActiveBatFaults",
+            "dataType": "BatFaultEnum",
+            "writable": false,
+            "privilege": "RV"
+          },
+          {
+            "id": "0x0013",
+            "name": "BatReplacementDescription",
+            "dataType": {
+              "type": "string",
+              "maxLength": 60
+            },
+            "writable": false,
+            "privilege": "RV"
+          },
+          {
+            "id": "0x0014",
+            "name": "BatCommonDesignation",
+            "dataType": "BatCommonDesignationEnum",
+            "writable": false,
+            "privilege": "RV"
+          },
+          {
+            "id": "0x0015",
+            "name": "BatANSIDesignation",
+            "dataType": {
+              "type": "string",
+              "maxLength": 20
+            },
+            "writable": false,
+            "privilege": "RV"
+          },
+          {
+            "id": "0x0016",
+            "name": "BatIECDesignation",
+            "dataType": {
+              "type": "string",
+              "maxLength": 20
+            },
+            "writable": false,
+            "privilege": "RV"
+          },
+          {
+            "id": "0x0017",
+            "name": "BatApprovedChemistry",
+            "dataType": "BatApprovedChemistryEnum",
+            "writable": false,
+            "privilege": "RV"
+          },
+          {
+            "id": "0x0018",
+            "name": "BatCapacity",
+            "dataType": "uint32",
+            "writable": false,
+            "privilege": "RV"
+          },
+          {
+            "id": "0x0019",
+            "name": "BatQuantity",
+            "dataType": "uint8",
+            "writable": false,
+            "privilege": "RV"
+          },
+          {
+            "id": "0x001A",
+            "name": "BatChargeState",
+            "dataType": "BatChargeStateEnum",
+            "writable": false,
+            "privilege": "RV"
+          },
+          {
+            "id": "0x001B",
+            "name": "BatTimeToFullCharge",
+            "dataType": "uint32",
+            "writable": false,
+            "privilege": "XQ"
+          },
+          {
+            "id": "0x001C",
+            "name": "BatFunctionalWhileCharging",
+            "dataType": "bool",
+            "writable": false,
+            "privilege": "RV"
+          },
+          {
+            "id": "0x001D",
+            "name": "BatChargingCurrent",
+            "dataType": "uint32",
+            "writable": false,
+            "privilege": "RV"
+          },
+          {
+            "id": "0x001E",
+            "name": "ActiveBatChargeFaults",
+            "dataType": {
+              "type": "list",
+              "elementType": "BatChargeFaultEnum",
+              "maxLength": 16
+            },
+            "writable": false,
+            "privilege": "RV"
+          },
+          {
+            "id": "0x001F",
+            "name": "EndpointList",
+            "dataType": {
+              "type": "list",
+              "elementType": "endpoint-no"
+            },
+            "writable": true,
+            "privilege": "RV"
+          }
+        ],
+        "commands": [],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "WiredFaultChange",
+            "parameters": {
+              "FaultList": {
+                "type": "list",
+                "elementType": "WiredFaultEnum"
+              }
+            },
+            "privilege": "INFO",
+            "side": "V"
+          },
+          {
+            "id": "0x01",
+            "name": "BatFaultChange",
+            "parameters": {
+              "FaultList": {
+                "type": "list",
+                "elementType": "BatFaultEnum"
+              }
+            },
+            "privilege": "INFO",
+            "side": "V"
+          },
+          {
+            "id": "0x02",
+            "name": "BatChargeFaultChange",
+            "parameters": {
+              "FaultList": {
+                "type": "list",
+                "elementType": "BatChargeFaultEnum"
+              }
+            },
+            "privilege": "INFO",
+            "side": "V"
+          }
+        ]
+      }
+    ]
+  }
+}

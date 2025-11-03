@@ -1,0 +1,34 @@
+config:
+  attribute: '0x0C'
+  cluster: wifi-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: wifi-network-diagnostics-cluster_attribute_0x0C_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"OverrunCount": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: <Node rebooted>
+  arguments:
+    '{"OverrunCount"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"OverrunCount": 18446744073709551615}'
+  ExpectedResponse: <success>
+  Pre-requisites: <Node operational>
+  arguments:
+    '{"OverrunCount"': 18446744073709551615}  // Maximum value for uint64
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"OverrunCount": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: '<Node rebooted>
+
+
+    These test cases cover the extreme values of the `OverrunCount` attribute and
+    the special response when the Node is rebooted.'
+  arguments:
+    '{"OverrunCount"': <any_value>}
+  label: Test_Case_Special_Response_-_Node_Reboot
+  option: WriteAttribute

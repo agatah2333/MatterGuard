@@ -1,0 +1,6 @@
+config:
+  attribute: '0x0019'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0019_v1.1.0.0
+tests: []

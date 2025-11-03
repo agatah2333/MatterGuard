@@ -1,0 +1,36 @@
+config:
+  cluster: general-commissioning-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: general-commissioning-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: '`<current time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`NoFailSafe`'
+  Pre-requisites: '`No Fail-Safe context exists`'
+  arguments:
+    '{"ErrorCode"': '"NoFailSafe"}`'
+  option: SendCommand
+- ActionTime: '`<current time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`InvalidAuthentication`'
+  Pre-requisites: '`Command received outside a CASE session or accessing fabric is
+    not the one associated with the ongoing Fail-Safe context`'
+  arguments:
+    '{"ErrorCode"': '"InvalidAuthentication"}`'
+  option: SendCommand
+- ActionTime: '`<current time>`'
+  Attribute_Change: "- `Fail-Safe timer disarmed`\n  - `Commissioning window closed`\n\
+    \  - `Temporary administrative privileges revoked`\n  - `Secure Session Context\
+    \ of any PASE session cleared`\n  - `Breadcrumb attribute reset to zero`"
+  ExpectedResponse: '`OK`'
+  Pre-requisites: '`Command received over a CASE session and the accessing fabric
+    index matches the Fabric Index associated with the current Fail-Safe context`
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values of the field that could result in special responses mentioned in the
+    description of the effect【4:0†source】【4:1†source】【4:4†source】【4:7†source】【4:9†source】.'
+  arguments:
+    '{"ErrorCode"': '"OK"}`'
+  option: SendCommand

@@ -1,0 +1,53 @@
+config:
+  cluster: time-synchronization-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: time-synchronization-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '{"UTCTime": 0, "Granularity": 0, "TimeSource": 2}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Node's current Granularity is NoTimeGranularity
+  arguments:
+    '{"UTCTime"': '0, "Granularity": 0, "TimeSource": 0}'
+  label: Test_Case_Minimum_UTCTime,_NoTimeGranularity,_None_TimeSource
+  option: SendCommand
+- ActionTime: 18446744073709551615
+  Attribute_Change: '{"UTCTime": 18446744073709551615, "Granularity": 3, "TimeSource":
+    2}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Node's current Granularity is not NoTimeGranularity
+  arguments:
+    '{"UTCTime"': '18446744073709551615, "Granularity": 4, "TimeSource": 16}'
+  label: Test_Case_Maximum_UTCTime,_MicrosecondsGranularity,_GNSS_TimeSource
+  option: SendCommand
+- ActionTime: 9223372036854775807
+  Attribute_Change: '{"UTCTime": 9223372036854775807, "Granularity": 1, "TimeSource":
+    2}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Node's current Granularity is not NoTimeGranularity
+  arguments:
+    '{"UTCTime"': '9223372036854775807, "Granularity": 2, "TimeSource": 2}'
+  label: Test_Case_Mid-range_UTCTime,_SecondsGranularity,_Admin_TimeSource
+  option: SendCommand
+- ActionTime: 123456789
+  Attribute_Change: None
+  ExpectedResponse: TimeNotAccepted
+  Pre-requisites: Node's current Granularity is higher than MinutesGranularity
+  arguments:
+    '{"UTCTime"': '123456789, "Granularity": 1, "TimeSource": 1}'
+  label: Test_Case_UTCTime_with_MinutesGranularity,_Unknown_TimeSource
+  option: SendCommand
+- ActionTime: 987654321
+  Attribute_Change: '{"UTCTime": 987654321, "Granularity": 2, "TimeSource": 2}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Node''s current Granularity is not NoTimeGranularity
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:6†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"UTCTime"': '987654321, "Granularity": 3, "TimeSource": 3}'
+  label: Test_Case_UTCTime_with_MillisecondsGranularity,_NodeTimeCluster_TimeSource
+  option: SendCommand

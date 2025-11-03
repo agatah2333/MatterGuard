@@ -1,0 +1,136 @@
+{
+  "source_file": "Water heater management_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0094",
+        "name": "Water Heater Management",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "HeaterTypes",
+            "dataType": "WaterHeaterHeatSourceBitmap",
+            "valueRange": "all",
+            "description": "Indicates the heat sources that the water heater can call on for heating.",
+            "privilege": "RVM",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "HeatDemand",
+            "dataType": "WaterHeaterHeatSourceBitmap",
+            "valueRange": "all",
+            "description": "Indicates if the water heater is heating water.",
+            "privilege": "RVM",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "TankVolume",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "Indicates the volume of water that the hot water tank can hold.",
+            "privilege": "RVEM",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "EstimatedHeatRequired",
+            "dataType": "energy-mWh",
+            "valueRange": "min 0",
+            "description": "Indicates the estimated heat energy needed to raise the water temperature to the target setpoint.",
+            "privilege": "RVEM",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "TankPercentage",
+            "dataType": "percent",
+            "valueRange": "all",
+            "description": "Indicates an approximate level of hot water stored in the tank.",
+            "privilege": "RVTP",
+            "writable": false
+          },
+          {
+            "id": "0x0005",
+            "name": "BoostState",
+            "dataType": "BoostStateEnum",
+            "valueRange": "all",
+            "description": "Indicates whether the Boost is currently Active or Inactive.",
+            "privilege": "RVM",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "Boost",
+            "parameters": {
+              "dataType": "WaterHeaterBoostInfoStruct",
+              "valueRange": "all",
+              "description": "Allows a client to request that the water heater is put into a Boost state."
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "CancelBoost",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Allows a client to cancel an ongoing Boost operation."
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "BoostStarted",
+            "parameters": {
+              "dataType": "WaterHeaterBoostInfoStruct",
+              "valueRange": "all",
+              "description": "Generated whenever a Boost command is accepted."
+            },
+            "privilege": "INFOVM",
+            "side": "server"
+          },
+          {
+            "id": "0x01",
+            "name": "BoostEnded",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Generated whenever the BoostState transitions from Active to Inactive."
+            },
+            "privilege": "INFOVM",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "WaterHeaterBoostInfoStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "Duration": "elapsed-s(min 1)",
+              "OneShot": "bool",
+              "EmergencyBoost": "bool",
+              "TemporarySetpoint": "temperature",
+              "TargetPercentage": "percent",
+              "TargetReheat": "percent(max TargetPercentage)"
+            }
+          },
+          "BoostStateEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Inactive",
+              "1": "Active"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

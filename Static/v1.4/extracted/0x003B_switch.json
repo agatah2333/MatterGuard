@@ -1,0 +1,104 @@
+{
+  "source_file": "Switch_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x003B",
+        "name": "Switch",
+        "description": "Exposes interactions with switch devices for cross-device control",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "NumberOfPositions",
+            "dataType": "uint8",
+            "valueRange": "min 2",
+            "description": "Maximum number of switch positions",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentPosition",
+            "dataType": "uint8",
+            "valueRange": "0-NumberOfPositions-1",
+            "description": "Current switch position state",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "MultiPressMax",
+            "dataType": "uint8",
+            "valueRange": "min 2",
+            "description": "Maximum detectable consecutive presses",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "SwitchLatched",
+            "parameters": [
+              {
+                "name": "NewPosition",
+                "dataType": "uint8",
+                "valueRange": "0-NumberOfPositions-1",
+                "description": "Final position after latching"
+              }
+            ],
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x05",
+            "name": "MultiPressOngoing",
+            "parameters": [
+              {
+                "name": "NewPosition",
+                "dataType": "uint8",
+                "valueRange": "0-NumberOfPositions-1",
+                "description": "Current pressed position"
+              },
+              {
+                "name": "CurrentNumberOfPressesCounted",
+                "dataType": "uint8",
+                "valueRange": "2-MultiPressMax",
+                "description": "Ongoing multi-press count"
+              }
+            ],
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x06",
+            "name": "MultiPressComplete",
+            "parameters": [
+              {
+                "name": "TotalNumberOfPressesCounted",
+                "dataType": "uint8",
+                "valueRange": "max MultiPressMax",
+                "description": "Total completed presses"
+              }
+            ],
+            "privilege": "INFO",
+            "side": "server"
+          }
+        ],
+        "commands": [],
+        "dataTypes": {
+          "SwitchEventParams": {
+            "baseType": "Struct",
+            "fields": {
+              "PositionField": {
+                "dataType": "uint8",
+                "valueRange": "dynamic based on NumberOfPositions"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

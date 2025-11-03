@@ -1,0 +1,34 @@
+config:
+  cluster: window-covering
+  command: '0x01'
+  nodeId: '0x654231'
+name: window-covering_command_0x01_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: "- `CurrentPositionLiftPercent100ths`: 100.00%\n  - `CurrentPositionTiltPercent100ths`:\
+    \ 100.00%"
+  ExpectedResponse: Success
+  Pre-requisites: The device must support the Position Aware feature.
+  arguments:
+    TargetPositionLiftPercent100ths: 100.00%
+    TargetPositionTiltPercent100ths: 100.00%
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: "- `CurrentPositionLiftPercent100ths`: 100.00% (if no special\
+    \ condition is met)\n  - `CurrentPositionTiltPercent100ths`: 100.00% (if no special\
+    \ condition is met)"
+  ExpectedResponse: Special response if any safety or operational status flags are
+    set (e.g., obstacle detected, thermal protection activated).
+  Pre-requisites: 'The device must support the Position Aware feature and have safety
+    or operational status flags set.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】.'
+  arguments:
+    TargetPositionLiftPercent100ths: 100.00%
+    TargetPositionTiltPercent100ths: 100.00%
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SendCommand

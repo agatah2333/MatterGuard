@@ -1,0 +1,151 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x0A'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x0A_v1.1.0.0
+tests:
+- ActionTime: "0\n  - **ExpectedResponse**: \"SensorFailure\"\n  - **Which Attribute\
+    \ Will Be Changed and the Value of the Attribute**: \"PumpStatus: DeviceFault\"\
+    \n  - **Any Pre-requisites**: \"Pump is running\""
+  Attribute_Change: "\"PumpStatus: DeviceFault\"\n  - **Any Pre-requisites**: \"Pump\
+    \ is running\""
+  ExpectedResponse: "\"SensorFailure\"\n  - **Which Attribute Will Be Changed and\
+    \ the Value of the Attribute**: \"PumpStatus: DeviceFault\"\n  - **Any Pre-requisites**:\
+    \ \"Pump is running\""
+  Pre-requisites: '"Pump is running"'
+  arguments:
+    '**ActionTime**': 0
+    '**Any Pre-requisites**': '"Pump is running"'
+    '**ExpectedResponse**': '"SensorFailure"'
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': '"PumpStatus:
+      DeviceFault"'
+    '{"SensorValue"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify pump-configuration-and-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: "65535\n  - **ExpectedResponse**: \"SensorFailure\"\n  - **Which Attribute\
+    \ Will Be Changed and the Value of the Attribute**: \"PumpStatus: DeviceFault\"\
+    \n  - **Any Pre-requisites**: \"Pump is running\"\n\nThese test cases cover the\
+    \ extreme values of the sensor value field and the special response when the sensor\
+    \ value is at its maximum.\n\nFor more detailed information, you can refer to\
+    \ the Matter Application Cluster Specification document【4:0†source】."
+  Attribute_Change: "\"PumpStatus: DeviceFault\"\n  - **Any Pre-requisites**: \"Pump\
+    \ is running\"\n\nThese test cases cover the extreme values of the sensor value\
+    \ field and the special response when the sensor value is at its maximum.\n\n\
+    For more detailed information, you can refer to the Matter Application Cluster\
+    \ Specification document【4:0†source】."
+  ExpectedResponse: "\"SensorFailure\"\n  - **Which Attribute Will Be Changed and\
+    \ the Value of the Attribute**: \"PumpStatus: DeviceFault\"\n  - **Any Pre-requisites**:\
+    \ \"Pump is running\"\n\nThese test cases cover the extreme values of the sensor\
+    \ value field and the special response when the sensor value is at its maximum.\n\
+    \nFor more detailed information, you can refer to the Matter Application Cluster\
+    \ Specification document【4:0†source】."
+  Pre-requisites: '"Pump is running"
+
+
+    These test cases cover the extreme values of the sensor value field and the special
+    response when the sensor value is at its maximum.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments:
+    '**ActionTime**': 65535
+    '**Any Pre-requisites**': '"Pump is running"'
+    '**ExpectedResponse**': '"SensorFailure"'
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': '"PumpStatus:
+      DeviceFault"'
+    '{"SensorValue"': 65535}
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify pump-configuration-and-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 60
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

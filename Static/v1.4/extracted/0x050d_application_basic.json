@@ -1,0 +1,113 @@
+{
+  "source_file": "Application Basic_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x050D",
+        "name": "Application Basic",
+        "description": "This cluster provides information about a Content App running on a Video Player device which is represented as an endpoint.",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "VendorName",
+            "dataType": "string",
+            "valueRange": "max 32",
+            "description": "This attribute SHALL specify a human readable (displayable) name of the vendor for the Content App.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "VendorID",
+            "dataType": "vendor-id",
+            "valueRange": "all",
+            "description": "This attribute SHALL specify the vendor ID for the Content App.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "ApplicationName",
+            "dataType": "string",
+            "valueRange": "desc",
+            "description": "This attribute SHALL specify the name of the application.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "ProductID",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "This attribute SHALL specify the product ID for the Content App.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "Application",
+            "dataType": "ApplicationStruct",
+            "valueRange": "desc",
+            "description": "This attribute SHALL specify the application structure.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0005",
+            "name": "Status",
+            "dataType": "ApplicationStatusEnum",
+            "valueRange": "desc",
+            "description": "This attribute SHALL specify the status of the application.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0006",
+            "name": "ApplicationVersion",
+            "dataType": "string",
+            "valueRange": "max 32",
+            "description": "This attribute SHALL specify the version of the application.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0007",
+            "name": "AllowedVendorList",
+            "dataType": "list[vendor-id]",
+            "valueRange": "F",
+            "description": "This attribute SHALL specify the list of allowed vendors.",
+            "privilege": "R",
+            "writable": true
+          }
+        ],
+        "commands": [],
+        "events": [],
+        "dataTypes": {
+          "ApplicationStatusEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "Stopped",
+              "1": "ActiveVisibleFocus",
+              "2": "ActiveHidden",
+              "3": "ActiveVisibleNotFocus"
+            }
+          },
+          "ApplicationStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "CatalogVendorID": {
+                "dataType": "uint16",
+                "valueRange": "all"
+              },
+              "ApplicationID": {
+                "dataType": "string",
+                "valueRange": "all"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

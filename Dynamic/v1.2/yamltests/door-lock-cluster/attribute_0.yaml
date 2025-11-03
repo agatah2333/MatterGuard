@@ -1,0 +1,56 @@
+config:
+  attribute: '0'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_0_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: LockState = 0
+  ExpectedResponse: Lock state is not fully locked.
+  Pre-requisites: The lock must be in a state where it is partially secured.
+  arguments:
+    '{"LockState"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: LockState = 1
+  ExpectedResponse: Lock state is fully locked.
+  Pre-requisites: The lock must be in a state where it is fully secured.
+  arguments:
+    '{"LockState"': 1}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: LockState = 2
+  ExpectedResponse: Lock state is fully unlocked.
+  Pre-requisites: The lock must be in a state where it is fully unsecured.
+  arguments:
+    '{"LockState"': 2}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: LockState = 3
+  ExpectedResponse: Lock state is fully unlocked and the latch is pulled.
+  Pre-requisites: The lock must support the unlatched state.
+  arguments:
+    '{"LockState"': 3}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: LockState = NULL
+  ExpectedResponse: Lock hardware does not currently know the status of the locking
+    mechanism.
+  Pre-requisites: 'The lock must have experienced a power cycle or similar event that
+    prevents it from knowing its current state.
+
+
+    These test cases cover the extreme values of the `LockState` attribute and the
+    special response when the attribute value is `NULL`.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:10†source】.'
+  arguments:
+    '{"LockState"': NULL}
+  label: Test_Case_Special_Response_-_NULL_Value
+  option: WriteAttribute

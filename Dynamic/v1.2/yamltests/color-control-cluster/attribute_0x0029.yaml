@@ -1,0 +1,6 @@
+config:
+  attribute: '0x0029'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0029_v1.2.0.0
+tests: []

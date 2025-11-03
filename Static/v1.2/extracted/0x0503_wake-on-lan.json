@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0503",
+    "name": "Wake On LAN",
+    "description": "Cluster for Wake On LAN functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

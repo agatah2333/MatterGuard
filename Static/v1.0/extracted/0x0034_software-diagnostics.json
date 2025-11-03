@@ -1,0 +1,45 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0034",
+    "name": "Software Diagnostics",
+    "description": "Software-specific diagnostics."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "ResetWatermarks"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Thread",
+      "type": "unknown",
+      "description": "Thread attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "Cur",
+      "type": "unknown",
+      "description": "Cur attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "Cur",
+      "type": "unknown",
+      "description": "Cur attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0003",
+      "name": "Cur",
+      "type": "unknown",
+      "description": "Cur attribute",
+      "access": "R"
+    }
+  ],
+  "events": []
+}

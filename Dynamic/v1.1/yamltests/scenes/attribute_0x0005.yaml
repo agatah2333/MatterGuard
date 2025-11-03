@@ -1,0 +1,42 @@
+config:
+  attribute: '0x0005'
+  cluster: scenes
+  nodeId: '0x654231'
+name: scenes_attribute_0x0005_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: LastConfiguredBy = 0x0000000000000000
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"LastConfiguredBy"': 0x0000000000000000}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: LastConfiguredBy = 0xFFFFFFFFFFFFFFFF
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"LastConfiguredBy"': 0xFFFFFFFFFFFFFFFF}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: LastConfiguredBy = null
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"LastConfiguredBy"': null}
+  label: Test_Case_Null_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: LastConfiguredBy = 0x123456789ABCDEF0
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special responses mentioned in the description of the effect【4:0†source】.'
+  arguments:
+    '{"LastConfiguredBy"': 0x123456789ABCDEF0}
+  label: Test_Case_Special_Node_ID
+  option: WriteAttribute

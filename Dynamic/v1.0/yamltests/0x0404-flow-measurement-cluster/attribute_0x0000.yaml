@@ -1,0 +1,228 @@
+config:
+  attribute: '0x0000'
+  cluster: flow-measurement-cluster
+  nodeId: '0x654231'
+name: flow-measurement-cluster_attribute_0x0000_v1.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `MeasuredValue`: `<MinMeasuredValue>`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '- `MinMeasuredValue` is defined and known.'
+  arguments:
+    MeasuredValue: '`<MinMeasuredValue>`'
+  label: Test_Case_Minimum_Measured_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify flow-measurement-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `MeasuredValue`: `<MaxMeasuredValue>`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '- `MaxMeasuredValue` is defined and known.'
+  arguments:
+    MeasuredValue: '`<MaxMeasuredValue>`'
+  label: Test_Case_Maximum_Measured_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify flow-measurement-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `MeasuredValue`: `null`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '- None.'
+  arguments:
+    MeasuredValue: '`null`'
+  label: Test_Case_Null_Value_(Unknown_Measurement)
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify flow-measurement-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `MeasuredValue`: `<special_value>`'
+  ExpectedResponse: '`<special_response>`'
+  Pre-requisites: '- The special value and response are defined in the system.
+
+
+    ### Notes:
+
+    - The `MeasuredValue` represents the flow in m³/h as follows: `MeasuredValue =
+    10 x Flow`.
+
+    - The null value indicates that the flow measurement is unknown.
+
+    - The range for `MeasuredValue` is from `MinMeasuredValue` to `MaxMeasuredValue`【4:0†source】.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description.'
+  arguments:
+    MeasuredValue: '`<special_value>`'
+  label: Test_Case_Special_Response_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify flow-measurement-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true

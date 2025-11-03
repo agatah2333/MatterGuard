@@ -1,0 +1,25 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0405",
+    "name": "Relative Humidity Measurement",
+    "description": "This cluster provides an interface to relative humidity measurement functionality, including configuration and provision of notifications."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0003",
+      "name": "Tolerance",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "Tolerance attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

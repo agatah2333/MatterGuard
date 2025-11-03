@@ -1,0 +1,32 @@
+config:
+  cluster: general-commissioning-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: general-commissioning-cluster_command_0x02_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Failure
+  Pre-requisites: No commissioning window is currently active.
+  arguments: {}
+  label: Test_Case_No_Active_Commissioning_Window
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Failure with status code Busy
+  Pre-requisites: The fail-safe timer is currently armed.
+  arguments: {}
+  label: Test_Case_Fail-Safe_Timer_Armed
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: The commissioning window will be closed.
+  ExpectedResponse: Success
+  Pre-requisites: 'An active commissioning window is currently open, and the fail-safe
+    timer is not armed.
+
+
+    These test cases cover the extreme values and special responses for the RevokeCommissioning
+    command in the General Commissioning Cluster【4:1†source】【4:2†source】【4:3†source】.'
+  arguments: {}
+  label: Test_Case_Successful_Revocation
+  option: SendCommand

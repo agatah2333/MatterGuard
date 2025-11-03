@@ -1,0 +1,47 @@
+config:
+  cluster: actions-cluster
+  command: '0x0B'
+  nodeId: '0x654231'
+name: actions-cluster_command_0x0B_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Action with ID 0 will be disabled immediately.
+  ExpectedResponse: Success
+  Pre-requisites: Action with ID 0 must exist.
+  arguments:
+    ActionID: 0
+    Duration: 0
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: 4294967295
+  Attribute_Change: Action with ID 65535 will be disabled after the maximum duration.
+  ExpectedResponse: Success
+  Pre-requisites: Action with ID 65535 must exist.
+  arguments:
+    ActionID: 65535
+    Duration: 4294967295
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: Action with ID 12345 will be disabled immediately.
+  ExpectedResponse: Success
+  Pre-requisites: Action with ID 12345 must exist.
+  arguments:
+    ActionID: 12345
+    Duration: 0
+  label: Test_Case_Special_Response_-_Immediate_Disable
+  option: SendCommand
+- ActionTime: 3600000
+  Attribute_Change: Action with ID 54321 will be disabled after 1 hour.
+  ExpectedResponse: Success
+  Pre-requisites: 'Action with ID 54321 must exist.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    ActionID: 54321
+    Duration: 3600000 (1 hour in milliseconds)
+  label: Test_Case_Special_Response_-_Long_Duration
+  option: SendCommand

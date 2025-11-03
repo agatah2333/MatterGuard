@@ -1,0 +1,27 @@
+config:
+  attribute: '44'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_44_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '- `RFIDOperationEventMask`: 0x0000'
+  ExpectedResponse: No RFID operation events will be notified.
+  Pre-requisites: The device should support the RFID operation events.
+  arguments:
+    RFIDOperationEventMask: '0x0000'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `RFIDOperationEventMask`: 0xFFFF'
+  ExpectedResponse: All RFID operation events will be notified.
+  Pre-requisites: 'The device should support the RFID operation events.
+
+
+    These test cases cover the extreme values of the constraints of the `RFIDOperationEventMask`
+    field and the values that could result in special responses as mentioned in the
+    description of the effect【4:0†source】.'
+  arguments:
+    RFIDOperationEventMask: '0xFFFF'
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: WriteAttribute

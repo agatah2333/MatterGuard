@@ -1,0 +1,43 @@
+config:
+  attribute: '1'
+  cluster: bridged-device-basic
+  nodeId: '0x654231'
+name: bridged-device-basic_attribute_1_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": true}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"Reachable"': true}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": false}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"Reachable"': false}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": true}'
+  ExpectedResponse: <ReachableChanged event>
+  Pre-requisites: '{"Reachable": false}'
+  arguments:
+    '{"Reachable"': true}
+  label: Test_Case_Special_Response_-_Device_Becomes_Reachable
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": false}'
+  ExpectedResponse: <ReachableChanged event>
+  Pre-requisites: '{"Reachable": true}
+
+
+    These test cases cover the extreme values of the `Reachable` attribute and the
+    special responses when the reachability status changes, triggering the `ReachableChanged`
+    event【4:0†source】【4:2†source】【4:17†source】.'
+  arguments:
+    '{"Reachable"': false}
+  label: Test_Case_Special_Response_-_Device_Becomes_Unreachable
+  option: WriteAttribute

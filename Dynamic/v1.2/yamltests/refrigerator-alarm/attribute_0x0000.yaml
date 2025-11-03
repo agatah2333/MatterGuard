@@ -1,0 +1,25 @@
+config:
+  attribute: '0x0000'
+  cluster: refrigerator-alarm
+  nodeId: '0x654231'
+name: refrigerator-alarm_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Mask attribute will be set to 0.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"Mask"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Mask attribute will be set to 1.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    ### Explanation'
+  arguments:
+    '{"Mask"': 1}
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: WriteAttribute

@@ -1,0 +1,42 @@
+config:
+  attribute: '0x000A'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x000A_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Covering is currently not moving.
+  Pre-requisites: None
+  arguments:
+    OperationalStatus: '0x00'
+  label: Test_Case_Extreme_Value_(All_Bits_Cleared)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Reserved state.
+  Pre-requisites: None
+  arguments:
+    OperationalStatus: '0xFF'
+  label: Test_Case_Extreme_Value_(All_Bits_Set)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Covering is currently opening.
+  Pre-requisites: None
+  arguments:
+    OperationalStatus: '0x01'
+  label: Test_Case_Special_Response_(Covering_Opening)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Covering is currently closing.
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the `OperationalStatus` attribute
+    and the special responses as described in the specification【4:0†source】.'
+  arguments:
+    OperationalStatus: '0x02'
+  label: Test_Case_Special_Response_(Covering_Closing)
+  option: WriteAttribute

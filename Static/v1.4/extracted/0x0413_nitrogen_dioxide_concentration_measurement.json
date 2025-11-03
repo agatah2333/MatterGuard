@@ -1,0 +1,132 @@
+{
+  "source_file": "Nitrogen Dioxide Concentration Measurement_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0413",
+        "name": "Nitrogen Dioxide Concentration Measurement",
+        "description": "Monitors and reports NO₂ concentration levels with multi-dimensional analysis",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "MeasuredValue",
+            "dataType": "float",
+            "valueRange": "MinMeasuredValue-MaxMeasuredValue",
+            "description": "Current NO₂ concentration measurement",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "PeakMeasuredValue",
+            "dataType": "float",
+            "valueRange": "dynamic",
+            "description": "Maximum concentration in monitoring window",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0008",
+            "name": "MeasurementUnit",
+            "dataType": "MeasurementUnitEnum",
+            "valueRange": "0-7",
+            "description": "Concentration measurement unit",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x000A",
+            "name": "LevelValue",
+            "dataType": "LevelValueEnum",
+            "valueRange": "0-4",
+            "description": "Pollution level classification",
+            "privilege": "R",
+            "writable": true
+          }
+        ],
+        "dataTypes": {
+          "MeasurementContext": {
+            "baseType": "Struct",
+            "fields": {
+              "value": "float",
+              "unit": "MeasurementUnitEnum",
+              "medium": "MeasurementMediumEnum",
+              "uncertainty": "float"
+            }
+          },
+          "MeasurementUnitEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "ppm",
+              "1": "ppb",
+              "2": "ppt",
+              "3": "mg/m³",
+              "4": "μg/m³",
+              "5": "ng/m³",
+              "6": "/m³",
+              "7": "Bq/m³"
+            }
+          },
+          "MeasurementMediumEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Air",
+              "1": "Water",
+              "2": "Soil"
+            }
+          },
+          "LevelValueEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Unknown",
+              "1": "Low (<0.05ppm)",
+              "2": "Medium (0.05-0.1ppm)",
+              "3": "High (0.1-0.3ppm)",
+              "4": "Critical (>0.3ppm)"
+            }
+          }
+        },
+        "safetyProfile": {
+          "OSHA": {
+            "PEL": 5,
+            "unit": "ppm"
+          },
+          "WHO": {
+            "guideline": 0.1,
+            "unit": "ppm"
+          },
+          "NIOSH": {
+            "IDLH": 20,
+            "unit": "ppm"
+          }
+        },
+        "unitConversions": {
+          "ppm_to_mg/m³": "value * 1.88",
+          "mg/m³_to_ppm": "value / 1.88",
+          "ppb_factor": 1000
+        },
+        "analytics": {
+          "exposureAssessment": {
+            "formula": "TEI = (C × T) / TLV",
+            "interpretation": {
+              "<1": "Safe",
+              "1-2": "Monitor",
+              ">2": "Danger"
+            }
+          }
+        },
+        "validationRules": [
+          {
+            "rule": "MaxMeasuredValue > MinMeasuredValue + measurementResolution",
+            "errorCode": "INVALID_RANGE"
+          },
+          {
+            "rule": "PeakMeasuredValueWindow ≤ 604800",
+            "errorCode": "WINDOW_EXCEEDED"
+          }
+        ]
+      }
+    ]
+  }
+}

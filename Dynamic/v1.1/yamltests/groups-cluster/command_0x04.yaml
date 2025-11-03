@@ -1,0 +1,30 @@
+config:
+  cluster: groups-cluster
+  command: '0x04'
+  nodeId: '0x654231'
+name: groups-cluster_command_0x04_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: All group memberships for the server endpoint will be removed
+    from the Group Table.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The server endpoint must have at least one group membership.
+  arguments: {}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: All group memberships for the server endpoint will be removed
+    from the Group Table.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'The server endpoint must have no group memberships.
+
+
+    These test cases cover the scenarios where the `RemoveAllGroups` command is executed
+    under different conditions, ensuring that the command behaves as expected when
+    there are group memberships to remove and when there are none.
+
+
+    For more details, refer to the Matter Application Cluster Specification【4:0†source】.'
+  arguments: {}
+  label: Test_Case_Special_Responses
+  option: SendCommand

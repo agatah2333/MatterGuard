@@ -1,0 +1,20 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0042",
+    "name": "Proxy Discovery",
+    "description": "Proxy discovery functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "Proxy Discover Request"
+    },
+    {
+      "id": "0x01",
+      "name": "Proxy Discover Response"
+    }
+  ],
+  "attributes": [],
+  "events": []
+}

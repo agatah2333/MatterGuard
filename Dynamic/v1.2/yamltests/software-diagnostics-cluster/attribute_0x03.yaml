@@ -1,0 +1,46 @@
+config:
+  attribute: '0x03'
+  cluster: software-diagnostics-cluster
+  nodeId: '0x654231'
+name: software-diagnostics-cluster_attribute_0x03_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: CurrentHeapHighWatermark = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"CurrentHeapHighWatermark"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: CurrentHeapHighWatermark = 18446744073709551615
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"CurrentHeapHighWatermark"': 18446744073709551615}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <time>
+  Attribute_Change: CurrentHeapHighWatermark = <CurrentHeapUsed>
+  ExpectedResponse: Success
+  Pre-requisites: CurrentHeapUsed attribute must be set
+  arguments:
+    '{"CurrentHeapHighWatermark"': <CurrentHeapUsed>}
+  label: Test_Case_Special_Response_-_Reset_to_CurrentHeapUsed
+  option: WriteAttribute
+- ActionTime: <time>
+  Attribute_Change: CurrentHeapHighWatermark = <value>
+  ExpectedResponse: Success
+  Pre-requisites: 'ResetWatermarks command must be issued
+
+
+    These test cases cover the extreme values of the `CurrentHeapHighWatermark` attribute
+    and the special responses as per the provided context.
+
+
+    For more detailed information, you can refer to the Matter 1.2 Core Specification
+    document【4:0†source】.'
+  arguments:
+    '{"CurrentHeapHighWatermark"': <value>}
+  label: Test_Case_Special_Response_-_Reset_on_Command
+  option: WriteAttribute

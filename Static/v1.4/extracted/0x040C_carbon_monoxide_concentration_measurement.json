@@ -1,0 +1,102 @@
+{
+  "source_file": "Carbon Monoxide Concentration Measurement_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x040C",
+        "name": "Carbon Monoxide Concentration Measurement",
+        "description": "Monitors and reports carbon monoxide concentration levels with advanced measurement metrics",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "MeasuredValue",
+            "dataType": "float",
+            "valueRange": "dynamic",
+            "description": "Current CO concentration in selected unit",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "PeakMeasuredValue",
+            "dataType": "float",
+            "valueRange": "dynamic",
+            "description": "Maximum concentration in monitoring window",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0004",
+            "name": "PeakMeasuredValueWindow",
+            "dataType": "uint32",
+            "valueRange": "0-604800",
+            "description": "Peak monitoring period in seconds (max 7 days)",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0008",
+            "name": "MeasurementUnit",
+            "dataType": "MeasurementUnitEnum",
+            "valueRange": "0-2",
+            "description": "Concentration measurement unit",
+            "privilege": "R",
+            "writable": true
+          }
+        ],
+        "dataTypes": {
+          "MeasurementData": {
+            "baseType": "Struct",
+            "fields": {
+              "value": "float",
+              "unit": "MeasurementUnitEnum",
+              "timestamp": "epoch-s",
+              "uncertainty": "float"
+            }
+          },
+          "MeasurementUnitEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "ppm",
+              "1": "ppb",
+              "2": "mg/m³"
+            }
+          },
+          "AlertThresholds": {
+            "baseType": "Struct",
+            "fields": {
+              "warningLevel": "float",
+              "criticalLevel": "float",
+              "emergencyLevel": "float"
+            }
+          }
+        },
+        "validationRules": [
+          {
+            "rule": "MaxMeasuredValue > MinMeasuredValue",
+            "errorCode": "INVALID_RANGE"
+          },
+          {
+            "rule": "PeakMeasuredValueWindow <= 604800",
+            "errorCode": "WINDOW_EXCEEDED"
+          }
+        ],
+        "safetyStandards": {
+          "OSHA": {
+            "PEL": 50,
+            "unit": "ppm"
+          },
+          "WHO": {
+            "guideline": 25,
+            "unit": "ppm"
+          },
+          "NIOSH": {
+            "IDLH": 1200,
+            "unit": "ppm"
+          }
+        }
+      }
+    ]
+  }
+}

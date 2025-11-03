@@ -1,0 +1,60 @@
+config:
+  cluster: color-control-cluster
+  command: '0x09'
+  nodeId: '0x654231'
+name: color-control-cluster_command_0x09_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`CurrentX` and `CurrentY` will be decreased by 32768 each.'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    OptionsMask: 0
+    OptionsOverride: 0
+    StepX: '-32768'
+    StepY: '-32768'
+    TransitionTime: 0
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: 6553.4 seconds (65534 / 10)
+  Attribute_Change: '`CurrentX` and `CurrentY` will be increased by 32767 each.'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    OptionsMask: 255
+    OptionsOverride: 255
+    StepX: 32767
+    StepY: 32767
+    TransitionTime: 65534
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: 10 seconds (100 / 10)
+  Attribute_Change: None
+  ExpectedResponse: No movement, command execution stops any ongoing operation.
+  Pre-requisites: None
+  arguments:
+    OptionsMask: 0
+    OptionsOverride: 0
+    StepX: 0
+    StepY: 0
+    TransitionTime: 100
+  label: Test_Case_Special_Response_-_Zero_Step
+  option: SendCommand
+- ActionTime: 50 seconds (500 / 10)
+  Attribute_Change: '`CurrentX` and `CurrentY` will be increased by 32767 each.'
+  ExpectedResponse: Success, but if the step is larger than can be represented by
+    signed 16-bit integers, more than one step command should be issued.
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    OptionsMask: 0
+    OptionsOverride: 0
+    StepX: 32767
+    StepY: 32767
+    TransitionTime: 500
+  label: Test_Case_Special_Response_-_Large_Step
+  option: SendCommand

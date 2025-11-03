@@ -1,0 +1,46 @@
+config:
+  attribute: '0x0014'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x0014_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: Scale = -127
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Scale"': -127}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: Scale = 127
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Scale"': 127}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: Scale = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Scale"': 0}
+  label: Test_Case_Default_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: Scale = 1
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    a value that could result in a special response. The default value is also included
+    to ensure the system handles it correctly.
+
+
+    For more detailed information, you can refer to the Matter specification document【4:1†source】.'
+  arguments:
+    '{"Scale"': 1}
+  label: Test_Case_Special_Response_Value
+  option: WriteAttribute

@@ -1,0 +1,240 @@
+config:
+  cluster: operational-credentials-cluster
+  command: '0x0a'
+  nodeId: '0x654231'
+name: operational-credentials-cluster_command_0x0a_v1.1.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: "- `NOCValue` updated to `<valid_certificate_1>`\n  - `ICACValue`\
+    \ updated to `<valid_certificate_2>`\n  - `IPKValue` updated to `<valid_key_1>`\n\
+    \  - `CaseAdminSubject` updated to `<valid_subject_1>`"
+  ExpectedResponse: '`Success`'
+  Pre-requisites: None
+  arguments:
+    CaseAdminSubject: '`<valid_subject_1>`'
+    ICACValue: '`<valid_certificate_2>`'
+    IPKValue: '`<valid_key_1>`'
+    NOCValue: '`<valid_certificate_1>`'
+  label: Test_Case_Valid_Input
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify operational-credentials-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`<current_time>`'
+  Attribute_Change: None
+  ExpectedResponse: '`FabricConflict`'
+  Pre-requisites: The device already has a fabric with the same `<Root Public Key,
+    FabricID>` pair as in `<conflicting_certificate>`.
+  arguments:
+    CaseAdminSubject: '`<valid_subject_1>`'
+    ICACValue: '`<valid_certificate_2>`'
+    IPKValue: '`<valid_key_1>`'
+    NOCValue: '`<conflicting_certificate>`'
+  label: Test_Case_Fabric_Conflict
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify operational-credentials-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`<current_time>`'
+  Attribute_Change: None
+  ExpectedResponse: '`InvalidAdminSubject`'
+  Pre-requisites: None
+  arguments:
+    CaseAdminSubject: '`<invalid_subject>`'
+    ICACValue: '`<valid_certificate_2>`'
+    IPKValue: '`<valid_key_1>`'
+    NOCValue: '`<valid_certificate_1>`'
+  label: Test_Case_Invalid_Admin_Subject
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify operational-credentials-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`<current_time>`'
+  Attribute_Change: "- `NOCValue` updated to `<valid_certificate_1>`\n  - `ICACValue`\
+    \ set to `null`\n  - `IPKValue` updated to `<valid_key_1>`\n  - `CaseAdminSubject`\
+    \ updated to `<valid_subject_1>`"
+  ExpectedResponse: '`Success`'
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:3†source】【4:9†source】【4:13†source】.'
+  arguments:
+    CaseAdminSubject: '`<valid_subject_1>`'
+    ICACValue: '`null`'
+    IPKValue: '`<valid_key_1>`'
+    NOCValue: '`<valid_certificate_1>`'
+  label: Test_Case_Missing_ICACValue
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify operational-credentials-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

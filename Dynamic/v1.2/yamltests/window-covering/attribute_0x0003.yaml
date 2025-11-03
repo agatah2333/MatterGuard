@@ -1,0 +1,54 @@
+config:
+  attribute: '0x0003'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0003_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"CurrentPositionLift": InstalledOpenLimitLift}'
+  ExpectedResponse: <success>
+  Pre-requisites: InstalledOpenLimitLift is set to a known value.
+  arguments:
+    '{"CurrentPositionLift"': InstalledOpenLimitLift}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"CurrentPositionLift": InstalledClosedLimitLift}'
+  ExpectedResponse: <success>
+  Pre-requisites: InstalledClosedLimitLift is set to a known value.
+  arguments:
+    '{"CurrentPositionLift"': InstalledClosedLimitLift}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: <none>
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: InstalledOpenLimitLift is set to a known value.
+  arguments:
+    '{"CurrentPositionLift"': InstalledOpenLimitLift - 1}
+  label: Test_Case_Out_of_Bounds_(Below_Minimum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: <none>
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: InstalledClosedLimitLift is set to a known value.
+  arguments:
+    '{"CurrentPositionLift"': InstalledClosedLimitLift + 1}
+  label: Test_Case_Out_of_Bounds_(Above_Maximum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"CurrentPositionLift": (InstalledOpenLimitLift + InstalledClosedLimitLift)
+    / 2}'
+  ExpectedResponse: <success>
+  Pre-requisites: 'InstalledOpenLimitLift and InstalledClosedLimitLift are set to
+    known values.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:18†source】【4:7†source】【4:14†source】.'
+  arguments:
+    '{"CurrentPositionLift"': (InstalledOpenLimitLift + InstalledClosedLimitLift)
+      / 2}
+  label: Test_Case_Mid-Range_Value
+  option: WriteAttribute

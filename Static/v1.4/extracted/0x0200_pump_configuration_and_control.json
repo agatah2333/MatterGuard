@@ -1,0 +1,456 @@
+{
+  "source_file": "Pump Configuration and Control_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0200",
+        "name": "Pump Configuration and Control",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "MaxPressure",
+            "dataType": "int16",
+            "valueRange": "-3,276.7 kPa to 3,276.7 kPa",
+            "description": "Specifies the maximum pressure the pump can achieve.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "MaxSpeed",
+            "dataType": "uint16",
+            "valueRange": "0 to 65,534 RPM",
+            "description": "Specifies the maximum speed the pump can achieve.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "MaxFlow",
+            "dataType": "uint16",
+            "valueRange": "0 m³/h to 6,553.4 m³/h",
+            "description": "Specifies the maximum flow the pump can achieve.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "MinConstPressure",
+            "dataType": "int16",
+            "valueRange": "-3,276.7 kPa to 3,276.7 kPa",
+            "description": "Minimum pressure in ConstantPressure mode.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "MaxConstPressure",
+            "dataType": "int16",
+            "valueRange": "-3,276.7 kPa to 3,276.7 kPa",
+            "description": "Maximum pressure in ConstantPressure mode.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0005",
+            "name": "MinCompPressure",
+            "dataType": "int16",
+            "valueRange": "-3,276.7 kPa to 3,276.7 kPa",
+            "description": "Minimum compensated pressure in ProportionalPressure mode.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0006",
+            "name": "MaxCompPressure",
+            "dataType": "int16",
+            "valueRange": "-3,276.7 kPa to 3,276.7 kPa",
+            "description": "Maximum compensated pressure in ProportionalPressure mode.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0007",
+            "name": "MinConstSpeed",
+            "dataType": "uint16",
+            "valueRange": "0 to 65,534 RPM",
+            "description": "Minimum speed in ConstantSpeed mode.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0008",
+            "name": "MaxConstSpeed",
+            "dataType": "uint16",
+            "valueRange": "0 to 65,534 RPM",
+            "description": "Maximum speed in ConstantSpeed mode.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0009",
+            "name": "MinConstFlow",
+            "dataType": "uint16",
+            "valueRange": "0 m³/h to 6,553.4 m³/h",
+            "description": "Minimum flow in ConstantFlow mode.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x000A",
+            "name": "MaxConstFlow",
+            "dataType": "uint16",
+            "valueRange": "0 m³/h to 6,553.4 m³/h",
+            "description": "Maximum flow in ConstantFlow mode.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x000B",
+            "name": "MinConstTemp",
+            "dataType": "int16",
+            "valueRange": "-273.15 °C to 327.67 °C",
+            "description": "Minimum temperature in ConstantTemperature mode.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x000C",
+            "name": "MaxConstTemp",
+            "dataType": "int16",
+            "valueRange": "-273.15 °C to 327.67 °C",
+            "description": "Maximum temperature in ConstantTemperature mode.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0010",
+            "name": "PumpStatus",
+            "dataType": "PumpStatusBitmap",
+            "valueRange": "Bitmap",
+            "description": "Activity status of pump functions.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0011",
+            "name": "EffectiveOperationMode",
+            "dataType": "OperationModeEnum",
+            "valueRange": "Enum",
+            "description": "Current effective operation mode.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0012",
+            "name": "EffectiveControlMode",
+            "dataType": "ControlModeEnum",
+            "valueRange": "Enum",
+            "description": "Current effective control mode.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0013",
+            "name": "Capacity",
+            "dataType": "int16",
+            "valueRange": "All",
+            "description": "Pump capacity specification.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0014",
+            "name": "Speed",
+            "dataType": "uint16",
+            "valueRange": "All",
+            "description": "Current pump speed.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0015",
+            "name": "LifetimeRunningHours",
+            "dataType": "uint24",
+            "valueRange": "All",
+            "description": "Total operational hours.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0016",
+            "name": "Power",
+            "dataType": "uint24",
+            "valueRange": "All",
+            "description": "Power consumption measurement.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0017",
+            "name": "LifetimeEnergyConsumed",
+            "dataType": "uint32",
+            "valueRange": "All",
+            "description": "Total energy consumption.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0020",
+            "name": "OperationMode",
+            "dataType": "OperationModeEnum",
+            "valueRange": "Enum",
+            "description": "Configured operation mode.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0021",
+            "name": "ControlMode",
+            "dataType": "ControlModeEnum",
+            "valueRange": "Enum",
+            "description": "Configured control mode.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0022",
+            "name": "AlarmMask",
+            "dataType": "Bitmap",
+            "valueRange": "All",
+            "description": "Alarm configuration mask.",
+            "privilege": "RW",
+            "writable": true
+          }
+        ],
+        "commands": [],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "SupplyVoltageLow",
+            "parameters": {
+              "dataType": "float",
+              "valueRange": "INFO",
+              "description": "Low supply voltage detection (V)"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x01",
+            "name": "SupplyVoltageHigh",
+            "parameters": {
+              "dataType": "float",
+              "valueRange": "INFO",
+              "description": "High supply voltage detection (V)"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x02",
+            "name": "PowerMissingPhase",
+            "parameters": {
+              "dataType": "bool",
+              "valueRange": "INFO",
+              "description": "Phase loss detection"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x03",
+            "name": "SystemPressureLow",
+            "parameters": {
+              "dataType": "float",
+              "valueRange": "INFO",
+              "description": "Low system pressure (kPa)"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x04",
+            "name": "SystemPressureHigh",
+            "parameters": {
+              "dataType": "float",
+              "valueRange": "INFO",
+              "description": "High system pressure (kPa)"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x05",
+            "name": "DryRunning",
+            "parameters": {
+              "dataType": "bool",
+              "valueRange": "INFO",
+              "description": "Dry running condition"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x06",
+            "name": "MotorTemperatureHigh",
+            "parameters": {
+              "dataType": "float",
+              "valueRange": "INFO",
+              "description": "Motor overheat (°C)"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x07",
+            "name": "PumpMotorFatalFailure",
+            "parameters": {
+              "dataType": "bool",
+              "valueRange": "CRITICAL",
+              "description": "Motor catastrophic failure"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x08",
+            "name": "ElectronicTemperatureHigh",
+            "parameters": {
+              "dataType": "float",
+              "valueRange": "INFO",
+              "description": "Control electronics overheat (°C)"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x09",
+            "name": "PumpBlocked",
+            "parameters": {
+              "dataType": "bool",
+              "valueRange": "CRITICAL",
+              "description": "Mechanical blockage detected"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x0A",
+            "name": "SensorFailure",
+            "parameters": {
+              "dataType": "bool",
+              "valueRange": "INFO",
+              "description": "Sensor malfunction"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x0B",
+            "name": "ElectronicNonFatalFailure",
+            "parameters": {
+              "dataType": "bool",
+              "valueRange": "INFO",
+              "description": "Non-critical electronics fault"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x0C",
+            "name": "ElectronicFatalFailure",
+            "parameters": {
+              "dataType": "bool",
+              "valueRange": "CRITICAL",
+              "description": "Critical electronics failure"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x0D",
+            "name": "GeneralFault",
+            "parameters": {
+              "dataType": "bool",
+              "valueRange": "INFO",
+              "description": "Unspecified system fault"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x0E",
+            "name": "Leakage",
+            "parameters": {
+              "dataType": "bool",
+              "valueRange": "INFO",
+              "description": "Fluid leakage detected"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x0F",
+            "name": "AirDetection",
+            "parameters": {
+              "dataType": "bool",
+              "valueRange": "INFO",
+              "description": "Air in system detected"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x10",
+            "name": "TurbineOperation",
+            "parameters": {
+              "dataType": "bool",
+              "valueRange": "INFO",
+              "description": "Turbine mode active"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "PumpStatusBitmap": {
+            "baseType": "bitmap32",
+            "fields": {
+              "DeviceFault": 0,
+              "SupplyFault": 1,
+              "SpeedLow": 2,
+              "SpeedHigh": 3,
+              "LocalOverride": 4,
+              "Running": 5,
+              "RemotePressure": 6,
+              "RemoteFlow": 7,
+              "RemoteTemperature": 8
+            }
+          },
+          "OperationModeEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "Normal",
+              "1": "Minimum",
+              "2": "Maximum",
+              "3": "Local"
+            }
+          },
+          "ControlModeEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "ConstantSpeed",
+              "1": "ConstantPressure",
+              "2": "ProportionalPressure",
+              "3": "ConstantFlow",
+              "5": "ConstantTemperature",
+              "7": "Automatic"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

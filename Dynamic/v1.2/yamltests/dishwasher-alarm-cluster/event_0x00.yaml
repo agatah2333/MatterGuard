@@ -1,0 +1,41 @@
+config:
+  cluster: dishwasher-alarm-cluster
+  event: '0x00'
+  nodeId: '0x654231'
+name: dishwasher-alarm-cluster_event_0x00_v1.2.0.0
+tests:
+- ActionTime: '`<minimum_value>`'
+  Attribute_Change: '- `OperationalState`: `Error`'
+  ExpectedResponse: '`<Error>`'
+  Pre-requisites: '`<None>`'
+  arguments:
+    ErrorState: '`<minimum_value>`'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: '`<specific_time_value>`'
+  Attribute_Change: '- `OperationalState`: `Error`'
+  ExpectedResponse: '`<specific_error_response>`'
+  Pre-requisites: '`<None>`
+
+
+    ### Explanation
+
+    1. **Extreme Values of the Constraints of the Field**: This test case checks the
+    minimum possible value for the `ErrorState` field to ensure the system handles
+    boundary conditions correctly.
+
+    2. **Values of the Field that Could Result in Special Responses**: This test case
+    checks for specific error values that might trigger special responses as defined
+    in the specification.
+
+
+    These test cases ensure that the system behaves correctly under both normal and
+    edge conditions for the `OperationalError` event in the Dishwasher Alarm Cluster.
+
+
+    For more detailed information, refer to the Matter 1.2 Application Cluster Specification
+    document【4:0†source】.'
+  arguments:
+    ErrorState: '`<specific_error_value>`'
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: SubscribeToEvent

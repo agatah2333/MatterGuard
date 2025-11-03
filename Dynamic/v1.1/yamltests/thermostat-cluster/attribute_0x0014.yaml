@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0014'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0014_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '`UnoccupiedHeatingSetpoint` will be set to 7°C'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    UnoccupiedHeatingSetpoint: 7°C (assuming 7°C is the minimum allowed value)
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`UnoccupiedHeatingSetpoint` will be set to 30°C'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    UnoccupiedHeatingSetpoint: 30°C (assuming 30°C is the maximum allowed value)
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`UnoccupiedHeatingSetpoint` will be set to 7°C'
+  ExpectedResponse: SUCCESS (with adjustment)
+  Pre-requisites: None
+  arguments:
+    UnoccupiedHeatingSetpoint: 6°C (assuming 7°C is the minimum allowed value)
+  label: Test_Case_Below_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`UnoccupiedHeatingSetpoint` will be set to 30°C'
+  ExpectedResponse: SUCCESS (with adjustment)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    UnoccupiedHeatingSetpoint: 31°C (assuming 30°C is the maximum allowed value)
+  label: Test_Case_Above_Maximum_Value
+  option: WriteAttribute

@@ -1,0 +1,51 @@
+config:
+  cluster: software-diagnostics-cluster
+  event: '0x00'
+  nodeId: '0x654231'
+name: software-diagnostics-cluster_event_0x00_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: N/A
+  ExpectedResponse: Event logged with minimum values
+  Pre-requisites: None
+  arguments:
+    FaultRecording: '""'
+    ID: 0
+    Name: '""'
+  label: Test_Case_Minimum_Values
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: N/A
+  ExpectedResponse: Event logged with maximum values
+  Pre-requisites: None
+  arguments:
+    FaultRecording: <1024_bytes_data> (1024 bytes of data)
+    ID: 18446744073709551615 (maximum uint64 value)
+    Name: '"MaxName" (8 characters)'
+  label: Test_Case_Maximum_Values
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: N/A
+  ExpectedResponse: Specific handling for thread ID 12345
+  Pre-requisites: Thread ID 12345 must be known to the system
+  arguments:
+    FaultRecording: '"Special case data"'
+    ID: 12345 (example thread ID known to cause specific behavior)
+    Name: '"Thread1"'
+  label: Test_Case_Special_Response_-_Specific_Thread_ID
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: N/A
+  ExpectedResponse: Detailed analysis triggered for critical error
+  Pre-requisites: 'System must be configured to analyze specific fault recordings
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    FaultRecording: '"Critical error at address 0xABCDEF"'
+    ID: 67890
+    Name: '"Thread2"'
+  label: Test_Case_Special_Response_-_FaultRecording_Analysis
+  option: SubscribeToEvent

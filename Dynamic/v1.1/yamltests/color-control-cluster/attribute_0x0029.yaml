@@ -1,0 +1,29 @@
+config:
+  attribute: '0x0029'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0029_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Primary6Y set to 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Primary6Y"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Primary6Y set to 65279
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the `Primary6Y` attribute and ensure
+    that the system handles the minimum and maximum values correctly.
+
+
+    For more details, refer to the document: 【4:0†source】.'
+  arguments:
+    '{"Primary6Y"': 65279}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

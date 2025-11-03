@@ -1,0 +1,26 @@
+config:
+  attribute: '0x000B'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x000B_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatTimeToFullCharge": 0}'
+  ExpectedResponse: Success
+  Pre-requisites: Battery is charging
+  arguments:
+    '{"BatTimeToFullCharge"': 0}
+  label: Test_Case_Extreme_Values
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatTimeToFullCharge": NULL}'
+  ExpectedResponse: Success
+  Pre-requisites: 'Node is currently unable to assess the value
+
+
+    These test cases cover the extreme values and special responses for the `BatTimeToFullCharge`
+    attribute in the Power Source Cluster【4:0†source】【4:4†source】【4:10†source】.'
+  arguments:
+    '{"BatTimeToFullCharge"': NULL}
+  label: Test_Case_Special_Response
+  option: WriteAttribute

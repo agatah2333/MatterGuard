@@ -1,0 +1,108 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0036",
+    "name": "Wi-Fi Network Diagnostics",
+    "description": "Wi-Fi network diagnostics."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "ResetCounts"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "BSSID",
+      "type": "octstr",
+      "description": "BSSID attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "Security",
+      "type": "unknown",
+      "description": "Security attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "WiFiVer",
+      "type": "unknown",
+      "description": "WiFiVer attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0003",
+      "name": "Channel",
+      "type": "unknown",
+      "description": "Channel attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0004",
+      "name": "RSSI",
+      "type": "int8",
+      "description": "RSSI attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0005",
+      "name": "Beacon",
+      "type": "unknown",
+      "description": "Beacon attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0006",
+      "name": "BeaconRx",
+      "type": "unknown",
+      "description": "BeaconRx attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0007",
+      "name": "PacketMul",
+      "type": "unknown",
+      "description": "PacketMul attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0008",
+      "name": "PacketMul",
+      "type": "unknown",
+      "description": "PacketMul attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0009",
+      "name": "PacketUni",
+      "type": "unknown",
+      "description": "PacketUni attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x000a",
+      "name": "PacketUni",
+      "type": "unknown",
+      "description": "PacketUni attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x000b",
+      "name": "Current",
+      "type": "unknown",
+      "description": "Current attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x000c",
+      "name": "Overrun",
+      "type": "unknown",
+      "description": "Overrun attribute",
+      "access": "R"
+    }
+  ],
+  "events": []
+}

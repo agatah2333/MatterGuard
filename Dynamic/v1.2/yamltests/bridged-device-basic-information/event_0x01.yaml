@@ -1,0 +1,24 @@
+config:
+  cluster: bridged-device-basic-information
+  event: '0x01'
+  nodeId: '0x654231'
+name: bridged-device-basic-information_event_0x01_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: Reachable attribute will be set to True.
+  ExpectedResponse: Event indicating the device is reachable.
+  Pre-requisites: The device was previously unreachable.
+  arguments:
+    '{"ReachableNewValue"': True}
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: Reachable attribute will be set to False.
+  ExpectedResponse: Event indicating the device is not reachable.
+  Pre-requisites: 'The device was previously reachable.
+
+
+    These test cases cover the extreme values of the `ReachableNewValue` field and
+    the special responses that occur when the reachability status changes【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"ReachableNewValue"': False}
+  option: SubscribeToEvent

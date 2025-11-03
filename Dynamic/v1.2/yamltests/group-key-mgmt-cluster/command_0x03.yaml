@@ -1,0 +1,43 @@
+config:
+  cluster: group-key-mgmt-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: group-key-mgmt-cluster_command_0x03_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: The Group Key Set with ID 1 will be removed.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The Group Key Set with ID 1 must exist.
+  arguments:
+    '{"GroupKeySetID"': 1}
+  label: Test_Case_Minimum_Valid_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: The Group Key Set with ID 65535 will be removed.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The Group Key Set with ID 65535 must exist.
+  arguments:
+    '{"GroupKeySetID"': 65535}
+  label: Test_Case_Maximum_Valid_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: INVALID_COMMAND
+  Pre-requisites: None
+  arguments:
+    '{"GroupKeySetID"': 0}
+  label: Test_Case_Special_Response_-_INVALID_COMMAND
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: NOT_FOUND
+  Pre-requisites: 'The Group Key Set with ID 12345 must not exist.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】.'
+  arguments:
+    '{"GroupKeySetID"': 12345}
+  label: Test_Case_Special_Response_-_NOT_FOUND
+  option: SendCommand

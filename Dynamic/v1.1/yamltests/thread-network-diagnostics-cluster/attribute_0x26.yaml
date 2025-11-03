@@ -1,0 +1,42 @@
+config:
+  attribute: '0x26'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x26_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"ActiveNetworkFaults": [0]}'
+  ExpectedResponse: <success>
+  Pre-requisites: Node detects an unspecified fault.
+  arguments:
+    '{"NetworkFault"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"ActiveNetworkFaults": [3]}'
+  ExpectedResponse: <success>
+  Pre-requisites: Node detects the network is jammed.
+  arguments:
+    '{"NetworkFault"': 3}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"ActiveNetworkFaults": [1]}'
+  ExpectedResponse: <success>
+  Pre-requisites: Node detects the Thread link is down.
+  arguments:
+    '{"NetworkFault"': 1}
+  label: Test_Case_Special_Response_-_LinkDown
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"ActiveNetworkFaults": [2]}'
+  ExpectedResponse: <success>
+  Pre-requisites: 'Node detects a hardware failure.
+
+
+    These test cases cover the extreme values of the `NetworkFault` field and the
+    special responses as per the attribute''s description【4:0†source】.'
+  arguments:
+    '{"NetworkFault"': 2}
+  label: Test_Case_Special_Response_-_HardwareFailure
+  option: WriteAttribute

@@ -1,0 +1,50 @@
+{
+  "source_file": "Wake On LAN_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0503",
+        "name": "Wake on LAN",
+        "description": "Manages low power mode for Wake-on-LAN/WLAN enabled devices",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "MACAddress",
+            "dataType": "string",
+            "valueRange": "48-bit MAC (12 hex chars)",
+            "description": "Device's MAC address for Wake-on-LAN",
+            "privilege": "F",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "LinkLocalAddress",
+            "dataType": "ipv6adr",
+            "valueRange": "IPv6 link-local address",
+            "description": "Device's IPv6 link-local address",
+            "privilege": "F",
+            "writable": false
+          }
+        ],
+        "dataTypes": {
+          "WakeOnLANStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "MACAddress": {
+                "dataType": "string",
+                "valueRange": "max 12 characters"
+              },
+              "LinkLocalAddress": {
+                "dataType": "ipv6adr",
+                "valueRange": "128-bit address"
+              }
+            }
+          }
+        },
+        "commands": [],
+        "events": []
+      }
+    ]
+  }
+}

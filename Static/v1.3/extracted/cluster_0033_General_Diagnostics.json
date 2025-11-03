@@ -1,0 +1,157 @@
+{
+  "cluster_id": "0x0033",
+  "cluster_name": "General Diagnostics",
+  "section": "11.12",
+  "description": "The General Diagnostics Cluster, along with other diagnostics clusters, provide a means to acquire standardized diagnostics metrics that MAY be used by a Node to assist a user or Administrator in diagnosing potential problems. The General Diagnostics Cluster attempts to centralize all metrics that are broadly relevant to the majority of Nodes.",
+  "data_types": {
+    "HardwareFaultEnum": {
+      "name": "HardwareFaultEnum",
+      "definition_line": "11.12.5.1. HardwareFaultEnum Type"
+    },
+    "RadioFaultEnum": {
+      "name": "RadioFaultEnum",
+      "definition_line": "11.12.5.2. RadioFaultEnum Type"
+    },
+    "NetworkFaultEnum": {
+      "name": "NetworkFaultEnum",
+      "definition_line": "11.12.5.3. NetworkFaultEnum Type"
+    },
+    "InterfaceTypeEnum": {
+      "name": "InterfaceTypeEnum",
+      "definition_line": "11.12.5.4. InterfaceTypeEnum Type"
+    },
+    "BootReasonEnum": {
+      "name": "BootReasonEnum",
+      "definition_line": "11.12.5.5. BootReasonEnum Type"
+    },
+    "NetworkInterface": {
+      "name": "NetworkInterface",
+      "definition_line": "11.12.5.6. NetworkInterface Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "Network­",
+      "details": "list[Net­ max 8 RV M",
+      "raw_line": "0x0000         Network­        list[Net­     max 8                                        RV         M"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "Reboot­",
+      "details": "uint16 N RV M",
+      "raw_line": "0x0001         Reboot­         uint16                       N                             RV         M"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "UpTime",
+      "details": "uint64 C RV M",
+      "raw_line": "0x0002         UpTime          uint64                       C                             RV         M"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "TotalOper­",
+      "details": "uint32 NC RV O",
+      "raw_line": "0x0003         TotalOper­ uint32                            NC                            RV         O"
+    },
+    "0x0004": {
+      "id": "0x0004",
+      "name": "BootRea­",
+      "details": "BootReaso­ RV O",
+      "raw_line": "0x0004         BootRea­        BootReaso­                                                 RV         O"
+    },
+    "0x0005": {
+      "id": "0x0005",
+      "name": "Active­",
+      "details": "list[Hard­ max 11 RV O",
+      "raw_line": "0x0005         Active­         list[Hard­    max 11                                       RV         O"
+    },
+    "0x0006": {
+      "id": "0x0006",
+      "name": "ActiveRa­",
+      "details": "list[Radio­ max 7 RV O",
+      "raw_line": "0x0006         ActiveRa­       list[Radio­   max 7                                        RV         O"
+    },
+    "0x0007": {
+      "id": "0x0007",
+      "name": "ActiveNet­",
+      "details": "list[Net­ max 4 RV O",
+      "raw_line": "0x0007         ActiveNet­ list[Net­          max 4                                        RV         O"
+    },
+    "0x0008": {
+      "id": "0x0008",
+      "name": "TestEvent­",
+      "details": "bool all RV M",
+      "raw_line": "0x0008         TestEvent­ bool               all                                          RV         M"
+    },
+    "0x0009": {
+      "id": "0x0009",
+      "name": "DoNotUse",
+      "details": "X",
+      "raw_line": "0x0009         DoNotUse                                                                              X"
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "TestEventTrig­",
+      "details": "client ⇒ server Y M M",
+      "raw_line": "0x00               TestEventTrig­ client ⇒ server Y                           M                 M"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "TimeSnapshot",
+      "details": "client ⇒ server TimeSnap­ O M",
+      "raw_line": "0x01               TimeSnapshot client ⇒ server TimeSnap­                     O                 M"
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "TimeSnap­",
+      "details": "client ⇐ server N M",
+      "raw_line": "0x02               TimeSnap­          client ⇐ server N                                         M"
+    },
+    "0x03": {
+      "id": "0x03",
+      "name": "Payload­",
+      "details": "client ⇒ server PayloadTestRe­ M DMTEST",
+      "raw_line": "0x03               Payload­           client ⇒ server PayloadTestRe­ M                          DMTEST"
+    },
+    "0x04": {
+      "id": "0x04",
+      "name": "Payload­",
+      "details": "server ⇒ client N M DMTEST",
+      "raw_line": "0x04               Payload­           server ⇒ client N                       M                 DMTEST"
+    }
+  },
+  "events": {
+    "0x00": {
+      "id": "0x00",
+      "name": "HardwareFault­",
+      "details": "CRITICAL V O",
+      "raw_line": "0x00                   HardwareFault­         CRITICAL                V                         O"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "RadioFault­",
+      "details": "CRITICAL V O",
+      "raw_line": "0x01                   RadioFault­            CRITICAL                V                         O"
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "NetworkFault­",
+      "details": "CRITICAL V O",
+      "raw_line": "0x02                   NetworkFault­          CRITICAL                V                         O"
+    },
+    "0x03": {
+      "id": "0x03",
+      "name": "BootReason",
+      "details": "CRITICAL V M",
+      "raw_line": "0x03                   BootReason             CRITICAL                V                         M"
+    }
+  },
+  "extraction_info": {
+    "start_line": 42449,
+    "end_line": 43310,
+    "total_lines": 861
+  }
+}

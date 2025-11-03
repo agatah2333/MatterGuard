@@ -1,0 +1,45 @@
+config:
+  cluster: door-lock-cluster
+  command: '12'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_12_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Get Holiday Schedule Response with the details of the first holiday
+    schedule.
+  Pre-requisites: At least one holiday schedule must be configured.
+  arguments:
+    '{"HolidayIndex"': 0}
+  label: Test_Case_Minimum_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Get Holiday Schedule Response with the details of the 256th holiday
+    schedule, if it exists.
+  Pre-requisites: At least 256 holiday schedules must be configured.
+  arguments:
+    '{"HolidayIndex"': 255}
+  label: Test_Case_Maximum_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Get Holiday Schedule Response with the details of the most recent
+    holiday schedule.
+  Pre-requisites: At least one holiday schedule must be configured.
+  arguments:
+    '{"HolidayIndex"': 0}
+  label: Test_Case_Special_Response_-_Most_Recent_Entry
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: INVALID_COMMAND status code.
+  Pre-requisites: 'N/A
+
+
+    These test cases cover the extreme values of the field constraints and the special
+    responses as mentioned in the description of the effect.'
+  arguments:
+    '{"HolidayIndex"': 256}
+  label: Test_Case_Special_Response_-_Invalid_Entry
+  option: SendCommand

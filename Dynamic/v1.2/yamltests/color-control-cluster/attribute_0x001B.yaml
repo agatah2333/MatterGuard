@@ -1,0 +1,33 @@
+config:
+  attribute: '0x001B'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x001B_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Primary3Intensity = 0
+  ExpectedResponse: Success
+  Pre-requisites: 'NumberOfPrimaries > 2
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"Primary3Intensity"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Primary3Intensity = 0
+  ExpectedResponse: Success
+  Pre-requisites: 'NumberOfPrimaries > 2
+
+
+    These test cases cover the extreme values and special responses for the `Primary3Intensity`
+    attribute in the Color Control Cluster.
+
+
+    For more detailed information, refer to the Matter 1.2 Application Cluster Specification
+    document【4:0†source】.'
+  arguments:
+    '{"Primary3Intensity"': 0}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

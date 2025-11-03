@@ -1,0 +1,58 @@
+config:
+  attribute: '0x0001'
+  cluster: actions-cluster
+  nodeId: '0x654231'
+name: actions-cluster_attribute_0x0001_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: 'EndpointLists will be set to [{EndpointListID: 0, Endpoints:
+    [0]}]'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    EndpointListID: 0
+    Endpoints:
+    - 0
+  label: Test_Case_Minimum_Values
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: 'EndpointLists will be set to [{EndpointListID: 65535, Endpoints:
+    [0, 1, 2, ..., 255]}]'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    EndpointListID: 65535
+    Endpoints:
+    - 0
+    - 1
+    - 2
+    - '...'
+    - 255
+  label: Test_Case_Maximum_Values
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: 'EndpointLists will be set to [{EndpointListID: 1, Endpoints:
+    []}]'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    EndpointListID: 1
+    Endpoints: []
+  label: Test_Case_Special_Response_-_Empty_List
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: 'EndpointLists will be set to [{EndpointListID: 12345, Endpoints:
+    [1]}]'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:5†source】【4:6†source】【4:16†source】.'
+  arguments:
+    EndpointListID: 12345
+    Endpoints:
+    - 1
+  label: Test_Case_Special_Response_-_Single_Endpoint
+  option: WriteAttribute

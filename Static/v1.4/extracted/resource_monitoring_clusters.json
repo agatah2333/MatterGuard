@@ -1,0 +1,241 @@
+{
+  "base_cluster_info": {
+    "cluster_name": "Resource Monitoring Clusters",
+    "cluster_description": "This generic cluster provides an interface to the current condition of a resource. A resource is a component of a device that is designed to be replaced, refilled, or emptied when exhausted or full. Examples of resources include filters, cartridges, and water tanks. While batteries fit this definition they are not intended to be used with this cluster. Use the power source cluster for batteries instead.",
+    "revision": 1,
+    "classification": {
+      "hierarchy": "Base",
+      "role": "Application",
+      "scope": "Endpoint",
+      "pics_code": "REPM"
+    },
+    "notes": [
+      "This cluster is not meant to be used for monitoring of the system resources, such as processing, memory utilization, networking properties, etc.",
+      "This cluster SHALL be used via an alias to a specific resource type (see Cluster IDs)."
+    ]
+  },
+  "cluster_aliases": [
+    {
+      "cluster_id": "0x0071",
+      "cluster_name": "HEPA Filter Monitoring",
+      "pics_code": "HEPAFREMON"
+    },
+    {
+      "cluster_id": "0x0072",
+      "cluster_name": "Activated Carbon Filter Monitoring",
+      "pics_code": "ACFREMON"
+    },
+    {
+      "cluster_id": "0x0079",
+      "cluster_name": "Water Tank Level Monitoring",
+      "pics_code": "WTLREPMON"
+    }
+  ],
+  "features": [
+    {
+      "bit": 0,
+      "code": "CON",
+      "feature": "Condition",
+      "conformance": "O",
+      "summary": "Supports monitoring the condition of the resource in percentage"
+    },
+    {
+      "bit": 1,
+      "code": "WRN",
+      "feature": "Warning",
+      "conformance": "O",
+      "summary": "Supports warning indication"
+    },
+    {
+      "bit": 2,
+      "code": "REP",
+      "feature": "ReplacementProductList",
+      "conformance": "O",
+      "summary": "Supports specifying the list of replacement products"
+    }
+  ],
+  "data_types": [
+    {
+      "name": "DegradationDirectionEnum",
+      "type": "enum8",
+      "description": "Indicates the direction in which the condition of the resource changes over time.",
+      "values": [
+        {
+          "value": 0,
+          "name": "Up",
+          "summary": "The degradation of the resource is indicated by an upwards moving/increasing value",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "Down",
+          "summary": "The degradation of the resource is indicated by a downwards moving/decreasing value",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "name": "ChangeIndicationEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "OK",
+          "summary": "Resource is in good condition, no intervention required",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "Warning",
+          "summary": "Resource will be exhausted soon, intervention will shortly be required",
+          "conformance": "WRN"
+        },
+        {
+          "value": 2,
+          "name": "Critical",
+          "summary": "Resource is exhausted, immediate intervention is required",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "name": "ProductIdentifierTypeEnum",
+      "type": "enum8",
+      "description": "Indicate the type of identifier used to describe the product. Devices SHOULD use globally-recognized IDs over OEM specific ones.",
+      "values": [
+        {
+          "value": 0,
+          "name": "UPC",
+          "summary": "12-digit Universal Product Code",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "GTIN-8",
+          "summary": "8-digit Global Trade Item Number",
+          "conformance": "M"
+        },
+        {
+          "value": 2,
+          "name": "EAN",
+          "summary": "13-digit European Article Number",
+          "conformance": "M"
+        },
+        {
+          "value": 3,
+          "name": "GTIN-14",
+          "summary": "14-digit Global Trade Item Number",
+          "conformance": "M"
+        },
+        {
+          "value": 4,
+          "name": "OEM",
+          "summary": "Original Equipment Manufacturer part number",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "name": "ReplacementProductStruct",
+      "type": "struct",
+      "description": "Indicates the product identifier that can be used as a replacement for the resource.",
+      "fields": [
+        {
+          "id": 0,
+          "name": "ProductIdentifierType",
+          "type": "ProductIdentifierTypeEnum",
+          "constraint": "desc",
+          "conformance": "M"
+        },
+        {
+          "id": 1,
+          "name": "ProductIdentifierValue",
+          "type": "string",
+          "constraint": "max 20",
+          "conformance": "M"
+        }
+      ]
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Condition",
+      "type": "percent",
+      "constraint": "",
+      "quality": "",
+      "default": null,
+      "access": "RV",
+      "conformance": "CON",
+      "description": "This attribute SHALL indicate the current condition of the resource in percent."
+    },
+    {
+      "id": "0x0001",
+      "name": "DegradationDirection",
+      "type": "DegradationDirectionEnum",
+      "constraint": "desc",
+      "quality": "F",
+      "default": null,
+      "access": "RV",
+      "conformance": "CON",
+      "description": "This attribute SHALL indicate the direction of change for the condition of the resource over time, which helps to determine whether a higher or lower condition value is considered optimal."
+    },
+    {
+      "id": "0x0002",
+      "name": "ChangeIndication",
+      "type": "ChangeIndicationEnum",
+      "constraint": "",
+      "quality": "",
+      "default": "0",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL be populated with a value from ChangeIndicationEnum that is indicative of the current requirement to change the resource."
+    },
+    {
+      "id": "0x0003",
+      "name": "InPlaceIndicator",
+      "type": "bool",
+      "constraint": "",
+      "quality": "",
+      "default": null,
+      "access": "RV",
+      "conformance": "O",
+      "description": "This attribute SHALL indicate whether a resource is currently installed. A value of true SHALL indicate that a resource is installed. A value of false SHALL indicate that a resource is not installed."
+    },
+    {
+      "id": "0x0004",
+      "name": "LastChangedTime",
+      "type": "epoch-s",
+      "constraint": "all",
+      "quality": "XN",
+      "default": "null",
+      "access": "RW VO",
+      "conformance": "O",
+      "description": "This attribute MAY indicates the time at which the resource has been changed, if supported by the server. The attribute SHALL be null if it was never set or is unknown."
+    },
+    {
+      "id": "0x0005",
+      "name": "ReplacementProductList",
+      "type": "list[ReplacementProductStruct]",
+      "constraint": "max 5",
+      "quality": "F",
+      "default": null,
+      "access": "RV",
+      "conformance": "REP",
+      "description": "This attribute SHALL indicate the list of supported products that may be used as replacements for the current resource. Each item in this list represents a unique ReplacementProductStruct."
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "ResetCondition",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "O",
+      "description": "Upon receipt, the device SHALL reset the Condition and ChangeIndicator attributes, indicating full resource availability and readiness for use, as initially configured. Invocation of this command MAY cause the LastChangedTime to be updated automatically based on the clock of the server, if the server supports setting the attribute.",
+      "fields": []
+    }
+  ],
+  "events": []
+}

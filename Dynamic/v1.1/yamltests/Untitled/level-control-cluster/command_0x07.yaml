@@ -1,0 +1,157 @@
+config:
+  cluster: level-control-cluster
+  command: '0x07'
+  nodeId: '0x654231'
+name: level-control-cluster_command_0x07_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: "- `CurrentLevel`: No change\n  - `RemainingTime`: 0"
+  ExpectedResponse: The device should stop any ongoing level change and leave the
+    `CurrentLevel` attribute at its current value.
+  Pre-requisites: An ongoing `MoveToLevel`, `Move`, or `Step` command should be in
+    process.
+  arguments:
+    OptionsMask: 0
+    OptionsOverride: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify level-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0008'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read MinLevel attribute to understand constraints
+    action:
+      type: read-by-id
+      cluster_id: '0x0008'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+  - step: 4
+    description: Read MaxLevel attribute to understand constraints
+    action:
+      type: read-by-id
+      cluster_id: '0x0008'
+      attribute_id: '0x0003'
+    expected_response: Success
+    timeout: 10
+  - step: 5
+    description: Read current CurrentLevel attribute
+    action:
+      type: read-by-id
+      cluster_id: '0x0008'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 6
+    description: Set initial CurrentLevel to 100 for known starting state
+    action:
+      type: command-by-id
+      cluster_id: '0x0008'
+      command_id: '0x0000'
+      payload: '{"0": "100", "1": "0", "2": "0", "3": "0"}'
+    expected_response: Success
+    timeout: 15
+  - step: 7
+    description: Verify CurrentLevel is set to 100
+    action:
+      type: read-by-id
+      cluster_id: '0x0008'
+      attribute_id: '0x0000'
+    expected_response:
+      status: Success
+      value: 100
+    timeout: 10
+- ActionTime: N/A
+  Attribute_Change: "- `CurrentLevel`: No change\n  - `RemainingTime`: 0"
+  ExpectedResponse: The device should stop any ongoing level change and leave the
+    `CurrentLevel` attribute at its current value.
+  Pre-requisites: 'An ongoing `MoveToLevel`, `Move`, or `Step` command should be in
+    process.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    OptionsMask: 255
+    OptionsOverride: 255
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify level-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0008'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read MinLevel attribute to understand constraints
+    action:
+      type: read-by-id
+      cluster_id: '0x0008'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+  - step: 4
+    description: Read MaxLevel attribute to understand constraints
+    action:
+      type: read-by-id
+      cluster_id: '0x0008'
+      attribute_id: '0x0003'
+    expected_response: Success
+    timeout: 10
+  - step: 5
+    description: Read current CurrentLevel attribute
+    action:
+      type: read-by-id
+      cluster_id: '0x0008'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 6
+    description: Set initial CurrentLevel to 100 for known starting state
+    action:
+      type: command-by-id
+      cluster_id: '0x0008'
+      command_id: '0x0000'
+      payload: '{"0": "100", "1": "0", "2": "0", "3": "0"}'
+    expected_response: Success
+    timeout: 15
+  - step: 7
+    description: Verify CurrentLevel is set to 100
+    action:
+      type: read-by-id
+      cluster_id: '0x0008'
+      attribute_id: '0x0000'
+    expected_response:
+      status: Success
+      value: 100
+    timeout: 10
+execution_metadata:
+  estimated_duration: 60
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x050b",
+    "name": "Audio Output",
+    "description": "Cluster for Audio Output functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

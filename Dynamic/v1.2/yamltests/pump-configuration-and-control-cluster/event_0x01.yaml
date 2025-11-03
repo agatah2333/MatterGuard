@@ -1,0 +1,32 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x01'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x01_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    ##### Test Case 1.2:'
+  arguments:
+    CompletionErrorCode: 0 (NoError)
+    PausedTime: 0
+    TotalOperationalTime: 0
+  label: Test_Case_Extreme_Values_of_Constraints
+  option: SubscribeToEvent
+- ActionTime: 4200
+  Attribute_Change: None
+  ExpectedResponse: Error
+  Pre-requisites: 'None
+
+
+    ##### Test Case 2.2:'
+  arguments:
+    CompletionErrorCode: 1 (Example of an error code other than NoError)
+    PausedTime: 600 (10 minutes)
+    TotalOperationalTime: 3600 (1 hour)
+  label: Test_Case_Special_Responses
+  option: SubscribeToEvent

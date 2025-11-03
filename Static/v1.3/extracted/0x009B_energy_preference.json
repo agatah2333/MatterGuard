@@ -1,0 +1,140 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x009B",
+    "name": "Energy Preference",
+    "description": "This cluster provides an interface to specify preferences for how devices should consume energy."
+  },
+  "derived_datatypes": [
+    {
+      "type": "enum",
+      "name": "EnergyPriorityEnum",
+      "base_data_type": "ENUM8",
+      "description": "This data type is derived from enum8.",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "Comfort",
+            "value": "0",
+            "description": "This value SHALL emphasize user comfort; e.g. local temperature for a thermostat."
+          },
+          {
+            "name": "Speed",
+            "value": "1",
+            "description": "This value SHALL emphasize how quickly a device accomplishes its targeted use; e.g. how quickly a robot vacuum completes a cleaning cycle."
+          },
+          {
+            "name": "Efficiency",
+            "value": "2",
+            "description": "This value SHALL emphasize how much energy a device uses; e.g. electricity usage for a Pump."
+          },
+          {
+            "name": "WaterConsumption",
+            "value": "3",
+            "description": "This value SHALL emphasize how much water is consumed during device use; e.g. how much water a dishwasher uses during a cleaning cycle."
+          }
+        ]
+      }
+    },
+    {
+      "type": "struct",
+      "name": "BalanceStruct",
+      "description": "This represents a step along a scale of preferences.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "Step",
+          "data_type": "percent",
+          "quality": "F",
+          "description": "This field SHALL indicate the relative value of this step."
+        },
+        {
+          "id": "1",
+          "name": "Label",
+          "data_type": "string",
+          "constraint": "max 64",
+          "quality": "F",
+          "conformance": "O",
+          "description": "This field SHALL indicate an optional string explaining which actions a device might take at the given step value."
+        }
+      ]
+    }
+  ],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "EnergyBalances",
+      "data_type": "list[BalanceStruct]",
+      "constraint": "2 to 10",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "BALA",
+      "description": "This attribute SHALL indicate a list of BalanceStructs, each representing a step along a linear scale of relative priorities.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0001",
+      "name": "CurrentEnergyBalance",
+      "data_type": "uint8",
+      "quality": "N",
+      "access": "RW VO",
+      "conformance": "BALA",
+      "description": "This attribute SHALL indicate the current preference of the user for balancing different priorities during device use.",
+      "privilege": "V",
+      "writable": true
+    },
+    {
+      "id": "0x0002",
+      "name": "EnergyPriorities",
+      "data_type": "list[EnergyPriorityEnum]",
+      "constraint": "2",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "BALA",
+      "description": "This attribute SHALL indicate two extremes for interpreting the values in the EnergyBalances attribute.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0003",
+      "name": "LowPowerModeSensitivities",
+      "data_type": "list[BalanceStruct]",
+      "constraint": "2 to 10",
+      "quality": "F",
+      "access": "RV",
+      "conformance": "LPMS",
+      "description": "This attribute SHALL indicate a list of BalanceStructs, each representing a condition or set of conditions for the device to enter a low power mode.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0004",
+      "name": "CurrentLowPowerModeSensitivity",
+      "data_type": "uint8",
+      "quality": "N",
+      "access": "RW VO",
+      "conformance": "LPMS",
+      "description": "This attribute SHALL indicate the current preference of the user for determining when the device should enter a low power mode.",
+      "privilege": "V",
+      "writable": true
+    }
+  ],
+  "events": [],
+  "features": [
+    {
+      "bit": 0,
+      "code": "BALA",
+      "name": "EnergyBalance",
+      "conformance": "O.a+",
+      "description": "Device can balance energy consumption vs. another priority"
+    },
+    {
+      "bit": 1,
+      "code": "LPMS",
+      "name": "LowPowerModeSensitivity",
+      "conformance": "O.a+",
+      "description": "Device can adjust the conditions for entering a low power mode"
+    }
+  ]
+}

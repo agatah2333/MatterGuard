@@ -1,0 +1,6 @@
+config:
+  attribute: '0x0051'
+  cluster: binary-input-basic-cluster
+  nodeId: '0x654231'
+name: binary-input-basic-cluster_attribute_0x0051_v1.1.0.0
+tests: []

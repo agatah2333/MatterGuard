@@ -1,0 +1,33 @@
+config:
+  cluster: boolean-state-cluster
+  event: '0x0000'
+  nodeId: '0x654231'
+name: boolean-state-cluster_event_0x0000_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '`StateValue` will be set to 0'
+  ExpectedResponse: Event generated with `StateValue` = 0
+  Pre-requisites: The initial value of `StateValue` should be 1
+  arguments:
+    StateValue: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '`StateValue` will be set to 1'
+  ExpectedResponse: Event generated with `StateValue` = 1
+  Pre-requisites: "The initial value of `StateValue` should be 0\n\n### Explanation\n\
+    \n1. **Extreme Values of the Constraints of the Field**:\n   - The `StateValue`\
+    \ attribute is a boolean, so it can only take values 0 (FALSE) or 1 (TRUE). Testing\
+    \ with the value 0 ensures that the system correctly handles the lower bound of\
+    \ the boolean state.\n\n2. **Values of the Field That Could Result in Special\
+    \ Responses**:\n   - The `StateValue` attribute set to 1 (TRUE) ensures that the\
+    \ system correctly handles the upper bound of the boolean state. This test case\
+    \ also checks if the event is generated correctly when the state changes to TRUE.\n\
+    \nThese test cases ensure that the Boolean State Cluster's `StateValue` attribute\
+    \ and the corresponding `StateChange` event are functioning correctly under different\
+    \ scenarios.\n\n### References\n- The Boolean State Cluster and its attributes\
+    \ and events are defined in the Matter 1.2 Application Cluster Specification【4:0†source】."
+  arguments:
+    StateValue: 1
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SubscribeToEvent

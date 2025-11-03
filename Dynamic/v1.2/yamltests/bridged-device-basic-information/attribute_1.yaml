@@ -1,0 +1,47 @@
+config:
+  attribute: '1'
+  cluster: bridged-device-basic-information
+  nodeId: '0x654231'
+name: bridged-device-basic-information_attribute_1_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"VendorName": ""}'
+  ExpectedResponse: <error_or_success_based_on_specification>
+  Pre-requisites: <none>
+  arguments:
+    '{"VendorName"': '""}'
+  label: Test_Case_Minimum_Length
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"VendorName": "<max_length_string>"}'
+  ExpectedResponse: <error_or_success_based_on_specification>
+  Pre-requisites: <none>
+  arguments:
+    '{"VendorName"': '"<max_length_string>"}'
+  label: Test_Case_Maximum_Length
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"VendorName": "!@#$%^&*()_+-=[]{}|;'':,.<>?/~`"}'
+  ExpectedResponse: <error_or_success_based_on_specification>
+  Pre-requisites: <none>
+  arguments:
+    '{"VendorName"': '"!@#$%^&*()_+-=[]{}|;'':,.<>?/~`"}'
+  label: Test_Case_Special_Characters
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"VendorName": "ExampleVendor"}'
+  ExpectedResponse: <success>
+  Pre-requisites: '<none>
+
+
+    These test cases cover the extreme values of the constraints of the field (minimum
+    and maximum length), special characters, and a normal value to ensure the attribute
+    behaves as expected under various conditions.
+
+
+    For more detailed constraints and expected responses, refer to the Matter specification
+    document【4:0†source】.'
+  arguments:
+    '{"VendorName"': '"ExampleVendor"}'
+  label: Test_Case_Normal_Value
+  option: WriteAttribute

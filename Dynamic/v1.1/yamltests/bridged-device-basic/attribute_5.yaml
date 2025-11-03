@@ -1,0 +1,28 @@
+config:
+  attribute: '5'
+  cluster: bridged-device-basic
+  nodeId: '0x654231'
+name: bridged-device-basic_attribute_5_v1.1.0.0
+tests:
+- ActionTime: '"N/A"'
+  Attribute_Change: '"N/A"'
+  ExpectedResponse: '"Error: NodeLabel cannot be empty"'
+  Pre-requisites: '"N/A"
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"NodeLabel"': '""}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: '"N/A"'
+  Attribute_Change: '"NodeLabel: ''Living Room Light''"'
+  ExpectedResponse: '"Success: NodeLabel set to ''Living Room Light''"'
+  Pre-requisites: '"N/A"
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"NodeLabel"': '"Living Room Light"}'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

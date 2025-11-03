@@ -1,0 +1,114 @@
+{
+  "source_file": "RVC Operational State_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0061",
+        "name": "RVC Operational State",
+        "attributes": [],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "Pause",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "This command SHALL be supported if the device supports remotely pausing the operation."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "Stop",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "This command SHALL be supported if the device supports remotely stopping the operation."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "Start",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "This command SHALL be supported if the device supports remotely starting the operation."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x03",
+            "name": "Resume",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "This command SHALL be supported if the device supports remotely resuming the operation."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x04",
+            "name": "OperationalCommandResponse",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "This command SHALL be generated in response to any of the Start, Stop, Pause, or Resume commands."
+            },
+            "privilege": "N",
+            "direction": "server → client"
+          },
+          {
+            "id": "0x80",
+            "name": "GoHome",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "This command is specific to the RVC Operational State cluster."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "OperationalStateEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0x00": "Stopped",
+              "0x01": "Running",
+              "0x02": "Paused",
+              "0x03": "Error",
+              "0x40": "SeekingCharger",
+              "0x41": "Charging",
+              "0x42": "Docked"
+            }
+          },
+          "ErrorStateEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0x00": "NoError",
+              "0x01": "UnableToStartOrResume",
+              "0x02": "UnableToCompleteOperation",
+              "0x03": "CommandInvalidInState",
+              "0x40": "FailedToFindChargingDock",
+              "0x41": "Stuck",
+              "0x42": "DustBinMissing",
+              "0x43": "DustBinFull",
+              "0x44": "WaterTankEmpty",
+              "0x45": "WaterTankMissing",
+              "0x46": "WaterTankLidOpen",
+              "0x47": "MopCleaningPadMissing"
+            }
+          }
+        },
+        "description": "This cluster is derived from the Operational State cluster and provides an interface for monitoring the operational state of a robotic vacuum cleaner."
+      }
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+config:
+  cluster: level-control-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: level-control-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`CurrentLevel` to 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Level: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+    TransitionTime: 0
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: 65535
+  Attribute_Change: '`CurrentLevel` to 254'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Level: 254
+    OptionsMask: 255
+    OptionsOverride: 255
+    TransitionTime: 65535
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: Determined by `OnOffTransitionTime` attribute
+  Attribute_Change: '`CurrentLevel` to 128'
+  ExpectedResponse: Success
+  Pre-requisites: '`OnOffTransitionTime` attribute must be set'
+  arguments:
+    Level: 128
+    OptionsMask: 0
+    OptionsOverride: 0
+  label: Test_Case_Special_Response_-_Null_TransitionTime
+  option: SendCommand
+- ActionTime: 500
+  Attribute_Change: '`CurrentLevel` to 100'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:5†source】【4:6†source】.'
+  arguments:
+    Level: 100
+    OptionsMask: 1
+    OptionsOverride: 1
+    TransitionTime: 500
+  label: Test_Case_Special_Response_-_OptionsMask_and_OptionsOverride
+  option: SendCommand

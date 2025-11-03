@@ -1,0 +1,43 @@
+config:
+  cluster: door-lock-cluster
+  command: '14'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_14_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: UserType of UserID 0 set to <DefaultUserType>
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"UserID"': '0, "UserType": <DefaultUserType>}'
+  label: Test_Case_Minimum_UserID_and_Default_UserType
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: UserType of UserID <MaxUserID> set to <DefaultUserType>
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Ensure the maximum UserID is supported by the device
+  arguments:
+    '{"UserID"': '<MaxUserID>, "UserType": <DefaultUserType>}'
+  label: Test_Case_Maximum_UserID_and_Default_UserType
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments:
+    '{"UserID"': '<MaxUserID + 1>, "UserType": <DefaultUserType>}'
+  label: Test_Case_Invalid_UserID_(Out_of_Range)
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: UserType of UserID 1 set to <AdminUser>
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Ensure UserID 1 exists and can be set to AdminUser
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    '{"UserID"': '1, "UserType": <AdminUser>}'
+  label: Test_Case_Special_UserType_(e.g.,_AdminUser)
+  option: SendCommand

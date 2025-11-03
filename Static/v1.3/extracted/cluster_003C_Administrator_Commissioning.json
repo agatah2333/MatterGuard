@@ -1,0 +1,58 @@
+{
+  "cluster_id": "0x003C",
+  "cluster_name": "Administrator Commissioning",
+  "section": "11.19",
+  "description": "This cluster is used to trigger a Node to allow a new Administrator to commission it. It defines Attributes, Commands and Responses needed for this purpose. There are two methods of commissioning, Basic Commissioning which MAY be supported and is described in Section 5.6.2, “Basic Commissioning Method (BCM)” and Enhanced Commissioning which SHALL be supported and is described in Section 5.6.3, “Enhanced Commissioning Method",
+  "data_types": {
+    "CommissioningWindowStatusEnum": {
+      "name": "CommissioningWindowStatusEnum",
+      "definition_line": "11.19.5.1. CommissioningWindowStatusEnum Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "Window­",
+      "details": "Commis­ RV M",
+      "raw_line": "0x0000         Window­        Commis­                                                    RV         M"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "Admin­",
+      "details": "fabric-idx X RV M",
+      "raw_line": "0x0001         Admin­         fabric-idx                   X                             RV         M"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "Admin­",
+      "details": "vendor-id X RV M",
+      "raw_line": "0x0002         Admin­         vendor-id                    X                             RV         M"
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "OpenCommis­",
+      "details": "client ⇒ server Y AT M",
+      "raw_line": "0x00               OpenCommis­ client ⇒ server Y                               AT                M"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "OpenBasic­",
+      "details": "client ⇒ server Y AT BC",
+      "raw_line": "0x01               OpenBasic­          client ⇒ server Y                       AT                BC"
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "RevokeCom­",
+      "details": "client ⇒ server Y AT M",
+      "raw_line": "0x02               RevokeCom­          client ⇒ server Y                       AT                M"
+    }
+  },
+  "events": {},
+  "extraction_info": {
+    "start_line": 48057,
+    "end_line": 49629,
+    "total_lines": 1572
+  }
+}

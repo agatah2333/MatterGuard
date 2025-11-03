@@ -1,0 +1,46 @@
+config:
+  attribute: '0x0003'
+  cluster: illuminance-measurement-cluster
+  nodeId: '0x654231'
+name: illuminance-measurement-cluster_attribute_0x0003_v1.1.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `Tolerance`: 0'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`<none>`'
+  arguments:
+    Tolerance: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `Tolerance`: 2048'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`<none>`'
+  arguments:
+    Tolerance: 2048
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `Tolerance`: `<MinMeasuredValue>`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`<MinMeasuredValue> is defined`'
+  arguments:
+    Tolerance: '`<MinMeasuredValue>`'
+  label: Test_Case_Special_Response_-_Minimum_Measured_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `Tolerance`: `<MaxMeasuredValue>`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`<MaxMeasuredValue> is defined`
+
+
+    These test cases cover the extreme values of the constraints of the Tolerance
+    field and the values that could result in special responses as mentioned in the
+    description of the effect.
+
+
+    For more details, refer to the Matter Application Cluster Specification【4:0†source】.'
+  arguments:
+    Tolerance: '`<MaxMeasuredValue>`'
+  label: Test_Case_Special_Response_-_Maximum_Measured_Value
+  option: WriteAttribute

@@ -1,0 +1,52 @@
+config:
+  cluster: switch-cluster
+  event: '0x05'
+  nodeId: '0x654231'
+name: switch-cluster_event_0x05_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: "- `CurrentPosition`: 0\n  - `CurrentNumberOfPressesCounted`:\
+    \ 2"
+  ExpectedResponse: <success>
+  Pre-requisites: "- `NumberOfPositions` should be at least 2.\n  - `MultiPressMax`\
+    \ should be at least 2."
+  arguments:
+    CurrentNumberOfPressesCounted: 2
+    NewPosition: 0
+  label: Test_Case_Minimum_Values
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: "- `CurrentPosition`: `NumberOfPositions-1`\n  - `CurrentNumberOfPressesCounted`:\
+    \ `MultiPressMax`"
+  ExpectedResponse: <success>
+  Pre-requisites: "- `NumberOfPositions` should be greater than 2.\n  - `MultiPressMax`\
+    \ should be greater than 2."
+  arguments:
+    CurrentNumberOfPressesCounted: '`MultiPressMax`'
+    NewPosition: '`NumberOfPositions-1`'
+  label: Test_Case_Maximum_Values
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: "- `CurrentPosition`: 1\n  - `CurrentNumberOfPressesCounted`:\
+    \ 2"
+  ExpectedResponse: <second_press_detected>
+  Pre-requisites: "- `NumberOfPositions` should be at least 2.\n  - `MultiPressMax`\
+    \ should be at least 2."
+  arguments:
+    CurrentNumberOfPressesCounted: 2
+    NewPosition: 1
+  label: Test_Case_Special_Response_-_Second_Press_Detected
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: "- `CurrentPosition`: 2\n  - `CurrentNumberOfPressesCounted`:\
+    \ 3"
+  ExpectedResponse: <third_press_detected>
+  Pre-requisites: "- `NumberOfPositions` should be at least 3.\n  - `MultiPressMax`\
+    \ should be at least 3.\n\nThese test cases cover the extreme values of the constraints\
+    \ of the fields and the values that could result in special responses as mentioned\
+    \ in the description of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】."
+  arguments:
+    CurrentNumberOfPressesCounted: 3
+    NewPosition: 2
+  label: Test_Case_Special_Response_-_Third_Press_Detected
+  option: SubscribeToEvent

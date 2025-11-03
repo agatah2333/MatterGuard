@@ -1,0 +1,46 @@
+config:
+  attribute: '0x0000'
+  cluster: target-navigator-cluster
+  nodeId: '0x654231'
+name: target-navigator-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None (Read-only attribute)
+  ExpectedResponse: Success
+  Pre-requisites: TargetList should be empty or not contain an entry with Identifier
+    0.
+  arguments:
+    '{"Identifier"': '0, "Name": "Target A"}'
+  label: Test_Case_Minimum_Identifier_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None (Read-only attribute)
+  ExpectedResponse: Success
+  Pre-requisites: TargetList should be empty or not contain an entry with Identifier
+    255.
+  arguments:
+    '{"Identifier"': '255, "Name": "Target B"}'
+  label: Test_Case_Maximum_Identifier_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None (Read-only attribute)
+  ExpectedResponse: Error (Duplicate Identifier)
+  Pre-requisites: TargetList should already contain an entry with Identifier 1.
+  arguments:
+    '{"Identifier"': '1, "Name": "Target C"}'
+  label: Test_Case_Duplicate_Identifier
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None (Read-only attribute)
+  ExpectedResponse: Success
+  Pre-requisites: 'TargetList should be empty or not contain an entry with Identifier
+    2.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:18†source】.'
+  arguments:
+    '{"Identifier"': '2, "Name": "Target@D"}'
+  label: Test_Case_Special_Character_in_Name
+  option: WriteAttribute

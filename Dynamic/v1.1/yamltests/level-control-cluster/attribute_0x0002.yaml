@@ -1,0 +1,54 @@
+config:
+  attribute: '0x0002'
+  cluster: level-control-cluster
+  nodeId: '0x654231'
+name: level-control-cluster_attribute_0x0002_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: Device is not of Lighting Type
+  arguments:
+    '{"MinLevel"': 0}
+  label: Test_Case_Minimum_Value_(Non-Lighting_Type)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: Device is of Lighting Type
+  arguments:
+    '{"MinLevel"': 1}
+  label: Test_Case_Minimum_Value_(Lighting_Type)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"MinLevel"': <MaxLevel>}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: Device is not of Lighting Type
+  arguments:
+    '{"MinLevel"': 0}
+  label: Test_Case_Special_Response_(Non-Lighting_Type)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: 'Device is of Lighting Type
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    For more details, refer to the Matter Application Cluster Specification【4:0†source】.'
+  arguments:
+    '{"MinLevel"': 1}
+  label: Test_Case_Special_Response_(Lighting_Type)
+  option: WriteAttribute

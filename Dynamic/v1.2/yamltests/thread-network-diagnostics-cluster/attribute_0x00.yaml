@@ -1,0 +1,44 @@
+config:
+  attribute: '0x00'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x00_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `OverrunCount`: 0'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    #'
+  arguments:
+    OverrunCount: 0
+  label: Test_Case_Extreme_Value_(Minimum)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `OverrunCount`: 0'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    #'
+  arguments:
+    OverrunCount: MAX_UINT32
+  label: Test_Case_Extreme_Value_(Maximum)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `OverrunCount`: 0'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the `OverrunCount` field and a typical
+    scenario to ensure the command resets the attribute correctly and returns the
+    expected response.
+
+
+    For more detailed information, refer to the Matter 1.2 Core Specification document【4:0†source】.'
+  arguments:
+    OverrunCount: Any value (e.g., 12345)
+  label: Test_Case_Special_Response_Scenario
+  option: WriteAttribute

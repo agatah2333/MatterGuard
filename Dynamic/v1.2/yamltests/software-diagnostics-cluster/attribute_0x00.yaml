@@ -1,0 +1,29 @@
+config:
+  attribute: '0x00'
+  cluster: software-diagnostics-cluster
+  nodeId: '0x654231'
+name: software-diagnostics-cluster_attribute_0x00_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: SoftwareFault attribute will be set with minimum values.
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    ##### Test Case 1.2: Maximum Values'
+  arguments:
+    '{"ID"': '0, "Name": "", "FaultRecording": ""}'
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: SoftwareFault attribute will be set with critical fault details.
+  ExpectedResponse: Special handling for critical fault
+  Pre-requisites: 'None
+
+
+    ##### Test Case 2.2: Empty Fault Recording'
+  arguments:
+    '{"ID"': '999999999, "Name": "Faulty", "FaultRecording": "Critical fault occurred
+      in thread 999999999"}'
+  label: Test_Case_Special_Responses
+  option: WriteAttribute

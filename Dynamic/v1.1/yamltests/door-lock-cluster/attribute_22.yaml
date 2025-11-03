@@ -1,0 +1,52 @@
+config:
+  attribute: '22'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_22_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"LockState": 0}'
+  ExpectedResponse: <Lock state is not fully locked>
+  Pre-requisites: <None>
+  arguments:
+    '{"LockState"': 0}
+  label: Test_Case_Extreme_Value_-_Not_Fully_Locked
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LockState": 1}'
+  ExpectedResponse: <Lock state is fully locked>
+  Pre-requisites: <None>
+  arguments:
+    '{"LockState"': 1}
+  label: Test_Case_Extreme_Value_-_Locked
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LockState": 2}'
+  ExpectedResponse: <Lock state is fully unlocked>
+  Pre-requisites: <None>
+  arguments:
+    '{"LockState"': 2}
+  label: Test_Case_Extreme_Value_-_Unlocked
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LockState": NULL}'
+  ExpectedResponse: <Lock state is unknown>
+  Pre-requisites: <Lock hardware does not currently know the status of the locking
+    mechanism, e.g., after a power cycle until the first lock actuation is completed>
+  arguments:
+    '{"LockState"': NULL}
+  label: Test_Case_Special_Response_-_Unknown_Status
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LockState": 0}'
+  ExpectedResponse: <Lock state is somewhere between Locked and Unlocked>
+  Pre-requisites: '<The lock is partially secured, e.g., a deadbolt could be partially
+    extended and not in a dead latched state>
+
+
+    These test cases cover the extreme values and special responses for the LockState
+    attribute in the Door Lock Cluster【4:0†source】.'
+  arguments:
+    '{"LockState"': 0}
+  label: Test_Case_Special_Response_-_Transition_to_Not_Fully_Locked
+  option: WriteAttribute

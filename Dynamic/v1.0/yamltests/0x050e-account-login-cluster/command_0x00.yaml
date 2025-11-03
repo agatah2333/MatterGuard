@@ -1,0 +1,89 @@
+test_metadata:
+  version: 1.0.0
+  matter_spec_version: '1.0'
+  description: Refined test cases for account-login cluster command 0x00
+  extraction_method: systematic_cluster_analysis
+config:
+  cluster: account-login-cluster
+  cluster_id: '0x050e'
+  command_id: '0x00'
+  nodeId: '0x654231'
+  endpoint: 1
+name: account-login_cluster_command_0x00_refined_v1.0.0
+test_info:
+  total_test_cases: 1
+  test_focus:
+  - Extreme values of constraints
+  - Special response scenarios
+  - Error conditions
+test_summary: '- There are 1 test cases in the sendcommand
+
+  - The range of each field is {}'
+tests:
+- test_id: TC_GetSetupPIN_001
+  label: Test_Case_Basic_GetSetupPIN
+  description: Basic test for GetSetupPIN command
+  test_type: normal_operation
+  Pre-requisites:
+  - Device supports GetSetupPIN command
+  option: SendCommand
+  arguments: {}
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: Command executed successfully
+  formatted_output: 'Test case 1:
+
+    - Value of each field: {}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: Command executed
+    successfully
+
+    - Any pre-requisites: Device supports GetSetupPIN command'
+  setup_sequence:
+  - step: 1
+    description: Verify account-login-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x050e'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x050e'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x050e'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x050e'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true

@@ -1,0 +1,33 @@
+config:
+  attribute: '0x0001'
+  cluster: access-control-cluster
+  nodeId: '0x654231'
+name: access-control-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: "- `SubjectsPerAccessControlEntry`: 4\n  - `TargetsPerAccessControlEntry`:\
+    \ 3\n  - `AccessControlEntriesPerFabric`: 4"
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AccessControlEntriesPerFabric: 4
+    SubjectsPerAccessControlEntry: 4
+    TargetsPerAccessControlEntry: 3
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: None (Error expected)
+  ExpectedResponse: Constraint Error
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints and the values that
+    could result in special responses as per the provided context. The expected responses
+    and attribute changes are based on the constraints and error handling described
+    in the specification【4:0†source】【4:5†source】【4:14†source】.'
+  arguments:
+    AccessControlEntriesPerFabric: 0 (Invalid, below minimum)
+    SubjectsPerAccessControlEntry: 0 (Invalid, below minimum)
+    TargetsPerAccessControlEntry: 0 (Invalid, below minimum)
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

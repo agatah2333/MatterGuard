@@ -1,0 +1,94 @@
+{
+  "source_file": "Oven Mode_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0049",
+        "name": "Oven Mode",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SupportedModes",
+            "dataType": "list[ModeOptionStruct]",
+            "valueRange": "At least one entry must include the Bake mode tag",
+            "description": "Indicates the modes supported by the oven.",
+            "privilege": "Read",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentMode",
+            "dataType": "enum8",
+            "valueRange": "",
+            "description": "Indicates the current mode of the oven.",
+            "privilege": "Read",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "StartUpMode",
+            "dataType": "enum8",
+            "valueRange": "",
+            "description": "Indicates the mode the oven starts in.",
+            "privilege": "Read",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "OnMode",
+            "dataType": "enum8",
+            "valueRange": "",
+            "description": "Indicates the mode when the oven is turned on.",
+            "privilege": "Read",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ChangeToMode",
+            "parameters": {
+              "dataType": "uint8",
+              "valueRange": "SupportedModes",
+              "description": "On receipt of this command, if the NewMode field indicates a valid mode transition within the supported list, the server SHALL set the CurrentMode attribute to the NewMode value."
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "ChangeToModeResponse",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Response to ChangeToMode command."
+            },
+            "privilege": "Manage",
+            "direction": "server ⇒ client"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "ModeOptionStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "Label": {
+                "type": "string",
+                "valueRange": "Mandatory"
+              },
+              "Mode": {
+                "type": "enum8",
+                "valueRange": "Mandatory"
+              },
+              "ModeTags": {
+                "type": "bitmap8",
+                "valueRange": "1-8"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

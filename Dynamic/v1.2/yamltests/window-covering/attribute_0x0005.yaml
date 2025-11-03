@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0005'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0005_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentPositionLift`: 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    CurrentPositionLift: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentPositionLift`: `InstalledOpenLimitLift`'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    CurrentPositionLift: '`InstalledOpenLimitLift`'
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentPositionLift`: No change'
+  ExpectedResponse: '`CONSTRAINT_ERROR`'
+  Pre-requisites: None
+  arguments:
+    CurrentPositionLift: '-1'
+  label: Test_Case_Out_of_Bounds_(Below_Minimum)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentPositionLift`: No change'
+  ExpectedResponse: '`CONSTRAINT_ERROR`'
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the `CurrentPositionLift`
+    field and the values that could result in special responses as mentioned in the
+    description of the effect【4:0†source】.'
+  arguments:
+    CurrentPositionLift: '`InstalledOpenLimitLift` + 1'
+  label: Test_Case_Out_of_Bounds_(Above_Maximum)
+  option: WriteAttribute

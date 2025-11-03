@@ -1,0 +1,31 @@
+config:
+  attribute: '0x0029'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0029_v1.1.0.0
+tests:
+- ActionTime: N/A (Read-only attribute)
+  Attribute_Change: N/A (Read-only attribute)
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Thermostat should be in a state where no relays are active.
+  arguments:
+    ThermostatRunningState: 0x0000 (All relays off)
+  label: Test_Case_Extreme_Values
+  option: WriteAttribute
+- ActionTime: N/A (Read-only attribute)
+  Attribute_Change: N/A (Read-only attribute)
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Thermostat should be in a state where all relays are active, including
+    unimplemented ones treated as Off.
+
+
+    These test cases cover the extreme values of the `ThermostatRunningState` attribute
+    and ensure that the system handles both all relays being off and all relays being
+    on, including unimplemented ones.
+
+
+    For more details, refer to the Matter Application Cluster Specification【4:0†source】.'
+  arguments:
+    ThermostatRunningState: 0xFFFF (All relays on, including unimplemented ones)
+  label: Test_Case_Special_Responses
+  option: WriteAttribute

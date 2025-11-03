@@ -1,0 +1,6 @@
+config:
+  cluster: bridged-device-basic-information
+  event: '0x00'
+  nodeId: '0x654231'
+name: bridged-device-basic-information_event_0x00_v1.2.0.0
+tests: []

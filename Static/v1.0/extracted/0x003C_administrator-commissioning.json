@@ -1,0 +1,42 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x003C",
+    "name": "Administrator Commissioning",
+    "description": "Controls administrator commissioning window."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "OpenCommissioningWindow"
+    },
+    {
+      "id": "0x02",
+      "name": "RevokeCommissioning"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Window",
+      "type": "unknown",
+      "description": "Window attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "Admin",
+      "type": "unknown",
+      "description": "Admin attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "AdminVen",
+      "type": "unknown",
+      "description": "AdminVen attribute",
+      "access": "R"
+    }
+  ],
+  "events": []
+}

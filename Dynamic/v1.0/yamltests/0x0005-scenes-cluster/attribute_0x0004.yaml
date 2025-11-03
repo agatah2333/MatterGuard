@@ -1,0 +1,143 @@
+config:
+  attribute: '0x0004'
+  cluster: scenes
+  nodeId: '0x654231'
+name: scenes_attribute_0x0004_v1.0.0
+tests:
+- ActionTime: "N/A\n  - **ExpectedResponse**: Scene names are not supported, commands\
+    \ that write a scene name will discard the name, and commands that return a scene\
+    \ name will return an empty string.\n  - **Which Attribute Will Be Changed and\
+    \ the Value of the Attribute**: N/A\n  - **Any Pre-requisites**: N/A"
+  Attribute_Change: "N/A\n  - **Any Pre-requisites**: N/A"
+  ExpectedResponse: "Scene names are not supported, commands that write a scene name\
+    \ will discard the name, and commands that return a scene name will return an\
+    \ empty string.\n  - **Which Attribute Will Be Changed and the Value of the Attribute**:\
+    \ N/A\n  - **Any Pre-requisites**: N/A"
+  Pre-requisites: N/A
+  arguments:
+    '**ActionTime**': N/A
+    '**Any Pre-requisites**': N/A
+    '**ExpectedResponse**': Scene names are not supported, commands that write a scene
+      name will discard the name, and commands that return a scene name will return
+      an empty string.
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': N/A
+    '{"NameSupport"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify scenes cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: "N/A\n  - **ExpectedResponse**: Scene names are supported, commands\
+    \ that write a scene name will store the name, and commands that return a scene\
+    \ name will return the stored name.\n  - **Which Attribute Will Be Changed and\
+    \ the Value of the Attribute**: N/A\n  - **Any Pre-requisites**: N/A\n\nThese\
+    \ test cases cover the extreme values of the `NameSupport` attribute and the special\
+    \ responses based on its value【4:0†source】."
+  Attribute_Change: "N/A\n  - **Any Pre-requisites**: N/A\n\nThese test cases cover\
+    \ the extreme values of the `NameSupport` attribute and the special responses\
+    \ based on its value【4:0†source】."
+  ExpectedResponse: "Scene names are supported, commands that write a scene name will\
+    \ store the name, and commands that return a scene name will return the stored\
+    \ name.\n  - **Which Attribute Will Be Changed and the Value of the Attribute**:\
+    \ N/A\n  - **Any Pre-requisites**: N/A\n\nThese test cases cover the extreme values\
+    \ of the `NameSupport` attribute and the special responses based on its value【4:0†source】."
+  Pre-requisites: 'N/A
+
+
+    These test cases cover the extreme values of the `NameSupport` attribute and the
+    special responses based on its value【4:0†source】.'
+  arguments:
+    '**ActionTime**': N/A
+    '**Any Pre-requisites**': N/A
+    '**ExpectedResponse**': Scene names are supported, commands that write a scene
+      name will store the name, and commands that return a scene name will return
+      the stored name.
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': N/A
+    '{"NameSupport"': 1}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify scenes cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true

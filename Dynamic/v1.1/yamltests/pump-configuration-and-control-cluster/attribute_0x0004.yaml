@@ -1,0 +1,51 @@
+config:
+  attribute: '0x0004'
+  cluster: pump-configuration-and-control-cluster
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_attribute_0x0004_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: MaxConstPressure = -3276.7 kPa
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"MaxConstPressure"': -3276.7}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: MaxConstPressure = 3276.7 kPa
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"MaxConstPressure"': 3276.7}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Failure (Constraint Error)
+  Pre-requisites: None
+  arguments:
+    '{"MaxConstPressure"': 3276.8}
+  label: Test_Case_Invalid_Value_(Above_Maximum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Failure (Constraint Error)
+  Pre-requisites: None
+  arguments:
+    '{"MaxConstPressure"': -3276.8}
+  label: Test_Case_Invalid_Value_(Below_Minimum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: MaxConstPressure = null
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:2†source】【4:6†source】【4:12†source】【4:16†source】.'
+  arguments:
+    '{"MaxConstPressure"': null}
+  label: Test_Case_Null_Value
+  option: WriteAttribute

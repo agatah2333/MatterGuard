@@ -1,0 +1,43 @@
+config:
+  cluster: door-lock-cluster
+  command: '15'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_15_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Default Response with error status equal to FAILURE
+  Pre-requisites: N/A
+  arguments:
+    '{"User ID"': 0}
+  label: Test_Case_Minimum_User_ID
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Get User Type Response with User Type for the specified User ID
+  Pre-requisites: Ensure the User ID exists and is valid
+  arguments:
+    '{"User ID"': '[# of Users Supported attribute]}'
+  label: Test_Case_Maximum_User_ID
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Default Response with error status equal to FAILURE
+  Pre-requisites: N/A
+  arguments:
+    '{"User ID"': '[# of Users Supported attribute] + 1}'
+  label: Test_Case_Invalid_User_ID_(Out_of_Range)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Get User Type Response with User Type for the specified User ID
+  Pre-requisites: 'Ensure the User ID exists and is valid
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:8†source】.'
+  arguments:
+    '{"User ID"': 1}
+  label: Test_Case_Valid_User_ID_with_Special_Response
+  option: SendCommand

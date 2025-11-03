@@ -1,0 +1,27 @@
+{
+  "cluster_id": "0x002D",
+  "cluster_name": "Unit Localization",
+  "section": "11.5",
+  "description": "Nodes should be expected to be deployed to any and all regions of the world. These global regions may have differing preferences for the units in which values are conveyed in communication to a Matter Specification R1.3                        Connectivity Standards Alliance Document 23-27349 April 17, 2024 user. As such, Nodes that visually or audibly convey measurable values to the user need a mecha­ nism by which they can be configured to use a user’s preferred unit.",
+  "data_types": {
+    "TempUnitEnum": {
+      "name": "TempUnitEnum",
+      "definition_line": "11.5.5.1. TempUnitEnum Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "Tempera­",
+      "details": "Tem­ all N RW VM TEMP",
+      "raw_line": "0x0000         Tempera­      Tem­          all            N                             RW VM       TEMP"
+    }
+  },
+  "commands": {},
+  "events": {},
+  "extraction_info": {
+    "start_line": 38457,
+    "end_line": 38552,
+    "total_lines": 95
+  }
+}

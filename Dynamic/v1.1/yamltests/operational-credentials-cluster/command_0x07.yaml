@@ -1,0 +1,31 @@
+config:
+  cluster: operational-credentials-cluster
+  command: '0x07'
+  nodeId: '0x654231'
+name: operational-credentials-cluster_command_0x07_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  ExpectedResponse: Success
+  arguments: {}
+  label: Test_Case_Extreme_Values
+  option: SendCommand
+- ActionTime: Immediate
+  ExpectedResponse: Success
+  arguments: {}
+  label: Test_Case_Extreme_Values
+  option: SendCommand
+- ActionTime: Immediate
+  ExpectedResponse: FabricConflict
+  arguments: {}
+  label: Test_Case_Special_Response_-_FabricConflict
+  option: SendCommand
+- ActionTime: Immediate
+  ExpectedResponse: TableFull
+  arguments: {}
+  label: Test_Case_Special_Response_-_TableFull
+  option: SendCommand
+- ActionTime: Immediate
+  ExpectedResponse: InvalidAdminSubject
+  arguments: {}
+  label: Test_Case_Special_Response_-_InvalidAdminSubject
+  option: SendCommand

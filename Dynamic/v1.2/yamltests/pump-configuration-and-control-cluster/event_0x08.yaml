@@ -1,0 +1,61 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x08'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x08_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: No event triggered (temperature too low to be considered high)
+  Pre-requisites: None
+  arguments:
+    '{"Temperature"': -273.15}
+  label: Test_Case_Extreme_Low_Value
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: PumpStatus attribute, ElectronicTemperatureHigh bit set to 1
+  ExpectedResponse: Event triggered (ElectronicTemperatureHigh)
+  Pre-requisites: None
+  arguments:
+    '{"Temperature"': 327.67}
+  label: Test_Case_Extreme_High_Value
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: No event triggered (temperature just below the threshold)
+  Pre-requisites: None
+  arguments:
+    '{"Temperature"': <threshold_value - 0.01>}
+  label: Test_Case_Boundary_Value_Just_Below_Threshold
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: PumpStatus attribute, ElectronicTemperatureHigh bit set to 1
+  ExpectedResponse: Event triggered (ElectronicTemperatureHigh)
+  Pre-requisites: None
+  arguments:
+    '{"Temperature"': <threshold_value + 0.01>}
+  label: Test_Case_Boundary_Value_Just_Above_Threshold
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: No event triggered (temperature within normal operating range)
+  Pre-requisites: None
+  arguments:
+    '{"Temperature"': <normal_operating_temperature>}
+  label: Test_Case_Normal_Operating_Temperature
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: PumpStatus attribute, ElectronicTemperatureHigh bit set to 1,
+    and possibly other attributes related to pump operation
+  ExpectedResponse: Event triggered (ElectronicTemperatureHigh) with a special response
+    (e.g., pump shutdown)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values, boundary values, and special response
+    scenarios for the ElectronicTemperatureHigh event in the Pump Configuration and
+    Control Cluster.'
+  arguments:
+    '{"Temperature"': <special_response_temperature>}
+  label: Test_Case_Special_Response_Scenario
+  option: SubscribeToEvent

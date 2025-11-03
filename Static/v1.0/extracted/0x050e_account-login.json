@@ -1,0 +1,40 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x050e",
+    "name": "Account Login",
+    "description": "Provides commands that facilitate user account login on a Content App or a node."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "GetSetupPIN",
+      "parameters": [],
+      "privilege": "V",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "GetSetupPINResponse",
+      "parameters": [],
+      "privilege": "V",
+      "side": "client"
+    },
+    {
+      "id": "0x02",
+      "name": "Login",
+      "parameters": [],
+      "privilege": "V",
+      "side": "client"
+    },
+    {
+      "id": "0x03",
+      "name": "Logout",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    }
+  ],
+  "attributes": [],
+  "events": []
+}

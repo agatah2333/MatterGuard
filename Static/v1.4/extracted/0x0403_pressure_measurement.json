@@ -1,0 +1,86 @@
+{
+  "source_file": "Pressure Measurement_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0403",
+        "name": "Pressure Measurement",
+        "description": "Provides pressure measurement capabilities with dual-unit scaling support",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "MeasuredValue",
+            "dataType": "int16",
+            "valueRange": "MinMeasuredValue-MaxMeasuredValue",
+            "description": "Pressure in kPa (MeasuredValue = 10 × kPa)",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "MinMeasuredValue",
+            "dataType": "int16",
+            "valueRange": "-32768-32766",
+            "description": "Minimum measurable pressure in kPa",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "MaxMeasuredValue",
+            "dataType": "int16",
+            "valueRange": "MinMeasuredValue+1-32767",
+            "description": "Maximum measurable pressure in kPa",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0010",
+            "name": "ScaledValue",
+            "dataType": "int16",
+            "valueRange": "MinScaledValue-MaxScaledValue",
+            "description": "Scaled pressure in Pa (ScaledValue = 10^Scale × Pa)",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0014",
+            "name": "Scale",
+            "dataType": "int8",
+            "valueRange": "-127-127",
+            "description": "Exponent base for scaled values",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "dataTypes": {
+          "PressureValueStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "RawValue": "int16",
+              "kPa": {
+                "calculation": "RawValue / 10",
+                "unit": "kPa"
+              },
+              "Pa": {
+                "calculation": "ScaledValue × 10^Scale",
+                "unit": "Pa"
+              }
+            }
+          },
+          "ScaledPressureStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "ScaledValue": "int16",
+              "Scale": "int8",
+              "Tolerance": "uint16"
+            }
+          }
+        },
+        "commands": [],
+        "events": []
+      }
+    ]
+  }
+}

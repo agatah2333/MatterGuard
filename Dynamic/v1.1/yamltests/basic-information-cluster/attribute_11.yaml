@@ -1,0 +1,6 @@
+config:
+  attribute: '11'
+  cluster: basic-information-cluster
+  nodeId: '0x654231'
+name: basic-information-cluster_attribute_11_v1.1.0.0
+tests: []

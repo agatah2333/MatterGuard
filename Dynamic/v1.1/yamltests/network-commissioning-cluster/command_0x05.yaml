@@ -1,0 +1,25 @@
+config:
+  cluster: network-commissioning-cluster
+  command: '0x05'
+  nodeId: '0x654231'
+name: network-commissioning-cluster_command_0x05_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: LastNetworkingStatus = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"NetworkingStatus"': '0, "DebugText": ""}'
+  label: Test_Case_Extreme_Values_of_Constraints
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: LastNetworkingStatus = 1
+  ExpectedResponse: NetworkNotFound
+  Pre-requisites: 'None
+
+
+    **Test Case 3:**'
+  arguments:
+    '{"NetworkingStatus"': '1, "DebugText": "Network not found"}'
+  label: Test_Case_Special_Responses
+  option: SendCommand

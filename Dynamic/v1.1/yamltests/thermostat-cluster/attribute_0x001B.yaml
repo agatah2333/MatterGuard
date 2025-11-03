@@ -1,0 +1,42 @@
+config:
+  attribute: '0x001B'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x001B_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: ControlSequenceOfOperation set to 0 (CoolingOnly)
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"ControlSequenceOfOperation"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: ControlSequenceOfOperation set to 5 (CoolingAndHeatingWithReheat)
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"ControlSequenceOfOperation"': 5}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments:
+    '{"ControlSequenceOfOperation"': 6}
+  label: Test_Case_Value_that_could_result_in_a_special_response
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints and the values that
+    could result in special responses as mentioned in the description of the effect【4:0†source】.'
+  arguments:
+    '{"ControlSequenceOfOperation"': -1}
+  label: Test_Case_Value_that_could_result_in_a_special_response
+  option: WriteAttribute

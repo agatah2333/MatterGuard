@@ -1,0 +1,186 @@
+{
+  "source_file": "General Commissioning.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0030",
+        "name": "General Commissioning",
+        "dataTypes": {
+          "CommissioningErrorEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "OK",
+              "1": "ValueOutsideRange",
+              "2": "InvalidAuthentication",
+              "3": "NoFailSafe",
+              "4": "BusyWithOtherAdmin",
+              "5": "RequiredTCNotAccepted",
+              "6": "TCAcknowledgementsNotReceived",
+              "7": "TCMinVersionNotMet"
+            }
+          },
+          "RegulatoryLocationTypeEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "Indoor",
+              "1": "Outdoor"
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "Breadcrumb",
+            "dataType": "uint64",
+            "valueRange": "0-18446744073709551615",
+            "writable": true,
+            "privilege": "RW"
+          },
+          {
+            "id": "0x0001",
+            "name": "BasicCommissioningInfo",
+            "dataType": {
+              "type": "struct",
+              "fields": "Not specified"
+            },
+            "writable": false,
+            "privilege": "R"
+          },
+          {
+            "id": "0x0002",
+            "name": "RegulatoryConfig",
+            "dataType": "RegulatoryLocationTypeEnum",
+            "valueRange": "0-1",
+            "writable": true,
+            "privilege": "RW"
+          },
+          {
+            "id": "0x0003",
+            "name": "LocationCapability",
+            "dataType": "RegulatoryLocationTypeEnum",
+            "valueRange": "0-1",
+            "writable": false,
+            "privilege": "R"
+          },
+          {
+            "id": "0x0004",
+            "name": "SupportsConcurrentConnection",
+            "dataType": "bool",
+            "writable": false,
+            "privilege": "R"
+          },
+          {
+            "id": "0x0005",
+            "name": "TCAcceptedDocument",
+            "dataType": "uint16",
+            "writable": false,
+            "privilege": "R"
+          },
+          {
+            "id": "0x0006",
+            "name": "TCMinRequiredVersion",
+            "dataType": "uint16",
+            "writable": false,
+            "privilege": "R"
+          },
+          {
+            "id": "0x0007",
+            "name": "TCAcknowledgementsMap",
+            "dataType": {
+              "type": "bitmap",
+              "baseType": "map16"
+            },
+            "writable": false,
+            "privilege": "R"
+          },
+          {
+            "id": "0x0008",
+            "name": "TCMaxAcknowledgementsRequired",
+            "dataType": "uint16",
+            "writable": false,
+            "privilege": "R"
+          },
+          {
+            "id": "0x0009",
+            "name": "TCUpdateDeadline",
+            "dataType": "uint32",
+            "writable": false,
+            "privilege": "R"
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ArmFailSafe",
+            "parameters": {
+              "ExpiryLengthSeconds": {
+                "type": "uint16",
+                "valueRange": "0-3600"
+              }
+            },
+            "privilege": "Administer",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x01",
+            "name": "SetRegulatoryConfig",
+            "parameters": {
+              "LocationType": "RegulatoryLocationTypeEnum",
+              "CountryCode": {
+                "type": "string",
+                "length": 2,
+                "format": "ISO 3166-1 alpha-2"
+              }
+            },
+            "privilege": "Administer",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x02",
+            "name": "CommissioningComplete",
+            "parameters": {},
+            "privilege": "Administer",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x03",
+            "name": "SetRegulatoryConfigResponse",
+            "parameters": {},
+            "privilege": "None",
+            "direction": "bidirectional"
+          },
+          {
+            "id": "0x04",
+            "name": "CommissioningComplete",
+            "parameters": {},
+            "privilege": "Administer",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x05",
+            "name": "CommissioningCompleteResponse",
+            "parameters": {},
+            "privilege": "None",
+            "direction": "bidirectional"
+          },
+          {
+            "id": "0x06",
+            "name": "SetTCAcknowledgements",
+            "parameters": {},
+            "privilege": "P,TC",
+            "direction": "bidirectional"
+          },
+          {
+            "id": "0x07",
+            "name": "SetTCAcknowledgementsResponse",
+            "parameters": {},
+            "privilege": "P,TC",
+            "direction": "bidirectional"
+          }
+        ],
+        "events": []
+      }
+    ]
+  }
+}

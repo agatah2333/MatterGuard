@@ -1,0 +1,43 @@
+config:
+  cluster: target-navigator-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: target-navigator-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: CurrentTarget will be set to 0 if successful
+  ExpectedResponse: Success or TargetNotFound
+  Pre-requisites: Target 0 must exist in the TargetList
+  arguments:
+    '{"Target"': '0, "Data": ""}'
+  label: Test_Case_Minimum_Target_Value
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: CurrentTarget will be set to 255 if successful
+  ExpectedResponse: Success or TargetNotFound
+  Pre-requisites: Target 255 must exist in the TargetList
+  arguments:
+    '{"Target"': '255, "Data": ""}'
+  label: Test_Case_Maximum_Target_Value
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: TargetNotFound
+  Pre-requisites: Target 100 must not exist in the TargetList
+  arguments:
+    '{"Target"': '100, "Data": ""}'
+  label: Test_Case_Target_Not_Found
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: NotAllowed
+  Pre-requisites: 'The current state must not allow navigation to Target 1
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values of the field that could result in special responses mentioned in the
+    description of the effect【4:0†source】【4:4†source】【4:13†source】.'
+  arguments:
+    '{"Target"': '1, "Data": ""}'
+  label: Test_Case_Not_Allowed_State
+  option: SendCommand

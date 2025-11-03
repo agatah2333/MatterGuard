@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0002'
+  cluster: concentration-measurement-cluster
+  nodeId: '0x654231'
+name: concentration-measurement-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"MaxMeasuredValue": "MinMeasuredValue + 1"}'
+  ExpectedResponse: <success>
+  Pre-requisites: '{"MinMeasuredValue" is set to a valid value}'
+  arguments:
+    '{"MaxMeasuredValue"': '"MinMeasuredValue + 1"}'
+  label: Test_Case_Minimum_Valid_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"MaxMeasuredValue": 65534}'
+  ExpectedResponse: <success>
+  Pre-requisites: '{"MinMeasuredValue" is set to a valid value}'
+  arguments:
+    '{"MaxMeasuredValue"': 65534}
+  label: Test_Case_Maximum_Valid_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"MaxMeasuredValue": null}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"MaxMeasuredValue"': null}
+  label: Test_Case_Special_Value_(null)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: <none>
+  ExpectedResponse: <error>
+  Pre-requisites: '{"MinMeasuredValue" is set to a valid value}
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special values that could result in specific responses as mentioned in the
+    description of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"MaxMeasuredValue"': '"MinMeasuredValue"}'
+  label: Test_Case_Invalid_Value_(Below_Minimum)
+  option: WriteAttribute

@@ -1,0 +1,27 @@
+config:
+  attribute: '0x0001'
+  cluster: channel-cluster
+  nodeId: '0x654231'
+name: channel-cluster_attribute_0x0001_v1.1.0.0
+tests:
+- ActionTime: N/A (Read-only attribute)
+  Attribute_Change: N/A (Read-only attribute)
+  ExpectedResponse: Success
+  Pre-requisites: The attribute must be present in the cluster.
+  arguments:
+    LineupInfo: '"A" (Minimum length string)'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A (Read-only attribute)
+  Attribute_Change: N/A (Read-only attribute)
+  ExpectedResponse: Success
+  Pre-requisites: 'The attribute must be present in the cluster.
+
+
+    These test cases cover the extreme values and special responses for the `Lineup`
+    attribute in the `Channel-Cluster` cluster. The attribute is read-only, so the
+    test cases focus on reading the attribute with minimum and maximum length strings.'
+  arguments:
+    LineupInfo: '"Z" * 256 (Maximum length string)'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

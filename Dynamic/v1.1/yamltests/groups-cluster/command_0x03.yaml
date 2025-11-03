@@ -1,0 +1,47 @@
+config:
+  cluster: groups-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: groups-cluster_command_0x03_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: The server endpoint will be removed from the group with `GroupID`
+    1.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The server endpoint must be a member of the group with `GroupID`
+    1.
+  arguments:
+    GroupID: 1
+  label: Test_Case_Minimum_GroupID_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: The server endpoint will be removed from the group with `GroupID`
+    <max>.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The server endpoint must be a member of the group with `GroupID`
+    <max>.
+  arguments:
+    GroupID: <max>
+  label: Test_Case_Maximum_GroupID_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: No attribute will be changed.
+  ExpectedResponse: NOT_FOUND
+  Pre-requisites: The server endpoint must not be a member of the group with the specified
+    `GroupID`.
+  arguments:
+    GroupID: <any non-existent GroupID>
+  label: Test_Case_GroupID_Not_Found
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: No attribute will be changed.
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'N/A
+
+
+    These test cases cover the extreme values of the `GroupID` field and the special
+    responses as mentioned in the description of the effect of the `RemoveGroup` command【4:0†source】【4:10†source】【4:16†source】.'
+  arguments:
+    GroupID: 0 (or any invalid GroupID outside the valid range)
+  label: Test_Case_GroupID_Constraint_Error
+  option: SendCommand

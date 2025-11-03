@@ -1,0 +1,49 @@
+config:
+  cluster: groups-cluster
+  command: '0x05'
+  nodeId: '0x654231'
+name: groups-cluster_command_0x05_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: Group membership will be added for the server endpoint.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The server must be identifying itself.
+  arguments:
+    GroupID: 1
+    GroupName: '""'
+  label: Test_Case_Minimum_GroupID_and_Empty_GroupName
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: Group membership will be added for the server endpoint, and the
+    group name will be updated if supported.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The server must be identifying itself.
+  arguments:
+    GroupID: max
+    GroupName: '"A" * 16'
+  label: Test_Case_Maximum_GroupID_and_Maximum_Length_GroupName
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: SUCCESS (but no group membership change)
+  Pre-requisites: The server must not be identifying itself.
+  arguments:
+    GroupID: 100
+    GroupName: '"TestGroup"'
+  label: Test_Case_GroupID_within_Range_but_Server_Not_Identifying
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: UNSUPPORTED_ACCESS
+  Pre-requisites: 'The server requires security material for the group ID, and that
+    material does not exist.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    GroupID: 200
+    GroupName: '"Unsupported"'
+  label: Test_Case_GroupID_with_Unsupported_Access
+  option: SendCommand

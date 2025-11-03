@@ -1,0 +1,33 @@
+config:
+  cluster: basic-information-cluster
+  event: '0x00'
+  nodeId: '0x654231'
+name: basic-information-cluster_event_0x00_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Event generated with INFO priority
+  Pre-requisites: Device should be in a state where it can generate events
+  arguments:
+    Access: V
+    Conformance: O
+    EventID: '0x00'
+    Priority: INFO
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Event generated with CRITICAL priority
+  Pre-requisites: 'Device should be in a state where it can generate events
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    Access: V
+    Conformance: O
+    EventID: '0x00'
+    Priority: CRITICAL
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SubscribeToEvent

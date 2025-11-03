@@ -1,0 +1,50 @@
+config:
+  cluster: rvc-run-mode-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: rvc-run-mode-cluster_command_0x01_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '- `CurrentMode` will be set to 0x00'
+  ExpectedResponse: "- `Status`: 0x00 (Success)\n  - `StatusText`: Optional"
+  Pre-requisites: '- Ensure that 0x00 is a valid mode in the `SupportedModes` attribute
+    list.'
+  arguments:
+    NewMode: '0x00'
+  label: Test_Case_Minimum_Value_of_NewMode
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '- No attribute will be changed.'
+  ExpectedResponse: "- `Status`: 0x01 (UnsupportedMode)\n  - `StatusText`: \"\""
+  Pre-requisites: '- Ensure that 0xFF is not a valid mode in the `SupportedModes`
+    attribute list.'
+  arguments:
+    NewMode: '0xFF'
+  label: Test_Case_Maximum_Value_of_NewMode
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '- `CurrentMode` will be set to <valid_mode_value>'
+  ExpectedResponse: "- `Status`: 0x00 (Success)\n  - `StatusText`: Optional"
+  Pre-requisites: '- Ensure that <valid_mode_value> is a valid mode in the `SupportedModes`
+    attribute list.'
+  arguments:
+    NewMode: <valid_mode_value>
+  label: Test_Case_Valid_Mode_Transition
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '- No attribute will be changed.'
+  ExpectedResponse: "- `Status`: 0x01 (UnsupportedMode)\n  - `StatusText`: \"\""
+  Pre-requisites: '- Ensure that <invalid_mode_value> is not a valid mode in the `SupportedModes`
+    attribute list.
+
+
+    ### Notes:
+
+    - The `NewMode` field is a uint8 type, so its range is from 0x00 to 0xFF.
+
+    - The `Status` field in the response can have values such as `0x00` (Success),
+    `0x01` (UnsupportedMode), `0x02` (GenericFailure), and `0x03` (InvalidInMode)【4:0†source】【4:3†source】【4:5†source】【4:8†source】【4:14†source】.'
+  arguments:
+    NewMode: <invalid_mode_value>
+  label: Test_Case_Invalid_Mode_Transition
+  option: SendCommand

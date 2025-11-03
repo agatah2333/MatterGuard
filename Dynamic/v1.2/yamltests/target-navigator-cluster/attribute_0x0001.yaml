@@ -1,0 +1,44 @@
+config:
+  attribute: '0x0001'
+  cluster: target-navigator-cluster
+  nodeId: '0x654231'
+name: target-navigator-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: CurrentTarget will be set to 0
+  ExpectedResponse: Success
+  Pre-requisites: TargetList must contain a TargetInfoStruct with Identifier 0
+  arguments:
+    '{"CurrentTarget"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: CurrentTarget will be set to 255
+  ExpectedResponse: Success
+  Pre-requisites: TargetList must contain a TargetInfoStruct with Identifier 255
+  arguments:
+    '{"CurrentTarget"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: CurrentTarget will be set to null
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"CurrentTarget"': null}
+  label: Test_Case_Null_Value_(No_Target_in_Foreground)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: CurrentTarget will remain unchanged
+  ExpectedResponse: TargetNotFound
+  Pre-requisites: 'TargetList must not contain a TargetInfoStruct with Identifier
+    100
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:14†source】.'
+  arguments:
+    '{"CurrentTarget"': 100}
+  label: Test_Case_Target_Not_Found
+  option: WriteAttribute

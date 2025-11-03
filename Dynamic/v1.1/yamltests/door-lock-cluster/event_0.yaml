@@ -1,0 +1,28 @@
+config:
+  cluster: door-lock-cluster
+  event: '0'
+  nodeId: '0x654231'
+name: door-lock-cluster_event_0_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: AlarmCode set to 0
+  ExpectedResponse: Alarm triggered with code 0
+  Pre-requisites: 'None
+
+
+    **Test Case 2**:'
+  arguments:
+    AlarmCode: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: AlarmCode set to 1
+  ExpectedResponse: Alarm triggered with code 1, indicating a specific alarm type
+  Pre-requisites: 'None
+
+
+    **Test Case 4**:'
+  arguments:
+    AlarmCode: 1
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SubscribeToEvent

@@ -1,0 +1,31 @@
+config:
+  attribute: '0x38'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x38_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`NeighborTable` will be set to an empty list `[]`.'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: Node should be in a state where it has no neighbors.
+  arguments:
+    NeighborTable: '`[]` (Empty list, representing no neighbors)'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`NeighborTable` will be updated to the provided list.'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: 'Node should be in a state where it can detect and list neighbors.
+
+
+    These test cases cover the extreme values and special responses for the `NeighborTable`
+    attribute in the Thread Network Diagnostics Cluster.
+
+
+    For more detailed information, you can refer to the Matter 1.2 Core Specification
+    document【4:0†source】.'
+  arguments:
+    NeighborTable: '`[{"NodeId": 1, "LinkQuality": 3, "Age": 10}, {"NodeId": 2, "LinkQuality":
+      1, "Age": 5}]` (List with two neighbor entries)'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

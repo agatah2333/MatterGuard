@@ -1,0 +1,99 @@
+{
+  "source_file": "Device Energy Management mode_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x009F",
+        "name": "Device Energy Management Mode",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SupportedModes",
+            "dataType": "list[ModeOptionStruct]",
+            "valueRange": "NoOptimization, LocalOptimization, GridOptimization",
+            "description": "At least one entry SHALL include the NoOptimization mode tag",
+            "privilege": "Read",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentMode",
+            "dataType": "ModeOptionStruct",
+            "valueRange": "Defined by SupportedModes",
+            "description": "Indicates the current mode of the device",
+            "privilege": "Read",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "StartUpMode",
+            "dataType": "ModeOptionStruct",
+            "valueRange": "Defined by SupportedModes",
+            "description": "Mode the device should start in",
+            "privilege": "Read",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "OnMode",
+            "dataType": "ModeOptionStruct",
+            "valueRange": "Defined by SupportedModes",
+            "description": "Mode when device is turned on",
+            "privilege": "Read",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ChangeToMode",
+            "parameters": {
+              "dataType": "uint8",
+              "valueRange": "SupportedModes",
+              "description": "Set CurrentMode to valid NewMode value"
+            },
+            "privilege": "Manage",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x01",
+            "name": "ChangeToModeResponse",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Response to ChangeToMode command"
+            },
+            "privilege": "Manage",
+            "direction": "server → client"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "ModeOptionStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "ModeValue": {
+                "type": "uint8",
+                "valueRange": "0-255"
+              },
+              "ModeTags": {
+                "type": "list[ModeTagEnum]",
+                "valueRange": "NoOptimization(1), LocalOptimization(2), GridOptimization(3)"
+              }
+            }
+          },
+          "ModeTagEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "1": "NoOptimization",
+              "2": "LocalOptimization",
+              "3": "GridOptimization"
+            }
+          }
+        },
+        "description": "Derived from Mode Base cluster, defines energy management modes and tags"
+      }
+    ]
+  }
+}

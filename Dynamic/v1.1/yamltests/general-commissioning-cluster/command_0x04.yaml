@@ -1,0 +1,39 @@
+config:
+  cluster: general-commissioning-cluster
+  command: '0x04'
+  nodeId: '0x654231'
+name: general-commissioning-cluster_command_0x04_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: NoFailSafe
+  Pre-requisites: No Fail-Safe context exists.
+  arguments: {}
+  label: Test_Case_No_Fail-Safe_Context
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: InvalidAuthentication
+  Pre-requisites: Command received outside a CASE session.
+  arguments: {}
+  label: Test_Case_Invalid_Authentication_(Outside_CASE_Session)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: InvalidAuthentication
+  Pre-requisites: Accessing fabric is not the one associated with the ongoing Fail-Safe
+    context.
+  arguments: {}
+  label: Test_Case_Invalid_Authentication_(Wrong_Fabric_Index)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: "- Fail-Safe timer disarmed.\n  - Commissioning window closed.\n\
+    \  - Temporary administrative privileges revoked.\n  - Secure Session Context\
+    \ of any PASE session cleared.\n  - Breadcrumb attribute reset to zero."
+  ExpectedResponse: OK
+  Pre-requisites: "- Command received over a CASE session.\n  - Accessing fabric index\
+    \ matches the Fabric Index associated with the current Fail-Safe context.\n\n\
+    ### Summary"
+  arguments: {}
+  label: Test_Case_Successful_Commissioning_Complete
+  option: SendCommand

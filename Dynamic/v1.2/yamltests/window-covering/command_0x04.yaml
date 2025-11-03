@@ -1,0 +1,56 @@
+config:
+  cluster: window-covering
+  command: '0x04'
+  nodeId: '0x654231'
+name: window-covering_command_0x04_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`TargetPositionLiftPercent100ths` will be set to the corresponding
+    percentage of `InstalledClosedLimitLift`.'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: '`InstalledClosedLimitLift` must be defined and the device must
+    be operational.'
+  arguments:
+    '{"LiftValue"': <InstalledClosedLimitLift>}`
+  label: Test_Case_Minimum_Lift_Value
+  option: SendCommand
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`TargetPositionLiftPercent100ths` will be set to the corresponding
+    percentage of `InstalledOpenLimitLift`.'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: '`InstalledOpenLimitLift` must be defined and the device must be
+    operational.'
+  arguments:
+    '{"LiftValue"': <InstalledOpenLimitLift>}`
+  label: Test_Case_Maximum_Lift_Value
+  option: SendCommand
+- ActionTime: '`<current_time>`'
+  Attribute_Change: No attribute will be changed.
+  ExpectedResponse: '`CONSTRAINT_ERROR`'
+  Pre-requisites: '`InstalledClosedLimitLift` must be defined and the device must
+    be operational.'
+  arguments:
+    '{"LiftValue"': <InstalledClosedLimitLift - 1>}`
+  label: Test_Case_Out_of_Bounds_(Below_Minimum)
+  option: SendCommand
+- ActionTime: '`<current_time>`'
+  Attribute_Change: No attribute will be changed.
+  ExpectedResponse: '`CONSTRAINT_ERROR`'
+  Pre-requisites: '`InstalledOpenLimitLift` must be defined and the device must be
+    operational.
+
+
+    ### Notes
+
+    - The `LiftValue` field specifies the requested physical lift/slide position in
+    centimeters.
+
+    - The `TargetPositionLiftPercent100ths` attribute will be updated to reflect the
+    new position if the command is successful.
+
+    - If the `LiftValue` is out of the bounds defined by `InstalledClosedLimitLift`
+    and `InstalledOpenLimitLift`, a `CONSTRAINT_ERROR` response will be returned【4:0†source】.'
+  arguments:
+    '{"LiftValue"': <InstalledOpenLimitLift + 1>}`
+  label: Test_Case_Out_of_Bounds_(Above_Maximum)
+  option: SendCommand

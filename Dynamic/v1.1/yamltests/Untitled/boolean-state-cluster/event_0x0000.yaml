@@ -1,0 +1,122 @@
+config:
+  cluster: boolean-state-cluster
+  event: '0x0000'
+  nodeId: '0x654231'
+name: boolean-state-cluster_event_0x0000_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '- `StateValue` attribute will be set to 0'
+  ExpectedResponse: Event generated with `StateValue` = 0
+  Pre-requisites: None
+  arguments:
+    StateValue: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify boolean-state-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 0
+  Attribute_Change: '- `StateValue` attribute will be set to 1'
+  ExpectedResponse: Event generated with `StateValue` = 1
+  Pre-requisites: "None\n\n### Explanation\n\n1. **Extreme Values of the Constraints\
+    \ of the Field**:\n   - The `StateValue` field is a boolean, so it can take values\
+    \ 0 (FALSE) or 1 (TRUE). The extreme values are 0 and 1.\n   - When `StateValue`\
+    \ is set to 0, an event should be generated indicating the state change to 0.\n\
+    \n2. **Values of the Field That Could Result in Special Responses**:\n   - When\
+    \ `StateValue` is set to 1, an event should be generated indicating the state\
+    \ change to 1.\n\nThese test cases ensure that the system correctly handles the\
+    \ boolean state changes and generates the appropriate events as specified in the\
+    \ Boolean State Cluster documentation【4:0†source】."
+  arguments:
+    StateValue: 1
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify boolean-state-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 60
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

@@ -1,0 +1,53 @@
+config:
+  attribute: '0x0033'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0033_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: ColorPointRY set to 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ColorPointRY"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: ColorPointRY set to 65279
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ColorPointRY"': 65279}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: ColorPointRY set to 32640
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ColorPointRY"': 32640}
+  label: Test_Case_Mid-Range_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Error - Value out of range
+  Pre-requisites: None
+  arguments:
+    '{"ColorPointRY"': 65280}
+  label: Test_Case_Special_Response_-_Invalid_Value_(Above_Maximum)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Error - Value out of range
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints and special responses
+    for the `ColorPointRY` attribute in the Color Control Cluster.
+
+
+    For more details, refer to the Matter Application Cluster Specification document【4:0†source】.'
+  arguments:
+    '{"ColorPointRY"': -1}
+  label: Test_Case_Special_Response_-_Invalid_Value_(Negative)
+  option: WriteAttribute

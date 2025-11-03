@@ -1,0 +1,42 @@
+config:
+  cluster: media-playback-cluster
+  command: '0x08'
+  nodeId: '0x654231'
+name: media-playback-cluster_command_0x08_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: SampledPosition set to the beginning of the current frame
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Media is currently playing
+  arguments:
+    '{"DeltaPositionMilliseconds"': 0}
+  label: Test_Case_Minimum_Value
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: SampledPosition set to the furthest valid position in the media
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Media is currently playing
+  arguments:
+    '{"DeltaPositionMilliseconds"': 18446744073709551615}
+  label: Test_Case_Maximum_Value
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: SampledPosition set to the beginning of the frame
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Media is currently playing
+  arguments:
+    '{"DeltaPositionMilliseconds"': <value that falls in the middle of a frame>}
+  label: Test_Case_Special_Response_-_Middle_of_a_Frame
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: SampledPosition set to the furthest valid position
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Media is currently playing
+
+
+    These test cases cover the extreme values of the `DeltaPositionMilliseconds` field
+    and the special responses as mentioned in the command description【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"DeltaPositionMilliseconds"': <value beyond the furthest valid position>}
+  label: Test_Case_Special_Response_-_Beyond_Furthest_Valid_Position
+  option: SendCommand

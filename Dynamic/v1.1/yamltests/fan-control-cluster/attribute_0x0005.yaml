@@ -1,0 +1,42 @@
+config:
+  attribute: '0x0005'
+  cluster: fan-control-cluster
+  nodeId: '0x654231'
+name: fan-control-cluster_attribute_0x0005_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '- `FanMode`: 0 (Off)'
+  ExpectedResponse: The server SHALL set the `FanMode` attribute value to Off.
+  Pre-requisites: N/A
+  arguments:
+    SpeedSetting: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `FanMode`: 3 (High)'
+  ExpectedResponse: The server SHALL set the `FanMode` attribute to High.
+  Pre-requisites: '`SpeedMax` should be set to its maximum value.'
+  arguments:
+    SpeedSetting: '`SpeedMax`'
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `SpeedSetting`: No change'
+  ExpectedResponse: The attribute value SHALL NOT change.
+  Pre-requisites: N/A
+  arguments: {}
+  label: Test_Case_Special_Response_for_Null_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `FanMode`: 2 (Medium)'
+  ExpectedResponse: The server SHALL set the `FanMode` attribute to Medium.
+  Pre-requisites: '`SpeedMax` should be greater than 1.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】.'
+  arguments:
+    SpeedSetting: '`SpeedMax` / 2'
+  label: Test_Case_Intermediate_Value
+  option: WriteAttribute

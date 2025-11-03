@@ -1,0 +1,19 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x002D",
+    "name": "Unit Localization",
+    "description": "Unit system preferences (metric/imperial)."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Tempera",
+      "type": "unknown",
+      "description": "Tempera attribute",
+      "access": "R"
+    }
+  ],
+  "events": []
+}

@@ -1,0 +1,6 @@
+config:
+  cluster: onoff-cluster
+  command: '0x41'
+  nodeId: '0x654231'
+name: onoff-cluster_command_0x41_v1.1.0.0
+tests: []

@@ -1,0 +1,187 @@
+{
+  "source_file": "AccessControl_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x001F",
+        "name": "AccessControl",
+        "dataTypes": {
+          "CommissioningAccessRestrictionEntryStruct": {
+            "baseType": "struct",
+            "fields": {
+              "0": {
+                "type": "uint16",
+                "valueRange": "all"
+              },
+              "1": {
+                "type": "uint32",
+                "valueRange": "all"
+              },
+              "2": {
+                "type": "uint8",
+                "valueRange": "min 1"
+              }
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "ACL",
+            "dataType": {
+              "type": "list",
+              "elementType": {
+                "type": "struct",
+                "fields": {
+                  "Privilege": {
+                    "type": "enum",
+                    "values": {
+                      "1": "View",
+                      "2": "Proxy View",
+                      "3": "Operate",
+                      "4": "Manage",
+                      "5": "Administer"
+                    }
+                  },
+                  "AuthMode": {
+                    "type": "enum",
+                    "values": {
+                      "1": "PASE",
+                      "2": "CASE",
+                      "3": "Group"
+                    }
+                  },
+                  "Subjects": {
+                    "type": "list",
+                    "elementType": "uint64"
+                  },
+                  "Targets": {
+                    "type": "list",
+                    "elementType": {
+                      "type": "struct",
+                      "fields": {
+                        "cluster": "uint32",
+                        "endpoint": "uint16",
+                        "deviceType": "uint32"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "valueRange": "",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "Extension",
+            "dataType": {
+              "type": "list",
+              "elementType": "AccessControlExtensionStruct"
+            },
+            "valueRange": "",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "SubjectsPerAccessControlEntry",
+            "dataType": "uint16",
+            "valueRange": "uint16",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "TargetsPerAccessControlEntry",
+            "dataType": "uint16",
+            "valueRange": "uint16",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "AccessControlEntriesPerFabric",
+            "dataType": "uint16",
+            "valueRange": "uint16",
+            "writable": false
+          },
+          {
+            "id": "0x0005",
+            "name": "CommissioningARL",
+            "dataType": {
+              "type": "list",
+              "elementType": "CommissioningAccessRestrictionEntryStruct"
+            },
+            "valueRange": "",
+            "writable": false
+          },
+          {
+            "id": "0x0006",
+            "name": "ARL",
+            "dataType": {
+              "type": "list",
+              "elementType": "AccessRestrictionEntryStruct"
+            },
+            "valueRange": "",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ReviewFabricRestrictions",
+            "parameters": {
+              "dataType": {
+                "type": "list",
+                "elementType": "CommissioningAccessRestrictionEntryStruct"
+              },
+              "valueRange": ""
+            }
+          },
+          {
+            "id": "0x01",
+            "name": "ReviewFabricRestrictionsResponse",
+            "parameters": {
+              "dataType": "Token",
+              "valueRange": "uint64"
+            }
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "AccessControlEntryChanged",
+            "parameters": {
+              "dataType": {
+                "type": "struct",
+                "fields": "AccessControlEntryStruct"
+              },
+              "valueRange": "AccessControlEntryStruct"
+            }
+          },
+          {
+            "id": "0x01",
+            "name": "AccessControlExtensionChanged",
+            "parameters": {
+              "dataType": {
+                "type": "struct",
+                "fields": "AccessControlExtensionStruct"
+              },
+              "valueRange": "AccessControlExtensionStruct"
+            }
+          },
+          {
+            "id": "0x02",
+            "name": "FabricRestrictionReviewUpdate",
+            "parameters": {
+              "dataType": {
+                "type": "struct",
+                "fields": "AccessRestrictionEntryStruct"
+              },
+              "valueRange": "AccessRestrictionEntryStruct"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

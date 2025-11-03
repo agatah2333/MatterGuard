@@ -1,0 +1,45 @@
+config:
+  attribute: '0x0004'
+  cluster: network-commissioning-cluster
+  nodeId: '0x654231'
+name: network-commissioning-cluster_attribute_0x0004_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"InterfaceEnabled": true}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"InterfaceEnabled"': true}
+  label: Test_Case_Extreme_Value_(True)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"InterfaceEnabled": false} or no change if INVALID_ACTION'
+  ExpectedResponse: Success or INVALID_ACTION (if disabling Ethernet interface is
+    not supported)
+  Pre-requisites: None
+  arguments:
+    '{"InterfaceEnabled"': false}
+  label: Test_Case_Extreme_Value_(False)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"InterfaceEnabled": false} or no change if communication is
+    lost'
+  ExpectedResponse: Undefined behavior, possible communication loss until fail-safe
+    recovery
+  Pre-requisites: The interface being disabled is the same as the one used to write
+    the value
+  arguments:
+    '{"InterfaceEnabled"': false}
+  label: Test_Case_Special_Response_(Disabling_the_interface_used_to_write_the_value)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: No change
+  ExpectedResponse: INVALID_ACTION
+  Pre-requisites: 'The interface is an Ethernet interface and disabling is not supported
+
+
+    ### Summary'
+  arguments:
+    '{"InterfaceEnabled"': false}
+  label: Test_Case_Special_Response_(Disabling_Ethernet_interface_when_not_supported)
+  option: WriteAttribute

@@ -1,0 +1,6 @@
+config:
+  cluster: scenes
+  command: '0x42'
+  nodeId: '0x654231'
+name: scenes_command_0x42_v1.0.0
+tests: []

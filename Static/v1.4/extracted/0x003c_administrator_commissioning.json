@@ -1,0 +1,117 @@
+{
+  "source_file": "Administrator Commissioning_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x003C",
+        "name": "Administrator Commissioning",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "WindowStatus",
+            "dataType": "CommissioningWindowStatusEnum",
+            "valueRange": "0-2",
+            "description": "Commissioning window state indicator",
+            "privilege": "Read",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "AdminFabricIndex",
+            "dataType": "fabric-idx",
+            "valueRange": "",
+            "description": "Fabric index of commissioning administrator",
+            "privilege": "Read",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "AdminVendorId",
+            "dataType": "vendor-id",
+            "valueRange": "",
+            "description": "Vendor ID of commissioning administrator",
+            "privilege": "Read",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "OpenCommissioningWindow",
+            "parameters": {
+              "CommissioningTimeout": {
+                "dataType": "uint16",
+                "valueRange": ""
+              },
+              "PAKEPasscodeVerifier": {
+                "dataType": "octstr",
+                "valueRange": ""
+              },
+              "Discriminator": {
+                "dataType": "uint16",
+                "valueRange": "0-4095"
+              },
+              "Iterations": {
+                "dataType": "uint32",
+                "valueRange": "1000-100000"
+              },
+              "Salt": {
+                "dataType": "octstr",
+                "valueRange": "16-32"
+              }
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "OpenBasicCommissioningWindow",
+            "parameters": {
+              "CommissioningTimeout": {
+                "dataType": "uint16",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "RevokeCommissioning",
+            "parameters": {},
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "CommissioningWindowStatusEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "WindowNotOpen",
+              "1": "EnhancedWindowOpen",
+              "2": "BasicWindowOpen"
+            }
+          },
+          "StatusCodeEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "2": "Busy",
+              "3": "PAKEParameterError",
+              "4": "WindowNotOpen"
+            }
+          },
+          "fabric-idx": {
+            "baseType": "uint8",
+            "description": "Fabric index identifier"
+          },
+          "vendor-id": {
+            "baseType": "uint16",
+            "description": "Vendor identifier"
+          }
+        }
+      }
+    ]
+  }
+}

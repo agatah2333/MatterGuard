@@ -1,0 +1,28 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x10'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x10_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '- `PumpStatus`: 0 (No fault)'
+  ExpectedResponse: No sensor failure detected
+  Pre-requisites: None
+  arguments:
+    SensorFailure: 0
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: '- `PumpStatus`: 1 (DeviceFault bit set)'
+  ExpectedResponse: Sensor failure detected
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the `SensorFailure` field (0 and
+    1) and the expected responses based on the description of the event.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments:
+    SensorFailure: 1
+  option: SubscribeToEvent

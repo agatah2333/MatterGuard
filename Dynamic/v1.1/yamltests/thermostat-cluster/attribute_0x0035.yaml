@@ -1,0 +1,51 @@
+config:
+  attribute: '0x0035'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0035_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '- `OccupiedSetbackMin`: 0'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: '- `OccupiedSetbackMax` should be greater than or equal to 0.'
+  arguments:
+    OccupiedSetbackMin: 0
+  label: Test_Case_Extreme_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `OccupiedSetbackMin`: <OccupiedSetbackMax>'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: '- `OccupiedSetbackMax` should be set to a valid value within the
+    range.
+
+
+    ### Special Response Scenarios'
+  arguments:
+    OccupiedSetbackMin: <OccupiedSetbackMax>
+  label: Test_Case_Extreme_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `OccupiedSetbackMin`: No change'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: '- `OccupiedSetbackMax` should be set to a valid value within the
+    range.'
+  arguments:
+    OccupiedSetbackMin: <OccupiedSetbackMax + 1>
+  label: Test_Case_Value_Greater_than_OccupiedSetbackMax
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `OccupiedSetbackMin`: No change'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: '- `OccupiedSetbackMax` should be set to a valid value within the
+    range.
+
+
+    These test cases cover the extreme values and special response scenarios for the
+    `OccupiedSetbackMin` attribute in the Thermostat Cluster.
+
+
+    For more details, refer to the Matter Application Cluster Specification【4:0†source】.'
+  arguments:
+    OccupiedSetbackMin: '-1'
+  label: Test_Case_Value_Less_than_0
+  option: WriteAttribute

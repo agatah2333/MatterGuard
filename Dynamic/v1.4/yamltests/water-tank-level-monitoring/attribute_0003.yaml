@@ -1,0 +1,24 @@
+name: Water Tank Level Monitoring - InPlaceIndicator Attribute Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Water Tank Level Monitoring
+  timeout: 180
+tests:
+- label: Read InPlaceIndicator attribute
+  command: readAttribute
+  attribute: InPlaceIndicator
+  response:
+    saveAs: inplaceindicator_value
+- label: InPlaceIndicator - Test boolean true
+  command: readAttribute
+  attribute: InPlaceIndicator
+  response:
+    constraints:
+      type: boolean
+- label: InPlaceIndicator - Test boolean false
+  command: readAttribute
+  attribute: InPlaceIndicator
+  response:
+    constraints:
+      type: boolean

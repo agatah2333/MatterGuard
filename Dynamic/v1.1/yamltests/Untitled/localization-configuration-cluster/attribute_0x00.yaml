@@ -1,0 +1,223 @@
+config:
+  attribute: '0x00'
+  cluster: localization-configuration-cluster
+  nodeId: '0x654231'
+name: localization-configuration-cluster_attribute_0x00_v1.1.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`ActiveLocale` remains unchanged.'
+  ExpectedResponse: '`CONSTRAINT_ERROR`'
+  Pre-requisites: '`SupportedLocales` list must not contain an empty string.'
+  arguments:
+    ActiveLocale: '`""` (empty string)'
+  label: Test_Case_Minimum_Length_Locale
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify localization-configuration-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`ActiveLocale` set to `"a"*35` if successful.'
+  ExpectedResponse: '`SUCCESS` if `"a"*35` is in `SupportedLocales`, otherwise `CONSTRAINT_ERROR`'
+  Pre-requisites: '`SupportedLocales` list must contain `"a"*35`.'
+  arguments:
+    ActiveLocale: '`"a"*35` (string of 35 ''a'' characters)'
+  label: Test_Case_Maximum_Length_Locale
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify localization-configuration-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`ActiveLocale` remains unchanged.'
+  ExpectedResponse: '`CONSTRAINT_ERROR`'
+  Pre-requisites: '`SupportedLocales` list must not contain `"unsupported-locale"`.'
+  arguments:
+    ActiveLocale: '`"unsupported-locale"`'
+  label: Test_Case_Locale_Not_in_SupportedLocales
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify localization-configuration-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`ActiveLocale` set to `"en-US"`.'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: '`SupportedLocales` list must contain `"en-US"`.
+
+
+    These test cases cover the extreme values of the constraints of the `ActiveLocale`
+    field and the values that could result in special responses as mentioned in the
+    description of the effect【4:2†source】【4:3†source】.'
+  arguments:
+    ActiveLocale: '`"en-US"`'
+  label: Test_Case_Valid_Locale_in_SupportedLocales
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify localization-configuration-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

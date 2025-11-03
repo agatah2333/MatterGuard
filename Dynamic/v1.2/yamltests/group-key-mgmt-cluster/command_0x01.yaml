@@ -1,0 +1,47 @@
+config:
+  cluster: group-key-mgmt-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: group-key-mgmt-cluster_command_0x01_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: INVALID_COMMAND
+  Pre-requisites: The GroupKeySetID being removed is 0, which is the Key Set associated
+    with the Identity Protection Key (IPK).
+  arguments:
+    GroupKeySetID: 0
+  label: Test_Case_Minimum_Value_of_GroupKeySetID
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: NOT_FOUND
+  Pre-requisites: The GroupKeySetID does not refer to a Group Key Set associated with
+    the accessing fabric.
+  arguments:
+    GroupKeySetID: 65535
+  label: Test_Case_Maximum_Value_of_GroupKeySetID
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: KeySetReadResponse
+  Pre-requisites: There exists a Group Key Set associated with the accessing fabric
+    which has the same GroupKeySetID as that provided in the GroupKeySetID field.
+  arguments:
+    GroupKeySetID: <valid_existing_group_key_set_id>
+  label: Test_Case_Valid_GroupKeySetID_with_Existing_Group_Key_Set
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: NOT_FOUND
+  Pre-requisites: 'The GroupKeySetID does not refer to a Group Key Set associated
+    with the accessing fabric.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values of the field that could result in special responses as mentioned in
+    the description of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】.'
+  arguments:
+    GroupKeySetID: <valid_non_existing_group_key_set_id>
+  label: Test_Case_Valid_GroupKeySetID_with_Non-Existing_Group_Key_Set
+  option: SendCommand

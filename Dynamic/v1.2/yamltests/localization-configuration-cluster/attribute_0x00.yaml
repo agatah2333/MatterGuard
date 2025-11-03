@@ -1,0 +1,104 @@
+config:
+  attribute: '0x00'
+  cluster: localization-configuration-cluster
+  nodeId: '0x654231'
+name: localization-configuration-cluster_attribute_0x00_v1.2.0.0
+tests:
+- ActionTime: "Immediate\n  - **ExpectedResponse**: Success\n  - **Which Attribute\
+    \ Will Be Changed and the Value of the Attribute**: ActiveLocale set to \"a\"\n\
+    \  - **Any Pre-requisites**: \"a\" must be in `SupportedLocales`"
+  Attribute_Change: "ActiveLocale set to \"a\"\n  - **Any Pre-requisites**: \"a\"\
+    \ must be in `SupportedLocales`"
+  ExpectedResponse: "Success\n  - **Which Attribute Will Be Changed and the Value\
+    \ of the Attribute**: ActiveLocale set to \"a\"\n  - **Any Pre-requisites**: \"\
+    a\" must be in `SupportedLocales`"
+  Pre-requisites: '"a" must be in `SupportedLocales`'
+  arguments:
+    '**ActionTime**': Immediate
+    '**Any Pre-requisites**': '"a" must be in `SupportedLocales`'
+    '**ExpectedResponse**': Success
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': ActiveLocale
+      set to "a"
+    '{"ActiveLocale"': '"a"}'
+  label: Test_Case_Minimum_Length_Locale
+  option: WriteAttribute
+- ActionTime: "Immediate\n  - **ExpectedResponse**: Success\n  - **Which Attribute\
+    \ Will Be Changed and the Value of the Attribute**: ActiveLocale set to \"a\"\
+    .repeat(35)\n  - **Any Pre-requisites**: \"a\".repeat(35) must be in `SupportedLocales`"
+  Attribute_Change: "ActiveLocale set to \"a\".repeat(35)\n  - **Any Pre-requisites**:\
+    \ \"a\".repeat(35) must be in `SupportedLocales`"
+  ExpectedResponse: "Success\n  - **Which Attribute Will Be Changed and the Value\
+    \ of the Attribute**: ActiveLocale set to \"a\".repeat(35)\n  - **Any Pre-requisites**:\
+    \ \"a\".repeat(35) must be in `SupportedLocales`"
+  Pre-requisites: '"a".repeat(35) must be in `SupportedLocales`'
+  arguments:
+    '**ActionTime**': Immediate
+    '**Any Pre-requisites**': '"a".repeat(35) must be in `SupportedLocales`'
+    '**ExpectedResponse**': Success
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': ActiveLocale
+      set to "a".repeat(35)
+    '{"ActiveLocale"': '"a".repeat(35)}'
+  label: Test_Case_Maximum_Length_Locale
+  option: WriteAttribute
+- ActionTime: "Immediate\n  - **ExpectedResponse**: CONSTRAINT_ERROR\n  - **Which\
+    \ Attribute Will Be Changed and the Value of the Attribute**: None\n  - **Any\
+    \ Pre-requisites**: \"en-US\" must not be in `SupportedLocales`"
+  Attribute_Change: "None\n  - **Any Pre-requisites**: \"en-US\" must not be in `SupportedLocales`"
+  ExpectedResponse: "CONSTRAINT_ERROR\n  - **Which Attribute Will Be Changed and the\
+    \ Value of the Attribute**: None\n  - **Any Pre-requisites**: \"en-US\" must not\
+    \ be in `SupportedLocales`"
+  Pre-requisites: '"en-US" must not be in `SupportedLocales`'
+  arguments:
+    '**ActionTime**': Immediate
+    '**Any Pre-requisites**': '"en-US" must not be in `SupportedLocales`'
+    '**ExpectedResponse**': CONSTRAINT_ERROR
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': None
+    '{"ActiveLocale"': '"en-US"}'
+  label: Test_Case_Locale_Not_in_SupportedLocales
+  option: WriteAttribute
+- ActionTime: "Immediate\n  - **ExpectedResponse**: Success\n  - **Which Attribute\
+    \ Will Be Changed and the Value of the Attribute**: ActiveLocale set to \"fr-FR\"\
+    \n  - **Any Pre-requisites**: \"fr-FR\" must be in `SupportedLocales`"
+  Attribute_Change: "ActiveLocale set to \"fr-FR\"\n  - **Any Pre-requisites**: \"\
+    fr-FR\" must be in `SupportedLocales`"
+  ExpectedResponse: "Success\n  - **Which Attribute Will Be Changed and the Value\
+    \ of the Attribute**: ActiveLocale set to \"fr-FR\"\n  - **Any Pre-requisites**:\
+    \ \"fr-FR\" must be in `SupportedLocales`"
+  Pre-requisites: '"fr-FR" must be in `SupportedLocales`'
+  arguments:
+    '**ActionTime**': Immediate
+    '**Any Pre-requisites**': '"fr-FR" must be in `SupportedLocales`'
+    '**ExpectedResponse**': Success
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': ActiveLocale
+      set to "fr-FR"
+    '{"ActiveLocale"': '"fr-FR"}'
+  label: Test_Case_Valid_Locale_in_SupportedLocales
+  option: WriteAttribute
+- ActionTime: "Immediate\n  - **ExpectedResponse**: CONSTRAINT_ERROR\n  - **Which\
+    \ Attribute Will Be Changed and the Value of the Attribute**: None\n  - **Any\
+    \ Pre-requisites**: None\n\nThese test cases cover the extreme values of the constraints\
+    \ of the `ActiveLocale` field and the values that could result in special responses\
+    \ as mentioned in the description of the effect【4:0†source】."
+  Attribute_Change: "None\n  - **Any Pre-requisites**: None\n\nThese test cases cover\
+    \ the extreme values of the constraints of the `ActiveLocale` field and the values\
+    \ that could result in special responses as mentioned in the description of the\
+    \ effect【4:0†source】."
+  ExpectedResponse: "CONSTRAINT_ERROR\n  - **Which Attribute Will Be Changed and the\
+    \ Value of the Attribute**: None\n  - **Any Pre-requisites**: None\n\nThese test\
+    \ cases cover the extreme values of the constraints of the `ActiveLocale` field\
+    \ and the values that could result in special responses as mentioned in the description\
+    \ of the effect【4:0†source】."
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the `ActiveLocale`
+    field and the values that could result in special responses as mentioned in the
+    description of the effect【4:0†source】.'
+  arguments:
+    '**ActionTime**': Immediate
+    '**Any Pre-requisites**': None
+    '**ExpectedResponse**': CONSTRAINT_ERROR
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': None
+    '{"ActiveLocale"': '"invalid_locale"}'
+  label: Test_Case_Invalid_Locale_Format
+  option: WriteAttribute

@@ -1,0 +1,47 @@
+config:
+  attribute: '0x01'
+  cluster: ethernet-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: ethernet-network-diagnostics-cluster_attribute_0x01_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: Networks attribute will include the network with ID 1 and status
+    Success.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    NetworkID: 1
+    NetworkStatus: Success
+  label: Test_Case_Extreme_Value_(Minimum)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: Networks attribute will include the network with ID 32 and status
+    Failure.
+  ExpectedResponse: Failure
+  Pre-requisites: None
+  arguments:
+    NetworkID: 32
+    NetworkStatus: Failure
+  label: Test_Case_Extreme_Value_(Maximum)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: Networks attribute will be set to null.
+  ExpectedResponse: 'null'
+  Pre-requisites: No network configurations exist in the Networks attribute.
+  arguments: {}
+  label: Test_Case_Special_Response_(No_Network_Configurations)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: Networks attribute will indicate a NetworkID that is no longer
+    configured on the Node.
+  ExpectedResponse: 'null'
+  Pre-requisites: 'Network configuration with ID 15 was removed using the RemoveNetwork
+    command.
+
+
+    These test cases cover the extreme values and special responses for the `Networks`
+    attribute in the Ethernet Network Diagnostics Cluster【4:1†source】.'
+  arguments:
+    NetworkID: 15 (previously configured)
+  label: Test_Case_Special_Response_(Network_Configuration_Removed)
+  option: WriteAttribute

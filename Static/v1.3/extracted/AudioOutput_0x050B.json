@@ -1,0 +1,94 @@
+{
+  "id": "0x050B",
+  "name": "Audio Output",
+  "description": "This cluster provides an interface for controlling the Output on a Video Player device such as a TV. This cluster would be supported on a device with audio outputs like a Video Player device (Smart TV, TV Setup Top Box, Smart Speaker, etc). This cluster provides the list of available outputs and provides commands for selecting and renaming them.",
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Application",
+    "scope": "Endpoint",
+    "picsCode": "AUDIOOUTPUT"
+  },
+  "revision": {
+    "current": 1,
+    "history": [
+      {
+        "revision": 1,
+        "description": "Initial Release"
+      }
+    ]
+  },
+  "features": {
+    "NU": {
+      "bit": 0,
+      "code": "NU",
+      "name": "NameUpdates",
+      "summary": "Supports updates to output names"
+    }
+  },
+  "dataTypes": {
+    "OutputTypeEnum": {
+      "type": "enum8",
+      "description": "The type of output, expressed as an enum, with the following values:",
+      "values": {
+        "0": {"name": "HDMI", "summary": "HDMI", "conformance": "M"},
+        "1": {"name": "BT", "conformance": "M"},
+        "2": {"name": "Optical", "conformance": "M"},
+        "3": {"name": "Headphone", "conformance": "M"},
+        "4": {"name": "Internal", "conformance": "M"},
+        "5": {"name": "Other", "conformance": "M"}
+      }
+    },
+    "OutputInfoStruct": {
+      "type": "struct",
+      "description": "This contains information about an output.",
+      "fields": {
+        "0": {"name": "Index", "type": "uint8", "constraint": "all", "conformance": "M"},
+        "1": {"name": "OutputType", "type": "OutputTypeEnum", "constraint": "desc", "conformance": "M"},
+        "2": {"name": "Name", "type": "string", "constraint": "all", "conformance": "M"}
+      }
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "name": "OutputList",
+      "type": "list[OutputInfoStruct]",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute provides the list of outputs supported by the device."
+    },
+    "0x0001": {
+      "name": "CurrentOutput",
+      "type": "uint8",
+      "constraint": "all",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute contains the value of the index field of the currently selected OutputInfoStruct."
+    }
+  },
+  "commands": {
+    "0x00": {
+      "name": "SelectOutput",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "description": "Upon receipt, this SHALL change the output on the device to the output at a specific index in the Output List.",
+      "fields": {
+        "0": {"name": "Index", "type": "uint8", "constraint": "all", "conformance": "M"}
+      }
+    },
+    "0x01": {
+      "name": "RenameOutput",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "M",
+      "conformance": "NU",
+      "description": "Upon receipt, this SHALL rename the output at a specific index in the Output List.",
+      "fields": {
+        "0": {"name": "Index", "type": "uint8", "constraint": "all", "conformance": "M"},
+        "1": {"name": "Name", "type": "string", "constraint": "all", "conformance": "M"}
+      }
+    }
+  },
+  "events": {}
+}

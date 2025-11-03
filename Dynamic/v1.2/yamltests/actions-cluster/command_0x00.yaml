@@ -1,0 +1,6 @@
+config:
+  cluster: actions-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: actions-cluster_command_0x00_v1.2.0.0
+tests: []

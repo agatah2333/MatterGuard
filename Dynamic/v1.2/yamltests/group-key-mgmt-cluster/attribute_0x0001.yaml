@@ -1,0 +1,90 @@
+config:
+  attribute: '0x0001'
+  cluster: group-key-mgmt-cluster
+  nodeId: '0x654231'
+name: group-key-mgmt-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: "N/A\n  - **ExpectedResponse**: Success\n  - **Which Attribute Will\
+    \ Be Changed and the Value of the Attribute**: N/A (Read-only attribute)\n  -\
+    \ **Any Pre-requisites**: The GroupTable should not contain any entry whose GroupInfoMapStruct\
+    \ has an empty Endpoints list."
+  Attribute_Change: "N/A (Read-only attribute)\n  - **Any Pre-requisites**: The GroupTable\
+    \ should not contain any entry whose GroupInfoMapStruct has an empty Endpoints\
+    \ list."
+  ExpectedResponse: "Success\n  - **Which Attribute Will Be Changed and the Value\
+    \ of the Attribute**: N/A (Read-only attribute)\n  - **Any Pre-requisites**: The\
+    \ GroupTable should not contain any entry whose GroupInfoMapStruct has an empty\
+    \ Endpoints list."
+  Pre-requisites: The GroupTable should not contain any entry whose GroupInfoMapStruct
+    has an empty Endpoints list.
+  arguments:
+    '**ActionTime**': N/A
+    '**Any Pre-requisites**': The GroupTable should not contain any entry whose GroupInfoMapStruct
+      has an empty Endpoints list.
+    '**ExpectedResponse**': Success
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': N/A (Read-only
+      attribute)
+    '{"GroupId"': '1, "Endpoints": [1]}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: "N/A\n  - **ExpectedResponse**: Success\n  - **Which Attribute Will\
+    \ Be Changed and the Value of the Attribute**: N/A (Read-only attribute)\n  -\
+    \ **Any Pre-requisites**: The GroupTable should not contain any entry whose GroupInfoMapStruct\
+    \ has an empty Endpoints list.\n\n### Notes\n- The GroupTable attribute is read-only\
+    \ and reflects data managed via the Groups cluster.\n- The GroupTable SHALL NOT\
+    \ contain any entry whose GroupInfoMapStruct has an empty Endpoints list.\n- If\
+    \ a RemoveGroup or RemoveAllGroups command causes the removal of a group mapping\
+    \ from its last mapped endpoint, the entire GroupTable entry for that given GroupId\
+    \ SHALL be removed【4:0†source】【4:6†source】.\n\nThese test cases cover the extreme\
+    \ values and special responses for the GroupTable attribute in the group-key-mgmt-cluster\
+    \ cluster."
+  Attribute_Change: "N/A (Read-only attribute)\n  - **Any Pre-requisites**: The GroupTable\
+    \ should not contain any entry whose GroupInfoMapStruct has an empty Endpoints\
+    \ list.\n\n### Notes\n- The GroupTable attribute is read-only and reflects data\
+    \ managed via the Groups cluster.\n- The GroupTable SHALL NOT contain any entry\
+    \ whose GroupInfoMapStruct has an empty Endpoints list.\n- If a RemoveGroup or\
+    \ RemoveAllGroups command causes the removal of a group mapping from its last\
+    \ mapped endpoint, the entire GroupTable entry for that given GroupId SHALL be\
+    \ removed【4:0†source】【4:6†source】.\n\nThese test cases cover the extreme values\
+    \ and special responses for the GroupTable attribute in the group-key-mgmt-cluster\
+    \ cluster."
+  ExpectedResponse: "Success\n  - **Which Attribute Will Be Changed and the Value\
+    \ of the Attribute**: N/A (Read-only attribute)\n  - **Any Pre-requisites**: The\
+    \ GroupTable should not contain any entry whose GroupInfoMapStruct has an empty\
+    \ Endpoints list.\n\n### Notes\n- The GroupTable attribute is read-only and reflects\
+    \ data managed via the Groups cluster.\n- The GroupTable SHALL NOT contain any\
+    \ entry whose GroupInfoMapStruct has an empty Endpoints list.\n- If a RemoveGroup\
+    \ or RemoveAllGroups command causes the removal of a group mapping from its last\
+    \ mapped endpoint, the entire GroupTable entry for that given GroupId SHALL be\
+    \ removed【4:0†source】【4:6†source】.\n\nThese test cases cover the extreme values\
+    \ and special responses for the GroupTable attribute in the group-key-mgmt-cluster\
+    \ cluster."
+  Pre-requisites: 'The GroupTable should not contain any entry whose GroupInfoMapStruct
+    has an empty Endpoints list.
+
+
+    ### Notes
+
+    - The GroupTable attribute is read-only and reflects data managed via the Groups
+    cluster.
+
+    - The GroupTable SHALL NOT contain any entry whose GroupInfoMapStruct has an empty
+    Endpoints list.
+
+    - If a RemoveGroup or RemoveAllGroups command causes the removal of a group mapping
+    from its last mapped endpoint, the entire GroupTable entry for that given GroupId
+    SHALL be removed【4:0†source】【4:6†source】.
+
+
+    These test cases cover the extreme values and special responses for the GroupTable
+    attribute in the group-key-mgmt-cluster cluster.'
+  arguments:
+    '**ActionTime**': N/A
+    '**Any Pre-requisites**': The GroupTable should not contain any entry whose GroupInfoMapStruct
+      has an empty Endpoints list.
+    '**ExpectedResponse**': Success
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': N/A (Read-only
+      attribute)
+    '{"GroupId"': '65535, "Endpoints": [1, 2, 3]}'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

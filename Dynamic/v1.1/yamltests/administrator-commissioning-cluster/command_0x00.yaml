@@ -1,0 +1,18 @@
+config:
+  cluster: administrator-commissioning-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: administrator-commissioning-cluster_command_0x00_v1.1.0.0
+tests:
+- arguments: {}
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Special_Response_-_PAKEParameterError
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Special_Response_-_Busy
+  option: SendCommand

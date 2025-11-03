@@ -1,0 +1,98 @@
+{
+  "cluster_id": "0x003F",
+  "cluster_name": "Group Key Management",
+  "section": "11.2",
+  "description": "The Group Key Management cluster manages group keys for the node. The cluster is scoped to the node and is a singleton for the node. This cluster maintains a list of groups supported by the node. Each group list entry supports a single group, with a single group ID and single group key. Duplicate groups are not allowed in the list. Additions or removal of a group entry are performed via modifi­ cations of the list. Such modifications require Administer privilege.",
+  "data_types": {
+    "GroupKeySecurityPolicyEnum": {
+      "name": "GroupKeySecurityPolicyEnum",
+      "definition_line": "11.2.5.1. GroupKeySecurityPolicyEnum Type"
+    },
+    "GroupKeyMulticastPolicyEnum": {
+      "name": "GroupKeyMulticastPolicyEnum",
+      "definition_line": "11.2.5.2. GroupKeyMulticastPolicyEnum Type"
+    },
+    "GroupKeyMapStruct": {
+      "name": "GroupKeyMapStruct",
+      "definition_line": "11.2.5.3. GroupKeyMapStruct Type"
+    },
+    "GroupKeySetStruct": {
+      "name": "GroupKeySetStruct",
+      "definition_line": "11.2.5.4. GroupKeySetStruct Type"
+    },
+    "GroupInfoMapStruct": {
+      "name": "GroupInfoMapStruct",
+      "definition_line": "11.2.5.5. GroupInfoMapStruct Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "Group­",
+      "details": "list[Group­ desc N empty RW VM F M",
+      "raw_line": "0x0000          Group­         list[Group­ desc             N              empty          RW VM F    M"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "GroupT­",
+      "details": "list[GroupI desc empty RVF M",
+      "raw_line": "0x0001          GroupT­        list[GroupI desc                            empty          RVF        M"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "Max­",
+      "details": "uint16 all F 0 RV M",
+      "raw_line": "0x0002          Max­           uint16        all            F              0              RV         M"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "Max­",
+      "details": "uint16 1 to 65535 F 1 RV M",
+      "raw_line": "0x0003          Max­           uint16        1 to 65535     F              1              RV         M"
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "KeySetWrite",
+      "details": "client ⇒ server Y AF M",
+      "raw_line": "0x00                KeySetWrite         client ⇒ server Y                       AF                M"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "KeySetRead",
+      "details": "client ⇒ server KeySetRead­ AF M",
+      "raw_line": "0x01                KeySetRead          client ⇒ server KeySetRead­             AF                M"
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "KeySetRead­",
+      "details": "client ⇐ server N M",
+      "raw_line": "0x02                KeySetRead­         client ⇐ server N                                         M"
+    },
+    "0x03": {
+      "id": "0x03",
+      "name": "KeySe­",
+      "details": "client ⇒ server Y AF M",
+      "raw_line": "0x03                KeySe­              client ⇒ server Y                       AF                M"
+    },
+    "0x04": {
+      "id": "0x04",
+      "name": "KeySe­",
+      "details": "client ⇒ server KeySe­ AF M",
+      "raw_line": "0x04                KeySe­              client ⇒ server KeySe­                  AF                M"
+    },
+    "0x05": {
+      "id": "0x05",
+      "name": "KeySe­",
+      "details": "client ⇐ server N M",
+      "raw_line": "0x05                KeySe­              client ⇐ server N                                         M"
+    }
+  },
+  "events": {},
+  "extraction_info": {
+    "start_line": 37644,
+    "end_line": 38219,
+    "total_lines": 575
+  }
+}

@@ -1,0 +1,32 @@
+config:
+  cluster: content-launch-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: content-launch-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: "- `Status` attribute to `ACTIVE_VISIBLE_FOCUS`\n  - `CurrentApp`\
+    \ attribute to `<valid_application_id>`"
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: 'The application specified must be valid and supported by the server.
+
+
+    ##### Test Case 1.2: Maximum Data Length'
+  arguments:
+    Application: '`<valid_application_id>`'
+    Data: '`""` (empty string)'
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: SendCommand
+- ActionTime: '`<current_time>`'
+  Attribute_Change: None
+  ExpectedResponse: '`APPLICATION_NOT_FOUND`'
+  Pre-requisites: 'The application specified must be invalid or not supported by the
+    server.
+
+
+    ##### Test Case 2.2: Data Format Error'
+  arguments:
+    Application: '`<invalid_application_id>`'
+    Data: '`"<any_valid_octet_string>"`'
+  label: Test_Case_Special_Responses
+  option: SendCommand

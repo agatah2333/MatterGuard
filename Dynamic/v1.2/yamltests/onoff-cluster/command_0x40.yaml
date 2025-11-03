@@ -1,0 +1,47 @@
+config:
+  cluster: onoff-cluster
+  command: '0x40'
+  nodeId: '0x654231'
+name: onoff-cluster_command_0x40_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '- `OnOff`: FALSE'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    EffectIdentifier: '0x00'
+    EffectVariant: '0x00'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: '- `OnOff`: FALSE'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    EffectIdentifier: '0x01'
+    EffectVariant: '0x02'
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: '- `OnOff`: FALSE'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    EffectIdentifier: '0x00'
+    EffectVariant: '0x01'
+  label: Test_Case_Special_Response_Scenario_1
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: '- `OnOff`: FALSE'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:3†source】【4:4†source】.'
+  arguments:
+    EffectIdentifier: '0x01'
+    EffectVariant: '0x00'
+  label: Test_Case_Special_Response_Scenario_2
+  option: SendCommand

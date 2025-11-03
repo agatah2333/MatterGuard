@@ -1,0 +1,44 @@
+config:
+  attribute: '0x0013'
+  cluster: level-control-cluster
+  nodeId: '0x654231'
+name: level-control-cluster_attribute_0x0013_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`OffTransitionTime` will be set to 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"OffTransitionTime"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 65535
+  Attribute_Change: '`OffTransitionTime` will be set to 65535'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"OffTransitionTime"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 'null'
+  Attribute_Change: '`OffTransitionTime` will be set to the value of `OnOffTransitionTime`'
+  ExpectedResponse: Success
+  Pre-requisites: '`OnOffTransitionTime` attribute must be implemented and have a
+    valid value'
+  arguments:
+    '{"OffTransitionTime"': null}
+  label: Test_Case_Special_Value_(Null)
+  option: WriteAttribute
+- ActionTime: 1000
+  Attribute_Change: '`OffTransitionTime` will be set to 1000'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special values that could result in specific responses as mentioned in the
+    description of the effect【4:0†source】【4:1†source】【4:5†source】【4:12†source】.'
+  arguments:
+    '{"OffTransitionTime"': 1000}
+  label: Test_Case_Typical_Value
+  option: WriteAttribute

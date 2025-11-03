@@ -1,0 +1,65 @@
+config:
+  attribute: '0x0001'
+  cluster: operational-state-rvc-cluster
+  nodeId: '0x654231'
+name: operational-state-rvc-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    CountdownTime: 0
+    CurrentPhase: 0
+    OperationalError: '{ `ErrorStateID`: 0x00, `ErrorStateLabel`: "", `ErrorStateDetails`:
+      "" }'
+    OperationalState: 0x00 (Stopped)
+    OperationalStateList: []
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: 259200
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    CountdownTime: 259200
+    CurrentPhase: 255
+    OperationalError: '{ `ErrorStateID`: 0x3F, `ErrorStateLabel`: "Max Error", `ErrorStateDetails`:
+      "Details of max error" }'
+    OperationalState: 0x3F (General State)
+    OperationalStateList: '[{ `OperationalStateID`: 0x3F, `OperationalStateLabel`:
+      "Max State" }]'
+  label: Test_Case_Maximum_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: 100
+  Attribute_Change: '`OperationalState` to `Error`'
+  ExpectedResponse: Error
+  Pre-requisites: Device must be in a state where it can transition to an error state.
+  arguments:
+    CountdownTime: 100
+    CurrentPhase: 1
+    OperationalError: '{ `ErrorStateID`: 0x01, `ErrorStateLabel`: "UnableToStartOrResume",
+      `ErrorStateDetails`: "Device cannot start" }'
+    OperationalState: 0x03 (Error)
+    OperationalStateList: '[{ `OperationalStateID`: 0x03, `OperationalStateLabel`:
+      "Error" }]'
+  label: Test_Case_Special_Response_-_Device_in_Error_State
+  option: WriteAttribute
+- ActionTime: 200
+  Attribute_Change: '`OperationalState` to `Paused`'
+  ExpectedResponse: Success
+  Pre-requisites: 'Device must be in a state where it can transition to a paused state.
+
+
+    These test cases cover the extreme values of the constraints and the special responses
+    as mentioned in the provided context【4:0†source】【4:3†source】【4:6†source】【4:7†source】.'
+  arguments:
+    CountdownTime: 200
+    CurrentPhase: 2
+    OperationalError: '{ `ErrorStateID`: 0x00, `ErrorStateLabel`: "", `ErrorStateDetails`:
+      "" }'
+    OperationalState: 0x02 (Paused)
+    OperationalStateList: '[{ `OperationalStateID`: 0x02, `OperationalStateLabel`:
+      "Paused" }]'
+  label: Test_Case_Special_Response_-_Device_Paused
+  option: WriteAttribute

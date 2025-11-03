@@ -1,0 +1,216 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0054",
+    "name": "RVC Run Mode",
+    "description": "Commands and attributes for controlling the running mode of an RVC device. This cluster is derived from the Mode Base cluster to define specifics for Robotic Vacuum Cleaner devices.",
+    "classification": {
+      "hierarchy": "Mode Base",
+      "role": "Application",
+      "scope": "Endpoint",
+      "pics_code": "RVCRUNM"
+    },
+    "revision_history": [
+      {
+        "revision": 1,
+        "description": "Initial Release"
+      },
+      {
+        "revision": 2,
+        "description": "Add constraint about switching from non-Idle to non-Idle modes. ChangeToModeResponse command: StatusText must be provided for InvalidInMode status. Deprecate the OnMode attribute and the related feature map bit. Add the Mapping mode tag."
+      }
+    ]
+  },
+  "features": {
+    "DEPONOFF": {
+      "bit": 0,
+      "code": "DEPONOFF",
+      "name": "OnOff",
+      "conformance": "D",
+      "summary": "OnOff feature (deprecated)"
+    }
+  },
+  "derived_data_types": {
+    "enums": {},
+    "structs": {
+      "ModeOptionStruct": {
+        "description": "Derived from Mode Base cluster",
+        "fields": {
+          "0": {
+            "name": "Label",
+            "type": "string",
+            "conformance": "M"
+          },
+          "1": {
+            "name": "Mode",
+            "type": "uint8",
+            "conformance": "M"
+          },
+          "2": {
+            "name": "ModeTags",
+            "type": "list[ModeTagStruct]",
+            "constraint": "1 to 8",
+            "conformance": "M"
+          }
+        }
+      }
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "SupportedModes",
+      "type": "list[ModeOptionStruct]",
+      "constraint": "desc",
+      "quality": "",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "List of supported modes. At least one entry SHALL include the Idle mode tag. At least one entry (different from the one above) SHALL include the Cleaning mode tag."
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "CurrentMode",
+      "type": "uint8",
+      "constraint": "desc",
+      "quality": "",
+      "default": "",
+      "access": "RV",
+      "conformance": "M",
+      "description": "Current mode of the device"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "StartUpMode",
+      "type": "uint8",
+      "constraint": "desc",
+      "quality": "X",
+      "default": "",
+      "access": "RW",
+      "conformance": "X",
+      "description": "Startup mode attribute (not supported in this cluster)"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "OnMode",
+      "type": "uint8",
+      "constraint": "desc",
+      "quality": "",
+      "default": "",
+      "access": "RW",
+      "conformance": "D",
+      "description": "OnMode attribute (deprecated)"
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "ChangeToMode",
+      "direction": "client => server",
+      "response": "ChangeToModeResponse",
+      "access": "O",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "NewMode",
+          "type": "uint8",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "The mode to change to"
+        }
+      ],
+      "description": "Change the device to the indicated mode. Attempting to switch from a mode without the Idle mode tag to another non-Idle mode SHALL NOT be allowed and shall return InvalidInMode status."
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "ChangeToModeResponse",
+      "direction": "client <= server",
+      "response": "N",
+      "access": "",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "Status",
+          "type": "enum8",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "Status of the mode change request"
+        },
+        {
+          "id": "1",
+          "name": "StatusText",
+          "type": "string",
+          "constraint": "max 64",
+          "quality": "",
+          "default": "",
+          "conformance": "O",
+          "description": "Text description of the status"
+        }
+      ],
+      "description": "Response to ChangeToMode command"
+    }
+  },
+  "events": {},
+  "cluster_namespace": {
+    "status_codes": {
+      "0x41": {
+        "name": "Stuck",
+        "description": "Device is stuck and requires manual intervention"
+      },
+      "0x42": {
+        "name": "DustBinMissing",
+        "description": "Dust bin is missing"
+      },
+      "0x43": {
+        "name": "DustBinFull",
+        "description": "Dust bin is full"
+      },
+      "0x44": {
+        "name": "WaterTankEmpty",
+        "description": "Water tank is empty"
+      },
+      "0x45": {
+        "name": "WaterTankMissing",
+        "description": "Water tank is missing"
+      },
+      "0x46": {
+        "name": "WaterTankLidOpen",
+        "description": "Water tank lid is open"
+      },
+      "0x47": {
+        "name": "MopCleaningPadMissing",
+        "description": "Mop cleaning pad is missing"
+      },
+      "0x48": {
+        "name": "BatteryLow",
+        "description": "Battery is low"
+      }
+    },
+    "mode_tags": {
+      "0x4000": {
+        "name": "Idle",
+        "description": "The device is not performing any of the main operations of the other modes. However, auxiliary actions, such as seeking the charger or charging, may occur."
+      },
+      "0x4001": {
+        "name": "Cleaning",
+        "description": "The device was asked to clean so it may be actively running, or paused due to an error, due to a pause command, or for recharging etc."
+      },
+      "0x4002": {
+        "name": "Mapping",
+        "description": "The device was asked to create a map of the space it is located in, so it may be actively running, or paused due to an error, due to a pause command, or for recharging etc."
+      }
+    }
+  },
+  "mode_use": {
+    "start_cleaning": "Starting a cleaning cycle SHALL be done by switching from a mode with the Idle mode tag to a mode with the Cleaning mode tag.",
+    "stop_cleaning": "Stopping a cleaning cycle SHALL be done by switching from a mode with the Cleaning mode tag to a mode with the Idle mode tag.",
+    "start_mapping": "Starting a mapping cycle SHALL be done by switching from a mode with the Idle mode tag to a mode with the Mapping mode tag.",
+    "stop_mapping": "Stopping a mapping cycle SHALL be done by switching from a mode with the Mapping mode tag to a mode with the Idle mode tag."
+  },
+  "mode_change_restrictions": "Attempting to switch the RVC Run Mode from a mode without the Idle mode tag to another non-Idle mode SHALL NOT be allowed and the ChangeToModeResponse command SHALL have the StatusCode field set to the InvalidInMode value in that case."
+}

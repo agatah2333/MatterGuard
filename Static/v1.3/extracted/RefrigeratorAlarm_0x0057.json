@@ -1,0 +1,66 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0057",
+    "name": "Refrigerator Alarm",
+    "description": "This cluster is a derived cluster of Alarm Base cluster.",
+    "classification": {
+      "hierarchy": "Alarm Base",
+      "role": "Application",
+      "scope": "Endpoint",
+      "pics_code": "REFALM"
+    },
+    "revision_history": [
+      {
+        "revision": 1,
+        "description": "Initial revision"
+      }
+    ]
+  },
+  "features": {
+    "RESET": {
+      "bit": 0,
+      "code": "RESET",
+      "name": "Reset",
+      "conformance": "X",
+      "summary": "Supports the ability to reset alarms"
+    }
+  },
+  "data_types": {
+    "bitmaps": {
+      "AlarmBitmap": {
+        "type": "map32",
+        "description": "Alarm bitmap for refrigerator alarms",
+        "bits": {
+          "0": {
+            "name": "DoorOpen",
+            "summary": "The cabinet's door has been open for a vendor defined amount of time.",
+            "conformance": "M"
+          }
+        }
+      }
+    }
+  },
+  "attributes": {
+    "Mask": {
+      "description": "If the generation of the alarm has not been suppressed at the device itself, then this attribute SHALL have these fixed values. This alarm SHALL be cleared only when the door is closed (manual action).",
+      "fixed_values": {
+        "0": {
+          "name": "DoorOpen",
+          "value": 1
+        }
+      }
+    },
+    "note": "This cluster inherits all attributes from the Alarm Base cluster"
+  },
+  "commands": {
+    "0x01": {
+      "id": "0x01",
+      "name": "ModifyEnabledAlarms",
+      "conformance": "X"
+    },
+    "note": "This cluster inherits commands from the Alarm Base cluster"
+  },
+  "events": {
+    "note": "This cluster inherits all events from the Alarm Base cluster"
+  }
+}

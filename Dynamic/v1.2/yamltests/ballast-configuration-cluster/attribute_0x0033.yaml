@@ -1,0 +1,48 @@
+config:
+  attribute: '0x0033'
+  cluster: ballast-configuration-cluster
+  nodeId: '0x654231'
+name: ballast-configuration-cluster_attribute_0x0033_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: LampBurnHours = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"LampBurnHours"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: LampBurnHours = 16777215
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"LampBurnHours"': 16777215}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: LampBurnHours = 8388608
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"LampBurnHours"': 8388608}
+  label: Test_Case_Special_Value_(Mid-Range)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Error (Invalid Value)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    a special mid-range value. The null value test case is included to check the system''s
+    response to an invalid input.
+
+
+    ### References
+
+    - Matter-1.2-Application-Cluster-Specification.pdf【4:1†source】'
+  arguments:
+    '{"LampBurnHours"': null}
+  label: Test_Case_Null_Value_(Invalid)
+  option: WriteAttribute

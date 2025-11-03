@@ -1,0 +1,1134 @@
+{
+  "source_file": "Color Control_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0300",
+        "name": "Color Control",
+        "dataTypes": {
+          "DriftCompensationEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "None",
+              "1": "TemperatureMonitoring",
+              "2": "OpticalLuminanceFeedback",
+              "3": "OpticalColorFeedback"
+            }
+          },
+          "OptionsBitmap": {
+            "baseType": "bitmap32",
+            "fields": {
+              "ExecuteIfOff": {
+                "bit": 0
+              },
+              "CoupleColorTempToLevel": {
+                "bit": 1
+              }
+            }
+          },
+          "ColorCapabilitiesBitmap": {
+            "baseType": "bitmap16",
+            "fields": {
+              "HueSaturationSupported": {
+                "bit": 0
+              },
+              "EnhancedHueSupported": {
+                "bit": 1
+              },
+              "ColorLoopSupported": {
+                "bit": 2
+              },
+              "XYAttributesSupported": {
+                "bit": 3
+              },
+              "ColorTemperatureSupported": {
+                "bit": 4
+              }
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "CurrentHue",
+            "dataType": "uint8",
+            "valueRange": "0-254",
+            "description": "当前色调值，计算公式：Hue = CurrentHue * 360 / 254",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentSaturation",
+            "dataType": "uint8",
+            "valueRange": "0-254",
+            "description": "当前饱和度值，计算公式：Saturation = CurrentSaturation / 254",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "RemainingTime",
+            "dataType": "uint16",
+            "valueRange": "0-65534",
+            "description": "当前命令剩余执行时间（单位：0.1秒）",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "CurrentX",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "CIE xyY色彩空间x坐标值",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0004",
+            "name": "CurrentY",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "CIE xyY色彩空间y坐标值",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0005",
+            "name": "DriftCompensation",
+            "dataType": "DriftCompensationEnum",
+            "valueRange": "0-3",
+            "description": "色彩漂移补偿机制",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0006",
+            "name": "CompensationText",
+            "dataType": "string",
+            "valueRange": "max32",
+            "description": "补偿机制文本描述",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0007",
+            "name": "ColorTemperatureMireds",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "当前色温值（mired）",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0008",
+            "name": "ColorMode",
+            "dataType": "enum8",
+            "valueRange": "0-2",
+            "description": "当前色彩控制模式",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x000F",
+            "name": "Options",
+            "dataType": "OptionsBitmap",
+            "valueRange": "bitmap",
+            "description": "命令选项位图",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0010",
+            "name": "NumberOfPrimaries",
+            "dataType": "uint8",
+            "valueRange": "0-6",
+            "description": "设备支持的原色数量",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0011",
+            "name": "Primary1X",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "原色1 x坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0012",
+            "name": "Primary1Y",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "原色1 y坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0013",
+            "name": "Primary1Intensity",
+            "dataType": "uint8",
+            "valueRange": "0-254",
+            "description": "原色1强度",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0015",
+            "name": "Primary2X",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "原色2 x坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0016",
+            "name": "Primary2Y",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "原色2 y坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0017",
+            "name": "Primary2Intensity",
+            "dataType": "uint8",
+            "valueRange": "0-254",
+            "description": "原色2强度",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0019",
+            "name": "Primary3X",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "原色3 x坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x001A",
+            "name": "Primary3Y",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "原色3 y坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x001B",
+            "name": "Primary3Intensity",
+            "dataType": "uint8",
+            "valueRange": "0-254",
+            "description": "原色3强度",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0020",
+            "name": "Primary4X",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "原色4 x坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0021",
+            "name": "Primary4Y",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "原色4 y坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0022",
+            "name": "Primary4Intensity",
+            "dataType": "uint8",
+            "valueRange": "0-254",
+            "description": "原色4强度",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0024",
+            "name": "Primary5X",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "原色5 x坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0025",
+            "name": "Primary5Y",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "原色5 y坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0026",
+            "name": "Primary5Intensity",
+            "dataType": "uint8",
+            "valueRange": "0-254",
+            "description": "原色5强度",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0028",
+            "name": "Primary6X",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "原色6 x坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0029",
+            "name": "Primary6Y",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "原色6 y坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x002A",
+            "name": "Primary6Intensity",
+            "dataType": "uint8",
+            "valueRange": "0-254",
+            "description": "原色6强度",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0030",
+            "name": "WhitePointX",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "白点x坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0031",
+            "name": "WhitePointY",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "白点y坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0032",
+            "name": "ColorPointRX",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "红色点x坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0033",
+            "name": "ColorPointRY",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "红色点y坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0034",
+            "name": "ColorPointRIntensity",
+            "dataType": "uint8",
+            "valueRange": "0-254",
+            "description": "红色点强度",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0036",
+            "name": "ColorPointGX",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "绿色点x坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0037",
+            "name": "ColorPointGY",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "绿色点y坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0038",
+            "name": "ColorPointGIntensity",
+            "dataType": "uint8",
+            "valueRange": "0-254",
+            "description": "绿色点强度",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x003A",
+            "name": "ColorPointBX",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "蓝色点x坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x003B",
+            "name": "ColorPointBY",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "蓝色点y坐标",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x003C",
+            "name": "ColorPointBIntensity",
+            "dataType": "uint8",
+            "valueRange": "0-254",
+            "description": "蓝色点强度",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0040",
+            "name": "EnhancedCurrentHue",
+            "dataType": "uint16",
+            "valueRange": "0-65534",
+            "description": "增强色调值",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0041",
+            "name": "EnhancedColorMode",
+            "dataType": "enum8",
+            "valueRange": "0-1",
+            "description": "增强色彩模式",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0042",
+            "name": "ColorLoopActive",
+            "dataType": "enum8",
+            "valueRange": "0-1",
+            "description": "色彩循环状态",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0043",
+            "name": "ColorLoopDirection",
+            "dataType": "enum8",
+            "valueRange": "0-1",
+            "description": "色彩循环方向",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0044",
+            "name": "ColorLoopTime",
+            "dataType": "uint16",
+            "valueRange": "0-65534",
+            "description": "色彩循环时间",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0045",
+            "name": "ColorLoopStartEnhancedHue",
+            "dataType": "uint16",
+            "valueRange": "0-65534",
+            "description": "色彩循环起始增强色调值",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0046",
+            "name": "ColorLoopStoredEnhancedHue",
+            "dataType": "uint16",
+            "valueRange": "0-65534",
+            "description": "色彩循环存储增强色调值",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x400A",
+            "name": "ColorCapabilities",
+            "dataType": "ColorCapabilitiesBitmap",
+            "valueRange": "bitmap",
+            "description": "设备色彩控制能力位图",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x400B",
+            "name": "ColorTempPhysicalMinMireds",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "硬件支持的最小色温值（mired）",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x400C",
+            "name": "ColorTempPhysicalMaxMireds",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "硬件支持的最大色温值（mired）",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x400D",
+            "name": "CoupleColorTempToLevelMinMireds",
+            "dataType": "uint16",
+            "valueRange": "0-65279",
+            "description": "色温与亮度联动模式下的最小色温值",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x4010",
+            "name": "StartUpColorTemperatureMireds",
+            "dataType": "uint16",
+            "valueRange": "1-65279",
+            "description": "Indicates the desired startup color temperature value the light uses when powered on.",
+            "privilege": "R",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "MoveToHue",
+            "parameters": {
+              "Hue": {
+                "dataType": "uint8",
+                "valueRange": "0-254",
+                "description": "Target hue value"
+              },
+              "Direction": {
+                "dataType": "DirectionEnum",
+                "valueRange": "0-3",
+                "description": "Transition direction"
+              },
+              "TransitionTime": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Transition duration in 1/10s units"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "MoveHue",
+            "parameters": {
+              "MoveMode": {
+                "dataType": "MoveModeEnum",
+                "valueRange": "0-3",
+                "description": "Movement direction mode"
+              },
+              "Rate": {
+                "dataType": "uint8",
+                "valueRange": "0-255",
+                "description": "Movement rate in steps/sec"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "StepHue",
+            "parameters": {
+              "StepMode": {
+                "dataType": "StepModeEnum",
+                "valueRange": "0-1",
+                "description": "Step direction mode"
+              },
+              "StepSize": {
+                "dataType": "uint8",
+                "valueRange": "0-255",
+                "description": "Hue change per step"
+              },
+              "TransitionTime": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Step duration in 1/10s units"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x03",
+            "name": "MoveToSaturation",
+            "parameters": {
+              "Saturation": {
+                "dataType": "uint8",
+                "valueRange": "0-254",
+                "description": "Target saturation value"
+              },
+              "TransitionTime": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Transition duration in 1/10s units"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x04",
+            "name": "MoveSaturation",
+            "parameters": {
+              "MoveMode": {
+                "dataType": "MoveModeEnum",
+                "valueRange": "0-3",
+                "description": "Movement direction mode"
+              },
+              "Rate": {
+                "dataType": "uint8",
+                "valueRange": "0-255",
+                "description": "Movement rate in steps/sec"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x05",
+            "name": "StepSaturation",
+            "parameters": {
+              "StepMode": {
+                "dataType": "StepModeEnum",
+                "valueRange": "0-1",
+                "description": "Step direction mode"
+              },
+              "StepSize": {
+                "dataType": "uint8",
+                "valueRange": "0-255",
+                "description": "Saturation change per step"
+              },
+              "TransitionTime": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Step duration in 1/10s units"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x06",
+            "name": "MoveToHueAndSaturation",
+            "parameters": {
+              "Hue": {
+                "dataType": "uint8",
+                "valueRange": "0-254",
+                "description": "Target hue value"
+              },
+              "Saturation": {
+                "dataType": "uint8",
+                "valueRange": "0-254",
+                "description": "Target saturation value"
+              },
+              "TransitionTime": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Transition duration in 1/10s units"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x07",
+            "name": "MoveToColor",
+            "parameters": {
+              "ColorX": {
+                "dataType": "uint16",
+                "valueRange": "0-65279",
+                "description": "CIE 1931 X coordinate"
+              },
+              "ColorY": {
+                "dataType": "uint16",
+                "valueRange": "0-65279",
+                "description": "CIE 1931 Y coordinate"
+              },
+              "TransitionTime": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Transition duration in 1/10s units"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x08",
+            "name": "MoveColor",
+            "parameters": {
+              "RateX": {
+                "dataType": "int16",
+                "valueRange": "-32768-32767",
+                "description": "X coordinate movement rate"
+              },
+              "RateY": {
+                "dataType": "int16",
+                "valueRange": "-32768-32767",
+                "description": "Y coordinate movement rate"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x09",
+            "name": "StepColor",
+            "parameters": {
+              "StepX": {
+                "dataType": "int16",
+                "valueRange": "-32768-32767",
+                "description": "X coordinate step value"
+              },
+              "StepY": {
+                "dataType": "int16",
+                "valueRange": "-32768-32767",
+                "description": "Y coordinate step value"
+              },
+              "TransitionTime": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Step duration in 1/10s units"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x0A",
+            "name": "MoveToColorTemperature",
+            "parameters": {
+              "ColorTempMireds": {
+                "dataType": "uint16",
+                "valueRange": "0-65279",
+                "description": "Color temperature in mireds"
+              },
+              "TransitionTime": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Transition duration in 1/10s units"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x40",
+            "name": "EnhancedMoveToHue",
+            "parameters": {
+              "EnhancedHue": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Extended hue value (0-360° mapped to 0-65535)"
+              },
+              "Direction": {
+                "dataType": "DirectionEnum",
+                "valueRange": "0-3",
+                "description": "Transition direction"
+              },
+              "TransitionTime": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Transition duration in 1/10s units"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x41",
+            "name": "EnhancedMoveHue",
+            "parameters": {
+              "MoveMode": {
+                "dataType": "MoveModeEnum",
+                "valueRange": "0-3",
+                "description": "Movement direction mode"
+              },
+              "Rate": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Movement rate in steps/sec"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x42",
+            "name": "EnhancedStepHue",
+            "parameters": {
+              "StepMode": {
+                "dataType": "StepModeEnum",
+                "valueRange": "0-1",
+                "description": "Step direction mode"
+              },
+              "StepSize": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Hue change per step"
+              },
+              "TransitionTime": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Step duration in 1/10s units"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x43",
+            "name": "EnhancedMoveToHueAndSaturation",
+            "parameters": {
+              "EnhancedHue": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Extended hue value"
+              },
+              "Saturation": {
+                "dataType": "uint8",
+                "valueRange": "0-254",
+                "description": "Target saturation value"
+              },
+              "TransitionTime": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Transition duration in 1/10s units"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x44",
+            "name": "ColorLoopSet",
+            "parameters": {
+              "UpdateFlags": {
+                "dataType": "UpdateFlagsBitmap",
+                "valueRange": "bitmap",
+                "description": "Attributes to update"
+              },
+              "Action": {
+                "dataType": "ColorLoopActionEnum",
+                "valueRange": "0-1",
+                "description": "Start/Stop color loop"
+              },
+              "Direction": {
+                "dataType": "ColorLoopDirectionEnum",
+                "valueRange": "0-1",
+                "description": "Loop direction"
+              },
+              "Time": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Full loop cycle time in seconds"
+              },
+              "StartHue": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Initial hue value for loop"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x47",
+            "name": "StopMoveStep",
+            "parameters": {
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x4B",
+            "name": "MoveColorTemperature",
+            "parameters": {
+              "MoveMode": {
+                "dataType": "MoveModeEnum",
+                "valueRange": "0-3",
+                "description": "Movement direction mode"
+              },
+              "Rate": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Movement rate in steps/sec"
+              },
+              "ColorTempMin": {
+                "dataType": "uint16",
+                "valueRange": "0-65279",
+                "description": "Minimum color temperature bound"
+              },
+              "ColorTempMax": {
+                "dataType": "uint16",
+                "valueRange": "0-65279",
+                "description": "Maximum color temperature bound"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x4C",
+            "name": "StepColorTemperature",
+            "parameters": {
+              "StepMode": {
+                "dataType": "StepModeEnum",
+                "valueRange": "0-1",
+                "description": "Mode of the step to be performed"
+              },
+              "StepSize": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Change to current color temperature"
+              },
+              "TransitionTime": {
+                "dataType": "uint16",
+                "valueRange": "0-65534",
+                "description": "Time to perform the step"
+              },
+              "ColorTempMinimum": {
+                "dataType": "uint16",
+                "valueRange": "0-65279",
+                "description": "Lower bound of color temperature"
+              },
+              "ColorTempMaximum": {
+                "dataType": "uint16",
+                "valueRange": "0-65279",
+                "description": "Upper bound of color temperature"
+              },
+              "OptionsMask": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options mask"
+              },
+              "OptionsOverride": {
+                "dataType": "OptionsBitmap",
+                "valueRange": "bitmap",
+                "description": "Command options override"
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": []
+      }
+    ]
+  }
+}

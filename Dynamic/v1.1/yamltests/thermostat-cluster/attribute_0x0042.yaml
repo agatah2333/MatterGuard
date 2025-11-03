@@ -1,0 +1,54 @@
+config:
+  attribute: '0x0042'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0042_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: ACRefrigerantType = 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"ACRefrigerantType"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: ACRefrigerantType = 3
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"ACRefrigerantType"': 3}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: ACRefrigerantType = 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"ACRefrigerantType"': 0}
+  label: Test_Case_Special_Response_for_Unknown_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: ACRefrigerantType = 1
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"ACRefrigerantType"': 1}
+  label: Test_Case_Valid_Known_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: ACRefrigerantType = 2
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    For more details, refer to the document: 【4:0†source】.'
+  arguments:
+    '{"ACRefrigerantType"': 2}
+  label: Test_Case_Valid_Known_Value
+  option: WriteAttribute

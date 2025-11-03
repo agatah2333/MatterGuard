@@ -1,0 +1,6 @@
+config:
+  attribute: '0x02'
+  cluster: client-monitoring-cluster
+  nodeId: '0x654231'
+name: client-monitoring-cluster_attribute_0x02_v1.1.0.0
+tests: []

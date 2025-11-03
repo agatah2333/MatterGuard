@@ -1,0 +1,403 @@
+{
+  "source_file": "media playback.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0506",
+        "name": "Media Playback",
+        "dataTypes": {
+          "PlaybackStateEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Playing",
+              "1": "Paused",
+              "2": "NotPlaying",
+              "3": "Buffering"
+            }
+          },
+          "StatusEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Success",
+              "1": "InvalidStateForCommand",
+              "2": "NotAllowed",
+              "3": "NotActive",
+              "4": "SpeedOutOfRange",
+              "5": "SeekOutOfRange"
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "CurrentState",
+            "dataType": "enum8",
+            "valueRange": "PlaybackStateEnum",
+            "description": "This attribute SHALL indicate the current playback state of media.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "StartTime",
+            "dataType": "uint64",
+            "valueRange": "epoch-us",
+            "description": "This attribute SHALL indicate the start time of the media.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "Duration",
+            "dataType": "uint64",
+            "valueRange": "uint64",
+            "description": "This attribute SHALL indicate the duration, in milliseconds, of the current media being played back.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "SampledPosition",
+            "dataType": "struct",
+            "valueRange": "PlaybackPositionStruct",
+            "description": "This attribute SHALL indicate the position of playback at the time specified in the attribute.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0004",
+            "name": "PlaybackSpeed",
+            "dataType": "float",
+            "valueRange": "single",
+            "description": "This attribute SHALL indicate the speed at which the current media is being played.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0005",
+            "name": "SeekRangeEnd",
+            "dataType": "uint64",
+            "valueRange": "uint64",
+            "description": "This attribute SHALL indicate the furthest forward valid position to which a client MAY seek forward.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0006",
+            "name": "SeekRangeStart",
+            "dataType": "uint64",
+            "valueRange": "uint64",
+            "description": "This attribute SHALL indicate the earliest valid position to which a client MAY seek back.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0007",
+            "name": "ActiveAudioTrack",
+            "dataType": "struct",
+            "valueRange": "TrackStruct",
+            "description": "ActiveTrack refers to the Audio track currently set and being used for the streaming media.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0008",
+            "name": "AvailableAudioTracks",
+            "dataType": "list",
+            "valueRange": "list[TrackStruct]",
+            "description": "AvailableAudioTracks refers to the list of Audio tracks available for the current title being played.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0009",
+            "name": "ActiveTextTrack",
+            "dataType": "struct",
+            "valueRange": "TrackStruct",
+            "description": "ActiveTrack refers to the Text track currently set and being used for the streaming media.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x000A",
+            "name": "AvailableTextTracks",
+            "dataType": "list",
+            "valueRange": "list[TrackStruct]",
+            "description": "AvailableTextTracks refers to the list of Text tracks available for the current title being played.",
+            "privilege": "R",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "Play",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "This SHALL play media. If content is currently in a FastForward or Rewind state, Play SHALL return media to normal playback speed."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "Pause",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "This SHALL pause playback of the media."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "Stop",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "This SHALL stop playback of the media."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x03",
+            "name": "StartOver",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "This SHALL Start Over with the current media playback item."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x04",
+            "name": "Previous",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "This SHALL cause the handler to be invoked for 'Previous'."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x05",
+            "name": "Next",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "This SHALL cause the handler to be invoked for 'Next'."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x06",
+            "name": "Rewind",
+            "parameters": {
+              "dataType": "boolean",
+              "valueRange": "bool",
+              "description": "This SHALL start playback of the media backward."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x07",
+            "name": "FastForward",
+            "parameters": {
+              "dataType": "boolean",
+              "valueRange": "bool",
+              "description": "This SHALL start playback of the media in the forward direction."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x08",
+            "name": "SkipForward",
+            "parameters": {
+              "dataType": "uint64",
+              "valueRange": "uint64",
+              "description": "This SHALL Skip forward in the media by the given number of milliseconds."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x09",
+            "name": "SkipBackward",
+            "parameters": {
+              "dataType": "uint64",
+              "valueRange": "uint64",
+              "description": "This SHALL Skip backward in the media by the given number of milliseconds."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x0A",
+            "name": "PlaybackResponse",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "This command SHALL be generated in response to various Playback Commands."
+            },
+            "privilege": "M",
+            "direction": "client ⇐ server"
+          },
+          {
+            "id": "0x0B",
+            "name": "Seek",
+            "parameters": {
+              "dataType": "Position",
+              "valueRange": "uint64",
+              "description": "This SHALL change the playback position in the media to the given position."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x0C",
+            "name": "ActivateAudioTrack",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "The server SHALL set the active Audio Track to the one identified by the TrackID."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x0D",
+            "name": "ActivateTextTrack",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "The server SHALL set the active Text Track to the one identified by the TrackID."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x0E",
+            "name": "DeactivateTextTrack",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "If a Text Track is active, the server SHALL stop displaying it."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x0000",
+            "name": "CurrentState",
+            "parameters": {
+              "dataType": "enum8",
+              "valueRange": "PlaybackStateEnum",
+              "description": "This field SHALL indicate the updated playback state as defined by the CurrentState attribute."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x0001",
+            "name": "StartTime",
+            "parameters": {
+              "dataType": "uint64",
+              "valueRange": "epoch-us",
+              "description": "This field SHALL indicate the updated start time as defined by the StartTime attribute."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x0002",
+            "name": "Duration",
+            "parameters": {
+              "dataType": "uint64",
+              "valueRange": "uint64",
+              "description": "This field SHALL indicate the updated duration as defined by the Duration attribute."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x0003",
+            "name": "SampledPosition",
+            "parameters": {
+              "dataType": "struct",
+              "valueRange": "PlaybackPositionStruct",
+              "description": "This field SHALL indicate the updated position of playback as defined by the SampledPosition attribute."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x0004",
+            "name": "PlaybackSpeed",
+            "parameters": {
+              "dataType": "float",
+              "valueRange": "single",
+              "description": "This field SHALL indicate the updated speed at which the current media is being played as defined by the PlaybackSpeed attribute."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x0005",
+            "name": "SeekRangeEnd",
+            "parameters": {
+              "dataType": "uint64",
+              "valueRange": "uint64",
+              "description": "This field SHALL indicate the updated start of the seek range end as defined by the SeekRangeEnd attribute."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x0006",
+            "name": "SeekRangeStart",
+            "parameters": {
+              "dataType": "uint64",
+              "valueRange": "uint64",
+              "description": "This field SHALL indicate the updated start of the seek range start as defined by the SeekRangeStart attribute."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x0007",
+            "name": "Data",
+            "parameters": {
+              "dataType": "octet string",
+              "valueRange": "octstr",
+              "description": "This field SHALL indicate optional app-specific data."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x0008",
+            "name": "AudioAdvanceUnmuted",
+            "parameters": {
+              "dataType": "boolean",
+              "valueRange": "bool",
+              "description": "This field SHALL indicate whether audio should be unmuted by the player during fast forward."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          }
+        ]
+      }
+    ]
+  }
+}

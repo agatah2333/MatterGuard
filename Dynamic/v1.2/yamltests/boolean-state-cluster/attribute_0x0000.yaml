@@ -1,0 +1,25 @@
+config:
+  attribute: '0x0000'
+  cluster: boolean-state-cluster
+  nodeId: '0x654231'
+name: boolean-state-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"StateValue": False}'
+  ExpectedResponse: <StateChange event indicating StateValue changed to False>
+  Pre-requisites: <None>
+  arguments:
+    '{"StateValue"': False}
+  label: Test_Case_Extreme_Value_(False)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"StateValue": True}'
+  ExpectedResponse: <StateChange event indicating StateValue changed to True>
+  Pre-requisites: '<None>
+
+
+    ### Special Responses'
+  arguments:
+    '{"StateValue"': True}
+  label: Test_Case_Extreme_Value_(True)
+  option: WriteAttribute

@@ -1,0 +1,45 @@
+{
+  "source_file": "Refrigerator Alarm_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0057",
+        "name": "Refrigerator Alarm",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "Mask",
+            "dataType": "AlarmBitmap",
+            "valueRange": "all",
+            "description": "This attribute SHALL indicate a bitmap where each bit set in the Mask attribute corresponds to an alarm that SHALL be enabled.",
+            "privilege": "R",
+            "writable": "V"
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x01",
+            "name": "ModifyEnabledAlarms",
+            "parameters": {
+              "dataType": "AlarmBitmap",
+              "valueRange": "all",
+              "description": "This command allows a client to request that an alarm be enabled or suppressed at the server."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "AlarmBitmap": {
+            "baseType": "map32",
+            "valueRange": "Derived from map32",
+            "description": "Bitmap type for refrigerator alarm status"
+          }
+        },
+        "description": "This cluster is a derived cluster of Alarm Base cluster and provides the alarm definition related to refrigerator and temperature controlled cabinet devices."
+      }
+    ]
+  }
+}

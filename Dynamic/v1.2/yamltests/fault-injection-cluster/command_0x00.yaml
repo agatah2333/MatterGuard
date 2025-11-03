@@ -1,0 +1,55 @@
+config:
+  cluster: fault-injection-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: fault-injection-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: "- `CurrentHeapHighWatermark` set to `CurrentHeapUsed`\n  - `StackFreeMinimum`\
+    \ for every thread set to `StackFreeCurrent`"
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    FaultRecording: '""'
+    ID: 0
+    Name: '""'
+  label: Test_Case_Extreme_Values_(Minimum)
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: "- `CurrentHeapHighWatermark` set to `CurrentHeapUsed`\n  - `StackFreeMinimum`\
+    \ for every thread set to `StackFreeCurrent`"
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    FaultRecording: '"A" * 1024 (1024 bytes)'
+    ID: 18446744073709551615 (maximum uint64 value)
+    Name: '"ABCDEFGH" (8 characters)'
+  label: Test_Case_Extreme_Values_(Maximum)
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: "- `CurrentHeapHighWatermark` set to `CurrentHeapUsed`\n  - `StackFreeMinimum`\
+    \ for every thread set to `StackFreeCurrent`"
+  ExpectedResponse: Special handling for thread ID 1
+  Pre-requisites: None
+  arguments:
+    FaultRecording: '"Special fault recording data"'
+    ID: 1 (assuming this ID triggers a special response)
+    Name: '"Thread1"'
+  label: Test_Case_Special_Response_(ID_Field)
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: "- `CurrentHeapHighWatermark` set to `CurrentHeapUsed`\n  - `StackFreeMinimum`\
+    \ for every thread set to `StackFreeCurrent`"
+  ExpectedResponse: Special handling for name "Special"
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:3†source】【4:5†source】.'
+  arguments:
+    FaultRecording: '"Fault data for special name"'
+    ID: 12345
+    Name: '"Special" (assuming this name triggers a special response)'
+  label: Test_Case_Special_Response_(Name_Field)
+  option: SendCommand

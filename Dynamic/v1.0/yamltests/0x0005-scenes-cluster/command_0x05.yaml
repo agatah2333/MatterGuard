@@ -1,0 +1,223 @@
+config:
+  cluster: scenes
+  command: '0x05'
+  nodeId: '0x654231'
+name: scenes_command_0x05_v1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: All attributes related to the scene will be set to the values
+    stored in the Scene Table.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Scene with GroupID 0 and SceneID 0 must exist in the Scene Table.
+  arguments:
+    '{"GroupID"': '0, "SceneID": 0, "TransitionTime": 0}'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify scenes cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: Maximum transition time
+  Attribute_Change: All attributes related to the scene will be set to the values
+    stored in the Scene Table.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Scene with GroupID <max> and SceneID 255 must exist in the Scene
+    Table.
+  arguments:
+    '{"GroupID"': '<max>, "SceneID": 255, "TransitionTime": 65535}'
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify scenes cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 100ms
+  Attribute_Change: None
+  ExpectedResponse: ILLEGAL_COMMAND
+  Pre-requisites: GroupID <non-existent> does not exist in the Group Table.
+  arguments:
+    '{"GroupID"': '<non-existent>, "SceneID": 1, "TransitionTime": 100}'
+  label: Test_Case_Non-existent_GroupID
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify scenes cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 200ms
+  Attribute_Change: None
+  ExpectedResponse: NOT_FOUND
+  Pre-requisites: 'SceneID <non-existent> does not exist in the Scene Table for GroupID
+    1.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:16†source】.'
+  arguments:
+    '{"GroupID"': '1, "SceneID": <non-existent>, "TransitionTime": 200}'
+  label: Test_Case_Non-existent_SceneID
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify scenes cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true

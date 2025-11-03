@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0035'
+  cluster: ballast-configuration-cluster
+  nodeId: '0x654231'
+name: ballast-configuration-cluster_attribute_0x0035_v1.1.0.0
+tests:
+- ActionTime: '`0`'
+  Attribute_Change: '`LampBurnHoursTripPoint` set to `0`'
+  ExpectedResponse: '`No alarm generated`'
+  Pre-requisites: '`None`'
+  arguments:
+    LampBurnHoursTripPoint: '`0`'
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: '`0`'
+  Attribute_Change: '`LampBurnHoursTripPoint` set to `16777215`'
+  ExpectedResponse: '`Alarm generated when LampBurnHours reaches 16777215`'
+  Pre-requisites: '`None`'
+  arguments:
+    LampBurnHoursTripPoint: '`16777215`'
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: '`0`'
+  Attribute_Change: '`LampBurnHoursTripPoint` set to `null`'
+  ExpectedResponse: '`No alarm generated`'
+  Pre-requisites: '`None`'
+  arguments:
+    LampBurnHoursTripPoint: '`null`'
+  label: Test_Case_Special_Value_(Null)
+  option: WriteAttribute
+- ActionTime: '`0`'
+  Attribute_Change: '`LampBurnHoursTripPoint` set to `10000`'
+  ExpectedResponse: '`Alarm generated when LampBurnHours reaches 10000`'
+  Pre-requisites: '`None`
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special value that could result in a specific response as mentioned in the
+    description of the effect【4:0†source】.'
+  arguments:
+    LampBurnHoursTripPoint: '`10000`'
+  label: Test_Case_Typical_Value
+  option: WriteAttribute

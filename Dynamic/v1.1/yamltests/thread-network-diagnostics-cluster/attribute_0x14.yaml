@@ -1,0 +1,43 @@
+config:
+  attribute: '0x14'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x14_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: ActiveNetworkFaults will be set to an empty list.
+  ExpectedResponse: <success>
+  Pre-requisites: Node has no active network faults.
+  arguments:
+    '{"NetworkFault"': '[]}'
+  label: Test_Case_Extreme_Values_(Empty_List)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: ActiveNetworkFaults will be set to [0, 1, 2, 3].
+  ExpectedResponse: <success>
+  Pre-requisites: Node detects all possible network faults.
+  arguments:
+    '{"NetworkFault"': '[0, 1, 2, 3]}'
+  label: Test_Case_Extreme_Values_(Maximum_List_Size)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: ActiveNetworkFaults will be set to [1].
+  ExpectedResponse: <success>
+  Pre-requisites: Node detects a LinkDown fault.
+  arguments:
+    '{"NetworkFault"': '[1]}'
+  label: Test_Case_Special_Response_(LinkDown_Fault)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: ActiveNetworkFaults will be cleared.
+  ExpectedResponse: <success>
+  Pre-requisites: 'Node previously had a fault that has now been resolved.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:8†source】【4:9†source】.'
+  arguments:
+    '{"NetworkFault"': '[]}'
+  label: Test_Case_Special_Response_(Clearing_a_Fault)
+  option: WriteAttribute

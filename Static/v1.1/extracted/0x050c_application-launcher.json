@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x050c",
+    "name": "Application Launcher",
+    "description": "The Matter Application Cluster specification defines generic interfaces that are sufficiently general\nto be of use across a wide range of application domains."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

@@ -1,0 +1,175 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x001D",
+    "name": "Descriptor",
+    "description": "The Descriptor cluster is meant to replace the support from the Zigbee Device Object (ZDO) for describing a node, its endpoints and clusters. This cluster describes an endpoint instance on the node, independently from other endpoints, but also allows composition of endpoints to conform to complex device type patterns. This cluster supports a list of one or more device type identifiers that represent conformance to device type specifications.",
+    "revision": 2,
+    "classification": {
+      "hierarchy": "Base",
+      "role": "Utility", 
+      "scope": "Endpoint",
+      "pics_code": "DESC"
+    }
+  },
+  "features": {
+    "TAGLIST": {
+      "bit": 0,
+      "code": "TAGLIST",
+      "feature": "TagList",
+      "conformance": "desc",
+      "summary": "The TagList attribute is present"
+    }
+  },
+  "derived_data_types": {
+    "structs": {
+      "DeviceTypeStruct": {
+        "id": "DeviceTypeStruct",
+        "description": "The device type and revision define endpoint conformance to a release of a device type definition.",
+        "fields": [
+          {
+            "id": 0,
+            "name": "DeviceType",
+            "type": "devtype-id",
+            "constraint": "",
+            "quality": "",
+            "default": "",
+            "access": "",
+            "conformance": "M",
+            "description": "This SHALL indicate the device type definition. The endpoint SHALL conform to the device type definition and cluster specifications required by the device type."
+          },
+          {
+            "id": 1,
+            "name": "Revision",
+            "type": "uint16",
+            "constraint": "min 1",
+            "quality": "",
+            "default": "",
+            "access": "",
+            "conformance": "M",
+            "description": "This is the implemented revision of the device type definition. The endpoint SHALL conform to this revision of the device type."
+          }
+        ]
+      },
+      "SemanticTagStruct": {
+        "id": "SemanticTagStruct",
+        "description": "This data type is used for semantic tagging of endpoints to provide disambiguation and additional endpoint information.",
+        "fields": [
+          {
+            "id": 0,
+            "name": "MfgCode",
+            "type": "vendor-id",
+            "constraint": "",
+            "quality": "X",
+            "default": "null",
+            "access": "",
+            "conformance": "M",
+            "description": "If not null, SHALL be the Vendor ID of the manufacturer who has defined a certain namespace and the NamespaceID field SHALL be the ID of a namespace defined by the manufacturer identified in the MfgCode field. If null, the NamespaceID field SHALL indicate a standard namespace."
+          },
+          {
+            "id": 1,
+            "name": "NamespaceID",
+            "type": "namespace",
+            "constraint": "",
+            "quality": "",
+            "default": "",
+            "access": "",
+            "conformance": "M",
+            "description": "The NamespaceID field SHALL identify a namespace. The common and device-specific semantic tag namespaces are listed in StandardNamespaces."
+          },
+          {
+            "id": 2,
+            "name": "Tag",
+            "type": "tag",
+            "constraint": "",
+            "quality": "",
+            "default": "",
+            "access": "",
+            "conformance": "M",
+            "description": "The Tag field SHALL be the ID of a semantic tag located within the namespace indicated by NamespaceID."
+          },
+          {
+            "id": 3,
+            "name": "Label",
+            "type": "string",
+            "constraint": "max 64",
+            "quality": "X",
+            "default": "null",
+            "access": "",
+            "conformance": "MfgCode != null, O",
+            "description": "The Label field, if present, SHALL contain human-readable text suitable for display on a client. The content of the Label field is defined by the manufacturer. This field SHALL be present when the MfgCode is not null."
+          }
+        ]
+      }
+    },
+    "enums": {}
+  },
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "DeviceTypeList",
+      "type": "list[DeviceTypeStruct]",
+      "constraint": "min 1",
+      "quality": "F",
+      "default": "desc",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This is a list of device types and corresponding revisions declaring endpoint conformance. At least one device type entry SHALL be present. An endpoint SHALL conform to all device types listed in the DeviceTypeList. A cluster instance that is in common for more than one device type in the DeviceTypeList SHALL be supported as a shared cluster instance on the endpoint."
+    },
+    {
+      "id": "0x0001",
+      "name": "ServerList",
+      "type": "list[cluster-id]",
+      "constraint": "",
+      "quality": "F",
+      "default": "empty",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL list each cluster ID for the server clusters present on the endpoint instance."
+    },
+    {
+      "id": "0x0002",
+      "name": "ClientList",
+      "type": "list[cluster-id]",
+      "constraint": "",
+      "quality": "F",
+      "default": "empty",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL list each cluster ID for the client clusters present on the endpoint instance."
+    },
+    {
+      "id": "0x0003",
+      "name": "PartsList",
+      "type": "list[endpoint-no]",
+      "constraint": "",
+      "quality": "",
+      "default": "empty",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute indicates composition of the device type instance. Device type instance composition SHALL include the endpoints in this list. See Endpoint Composition for more information about which endpoints to include in this list."
+    },
+    {
+      "id": "0x0004",
+      "name": "TagList",
+      "type": "list[SemanticTagStruct]",
+      "constraint": "1 to 6",
+      "quality": "F",
+      "default": "MS",
+      "access": "RV",
+      "conformance": "TAGLIST",
+      "description": "This attribute SHALL be used to disambiguate sibling endpoints in certain situations, as defined in the Disambiguation section in the System Model specification. It MAY also be used to provide information about an endpoint (e.g. the relative location of a Temperature sensor in a Temperature Controlled Cabinet). A client SHOULD use these tags to convey disambiguation information and other relevant information to the user, as appropriate. A client SHOULD use these tags in its logic to make decisions, as appropriate."
+    }
+  ],
+  "commands": [],
+  "events": [],
+  "revision_history": [
+    {
+      "revision": 1,
+      "description": "Initial Release"
+    },
+    {
+      "revision": 2,
+      "description": "Semantic tag list; TagList feature"
+    }
+  ]
+}

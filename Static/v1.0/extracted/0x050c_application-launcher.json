@@ -1,0 +1,64 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x050c",
+    "name": "Application Launcher",
+    "description": "Provides an interface for launching applications on a Video Player device such as a TV."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "LaunchApp",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "StopApp",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x02",
+      "name": "HideApp",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x03",
+      "name": "LauncherResponse",
+      "parameters": [],
+      "privilege": "V",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "CatalogList",
+      "data_type": "list[uint16]",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "This attribute SHALL specify the list of supported application catalogs, where each entry in the list is the CSA-issued vendor ID for the catalog.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "CurrentApp",
+      "data_type": "ApplicationEP",
+      "value_range": {},
+      "description": "This attribute SHALL specify the current in-focus application, identified using an Application ID, catalog vendor ID and the corresponding endpoint number when the application is represented by a Content App endpoint.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

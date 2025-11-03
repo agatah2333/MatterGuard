@@ -1,0 +1,55 @@
+config:
+  cluster: refrigerator-alarm
+  event: '0x00'
+  nodeId: '0x654231'
+name: refrigerator-alarm_event_0x00_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '- `State`: 0xFFFFFFFF'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    Active: '0xFFFFFFFF'
+    Inactive: '0x00000000'
+    Mask: '0xFFFFFFFF'
+    State: '0xFFFFFFFF'
+  label: Test_Case_Extreme_Values_(All_Alarms_Active)
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: '- `State`: 0x00000000'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    Active: '0x00000000'
+    Inactive: '0xFFFFFFFF'
+    Mask: '0x00000000'
+    State: '0x00000000'
+  label: Test_Case_Extreme_Values_(All_Alarms_Inactive)
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: '- `State`: No change'
+  ExpectedResponse: INVALID_COMMAND
+  Pre-requisites: None
+  arguments:
+    Active: '0x00000001'
+    Inactive: '0x00000000'
+    Mask: 0x80000000 (Unknown alarm bit set)
+    State: '0x00000001'
+  label: Test_Case_Special_Response_(Invalid_Command)
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: '- `State`: No change'
+  ExpectedResponse: FAILURE
+  Pre-requisites: 'Alarm requires manual intervention to reset
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    Active: '0x00000001'
+    Inactive: '0x00000000'
+    Mask: 0x00000001 (Alarm requires manual intervention)
+    State: '0x00000001'
+  label: Test_Case_Special_Response_(Failure_to_Reset)
+  option: SubscribeToEvent

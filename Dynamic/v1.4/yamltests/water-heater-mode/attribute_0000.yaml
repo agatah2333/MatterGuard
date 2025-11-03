@@ -1,0 +1,12 @@
+name: Water Heater Mode - SupportedModes Attribute Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Water Heater Mode
+  timeout: 180
+tests:
+- label: Read SupportedModes attribute
+  command: readAttribute
+  attribute: SupportedModes
+  response:
+    saveAs: supportedmodes_value

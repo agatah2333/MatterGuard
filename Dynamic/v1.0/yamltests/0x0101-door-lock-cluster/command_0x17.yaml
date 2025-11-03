@@ -1,0 +1,21 @@
+config:
+  node_id: 305414945
+  cluster: '0x0101'
+  endpoint: 1
+tests:
+- label: test_get rfid code
+  cluster: '0x0101'
+  command: '0x17'
+  arguments: {}
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS

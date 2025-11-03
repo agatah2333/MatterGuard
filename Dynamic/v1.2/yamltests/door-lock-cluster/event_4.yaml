@@ -1,0 +1,41 @@
+config:
+  cluster: door-lock-cluster
+  event: '4'
+  nodeId: '0x654231'
+name: door-lock-cluster_event_4_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: LockUserChange event generated with all fields set to minimum
+    values.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    DataIndex: 0
+    DataOperationType: 0
+    FabricIndex: 0
+    LockDataType: 0
+    OperationSource: 0
+    SourceNode: 0
+    UserIndex: 0
+  label: Test_Case_Extreme_Values
+  option: SubscribeToEvent
+- ActionTime: '0xFFFFFFFF'
+  Attribute_Change: LockUserChange event generated with all fields set to maximum
+    values.
+  ExpectedResponse: FAILURE
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:4†source】【4:16†source】.'
+  arguments:
+    DataIndex: '0xFFFF'
+    DataOperationType: 2
+    FabricIndex: '0xFFFF'
+    LockDataType: 6
+    OperationSource: 1
+    SourceNode: '0xFFFFFFFF'
+    UserIndex: '0xFFFF'
+  label: Test_Case_Special_Response_Values
+  option: SubscribeToEvent

@@ -1,0 +1,71 @@
+{
+  "source_file": "Water heater Mode_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x009E",
+        "name": "Water Heater Mode",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SupportedModes",
+            "dataType": "list[ModeOptionStruct]",
+            "valueRange": "",
+            "description": "Contains the list of supported modes for the water heater.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentMode",
+            "dataType": "ModeOptionStruct",
+            "valueRange": "",
+            "description": "Indicates the current mode of the water heater.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "StartUpMode",
+            "dataType": "ModeOptionStruct",
+            "valueRange": "",
+            "description": "Indicates the startup mode of the water heater.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "OnMode",
+            "dataType": "ModeOptionStruct",
+            "valueRange": "",
+            "description": "Indicates the mode when the water heater is on.",
+            "privilege": "R",
+            "writable": true
+          }
+        ],
+        "commands": [],
+        "events": [],
+        "dataTypes": {
+          "ModeOptionStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "Label": {
+                "type": "string",
+                "valueRange": ""
+              },
+              "Mode": {
+                "type": "int32",
+                "valueRange": ""
+              },
+              "ModeTags": {
+                "type": "list[int32]",
+                "valueRange": "1-8"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

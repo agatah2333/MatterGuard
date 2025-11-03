@@ -1,0 +1,28 @@
+{
+  "cluster_id": "0x0043",
+  "cluster_name": "Proxy Discovery",
+  "section": "9.15.12",
+  "description": "This cluster contains commands needed to do proxy discovery as defined in the Section 9.15.7.3, “Step 2: Proxy Discovery” and Section 9.15.7.4, “Step 3: Proxy Response” steps of the overall Section",
+  "data_types": {},
+  "attributes": {},
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "ProxyDiscov­",
+      "details": "client ⇒ server N O M",
+      "raw_line": "0x00                  ProxyDiscov­      client ⇒ server N                      O                 M"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "ProxyDiscov­",
+      "details": "client ⇐ server N M",
+      "raw_line": "0x01                  ProxyDiscov­      client ⇐ server N                                        M"
+    }
+  },
+  "events": {},
+  "extraction_info": {
+    "start_line": 32458,
+    "end_line": 32586,
+    "total_lines": 128
+  }
+}

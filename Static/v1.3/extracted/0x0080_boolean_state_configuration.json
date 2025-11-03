@@ -1,0 +1,206 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0080",
+    "name": "Boolean State Configuration",
+    "description": "This cluster is used to configure a boolean sensor, including optional state change alarm features and configuration of the sensitivity level associated with the sensor."
+  },
+  "derived_datatypes": [
+    {
+      "type": "bitmap",
+      "name": "AlarmModeBitmap",
+      "base_data_type": "map8",
+      "value_range": {
+        "bitmap_values": [
+          {
+            "bit": "0",
+            "name": "Visual",
+            "description": "Visual alarming",
+            "conformance": "VIS"
+          },
+          {
+            "bit": "1",
+            "name": "Audible",
+            "description": "Audible alarming",
+            "conformance": "AUD"
+          }
+        ]
+      }
+    },
+    {
+      "type": "bitmap",
+      "name": "SensorFaultBitmap",
+      "base_data_type": "map16",
+      "value_range": {
+        "bitmap_values": [
+          {
+            "bit": "0",
+            "name": "GeneralFault",
+            "description": "Unspecified fault detected",
+            "conformance": "M"
+          }
+        ]
+      }
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "SuppressAlarm",
+      "parameters": [
+        {
+          "name": "AlarmsToSuppress",
+          "data_type": "AlarmModeBitmap",
+          "value_range": {},
+          "description": "This field SHALL indicate the alarm modes to suppress."
+        }
+      ],
+      "privilege": "O",
+      "side": "client",
+      "conformance": "SPRS"
+    },
+    {
+      "id": "0x01",
+      "name": "EnableDisableAlarm",
+      "parameters": [
+        {
+          "name": "AlarmsToEnableDisable",
+          "data_type": "AlarmModeBitmap",
+          "value_range": {},
+          "description": "This field SHALL indicate the alarm modes to either enable or disable depending on the bit status, as specified for the AlarmsEnabled attribute."
+        }
+      ],
+      "privilege": "O",
+      "side": "client",
+      "conformance": "VIS | AUD"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "CurrentSensitivityLevel",
+      "data_type": "uint8",
+      "value_range": {
+        "max": "SupportedSensitivityLevels - 1"
+      },
+      "description": "This attribute SHALL indicate the currently selected sensitivity level.",
+      "privilege": "V",
+      "writable": true,
+      "conformance": "SENSLVL"
+    },
+    {
+      "id": "0x0001",
+      "name": "SupportedSensitivityLevels",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "2",
+        "max": "10"
+      },
+      "description": "This attribute SHALL indicate the number of supported sensitivity levels by the device.",
+      "privilege": "V",
+      "writable": false,
+      "conformance": "SENSLVL"
+    },
+    {
+      "id": "0x0002",
+      "name": "DefaultSensitivityLevel",
+      "data_type": "uint8",
+      "value_range": {
+        "max": "SupportedSensitivityLevels - 1"
+      },
+      "description": "This attribute SHALL indicate the default sensitivity level selected by the manufacturer.",
+      "privilege": "V",
+      "writable": false,
+      "conformance": "[SENSLVL]"
+    },
+    {
+      "id": "0x0003",
+      "name": "AlarmsActive",
+      "data_type": "AlarmModeBitmap",
+      "value_range": {},
+      "description": "This attribute SHALL indicate which specific alarm modes on the server are currently active.",
+      "privilege": "V",
+      "writable": false,
+      "conformance": "VIS | AUD"
+    },
+    {
+      "id": "0x0004",
+      "name": "AlarmsSuppressed",
+      "data_type": "AlarmModeBitmap",
+      "value_range": {},
+      "description": "This attribute SHALL indicate which specific alarm modes on the server are currently suppressed.",
+      "privilege": "V",
+      "writable": false,
+      "conformance": "SPRS"
+    },
+    {
+      "id": "0x0005",
+      "name": "AlarmsEnabled",
+      "data_type": "AlarmModeBitmap",
+      "value_range": {},
+      "description": "This attribute SHALL indicate the alarm modes that will be emitted if the sensor is triggered.",
+      "privilege": "V",
+      "writable": false,
+      "conformance": "[VIS | AUD]"
+    },
+    {
+      "id": "0x0006",
+      "name": "AlarmsSupported",
+      "data_type": "AlarmModeBitmap",
+      "value_range": {},
+      "description": "This attribute SHALL indicate the alarms supported by the sensor.",
+      "privilege": "V",
+      "writable": false,
+      "conformance": "VIS | AUD"
+    },
+    {
+      "id": "0x0007",
+      "name": "SensorFault",
+      "data_type": "SensorFaultBitmap",
+      "value_range": {},
+      "description": "This attribute SHALL indicate any faults registered by the device.",
+      "privilege": "V",
+      "writable": false,
+      "conformance": "O"
+    }
+  ],
+  "events": [
+    {
+      "id": "0x00",
+      "name": "AlarmsStateChanged",
+      "priority": "INFO",
+      "privilege": "V",
+      "conformance": "VIS | AUD",
+      "description": "This event SHALL be generated after any bits in the AlarmsActive and/or AlarmsSuppressed attributes change.",
+      "fields": [
+        {
+          "name": "AlarmsActive",
+          "data_type": "AlarmModeBitmap",
+          "description": "This field SHALL indicate the state of active alarm modes, as indicated by the AlarmsActive attribute, at the time the event was generated.",
+          "conformance": "M"
+        },
+        {
+          "name": "AlarmsSuppressed",
+          "data_type": "AlarmModeBitmap",
+          "description": "This field SHALL indicate the state of suppressed alarm modes, as indicated by the AlarmsSuppressed attribute, at the time the event was generated.",
+          "conformance": "SPRS"
+        }
+      ]
+    },
+    {
+      "id": "0x01",
+      "name": "SensorFault",
+      "priority": "INFO",
+      "privilege": "V",
+      "conformance": "O",
+      "description": "This event SHALL be generated when the device registers or clears a fault.",
+      "fields": [
+        {
+          "name": "SensorFault",
+          "data_type": "SensorFaultBitmap",
+          "description": "This field SHALL indicate the value of the SensorFault attribute, at the time this event is generated.",
+          "conformance": "M"
+        }
+      ]
+    }
+  ]
+}

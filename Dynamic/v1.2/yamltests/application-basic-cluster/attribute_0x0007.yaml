@@ -1,0 +1,44 @@
+config:
+  attribute: '0x0007'
+  cluster: application-basic-cluster
+  nodeId: '0x654231'
+name: application-basic-cluster_attribute_0x0007_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: VendorID = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"VendorID"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: VendorID = 65535
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"VendorID"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: VendorID = 12345
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"VendorID"': 12345}
+  label: Test_Case_Special_Value_(Example:_Reserved_or_Special_Vendor_ID)
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: VendorID = 54321
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    values that could result in special responses. The VendorID attribute is mandatory
+    and should be tested with both minimum and maximum values, as well as some special
+    values that might be reserved or have special significance.'
+  arguments:
+    '{"VendorID"': 54321}
+  label: Test_Case_Another_Special_Value_(Example:_Another_Reserved_or_Special_Vendor_ID)
+  option: WriteAttribute

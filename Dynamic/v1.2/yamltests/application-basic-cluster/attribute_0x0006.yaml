@@ -1,0 +1,45 @@
+config:
+  attribute: '0x0006'
+  cluster: application-basic-cluster
+  nodeId: '0x654231'
+name: application-basic-cluster_attribute_0x0006_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: Location = ""
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"Location"': '""}'
+  label: Test_Case_Minimum_Length
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: Location = "A"*100
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"Location"': '"A"*100}'
+  label: Test_Case_Maximum_Length
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: Location = "!@#$%^&*()_+-=[]{}|;':,.<>?/~`"
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"Location"': '"!@#$%^&*()_+-=[]{}|;'':,.<>?/~`"}'
+  label: Test_Case_Special_Characters
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: Location = "Living Room"
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    values that could result in special responses. The `Location` attribute is a string
+    with a maximum length of 100 characters, and the test cases include an empty string,
+    a string with the maximum length, a string with special characters, and a normal
+    string.'
+  arguments:
+    '{"Location"': '"Living Room"}'
+  label: Test_Case_Normal_String
+  option: WriteAttribute

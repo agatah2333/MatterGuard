@@ -1,0 +1,42 @@
+config:
+  attribute: '0x0011'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0011_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Primary1X = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Primary1X"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Primary1X = 65279
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Primary1X"': 65279}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Primary1X = 32640
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Primary1X"': 32640}
+  label: Test_Case_Special_Response_-_Mid_Range
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Primary1X = 65278
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    values that could result in special responses as per the attribute''s description【4:0†source】.'
+  arguments:
+    '{"Primary1X"': 65278}
+  label: Test_Case_Special_Response_-_Near_Maximum
+  option: WriteAttribute

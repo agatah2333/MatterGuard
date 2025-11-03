@@ -1,0 +1,44 @@
+config:
+  cluster: thread-network-diagnostics-cluster
+  event: '0x00'
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_event_0x00_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: "- `CurrentHeapHighWatermark` set to `CurrentHeapUsed`\n  - `StackFreeMinimum`\
+    \ set to `StackFreeCurrent`"
+  ExpectedResponse: <success>
+  Pre-requisites: None
+  arguments:
+    FaultRecording: '""'
+    ID: 0
+    Name: '""'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: "- `CurrentHeapHighWatermark` set to `CurrentHeapUsed`\n  - `StackFreeMinimum`\
+    \ set to `StackFreeCurrent`"
+  ExpectedResponse: <success>
+  Pre-requisites: 'None
+
+
+    ### Notes
+
+    - The `ID` field is set to the ID of the software thread in which the last software
+    fault occurred.
+
+    - The `Name` field is set to a manufacturer-specified name or prefix of the software
+    thread in which the last software fault occurred.
+
+    - The `FaultRecording` field is a manufacturer-specified payload intended to convey
+    information to assist in further diagnosing or debugging a software fault.
+
+
+    These test cases cover the extreme values and special responses as per the provided
+    context from the Matter 1.2 Core Specification【4:0†source】.'
+  arguments:
+    FaultRecording: <max_1024_bytes_data>
+    ID: <max_uint64_value>
+    Name: '"FaultyTh"'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SubscribeToEvent

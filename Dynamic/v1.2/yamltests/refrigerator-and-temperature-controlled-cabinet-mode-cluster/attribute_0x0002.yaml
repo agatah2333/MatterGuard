@@ -1,0 +1,50 @@
+config:
+  attribute: '0x0002'
+  cluster: refrigerator-and-temperature-controlled-cabinet-mode-cluster
+  nodeId: '0x654231'
+name: refrigerator-and-temperature-controlled-cabinet-mode-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: MaxTemperature will be set to MinTemperature + 1
+  ExpectedResponse: SUCCESS
+  Pre-requisites: MinTemperature must be defined and set.
+  arguments:
+    '{"MaxTemperature"': MinTemperature + 1}
+  label: Test_Case_Minimum_Value_of_the_Constraint
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: MaxTemperature will be set to 32767
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"MaxTemperature"': 32767}
+  label: Test_Case_Maximum_Value_of_the_Constraint
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: MaxTemperature will remain unchanged
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: MinTemperature must be defined and set.
+  arguments:
+    '{"MaxTemperature"': MinTemperature}
+  label: Test_Case_Value_Below_Minimum_Constraint
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: MaxTemperature will remain unchanged
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments:
+    '{"MaxTemperature"': 32768}
+  label: Test_Case_Value_Above_Maximum_Constraint
+  option: WriteAttribute
+- ActionTime: During an operation that does not allow temperature change
+  Attribute_Change: MaxTemperature will remain unchanged
+  ExpectedResponse: INVALID_IN_STATE
+  Pre-requisites: 'The device must be in a state that does not allow temperature changes.
+
+
+    These test cases cover the extreme values of the constraints and the special responses
+    as mentioned in the description of the effect.'
+  arguments:
+    '{"MaxTemperature"': <valid_value_within_constraints>}
+  label: Test_Case_Special_Response_-_INVALID_IN_STATE
+  option: WriteAttribute

@@ -1,0 +1,49 @@
+config:
+  attribute: '0x0000'
+  cluster: application-basic-cluster
+  nodeId: '0x654231'
+name: application-basic-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: 'VendorName: ""'
+  ExpectedResponse: <error or success based on implementation>
+  Pre-requisites: None
+  arguments:
+    '{"VendorName"': '""}'
+  label: Test_Case_Minimum_Length
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: 'VendorName: "<256_characters_string>"'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"VendorName"': '"<256_characters_string>"}'
+  label: Test_Case_Maximum_Length
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: 'VendorName: "Vendor!@#$%^&*()_+-=~`"'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"VendorName"': '"Vendor!@#$%^&*()_+-=~`"}'
+  label: Test_Case_Special_Characters
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: 'VendorName: "Vendor1234567890"'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"VendorName"': '"Vendor1234567890"}'
+  label: Test_Case_Numeric_Values
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: 'VendorName: "供应商"'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    ### Summary'
+  arguments:
+    '{"VendorName"': '"供应商"}'
+  label: Test_Case_Unicode_Characters
+  option: WriteAttribute

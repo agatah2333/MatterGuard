@@ -1,0 +1,106 @@
+{
+  "source_file": "Descriptor_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x001D",
+        "name": "Descriptor",
+        "dataTypes": {
+          "DeviceTypeStruct": {
+            "type": "struct",
+            "fields": {
+              "DeviceType": {
+                "type": "devtype-id"
+              },
+              "Revision": {
+                "type": "uint16",
+                "valueRange": "min 1"
+              }
+            }
+          },
+          "SemanticTagStruct": {
+            "type": "struct",
+            "fields": {
+              "MfgCode": {
+                "type": "vendor_id",
+                "nullable": true
+              },
+              "NamespaceID": {
+                "type": "enum8"
+              },
+              "Tag": {
+                "type": "enum8"
+              },
+              "Label": {
+                "type": "char_string",
+                "nullable": true,
+                "optional": true
+              }
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "DeviceTypeList",
+            "dataType": {
+              "type": "list",
+              "elementType": {
+                "type": "struct",
+                "fields": "DeviceTypeStruct"
+              }
+            },
+            "valueRange": "min 1",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "ServerList",
+            "dataType": {
+              "type": "list",
+              "elementType": "cluster-id"
+            },
+            "valueRange": "empty",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "ClientList",
+            "dataType": {
+              "type": "list",
+              "elementType": "cluster-id"
+            },
+            "valueRange": "empty",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "PartsList",
+            "dataType": {
+              "type": "list",
+              "elementType": "endpoint-no"
+            },
+            "valueRange": "empty",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "TagList",
+            "dataType": {
+              "type": "list",
+              "elementType": {
+                "type": "struct",
+                "fields": "SemanticTagStruct"
+              }
+            },
+            "valueRange": "1 to 6",
+            "writable": false
+          }
+        ],
+        "commands": [],
+        "events": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0002'
+  cluster: pressure-measurement-cluster
+  nodeId: '0x654231'
+name: pressure-measurement-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `MaxMeasuredValue`: `MinMeasuredValue + 1`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '- `MinMeasuredValue` must be set to a known value.'
+  arguments:
+    MaxMeasuredValue: '`MinMeasuredValue + 1`'
+  label: Test_Case_Minimum_Value_of_the_Constraint
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `MaxMeasuredValue`: `32767`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '- `MinMeasuredValue` must be set to a known value.'
+  arguments:
+    MaxMeasuredValue: '`32767`'
+  label: Test_Case_Maximum_Value_of_the_Constraint
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `MaxMeasuredValue`: `null`'
+  ExpectedResponse: '`<value_not_available>`'
+  Pre-requisites: '- None'
+  arguments:
+    MaxMeasuredValue: '`null`'
+  label: Test_Case_Special_Response_-_Null_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `MaxMeasuredValue`: `MinMeasuredValue + 2`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '- `MinMeasuredValue` must be set to a known value.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    MaxMeasuredValue: '`MinMeasuredValue + 2`'
+  label: Test_Case_Special_Response_-_Just_Above_Minimum
+  option: WriteAttribute

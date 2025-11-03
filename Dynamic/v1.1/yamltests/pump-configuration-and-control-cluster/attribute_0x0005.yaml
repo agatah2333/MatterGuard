@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0005'
+  cluster: pump-configuration-and-control-cluster
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_attribute_0x0005_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: MinCompPressure = -3276.7 kPa
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"MinCompPressure"': -3276.7}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: MinCompPressure = 3276.7 kPa
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"MinCompPressure"': 3276.7}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: Error (Constraint Error)
+  Pre-requisites: None
+  arguments:
+    '{"MinCompPressure"': -3276.8}
+  label: Test_Case_Invalid_Value_(Below_Minimum)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: Error (Constraint Error)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:2†source】【4:6†source】.'
+  arguments:
+    '{"MinCompPressure"': 3276.8}
+  label: Test_Case_Invalid_Value_(Above_Maximum)
+  option: WriteAttribute

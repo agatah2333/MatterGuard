@@ -1,0 +1,49 @@
+config:
+  attribute: '0x0000'
+  cluster: wake-on-lan-cluster
+  nodeId: '0x654231'
+name: wake-on-lan-cluster_attribute_0x0000_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`MACAddress` will be set to `00:00:00:00:00:00`'
+  ExpectedResponse: Success
+  Pre-requisites: Device must support Wake-on-LAN
+  arguments:
+    MACAddress: '`00:00:00:00:00:00`'
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`MACAddress` will be set to `FF:FF:FF:FF:FF:FF`'
+  ExpectedResponse: Success
+  Pre-requisites: Device must support Wake-on-LAN
+  arguments:
+    MACAddress: '`FF:FF:FF:FF:FF:FF`'
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`MACAddress` will be set to `FF:FF:FF:FF:FF:FF`'
+  ExpectedResponse: Special handling or error (depending on implementation)
+  Pre-requisites: Device must support Wake-on-LAN
+  arguments:
+    MACAddress: '`FF:FF:FF:FF:FF:FF`'
+  label: Test_Case_Broadcast_MAC_Address
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`MACAddress` will be set to `01:00:5E:00:00:00`'
+  ExpectedResponse: Special handling or error (depending on implementation)
+  Pre-requisites: 'Device must support Wake-on-LAN
+
+
+    These test cases cover the extreme values of the MAC address field and special
+    cases such as broadcast and multicast addresses, which might have specific handling
+    in the implementation.
+
+
+    ### References
+
+    - The details about the `MACAddress` attribute and its constraints are derived
+    from the Matter Application Cluster Specification document【4:0†source】.'
+  arguments:
+    MACAddress: '`01:00:5E:00:00:00`'
+  label: Test_Case_Multicast_MAC_Address
+  option: WriteAttribute

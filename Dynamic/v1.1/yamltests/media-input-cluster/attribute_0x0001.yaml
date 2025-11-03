@@ -1,0 +1,47 @@
+config:
+  attribute: '0x0001'
+  cluster: media-input-cluster
+  nodeId: '0x654231'
+name: media-input-cluster_attribute_0x0001_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`CurrentInput` will be set to 0'
+  ExpectedResponse: Success
+  Pre-requisites: The device must have at least one input in the `InputList`.
+  arguments:
+    CurrentInput: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`CurrentInput` will be set to 255 if the input exists, otherwise
+    an error will be returned.'
+  ExpectedResponse: Success or Error (depending on the number of inputs in the `InputList`)
+  Pre-requisites: The device must have at least 256 inputs in the `InputList`.
+  arguments:
+    CurrentInput: 255
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: No change, error response expected.
+  ExpectedResponse: Error (Invalid value for uint8)
+  Pre-requisites: N/A
+  arguments:
+    CurrentInput: 256
+  label: Test_Case_Special_Response_-_Invalid_Input
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: No change, error response expected.
+  ExpectedResponse: Error (Input index not in `InputList`)
+  Pre-requisites: 'The `InputList` should not contain an input with index 10.
+
+
+    These test cases cover the extreme values of the `CurrentInput` field and special
+    cases that could result in specific responses as per the attribute''s constraints
+    and expected behavior.
+
+
+    For more details, refer to the Matter Application Cluster Specification【4:0†source】.'
+  arguments:
+    CurrentInput: 10
+  label: Test_Case_Special_Response_-_Valid_Input_but_Not_in_List
+  option: WriteAttribute

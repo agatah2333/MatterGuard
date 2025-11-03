@@ -1,0 +1,49 @@
+config:
+  cluster: door-lock-cluster
+  command: '27'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_27_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: Door state will change to unlocked.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: '`RequirePINForRemoteOperation` attribute is set to False.'
+  arguments:
+    '{"PINCode"': '""}'
+  label: Test_Case_Minimum_Value_of_PINCode
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: Door state will change to unlocked.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: '`RequirePINForRemoteOperation` attribute is set to False.'
+  arguments:
+    '{"PINCode"': '"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"}'
+  label: Test_Case_Maximum_Length_of_PINCode
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None, the door remains locked.
+  ExpectedResponse: FAILURE
+  Pre-requisites: '`RequirePINForRemoteOperation` attribute is set to True, and the
+    `WrongCodeEntryLimit` has been exceeded.'
+  arguments:
+    '{"PINCode"': '"1234"}'
+  label: Test_Case_Invalid_PINCode_(Exceeds_WrongCodeEntryLimit)
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: Door state will change to unlocked.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: '`RequirePINForRemoteOperation` attribute is set to True, and the
+    provided PINCode is valid.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    For more detailed information, refer to the Matter 1.2 Application Cluster Specification
+    document【4:0†source】.'
+  arguments:
+    '{"PINCode"': '"1234"}'
+  label: Test_Case_Valid_PINCode
+  option: SendCommand

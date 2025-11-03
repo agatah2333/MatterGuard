@@ -1,0 +1,25 @@
+config:
+  attribute: '0x0A'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x0A_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`RxOnWhenIdle` will be set to `true`'
+  ExpectedResponse: N/A
+  Pre-requisites: The device must support the Thread Network Diagnostics Cluster.
+  arguments:
+    '{"RxOnWhenIdle"': true}
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`RxOnWhenIdle` will be set to `false`'
+  ExpectedResponse: N/A
+  Pre-requisites: 'The device must support the Thread Network Diagnostics Cluster.
+
+
+    These test cases cover the extreme values of the boolean field `RxOnWhenIdle`
+    and ensure that the attribute can be set to both `true` and `false` as required
+    by the specification【4:0†source】.'
+  arguments:
+    '{"RxOnWhenIdle"': false}
+  option: WriteAttribute

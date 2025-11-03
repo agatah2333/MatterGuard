@@ -1,0 +1,10 @@
+config:
+  cluster: general-commissioning-cluster
+  command: '0x05'
+  nodeId: '0x654231'
+name: general-commissioning-cluster_command_0x05_v1.1.0.0
+tests: []
+execution_metadata:
+  estimated_duration: 0
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

@@ -1,0 +1,32 @@
+config:
+  cluster: media-playback-cluster
+  command: '0x04'
+  nodeId: '0x654231'
+name: media-playback-cluster_command_0x04_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: CurrentState attribute will be set to reflect the state after
+    the "Previous" command is executed.
+  ExpectedResponse: Success
+  Pre-requisites: The media playback should be in a state where the "Previous" command
+    is valid (e.g., not at the first item in the playlist).
+  arguments: {}
+  label: Test_Case_Extreme_Values_of_Constraints
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: No attribute will be changed as the command is not allowed.
+  ExpectedResponse: NotAllowed
+  Pre-requisites: 'The media playback should be in a state where the "Previous" command
+    is not allowed (e.g., at the first item in the playlist).
+
+
+    These test cases cover the scenarios where the command is executed under normal
+    conditions and where it is expected to return a special response due to constraints
+    in the playback state.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments: {}
+  label: Test_Case_Special_Responses
+  option: SendCommand

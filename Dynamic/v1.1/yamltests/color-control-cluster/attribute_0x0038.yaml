@@ -1,0 +1,46 @@
+config:
+  attribute: '0x0038'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0038_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: ColorPointGIntensity = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ColorPointGIntensity"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: ColorPointGIntensity = 254
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ColorPointGIntensity"': 254}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: ColorPointGIntensity = 127
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ColorPointGIntensity"': 127}
+  label: Test_Case_Special_Value_(Mid-range)
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Error (Invalid Value)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    a mid-range value to ensure the attribute behaves as expected within its valid
+    range. Additionally, an out-of-range value is tested to verify proper error handling.
+
+
+    For more details, refer to the Matter Application Cluster Specification【4:0†source】.'
+  arguments:
+    '{"ColorPointGIntensity"': 255}
+  label: Test_Case_Invalid_Value_(Out_of_Range)
+  option: WriteAttribute

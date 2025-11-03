@@ -1,0 +1,47 @@
+config:
+  cluster: application-launcher-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: application-launcher-cluster_command_0x02_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: Status attribute updated to ActiveHidden or Stopped.
+  ExpectedResponse: 0 (Success)
+  Pre-requisites: Ensure the application with CatalogVendorID 0 and ApplicationID
+    "" exists and can be hidden.
+  arguments:
+    '{"CatalogVendorID"': '0, "ApplicationID": ""}'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: Status attribute updated to ActiveHidden or Stopped.
+  ExpectedResponse: 0 (Success)
+  Pre-requisites: Ensure the application with CatalogVendorID 65535 and ApplicationID
+    "A"*256 exists and can be hidden.
+  arguments:
+    '{"CatalogVendorID"': '65535, "ApplicationID": "A"*256}'
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: 1 (AppNotAvailable)
+  Pre-requisites: Ensure the application with CatalogVendorID 1234 and ApplicationID
+    "NonExistentApp" does not exist.
+  arguments:
+    '{"CatalogVendorID"': '1234, "ApplicationID": "NonExistentApp"}'
+  label: Test_Case_Application_Not_Available
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: 2 (SystemBusy)
+  Pre-requisites: 'Simulate a busy system state where the application with CatalogVendorID
+    5678 and ApplicationID "BusyApp" cannot be hidden due to system constraints.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"CatalogVendorID"': '5678, "ApplicationID": "BusyApp"}'
+  label: Test_Case_System_Busy
+  option: SendCommand

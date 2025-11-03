@@ -1,0 +1,63 @@
+config:
+  attribute: '0x0000'
+  cluster: fan-control-cluster
+  nodeId: '0x654231'
+name: fan-control-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: "- PercentSetting: 0\n  - PercentCurrent: 0\n  - SpeedSetting:\
+    \ 0 (if present)\n  - SpeedCurrent: 0 (if present)"
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"FanMode"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: "- PercentSetting: Implementation specific\n  - SpeedSetting:\
+    \ Implementation specific (if present)"
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"FanMode"': 6}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- FanMode: 3'
+  ExpectedResponse: Attribute set to High (3)
+  Pre-requisites: None
+  arguments:
+    '{"FanMode"': 4}
+  label: Test_Case_Special_Response_for_"On"_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: "- PercentSetting: null\n  - SpeedSetting: null (if present)\n\
+    \  - PercentCurrent: Current state of the fan\n  - SpeedCurrent: Current state\
+    \ of the fan (if present)"
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"FanMode"': 5}
+  label: Test_Case_Special_Response_for_"Auto"_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- FanMode: 5'
+  ExpectedResponse: Attribute set to Auto (5)
+  Pre-requisites: AUT feature supported
+  arguments:
+    '{"FanMode"': 6}
+  label: Test_Case_Special_Response_for_"Smart"_Value_with_AUT_Feature_Supported
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- FanMode: 3'
+  ExpectedResponse: Attribute set to High (3)
+  Pre-requisites: 'AUT feature not supported
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】.'
+  arguments:
+    '{"FanMode"': 6}
+  label: Test_Case_Special_Response_for_"Smart"_Value_without_AUT_Feature_Supported
+  option: WriteAttribute

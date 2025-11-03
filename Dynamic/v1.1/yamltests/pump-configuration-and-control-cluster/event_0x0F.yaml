@@ -1,0 +1,62 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x0F'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x0F_v1.1.0.0
+tests:
+- ActionTime: "0\n  - **ExpectedResponse**: \"Success\"\n  - **Which Attribute Will\
+    \ Be Changed and the Value of the Attribute**: \"PumpStatus: AirDetection\"\n\
+    \  - **Any Pre-requisites**: \"Pump must be running\""
+  Attribute_Change: "\"PumpStatus: AirDetection\"\n  - **Any Pre-requisites**: \"\
+    Pump must be running\""
+  ExpectedResponse: "\"Success\"\n  - **Which Attribute Will Be Changed and the Value\
+    \ of the Attribute**: \"PumpStatus: AirDetection\"\n  - **Any Pre-requisites**:\
+    \ \"Pump must be running\""
+  Pre-requisites: '"Pump must be running"'
+  arguments:
+    '**ActionTime**': 0
+    '**Any Pre-requisites**': '"Pump must be running"'
+    '**ExpectedResponse**': '"Success"'
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': '"PumpStatus:
+      AirDetection"'
+    '{"field0"': '0, "field1": 65534}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: "32767\n  - **ExpectedResponse**: \"Warning: Air detected in the pump\"\
+    \n  - **Which Attribute Will Be Changed and the Value of the Attribute**: \"PumpStatus:\
+    \ AirDetection\"\n  - **Any Pre-requisites**: \"Pump must be running\"\n\nThese\
+    \ test cases cover the extreme values of the constraints of the field and the\
+    \ values that could result in special responses as mentioned in the description\
+    \ of the effect.\n\nFor more detailed information, you can refer to the Matter\
+    \ Application Cluster Specification document【4:0†source】."
+  Attribute_Change: "\"PumpStatus: AirDetection\"\n  - **Any Pre-requisites**: \"\
+    Pump must be running\"\n\nThese test cases cover the extreme values of the constraints\
+    \ of the field and the values that could result in special responses as mentioned\
+    \ in the description of the effect.\n\nFor more detailed information, you can\
+    \ refer to the Matter Application Cluster Specification document【4:0†source】."
+  ExpectedResponse: "\"Warning: Air detected in the pump\"\n  - **Which Attribute\
+    \ Will Be Changed and the Value of the Attribute**: \"PumpStatus: AirDetection\"\
+    \n  - **Any Pre-requisites**: \"Pump must be running\"\n\nThese test cases cover\
+    \ the extreme values of the constraints of the field and the values that could\
+    \ result in special responses as mentioned in the description of the effect.\n\
+    \nFor more detailed information, you can refer to the Matter Application Cluster\
+    \ Specification document【4:0†source】."
+  Pre-requisites: '"Pump must be running"
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments:
+    '**ActionTime**': 32767
+    '**Any Pre-requisites**': '"Pump must be running"'
+    '**ExpectedResponse**': '"Warning: Air detected in the pump"'
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': '"PumpStatus:
+      AirDetection"'
+    '{"field0"': '32767, "field1": 32767}'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SubscribeToEvent

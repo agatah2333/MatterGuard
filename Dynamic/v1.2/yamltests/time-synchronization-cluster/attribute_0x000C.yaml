@@ -1,0 +1,6 @@
+config:
+  attribute: '0x000C'
+  cluster: time-synchronization-cluster
+  nodeId: '0x654231'
+name: time-synchronization-cluster_attribute_0x000C_v1.2.0.0
+tests: []

@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0003'
+  cluster: application-basic-cluster
+  nodeId: '0x654231'
+name: application-basic-cluster_attribute_0x0003_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `ProductName`: "A"'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    ProductName: '"A"'
+  label: Test_Case_Minimum_Length
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `ProductName`: "A" * 32'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    ProductName: '"A" * 32'
+  label: Test_Case_Maximum_Length
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `ProductName`: "!@#$%^&*()_+"'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    ProductName: '"!@#$%^&*()_+"'
+  label: Test_Case_Special_Characters
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `ProductName`: Unchanged'
+  ExpectedResponse: Error (Constraint Violation)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the `ProductName`
+    field and include a special case with special characters. The empty string case
+    is included to test the constraint violation response.'
+  arguments:
+    ProductName: '""'
+  label: Test_Case_Empty_String_(Invalid_Case)
+  option: WriteAttribute

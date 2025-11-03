@@ -1,0 +1,39 @@
+config:
+  attribute: '0x0021'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0021_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: NumberOfWeeklyTransitions = 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"NumberOfWeeklyTransitions"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: NumberOfWeeklyTransitions = 255
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"NumberOfWeeklyTransitions"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: NumberOfWeeklyTransitions = 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    These test cases ensure that the attribute behaves correctly at its boundary values
+    and default state. The expected response for reading the attribute is always `SUCCESS`
+    since it is a read-only attribute.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:1†source】.'
+  arguments:
+    '{"NumberOfWeeklyTransitions"': 0}
+  label: Test_Case_Default_Value
+  option: WriteAttribute

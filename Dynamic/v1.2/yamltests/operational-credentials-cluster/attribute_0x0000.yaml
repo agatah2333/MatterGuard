@@ -1,0 +1,35 @@
+config:
+  attribute: '0x0000'
+  cluster: operational-credentials-cluster
+  nodeId: '0x654231'
+name: operational-credentials-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: WindowStatus set to WindowNotOpen
+  ExpectedResponse: WindowNotOpen
+  Pre-requisites: 'Initial commissioning or after the expiry of a commissioning window
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"WindowStatus"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: WindowStatus set to EnhancedWindowOpen
+  ExpectedResponse: EnhancedWindowOpen
+  Pre-requisites: 'An Enhanced Commissioning Method window is open
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    ### References
+
+    - Matter 1.2 Core Specification【4:0†source】'
+  arguments:
+    '{"WindowStatus"': 1}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

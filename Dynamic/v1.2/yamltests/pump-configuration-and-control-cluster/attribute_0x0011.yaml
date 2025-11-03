@@ -1,0 +1,59 @@
+config:
+  attribute: '0x0011'
+  cluster: pump-configuration-and-control-cluster
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_attribute_0x0011_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"EffectiveOperationMode": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"EffectiveOperationMode"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"EffectiveOperationMode": 3}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"EffectiveOperationMode"': 3}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: <none>
+  ExpectedResponse: <constraint_error>
+  Pre-requisites: <none>
+  arguments:
+    '{"EffectiveOperationMode"': 4}
+  label: Test_Case_Invalid_Value_(Above_Range)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: <none>
+  ExpectedResponse: <failure>
+  Pre-requisites: '{"PumpStatus": {"LocalOverride": 1}}'
+  arguments:
+    '{"EffectiveOperationMode"': 3}
+  label: Test_Case_Special_Response_-_Local_Override
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"EffectiveOperationMode": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: '{"RemoteSensorConnected": true}'
+  arguments:
+    '{"EffectiveOperationMode"': 0}
+  label: Test_Case_Special_Response_-_Normal_with_Remote_Sensor
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"EffectiveOperationMode": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: '{"RemoteSensorConnected": false}
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"EffectiveOperationMode"': 0}
+  label: Test_Case_Special_Response_-_Normal_without_Remote_Sensor
+  option: WriteAttribute

@@ -1,0 +1,52 @@
+config:
+  cluster: actions-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: actions-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Action state will be set to Active, then Disabled after 0 seconds.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    ActionID: 0
+    Duration: 0
+    InvokeID: 0
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: 4294967295
+  Attribute_Change: Action state will be set to Active, then Disabled after 4294967295
+    seconds.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    ActionID: 65535
+    Duration: 4294967295
+    InvokeID: 4294967295
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: 60
+  Attribute_Change: None
+  ExpectedResponse: NOT_FOUND
+  Pre-requisites: ActionID 99999 must not exist in the ActionList.
+  arguments:
+    ActionID: 99999 (Assuming this is an unsupported ActionID)
+    Duration: 60
+    InvokeID: 12345
+  label: Test_Case_Special_Response_-_Unsupported_Action
+  option: SendCommand
+- ActionTime: '-1'
+  Attribute_Change: None
+  ExpectedResponse: INVALID_COMMAND
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:2†source】【4:3†source】【4:6†source】.'
+  arguments:
+    ActionID: 1
+    Duration: -1 (Invalid value)
+    InvokeID: 1
+  label: Test_Case_Special_Response_-_Invalid_Command
+  option: SendCommand

@@ -1,0 +1,44 @@
+config:
+  attribute: '0x0003'
+  cluster: rvc-clean-mode-cluster
+  nodeId: '0x654231'
+name: rvc-clean-mode-cluster_attribute_0x0003_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '- `CurrentMode`: 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    CurrentMode: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '- `CurrentMode`: 255'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    CurrentMode: 255
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '- `CurrentMode`: <value that triggers CleaningInProgress>'
+  ExpectedResponse: CleaningInProgress
+  Pre-requisites: Cleaning must be in progress
+  arguments:
+    CurrentMode: <value that triggers CleaningInProgress>
+  label: Test_Case_Special_Response_-_CleaningInProgress
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '- `CurrentMode`: Unchanged'
+  ExpectedResponse: ModeNotSupported
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the `CurrentMode` field and the special
+    responses as per the provided context. For the exact values that trigger special
+    responses like `CleaningInProgress` and `ModeNotSupported`, refer to the specific
+    implementation details or documentation of the `rvc-clean-mode-cluster` cluster【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    CurrentMode: <value not in SupportedModes>
+  label: Test_Case_Special_Response_-_Mode_Not_Supported
+  option: WriteAttribute

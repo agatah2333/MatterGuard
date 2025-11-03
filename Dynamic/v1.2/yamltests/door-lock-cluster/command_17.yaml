@@ -1,0 +1,50 @@
+config:
+  cluster: door-lock-cluster
+  command: '17'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_17_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Get RFID Code Response with the most recent RFID code
+  Pre-requisites: The RFID Users Supported attribute must be greater than 0
+  arguments:
+    '{"User ID"': 0}
+  label: Test_Case_Minimum_User_ID
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Get RFID Code Response with the RFID code for the specified user
+    ID
+  Pre-requisites: The RFID Users Supported attribute must be set to <max_user_id>
+  arguments:
+    '{"User ID"': <max_user_id>}
+  label: Test_Case_Maximum_User_ID
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Default Response with an error status equal to FAILURE
+  Pre-requisites: The RFID Users Supported attribute must be set to <max_user_id>
+  arguments:
+    '{"User ID"': <max_user_id + 1>}
+  label: Test_Case_Invalid_User_ID_(Out_of_Range)
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Get RFID Code Response with a status code of DUPLICATE
+  Pre-requisites: The specified user ID must have a duplicate RFID code in the system
+  arguments:
+    '{"User ID"': <duplicate_user_id>}
+  label: Test_Case_Special_Response_for_Duplicate_RFID_Code
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Get RFID Code Response with a status code of OCCUPIED
+  Pre-requisites: 'The specified user ID must be an occupied slot in the system
+
+
+    ### Field Ranges'
+  arguments:
+    '{"User ID"': <occupied_user_id>}
+  label: Test_Case_Special_Response_for_Occupied_Slot
+  option: SendCommand

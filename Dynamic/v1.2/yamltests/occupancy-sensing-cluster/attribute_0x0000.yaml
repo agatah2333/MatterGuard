@@ -1,0 +1,47 @@
+config:
+  attribute: '0x0000'
+  cluster: occupancy-sensing-cluster
+  nodeId: '0x654231'
+name: occupancy-sensing-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: Occupancy = 0
+  ExpectedResponse: Unoccupied
+  Pre-requisites: None
+  arguments:
+    '{"Occupancy"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Occupancy = 1
+  ExpectedResponse: Occupied
+  Pre-requisites: None
+  arguments:
+    '{"Occupancy"': 1}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Occupancy = 1
+  ExpectedResponse: Occupied
+  Pre-requisites: Occupancy = 0
+  arguments:
+    '{"Occupancy"': 1}
+  label: Test_Case_Transition_from_Unoccupied_to_Occupied
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Occupancy = 0
+  ExpectedResponse: Unoccupied
+  Pre-requisites: 'Occupancy = 1
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments:
+    '{"Occupancy"': 0}
+  label: Test_Case_Transition_from_Occupied_to_Unoccupied
+  option: WriteAttribute

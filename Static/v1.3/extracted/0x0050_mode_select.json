@@ -1,0 +1,140 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0050",
+    "name": "Mode Select",
+    "description": "This cluster provides an interface for controlling a characteristic of a device that can be set to one of several predefined values. For example, the light pattern of a disco ball, the mode of a massage chair, or the wash cycle of a laundry machine."
+  },
+  "derived_datatypes": [
+    {
+      "type": "struct",
+      "name": "SemanticTagStruct",
+      "description": "A Semantic Tag is meant to be interpreted by the client for the purpose the cluster serves.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "MfgCode",
+          "data_type": "vendor-id",
+          "description": "This field SHALL indicate a manufacturer code (Vendor ID), and the Value field SHALL indicate a semantic tag defined by the manufacturer.",
+          "conformance": "M"
+        },
+        {
+          "id": "1",
+          "name": "Value",
+          "data_type": "enum16",
+          "description": "This field SHALL indicate the semantic tag within a semantic tag namespace which is either manufacturer specific or standard.",
+          "conformance": "M"
+        }
+      ]
+    },
+    {
+      "type": "struct",
+      "name": "ModeOptionStruct",
+      "description": "This is a struct representing a possible mode of the server.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "Label",
+          "data_type": "string",
+          "constraint": "max 64",
+          "description": "This field is readable text that describes the mode option that can be used by a client to indicate to the user what this option means.",
+          "conformance": "M"
+        },
+        {
+          "id": "1",
+          "name": "Mode",
+          "data_type": "uint8",
+          "description": "The Mode field is used to identify the mode option. The value SHALL be unique for every item in the SupportedModes attribute.",
+          "conformance": "M"
+        },
+        {
+          "id": "2",
+          "name": "SemanticTags",
+          "data_type": "list[SemanticTagStruct]",
+          "constraint": "max 64",
+          "description": "This field is a list of semantic tags that map to the mode option.",
+          "conformance": "M"
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "ChangeToMode",
+      "parameters": [
+        {
+          "name": "NewMode",
+          "data_type": "uint8",
+          "value_range": {},
+          "description": "The new mode to set."
+        }
+      ],
+      "privilege": "O",
+      "side": "client",
+      "description": "On receipt of this command, if the NewMode field indicates a valid mode transition within the supported list, the server SHALL set the CurrentMode attribute to the NewMode value, otherwise, the server SHALL respond with an INVALID_COMMAND status response."
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Description",
+      "data_type": "string",
+      "value_range": {
+        "max": "64"
+      },
+      "description": "This attribute describes the purpose of the server, in readable text.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0001",
+      "name": "StandardNamespace",
+      "data_type": "enum16",
+      "value_range": {},
+      "description": "This attribute, when not null, SHALL indicate a single standard namespace for any standard semantic tag value supported in this or any other cluster instance with the same value of this attribute.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0002",
+      "name": "SupportedModes",
+      "data_type": "list[ModeOptionStruct]",
+      "value_range": {
+        "max": "255"
+      },
+      "description": "This attribute is the list of supported modes that may be selected for the CurrentMode attribute.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0003",
+      "name": "CurrentMode",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "This attribute represents the current mode of the server. The value of this field must match the Mode field of one of the entries in the SupportedModes attribute.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0004",
+      "name": "StartUpMode",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "The StartUpMode attribute value indicates the desired startup mode for the server when it is supplied with power.",
+      "privilege": "V",
+      "writable": true,
+      "conformance": "O"
+    },
+    {
+      "id": "0x0005",
+      "name": "OnMode",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "This attribute SHALL indicate the value of CurrentMode that depends on the state of the On/Off cluster on the same endpoint.",
+      "privilege": "V",
+      "writable": true,
+      "conformance": "DEPONOFF"
+    }
+  ],
+  "events": []
+}

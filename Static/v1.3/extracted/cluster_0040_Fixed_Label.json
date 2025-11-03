@@ -1,0 +1,22 @@
+{
+  "cluster_id": "0x0040",
+  "cluster_name": "Fixed Label",
+  "section": "9.8",
+  "description": "This cluster provides a feature for the device to tag an endpoint with zero or more read only labels. Examples: • A bridge can use this to indicate grouping of bridged devices. For example: All bridged devices whose endpoints have an entry in their LabelList \"room\":\"bedroom 2\" are in the same (bed)room.",
+  "data_types": {},
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "LabelList",
+      "details": "list[Label­ N empty RV M",
+      "raw_line": "0x0000         LabelList     list[Label­                  N              empty          RV          M"
+    }
+  },
+  "commands": {},
+  "events": {},
+  "extraction_info": {
+    "start_line": 28855,
+    "end_line": 28916,
+    "total_lines": 61
+  }
+}

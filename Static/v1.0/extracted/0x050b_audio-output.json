@@ -1,0 +1,50 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x050b",
+    "name": "Audio Output",
+    "description": "Provides an interface for controlling the Output on a Video Player device such as a TV."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "SelectOutput",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "RenameOutput",
+      "parameters": [],
+      "privilege": "A",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "OutputList",
+      "data_type": "list[OutputInfo]",
+      "value_range": {},
+      "description": "This list provides the outputs supported by the device.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "CurrentOutput",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "This field contains the value of the index field of the currently selected OutputInfo.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

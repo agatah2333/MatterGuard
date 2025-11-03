@@ -1,0 +1,58 @@
+config:
+  attribute: '0x0001'
+  cluster: fan-control-cluster
+  nodeId: '0x654231'
+name: fan-control-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '`FanModeSequence` set to 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    FanModeSequence: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`FanModeSequence` set to 5'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    FanModeSequence: 5
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`FanModeSequence` set to 2'
+  ExpectedResponse: Success
+  Pre-requisites: Fan supports 3 or more speeds【4:1†source】
+  arguments:
+    FanModeSequence: 2
+  label: Test_Case_Special_Response_for_Medium_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`FanModeSequence` set to 3'
+  ExpectedResponse: Success
+  Pre-requisites: Fan supports auto mode【4:1†source】
+  arguments:
+    FanModeSequence: 3
+  label: Test_Case_Special_Response_for_Auto_Mode
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`FanModeSequence` set to 4'
+  ExpectedResponse: Success
+  Pre-requisites: Fan supports high and auto modes【4:1†source】
+  arguments:
+    FanModeSequence: 4
+  label: Test_Case_Off/High/Auto_Mode
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`FanModeSequence` set to 5'
+  ExpectedResponse: Success
+  Pre-requisites: 'Fan supports high mode【4:1†source】
+
+
+    These test cases cover the extreme values of the `FanModeSequence` attribute as
+    well as the special responses based on the attribute''s description.'
+  arguments:
+    FanModeSequence: 5
+  label: Test_Case_Off/High_Mode
+  option: WriteAttribute

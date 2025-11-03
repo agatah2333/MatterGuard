@@ -1,0 +1,6 @@
+config:
+  cluster: switch-cluster
+  event: '0x04'
+  nodeId: '0x654231'
+name: switch-cluster_event_0x04_v1.2.0.0
+tests: []

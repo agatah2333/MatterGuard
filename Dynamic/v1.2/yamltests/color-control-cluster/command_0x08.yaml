@@ -1,0 +1,54 @@
+config:
+  cluster: color-control-cluster
+  command: '0x08'
+  nodeId: '0x654231'
+name: color-control-cluster_command_0x08_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '`ColorMode` set to 1, `CurrentX` and `CurrentY` updated.'
+  ExpectedResponse: Command executed with minimum rates.
+  Pre-requisites: Device supports Color Control Cluster.
+  arguments:
+    OptionsMask: 0
+    OptionsOverride: 0
+    RateX: '-32768'
+    RateY: '-32768'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '`ColorMode` set to 1, `CurrentX` and `CurrentY` updated.'
+  ExpectedResponse: Command executed with maximum rates.
+  Pre-requisites: Device supports Color Control Cluster.
+  arguments:
+    OptionsMask: 255
+    OptionsOverride: 255
+    RateX: 32767
+    RateY: 32767
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '`ColorMode` remains unchanged, ongoing operations stopped.'
+  ExpectedResponse: No movement, stops any ongoing operation.
+  Pre-requisites: Device supports Color Control Cluster.
+  arguments:
+    OptionsMask: 0
+    OptionsOverride: 0
+    RateX: 0
+    RateY: 0
+  label: Test_Case_Special_Response_-_No_Movement
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '`ColorMode` set to 1, `CurrentX` and `CurrentY` updated.'
+  ExpectedResponse: Command executed with mixed rates.
+  Pre-requisites: 'Device supports Color Control Cluster.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the special responses as mentioned in the command description【4:1†source】【4:0†source】.'
+  arguments:
+    OptionsMask: 128
+    OptionsOverride: 128
+    RateX: 1000
+    RateY: '-1000'
+  label: Test_Case_Special_Response_-_Mixed_Rates
+  option: SendCommand

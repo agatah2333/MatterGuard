@@ -1,0 +1,46 @@
+config:
+  cluster: refrigerator-and-temperature-controlled-cabinet-mode-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: refrigerator-and-temperature-controlled-cabinet-mode-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: '`<current time>`'
+  Attribute_Change: '`TemperatureSetpoint` to `<MinTemperature>`'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: '`MinTemperature` is defined and within valid range.'
+  arguments:
+    TargetTemperature: '`<MinTemperature>`'
+    TargetTemperatureLevel: '`<valid level>`'
+  label: Test_Case_Minimum_TargetTemperature
+  option: SendCommand
+- ActionTime: '`<current time>`'
+  Attribute_Change: '`TemperatureSetpoint` to `<MaxTemperature>`'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: '`MaxTemperature` is defined and within valid range.'
+  arguments:
+    TargetTemperature: '`<MaxTemperature>`'
+    TargetTemperatureLevel: '`<valid level>`'
+  label: Test_Case_Maximum_TargetTemperature
+  option: SendCommand
+- ActionTime: '`<current time>`'
+  Attribute_Change: '`TemperatureSetpoint` remains unchanged.'
+  ExpectedResponse: '`CONSTRAINT_ERROR`'
+  Pre-requisites: '`Step` attribute is supported and defined.'
+  arguments:
+    TargetTemperature: '`<value not meeting step constraint>`'
+    TargetTemperatureLevel: '`<valid level>`'
+  label: Test_Case_TargetTemperature_causing_CONSTRAINT_ERROR
+  option: SendCommand
+- ActionTime: '`<current time>`'
+  Attribute_Change: '`SelectedTemperatureLevel` remains unchanged.'
+  ExpectedResponse: '`CONSTRAINT_ERROR`'
+  Pre-requisites: '`SupportedTemperatureLevels` list is defined and has valid entries.
+
+
+    These test cases cover the extreme values of the constraints and the special responses
+    as mentioned in the command description【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    TargetTemperature: '`<valid temperature>`'
+    TargetTemperatureLevel: '`<out of bounds level>`'
+  label: Test_Case_TargetTemperatureLevel_causing_CONSTRAINT_ERROR
+  option: SendCommand

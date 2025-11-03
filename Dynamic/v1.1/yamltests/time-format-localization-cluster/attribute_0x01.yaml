@@ -1,0 +1,18 @@
+config:
+  attribute: '0x01'
+  cluster: time-format-localization-cluster
+  nodeId: '0x654231'
+name: time-format-localization-cluster_attribute_0x01_v1.1.0.0
+tests:
+- arguments: {}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- arguments: {}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- arguments: {}
+  label: Test_Case_Duplicate_Entries
+  option: WriteAttribute
+- arguments: {}
+  label: Test_Case_Exceeding_Maximum_Length
+  option: WriteAttribute

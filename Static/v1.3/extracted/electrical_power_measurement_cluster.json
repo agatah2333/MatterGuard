@@ -1,0 +1,414 @@
+{
+  "cluster": {
+    "id": "0x0090",
+    "name": "Electrical Power Measurement",
+    "description": "This cluster provides a mechanism for querying data about electrical power as measured by the server.",
+    "classification": {
+      "hierarchy": "Base",
+      "role": "Application", 
+      "scope": "Endpoint",
+      "pics_code": "EPM"
+    },
+    "revision": {
+      "current": 1,
+      "history": [
+        {
+          "revision": 1,
+          "description": "Initial Release"
+        }
+      ]
+    },
+    "features": [
+      {
+        "bit": 0,
+        "code": "DIRC",
+        "name": "DirectCurrent",
+        "conformance": "O.a+",
+        "summary": "Supports measurement of direct current",
+        "description": "This feature indicates the cluster can measure a direct current."
+      },
+      {
+        "bit": 1,
+        "code": "ALTC",
+        "name": "AlternatingCurrent", 
+        "conformance": "O.a+",
+        "summary": "Supports measurement of alternating current",
+        "description": "This feature indicates the cluster can measure an alternating current."
+      },
+      {
+        "bit": 2,
+        "code": "POLY",
+        "name": "PolyphasePower",
+        "conformance": "[ALTC]",
+        "summary": "Supports polyphase measurements",
+        "description": "This feature indicates the cluster represents the collective measurements for a Polyphase power supply."
+      },
+      {
+        "bit": 3,
+        "code": "HARM",
+        "name": "Harmonics",
+        "conformance": "[ALTC]",
+        "summary": "Supports measurement of AC harmonics",
+        "description": "This feature indicates the cluster can measure the harmonics of an alternating current."
+      },
+      {
+        "bit": 4,
+        "code": "PWRQ",
+        "name": "PowerQuality",
+        "conformance": "[ALTC]",
+        "summary": "Supports measurement of AC harmonic phases",
+        "description": "This feature indicates the cluster can measure the harmonic phases of an alternating current."
+      }
+    ],
+    "data_types": [
+      {
+        "name": "PowerModeEnum",
+        "type": "enum8",
+        "values": [
+          {
+            "value": 0,
+            "name": "Unknown",
+            "summary": "",
+            "conformance": "M"
+          },
+          {
+            "value": 1,
+            "name": "DC",
+            "summary": "Direct current",
+            "conformance": "M"
+          },
+          {
+            "value": 2,
+            "name": "AC",
+            "summary": "Alternating current, either single-phase or polyphase",
+            "conformance": "M"
+          }
+        ]
+      },
+      {
+        "name": "MeasurementRangeStruct",
+        "type": "struct",
+        "description": "This struct SHALL indicate the maximum and minimum values of a given measurement type during a measurement period, along with the observation times of these values.",
+        "fields": [
+          {
+            "id": 0,
+            "name": "MeasurementType",
+            "type": "MeasurementTypeEnum",
+            "conformance": "M",
+            "description": "This field SHALL be the type of measurement for the range provided."
+          },
+          {
+            "id": 1,
+            "name": "Min",
+            "type": "int64",
+            "constraint": "-2^62 to 2^62",
+            "conformance": "M",
+            "description": "This field SHALL be the smallest measured value for the associated measurement over either the period between StartTimestamp and EndTimestamp, or the period between StartSystime and EndSystime, or both."
+          },
+          {
+            "id": 2,
+            "name": "Max",
+            "type": "int64",
+            "constraint": "-2^62 to 2^62",
+            "conformance": "M",
+            "description": "This field SHALL be the largest measured value for the associated measurement over the period between either StartTimestamp and EndTimestamp or the period between StartSystime and EndSystime, or both."
+          },
+          {
+            "id": 3,
+            "name": "StartTimestamp",
+            "type": "epoch-s",
+            "conformance": "EndTimestamp",
+            "description": "This field SHALL be the timestamp in UTC of the beginning of the measurement period."
+          },
+          {
+            "id": 4,
+            "name": "EndTimestamp",
+            "type": "epoch-s",
+            "constraint": "min (StartTimestamp+1)",
+            "conformance": "desc",
+            "description": "This field SHALL be the timestamp in UTC of the end of the measurement period."
+          },
+          {
+            "id": 5,
+            "name": "MinTimestamp",
+            "type": "epoch-s",
+            "conformance": "EndTimestamp"
+          },
+          {
+            "id": 6,
+            "name": "MaxTimestamp",
+            "type": "epoch-s",
+            "constraint": "min (MinTimestamp+1)",
+            "conformance": "EndTimestamp"
+          },
+          {
+            "id": 7,
+            "name": "StartSystime",
+            "type": "systime-ms",
+            "conformance": "EndSystime"
+          },
+          {
+            "id": 8,
+            "name": "EndSystime",
+            "type": "systime-ms",
+            "constraint": "min (StartSystime+1)",
+            "conformance": "desc"
+          },
+          {
+            "id": 9,
+            "name": "MinSystime",
+            "type": "systime-ms",
+            "conformance": "EndSystime"
+          },
+          {
+            "id": 10,
+            "name": "MaxSystime",
+            "type": "systime-ms",
+            "constraint": "min (MinSystime+1)",
+            "conformance": "EndSystime"
+          }
+        ]
+      },
+      {
+        "name": "HarmonicMeasurementStruct",
+        "type": "struct",
+        "fields": [
+          {
+            "id": 0,
+            "name": "Order",
+            "type": "uint8",
+            "constraint": "min 1",
+            "default": "1",
+            "conformance": "M",
+            "description": "This field SHALL be the order of the harmonic being measured. Typically this is an odd number, but servers may choose to report even harmonics."
+          },
+          {
+            "id": 1,
+            "name": "Measurement",
+            "type": "int64",
+            "constraint": "-2^62 to 2^62",
+            "quality": "X",
+            "default": "null",
+            "conformance": "M"
+          }
+        ]
+      }
+    ],
+    "attributes": [
+      {
+        "id": "0x0000",
+        "name": "PowerMode",
+        "type": "PowerModeEnum",
+        "constraint": null,
+        "quality": null,
+        "default": null,
+        "access": "RV",
+        "conformance": "M",
+        "description": "This SHALL indicate the current mode of the server. For some servers, such as an EV, this may change depending on the mode of charging or discharging."
+      },
+      {
+        "id": "0x0001", 
+        "name": "NumberOfMeasurementTypes",
+        "type": "uint8",
+        "constraint": "min 1",
+        "quality": "F",
+        "default": null,
+        "access": "RV",
+        "conformance": "M",
+        "description": "This SHALL indicate the maximum number of measurement types the server is capable of reporting."
+      },
+      {
+        "id": "0x0002",
+        "name": "Accuracy", 
+        "type": "list[MeasurementAccuracyStruct]",
+        "constraint": "1 to NumberOfMeasurementTypes",
+        "quality": "F",
+        "default": null,
+        "access": "RV", 
+        "conformance": "M",
+        "description": "This SHALL indicate a list of accuracy specifications for the measurement types supported by the server."
+      },
+      {
+        "id": "0x0003",
+        "name": "Ranges",
+        "type": "list[MeasurementRangeStruct]",
+        "constraint": "0 to NumberOfMeasurementTypes",
+        "quality": "Q",
+        "default": "empty",
+        "access": "RV",
+        "conformance": "O"
+      },
+      {
+        "id": "0x0004",
+        "name": "Voltage",
+        "type": "voltage-mV",
+        "constraint": "-2^62 to 2^62",
+        "quality": "XQ",
+        "default": "null",
+        "access": "RV",
+        "conformance": "O"
+      },
+      {
+        "id": "0x0005",
+        "name": "ActiveCurrent",
+        "type": "amperage-mA",
+        "constraint": "-2^62 to 2^62",
+        "quality": "XQ",
+        "default": "null",
+        "access": "RV",
+        "conformance": "O"
+      },
+      {
+        "id": "0x0006",
+        "name": "ReactiveCurrent",
+        "type": "amperage-mA",
+        "constraint": "-2^62 to 2^62",
+        "quality": "XQ",
+        "default": "null",
+        "access": "RV",
+        "conformance": "[ALTC]"
+      },
+      {
+        "id": "0x0007",
+        "name": "ApparentCurrent",
+        "type": "amperage-mA",
+        "constraint": "0 to 2^62",
+        "quality": "XQ",
+        "default": "null",
+        "access": "RV",
+        "conformance": "[ALTC]"
+      },
+      {
+        "id": "0x0008",
+        "name": "ActivePower",
+        "type": "power-mW",
+        "constraint": "-2^62 to 2^62",
+        "quality": "XQ",
+        "default": "null",
+        "access": "RV",
+        "conformance": "M"
+      },
+      {
+        "id": "0x0009",
+        "name": "ReactivePower",
+        "type": "power-mW",
+        "constraint": "-2^62 to 2^62",
+        "quality": "XQ",
+        "default": "null",
+        "access": "RV",
+        "conformance": "[ALTC]"
+      },
+      {
+        "id": "0x000A",
+        "name": "ApparentPower",
+        "type": "power-mW",
+        "constraint": "-2^62 to 2^62",
+        "quality": "XQ",
+        "default": "null",
+        "access": "RV",
+        "conformance": "[ALTC]"
+      },
+      {
+        "id": "0x000B",
+        "name": "RMSVoltage",
+        "type": "voltage-mV",
+        "constraint": "-2^62 to 2^62",
+        "quality": "XQ",
+        "default": "null",
+        "access": "RV",
+        "conformance": "[ALTC]"
+      },
+      {
+        "id": "0x000C",
+        "name": "RMSCurrent",
+        "type": "amperage-mA",
+        "constraint": "-2^62 to 2^62",
+        "quality": "XQ",
+        "default": "null",
+        "access": "RV",
+        "conformance": "[ALTC]"
+      },
+      {
+        "id": "0x000D",
+        "name": "RMSPower",
+        "type": "power-mW",
+        "constraint": "-2^62 to 2^62",
+        "quality": "XQ",
+        "default": "null",
+        "access": "RV",
+        "conformance": "[ALTC]"
+      },
+      {
+        "id": "0x000E",
+        "name": "Frequency",
+        "type": "int64",
+        "constraint": "0 to 1000000",
+        "quality": "XQ",
+        "default": "null",
+        "access": "RV",
+        "conformance": "[ALTC]"
+      },
+      {
+        "id": "0x000F",
+        "name": "HarmonicCurrents",
+        "type": "list[HarmonicMeasurementStruct]",
+        "constraint": "desc",
+        "quality": "XQ",
+        "default": "null",
+        "access": "RV",
+        "conformance": "HARM"
+      },
+      {
+        "id": "0x0010",
+        "name": "HarmonicPhases",
+        "type": "list[HarmonicMeasurementStruct]",
+        "constraint": "desc",
+        "quality": "XQ",
+        "default": "null",
+        "access": "RV",
+        "conformance": "PWRQ"
+      },
+      {
+        "id": "0x0011",
+        "name": "PowerFactor",
+        "type": "int64",
+        "constraint": "-10000 to 10000",
+        "quality": "XQ",
+        "default": "null",
+        "access": "RV",
+        "conformance": "[ALTC]"
+      },
+      {
+        "id": "0x0012",
+        "name": "NeutralCurrent",
+        "type": "amperage-mA",
+        "constraint": "-2^62 to 2^62",
+        "quality": "XQ",
+        "default": "null",
+        "access": "RV",
+        "conformance": "[POLY]"
+      }
+    ],
+    "commands": [],
+    "events": [
+      {
+        "id": 0,
+        "name": "MeasurementPeriodRanges",
+        "priority": "INFO",
+        "access": "RV",
+        "conformance": "Ranges",
+        "description": "If supported, this event SHALL be generated at the end of a measurement period.",
+        "fields": [
+          {
+            "id": 0,
+            "name": "Ranges",
+            "type": "list[MeasurementRangeStruct]",
+            "access": "RV",
+            "conformance": "M",
+            "description": "This SHALL indicate the value of the Ranges attribute at the time of event generation."
+          }
+        ]
+      }
+    ]
+  }
+}

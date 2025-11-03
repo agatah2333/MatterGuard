@@ -1,0 +1,65 @@
+config:
+  cluster: ota-software-update-requestor
+  event: '0x02'
+  nodeId: '0x654231'
+name: ota-software-update-requestor_event_0x02_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Error due to minimum values
+  Pre-requisites: None
+  arguments:
+    BytesDownloaded: 0
+    PlatformCode: '-9223372036854775808'
+    ProgressPercent: 0
+    SoftwareVersion: 0
+  label: Test_Case_Extreme_Values_(Minimum)
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Error due to maximum values
+  Pre-requisites: None
+  arguments:
+    BytesDownloaded: 18446744073709551615
+    PlatformCode: 9223372036854775807
+    ProgressPercent: 100
+    SoftwareVersion: 4294967295
+  label: Test_Case_Extreme_Values_(Maximum)
+  option: SubscribeToEvent
+- ActionTime: <valid_action_time>
+  Attribute_Change: UpdateState to "Completed"
+  ExpectedResponse: Success, download completed
+  Pre-requisites: Ongoing download process
+  arguments:
+    BytesDownloaded: <valid_bytes_downloaded>
+    PlatformCode: <valid_platform_code>
+    ProgressPercent: 100
+    SoftwareVersion: <valid_version>
+  label: Test_Case_Special_Response_(ProgressPercent_=_100)
+  option: SubscribeToEvent
+- ActionTime: <valid_action_time>
+  Attribute_Change: UpdateState to "Error"
+  ExpectedResponse: Error due to specific platform code
+  Pre-requisites: 'Ongoing download process
+
+
+    ### Notes
+
+    - Replace `<valid_version>`, `<valid_bytes_downloaded>`, `<valid_platform_code>`,
+    `<valid_action_time>`, `<valid_progress_percent>`, and `<specific_error_code>`
+    with appropriate values based on the context of the test environment.
+
+    - Ensure that the pre-requisites are met before running the test cases to validate
+    the expected responses accurately.
+
+
+    These test cases cover both the extreme values and special responses as per the
+    provided context for the OTA Software Update Requestor cluster''s DownloadError
+    event【4:0†source】【4:1†source】【4:2†source】【4:3†source】.'
+  arguments:
+    BytesDownloaded: <valid_bytes_downloaded>
+    PlatformCode: <specific_error_code>
+    ProgressPercent: <valid_progress_percent>
+    SoftwareVersion: <valid_version>
+  label: Test_Case_Special_Response_(PlatformCode_=_Specific_Error_Code)
+  option: SubscribeToEvent

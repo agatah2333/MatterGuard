@@ -1,0 +1,26 @@
+config:
+  attribute: '0x03'
+  cluster: client-monitoring-cluster
+  nodeId: '0x654231'
+name: client-monitoring-cluster_attribute_0x03_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: IdentifyType = 0x00
+  ExpectedResponse: No presentation
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyType"': 0x00}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: IdentifyType = 0x03
+  ExpectedResponse: Audible beep
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values and special responses for the `IdentifyType`
+    attribute in the Client Monitoring Cluster【4:0†source】.'
+  arguments:
+    '{"IdentifyType"': 0x03}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

@@ -1,0 +1,28 @@
+config:
+  attribute: '0x0003'
+  cluster: refrigerator-alarm
+  nodeId: '0x654231'
+name: refrigerator-alarm_attribute_0x0003_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: Supported = 0x00000000
+  ExpectedResponse: All alarms are not supported.
+  Pre-requisites: 'None
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"Supported"': 0x00000000}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: Supported = 0
+  ExpectedResponse: No alarms are supported.
+  Pre-requisites: 'None
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"Supported"': 0}
+  label: Test_Case_Special_Responses
+  option: WriteAttribute

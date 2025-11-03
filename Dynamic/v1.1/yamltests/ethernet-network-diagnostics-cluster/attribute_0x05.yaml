@@ -1,0 +1,26 @@
+config:
+  attribute: '0x05'
+  cluster: ethernet-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: ethernet-network-diagnostics-cluster_attribute_0x05_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: LastNetworkingStatus will be set to "Success"
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"LastNetworkingStatus"': 0}
+  label: Test_Case_Extreme_Values
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: LastNetworkingStatus will be set to "NetworkCommissioningFailed"
+  ExpectedResponse: NetworkCommissioningFailed
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values and special response values for the
+    `LastNetworkingStatus` attribute in the Ethernet Network Diagnostics Cluster【4:0†source】.'
+  arguments:
+    '{"LastNetworkingStatus"': 5}
+  label: Test_Case_Special_Response_Values
+  option: WriteAttribute

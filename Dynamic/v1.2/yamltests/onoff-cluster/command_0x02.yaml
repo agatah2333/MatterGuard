@@ -1,0 +1,52 @@
+config:
+  cluster: onoff-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: onoff-cluster_command_0x02_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: "- `OnOff`: TRUE\n  - `OnTime`: 0\n  - `OffWaitTime`: 0"
+  ExpectedResponse: OnOff attribute set to TRUE
+  Pre-requisites: Device is initially off
+  arguments:
+    OffWaitTime: 0
+    OnOff: 'FALSE'
+    OnTime: 0
+  label: Test_Case_Toggle_from_Off_to_On
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: "- `OnOff`: FALSE\n  - `OnTime`: 0\n  - `OffWaitTime`: 0"
+  ExpectedResponse: OnOff attribute set to FALSE
+  Pre-requisites: Device is initially on
+  arguments:
+    OffWaitTime: 0
+    OnOff: 'TRUE'
+    OnTime: 0
+  label: Test_Case_Toggle_from_On_to_Off
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: "- `OnOff`: FALSE\n  - `OnTime`: 0\n  - `OffWaitTime`: 50"
+  ExpectedResponse: OnOff attribute set to FALSE, OnTime set to 0
+  Pre-requisites: Device is initially on, OnTime and OffWaitTime attributes are supported
+  arguments:
+    OffWaitTime: 50
+    OnOff: 'TRUE'
+    OnTime: 100
+  label: Test_Case_Toggle_with_OnTime_and_OffWaitTime_Supported_(On_to_Off)
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: "- `OnOff`: TRUE\n  - `OnTime`: 0\n  - `OffWaitTime`: 0"
+  ExpectedResponse: OnOff attribute set to TRUE, OffWaitTime set to 0
+  Pre-requisites: 'Device is initially off, OnTime and OffWaitTime attributes are
+    supported
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:1†source】【4:0†source】.'
+  arguments:
+    OffWaitTime: 50
+    OnOff: 'FALSE'
+    OnTime: 0
+  label: Test_Case_Toggle_with_OnTime_and_OffWaitTime_Supported_(Off_to_On)
+  option: SendCommand

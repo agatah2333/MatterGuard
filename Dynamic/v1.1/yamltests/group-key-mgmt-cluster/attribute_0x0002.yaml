@@ -1,0 +1,30 @@
+config:
+  attribute: '0x0002'
+  cluster: group-key-mgmt-cluster
+  nodeId: '0x654231'
+name: group-key-mgmt-cluster_attribute_0x0002_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`MaxGroupsPerFabric` will be set to 0'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    MaxGroupsPerFabric: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`MaxGroupsPerFabric` will be set to 65535'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the `MaxGroupsPerFabric` attribute,
+    ensuring that the system can handle both the minimum and maximum possible values
+    correctly.
+
+
+    For more detailed information, you can refer to the Matter specification document【4:0†source】.'
+  arguments:
+    MaxGroupsPerFabric: 65535
+  label: Test_Case_Special_Response_Values
+  option: WriteAttribute

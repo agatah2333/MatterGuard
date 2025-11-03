@@ -1,0 +1,47 @@
+config:
+  cluster: content-launch-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: content-launch-cluster_command_0x02_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Command succeeded
+  Pre-requisites: None
+  arguments:
+    Data: '""'
+    Status: 0
+  label: Test_Case_Extreme_Value_(Minimum)
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Requested URL returned 401 error code
+  Pre-requisites: None
+  arguments:
+    Data: '"<max_size_data>"'
+    Status: 2
+  label: Test_Case_Extreme_Value_(Maximum)
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Requested URL could not be reached by device
+  Pre-requisites: None
+  arguments:
+    Data: '"URL not reachable"'
+    Status: 1
+  label: Test_Case_Special_Response_(URL_Not_Available)
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Requested URL returned 401 error code
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:3†source】【4:5†source】【4:17†source】.'
+  arguments:
+    Data: '"Authentication failed"'
+    Status: 2
+  label: Test_Case_Special_Response_(Authentication_Failed)
+  option: SendCommand

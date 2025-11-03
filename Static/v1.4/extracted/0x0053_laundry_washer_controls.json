@@ -1,0 +1,63 @@
+{
+  "source_file": "Laundry Washer Controls_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0053",
+        "name": "Laundry Washer Controls",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SpinSpeeds",
+            "dataType": "list[string]",
+            "valueRange": "max 16[max 64]",
+            "description": "List of supported spin speeds.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "SpinSpeedCurrent",
+            "dataType": "uint8",
+            "valueRange": "0-15",
+            "description": "Current spin speed setting.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "NumberOfRinses",
+            "dataType": "NumberOfRinsesEnum",
+            "valueRange": "",
+            "description": "Number of rinse cycles to perform.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "SupportedRinses",
+            "dataType": "list[NumberOfRinsesEnum]",
+            "valueRange": "max 4",
+            "description": "List of supported rinse cycles.",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "commands": [],
+        "events": [],
+        "dataTypes": {
+          "NumberOfRinsesEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "None",
+              "1": "Normal",
+              "2": "Extra",
+              "3": "Max"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

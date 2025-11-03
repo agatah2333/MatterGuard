@@ -1,0 +1,41 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0048",
+    "name": "Oven Cavity Operational State",
+    "description": "This cluster provides an interface for monitoring the operational state of an oven.",
+    "classification": {
+      "hierarchy": "Operational State",
+      "role": "Application",
+      "scope": "Endpoint",
+      "pics_code": "OVENOPSTATE"
+    },
+    "revision_history": [
+      {
+        "revision": 1,
+        "description": "Initial release"
+      }
+    ]
+  },
+  "features": {},
+  "data_types": {},
+  "attributes": {
+    "PhaseList": {
+      "description": "As defined in the base cluster, this attribute indicates a list of names of different phases that the device can go through for the selected function or mode. For this derived cluster, only these pre-defined strings may be used in the PhaseList attribute: 'pre-heating', 'pre-heated', and 'cooling down'. Other values SHALL NOT be used. A null value indicates that the device does not present phases during its operation."
+    },
+    "note": "This cluster inherits all attributes from the Operational State cluster"
+  },
+  "commands": {
+    "note": "This cluster inherits all commands from the Operational State cluster"
+  },
+  "events": {
+    "note": "This cluster inherits all events from the Operational State cluster"
+  },
+  "phase_restrictions": {
+    "allowed_phases": [
+      "pre-heating",
+      "pre-heated",
+      "cooling down"
+    ],
+    "description": "Only these pre-defined strings may be used in the PhaseList attribute. Other values SHALL NOT be used."
+  }
+}

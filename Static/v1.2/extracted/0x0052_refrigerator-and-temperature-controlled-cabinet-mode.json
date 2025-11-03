@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0052",
+    "name": "Refrigerator And Temperature Controlled Cabinet Mode",
+    "description": "Cluster for Refrigerator And Temperature Controlled Cabinet Mode functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

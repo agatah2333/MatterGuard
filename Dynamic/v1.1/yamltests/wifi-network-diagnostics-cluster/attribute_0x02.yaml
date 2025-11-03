@@ -1,0 +1,32 @@
+config:
+  attribute: '0x02'
+  cluster: wifi-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: wifi-network-diagnostics-cluster_attribute_0x02_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: The WiFiVersion attribute should return the value 0, indicating
+    the network interface is using 802.11a.
+  Pre-requisites: The Wi-Fi network should be operational and connected.
+  arguments:
+    '{"WiFiVersion"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: The WiFiVersion attribute should return the value 5, indicating
+    the network interface is using 802.11ax.
+  Pre-requisites: 'The Wi-Fi network should be operational and connected.
+
+
+    These test cases cover the extreme values of the constraints of the WiFiVersion
+    field and the values that could result in special responses as mentioned in the
+    description of the effect.
+
+
+    For more detailed information, refer to the Matter 1.0 Core Specification document【4:1†source】.'
+  arguments:
+    '{"WiFiVersion"': 5}
+  label: Test_Case_Special_Responses
+  option: WriteAttribute

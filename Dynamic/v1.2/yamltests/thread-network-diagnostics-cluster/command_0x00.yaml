@@ -1,0 +1,6 @@
+config:
+  cluster: thread-network-diagnostics-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_command_0x00_v1.2.0.0
+tests: []

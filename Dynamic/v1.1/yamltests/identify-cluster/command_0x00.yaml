@@ -1,0 +1,42 @@
+config:
+  cluster: identify-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: identify-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: IdentifyTime attribute will be set to 0.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyTime"': 0}
+  label: Test_Case_Minimum_Value
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: IdentifyTime attribute will be set to 65535.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyTime"': 65535}
+  label: Test_Case_Maximum_Value
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: IdentifyTime attribute will be set to 1.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyTime"': 1}
+  label: Test_Case_Special_Response_-_Start_Identifying
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: IdentifyTime attribute will be set to 300.
+  ExpectedResponse: Success
+  Pre-requisites: 'The device should already be in the identifying state.
+
+
+    These test cases cover the extreme values of the IdentifyTime field and the special
+    responses as per the command''s effect on receipt【4:0†source】【4:1†source】.'
+  arguments:
+    '{"IdentifyTime"': 300}
+  label: Test_Case_Special_Response_-_Continue_Identifying
+  option: SendCommand

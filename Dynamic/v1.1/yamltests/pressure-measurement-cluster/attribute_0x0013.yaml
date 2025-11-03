@@ -1,0 +1,47 @@
+config:
+  attribute: '0x0013'
+  cluster: pressure-measurement-cluster
+  nodeId: '0x654231'
+name: pressure-measurement-cluster_attribute_0x0013_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: None (Read-only)
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ScaledTolerance"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None (Read-only)
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ScaledTolerance"': 2048}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None (Read-only)
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ScaledTolerance"': 1024}
+  label: Test_Case_Mid-Range_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None (Read-only)
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    a mid-range value to ensure the attribute behaves as expected across its entire
+    range. The special response value is the maximum value, which should be handled
+    correctly by the system.
+
+
+    For more details, refer to the Matter Application Cluster Specification document【4:0†source】.'
+  arguments:
+    '{"ScaledTolerance"': 2048}
+  label: Test_Case_Special_Response_Value
+  option: WriteAttribute

@@ -1,0 +1,29 @@
+config:
+  attribute: '0x000D'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x000D_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '{"CurrentPositionTilt": 0}'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"CurrentPositionTilt"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '{"CurrentPositionTilt": null}'
+  ExpectedResponse: Calibration Needed
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the `CurrentPositionTilt` attribute
+    and a special case where the value is `null`, indicating that calibration is needed【4:0†source】【4:2†source】.'
+  arguments:
+    '{"CurrentPositionTilt"': null}
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: WriteAttribute

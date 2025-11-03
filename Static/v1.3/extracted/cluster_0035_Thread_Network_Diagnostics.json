@@ -1,0 +1,443 @@
+{
+  "cluster_id": "0x0035",
+  "cluster_name": "Thread Network Diagnostics",
+  "section": "11.14",
+  "description": "The Thread Network Diagnostics Cluster provides a means to acquire standardized diagnostics met­ rics that MAY be used by a Node to assist a user or Administrator in diagnosing potential problems. The Thread Network Diagnostics Cluster attempts to centralize all metrics that are relevant to a potential Thread radio running on a Node.",
+  "data_types": {
+    "NetworkFaultEnum": {
+      "name": "NetworkFaultEnum",
+      "definition_line": "11.14.5.1. NetworkFaultEnum Type"
+    },
+    "ConnectionStatusEnum": {
+      "name": "ConnectionStatusEnum",
+      "definition_line": "11.14.5.2. ConnectionStatusEnum Type"
+    },
+    "RoutingRoleEnum": {
+      "name": "RoutingRoleEnum",
+      "definition_line": "11.14.5.3. RoutingRoleEnum Type"
+    },
+    "NeighborTableStruct": {
+      "name": "NeighborTableStruct",
+      "definition_line": "11.14.5.4. NeighborTableStruct Type"
+    },
+    "RouteTableStruct": {
+      "name": "RouteTableStruct",
+      "definition_line": "11.14.5.5. RouteTableStruct Type"
+    },
+    "SecurityPolicy": {
+      "name": "SecurityPolicy",
+      "definition_line": "11.14.5.6. SecurityPolicy Type"
+    },
+    "OperationalDatasetComponents": {
+      "name": "OperationalDatasetComponents",
+      "definition_line": "11.14.5.7. OperationalDatasetComponents Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "Channel",
+      "details": "uint16 all X RV M",
+      "raw_line": "0x0000         Channel        uint16        all            X                             RV         M"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "Routing­",
+      "details": "Routin­ all X RV M",
+      "raw_line": "0x0001         Routing­       Routin­       all            X                             RV         M"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "Network­",
+      "details": "String max 16 X RV M",
+      "raw_line": "0x0002         Network­       String        max 16         X                             RV         M"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "PanId",
+      "details": "uint16 all X RV M",
+      "raw_line": "0x0003         PanId          uint16        all            X                             RV         M"
+    },
+    "0x0004": {
+      "id": "0x0004",
+      "name": "Extended­",
+      "details": "uint64 all X RV M",
+      "raw_line": "0x0004         Extended­ uint64             all            X                             RV         M"
+    },
+    "0x0005": {
+      "id": "0x0005",
+      "name": "MeshLo­",
+      "details": "ipv6pre all X RV M",
+      "raw_line": "0x0005         MeshLo­        ipv6pre       all            X                             RV         M"
+    },
+    "0x0006": {
+      "id": "0x0006",
+      "name": "Overrun­",
+      "details": "uint64 all C 0 RV ERRCNT",
+      "raw_line": "0x0006         Overrun­       uint64        all            C              0              RV         ERRCNT"
+    },
+    "0x0007": {
+      "id": "0x0007",
+      "name": "Neigh­",
+      "details": "list[Neigh­ all [] RV M",
+      "raw_line": "0x0007         Neigh­         list[Neigh­   all                           []             RV         M"
+    },
+    "0x0008": {
+      "id": "0x0008",
+      "name": "RouteTabl",
+      "details": "list[RouteT all [] RV M",
+      "raw_line": "0x0008         RouteTabl list[RouteT all                                  []             RV         M"
+    },
+    "0x0009": {
+      "id": "0x0009",
+      "name": "Parti­",
+      "details": "uint32 all X RV M",
+      "raw_line": "0x0009         Parti­         uint32        all            X                             RV         M"
+    },
+    "0x000A": {
+      "id": "0x000A",
+      "name": "Weighting",
+      "details": "uint16 max 255 X RV M",
+      "raw_line": "0x000A         Weighting uint16             max 255        X                             RV         M"
+    },
+    "0x000B": {
+      "id": "0x000B",
+      "name": "DataVer­",
+      "details": "uint16 max 255 X RV M",
+      "raw_line": "0x000B         DataVer­       uint16        max 255        X                             RV         M"
+    },
+    "0x000C": {
+      "id": "0x000C",
+      "name": "Stable­",
+      "details": "uint16 max 255 X RV M",
+      "raw_line": "0x000C         Stable­         uint16        max 255        X                             RV         M"
+    },
+    "0x000D": {
+      "id": "0x000D",
+      "name": "Leader­",
+      "details": "uint8 max 62 X RV M",
+      "raw_line": "0x000D         Leader­         uint8         max 62         X                             RV         M"
+    },
+    "0x000E": {
+      "id": "0x000E",
+      "name": "DetachedR",
+      "details": "uint16 all C 0 RV [MLECNT]",
+      "raw_line": "0x000E         DetachedR uint16              all            C              0              RV         [MLECNT]"
+    },
+    "0x000F": {
+      "id": "0x000F",
+      "name": "ChildRole­",
+      "details": "uint16 all C 0 RV [MLECNT]",
+      "raw_line": "0x000F         ChildRole­ uint16             all            C              0              RV         [MLECNT]"
+    },
+    "0x0010": {
+      "id": "0x0010",
+      "name": "Router­",
+      "details": "uint16 all C 0 RV [MLECNT]",
+      "raw_line": "0x0010         Router­         uint16        all            C              0              RV         [MLECNT]"
+    },
+    "0x0011": {
+      "id": "0x0011",
+      "name": "Leader­",
+      "details": "uint16 all C 0 RV [MLECNT]",
+      "raw_line": "0x0011         Leader­         uint16        all            C              0              RV         [MLECNT]"
+    },
+    "0x0012": {
+      "id": "0x0012",
+      "name": "AttachAt­",
+      "details": "uint16 all C 0 RV [MLECNT]",
+      "raw_line": "0x0012         AttachAt­       uint16        all            C              0              RV         [MLECNT]"
+    },
+    "0x0013": {
+      "id": "0x0013",
+      "name": "Partition­",
+      "details": "uint16 all C 0 RV [MLECNT]",
+      "raw_line": "0x0013         Partition­      uint16        all            C              0              RV         [MLECNT]"
+    },
+    "0x0014": {
+      "id": "0x0014",
+      "name": "BetterPar­",
+      "details": "uint16 all C 0 RV [MLECNT]",
+      "raw_line": "0x0014         BetterPar­ uint16             all            C              0              RV         [MLECNT]"
+    },
+    "0x0015": {
+      "id": "0x0015",
+      "name": "Par­",
+      "details": "uint16 all C 0 RV [MLECNT]",
+      "raw_line": "0x0015         Par­            uint16        all            C              0              RV         [MLECNT]"
+    },
+    "0x0016": {
+      "id": "0x0016",
+      "name": "TxTotal­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0016         TxTotal­        uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x0017": {
+      "id": "0x0017",
+      "name": "TxUnicast­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0017         TxUnicast­ uint32             all            C              0              RV         [MACCNT]"
+    },
+    "0x0018": {
+      "id": "0x0018",
+      "name": "TxBroad­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0018         TxBroad­        uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x0019": {
+      "id": "0x0019",
+      "name": "TxAckRe­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0019         TxAckRe­        uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x001A": {
+      "id": "0x001A",
+      "name": "TxAcked­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x001A         TxAcked­        uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x001B": {
+      "id": "0x001B",
+      "name": "TxNoAck­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x001B         TxNoAck­       uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x001C": {
+      "id": "0x001C",
+      "name": "TxData­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x001C         TxData­        uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x001D": {
+      "id": "0x001D",
+      "name": "TxDat­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x001D         TxDat­         uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x001E": {
+      "id": "0x001E",
+      "name": "TxBeacon­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x001E         TxBeacon­ uint32             all            C              0              RV         [MACCNT]"
+    },
+    "0x001F": {
+      "id": "0x001F",
+      "name": "TxBeacon­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x001F         TxBeacon­ uint32             all            C              0              RV         [MACCNT]"
+    },
+    "0x0020": {
+      "id": "0x0020",
+      "name": "TxOther­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0020         TxOther­       uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x0021": {
+      "id": "0x0021",
+      "name": "TxRetryCo",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0021         TxRetryCo uint32             all            C              0              RV         [MACCNT]"
+    },
+    "0x0022": {
+      "id": "0x0022",
+      "name": "TxDirect­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0022         TxDirect­      uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x0023": {
+      "id": "0x0023",
+      "name": "TxIndi­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0023         TxIndi­        uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x0024": {
+      "id": "0x0024",
+      "name": "TxErrCca­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0024         TxErrCca­ uint32             all            C              0              RV         [MACCNT]"
+    },
+    "0x0025": {
+      "id": "0x0025",
+      "name": "TxErrAbo",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0025         TxErrAbo uint32              all            C              0              RV         [MACCNT]"
+    },
+    "0x0026": {
+      "id": "0x0026",
+      "name": "TxEr­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0026         TxEr­          uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x0027": {
+      "id": "0x0027",
+      "name": "RxTotal­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0027         RxTotal­       uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x0028": {
+      "id": "0x0028",
+      "name": "RxUnicast­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0028         RxUnicast­ uint32            all            C              0              RV         [MACCNT]"
+    },
+    "0x0029": {
+      "id": "0x0029",
+      "name": "RxBroad­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0029         RxBroad­       uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x002A": {
+      "id": "0x002A",
+      "name": "RxData­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x002A         RxData­        uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x002B": {
+      "id": "0x002B",
+      "name": "RxDat­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x002B         RxDat­         uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x002C": {
+      "id": "0x002C",
+      "name": "RxBeacon­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x002C         RxBeacon­ uint32             all            C              0              RV         [MACCNT]"
+    },
+    "0x002D": {
+      "id": "0x002D",
+      "name": "RxBeacon­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x002D         RxBeacon­ uint32             all            C              0              RV         [MACCNT]"
+    },
+    "0x002E": {
+      "id": "0x002E",
+      "name": "RxOther­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x002E         RxOther­       uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x002F": {
+      "id": "0x002F",
+      "name": "RxAd­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x002F         RxAd­          uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x0030": {
+      "id": "0x0030",
+      "name": "RxDestAd­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0030         RxDestAd­ uint32             all            C              0              RV         [MACCNT]"
+    },
+    "0x0031": {
+      "id": "0x0031",
+      "name": "RxDupli­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0031         RxDupli­       uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x0032": {
+      "id": "0x0032",
+      "name": "RxEr­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0032         RxEr­          uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x0033": {
+      "id": "0x0033",
+      "name": "RxErrUnk­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0033         RxErrUnk­ uint32             all            C              0              RV         [MACCNT]"
+    },
+    "0x0034": {
+      "id": "0x0034",
+      "name": "RxErrIn­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0034         RxErrIn­       uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x0035": {
+      "id": "0x0035",
+      "name": "RxErrSec­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0035         RxErrSec­ uint32             all            C              0              RV         [MACCNT]"
+    },
+    "0x0036": {
+      "id": "0x0036",
+      "name": "RxErrFc­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0036         RxErrFc­       uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x0037": {
+      "id": "0x0037",
+      "name": "RxEr­",
+      "details": "uint32 all C 0 RV [MACCNT]",
+      "raw_line": "0x0037         RxEr­           uint32        all            C              0              RV         [MACCNT]"
+    },
+    "0x0038": {
+      "id": "0x0038",
+      "name": "Active­",
+      "details": "uint64 all X 0 RV O",
+      "raw_line": "0x0038         Active­         uint64        all            X              0              RV         O"
+    },
+    "0x0039": {
+      "id": "0x0039",
+      "name": "Pending­",
+      "details": "uint64 all X 0 RV O",
+      "raw_line": "0x0039         Pending­        uint64        all            X              0              RV         O"
+    },
+    "0x003A": {
+      "id": "0x003A",
+      "name": "Delay",
+      "details": "uint32 all X 0 RV O",
+      "raw_line": "0x003A         Delay           uint32        all            X              0              RV         O"
+    },
+    "0x003B": {
+      "id": "0x003B",
+      "name": "Security­",
+      "details": "Security­ X RV M",
+      "raw_line": "0x003B         Security­       Security­                    X                             RV         M"
+    },
+    "0x003C": {
+      "id": "0x003C",
+      "name": "Channel­",
+      "details": "octstr 4 X RV M",
+      "raw_line": "0x003C         Channel­        octstr        4              X                             RV         M"
+    },
+    "0x003D": {
+      "id": "0x003D",
+      "name": "Opera­",
+      "details": "Opera­ X RV M",
+      "raw_line": "0x003D         Opera­          Opera­                       X                             RV         M"
+    },
+    "0x003E": {
+      "id": "0x003E",
+      "name": "ActiveNet­",
+      "details": "list[Net­ max 4 RV M",
+      "raw_line": "0x003E         ActiveNet­ list[Net­          max 4                                        RV         M"
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "ResetCounts",
+      "details": "client ⇒ server Y M ERRCNT",
+      "raw_line": "0x00               ResetCounts        client ⇒ server Y                       M                     ERRCNT"
+    }
+  },
+  "events": {
+    "0x00": {
+      "id": "0x00",
+      "name": "ConnectionStatus",
+      "details": "INFO V O",
+      "raw_line": "0x00                   ConnectionStatus INFO                          V                         O"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "NetworkFault­",
+      "details": "INFO V O",
+      "raw_line": "0x01                   NetworkFault­          INFO                    V                         O"
+    }
+  },
+  "extraction_info": {
+    "start_line": 43542,
+    "end_line": 44869,
+    "total_lines": 1327
+  }
+}

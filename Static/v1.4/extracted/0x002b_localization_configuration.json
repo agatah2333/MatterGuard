@@ -1,0 +1,61 @@
+{
+  "source_file": "Localization Configuration_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x002B",
+        "name": "Localization Configuration",
+        "dataTypes": {
+          "LocalizationConfigStruct": {
+            "type": "struct",
+            "fields": {
+              "ActiveLocale": {
+                "type": "string",
+                "maxLength": 35
+              },
+              "SupportedLocales": {
+                "type": "list",
+                "elementType": {
+                  "type": "string",
+                  "maxLength": 35
+                },
+                "maxLength": 32
+              }
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "ActiveLocale",
+            "dataType": {
+              "type": "string",
+              "maxLength": 35
+            },
+            "valueRange": "BCP47 Language Tag",
+            "writable": true,
+            "privilege": "MS"
+          },
+          {
+            "id": "0x0001",
+            "name": "SupportedLocales",
+            "dataType": {
+              "type": "list",
+              "elementType": {
+                "type": "string",
+                "maxLength": 35
+              },
+              "maxLength": 32
+            },
+            "valueRange": "unique entries",
+            "writable": false,
+            "privilege": "MS"
+          }
+        ],
+        "commands": [],
+        "events": []
+      }
+    ]
+  }
+}

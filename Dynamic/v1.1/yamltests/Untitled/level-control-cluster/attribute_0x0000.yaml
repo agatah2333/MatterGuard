@@ -1,0 +1,35 @@
+config:
+  node_id: 305414945
+  cluster: '0x0008'
+  endpoint: 1
+tests:
+- label: test_read_currentlevel
+  operation: read
+  cluster: '0x0008'
+  attribute: '0x0000'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  - type: attribute_write
+    description: Ensure device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    value: 1
+  - type: attribute_read
+    description: Read current level before operation
+    cluster: '0x0008'
+    attribute: '0x0000'
+  prerequisite_confirmations:
+  - type: attribute_read
+    description: Confirm device is turned on
+    cluster: '0x0006'
+    attribute: '0x0000'
+    expected_value: 1
+execution_metadata:
+  estimated_duration: 30
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

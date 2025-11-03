@@ -1,0 +1,293 @@
+config:
+  cluster: operational-credentials-cluster
+  command: '0x09'
+  nodeId: '0x654231'
+name: operational-credentials-cluster_command_0x09_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: New NOC and ICAC will be added
+  ExpectedResponse: Success or specific error if constraints are violated
+  Pre-requisites: Ensure the device is in a state to accept new NOC
+  arguments:
+    CaseAdminSubject: '`0xFFFFFFFFFFFFFFFF`'
+    ICACValue: 400 bytes of `0xFF`
+    IPKValue: 16 bytes of `0xFF`
+    NOCValue: 400 bytes of `0xFF`
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify operational-credentials-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: No change
+  ExpectedResponse: '`FabricConflict`'
+  Pre-requisites: Ensure the `<Root Public Key, FabricID>` pair already exists on
+    the device
+  arguments:
+    CaseAdminSubject: Valid subject
+    ICACValue: Valid ICAC
+    IPKValue: Valid IPK
+    NOCValue: Valid NOC that encodes an Operational Identifier for an existing `<Root
+      Public Key, FabricID>` pair
+  label: Test_Case_Special_Response_-_FabricConflict
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify operational-credentials-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: No change
+  ExpectedResponse: '`TableFull`'
+  Pre-requisites: Ensure the device’s operational credentials table is full
+  arguments:
+    CaseAdminSubject: Valid subject
+    ICACValue: Valid ICAC
+    IPKValue: Valid IPK
+    NOCValue: Valid NOC
+  label: Test_Case_Special_Response_-_TableFull
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify operational-credentials-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: No change
+  ExpectedResponse: '`InvalidAdminSubject`'
+  Pre-requisites: Ensure the `CaseAdminSubject` is invalid
+  arguments:
+    CaseAdminSubject: Invalid subject (e.g., not in the Operational or CASE Authenticated
+      Tag range)
+    ICACValue: Valid ICAC
+    IPKValue: Valid IPK
+    NOCValue: Valid NOC
+  label: Test_Case_Special_Response_-_InvalidAdminSubject
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify operational-credentials-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: New NOC and ICAC will be added
+  ExpectedResponse: Success or specific error if constraints are violated
+  Pre-requisites: 'Ensure the device is in a state to accept new NOC
+
+
+    These test cases cover the extreme values of the constraints and the special responses
+    as mentioned in the description of the effect for the AddNOC command in the Operational
+    Credentials Cluster【4:8†source】【4:9†source】【4:19†source】.'
+  arguments:
+    CaseAdminSubject: '`0x0000000000000000`'
+    ICACValue: 1 byte of `0x00`
+    IPKValue: 1 byte of `0x00`
+    NOCValue: 1 byte of `0x00`
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify operational-credentials-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x003E'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 150
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

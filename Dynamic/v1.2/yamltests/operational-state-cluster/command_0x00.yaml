@@ -1,0 +1,43 @@
+config:
+  cluster: operational-state-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: operational-state-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: OperationalState attribute will be set to 0x02 (Paused)
+  ExpectedResponse: OperationalCommandResponse with ErrorStateID of 0x00 (NoError)
+  Pre-requisites: Device must be in the Running state
+  arguments:
+    OperationalState: 0x01 (Running)
+  label: Test_Case_Extreme_Value_(Running_State)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: No attribute will be changed
+  ExpectedResponse: OperationalCommandResponse with ErrorStateID of 0x03 (CommandInvalidInState)
+  Pre-requisites: Device must be in the Paused state
+  arguments:
+    OperationalState: 0x02 (Paused)
+  label: Test_Case_Extreme_Value_(Paused_State)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: No attribute will be changed
+  ExpectedResponse: OperationalCommandResponse with ErrorStateID of 0x03 (CommandInvalidInState)
+  Pre-requisites: Device must be in the Stopped state
+  arguments:
+    OperationalState: 0x00 (Stopped)
+  label: Test_Case_Special_Response_(Stopped_State)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: No attribute will be changed
+  ExpectedResponse: OperationalCommandResponse with ErrorStateID of 0x03 (CommandInvalidInState)
+  Pre-requisites: 'Device must be in the Error state
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    OperationalState: 0x03 (Error)
+  label: Test_Case_Special_Response_(Error_State)
+  option: SendCommand

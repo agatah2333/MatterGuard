@@ -1,0 +1,99 @@
+config:
+  node_id: 305414945
+  cluster: '0x0008'
+  endpoint: 1
+tests:
+- label: read_defaultmoverate
+  cluster: '0x0008'
+  attribute: '0x0014'
+  operation: read
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+- label: write_defaultmoverate_minimum_boundary
+  cluster: '0x0008'
+  attribute: '0x0014'
+  operation: write
+  arguments:
+    value: 1
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  post_action_verification:
+  - type: attribute_read
+    description: Verify attribute was written correctly
+    cluster: '0x0008'
+    attribute: '0x0014'
+    expected_value: 1
+- label: write_defaultmoverate_maximum_boundary
+  cluster: '0x0008'
+  attribute: '0x0014'
+  operation: write
+  arguments:
+    value: 254
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  post_action_verification:
+  - type: attribute_read
+    description: Verify attribute was written correctly
+    cluster: '0x0008'
+    attribute: '0x0014'
+    expected_value: 254
+- label: write_defaultmoverate_midrange
+  cluster: '0x0008'
+  attribute: '0x0014'
+  operation: write
+  arguments:
+    value: 127
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  post_action_verification:
+  - type: attribute_read
+    description: Verify attribute was written correctly
+    cluster: '0x0008'
+    attribute: '0x0014'
+    expected_value: 127
+- label: write_defaultmoverate_below_minimum
+  cluster: '0x0008'
+  attribute: '0x0014'
+  operation: write
+  arguments:
+    value: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  post_action_verification:
+  - type: attribute_read
+    description: Verify attribute was written correctly
+    cluster: '0x0008'
+    attribute: '0x0014'
+    expected_value: 0
+- label: write_defaultmoverate_above_maximum
+  cluster: '0x0008'
+  attribute: '0x0014'
+  operation: write
+  arguments:
+    value: 255
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  post_action_verification:
+  - type: attribute_read
+    description: Verify attribute was written correctly
+    cluster: '0x0008'
+    attribute: '0x0014'
+    expected_value: 255

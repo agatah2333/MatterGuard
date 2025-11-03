@@ -1,0 +1,40 @@
+config:
+  attribute: '0x0026'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0026_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: Primary5Intensity set to 0
+  ExpectedResponse: Success
+  Pre-requisites: NumberOfPrimaries attribute must be greater than 4
+  arguments:
+    '{"Primary5Intensity"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Primary5Intensity set to 255
+  ExpectedResponse: Success
+  Pre-requisites: NumberOfPrimaries attribute must be greater than 4
+  arguments:
+    '{"Primary5Intensity"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Primary5Intensity set to null (indicating this primary is not
+    available)
+  ExpectedResponse: Success
+  Pre-requisites: 'NumberOfPrimaries attribute must be greater than 4
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special value that indicates the primary is not available.
+
+
+    ### References
+
+    - Matter Application Cluster Specification R1.0【4:0†source】.'
+  arguments:
+    '{"Primary5Intensity"': null}
+  label: Test_Case_Special_Value_(Null_Indication)
+  option: WriteAttribute

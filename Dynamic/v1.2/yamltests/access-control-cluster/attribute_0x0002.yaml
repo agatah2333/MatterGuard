@@ -1,0 +1,55 @@
+config:
+  attribute: '0x0002'
+  cluster: access-control-cluster
+  nodeId: '0x654231'
+name: access-control-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: '`Immediate`'
+  Attribute_Change: '`SubjectsPerAccessControlEntry: 4`'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"SubjectsPerAccessControlEntry"': 4}`
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: '`Immediate`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`Constraint Error`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"SubjectsPerAccessControlEntry"': 3}`
+  label: Test_Case_Below_Minimum_Value
+  option: WriteAttribute
+- ActionTime: '`Immediate`'
+  Attribute_Change: '`SubjectsPerAccessControlEntry: 5`'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"SubjectsPerAccessControlEntry"': 5}`
+  label: Test_Case_Typical_Value
+  option: WriteAttribute
+- ActionTime: '`Immediate`'
+  Attribute_Change: '`SubjectsPerAccessControlEntry: 65535`'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"SubjectsPerAccessControlEntry"': 65535}`
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: '`Immediate`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`Constraint Error`'
+  Pre-requisites: '`None`
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    For more detailed information, you can refer to the Matter 1.2 Core Specification
+    document【4:0†source】.'
+  arguments:
+    '{"SubjectsPerAccessControlEntry"': 0}`
+  label: Test_Case_Special_Response_Scenario
+  option: WriteAttribute

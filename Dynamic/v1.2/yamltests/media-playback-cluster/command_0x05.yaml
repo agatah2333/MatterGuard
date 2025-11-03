@@ -1,0 +1,32 @@
+config:
+  cluster: media-playback-cluster
+  command: '0x05'
+  nodeId: '0x654231'
+name: media-playback-cluster_command_0x05_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: The `CurrentState` attribute will be updated to reflect the new
+    state after the "Next" command is executed.
+  ExpectedResponse: Success
+  Pre-requisites: The media playback should be in a state where moving to the next
+    item is possible (e.g., not at the end of the playlist).
+  arguments: {}
+  label: Test_Case_Extreme_Value_of_Constraints
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: No attribute will be changed as the command is not allowed.
+  ExpectedResponse: NotAllowed
+  Pre-requisites: 'The media playback is in a state where the "Next" command is not
+    allowed (e.g., during a commercial break or when the current item is the last
+    in the playlist).
+
+
+    These test cases cover the extreme values and special response scenarios for the
+    `Next` command in the Media Playback cluster.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments: {}
+  label: Test_Case_Special_Response_Scenario
+  option: SendCommand

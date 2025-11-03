@@ -1,0 +1,81 @@
+{
+  "source_file": "Air Quality_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x005B",
+        "name": "Air Quality",
+        "description": "Provides air quality classification using standardized levels",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "AirQuality",
+            "dataType": "AirQualityEnum",
+            "valueRange": "0-6",
+            "description": "Current air quality classification level",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "dataTypes": {
+          "AirQualityEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Unknown",
+              "1": "Good (0-50 AQI)",
+              "2": "Fair (51-100 AQI)",
+              "3": "Moderate (101-150 AQI)",
+              "4": "Poor (151-200 AQI)",
+              "5": "VeryPoor (201-300 AQI)",
+              "6": "ExtremelyPoor (301+ AQI)"
+            }
+          }
+        },
+        "commands": [],
+        "events": [],
+        "aqiMapping": {
+          "standard": "EPA AirNow",
+          "thresholds": [
+            {
+              "level": 1,
+              "min": 0,
+              "max": 50,
+              "color": "#00E400"
+            },
+            {
+              "level": 2,
+              "min": 51,
+              "max": 100,
+              "color": "#FFFF00"
+            },
+            {
+              "level": 3,
+              "min": 101,
+              "max": 150,
+              "color": "#FF7E00"
+            },
+            {
+              "level": 4,
+              "min": 151,
+              "max": 200,
+              "color": "#FF0000"
+            },
+            {
+              "level": 5,
+              "min": 201,
+              "max": 300,
+              "color": "#8F3F97"
+            },
+            {
+              "level": 6,
+              "min": 301,
+              "max": 500,
+              "color": "#7E0023"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

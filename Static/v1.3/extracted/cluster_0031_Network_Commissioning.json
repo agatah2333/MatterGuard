@@ -1,0 +1,166 @@
+{
+  "cluster_id": "0x0031",
+  "cluster_name": "Network Commissioning",
+  "section": "11.9",
+  "description": "Network commissioning is part of the overall Node commissioning. The main goal of Network Com­ missioning Cluster is to associate a Node with or manage a Node’s one or more network interfaces. These network interfaces can include the following types. Matter Specification R1.3                        Connectivity Standards Alliance Document 23-27349 April 17, 2024 • Wi-Fi (IEEE 802.11-2020)",
+  "data_types": {
+    "WiFiSecurityBitmap": {
+      "name": "WiFiSecurityBitmap",
+      "definition_line": "11.9.5.1. WiFiSecurityBitmap Type"
+    },
+    "ThreadCapabilitiesBitmap": {
+      "name": "ThreadCapabilitiesBitmap",
+      "definition_line": "11.9.5.2. ThreadCapabilitiesBitmap Type"
+    },
+    "WiFiBandEnum": {
+      "name": "WiFiBandEnum",
+      "definition_line": "11.9.5.3. WiFiBandEnum Type"
+    },
+    "NetworkCommissioningStatusEnum": {
+      "name": "NetworkCommissioningStatusEnum",
+      "definition_line": "11.9.5.4. NetworkCommissioningStatusEnum Type"
+    },
+    "NetworkInfoStruct": {
+      "name": "NetworkInfoStruct",
+      "definition_line": "11.9.5.5. NetworkInfoStruct Type"
+    },
+    "WiFiInterfaceScanResultStruct": {
+      "name": "WiFiInterfaceScanResultStruct",
+      "definition_line": "11.9.5.6. WiFiInterfaceScanResultStruct Type"
+    },
+    "ThreadInterfaceScanResultStruct": {
+      "name": "ThreadInterfaceScanResultStruct",
+      "definition_line": "11.9.5.7. ThreadInterfaceScanResultStruct Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "MaxNet­",
+      "details": "uint8 min 1 F RA M",
+      "raw_line": "0x0000         MaxNet­        uint8         min 1          F                             RA          M"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "Networks",
+      "details": "list[Net­ max empty RA M",
+      "raw_line": "0x0001         Networks       list[Net­     max                           empty          RA          M"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "ScanMax­",
+      "details": "uint8 desc F RV WI | TH",
+      "raw_line": "0x0002         ScanMax­       uint8         desc           F                             RV          WI | TH"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "Connect­",
+      "details": "uint8 desc F RV WI | TH",
+      "raw_line": "0x0003         Connect­       uint8         desc           F                             RV          WI | TH"
+    },
+    "0x0004": {
+      "id": "0x0004",
+      "name": "Inter­",
+      "details": "bool N true RW VA M",
+      "raw_line": "0x0004         Inter­         bool                         N              true           RW VA       M"
+    },
+    "0x0005": {
+      "id": "0x0005",
+      "name": "LastNet­",
+      "details": "Network­ X null RA M",
+      "raw_line": "0x0005         LastNet­       Network­                     X              null           RA          M"
+    },
+    "0x0006": {
+      "id": "0x0006",
+      "name": "LastNet­",
+      "details": "octstr 1 to 32 X null RA M",
+      "raw_line": "0x0006         LastNet­       octstr        1 to 32        X              null           RA          M"
+    },
+    "0x0007": {
+      "id": "0x0007",
+      "name": "LastCon­",
+      "details": "int32 X null RA M",
+      "raw_line": "0x0007         LastCon­       int32                        X              null           RA          M"
+    },
+    "0x0008": {
+      "id": "0x0008",
+      "name": "Support­",
+      "details": "list[WiFiBa min 1 F MS RV WI",
+      "raw_line": "0x0008         Support­       list[WiFiBa min 1            F              MS             RV          WI"
+    },
+    "0x0009": {
+      "id": "0x0009",
+      "name": "Support­",
+      "details": "ThreadCa­ F MS RV TH",
+      "raw_line": "0x0009         Support­      ThreadCa­                    F              MS             RV         TH"
+    },
+    "0x000A": {
+      "id": "0x000A",
+      "name": "Thread­",
+      "details": "uint16 F MS RV TH",
+      "raw_line": "0x000A         Thread­       uint16                       F              MS             RV         TH"
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "ScanNetworks",
+      "details": "client ⇒ server ScanNetwork­ A WI | TH",
+      "raw_line": "0x00               ScanNetworks client ⇒ server ScanNetwork­                   A                 WI | TH"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "ScanNetwork­",
+      "details": "client ⇐ server N WI | TH",
+      "raw_line": "0x01               ScanNetwork­ client ⇐ server N                                                WI | TH"
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "AddOrUp­",
+      "details": "client ⇒ server NetworkConfi­ A WI",
+      "raw_line": "0x02               AddOrUp­            client ⇒ server NetworkConfi­ A                           WI"
+    },
+    "0x03": {
+      "id": "0x03",
+      "name": "AddOrUp­",
+      "details": "client ⇒ server NetworkConfi­ A TH",
+      "raw_line": "0x03               AddOrUp­            client ⇒ server NetworkConfi­ A                           TH"
+    },
+    "0x04": {
+      "id": "0x04",
+      "name": "RemoveNet­",
+      "details": "client ⇒ server NetworkConfi­ A WI | TH",
+      "raw_line": "0x04               RemoveNet­         client ⇒ server NetworkConfi­ A                           WI | TH"
+    },
+    "0x05": {
+      "id": "0x05",
+      "name": "NetworkConfi­",
+      "details": "client ⇐ server N WI | TH",
+      "raw_line": "0x05               NetworkConfi­ client ⇐ server N                                              WI | TH"
+    },
+    "0x06": {
+      "id": "0x06",
+      "name": "ConnectNet­",
+      "details": "client ⇒ server ConnectNet­ A WI | TH",
+      "raw_line": "0x06               ConnectNet­        client ⇒ server ConnectNet­             A                 WI | TH"
+    },
+    "0x07": {
+      "id": "0x07",
+      "name": "ConnectNet­",
+      "details": "client ⇐ server N WI | TH",
+      "raw_line": "0x07               ConnectNet­        client ⇐ server N                                         WI | TH"
+    },
+    "0x08": {
+      "id": "0x08",
+      "name": "ReorderNet­",
+      "details": "client ⇒ server NetworkConfi­ A WI | TH",
+      "raw_line": "0x08               ReorderNet­        client ⇒ server NetworkConfi­ A                           WI | TH"
+    }
+  },
+  "events": {},
+  "extraction_info": {
+    "start_line": 40065,
+    "end_line": 41527,
+    "total_lines": 1462
+  }
+}

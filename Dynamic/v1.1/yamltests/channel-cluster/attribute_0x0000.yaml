@@ -1,0 +1,30 @@
+config:
+  attribute: '0x0000'
+  cluster: channel-cluster
+  nodeId: '0x654231'
+name: channel-cluster_attribute_0x0000_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    ChannelList: []
+  label: Test_Case_Extreme_Values
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success or Error if the list size exceeds internal limits
+  Pre-requisites: 'Ensure the system can handle large lists
+
+
+    These test cases cover the extreme values and potential special responses for
+    the `ChannelList` attribute in the Channel Cluster. The first test case checks
+    the behavior with an empty list, while the second test case checks the behavior
+    with a very large list, which could potentially trigger special responses or errors
+    due to internal limits.'
+  arguments:
+    ChannelList: '[ChannelInfo1, ChannelInfo2, ..., ChannelInfoN] (where N is a large
+      number, e.g., 1000)'
+  label: Test_Case_Special_Responses
+  option: WriteAttribute

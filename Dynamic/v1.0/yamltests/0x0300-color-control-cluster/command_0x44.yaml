@@ -1,0 +1,1674 @@
+test_metadata:
+  version: 1.0.0
+  matter_spec_version: '1.0'
+  description: Refined test cases for color-control cluster command 0x44
+  extraction_method: systematic_cluster_analysis
+config:
+  cluster: color-control-cluster
+  cluster_id: '0x0300'
+  command_id: '0x44'
+  nodeId: '0x654231'
+  endpoint: 1
+name: color-control_cluster_command_0x44_refined_v1.0.0
+test_info:
+  total_test_cases: 22
+  test_focus:
+  - Extreme values of constraints
+  - Special response scenarios
+  - Error conditions
+test_summary: '- There are 22 test cases in the sendcommand
+
+  - The range of each field is {"UpdateFlags": "[0, 255]", "Action": "[0, 255]", "Direction":
+  "[0, 255]", "Time": "[0, 255]", "StartHue": "[0, 255]", "OptionsMask": "[0, 255]",
+  "OptionsOverride": "[0, 255]"}'
+tests:
+- test_id: TC_ColorLoopSet_001
+  label: Test_Case_Basic_ColorLoopSet
+  description: Basic test for ColorLoopSet command
+  test_type: normal_operation
+  Pre-requisites:
+  - Device supports ColorLoopSet command
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 0
+    Time: 0
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: Command executed successfully
+  formatted_output: 'Test case 1:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 0, "Time":
+    0, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: Command executed
+    successfully
+
+    - Any pre-requisites: Device supports ColorLoopSet command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_002
+  label: Test_Case_Min_UpdateFlags
+  description: Test ColorLoopSet with minimum UpdateFlags value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports ColorLoopSet command
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 0
+    Time: 0
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: UpdateFlags set to minimum value
+  formatted_output: 'Test case 2:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 0, "Time":
+    0, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: UpdateFlags
+    set to minimum value
+
+    - Any pre-requisites: Device supports ColorLoopSet command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_003
+  label: Test_Case_Max_UpdateFlags
+  description: Test ColorLoopSet with maximum UpdateFlags value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports ColorLoopSet command
+  option: SendCommand
+  arguments:
+    UpdateFlags: 255
+    Action: 0
+    Direction: 0
+    Time: 0
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: UpdateFlags set to maximum value
+  formatted_output: 'Test case 3:
+
+    - Value of each field: {"UpdateFlags": 255, "Action": 0, "Direction": 0, "Time":
+    0, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: UpdateFlags
+    set to maximum value
+
+    - Any pre-requisites: Device supports ColorLoopSet command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_004
+  label: Test_Case_Null_UpdateFlags
+  description: Test ColorLoopSet with null UpdateFlags value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null UpdateFlags handling
+  option: SendCommand
+  arguments:
+    UpdateFlags: 255
+    Action: 0
+    Direction: 0
+    Time: 0
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for UpdateFlags
+  formatted_output: 'Test case 4:
+
+    - Value of each field: {"UpdateFlags": 255, "Action": 0, "Direction": 0, "Time":
+    0, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for UpdateFlags
+
+    - Any pre-requisites: Device supports null UpdateFlags handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_005
+  label: Test_Case_Min_Action
+  description: Test ColorLoopSet with minimum Action value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports ColorLoopSet command
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 0
+    Time: 0
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: Action set to minimum value
+  formatted_output: 'Test case 5:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 0, "Time":
+    0, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: Action set to
+    minimum value
+
+    - Any pre-requisites: Device supports ColorLoopSet command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_006
+  label: Test_Case_Max_Action
+  description: Test ColorLoopSet with maximum Action value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports ColorLoopSet command
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 255
+    Direction: 0
+    Time: 0
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: Action set to maximum value
+  formatted_output: 'Test case 6:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 255, "Direction": 0, "Time":
+    0, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: Action set to
+    maximum value
+
+    - Any pre-requisites: Device supports ColorLoopSet command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_007
+  label: Test_Case_Null_Action
+  description: Test ColorLoopSet with null Action value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null Action handling
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 255
+    Direction: 0
+    Time: 0
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for Action
+  formatted_output: 'Test case 7:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 255, "Direction": 0, "Time":
+    0, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for Action
+
+    - Any pre-requisites: Device supports null Action handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_008
+  label: Test_Case_Min_Direction
+  description: Test ColorLoopSet with minimum Direction value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports ColorLoopSet command
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 0
+    Time: 0
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: Direction set to minimum value
+  formatted_output: 'Test case 8:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 0, "Time":
+    0, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: Direction set
+    to minimum value
+
+    - Any pre-requisites: Device supports ColorLoopSet command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_009
+  label: Test_Case_Max_Direction
+  description: Test ColorLoopSet with maximum Direction value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports ColorLoopSet command
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 255
+    Time: 0
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: Direction set to maximum value
+  formatted_output: 'Test case 9:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 255, "Time":
+    0, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: Direction set
+    to maximum value
+
+    - Any pre-requisites: Device supports ColorLoopSet command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_010
+  label: Test_Case_Null_Direction
+  description: Test ColorLoopSet with null Direction value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null Direction handling
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 255
+    Time: 0
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for Direction
+  formatted_output: 'Test case 10:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 255, "Time":
+    0, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for Direction
+
+    - Any pre-requisites: Device supports null Direction handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_011
+  label: Test_Case_Min_Time
+  description: Test ColorLoopSet with minimum Time value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports ColorLoopSet command
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 0
+    Time: 0
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: Time set to minimum value
+  formatted_output: 'Test case 11:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 0, "Time":
+    0, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: Time set to
+    minimum value
+
+    - Any pre-requisites: Device supports ColorLoopSet command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_012
+  label: Test_Case_Max_Time
+  description: Test ColorLoopSet with maximum Time value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports ColorLoopSet command
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 0
+    Time: 255
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 255
+  ExpectedResponse: Success
+  Attribute_Change: Time set to maximum value
+  formatted_output: 'Test case 12:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 0, "Time":
+    255, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 255
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: Time set to
+    maximum value
+
+    - Any pre-requisites: Device supports ColorLoopSet command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_013
+  label: Test_Case_Null_Time
+  description: Test ColorLoopSet with null Time value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null Time handling
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 0
+    Time: 255
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for Time
+  formatted_output: 'Test case 13:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 0, "Time":
+    255, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for Time
+
+    - Any pre-requisites: Device supports null Time handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_014
+  label: Test_Case_Min_StartHue
+  description: Test ColorLoopSet with minimum StartHue value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports ColorLoopSet command
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 0
+    Time: 0
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: StartHue set to minimum value
+  formatted_output: 'Test case 14:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 0, "Time":
+    0, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: StartHue set
+    to minimum value
+
+    - Any pre-requisites: Device supports ColorLoopSet command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_015
+  label: Test_Case_Max_StartHue
+  description: Test ColorLoopSet with maximum StartHue value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports ColorLoopSet command
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 0
+    Time: 0
+    StartHue: 255
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: StartHue set to maximum value
+  formatted_output: 'Test case 15:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 0, "Time":
+    0, "StartHue": 255, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: StartHue set
+    to maximum value
+
+    - Any pre-requisites: Device supports ColorLoopSet command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_016
+  label: Test_Case_Null_StartHue
+  description: Test ColorLoopSet with null StartHue value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null StartHue handling
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 0
+    Time: 0
+    StartHue: 255
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for StartHue
+  formatted_output: 'Test case 16:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 0, "Time":
+    0, "StartHue": 255, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for StartHue
+
+    - Any pre-requisites: Device supports null StartHue handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_017
+  label: Test_Case_Min_OptionsMask
+  description: Test ColorLoopSet with minimum OptionsMask value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports ColorLoopSet command
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 0
+    Time: 0
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: OptionsMask set to minimum value
+  formatted_output: 'Test case 17:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 0, "Time":
+    0, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: OptionsMask
+    set to minimum value
+
+    - Any pre-requisites: Device supports ColorLoopSet command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_018
+  label: Test_Case_Max_OptionsMask
+  description: Test ColorLoopSet with maximum OptionsMask value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports ColorLoopSet command
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 0
+    Time: 0
+    StartHue: 0
+    OptionsMask: 255
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: OptionsMask set to maximum value
+  formatted_output: 'Test case 18:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 0, "Time":
+    0, "StartHue": 0, "OptionsMask": 255, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: OptionsMask
+    set to maximum value
+
+    - Any pre-requisites: Device supports ColorLoopSet command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_019
+  label: Test_Case_Null_OptionsMask
+  description: Test ColorLoopSet with null OptionsMask value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null OptionsMask handling
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 0
+    Time: 0
+    StartHue: 0
+    OptionsMask: 255
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for OptionsMask
+  formatted_output: 'Test case 19:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 0, "Time":
+    0, "StartHue": 0, "OptionsMask": 255, "OptionsOverride": 0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for OptionsMask
+
+    - Any pre-requisites: Device supports null OptionsMask handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_020
+  label: Test_Case_Min_OptionsOverride
+  description: Test ColorLoopSet with minimum OptionsOverride value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports ColorLoopSet command
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 0
+    Time: 0
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: OptionsOverride set to minimum value
+  formatted_output: 'Test case 20:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 0, "Time":
+    0, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: OptionsOverride
+    set to minimum value
+
+    - Any pre-requisites: Device supports ColorLoopSet command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_021
+  label: Test_Case_Max_OptionsOverride
+  description: Test ColorLoopSet with maximum OptionsOverride value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports ColorLoopSet command
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 0
+    Time: 0
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 255
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: OptionsOverride set to maximum value
+  formatted_output: 'Test case 21:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 0, "Time":
+    0, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 255}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: OptionsOverride
+    set to maximum value
+
+    - Any pre-requisites: Device supports ColorLoopSet command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_ColorLoopSet_022
+  label: Test_Case_Null_OptionsOverride
+  description: Test ColorLoopSet with null OptionsOverride value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null OptionsOverride handling
+  option: SendCommand
+  arguments:
+    UpdateFlags: 0
+    Action: 0
+    Direction: 0
+    Time: 0
+    StartHue: 0
+    OptionsMask: 0
+    OptionsOverride: 255
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for OptionsOverride
+  formatted_output: 'Test case 22:
+
+    - Value of each field: {"UpdateFlags": 0, "Action": 0, "Direction": 0, "Time":
+    0, "StartHue": 0, "OptionsMask": 0, "OptionsOverride": 255}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for OptionsOverride
+
+    - Any pre-requisites: Device supports null OptionsOverride handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true

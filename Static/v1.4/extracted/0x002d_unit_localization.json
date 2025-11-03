@@ -1,0 +1,35 @@
+{
+  "source_file": "Unit Localization_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x002D",
+        "name": "Unit Localization",
+        "dataTypes": {
+          "TempUnitEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "Fahrenheit",
+              "1": "Celsius",
+              "2": "Kelvin"
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "TemperatureUnit",
+            "dataType": "TempUnitEnum",
+            "valueRange": "all",
+            "writable": true,
+            "privilege": "RW",
+            "description": "The TemperatureUnit attribute SHALL indicate the unit for the Node to use only when conveying temperature in communication to the user. If provided, this value SHALL take priority over any unit implied through the ActiveLocale Attribute."
+          }
+        ],
+        "commands": [],
+        "events": []
+      }
+    ]
+  }
+}

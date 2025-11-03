@@ -1,0 +1,59 @@
+config:
+  attribute: '0x0004'
+  cluster: level-control-cluster
+  nodeId: '0x654231'
+name: level-control-cluster_attribute_0x0004_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: CurrentFrequency set to MinFrequency
+  ExpectedResponse: Success
+  Pre-requisites: MinFrequency must be defined and valid.
+  arguments:
+    '{"CurrentFrequency"': MinFrequency}
+  label: Test_Case_Minimum_Value_of_the_Constraint
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: CurrentFrequency set to MaxFrequency
+  ExpectedResponse: Success
+  Pre-requisites: MaxFrequency must be defined and valid.
+  arguments:
+    '{"CurrentFrequency"': MaxFrequency}
+  label: Test_Case_Maximum_Value_of_the_Constraint
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Error (Constraint Error)
+  Pre-requisites: MinFrequency must be defined and valid.
+  arguments:
+    '{"CurrentFrequency"': MinFrequency - 1}
+  label: Test_Case_Value_Just_Below_Minimum_Constraint
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Error (Constraint Error)
+  Pre-requisites: MaxFrequency must be defined and valid.
+  arguments:
+    '{"CurrentFrequency"': MaxFrequency + 1}
+  label: Test_Case_Value_Just_Above_Maximum_Constraint
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: CurrentFrequency set to 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"CurrentFrequency"': 0}
+  label: Test_Case_Special_Response_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Error (Undefined Value)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:7†source】【4:12†source】【4:18†source】.'
+  arguments:
+    '{"CurrentFrequency"': null}
+  label: Test_Case_Undefined_Value_(Null)
+  option: WriteAttribute

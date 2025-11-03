@@ -1,0 +1,30 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x00'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x00_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`OperationalState` will be set to `Error`'
+  ExpectedResponse: '`OperationalError`'
+  Pre-requisites: The device must be in a state where it can detect and report errors.
+  arguments:
+    '{"ErrorState"': <maximum_value>}`
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`OperationalState` will be set to `Error`'
+  ExpectedResponse: '`OperationalError`'
+  Pre-requisites: "The device must be in a state where it can detect and report the\
+    \ specific error condition.\n\n### Explanation\n\n1. **Extreme Values of the Constraints\
+    \ of the Field**:\n   - This test case ensures that the system can handle the\
+    \ maximum possible value for the `ErrorState` field, which is part of the `ErrorStateStruct`.\n\
+    \n2. **Values of the Field That Could Result in Special Responses**:\n   - This\
+    \ test case checks for specific error values that might trigger special handling\
+    \ or responses from the system. The exact value would depend on the defined `ErrorStateStruct`.\n\
+    \n### References\n- The information about the `OperationalError` event and its\
+    \ fields is derived from the Matter 1.2 Application Cluster Specification【4:0†source】."
+  arguments:
+    '{"ErrorState"': <specific_error_value>}`
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SubscribeToEvent

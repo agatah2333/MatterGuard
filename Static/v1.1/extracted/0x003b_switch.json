@@ -1,0 +1,39 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x003b",
+    "name": "Switch",
+    "description": "SHALL support the FeatureMap bitmap attribute as defined below."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x000",
+      "name": "NumberOfPositions",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x000",
+      "name": "CurrentPosition",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x000",
+      "name": "MultiPressMax",
+      "data_type": "uint8",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    }
+  ],
+  "events": []
+}

@@ -1,0 +1,16 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0508",
+    "name": "Low Power",
+    "description": "This cluster provides an interface for managing low power mode on a device."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "Sleep"
+    }
+  ],
+  "attributes": [],
+  "events": []
+}

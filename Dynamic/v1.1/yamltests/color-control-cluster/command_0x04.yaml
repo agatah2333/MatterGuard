@@ -1,0 +1,51 @@
+config:
+  cluster: color-control-cluster
+  command: '0x04'
+  nodeId: '0x654231'
+name: color-control-cluster_command_0x04_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '`ColorMode` set to 1'
+  ExpectedResponse: No movement, stops any ongoing operation
+  Pre-requisites: None
+  arguments:
+    MoveMode: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+    Rate: 0
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '`ColorMode` set to 1'
+  ExpectedResponse: Moves saturation up at maximum rate
+  Pre-requisites: None
+  arguments:
+    MoveMode: 1
+    OptionsMask: 0
+    OptionsOverride: 0
+    Rate: 254
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '`ColorMode` set to 1'
+  ExpectedResponse: Moves saturation down at maximum rate
+  Pre-requisites: None
+  arguments:
+    MoveMode: 3
+    OptionsMask: 0
+    OptionsOverride: 0
+    Rate: 254
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: No effect, INVALID_COMMAND response
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    MoveMode: 1
+    OptionsMask: 0
+    OptionsOverride: 0
+    Rate: 0
+  option: SendCommand

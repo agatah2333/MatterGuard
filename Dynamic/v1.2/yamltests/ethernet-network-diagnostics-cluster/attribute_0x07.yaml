@@ -1,0 +1,42 @@
+config:
+  attribute: '0x07'
+  cluster: ethernet-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: ethernet-network-diagnostics-cluster_attribute_0x07_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`CarrierDetect` = `true`'
+  ExpectedResponse: '`Carrier Detect control signal is present`'
+  Pre-requisites: '`Ethernet interface must be configured and operational`'
+  arguments:
+    CarrierDetect: '`true`'
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`CarrierDetect` = `false`'
+  ExpectedResponse: '`Carrier Detect control signal is not present`'
+  Pre-requisites: '`Ethernet interface must be configured and operational`'
+  arguments:
+    CarrierDetect: '`false`'
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`CarrierDetect` = `null`'
+  ExpectedResponse: '`Ethernet interface is not currently configured or operational`'
+  Pre-requisites: '`Ethernet interface must not be configured or operational`'
+  arguments:
+    CarrierDetect: '`null`'
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`CarrierDetect` = `true`'
+  ExpectedResponse: '`Carrier Detect control signal is present`'
+  Pre-requisites: '`Ethernet interface must be configured and operational`
+
+
+    These test cases cover the extreme values of the `CarrierDetect` attribute and
+    the special responses as mentioned in the description of the effect.
+
+
+    For more detailed information, you can refer to the Matter 1.2 Core Specification
+    document【4:0†source】.'
+  arguments:
+    CarrierDetect: '`true`'
+  option: WriteAttribute

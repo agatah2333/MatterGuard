@@ -1,0 +1,49 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0406",
+    "name": "Occupancy Sensing",
+    "description": "This cluster provides an interface to occupancy sensing functionality, including configuration and provision of notifications."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x0300",
+      "name": "Color",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    },
+    {
+      "id": "0x0301",
+      "name": "Ballast",
+      "parameters": [],
+      "privilege": "V",
+      "side": "server"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Occupancy",
+      "type": "map8",
+      "description": "Occupancy attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "OccupancySensorType",
+      "type": "enum8",
+      "constraint": "desc",
+      "description": "OccupancySensorType attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "OccupancySen",
+      "type": "unknown",
+      "description": "OccupancySen attribute",
+      "access": "R"
+    }
+  ],
+  "events": []
+}

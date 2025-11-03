@@ -1,0 +1,20 @@
+config:
+  node_id: 305414945
+  cluster: '0x0003'
+  endpoint: 1
+tests:
+- label: test_read_identifytype
+  operation: read
+  cluster: '0x0003'
+  attribute: '0x0001'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+execution_metadata:
+  estimated_duration: 30
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

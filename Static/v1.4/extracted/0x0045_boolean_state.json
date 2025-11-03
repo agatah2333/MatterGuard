@@ -1,0 +1,43 @@
+{
+  "source_file": "Boolean State_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0045",
+        "name": "Boolean State",
+        "description": "This cluster provides an interface to a boolean state.",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "StateValue",
+            "dataType": "bool",
+            "valueRange": "true/false",
+            "description": "Represents a boolean state with semantics defined by the device type",
+            "privilege": "P",
+            "writable": false
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "StateChange",
+            "parameters": {
+              "dataType": "bool",
+              "valueRange": "state transition",
+              "description": "Generated when the StateValue attribute changes"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "BooleanStateStruct": {
+            "baseType": "bool",
+            "description": "Basic boolean state representation"
+          }
+        }
+      }
+    ]
+  }
+}

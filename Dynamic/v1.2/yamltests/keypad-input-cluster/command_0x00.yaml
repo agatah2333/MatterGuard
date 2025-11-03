@@ -1,0 +1,43 @@
+config:
+  cluster: keypad-input-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: keypad-input-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: Device should support the key code 0.
+  arguments:
+    KeyCode: 0
+  label: Test_Case_Minimum_Value_of_KeyCode
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: N/A
+  ExpectedResponse: UnsupportedKey
+  Pre-requisites: Device should not support the key code 255.
+  arguments:
+    KeyCode: 255
+  label: Test_Case_Maximum_Value_of_KeyCode
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: N/A
+  ExpectedResponse: UnsupportedKey
+  Pre-requisites: Device should not support the key code 128.
+  arguments:
+    KeyCode: <unsupported_key_code> (e.g., 128 if not supported)
+  label: Test_Case_Special_Response_-_UnsupportedKey
+  option: SendCommand
+- ActionTime: During an invalid state (e.g., when the device is in a state that does
+    not accept key inputs)
+  Attribute_Change: N/A
+  ExpectedResponse: InvalidKeyInCurrentState
+  Pre-requisites: 'Device should be in a state that does not accept key inputs.
+
+
+    These test cases cover the extreme values of the `KeyCode` field and the special
+    responses as mentioned in the description of the effect【4:2†source】【4:3†source】【4:6†source】【4:19†source】.'
+  arguments:
+    KeyCode: <valid_key_code> (e.g., 1 for UP)
+  label: Test_Case_Special_Response_-_InvalidKeyInCurrentState
+  option: SendCommand

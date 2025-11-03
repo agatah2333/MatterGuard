@@ -1,0 +1,222 @@
+config:
+  cluster: thermostat-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: thermostat-cluster_command_0x02_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: Heat Setpoint, clamped to `MinHeatSetpointLimit`
+  ExpectedResponse: Clamped to `MinHeatSetpointLimit`
+  Pre-requisites: Ensure `MinHeatSetpointLimit` is set.
+  arguments:
+    '{"Mode"': '0, "Amount": -128}'
+  label: Test_Case_Extreme_Values_(Minimum)
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify thermostat-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: Cool Setpoint, clamped to `MaxCoolSetpointLimit`
+  ExpectedResponse: Clamped to `MaxCoolSetpointLimit`
+  Pre-requisites: Ensure `MaxCoolSetpointLimit` is set.
+  arguments:
+    '{"Mode"': '1, "Amount": 127}'
+  label: Test_Case_Extreme_Values_(Maximum)
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify thermostat-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: Heat Setpoint, increased by 1.0°C
+  ExpectedResponse: Adjust Heat Setpoint by 1.0°C
+  Pre-requisites: Ensure the current Heat Setpoint is within the limits.
+  arguments:
+    '{"Mode"': '0, "Amount": 10}'
+  label: Test_Case_Special_Response_(Heat_Mode)
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify thermostat-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: Both Heat and Cool Setpoints, decreased by 0.5°C
+  ExpectedResponse: Adjust both Heat and Cool Setpoints by -0.5°C
+  Pre-requisites: 'Ensure both setpoints are within the limits.
+
+
+    These test cases cover the extreme values and special responses for the `Setpoint
+    Raise/Lower` command in the Thermostat cluster【4:0†source】.'
+  arguments:
+    '{"Mode"': '2, "Amount": -5}'
+  label: Test_Case_Special_Response_(Both_Modes)
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify thermostat-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0201'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

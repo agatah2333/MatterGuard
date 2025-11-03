@@ -1,0 +1,49 @@
+config:
+  attribute: '0x0008'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0008_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: ColorMode = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ColorMode"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: ColorMode = 2
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ColorMode"': 2}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: ColorMode = 1
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ColorMode"': 1}
+  label: Test_Case_Default_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Error (Invalid Value)
+  Pre-requisites: None
+  arguments:
+    '{"ColorMode"': -1}
+  label: Test_Case_Invalid_Value_(Below_Range)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Error (Invalid Value)
+  Pre-requisites: 'None
+
+
+    ### Special Responses'
+  arguments:
+    '{"ColorMode"': 3}
+  label: Test_Case_Invalid_Value_(Above_Range)
+  option: WriteAttribute

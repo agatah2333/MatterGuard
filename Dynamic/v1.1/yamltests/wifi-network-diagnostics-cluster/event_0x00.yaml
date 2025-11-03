@@ -1,0 +1,28 @@
+config:
+  cluster: wifi-network-diagnostics-cluster
+  event: '0x00'
+  nodeId: '0x654231'
+name: wifi-network-diagnostics-cluster_event_0x00_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"DisconnectionReason": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: '<none>
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"ReasonCode"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '{"DisconnectionReason": 1}'
+  ExpectedResponse: <deauthenticated>
+  Pre-requisites: '<none>
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"ReasonCode"': 1}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SubscribeToEvent

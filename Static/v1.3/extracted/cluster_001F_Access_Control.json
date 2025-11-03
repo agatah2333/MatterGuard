@@ -1,0 +1,84 @@
+{
+  "cluster_id": "0x001F",
+  "cluster_name": "Access Control",
+  "section": "9.10",
+  "description": "The Access Control Cluster exposes a data model view of a Node’s Access Control List (ACL), which codifies the rules used to manage and enforce Access Control for the Node’s endpoints and their associated cluster instances. Access to this Access Control Cluster itself requires a special Adminis­ ter privilege level, such that only Nodes granted such privilege (hereafter termed \"Administrators\") can manage the Access Control Cluster.",
+  "data_types": {
+    "ChangeTypeEnum": {
+      "name": "ChangeTypeEnum",
+      "definition_line": "9.10.4.1. ChangeTypeEnum Type"
+    },
+    "AccessControlEntryPrivilegeEnum": {
+      "name": "AccessControlEntryPrivilegeEnum",
+      "definition_line": "9.10.4.2. AccessControlEntryPrivilegeEnum Type"
+    },
+    "AccessControlEntryAuthModeEnum": {
+      "name": "AccessControlEntryAuthModeEnum",
+      "definition_line": "9.10.4.3. AccessControlEntryAuthModeEnum Type"
+    },
+    "AccessControlTargetStruct": {
+      "name": "AccessControlTargetStruct",
+      "definition_line": "9.10.4.4. AccessControlTargetStruct Type"
+    },
+    "AccessControlEntryStruct": {
+      "name": "AccessControlEntryStruct",
+      "definition_line": "9.10.4.5. AccessControlEntryStruct Type"
+    },
+    "AccessControlExtensionStruct": {
+      "name": "AccessControlExtensionStruct",
+      "definition_line": "9.10.4.6. AccessControlExtensionStruct Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "ACL",
+      "details": "list[Access­ desc desc RW A F M",
+      "raw_line": "0x0000         ACL            list[Access­ desc                           desc           RW A F     M"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "Extension",
+      "details": "list[Access­ desc desc RW A F O",
+      "raw_line": "0x0001         Extension list[Access­ desc                                desc           RW A F     O"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "Sub­",
+      "details": "uint16 min 4 F 4 RV M",
+      "raw_line": "0x0002         Sub­           uint16        min 4          F              4              RV         M"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "Tar­",
+      "details": "uint16 min 3 F 3 RV M",
+      "raw_line": "0x0003         Tar­           uint16        min 3          F              3              RV         M"
+    },
+    "0x0004": {
+      "id": "0x0004",
+      "name": "Access­",
+      "details": "uint16 min 4 F 4 RV M",
+      "raw_line": "0x0004         Access­        uint16        min 4          F              4              RV         M"
+    }
+  },
+  "commands": {},
+  "events": {
+    "0x00": {
+      "id": "0x00",
+      "name": "AccessControlEn­",
+      "details": "INFO AS M",
+      "raw_line": "0x00                   AccessControlEn­ INFO                           AS                       M"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "AccessControlEx­",
+      "details": "INFO AS M",
+      "raw_line": "0x01                   AccessControlEx­ INFO                           AS                       M"
+    }
+  },
+  "extraction_info": {
+    "start_line": 28964,
+    "end_line": 30500,
+    "total_lines": 1536
+  }
+}

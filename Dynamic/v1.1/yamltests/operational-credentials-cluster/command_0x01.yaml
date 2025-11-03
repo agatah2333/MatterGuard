@@ -1,0 +1,59 @@
+config:
+  cluster: operational-credentials-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: operational-credentials-cluster_command_0x01_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '- `WindowStatus` to `Open`'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '"CommissioningTimeout"': 0,
+    '"Discriminator"': 0,
+    '"Iterations"': 1000,
+    '"PAKEPasscodeVerifier"': '"<minimum_valid_value>",'
+    '"Salt"': '"<16_byte_value>"'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: '- `WindowStatus` to `Open`'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '"CommissioningTimeout"': 65535,
+    '"Discriminator"': 2047,
+    '"Iterations"': 100000,
+    '"PAKEPasscodeVerifier"': '"<maximum_valid_value>",'
+    '"Salt"': '"<32_byte_value>"'
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: '- None'
+  ExpectedResponse: Busy
+  Pre-requisites: An existing commissioning window is already open.
+  arguments:
+    '"CommissioningTimeout"': 300,
+    '"Discriminator"': 100,
+    '"Iterations"': 5000,
+    '"PAKEPasscodeVerifier"': '"<valid_value>",'
+    '"Salt"': '"<20_byte_value>"'
+  label: Test_Case_Special_Response_-_Busy
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: '- None'
+  ExpectedResponse: PAKEParameterError
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '"CommissioningTimeout"': 300,
+    '"Discriminator"': 100,
+    '"Iterations"': 5000,
+    '"PAKEPasscodeVerifier"': '"<invalid_value>",'
+    '"Salt"': '"<20_byte_value>"'
+  label: Test_Case_Special_Response_-_PAKEParameterError
+  option: SendCommand

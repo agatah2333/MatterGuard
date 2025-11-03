@@ -1,0 +1,45 @@
+{
+  "source_file": "Fixed Label_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0040",
+        "name": "Fixed Label",
+        "dataTypes": {
+          "LabelStruct": {
+            "type": "struct",
+            "fields": {
+              "Label": {
+                "type": "string",
+                "maxLength": 16
+              },
+              "Value": {
+                "type": "string",
+                "maxLength": 16
+              }
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "LabelList",
+            "dataType": {
+              "type": "list",
+              "elementType": {
+                "type": "struct",
+                "fields": "LabelStruct"
+              }
+            },
+            "valueRange": "derived",
+            "writable": false,
+            "privilege": "R"
+          }
+        ],
+        "commands": [],
+        "events": []
+      }
+    ]
+  }
+}

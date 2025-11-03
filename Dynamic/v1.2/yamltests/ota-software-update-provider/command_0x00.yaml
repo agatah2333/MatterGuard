@@ -1,0 +1,59 @@
+config:
+  cluster: ota-software-update-provider
+  command: '0x00'
+  nodeId: '0x654231'
+name: ota-software-update-provider_command_0x00_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AnnouncementReason: 0
+    Endpoint: '0xFF'
+    MetadataForNode: (empty)
+    ProviderNodeID: '0xFFFFFFFFFFFFFFFF'
+    VendorID: '0xFFFF'
+  label: Test_Case_Extreme_Values_of_Constraints
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AnnouncementReason: 2
+    Endpoint: '0x00'
+    MetadataForNode: (512 bytes of data)
+    ProviderNodeID: '0x0000000000000001'
+    VendorID: '0x0000'
+  label: Test_Case_Extreme_Values_of_Constraints
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: UNSUPPORTED_ACCESS
+  Pre-requisites: Accessing fabric index is 0
+  arguments:
+    AnnouncementReason: 1
+    Endpoint: '0x00'
+    MetadataForNode: (empty)
+    ProviderNodeID: '0x0000000000000001'
+    VendorID: '0x0000'
+  label: Test_Case_Special_Response_-_Unsupported_Access
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:3†source】【4:7†source】.'
+  arguments:
+    AnnouncementReason: 2
+    Endpoint: '0x01'
+    MetadataForNode: (empty)
+    ProviderNodeID: '0x0000000000000002'
+    VendorID: '0x1234'
+  label: Test_Case_Special_Response_-_Urgent_Update_Available
+  option: SendCommand

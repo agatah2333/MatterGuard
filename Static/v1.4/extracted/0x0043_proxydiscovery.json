@@ -1,0 +1,57 @@
+{
+  "source_file": "ProxyDiscovery_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0043",
+        "name": "ProxyDiscovery",
+        "dataTypes": {},
+        "attributes": [],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ProxyDiscoverRequest",
+            "parameters": {
+              "SourceNodeID": {
+                "type": "node-id",
+                "valueRange": "all"
+              },
+              "AttributePathCount": {
+                "type": "uint16",
+                "valueRange": "desc"
+              },
+              "EventPathCount": {
+                "type": "uint16",
+                "valueRange": "desc"
+              }
+            },
+            "privilege": "O",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x01",
+            "name": "ProxyDiscoverResponse",
+            "parameters": {
+              "ProxiedNodeID": {
+                "type": "node-id",
+                "valueRange": "all"
+              },
+              "HopCount": {
+                "type": "uint16",
+                "valueRange": "desc"
+              },
+              "SupportedAttributes": {
+                "type": "uint16",
+                "valueRange": "desc"
+              }
+            },
+            "privilege": "M",
+            "direction": "serverToClient"
+          }
+        ],
+        "events": []
+      }
+    ]
+  }
+}

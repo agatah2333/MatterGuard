@@ -1,0 +1,45 @@
+{
+  "source_file": "Laundry Dryer Controls_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x004A",
+        "name": "Laundry Dryer Controls",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SupportedDrynessLevels",
+            "dataType": "list[DrynessLevelEnum]",
+            "valueRange": "0-3",
+            "description": "This attribute SHALL indicate the list of supported dryness levels available to the appliance in the currently selected mode.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "DrynessLevel",
+            "dataType": "DrynessLevelEnum",
+            "valueRange": "0-3",
+            "description": "This attribute SHALL indicate the current dryness level setting of the server.",
+            "privilege": "RW",
+            "writable": true
+          }
+        ],
+        "commands": [],
+        "events": [],
+        "dataTypes": {
+          "DrynessLevelEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Low",
+              "1": "Normal",
+              "2": "Extra",
+              "3": "Max"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

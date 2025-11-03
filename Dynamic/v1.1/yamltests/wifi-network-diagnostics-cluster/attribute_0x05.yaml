@@ -1,0 +1,52 @@
+config:
+  attribute: '0x05'
+  cluster: wifi-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: wifi-network-diagnostics-cluster_attribute_0x05_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: LastNetworkingStatus will be set to 0 (Success)
+  ExpectedResponse: Success
+  Pre-requisites: The device must have attempted a network connection.
+  arguments:
+    '{"LastNetworkingStatus"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: LastNetworkingStatus will be set to 1 (Failure)
+  ExpectedResponse: Failure
+  Pre-requisites: The device must have attempted a network connection and failed.
+  arguments:
+    '{"LastNetworkingStatus"': 1}
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: LastNetworkingStatus will be set to null
+  ExpectedResponse: No previous connection attempt
+  Pre-requisites: No network connection attempt has been made.
+  arguments:
+    '{"LastNetworkingStatus"': null}
+  label: Test_Case_Null_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: LastNetworkingStatus will be set to 2 (Authentication Failure)
+  ExpectedResponse: Authentication Failure
+  Pre-requisites: The device must have attempted a network connection and failed due
+    to authentication issues.
+  arguments:
+    '{"LastNetworkingStatus"': 2}
+  label: Test_Case_Special_Failure_Case
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: LastNetworkingStatus will be set to 3 (Network Not Found)
+  ExpectedResponse: Network Not Found
+  Pre-requisites: 'The device must have attempted a network connection and failed
+    because the network was not found.
+
+
+    These test cases cover the extreme values and special responses for the `LastNetworkingStatus`
+    attribute in the Wi-Fi Network Diagnostics Cluster【4:1†source】.'
+  arguments:
+    '{"LastNetworkingStatus"': 3}
+  label: Test_Case_Network_Not_Found
+  option: WriteAttribute

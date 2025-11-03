@@ -1,0 +1,10 @@
+config:
+  attribute: '0x03'
+  cluster: ota-software-update-requestor
+  nodeId: '0x654231'
+name: ota-software-update-requestor_attribute_0x03_v1.1.0.0
+tests: []
+execution_metadata:
+  estimated_duration: 0
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

@@ -1,0 +1,34 @@
+config:
+  cluster: door-lock-cluster
+  command: '26'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_26_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  ExpectedResponse: SUCCESS
+  arguments:
+    CredentialIndex: 1
+    CredentialTypeEnum: 1 (PIN)
+  label: Test_Case_Clear_a_Single_Credential
+  option: SendCommand
+- ActionTime: Immediate
+  ExpectedResponse: SUCCESS
+  arguments:
+    CredentialIndex: '0xFFFE'
+    CredentialTypeEnum: 1 (PIN)
+  label: Test_Case_Clear_All_Credentials_of_a_Type
+  option: SendCommand
+- ActionTime: Immediate
+  ExpectedResponse: SUCCESS
+  arguments:
+    CredentialIndex: '0xFFFE'
+    CredentialTypeEnum: 0 (All Types)
+  label: Test_Case_Clear_All_Credentials
+  option: SendCommand
+- ActionTime: Immediate
+  ExpectedResponse: INVALID_COMMAND
+  arguments:
+    CredentialIndex: '0xFFFF'
+    CredentialTypeEnum: 1 (PIN)
+  label: Test_Case_Clear_Credential_with_Invalid_Index
+  option: SendCommand

@@ -1,0 +1,238 @@
+{
+  "source_file": "GroupKeyManagement_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x003F",
+        "name": "GroupKeyManagement",
+        "dataTypes": {
+          "GroupKeyMapStruct": {
+            "type": "struct",
+            "fields": {
+              "GroupId": {
+                "type": "group-id"
+              },
+              "GroupKeySetID": {
+                "type": "uint16",
+                "valueRange": "1-65535"
+              }
+            }
+          },
+          "GroupKeySecurityPolicyEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "Reserved",
+              "1": "AES-128-CCM",
+              "2": "Reserved2",
+              "3": "Reserved3"
+            }
+          },
+          "GroupKeyMulticastPolicyEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "MulticastToAll",
+              "1": "MulticastPerIndividualEndpoint"
+            }
+          },
+          "GroupKeySetStruct": {
+            "type": "struct",
+            "fields": {
+              "GroupKeySetID": {
+                "type": "uint16"
+              },
+              "GroupKeySecurityPolicy": {
+                "type": "enum8",
+                "values": {
+                  "0": "Reserved",
+                  "1": "AES-128-CCM",
+                  "2": "Reserved2",
+                  "3": "Reserved3"
+                }
+              },
+              "EpochKey0": {
+                "type": "octstr",
+                "length": 16,
+                "valueRange": "X"
+              },
+              "EpochStartTime0": {
+                "type": "epoch-us"
+              },
+              "EpochKey1": {
+                "type": "octstr",
+                "length": 16,
+                "valueRange": "X"
+              },
+              "EpochStartTime1": {
+                "type": "epoch-us"
+              },
+              "EpochKey2": {
+                "type": "octstr",
+                "length": 16,
+                "valueRange": "X"
+              },
+              "EpochStartTime2": {
+                "type": "epoch-us"
+              },
+              "GroupKeyMulticastPolicy": {
+                "type": "enum8",
+                "values": {
+                  "0": "MulticastToAll",
+                  "1": "MulticastPerIndividualEndpoint"
+                }
+              }
+            }
+          },
+          "GroupInfoMapStruct": {
+            "type": "struct",
+            "fields": {
+              "GroupId": {
+                "type": "group-id",
+                "valueRange": "all"
+              },
+              "Endpoints": {
+                "type": "list",
+                "elementType": {
+                  "type": "endpoint-no"
+                },
+                "valueRange": "min 1"
+              },
+              "GroupName": {
+                "type": "string",
+                "maxLength": 16,
+                "valueRange": "max 16"
+              }
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "GroupKeyMap",
+            "dataType": {
+              "type": "list",
+              "elementType": {
+                "type": "struct",
+                "fields": "GroupKeyMapStruct"
+              }
+            },
+            "valueRange": "desc",
+            "writable": true,
+            "privilege": "View"
+          },
+          {
+            "id": "0x0001",
+            "name": "GroupTable",
+            "dataType": {
+              "type": "list",
+              "elementType": {
+                "type": "struct",
+                "fields": "GroupInfoMapStruct"
+              }
+            },
+            "valueRange": "desc",
+            "writable": false,
+            "privilege": "View"
+          },
+          {
+            "id": "0x0002",
+            "name": "MaxGroupsPerFabric",
+            "dataType": {
+              "type": "uint16"
+            },
+            "valueRange": "all",
+            "writable": false,
+            "privilege": "View"
+          },
+          {
+            "id": "0x0003",
+            "name": "MaxGroupKeysPerFabric",
+            "dataType": {
+              "type": "uint16"
+            },
+            "valueRange": "1-65535",
+            "writable": false,
+            "privilege": "View"
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "KeySetWrite",
+            "parameters": {
+              "dataType": {
+                "type": "struct",
+                "fields": "GroupKeySetStruct"
+              }
+            },
+            "privilege": "Administer",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x01",
+            "name": "KeySetRead",
+            "parameters": {
+              "dataType": {
+                "type": "uint16",
+                "valueRange": "M"
+              }
+            },
+            "privilege": "Administer",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x02",
+            "name": "KeySetReadResponse",
+            "parameters": {
+              "dataType": {
+                "type": "struct",
+                "fields": "GroupKeySetStruct"
+              }
+            },
+            "privilege": "None",
+            "direction": "serverToClient"
+          },
+          {
+            "id": "0x03",
+            "name": "KeySetRemove",
+            "parameters": {
+              "dataType": {
+                "type": "uint16",
+                "valueRange": "min 1"
+              }
+            },
+            "privilege": "Administer",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x04",
+            "name": "KeySetReadAllIndices",
+            "parameters": {
+              "dataType": {
+                "type": "void"
+              }
+            },
+            "privilege": "Administer",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x05",
+            "name": "KeySetReadAllIndicesResponse",
+            "parameters": {
+              "dataType": {
+                "type": "list",
+                "elementType": {
+                  "type": "struct",
+                  "fields": "GroupKeySetStruct"
+                }
+              }
+            },
+            "privilege": "None",
+            "direction": "serverToClient"
+          }
+        ],
+        "events": []
+      }
+    ]
+  }
+}

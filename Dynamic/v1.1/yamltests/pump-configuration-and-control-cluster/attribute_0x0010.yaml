@@ -1,0 +1,6 @@
+config:
+  attribute: '0x0010'
+  cluster: pump-configuration-and-control-cluster
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_attribute_0x0010_v1.1.0.0
+tests: []

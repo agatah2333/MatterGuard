@@ -1,0 +1,32 @@
+config:
+  attribute: '0x0001'
+  cluster: rvc-run-mode-cluster
+  nodeId: '0x654231'
+name: rvc-run-mode-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '- `CurrentMode`: 0'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    **Test Case 1.2**:'
+  arguments:
+    CurrentMode: 0
+    OnMode: 0
+    StartUpMode: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '- `CurrentMode`: 1'
+  ExpectedResponse: CleaningInProgress
+  Pre-requisites: 'None
+
+
+    **Test Case 2.2**:'
+  arguments:
+    CurrentMode: 1
+    OnMode: 1
+    StartUpMode: 1
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

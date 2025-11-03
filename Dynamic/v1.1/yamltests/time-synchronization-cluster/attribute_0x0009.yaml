@@ -1,0 +1,42 @@
+config:
+  attribute: '0x0009'
+  cluster: time-synchronization-cluster
+  nodeId: '0x654231'
+name: time-synchronization-cluster_attribute_0x0009_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: NtpServerPort set to 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Server is capable of providing an NTP server instance.
+  arguments:
+    '{"NtpServerPort"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: NtpServerPort set to 65535
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Server is capable of providing an NTP server instance.
+  arguments:
+    '{"NtpServerPort"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: NtpServerPort set to null
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Server is not currently running an NTP server.
+  arguments:
+    '{"NtpServerPort"': null}
+  label: Test_Case_Null_Value_(Special_Response)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'N/A
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special responses mentioned in the description of the effect【4:0†source】【4:11†source】.'
+  arguments:
+    '{"NtpServerPort"': 70000}
+  label: Test_Case_Invalid_Value_(Out_of_Range)
+  option: WriteAttribute

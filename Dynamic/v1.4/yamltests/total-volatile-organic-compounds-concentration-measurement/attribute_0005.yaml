@@ -1,0 +1,13 @@
+name: Total Volatile Organic Compounds Concentration Measurement - AverageMeasuredValue
+  Attribute Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Total Volatile Organic Compounds Concentration Measurement
+  timeout: 180
+tests:
+- label: Read AverageMeasuredValue attribute
+  command: readAttribute
+  attribute: AverageMeasuredValue
+  response:
+    saveAs: averagemeasuredvalue_value

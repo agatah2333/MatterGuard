@@ -1,0 +1,51 @@
+config:
+  cluster: wifi-network-diagnostics-cluster
+  event: '0x01'
+  nodeId: '0x654231'
+name: wifi-network-diagnostics-cluster_event_0x01_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: <AssociationFailureCause set to Unknown, Status set to 0>
+  ExpectedResponse: <success>
+  Pre-requisites: <None>
+  arguments:
+    '{"AssociationFailureCause"': '0, "Status": 0}'
+  label: Test_Case_Extreme_Values
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: <AssociationFailureCause set to SsidNotFound, Status set to 65535>
+  ExpectedResponse: <success>
+  Pre-requisites: <None>
+  arguments:
+    '{"AssociationFailureCause"': '3, "Status": 65535}'
+  label: Test_Case_Extreme_Values
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: <AssociationFailureCause set to AssociationFailed, Status set
+    to 1>
+  ExpectedResponse: <AssociationFailed>
+  Pre-requisites: <None>
+  arguments:
+    '{"AssociationFailureCause"': '1, "Status": 1}'
+  label: Test_Case_Special_Response_-_Association_Failed
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: <AssociationFailureCause set to AuthenticationFailed, Status set
+    to 2>
+  ExpectedResponse: <AuthenticationFailed>
+  Pre-requisites: <None>
+  arguments:
+    '{"AssociationFailureCause"': '2, "Status": 2}'
+  label: Test_Case_Special_Response_-_Authentication_Failed
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: <AssociationFailureCause set to SsidNotFound, Status set to 3>
+  ExpectedResponse: <SsidNotFound>
+  Pre-requisites: '<None>
+
+
+    ### Summary'
+  arguments:
+    '{"AssociationFailureCause"': '3, "Status": 3}'
+  label: Test_Case_Special_Response_-_SSID_Not_Found
+  option: SubscribeToEvent

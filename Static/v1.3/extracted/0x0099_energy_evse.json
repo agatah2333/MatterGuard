@@ -1,0 +1,888 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0099",
+    "name": "Energy EVSE",
+    "description": "Electric Vehicle Supply Equipment (EVSE) is equipment used to charge an Electric Vehicle (EV) or Plug-In Hybrid Electric Vehicle. This cluster provides an interface to the functionality of Electric Vehicle Supply Equipment (EVSE) management."
+  },
+  "derived_datatypes": [
+    {
+      "type": "enum",
+      "name": "StateEnum",
+      "base_data_type": "ENUM8",
+      "description": "This data type is derived from enum8.",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "NotPluggedIn",
+            "value": "0",
+            "description": "The EV is not plugged in."
+          },
+          {
+            "name": "PluggedInNoDemand",
+            "value": "1",
+            "description": "The EV is plugged in, but not demanding current."
+          },
+          {
+            "name": "PluggedInDemand",
+            "value": "2",
+            "description": "The EV is plugged in and is demanding current, but EVSE is not allowing current to flow."
+          },
+          {
+            "name": "PluggedInCharging",
+            "value": "3",
+            "description": "The EV is plugged in, charging is in progress, and current is flowing"
+          },
+          {
+            "name": "PluggedInDischarging",
+            "value": "4",
+            "description": "The EV is plugged in, discharging is in progress, and current is flowing",
+            "conformance": "V2X"
+          },
+          {
+            "name": "SessionEnding",
+            "value": "5",
+            "description": "The EVSE is transitioning from any plugged-in state to NotPluggedIn"
+          },
+          {
+            "name": "Fault",
+            "value": "6",
+            "description": "There is a fault (see FaultState attribute)"
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "SupplyStateEnum",
+      "base_data_type": "ENUM8",
+      "description": "This data type is derived from enum8.",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "Disabled",
+            "value": "0",
+            "description": "The EV is not currently allowed to charge or discharge"
+          },
+          {
+            "name": "ChargingEnabled",
+            "value": "1",
+            "description": "The EV is currently allowed to charge"
+          },
+          {
+            "name": "DischargingEnabled",
+            "value": "2",
+            "description": "The EV is currently allowed to discharge",
+            "conformance": "[V2X]"
+          },
+          {
+            "name": "DisabledError",
+            "value": "3",
+            "description": "The EV is not currently allowed to charge or discharge due to an error. The error must be cleared before operation can continue."
+          },
+          {
+            "name": "DisabledDiagnostics",
+            "value": "4",
+            "description": "The EV is not currently allowed to charge or discharge due to Diagnostics Mode."
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "FaultStateEnum",
+      "base_data_type": "ENUM8",
+      "description": "This data type is derived from enum8.",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "NoError",
+            "value": "0",
+            "description": "The EVSE is not in an error state."
+          },
+          {
+            "name": "MeterFailure",
+            "value": "1",
+            "description": "The EVSE is unable to obtain electrical measurements."
+          },
+          {
+            "name": "OverVoltage",
+            "value": "2",
+            "description": "The EVSE input voltage level is too high."
+          },
+          {
+            "name": "UnderVoltage",
+            "value": "3",
+            "description": "The EVSE input voltage level is too low."
+          },
+          {
+            "name": "OverCurrent",
+            "value": "4",
+            "description": "The EVSE detected charging current higher than allowed by charger."
+          },
+          {
+            "name": "ContactWetFailure",
+            "value": "5",
+            "description": "The EVSE detected voltage on charging pins when the contactor is open."
+          },
+          {
+            "name": "ContactDryFailure",
+            "value": "6",
+            "description": "The EVSE detected absence of voltage after enabling contactor."
+          },
+          {
+            "name": "GroundFault",
+            "value": "7",
+            "description": "The EVSE has an unbalanced current supply."
+          },
+          {
+            "name": "PowerLoss",
+            "value": "8",
+            "description": "The EVSE has detected a loss in power."
+          },
+          {
+            "name": "PowerQuality",
+            "value": "9",
+            "description": "The EVSE has detected another power quality issue (e.g. phase imbalance)."
+          },
+          {
+            "name": "PilotShortCircuit",
+            "value": "10",
+            "description": "The EVSE pilot signal amplitude short circuited to ground."
+          },
+          {
+            "name": "EmergencyStop",
+            "value": "11",
+            "description": "The emergency stop button was pressed."
+          },
+          {
+            "name": "EVDisconnected",
+            "value": "12",
+            "description": "The EVSE detected that the cable has been disconnected."
+          },
+          {
+            "name": "WrongPowerSupply",
+            "value": "13",
+            "description": "The EVSE could not determine proper power supply level."
+          },
+          {
+            "name": "LiveNeutralSwap",
+            "value": "14",
+            "description": "The EVSE detected Live and Neutral are swapped."
+          },
+          {
+            "name": "OverTemperature",
+            "value": "15",
+            "description": "The EVSE internal temperature is too high."
+          },
+          {
+            "name": "Other",
+            "value": "255",
+            "description": "Any other reason."
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "EnergyTransferStoppedReasonEnum",
+      "base_data_type": "ENUM8",
+      "description": "This data type is derived from enum8.",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "EVStopped",
+            "value": "0",
+            "description": "The EV decided to stop"
+          },
+          {
+            "name": "EVSEStopped",
+            "value": "1",
+            "description": "The EVSE decided to stop"
+          },
+          {
+            "name": "Other",
+            "value": "2",
+            "description": "An other unknown reason"
+          }
+        ]
+      }
+    },
+    {
+      "type": "bitmap",
+      "name": "TargetDayOfWeekBitmap",
+      "base_data_type": "map8",
+      "description": "This data type is derived from map8.",
+      "value_range": {
+        "bitmap_values": [
+          {
+            "name": "Sunday",
+            "bit": 0,
+            "description": "Sunday"
+          },
+          {
+            "name": "Monday",
+            "bit": 1,
+            "description": "Monday"
+          },
+          {
+            "name": "Tuesday",
+            "bit": 2,
+            "description": "Tuesday"
+          },
+          {
+            "name": "Wednesday",
+            "bit": 3,
+            "description": "Wednesday"
+          },
+          {
+            "name": "Thursday",
+            "bit": 4,
+            "description": "Thursday"
+          },
+          {
+            "name": "Friday",
+            "bit": 5,
+            "description": "Friday"
+          },
+          {
+            "name": "Saturday",
+            "bit": 6,
+            "description": "Saturday"
+          }
+        ]
+      }
+    },
+    {
+      "type": "struct",
+      "name": "ChargingTargetStruct",
+      "description": "This represents a single user specified charging target for an EV.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "TargetTimeMinutesPastMidnight",
+          "data_type": "uint16",
+          "constraint": "0 to 1439",
+          "default": "0",
+          "description": "This field SHALL indicate the desired charging completion time of the associated day."
+        },
+        {
+          "id": "1",
+          "name": "TargetSoC",
+          "data_type": "percent",
+          "default": "0",
+          "conformance": "SOC, O.a+",
+          "description": "This field represents the target SoC that the vehicle should be charged to before the TargetTimeMinutesPastMidnight."
+        },
+        {
+          "id": "2",
+          "name": "AddedEnergy",
+          "data_type": "energy-mWh",
+          "constraint": "min 0",
+          "default": "0",
+          "conformance": "O.a+",
+          "description": "This field represents the amount of energy that the user would like to have added to the vehicle before the TargetTimeMinutesPastMidnight."
+        }
+      ]
+    },
+    {
+      "type": "struct",
+      "name": "ChargingTargetScheduleStruct",
+      "description": "This represents a set of user specified charging targets for an EV for a set of specified days.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "DayOfWeekForSequence",
+          "data_type": "TargetDayOfWeekBitmap",
+          "description": "This field SHALL indicate the days of the week that the charging targets SHOULD be associated to."
+        },
+        {
+          "id": "1",
+          "name": "ChargingTargets",
+          "data_type": "list[ChargingTargetStruct]",
+          "constraint": "max 10",
+          "description": "This field SHALL indicate a list of up to 10 charging targets for each of the associated days of the week."
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x01",
+      "name": "Disable",
+      "direction": "client to server",
+      "response": "Y",
+      "parameters": [],
+      "privilege": "OT",
+      "side": "client"
+    },
+    {
+      "id": "0x02",
+      "name": "EnableCharging",
+      "direction": "client to server",
+      "response": "Y",
+      "parameters": [
+        {
+          "id": "0",
+          "name": "ChargingEnabledUntil",
+          "data_type": "epoch-s",
+          "quality": "X",
+          "default": "null",
+          "description": "This field SHALL indicate the expiry time, in UTC, when charging will be automatically disabled."
+        },
+        {
+          "id": "1",
+          "name": "MinimumChargeCurrent",
+          "data_type": "amperage-mA",
+          "constraint": "min 0",
+          "description": "This field SHALL indicate the minimum current that can be delivered by the EVSE to the EV in trickle mode."
+        },
+        {
+          "id": "2",
+          "name": "MaximumChargeCurrent",
+          "data_type": "amperage-mA",
+          "constraint": "min 0",
+          "description": "This field SHALL indicate the maximum current that can be delivered by the EVSE to the EV."
+        }
+      ],
+      "privilege": "OT",
+      "side": "client"
+    },
+    {
+      "id": "0x03",
+      "name": "EnableDischarging",
+      "direction": "client to server",
+      "response": "Y",
+      "conformance": "V2X",
+      "parameters": [
+        {
+          "id": "0",
+          "name": "DischargingEnabledUntil",
+          "data_type": "epoch-s",
+          "quality": "X",
+          "default": "null",
+          "description": "This field SHALL indicate the expiry time, in UTC, when discharging will be automatically disabled."
+        },
+        {
+          "id": "1",
+          "name": "MaximumDischargeCurrent",
+          "data_type": "amperage-mA",
+          "constraint": "min 0",
+          "description": "This field SHALL indicate the maximum current that can be received by the EVSE from the EV."
+        }
+      ],
+      "privilege": "OT",
+      "side": "client"
+    },
+    {
+      "id": "0x04",
+      "name": "StartDiagnostics",
+      "direction": "client to server",
+      "response": "Y",
+      "conformance": "O",
+      "parameters": [],
+      "privilege": "OT",
+      "side": "client"
+    },
+    {
+      "id": "0x05",
+      "name": "SetTargets",
+      "direction": "client to server",
+      "response": "Y",
+      "conformance": "PREF",
+      "parameters": [
+        {
+          "id": "0",
+          "name": "ChargingTargetSchedules",
+          "data_type": "list[ChargingTargetScheduleStruct]",
+          "constraint": "max 7",
+          "description": "This field SHALL indicate a list of up to 7 sets of daily charging targets together with their associated days of the week."
+        }
+      ],
+      "privilege": "OT",
+      "side": "client"
+    },
+    {
+      "id": "0x06",
+      "name": "GetTargets",
+      "direction": "client to server",
+      "response": "GetTargetsResponse",
+      "conformance": "PREF",
+      "parameters": [],
+      "privilege": "OT",
+      "side": "client"
+    },
+    {
+      "id": "0x07",
+      "name": "ClearTargets",
+      "direction": "client to server",
+      "response": "Y",
+      "conformance": "PREF",
+      "parameters": [],
+      "privilege": "OT",
+      "side": "client"
+    },
+    {
+      "id": "0x00",
+      "name": "GetTargetsResponse",
+      "direction": "server to client",
+      "response": "N",
+      "conformance": "PREF",
+      "parameters": [
+        {
+          "id": "0",
+          "name": "ChargingTargetSchedules",
+          "data_type": "list[ChargingTargetScheduleStruct]",
+          "constraint": "max 7",
+          "description": "This field SHALL indicate a list of up to 7 sets of daily charging targets together with their associated days of the week."
+        }
+      ],
+      "privilege": "",
+      "side": "server"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "State",
+      "data_type": "StateEnum",
+      "quality": "X",
+      "access": "RV",
+      "description": "This attribute SHALL indicate the current status of the EVSE.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0001",
+      "name": "SupplyState",
+      "data_type": "SupplyStateEnum",
+      "access": "RV",
+      "description": "This attribute SHALL indicate whether the EV is currently allowed to charge from or discharge to the EVSE.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0002",
+      "name": "FaultState",
+      "data_type": "FaultStateEnum",
+      "access": "RV",
+      "description": "This attribute SHALL indicate the type of fault detected by the EVSE (internally or as detected in the pilot signal).",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0003",
+      "name": "ChargingEnabledUntil",
+      "data_type": "epoch-s",
+      "quality": "XN",
+      "default": "0",
+      "access": "RV",
+      "description": "This attribute SHALL indicate the time, in UTC, that the EVSE will automatically stop current flow to the EV.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0004",
+      "name": "DischargingEnabledUntil",
+      "data_type": "epoch-s",
+      "quality": "XN",
+      "default": "0",
+      "access": "RV",
+      "conformance": "V2X",
+      "description": "This attribute SHALL indicate the time, in UTC, that the EVSE will automatically stop current flow from the EV.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0005",
+      "name": "CircuitCapacity",
+      "data_type": "amperage-mA",
+      "constraint": "min 0",
+      "quality": "N",
+      "default": "0",
+      "access": "RV",
+      "description": "This attribute SHALL indicate the capacity that the circuit that the EVSE is connected to can provide.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0006",
+      "name": "MinimumChargeCurrent",
+      "data_type": "amperage-mA",
+      "constraint": "min 0",
+      "quality": "N",
+      "default": "6000",
+      "access": "RV",
+      "description": "This attribute SHALL indicate the minimum current that can be delivered by the EVSE to the EV.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0007",
+      "name": "MaximumChargeCurrent",
+      "data_type": "amperage-mA",
+      "constraint": "min 0",
+      "quality": "N",
+      "default": "0",
+      "access": "RV",
+      "description": "This attribute SHALL indicate the maximum current that can be delivered by the EVSE to the EV.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0008",
+      "name": "MaximumDischargeCurrent",
+      "data_type": "amperage-mA",
+      "constraint": "min 0",
+      "quality": "N",
+      "default": "0",
+      "access": "RV",
+      "conformance": "V2X",
+      "description": "This attribute SHALL indicate the maximum current that can be received by the EVSE from the EV.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0009",
+      "name": "UserMaximumChargeCurrent",
+      "data_type": "amperage-mA",
+      "quality": "N",
+      "default": "0",
+      "access": "RW VM",
+      "conformance": "O",
+      "description": "This attribute SHALL indicate a maximum current that can set by the consumer (e.g. via an app) as a preference to further reduce the charging rate.",
+      "privilege": "V",
+      "writable": true
+    },
+    {
+      "id": "0x000A",
+      "name": "RandomizationDelayWindow",
+      "data_type": "elapsed-s",
+      "constraint": "0 to 86400",
+      "quality": "N",
+      "default": "600",
+      "access": "RW VM",
+      "conformance": "O",
+      "description": "This attribute SHALL indicate the size of a random window over which the EVSE will randomize the start of a charging session.",
+      "privilege": "V",
+      "writable": true
+    },
+    {
+      "id": "0x0023",
+      "name": "NextChargeStartTime",
+      "data_type": "epoch-s",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "PREF",
+      "description": "This attribute SHALL indicate the time, in UTC, when the EVSE plans to start the next scheduled charge based on the charging preferences.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0024",
+      "name": "NextChargeTargetTime",
+      "data_type": "epoch-s",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "PREF",
+      "description": "This attribute SHALL indicate the time, in UTC, when the EVSE SHOULD complete the next scheduled charge based on the charging preferences.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0025",
+      "name": "NextChargeRequiredEnergy",
+      "data_type": "energy-mWh",
+      "constraint": "min 0",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "PREF",
+      "description": "This attribute SHALL indicate the amount of energy that the EVSE is going to attempt to add to the vehicle in the next charging target.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0026",
+      "name": "NextChargeTargetSoC",
+      "data_type": "percent",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "PREF",
+      "description": "This attribute SHALL indicate the target SoC the EVSE is going to attempt to reach when the vehicle is next charged.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0027",
+      "name": "ApproximateEVEfficiency",
+      "data_type": "uint16",
+      "quality": "XN",
+      "default": "null",
+      "access": "RW VM",
+      "conformance": "[PREF]",
+      "description": "This attribute SHALL indicate the vehicle efficiency rating for a connected vehicle.",
+      "privilege": "V",
+      "writable": true
+    },
+    {
+      "id": "0x0030",
+      "name": "StateOfCharge",
+      "data_type": "percent",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "SOC",
+      "description": "This attribute SHALL indicate the state of charge of the EV battery in steps of 1%.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0031",
+      "name": "BatteryCapacity",
+      "data_type": "energy-mWh",
+      "constraint": "min 0",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "SOC",
+      "description": "This attribute SHALL indicate the capacity of the EV battery in mWh.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0032",
+      "name": "VehicleID",
+      "data_type": "string",
+      "constraint": "max 32",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "PNC",
+      "description": "This attribute SHALL indicate the vehicle ID read by the EVSE via ISO-15118 using the PNC feature.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0040",
+      "name": "SessionID",
+      "data_type": "uint32",
+      "quality": "XN",
+      "default": "null",
+      "access": "RV",
+      "description": "This attribute SHALL indicate a unique identifier for the current or last session.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0041",
+      "name": "SessionDuration",
+      "data_type": "elapsed-s",
+      "quality": "XN",
+      "default": "null",
+      "access": "RV",
+      "description": "This attribute SHALL indicate the duration in seconds for the current or last charging session.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0042",
+      "name": "SessionEnergyCharged",
+      "data_type": "energy-mWh",
+      "constraint": "min 0",
+      "quality": "XN",
+      "default": "null",
+      "access": "RV",
+      "description": "This attribute SHALL indicate the energy, in mWh, delivered by the EVSE to the EV for the current or last charging session.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0043",
+      "name": "SessionEnergyDischarged",
+      "data_type": "energy-mWh",
+      "constraint": "min 0",
+      "quality": "XN",
+      "default": "null",
+      "access": "RV",
+      "conformance": "V2X",
+      "description": "This attribute SHALL indicate the energy, in mWh, received by the EVSE from the EV for the current or last charging session.",
+      "privilege": "V",
+      "writable": false
+    }
+  ],
+  "events": [
+    {
+      "id": "0x00",
+      "name": "EVConnected",
+      "priority": "INFO",
+      "access": "V",
+      "description": "This event SHALL be generated when the EV is plugged in.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "SessionID",
+          "data_type": "uint32",
+          "description": "This is the new session ID created after the vehicle is plugged in."
+        }
+      ]
+    },
+    {
+      "id": "0x01",
+      "name": "EVNotDetected",
+      "priority": "INFO",
+      "access": "V",
+      "description": "This event SHALL be generated when the EV is unplugged or not detected (having been previously plugged in).",
+      "fields": [
+        {
+          "id": "0",
+          "name": "SessionID",
+          "data_type": "uint32",
+          "description": "This field SHALL indicate the current value of the SessionID attribute."
+        },
+        {
+          "id": "1",
+          "name": "State",
+          "data_type": "StateEnum",
+          "description": "This field SHALL indicate the value of the State attribute prior to the EV not being detected."
+        },
+        {
+          "id": "2",
+          "name": "SessionDuration",
+          "data_type": "elapsed-s",
+          "description": "This field SHALL indicate the total duration of the session, from the start of the session when the EV was plugged in, until it was unplugged."
+        },
+        {
+          "id": "3",
+          "name": "SessionEnergyCharged",
+          "data_type": "energy-mWh",
+          "constraint": "min 0",
+          "description": "This field SHALL indicate the total amount of energy transferred from the EVSE to the EV during the session."
+        },
+        {
+          "id": "4",
+          "name": "SessionEnergyDischarged",
+          "data_type": "energy-mWh",
+          "constraint": "min 0",
+          "conformance": "V2X",
+          "description": "This field SHALL indicate the total amount of energy transferred from the EV to the EVSE during the session."
+        }
+      ]
+    },
+    {
+      "id": "0x02",
+      "name": "EnergyTransferStarted",
+      "priority": "INFO",
+      "access": "V",
+      "description": "This event SHALL be generated when the EV starts charging or discharging.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "SessionID",
+          "data_type": "uint32",
+          "description": "This field SHALL indicate the value of the SessionID attribute at the time the event was generated."
+        },
+        {
+          "id": "1",
+          "name": "State",
+          "data_type": "StateEnum",
+          "description": "This field SHALL indicate the value of the State attribute at the time the event was generated."
+        },
+        {
+          "id": "2",
+          "name": "MaximumCurrent",
+          "data_type": "amperage-mA",
+          "constraint": "min 0",
+          "description": "This field SHALL indicate the value of the maximum charging or discharging current at the time the event was generated."
+        }
+      ]
+    },
+    {
+      "id": "0x03",
+      "name": "EnergyTransferStopped",
+      "priority": "INFO",
+      "access": "V",
+      "description": "This event SHALL be generated when the EV stops charging or discharging.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "SessionID",
+          "data_type": "uint32",
+          "description": "This field SHALL indicate the value of the SessionID attribute prior to the energy transfer stopping."
+        },
+        {
+          "id": "1",
+          "name": "State",
+          "data_type": "StateEnum",
+          "description": "This field SHALL indicate the value of the State attribute prior to the energy transfer stopping."
+        },
+        {
+          "id": "2",
+          "name": "Reason",
+          "data_type": "EnergyTransferStoppedReasonEnum",
+          "description": "This field SHALL indicate the reason why the energy transferred stopped."
+        },
+        {
+          "id": "4",
+          "name": "EnergyTransferred",
+          "data_type": "energy-mWh",
+          "constraint": "min 0",
+          "description": "This field SHALL indicate the amount of energy transferred between the EVSE and EV since the previous EnergyTransferStarted event."
+        }
+      ]
+    },
+    {
+      "id": "0x04",
+      "name": "Fault",
+      "priority": "CRITICAL",
+      "access": "V",
+      "description": "If the EVSE detects a fault it SHALL generate a Fault Event.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "SessionID",
+          "data_type": "uint32",
+          "quality": "X",
+          "description": "This field SHALL indicate the value of the SessionID attribute prior to the Fault State being changed."
+        },
+        {
+          "id": "1",
+          "name": "State",
+          "data_type": "StateEnum",
+          "description": "This field SHALL indicate the value of the State attribute prior to the Fault State being changed."
+        },
+        {
+          "id": "2",
+          "name": "FaultStatePreviousState",
+          "data_type": "FaultStateEnum",
+          "description": "This field SHALL indicate the value of the FaultState attribute prior to the Fault State being changed."
+        },
+        {
+          "id": "4",
+          "name": "FaultStateCurrentState",
+          "data_type": "FaultStateEnum",
+          "description": "This field SHALL indicate the current value of the FaultState attribute."
+        }
+      ]
+    },
+    {
+      "id": "0x05",
+      "name": "RFID",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "[RFID]",
+      "description": "This event SHALL be generated when a RFID card has been read.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "UID",
+          "data_type": "octstr",
+          "constraint": "max 10",
+          "description": "The UID field (ISO 14443A UID) is either 4, 7 or 10 bytes."
+        }
+      ]
+    }
+  ]
+}

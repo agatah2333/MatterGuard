@@ -1,0 +1,59 @@
+config:
+  cluster: scenes
+  command: '0x02'
+  nodeId: '0x654231'
+name: scenes_command_0x02_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: Scene entry with GroupID 0 and SceneID 0 will be removed.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Scene entry with GroupID 0 and SceneID 0 exists in the Scene Table.
+  arguments: {}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: Scene entry with GroupID <max_value> and SceneID <max_value> will
+    be removed.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Scene entry with GroupID <max_value> and SceneID <max_value> exists
+    in the Scene Table.
+  arguments: {}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: ILLEGAL_COMMAND
+  Pre-requisites: GroupID <non_zero_value_not_in_group_table> does not exist in the
+    Group Table.
+  arguments: {}
+  label: Test_Case_Special_Response_-_ILLEGAL_COMMAND
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: NOT_FOUND
+  Pre-requisites: GroupID <valid_group_id> exists in the Group Table, but SceneID
+    <non_existent_scene_id> does not exist in the Scene Table for this GroupID.
+  arguments: {}
+  label: Test_Case_Special_Response_-_NOT_FOUND
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: Scene entry with GroupID <valid_group_id> and SceneID <valid_scene_id>
+    will be removed.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Scene entry with GroupID <valid_group_id> and SceneID <valid_scene_id>
+    exists in the Scene Table.
+
+
+    ### Summary
+
+    - There are 5 test cases in the command.
+
+    - The range of each field is {"GroupID": [0, <max_value>], "SceneID": [0, <max_value>]}.
+
+
+    These test cases cover the extreme values of the constraints and the special responses
+    as mentioned in the description of the effect for the `RemoveScene` command in
+    the Scenes cluster【4:0†source】【4:5†source】.'
+  arguments: {}
+  label: Test_Case_Special_Response_-_SUCCESS
+  option: SendCommand

@@ -1,0 +1,42 @@
+config:
+  attribute: '0x0000'
+  cluster: temperature-measurement-cluster
+  nodeId: '0x654231'
+name: temperature-measurement-cluster_attribute_0x0000_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '- `MeasuredValue`: -27315'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    MeasuredValue: '-27315'
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `MeasuredValue`: 32767'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    MeasuredValue: 32767
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `MeasuredValue`: null'
+  ExpectedResponse: <temperature_unknown>
+  Pre-requisites: <none>
+  arguments: {}
+  label: Test_Case_Null_Value_(Special_Response)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `MeasuredValue`: 0'
+  ExpectedResponse: <success>
+  Pre-requisites: '<none>
+
+
+    These test cases cover the extreme values of the constraints of the `MeasuredValue`
+    field and the special response when the value is null, indicating that the temperature
+    is unknown【4:0†source】【4:1†source】【4:2†source】【4:14†source】.'
+  arguments:
+    MeasuredValue: 0 (representing 0°C)
+  label: Test_Case_Mid-range_Value
+  option: WriteAttribute

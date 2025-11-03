@@ -1,0 +1,29 @@
+config:
+  cluster: client-monitoring-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: client-monitoring-cluster_command_0x02_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`OnOff` attribute will be set to `TRUE`'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: '`OnOff` attribute is initially `FALSE`'
+  arguments: {}
+  label: Test_Case_Toggle_from_OFF_to_ON
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '`OnOff` attribute will be set to `FALSE`'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: '`OnOff` attribute is initially `TRUE`
+
+
+    These test cases cover the extreme values of the constraints of the field (since
+    there are no data fields, the constraints are related to the `OnOff` attribute''s
+    state) and the values of the field that could result in special responses (toggling
+    the `OnOff` attribute and updating `OnTime` and `OffWaitTime` attributes accordingly).
+
+
+    For more detailed information, refer to the Matter Application Cluster Specification【4:0†source】.'
+  arguments: {}
+  label: Test_Case_Toggle_from_ON_to_OFF
+  option: SendCommand

@@ -1,0 +1,1191 @@
+test_metadata:
+  version: 1.0.0
+  matter_spec_version: '1.0'
+  description: Refined test cases for color-control cluster command 0x07
+  extraction_method: systematic_cluster_analysis
+config:
+  cluster: color-control-cluster
+  cluster_id: '0x0300'
+  command_id: '0x07'
+  nodeId: '0x654231'
+  endpoint: 1
+name: color-control_cluster_command_0x07_refined_v1.0.0
+test_info:
+  total_test_cases: 16
+  test_focus:
+  - Extreme values of constraints
+  - Special response scenarios
+  - Error conditions
+test_summary: '- There are 16 test cases in the sendcommand
+
+  - The range of each field is {"ColorX": "[0, 255]", "ColorY": "[0, 255]", "TransitionTime":
+  "[0, 255]", "OptionsMask": "[0, 255]", "OptionsOverride": "[0, 255]"}'
+tests:
+- test_id: TC_MoveToColor_001
+  label: Test_Case_Basic_MoveToColor
+  description: Basic test for MoveToColor command
+  test_type: normal_operation
+  Pre-requisites:
+  - Device supports MoveToColor command
+  option: SendCommand
+  arguments:
+    ColorX: 0
+    ColorY: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: Command executed successfully
+  formatted_output: 'Test case 1:
+
+    - Value of each field: {"ColorX": 0, "ColorY": 0, "TransitionTime": 0, "OptionsMask":
+    0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: Command executed
+    successfully
+
+    - Any pre-requisites: Device supports MoveToColor command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveToColor_002
+  label: Test_Case_Min_ColorX
+  description: Test MoveToColor with minimum ColorX value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveToColor command
+  option: SendCommand
+  arguments:
+    ColorX: 0
+    ColorY: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: ColorX set to minimum value
+  formatted_output: 'Test case 2:
+
+    - Value of each field: {"ColorX": 0, "ColorY": 0, "TransitionTime": 0, "OptionsMask":
+    0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: ColorX set to
+    minimum value
+
+    - Any pre-requisites: Device supports MoveToColor command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveToColor_003
+  label: Test_Case_Max_ColorX
+  description: Test MoveToColor with maximum ColorX value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveToColor command
+  option: SendCommand
+  arguments:
+    ColorX: 255
+    ColorY: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: ColorX set to maximum value
+  formatted_output: 'Test case 3:
+
+    - Value of each field: {"ColorX": 255, "ColorY": 0, "TransitionTime": 0, "OptionsMask":
+    0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: ColorX set to
+    maximum value
+
+    - Any pre-requisites: Device supports MoveToColor command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveToColor_004
+  label: Test_Case_Null_ColorX
+  description: Test MoveToColor with null ColorX value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null ColorX handling
+  option: SendCommand
+  arguments:
+    ColorX: 255
+    ColorY: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for ColorX
+  formatted_output: 'Test case 4:
+
+    - Value of each field: {"ColorX": 255, "ColorY": 0, "TransitionTime": 0, "OptionsMask":
+    0, "OptionsOverride": 0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for ColorX
+
+    - Any pre-requisites: Device supports null ColorX handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveToColor_005
+  label: Test_Case_Min_ColorY
+  description: Test MoveToColor with minimum ColorY value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveToColor command
+  option: SendCommand
+  arguments:
+    ColorX: 0
+    ColorY: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: ColorY set to minimum value
+  formatted_output: 'Test case 5:
+
+    - Value of each field: {"ColorX": 0, "ColorY": 0, "TransitionTime": 0, "OptionsMask":
+    0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: ColorY set to
+    minimum value
+
+    - Any pre-requisites: Device supports MoveToColor command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveToColor_006
+  label: Test_Case_Max_ColorY
+  description: Test MoveToColor with maximum ColorY value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveToColor command
+  option: SendCommand
+  arguments:
+    ColorX: 0
+    ColorY: 255
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: ColorY set to maximum value
+  formatted_output: 'Test case 6:
+
+    - Value of each field: {"ColorX": 0, "ColorY": 255, "TransitionTime": 0, "OptionsMask":
+    0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: ColorY set to
+    maximum value
+
+    - Any pre-requisites: Device supports MoveToColor command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveToColor_007
+  label: Test_Case_Null_ColorY
+  description: Test MoveToColor with null ColorY value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null ColorY handling
+  option: SendCommand
+  arguments:
+    ColorX: 0
+    ColorY: 255
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for ColorY
+  formatted_output: 'Test case 7:
+
+    - Value of each field: {"ColorX": 0, "ColorY": 255, "TransitionTime": 0, "OptionsMask":
+    0, "OptionsOverride": 0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for ColorY
+
+    - Any pre-requisites: Device supports null ColorY handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveToColor_008
+  label: Test_Case_Min_TransitionTime
+  description: Test MoveToColor with minimum TransitionTime value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveToColor command
+  option: SendCommand
+  arguments:
+    ColorX: 0
+    ColorY: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: TransitionTime set to minimum value
+  formatted_output: 'Test case 8:
+
+    - Value of each field: {"ColorX": 0, "ColorY": 0, "TransitionTime": 0, "OptionsMask":
+    0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: TransitionTime
+    set to minimum value
+
+    - Any pre-requisites: Device supports MoveToColor command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveToColor_009
+  label: Test_Case_Max_TransitionTime
+  description: Test MoveToColor with maximum TransitionTime value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveToColor command
+  option: SendCommand
+  arguments:
+    ColorX: 0
+    ColorY: 0
+    TransitionTime: 255
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 255
+  ExpectedResponse: Success
+  Attribute_Change: TransitionTime set to maximum value
+  formatted_output: 'Test case 9:
+
+    - Value of each field: {"ColorX": 0, "ColorY": 0, "TransitionTime": 255, "OptionsMask":
+    0, "OptionsOverride": 0}
+
+    - ActionTime: 255
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: TransitionTime
+    set to maximum value
+
+    - Any pre-requisites: Device supports MoveToColor command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveToColor_010
+  label: Test_Case_Null_TransitionTime
+  description: Test MoveToColor with null TransitionTime value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null TransitionTime handling
+  option: SendCommand
+  arguments:
+    ColorX: 0
+    ColorY: 0
+    TransitionTime: 255
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for TransitionTime
+  formatted_output: 'Test case 10:
+
+    - Value of each field: {"ColorX": 0, "ColorY": 0, "TransitionTime": 255, "OptionsMask":
+    0, "OptionsOverride": 0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for TransitionTime
+
+    - Any pre-requisites: Device supports null TransitionTime handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveToColor_011
+  label: Test_Case_Min_OptionsMask
+  description: Test MoveToColor with minimum OptionsMask value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveToColor command
+  option: SendCommand
+  arguments:
+    ColorX: 0
+    ColorY: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: OptionsMask set to minimum value
+  formatted_output: 'Test case 11:
+
+    - Value of each field: {"ColorX": 0, "ColorY": 0, "TransitionTime": 0, "OptionsMask":
+    0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: OptionsMask
+    set to minimum value
+
+    - Any pre-requisites: Device supports MoveToColor command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveToColor_012
+  label: Test_Case_Max_OptionsMask
+  description: Test MoveToColor with maximum OptionsMask value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveToColor command
+  option: SendCommand
+  arguments:
+    ColorX: 0
+    ColorY: 0
+    TransitionTime: 0
+    OptionsMask: 255
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: OptionsMask set to maximum value
+  formatted_output: 'Test case 12:
+
+    - Value of each field: {"ColorX": 0, "ColorY": 0, "TransitionTime": 0, "OptionsMask":
+    255, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: OptionsMask
+    set to maximum value
+
+    - Any pre-requisites: Device supports MoveToColor command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveToColor_013
+  label: Test_Case_Null_OptionsMask
+  description: Test MoveToColor with null OptionsMask value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null OptionsMask handling
+  option: SendCommand
+  arguments:
+    ColorX: 0
+    ColorY: 0
+    TransitionTime: 0
+    OptionsMask: 255
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for OptionsMask
+  formatted_output: 'Test case 13:
+
+    - Value of each field: {"ColorX": 0, "ColorY": 0, "TransitionTime": 0, "OptionsMask":
+    255, "OptionsOverride": 0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for OptionsMask
+
+    - Any pre-requisites: Device supports null OptionsMask handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveToColor_014
+  label: Test_Case_Min_OptionsOverride
+  description: Test MoveToColor with minimum OptionsOverride value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveToColor command
+  option: SendCommand
+  arguments:
+    ColorX: 0
+    ColorY: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: OptionsOverride set to minimum value
+  formatted_output: 'Test case 14:
+
+    - Value of each field: {"ColorX": 0, "ColorY": 0, "TransitionTime": 0, "OptionsMask":
+    0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: OptionsOverride
+    set to minimum value
+
+    - Any pre-requisites: Device supports MoveToColor command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveToColor_015
+  label: Test_Case_Max_OptionsOverride
+  description: Test MoveToColor with maximum OptionsOverride value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveToColor command
+  option: SendCommand
+  arguments:
+    ColorX: 0
+    ColorY: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 255
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: OptionsOverride set to maximum value
+  formatted_output: 'Test case 15:
+
+    - Value of each field: {"ColorX": 0, "ColorY": 0, "TransitionTime": 0, "OptionsMask":
+    0, "OptionsOverride": 255}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: OptionsOverride
+    set to maximum value
+
+    - Any pre-requisites: Device supports MoveToColor command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveToColor_016
+  label: Test_Case_Null_OptionsOverride
+  description: Test MoveToColor with null OptionsOverride value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null OptionsOverride handling
+  option: SendCommand
+  arguments:
+    ColorX: 0
+    ColorY: 0
+    TransitionTime: 0
+    OptionsMask: 0
+    OptionsOverride: 255
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for OptionsOverride
+  formatted_output: 'Test case 16:
+
+    - Value of each field: {"ColorX": 0, "ColorY": 0, "TransitionTime": 0, "OptionsMask":
+    0, "OptionsOverride": 255}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for OptionsOverride
+
+    - Any pre-requisites: Device supports null OptionsOverride handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true

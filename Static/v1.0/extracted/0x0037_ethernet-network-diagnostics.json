@@ -1,0 +1,81 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0037",
+    "name": "Ethernet Network Diagnostics",
+    "description": "Ethernet network diagnostics."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "ResetCounts"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "PHYRate",
+      "type": "unknown",
+      "description": "PHYRate attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "FullDuplex",
+      "type": "bool",
+      "constraint": "",
+      "description": "FullDuplex attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "PacketRx",
+      "type": "unknown",
+      "description": "PacketRx attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0003",
+      "name": "PacketTx",
+      "type": "unknown",
+      "description": "PacketTx attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0004",
+      "name": "TxEr",
+      "type": "unknown",
+      "description": "TxEr attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0005",
+      "name": "Collision",
+      "type": "unknown",
+      "description": "Collision attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0006",
+      "name": "Overrun",
+      "type": "unknown",
+      "description": "Overrun attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0007",
+      "name": "CarrierDe",
+      "type": "unknown",
+      "description": "CarrierDe attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0008",
+      "name": "TimeSin",
+      "type": "unknown",
+      "description": "TimeSin attribute",
+      "access": "R"
+    }
+  ],
+  "events": []
+}

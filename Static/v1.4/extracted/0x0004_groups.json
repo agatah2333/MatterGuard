@@ -1,0 +1,230 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0004",
+    "name": "Groups",
+    "description": "The Groups cluster manages, per endpoint, the content of the node-wide Group Table that is part of the underlying interaction layer. In a network supporting fabrics, group IDs referenced by attributes or other elements of this cluster are scoped to the accessing fabric. The Groups cluster is scoped to the endpoint. Groups cluster commands support discovering the endpoint membership in a group, adding the endpoint to a group, removing the endpoint from a group, removing endpoint membership from all groups. All commands defined in this cluster SHALL only affect groups scoped to the accessing fabric."
+  },
+  "derived_datatypes": [
+    {
+      "type": "bitmap",
+      "name": "NameSupportBitmap",
+      "base_data_type": "MAP8",
+      "value_range": {
+        "bits": [
+          {
+            "bit": 7,
+            "name": "GroupNames",
+            "description": "The ability to store a name for a group."
+          }
+        ]
+      }
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "AddGroup",
+      "parameters": [
+        {
+          "name": "GroupID",
+          "data_type": "group-id",
+          "value_range": {},
+          "description": "The group identifier"
+        },
+        {
+          "name": "GroupName",
+          "data_type": "string",
+          "max_length": 16,
+          "value_range": {},
+          "description": "The group name"
+        }
+      ],
+      "privilege": "MF",
+      "side": "client",
+      "response": "AddGroupResponse"
+    },
+    {
+      "id": "0x01",
+      "name": "ViewGroup",
+      "parameters": [
+        {
+          "name": "GroupID",
+          "data_type": "group-id",
+          "value_range": {},
+          "description": "The group identifier"
+        }
+      ],
+      "privilege": "OF",
+      "side": "client",
+      "response": "ViewGroupResponse"
+    },
+    {
+      "id": "0x02",
+      "name": "GetGroupMembership",
+      "parameters": [
+        {
+          "name": "GroupList",
+          "data_type": "list[group-id]",
+          "max_count": 10,
+          "value_range": {},
+          "description": "List of group identifiers"
+        }
+      ],
+      "privilege": "OF",
+      "side": "client",
+      "response": "GetGroupMembershipResponse"
+    },
+    {
+      "id": "0x03",
+      "name": "RemoveGroup",
+      "parameters": [
+        {
+          "name": "GroupID",
+          "data_type": "group-id",
+          "value_range": {},
+          "description": "The group identifier"
+        }
+      ],
+      "privilege": "MF",
+      "side": "client",
+      "response": "RemoveGroupResponse"
+    },
+    {
+      "id": "0x04",
+      "name": "RemoveAllGroups",
+      "parameters": [],
+      "privilege": "MF",
+      "side": "client"
+    },
+    {
+      "id": "0x05",
+      "name": "AddGroupIfIdentifying",
+      "parameters": [
+        {
+          "name": "GroupID",
+          "data_type": "group-id",
+          "value_range": {},
+          "description": "The group identifier"
+        },
+        {
+          "name": "GroupName",
+          "data_type": "string",
+          "max_length": 16,
+          "value_range": {},
+          "description": "The group name"
+        }
+      ],
+      "privilege": "MF",
+      "side": "client"
+    },
+    {
+      "id": "0x00",
+      "name": "AddGroupResponse",
+      "parameters": [
+        {
+          "name": "Status",
+          "data_type": "status",
+          "value_range": {},
+          "description": "Status of the add group operation"
+        },
+        {
+          "name": "GroupID",
+          "data_type": "group-id",
+          "value_range": {},
+          "description": "The group identifier"
+        }
+      ],
+      "privilege": "",
+      "side": "server"
+    },
+    {
+      "id": "0x01",
+      "name": "ViewGroupResponse",
+      "parameters": [
+        {
+          "name": "Status",
+          "data_type": "status",
+          "value_range": {},
+          "description": "Status of the view group operation"
+        },
+        {
+          "name": "GroupID",
+          "data_type": "group-id",
+          "value_range": {},
+          "description": "The group identifier"
+        },
+        {
+          "name": "GroupName",
+          "data_type": "string",
+          "max_length": 16,
+          "value_range": {},
+          "description": "The group name"
+        }
+      ],
+      "privilege": "",
+      "side": "server"
+    },
+    {
+      "id": "0x02",
+      "name": "GetGroupMembershipResponse",
+      "parameters": [
+        {
+          "name": "Capacity",
+          "data_type": "uint8",
+          "value_range": {},
+          "description": "The group capacity"
+        },
+        {
+          "name": "GroupList",
+          "data_type": "list[group-id]",
+          "max_count": 10,
+          "value_range": {},
+          "description": "List of group identifiers"
+        }
+      ],
+      "privilege": "",
+      "side": "server"
+    },
+    {
+      "id": "0x03",
+      "name": "RemoveGroupResponse",
+      "parameters": [
+        {
+          "name": "Status",
+          "data_type": "status",
+          "value_range": {},
+          "description": "Status of the remove group operation"
+        },
+        {
+          "name": "GroupID",
+          "data_type": "group-id",
+          "value_range": {},
+          "description": "The group identifier"
+        }
+      ],
+      "privilege": "",
+      "side": "server"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "NameSupport",
+      "data_type": "NameSupportBitmap",
+      "value_range": {},
+      "description": "This attribute provides legacy, read-only access to whether the Group Names feature is supported. The most significant bit, bit 7 (GroupNames), SHALL be equal to bit 0 of the FeatureMap attribute (GN Feature). All other bits SHALL be 0.",
+      "privilege": "V",
+      "writable": false,
+      "default": "0"
+    }
+  ],
+  "events": [],
+  "features": [
+    {
+      "bit": 0,
+      "code": "GN",
+      "name": "GroupNames",
+      "description": "The ability to store a name for a group."
+    }
+  ]
+}

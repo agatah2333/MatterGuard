@@ -1,0 +1,43 @@
+config:
+  attribute: '0x02'
+  cluster: general-diagnostics-cluster
+  nodeId: '0x654231'
+name: general-diagnostics-cluster_attribute_0x02_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '{"RebootCount": 0}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"RebootCount"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '{"RebootCount": 65535}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"RebootCount"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '{"RebootCount": 65534}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"RebootCount"': 65534}
+  label: Test_Case_Special_Response_-_Just_Before_Overflow
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Error (Value out of range)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the `RebootCount` attribute and the
+    special condition where the value exceeds the maximum limit, which should result
+    in an error response.'
+  arguments:
+    '{"RebootCount"': 65536}
+  label: Test_Case_Special_Response_-_Overflow_Condition
+  option: WriteAttribute

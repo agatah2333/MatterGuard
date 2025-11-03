@@ -1,0 +1,52 @@
+config:
+  cluster: ethernet-network-diagnostics-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: ethernet-network-diagnostics-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: '`<ScanMaxTimeSeconds>`'
+  Attribute_Change: '`Breadcrumb` attribute in the General Commissioning cluster will
+    remain unchanged.'
+  ExpectedResponse: '`ScanNetworksResponse`'
+  Pre-requisites: None
+  arguments:
+    Breadcrumb: '`null`'
+    SSID: '`""` (empty string, indicating non-directed scanning)'
+  label: Test_Case_Extreme_Value_for_SSID_(Minimum_Length)
+  option: SendCommand
+- ActionTime: '`<ScanMaxTimeSeconds>`'
+  Attribute_Change: '`Breadcrumb` attribute in the General Commissioning cluster will
+    remain unchanged.'
+  ExpectedResponse: '`ScanNetworksResponse`'
+  Pre-requisites: None
+  arguments:
+    Breadcrumb: '`null`'
+    SSID: '`"A"*32` (32 octets string, indicating directed scanning)'
+  label: Test_Case_Extreme_Value_for_SSID_(Maximum_Length)
+  option: SendCommand
+- ActionTime: '`<ScanMaxTimeSeconds>`'
+  Attribute_Change: '`Breadcrumb` attribute in the General Commissioning cluster will
+    remain unchanged.'
+  ExpectedResponse: '`BUSY`'
+  Pre-requisites: The server is currently unable to proceed with the operation due
+    to changes in networking interface configuration.
+  arguments:
+    Breadcrumb: '`null`'
+    SSID: '`null` (indicating non-directed scanning)'
+  label: Test_Case_Special_Response_(BUSY_Status)
+  option: SendCommand
+- ActionTime: '`<ScanMaxTimeSeconds>`'
+  Attribute_Change: '`Breadcrumb` attribute in the General Commissioning cluster will
+    be set to `123456789` upon success.'
+  ExpectedResponse: '`ScanNetworksResponse`'
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    Breadcrumb: '`123456789`'
+    SSID: '`"TestNetwork"`'
+  label: Test_Case_Special_Response_(Directed_Scanning_with_Breadcrumb)
+  option: SendCommand

@@ -1,0 +1,44 @@
+{
+  "source_file": "ProxyConfiguration_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0042",
+        "name": "ProxyConfiguration",
+        "dataTypes": {
+          "ConfigurationStruct": {
+            "type": "struct",
+            "fields": {
+              "ProxyAllNodes": {
+                "type": "bool"
+              },
+              "SourceList": {
+                "type": "list",
+                "elementType": "node-id"
+              }
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "ConfigurationList",
+            "dataType": {
+              "type": "list",
+              "elementType": {
+                "type": "struct",
+                "fields": "ConfigurationStruct"
+              }
+            },
+            "valueRange": "List of ConfigurationStruct",
+            "writable": true,
+            "privilege": "Read"
+          }
+        ],
+        "commands": [],
+        "events": []
+      }
+    ]
+  }
+}

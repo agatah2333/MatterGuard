@@ -1,0 +1,55 @@
+config:
+  attribute: '0x0001'
+  cluster: operational-credentials-cluster
+  nodeId: '0x654231'
+name: operational-credentials-cluster_attribute_0x0001_v1.1.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`NOCs` attribute will be updated with the provided values.'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    FabricIndex: 0
+    ICACValue: '`<minimum_valid_certificate_value>`'
+    NOCValue: '`<minimum_valid_certificate_value>`'
+    RCACValue: '`<minimum_valid_certificate_value>`'
+  label: Test_Case_Minimum_Values
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`NOCs` attribute will be updated with the provided values.'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    FabricIndex: 255
+    ICACValue: '`<maximum_valid_certificate_value>`'
+    NOCValue: '`<maximum_valid_certificate_value>`'
+    RCACValue: '`<maximum_valid_certificate_value>`'
+  label: Test_Case_Maximum_Values
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: No change
+  ExpectedResponse: Error - Invalid Certificate
+  Pre-requisites: None
+  arguments:
+    FabricIndex: 1
+    ICACValue: '`<valid_certificate_value>`'
+    NOCValue: '`<invalid_certificate_value>`'
+    RCACValue: '`<valid_certificate_value>`'
+  label: Test_Case_Special_Response_-_Invalid_Certificate
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: No change
+  ExpectedResponse: Error - Mismatched Fabric Index
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    FabricIndex: 2
+    ICACValue: '`<valid_certificate_value>`'
+    NOCValue: '`<valid_certificate_value>`'
+    RCACValue: '`<valid_certificate_value>`'
+  label: Test_Case_Special_Response_-_Mismatched_Fabric_Index
+  option: WriteAttribute

@@ -1,0 +1,123 @@
+{
+  "source_file": "Boolean State Configuration_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0080",
+        "name": "Boolean State Configuration",
+        "description": "Configures boolean sensors with alarm features and sensitivity levels",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "CurrentSensitivityLevel",
+            "dataType": "uint8",
+            "valueRange": "max(SupportedSensitivityLevels-1)",
+            "description": "Currently selected sensitivity level",
+            "privilege": "MS",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "SupportedSensitivityLevels",
+            "dataType": "uint8",
+            "valueRange": "2-10",
+            "description": "Number of supported sensitivity levels",
+            "privilege": "MS",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "AlarmsActive",
+            "dataType": "AlarmModeBitmap",
+            "valueRange": "all",
+            "description": "Currently active alarm modes",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0007",
+            "name": "SensorFault",
+            "dataType": "SensorFaultBitmap",
+            "valueRange": "all",
+            "description": "Registered device faults",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "SuppressAlarm",
+            "parameters": [
+              {
+                "name": "AlarmModes",
+                "dataType": "AlarmModeBitmap",
+                "valueRange": "all"
+              }
+            ],
+            "description": "Suppress specified alarm modes",
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "EnableDisableAlarm",
+            "parameters": [
+              {
+                "name": "AlarmModes",
+                "dataType": "AlarmModeBitmap",
+                "valueRange": "all"
+              }
+            ],
+            "description": "Modify enabled alarm modes",
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "AlarmsStateChanged",
+            "parameters": [
+              {
+                "name": "ActiveAlarms",
+                "dataType": "AlarmModeBitmap",
+                "valueRange": "all"
+              },
+              {
+                "name": "SuppressedAlarms",
+                "dataType": "AlarmModeBitmap",
+                "valueRange": "all"
+              }
+            ],
+            "description": "Alarm state change notification",
+            "privilege": "INFO",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "AlarmModeBitmap": {
+            "baseType": "map8",
+            "fields": {
+              "VisualAlarm": {
+                "bit": 0
+              },
+              "AudibleAlarm": {
+                "bit": 1
+              }
+            }
+          },
+          "SensorFaultBitmap": {
+            "baseType": "map16",
+            "fields": {
+              "GeneralFault": {
+                "bit": 0
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

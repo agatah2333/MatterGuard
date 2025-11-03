@@ -1,0 +1,32 @@
+config:
+  cluster: icd-management-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: icd-management-cluster_command_0x03_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '- `OperationalState` set to `Active`'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    CheckInNodeID: 0
+    Key: '"00000000000000000000000000000000"'
+    MonitoredSubject: 0
+    VerificationKey: '"00000000000000000000000000000000"'
+  label: Test_Case_Extreme_Values
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: '- No attribute change'
+  ExpectedResponse: ErrorStateID of `CommandInvalidInState`
+  Pre-requisites: 'Device must be in a state other than `Paused` or `Running`
+
+
+    These test cases cover the extreme values and special response scenarios for the
+    `StayActiveRequest` command in the `icd-management-cluster` cluster.'
+  arguments:
+    CheckInNodeID: 1
+    Key: '"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"'
+    MonitoredSubject: 1
+    VerificationKey: '"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"'
+  label: Test_Case_Special_Response_Scenario
+  option: SendCommand

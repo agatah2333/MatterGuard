@@ -1,0 +1,43 @@
+config:
+  cluster: network-commissioning-cluster
+  command: '0x08'
+  nodeId: '0x654231'
+name: network-commissioning-cluster_command_0x08_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: Network order will be updated to 0 for NetworkID 0
+  ExpectedResponse: Success
+  Pre-requisites: NetworkID 0 must exist
+  arguments:
+    NetworkID: 0
+    Order: 0
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: Network order will be updated to 255 for NetworkID 255
+  ExpectedResponse: Success
+  Pre-requisites: NetworkID 255 must exist
+  arguments:
+    NetworkID: 255
+    Order: 255
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: Network order will be updated to 1 for NetworkID 1
+  ExpectedResponse: Success
+  Pre-requisites: NetworkID 1 must exist
+  arguments:
+    NetworkID: 1
+    Order: 1
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: Network order will be updated to 2 for NetworkID 2
+  ExpectedResponse: Success
+  Pre-requisites: 'NetworkID 2 must exist
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    NetworkID: 2
+    Order: 2
+  option: SendCommand

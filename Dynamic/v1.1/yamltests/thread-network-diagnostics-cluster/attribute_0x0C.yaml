@@ -1,0 +1,24 @@
+config:
+  attribute: '0x0C'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x0C_v1.1.0.0
+tests:
+- ActionTime: '`N/A`'
+  Attribute_Change: '- `FullNetworkData`: `true`'
+  ExpectedResponse: '`N/A`'
+  Pre-requisites: '`N/A`'
+  arguments:
+    FullNetworkData: '`true`'
+  option: WriteAttribute
+- ActionTime: '`N/A`'
+  Attribute_Change: '- `FullNetworkData`: `false`'
+  ExpectedResponse: '`N/A`'
+  Pre-requisites: '`N/A`
+
+
+    These test cases cover the extreme values of the `FullNetworkData` attribute,
+    which are `true` and `false`【4:0†source】.'
+  arguments:
+    FullNetworkData: '`false`'
+  option: WriteAttribute

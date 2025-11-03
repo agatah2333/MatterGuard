@@ -1,0 +1,28 @@
+config:
+  cluster: basic-information-cluster
+  event: '0x00'
+  nodeId: '0x654231'
+name: basic-information-cluster_event_0x00_v1.1.0.0
+tests:
+- ActionTime: '`After boot or reboot process`'
+  Attribute_Change: '`SoftwareVersion` attribute will be set to `0`'
+  ExpectedResponse: '`StartUp event generated`'
+  Pre-requisites: '`Node has completed a boot or reboot process`
+
+
+    **Test Case 2**:'
+  arguments:
+    SoftwareVersion: '`0` (minimum value for `uint32`)'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: '`After boot or reboot process`'
+  Attribute_Change: '`SoftwareVersion` attribute will be set to `1`'
+  ExpectedResponse: '`StartUp event generated`'
+  Pre-requisites: '`Node has completed a boot or reboot process`
+
+
+    **Test Case 4**:'
+  arguments:
+    SoftwareVersion: '`1` (a typical value indicating a new software version)'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SubscribeToEvent

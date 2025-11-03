@@ -1,0 +1,50 @@
+config:
+  cluster: door-lock-cluster
+  event: '1'
+  nodeId: '0x654231'
+name: door-lock-cluster_event_1_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: DoorState = DoorOpen
+  ExpectedResponse: <DoorStateChange event triggered>
+  Pre-requisites: <None>
+  arguments:
+    '{"DoorState"': 0}
+  label: Test_Case_Door_Open
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: DoorState = DoorClosed
+  ExpectedResponse: <DoorStateChange event triggered>
+  Pre-requisites: <None>
+  arguments:
+    '{"DoorState"': 1}
+  label: Test_Case_Door_Closed
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: DoorState = DoorJammed
+  ExpectedResponse: <DoorStateChange event triggered>
+  Pre-requisites: <None>
+  arguments:
+    '{"DoorState"': 2}
+  label: Test_Case_Door_Jammed
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: DoorState = DoorForcedOpen
+  ExpectedResponse: <DoorStateChange event triggered>
+  Pre-requisites: <None>
+  arguments:
+    '{"DoorState"': 3}
+  label: Test_Case_Door_Forced_Open
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: DoorState = DoorAjar
+  ExpectedResponse: <DoorStateChange event triggered>
+  Pre-requisites: '<None>
+
+
+    These test cases cover the extreme values and special responses for the DoorStateChange
+    event in the Door Lock cluster【4:0†source】【4:12†source】.'
+  arguments:
+    '{"DoorState"': 5}
+  label: Test_Case_Door_Ajar
+  option: SubscribeToEvent

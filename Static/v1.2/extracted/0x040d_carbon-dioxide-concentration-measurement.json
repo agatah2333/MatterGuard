@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x040d",
+    "name": "Carbon Dioxide Concentration Measurement",
+    "description": "Cluster for Carbon Dioxide Concentration Measurement functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

@@ -1,0 +1,31 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x02'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x02_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`PumpStatus` attribute will be updated to indicate a power phase
+    is missing.'
+  ExpectedResponse: PowerMissingPhase event triggered
+  Pre-requisites: The pump must be running.
+  arguments:
+    Phase: 1
+    Voltage: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: '`PumpStatus` attribute will be updated to indicate a power phase
+    is missing.'
+  ExpectedResponse: PowerMissingPhase event triggered
+  Pre-requisites: 'The pump must be running.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:2†source】【4:3†source】.'
+  arguments:
+    Phase: 3
+    Voltage: 240
+  label: Test_Case_Special_Response_Values
+  option: SubscribeToEvent

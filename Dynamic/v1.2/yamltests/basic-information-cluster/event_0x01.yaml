@@ -1,0 +1,26 @@
+config:
+  cluster: basic-information-cluster
+  event: '0x01'
+  nodeId: '0x654231'
+name: basic-information-cluster_event_0x01_v1.2.0.0
+tests:
+- ActionTime: 0
+  ExpectedResponse: Success
+  arguments: {}
+  label: Test_Case_Extreme_Values
+  option: SubscribeToEvent
+- ActionTime: 4294967295
+  ExpectedResponse: Error
+  arguments: {}
+  label: Test_Case_Extreme_Values
+  option: SubscribeToEvent
+- ActionTime: 3600
+  ExpectedResponse: Success
+  arguments: {}
+  label: Test_Case_Special_Response_(NoError)
+  option: SubscribeToEvent
+- ActionTime: 2100
+  ExpectedResponse: Error
+  arguments: {}
+  label: Test_Case_Special_Response_(Error)
+  option: SubscribeToEvent

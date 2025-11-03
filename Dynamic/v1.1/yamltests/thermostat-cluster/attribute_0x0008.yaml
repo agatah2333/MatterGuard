@@ -1,0 +1,60 @@
+config:
+  attribute: '0x0008'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0008_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: PIHeatingDemand = 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Thermostat should be in "off" or "cooling" mode.
+  arguments:
+    '{"PIHeatingDemand"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: PIHeatingDemand = 100
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Thermostat should be in "heating" mode.
+  arguments:
+    '{"PIHeatingDemand"': 100}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: PIHeatingDemand = 50
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Thermostat should be in "heating" mode.
+  arguments:
+    '{"PIHeatingDemand"': 50}
+  label: Test_Case_Special_Response_for_Heating_Mode
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: PIHeatingDemand = 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Thermostat should be in "cooling" mode.
+  arguments:
+    '{"PIHeatingDemand"': 0}
+  label: Test_Case_Special_Response_for_Cooling_Mode
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: PIHeatingDemand = 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Thermostat should transition from "heating" to "cooling" mode.
+  arguments:
+    '{"PIHeatingDemand"': 0}
+  label: Test_Case_Transition_from_Heating_to_Cooling
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: PIHeatingDemand = 100
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Thermostat should transition from "cooling" to "heating" mode.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses based on the thermostat''s mode.
+    The expected responses and attribute changes are based on the provided attribute
+    specifications【4:2†source】.'
+  arguments:
+    '{"PIHeatingDemand"': 100}
+  label: Test_Case_Transition_from_Cooling_to_Heating
+  option: WriteAttribute

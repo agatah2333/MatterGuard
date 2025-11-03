@@ -1,0 +1,100 @@
+{
+  "source_file": "Dishwasher Alarm_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x005D",
+        "name": "Dishwasher Alarm",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "Mask",
+            "dataType": "AlarmBitmap",
+            "valueRange": "all",
+            "description": "This attribute SHALL indicate a bitmap where each bit set in the Mask attribute corresponds to an alarm that SHALL be enabled.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "Latch",
+            "dataType": "AlarmBitmap",
+            "valueRange": "all",
+            "description": "This attribute SHALL indicate a bitmap where each bit set in the Latch attribute SHALL indicate that the corresponding alarm will be latched when set.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "State",
+            "dataType": "AlarmBitmap",
+            "valueRange": "all",
+            "description": "This attribute SHALL indicate a bitmap where each bit SHALL represent the state of an alarm.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "Supported",
+            "dataType": "AlarmBitmap",
+            "valueRange": "all",
+            "description": "This attribute SHALL indicate a bitmap where each bit SHALL represent whether or not an alarm is supported.",
+            "privilege": "R",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "Reset",
+            "parameters": {
+              "dataType": "AlarmBitmap",
+              "valueRange": "all",
+              "description": "This command resets active and latched alarms (if possible)."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "ModifyEnabledAlarms",
+            "parameters": {
+              "dataType": "AlarmBitmap",
+              "valueRange": "all",
+              "description": "This command allows a client to request that an alarm be enabled or suppressed at the server."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "Notify",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "ActiveAlarms: AlarmBitmap, InactiveAlarms: AlarmBitmap, CurrentMask: AlarmBitmap, NewState: AlarmBitmap",
+              "description": "Reports changes in alarm status with full context"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "AlarmBitmap": {
+            "baseType": "map32",
+            "valueRange": {
+              "0": "InflowError",
+              "1": "DrainError",
+              "2": "DoorError",
+              "3": "TempTooLow",
+              "4": "TempTooHigh",
+              "5": "WaterLevelError"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x001D",
+    "name": "Descriptor",
+    "description": "This cluster describes an endpoint instance on the node, independently from other endpoints, but also allows composition of endpoints to conform to complex device type patterns."
+  },
+  "derived_datatypes": [
+    {
+      "type": "struct",
+      "name": "DeviceTypeStruct",
+      "base_data_type": "STRUCT",
+      "value_range": {
+        "struct_fields": [
+          {
+            "name": "DeviceType",
+            "data_type": "uint32",
+            "description": "This SHALL indicate the device type definition. The endpoint SHALL conform to the device type definition and cluster specifications required by the device type."
+          },
+          {
+            "name": "Revision",
+            "data_type": "uint16",
+            "description": "This is the implemented revision of the device type definition. The endpoint SHALL conform to this revision of the device type."
+          }
+        ]
+      }
+    }
+  ],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "DeviceTypeList",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "1",
+        "max": "255"
+      },
+      "description": "This is a list of device types and corresponding revisions declaring endpoint conformance. At least one device type entry SHALL be present.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "ServerList",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "This attribute SHALL list each cluster ID for the server clusters present on the endpoint instance.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "ClientList",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "This attribute SHALL list each cluster ID for the client clusters present on the endpoint instance.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "PartsList",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "This attribute indicates composition of the device type instance. Device type instance composition SHALL include the endpoints in this list.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

@@ -1,0 +1,77 @@
+config:
+  attribute: '0x0015'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x0015_v1.2.0.0
+tests:
+- ActionTime: "<current_time>\n  - **ExpectedResponse**: <success>\n  - **Which attribute\
+    \ will be changed and the value of the attribute**: {\"BatANSIDesignation\": \"\
+    \"}\n  - **Any pre-requisites**: <none>"
+  Attribute_Change: "{\"BatANSIDesignation\": \"\"}\n  - **Any pre-requisites**: <none>"
+  ExpectedResponse: "<success>\n  - **Which attribute will be changed and the value\
+    \ of the attribute**: {\"BatANSIDesignation\": \"\"}\n  - **Any pre-requisites**:\
+    \ <none>"
+  Pre-requisites: <none>
+  arguments:
+    '**ActionTime**': <current_time>
+    '**Any pre-requisites**': <none>
+    '**ExpectedResponse**': <success>
+    '**Which attribute will be changed and the value of the attribute**':
+      BatANSIDesignation: ''
+    '{"BatANSIDesignation"': '""}'
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: "<current_time>\n  - **ExpectedResponse**: <success>\n  - **Which attribute\
+    \ will be changed and the value of the attribute**: {\"BatANSIDesignation\": \"\
+    A\"*20}\n  - **Any pre-requisites**: <none>"
+  Attribute_Change: "{\"BatANSIDesignation\": \"A\"*20}\n  - **Any pre-requisites**:\
+    \ <none>"
+  ExpectedResponse: "<success>\n  - **Which attribute will be changed and the value\
+    \ of the attribute**: {\"BatANSIDesignation\": \"A\"*20}\n  - **Any pre-requisites**:\
+    \ <none>"
+  Pre-requisites: <none>
+  arguments:
+    '**ActionTime**': <current_time>
+    '**Any pre-requisites**': <none>
+    '**ExpectedResponse**': <success>
+    '**Which attribute will be changed and the value of the attribute**': '{"BatANSIDesignation":
+      "A"*20}'
+    '{"BatANSIDesignation"': '"A"*20}'
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: "<current_time>\n  - **ExpectedResponse**: <error_invalid_length>\n\
+    \  - **Which attribute will be changed and the value of the attribute**: <none>\n\
+    \  - **Any pre-requisites**: <none>"
+  Attribute_Change: "<none>\n  - **Any pre-requisites**: <none>"
+  ExpectedResponse: "<error_invalid_length>\n  - **Which attribute will be changed\
+    \ and the value of the attribute**: <none>\n  - **Any pre-requisites**: <none>"
+  Pre-requisites: <none>
+  arguments:
+    '**ActionTime**': <current_time>
+    '**Any pre-requisites**': <none>
+    '**ExpectedResponse**': <error_invalid_length>
+    '**Which attribute will be changed and the value of the attribute**': <none>
+    '{"BatANSIDesignation"': '"A"*21}'
+  label: Test_Case_Special_Response_-_Invalid_Length
+  option: WriteAttribute
+- ActionTime: "<current_time>\n  - **ExpectedResponse**: <success>\n  - **Which attribute\
+    \ will be changed and the value of the attribute**: {\"BatANSIDesignation\": \"\
+    [REPLC]\"}\n  - **Any pre-requisites**: <none>\n\n### Summary"
+  Attribute_Change: "{\"BatANSIDesignation\": \"[REPLC]\"}\n  - **Any pre-requisites**:\
+    \ <none>\n\n### Summary"
+  ExpectedResponse: "<success>\n  - **Which attribute will be changed and the value\
+    \ of the attribute**: {\"BatANSIDesignation\": \"[REPLC]\"}\n  - **Any pre-requisites**:\
+    \ <none>\n\n### Summary"
+  Pre-requisites: '<none>
+
+
+    ### Summary'
+  arguments:
+    '**ActionTime**': <current_time>
+    '**Any pre-requisites**': <none>
+    '**ExpectedResponse**': <success>
+    '**Which attribute will be changed and the value of the attribute**':
+      BatANSIDesignation: '[REPLC]'
+    '{"BatANSIDesignation"': '"[REPLC]"}'
+  label: Test_Case_Special_Response_-_Default_Value
+  option: WriteAttribute

@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0006'
+  cluster: media-playback-cluster
+  nodeId: '0x654231'
+name: media-playback-cluster_attribute_0x0006_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: SeekRangeStart = 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Media must be loaded and ready for playback.
+  arguments:
+    '{"SeekRangeStart"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: SeekRangeStart = 18446744073709551615
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Media must be loaded and ready for playback.
+  arguments:
+    '{"SeekRangeStart"': 18446744073709551615}  // max value for uint64
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: SeekRangeStart = "NaS"
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Media must be loaded and ready for playback.
+  arguments:
+    '{"SeekRangeStart"': '"NaS"}'
+  label: Test_Case_Special_Value_-_NaS_(Not_a_Seekable_position)
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: SeekRangeStart = 9223372036854775807
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Media must be loaded and ready for playback.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special value that could result in a specific response as mentioned in the
+    description of the effect.'
+  arguments:
+    '{"SeekRangeStart"': 9223372036854775807}  // mid value for uint64
+  label: Test_Case_Mid-Range_Value
+  option: WriteAttribute

@@ -1,0 +1,196 @@
+{
+  "cluster_id": "0x0028",
+  "cluster_name": "Basic Information",
+  "section": "11.1",
+  "description": "This cluster provides attributes and events for determining basic information about Nodes, which supports both Commissioning and operational determination of Node characteristics, such as Ven­ dor ID, Product ID and serial number, which apply to the whole Node.",
+  "data_types": {
+    "ProductFinishEnum": {
+      "name": "ProductFinishEnum",
+      "definition_line": "11.1.4.1. ProductFinishEnum Type"
+    },
+    "ColorEnum": {
+      "name": "ColorEnum",
+      "definition_line": "11.1.4.2. ColorEnum Type"
+    },
+    "ProductAppearanceStruct": {
+      "name": "ProductAppearanceStruct",
+      "definition_line": "11.1.4.3. ProductAppearanceStruct Type"
+    },
+    "CapabilityMinimaStruct": {
+      "name": "CapabilityMinimaStruct",
+      "definition_line": "11.1.4.4. CapabilityMinimaStruct Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "DataMod­",
+      "details": "uint16 desc F MS RV M",
+      "raw_line": "0x0000         DataMod­       uint16        desc           F              MS             RV          M"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "Vendor­",
+      "details": "string max 32 F MS RV M",
+      "raw_line": "0x0001         Vendor­        string        max 32         F              MS             RV          M"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "VendorID",
+      "details": "vendor-id all F MS RV M",
+      "raw_line": "0x0002         VendorID       vendor-id     all            F              MS             RV          M"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "Product­",
+      "details": "string max 32 F MS RV M",
+      "raw_line": "0x0003         Product­       string        max 32         F              MS             RV          M"
+    },
+    "0x0004": {
+      "id": "0x0004",
+      "name": "ProductID",
+      "details": "uint16 all F MS RV M",
+      "raw_line": "0x0004         ProductID uint16             all            F              MS             RV          M"
+    },
+    "0x0005": {
+      "id": "0x0005",
+      "name": "NodeLabel",
+      "details": "string max 32 N \"\" RW VM M",
+      "raw_line": "0x0005         NodeLabel string             max 32         N              \"\"             RW VM       M"
+    },
+    "0x0006": {
+      "id": "0x0006",
+      "name": "Location",
+      "details": "string 2 N \"XX\" RW VA M",
+      "raw_line": "0x0006         Location       string        2              N              \"XX\"           RW VA       M"
+    },
+    "0x0007": {
+      "id": "0x0007",
+      "name": "Hardware­",
+      "details": "uint16 all F 0 RV M",
+      "raw_line": "0x0007         Hardware­ uint16             all            F              0              RV          M"
+    },
+    "0x0008": {
+      "id": "0x0008",
+      "name": "Hardware­",
+      "details": "string 1 to 64 F MS RV M",
+      "raw_line": "0x0008         Hardware­ string             1 to 64        F              MS             RV          M"
+    },
+    "0x0009": {
+      "id": "0x0009",
+      "name": "Software­",
+      "details": "uint32 desc F 0 RV M",
+      "raw_line": "0x0009         Software­       uint32        desc           F              0              RV          M"
+    },
+    "0x000A": {
+      "id": "0x000A",
+      "name": "Software­",
+      "details": "string 1 to 64 F MS RV M",
+      "raw_line": "0x000A         Software­       string        1 to 64        F              MS             RV          M"
+    },
+    "0x000B": {
+      "id": "0x000B",
+      "name": "Manufac­",
+      "details": "string 8 to 16 F MS RV O",
+      "raw_line": "0x000B         Manufac­        string        8 to 16        F              MS             RV          O"
+    },
+    "0x000C": {
+      "id": "0x000C",
+      "name": "PartNum­",
+      "details": "string max 32 F MS RV O",
+      "raw_line": "0x000C         PartNum­        string        max 32         F              MS             RV          O"
+    },
+    "0x000D": {
+      "id": "0x000D",
+      "name": "Produc­",
+      "details": "string max 256 F MS RV O",
+      "raw_line": "0x000D         Produc­         string        max 256        F              MS             RV          O"
+    },
+    "0x000E": {
+      "id": "0x000E",
+      "name": "Product­",
+      "details": "string max 64 F MS RV O",
+      "raw_line": "0x000E         Product­        string        max 64         F              MS             RV          O"
+    },
+    "0x000F": {
+      "id": "0x000F",
+      "name": "Serial­",
+      "details": "string max 32 F MS RV O",
+      "raw_line": "0x000F         Serial­         string        max 32         F              MS             RV          O"
+    },
+    "0x0010": {
+      "id": "0x0010",
+      "name": "LocalCon­",
+      "details": "bool all N False RW VM O",
+      "raw_line": "0x0010         LocalCon­ bool                all            N              False          RW VM       O"
+    },
+    "0x0011": {
+      "id": "0x0011",
+      "name": "Reachable",
+      "details": "bool all True RV O",
+      "raw_line": "0x0011         Reachable bool                all                           True           RV          O"
+    },
+    "0x0012": {
+      "id": "0x0012",
+      "name": "UniqueID",
+      "details": "string max 32 F MS RV O",
+      "raw_line": "0x0012         UniqueID        string        max 32         F              MS             RV          O"
+    },
+    "0x0013": {
+      "id": "0x0013",
+      "name": "Capabili­",
+      "details": "Capabili­ all F MS RV M",
+      "raw_line": "0x0013         Capabili­       Capabili­     all            F              MS             RV          M"
+    },
+    "0x0014": {
+      "id": "0x0014",
+      "name": "Produc­",
+      "details": "ProductAp­ all F MS RV O",
+      "raw_line": "0x0014         Produc­         ProductAp­ all               F              MS             RV          O"
+    },
+    "0x0015": {
+      "id": "0x0015",
+      "name": "Specifica­",
+      "details": "uint32 desc F 0 RV M",
+      "raw_line": "0x0015         Specifica­      uint32        desc           F              0              RV          M"
+    },
+    "0x0016": {
+      "id": "0x0016",
+      "name": "Max­",
+      "details": "uint16 min 1 F 1 RV M",
+      "raw_line": "0x0016         Max­            uint16        min 1          F              1              RV          M"
+    }
+  },
+  "commands": {},
+  "events": {
+    "0x00": {
+      "id": "0x00",
+      "name": "StartUp",
+      "details": "CRITICAL V M",
+      "raw_line": "0x00                    StartUp                CRITICAL                V                         M"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "ShutDown",
+      "details": "CRITICAL V O",
+      "raw_line": "0x01                    ShutDown               CRITICAL                V                         O"
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "Leave",
+      "details": "INFO V O",
+      "raw_line": "0x02                    Leave                  INFO                    V                         O"
+    },
+    "0x03": {
+      "id": "0x03",
+      "name": "Reach­",
+      "details": "INFO V desc",
+      "raw_line": "0x03                    Reach­                 INFO                    V                         desc"
+    }
+  },
+  "extraction_info": {
+    "start_line": 36989,
+    "end_line": 37644,
+    "total_lines": 655
+  }
+}

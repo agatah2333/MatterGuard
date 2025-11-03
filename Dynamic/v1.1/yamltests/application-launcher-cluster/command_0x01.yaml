@@ -1,0 +1,47 @@
+config:
+  cluster: application-launcher-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: application-launcher-cluster_command_0x01_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: Status attribute to STOPPED
+  ExpectedResponse: 1 (APP_NOT_AVAILABLE)
+  Pre-requisites: Application Platform feature not supported
+  arguments:
+    Application.ApplicationID: '""'
+    Application.CatalogVendorID: 0
+  label: Test_Case_Minimum_Value_for_ApplicationID
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: Status attribute to STOPPED
+  ExpectedResponse: 1 (APP_NOT_AVAILABLE)
+  Pre-requisites: Application Platform feature supported
+  arguments:
+    Application.ApplicationID: '"A" * 255'
+    Application.CatalogVendorID: 65535
+  label: Test_Case_Maximum_Value_for_ApplicationID
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: Status attribute remains unchanged
+  ExpectedResponse: 2 (SYSTEM_BUSY)
+  Pre-requisites: System is currently busy
+  arguments:
+    Application.ApplicationID: '"ValidApp"'
+    Application.CatalogVendorID: 1234
+  label: Test_Case_Valid_ApplicationID_but_System_Busy
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: Status attribute to STOPPED
+  ExpectedResponse: 0 (SUCCESS)
+  Pre-requisites: 'Application is currently running and system is not busy
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:14†source】【4:15†source】.'
+  arguments:
+    Application.ApplicationID: '"AnotherValidApp"'
+    Application.CatalogVendorID: 5678
+  label: Test_Case_Valid_ApplicationID_and_Successful_Stop
+  option: SendCommand

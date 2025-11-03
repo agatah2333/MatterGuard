@@ -1,0 +1,358 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0102",
+    "name": "Window Covering",
+    "description": "The window covering cluster provides an interface for controlling and adjusting automatic window coverings such as drapery motors, automatic shades, curtains and blinds."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "UpOrOpen",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "DownOrClose",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x02",
+      "name": "StopMotion",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x04",
+      "name": "GoToLiftValue",
+      "parameters": [
+        {
+          "name": "LiftValue",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "LiftValue parameter"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x05",
+      "name": "GoToLiftPercentage",
+      "parameters": [
+        {
+          "name": "LiftPercentageValue",
+          "data_type": "percent",
+          "value_range": {},
+          "description": "LiftPercentageValue parameter"
+        },
+        {
+          "name": "LiftPercent100thsValue",
+          "data_type": "percent100ths",
+          "value_range": {},
+          "description": "LiftPercent100thsValue parameter"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x07",
+      "name": "GoToTiltValue",
+      "parameters": [
+        {
+          "name": "TiltValue",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "TiltValue parameter"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x08",
+      "name": "GoToTiltPercentage",
+      "parameters": [
+        {
+          "name": "TiltPercentageValue",
+          "data_type": "percent",
+          "value_range": {},
+          "description": "TiltPercentageValue parameter"
+        },
+        {
+          "name": "TiltPercent100thsValue",
+          "data_type": "percent100ths",
+          "value_range": {},
+          "description": "TiltPercent100thsValue parameter"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Type",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "Type attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "PhysicalClosedLimitLift",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "PhysicalClosedLimitLift attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "PhysicalClosedLimitTilt",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "PhysicalClosedLimitTilt attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0003",
+      "name": "CurrentPositionLift",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "CurrentPositionLift attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0004",
+      "name": "CurrentPositionTilt",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "CurrentPositionTilt attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0005",
+      "name": "NumberOfActuationsLift",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "NumberOfActuationsLift attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0006",
+      "name": "NumberOfActuationsTilt",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "NumberOfActuationsTilt attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0007",
+      "name": "ConfigStatus",
+      "data_type": "bitmap8",
+      "value_range": {},
+      "description": "ConfigStatus attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0008",
+      "name": "CurrentPositionLiftPercentage",
+      "data_type": "percent",
+      "value_range": {},
+      "description": "CurrentPositionLiftPercentage attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0009",
+      "name": "CurrentPositionTiltPercentage",
+      "data_type": "percent",
+      "value_range": {},
+      "description": "CurrentPositionTiltPercentage attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x000A",
+      "name": "OperationalStatus",
+      "data_type": "bitmap8",
+      "value_range": {},
+      "description": "OperationalStatus attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x000B",
+      "name": "TargetPositionLiftPercent100ths",
+      "data_type": "percent100ths",
+      "value_range": {},
+      "description": "TargetPositionLiftPercent100ths attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x000C",
+      "name": "TargetPositionTiltPercent100ths",
+      "data_type": "percent100ths",
+      "value_range": {},
+      "description": "TargetPositionTiltPercent100ths attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x000D",
+      "name": "EndProductType",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "EndProductType attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x000E",
+      "name": "CurrentPositionLiftPercent100ths",
+      "data_type": "percent100ths",
+      "value_range": {},
+      "description": "CurrentPositionLiftPercent100ths attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x000F",
+      "name": "CurrentPositionTiltPercent100ths",
+      "data_type": "percent100ths",
+      "value_range": {},
+      "description": "CurrentPositionTiltPercent100ths attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0010",
+      "name": "InstalledOpenLimitLift",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "InstalledOpenLimitLift attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0011",
+      "name": "InstalledClosedLimitLift",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "InstalledClosedLimitLift attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0012",
+      "name": "InstalledOpenLimitTilt",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "InstalledOpenLimitTilt attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0013",
+      "name": "InstalledClosedLimitTilt",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "InstalledClosedLimitTilt attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0017",
+      "name": "Mode",
+      "data_type": "bitmap8",
+      "value_range": {},
+      "description": "Mode attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x001A",
+      "name": "SafetyStatus",
+      "data_type": "bitmap16",
+      "value_range": {},
+      "description": "SafetyStatus attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

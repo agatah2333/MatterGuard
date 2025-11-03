@@ -1,0 +1,108 @@
+{
+  "source_file": "Water Tank Level Monitoring_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0079",
+        "name": "Water Tank Level Monitoring",
+        "description": "Monitors water tank levels and maintenance requirements",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "Condition",
+            "dataType": "uint8",
+            "valueRange": "0-100",
+            "description": "Current water level percentage",
+            "privilege": "R",
+            "writable": true,
+            "unitConversion": {
+              "formula": "Level% = Condition",
+              "example": "75 → 75% capacity"
+            }
+          },
+          {
+            "id": "0x0001",
+            "name": "DegradationDirection",
+            "dataType": "DegradationDirectionEnum",
+            "valueRange": "0-1",
+            "description": "Water level change trend",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "InPlaceIndicator",
+            "dataType": "bool",
+            "valueRange": "true/false",
+            "description": "Tank installation status",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0004",
+            "name": "LastChangedTime",
+            "dataType": "epoch-s",
+            "valueRange": "UTC timestamp",
+            "description": "Last maintenance timestamp",
+            "privilege": "RW",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ResetCondition",
+            "parameters": [],
+            "description": "Reset monitoring after maintenance",
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "dataTypes": {
+          "DegradationDirectionEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Filling",
+              "1": "Draining"
+            }
+          },
+          "ChangeIndicationEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Normal",
+              "1": "LowLevelWarning",
+              "2": "CriticalEmpty"
+            }
+          },
+          "ReplacementProductStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "ProductCode": "string(20)",
+              "Capacity": "uint16",
+              "MaterialType": "TankMaterialEnum"
+            }
+          },
+          "TankMaterialEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Polyethylene",
+              "1": "StainlessSteel",
+              "2": "Ceramic",
+              "3": "GlassLined"
+            }
+          }
+        },
+        "predictiveModels": {
+          "consumptionRate": {
+            "formula": "hoursRemaining = (Condition / ratePerHour) × usageFactor",
+            "variables": {
+              "ratePerHour": "configurable 1-5%",
+              "usageFactor": "0.5-2.0 based on usage patterns"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

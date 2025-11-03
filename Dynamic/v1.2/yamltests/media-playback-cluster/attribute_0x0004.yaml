@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0004'
+  cluster: media-playback-cluster
+  nodeId: '0x654231'
+name: media-playback-cluster_attribute_0x0004_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '`PlaybackSpeed` set to -∞'
+  ExpectedResponse: <error or specific handling for extreme negative value>
+  Pre-requisites: Media should be in a state that allows setting playback speed.
+  arguments:
+    PlaybackSpeed: -∞
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '`PlaybackSpeed` set to +∞'
+  ExpectedResponse: <error or specific handling for extreme positive value>
+  Pre-requisites: Media should be in a state that allows setting playback speed.
+  arguments:
+    PlaybackSpeed: +∞
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '`PlaybackSpeed` set to 1.0'
+  ExpectedResponse: Success
+  Pre-requisites: Media should be playing.
+  arguments:
+    PlaybackSpeed: '1.0'
+  label: Test_Case_Normal_Playback_Speed
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '`PlaybackSpeed` set to 0.0'
+  ExpectedResponse: Media should pause
+  Pre-requisites: 'Media should be playing.
+
+
+    These test cases cover the extreme values of the `PlaybackSpeed` attribute and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:6†source】【4:18†source】.'
+  arguments:
+    PlaybackSpeed: '0.0'
+  label: Test_Case_Zero_Playback_Speed
+  option: WriteAttribute

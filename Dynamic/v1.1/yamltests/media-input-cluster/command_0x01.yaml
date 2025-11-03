@@ -1,0 +1,29 @@
+config:
+  cluster: media-input-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: media-input-cluster_command_0x01_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: The `PlaybackState` attribute will be changed to `PAUSED`.
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: The media must be in a `PLAYING` state.
+  arguments: {}
+  label: Test_Case_Extreme_Value_of_Constraints
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: No attribute will be changed.
+  ExpectedResponse: '`INVALID_STATE_FOR_COMMAND`'
+  Pre-requisites: 'The media must be in a state other than `PLAYING` (e.g., `PAUSED`,
+    `NOT_PLAYING`, or `BUFFERING`).
+
+
+    These test cases cover the extreme values and special response scenarios for the
+    `Pause` command in the Media Input Cluster.
+
+
+    For more details, you can refer to the Matter Application Cluster Specification
+    document【4:0†source】.'
+  arguments: {}
+  label: Test_Case_Special_Response_Scenario
+  option: SendCommand

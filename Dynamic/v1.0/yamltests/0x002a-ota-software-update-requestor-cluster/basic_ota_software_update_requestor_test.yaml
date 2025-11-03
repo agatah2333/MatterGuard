@@ -1,0 +1,36 @@
+config:
+  cluster: ota-software-update-requestor-cluster
+  cluster_id: '0x002A'
+  endpoint: 1
+  nodeId: '0x654321'
+test_metadata:
+  category: Infrastructure
+  cluster_spec_reference: Matter 1.0 Spec - OTA Software Update Requestor Cluster
+  description: Basic test for OTA Software Update Requestor cluster
+  matter_spec_version: '1.0'
+  priority: medium
+  test_type: basic_functionality
+  version: 1.0.0
+tests:
+- attribute: '0xFFFD'
+  cluster: '0x002A'
+  description: Verify OTA Software Update Requestor cluster is supported
+  expected_response: Success
+  label: Basic_OTA_Software_Update_Requestor_Support
+  option: ReadAttribute
+  setup_sequence:
+  - action:
+      attribute_id: '0xFFFD'
+      cluster_id: '0x002A'
+      type: read-by-id
+    description: Verify OTA Software Update Requestor cluster support
+    expected_response: Success
+    step: 1
+  - action:
+      attribute_id: '0xFFFC'
+      cluster_id: '0x002A'
+      type: read-by-id
+    description: Read OTA Software Update Requestor cluster attributes
+    expected_response: Success
+    step: 2
+  test_id: TC_002A_BASIC_001

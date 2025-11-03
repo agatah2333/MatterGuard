@@ -1,0 +1,41 @@
+config:
+  attribute: '0x0012'
+  cluster: pressure-measurement-cluster
+  nodeId: '0x654231'
+name: pressure-measurement-cluster_attribute_0x0012_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: MaxScaledValue set to MinScaledValue + 1
+  ExpectedResponse: Success
+  Pre-requisites: MinScaledValue must be set to a known value
+  arguments:
+    MaxScaledValue: MinScaledValue + 1
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: MaxScaledValue set to 32767
+  ExpectedResponse: Success
+  Pre-requisites: MinScaledValue must be set to a value less than 32766
+  arguments:
+    MaxScaledValue: 32767
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: MaxScaledValue set to Null
+  ExpectedResponse: Indicates that the value is not available
+  Pre-requisites: None
+  arguments: {}
+  label: Test_Case_Special_Response_-_Null_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Error
+  Pre-requisites: 'MinScaledValue must be set to a known value
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special responses mentioned in the description of the effect【4:0†source】.'
+  arguments:
+    MaxScaledValue: MinScaledValue
+  label: Test_Case_Invalid_Value_(Below_Minimum)
+  option: WriteAttribute

@@ -1,0 +1,6 @@
+config:
+  attribute: '17'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_17_v1.2.0.0
+tests: []

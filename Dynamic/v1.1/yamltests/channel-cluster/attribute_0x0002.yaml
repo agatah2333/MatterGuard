@@ -1,0 +1,45 @@
+config:
+  attribute: '0x0002'
+  cluster: channel-cluster
+  nodeId: '0x654231'
+name: channel-cluster_attribute_0x0002_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`CurrentChannel` will be set to the minimum value.'
+  ExpectedResponse: Success
+  Pre-requisites: The device should support the Channel Cluster.
+  arguments:
+    ChannelName: '""'
+    ChannelNumber: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '`CurrentChannel` will be set to the maximum value.'
+  ExpectedResponse: Success
+  Pre-requisites: The device should support the Channel Cluster.
+  arguments:
+    ChannelName: '"ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ" (assuming max length of 32 characters)'
+    ChannelNumber: 9999 (assuming 4-digit channel numbers)
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '`CurrentChannel` will be set to null.'
+  ExpectedResponse: Success
+  Pre-requisites: The device should support the Channel Cluster and handle null values.
+  arguments: {}
+  label: Test_Case_Special_Response_-_Null_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '`CurrentChannel` will not be changed.'
+  ExpectedResponse: Error
+  Pre-requisites: 'The device should support the Channel Cluster and handle invalid
+    values gracefully.
+
+
+    These test cases cover the extreme values and special responses for the `CurrentChannel`
+    attribute in the Channel Cluster.'
+  arguments:
+    ChannelName: '"InvalidChannel"'
+    ChannelNumber: -1 (invalid value)
+  label: Test_Case_Special_Response_-_Invalid_Channel
+  option: WriteAttribute

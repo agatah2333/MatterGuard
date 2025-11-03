@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x002A",
+    "name": "OTA Software Update Requestor",
+    "description": "Requests software updates."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

@@ -1,0 +1,225 @@
+config:
+  attribute: '0x0001'
+  cluster: administrator-commissioning-cluster
+  nodeId: '0x654231'
+name: administrator-commissioning-cluster_attribute_0x0001_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`AdminFabricIndex` will be set to null.'
+  ExpectedResponse: Null (since the `WindowStatus` attribute is set to `WindowNotOpen`)
+  Pre-requisites: '`WindowStatus` attribute must be set to `WindowNotOpen`.'
+  arguments:
+    AdminFabricIndex: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify administrator-commissioning-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: '`AdminFabricIndex` will be set to 255.'
+  ExpectedResponse: 255 (if the `WindowStatus` attribute is not `WindowNotOpen`)
+  Pre-requisites: '`WindowStatus` attribute must be set to a value other than `WindowNotOpen`.'
+  arguments:
+    AdminFabricIndex: 255
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify administrator-commissioning-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: During an open commissioning window
+  Attribute_Change: '`AdminFabricIndex` will be set to null.'
+  ExpectedResponse: Null (since the fabric for the Administrator that opened the window
+    is removed)
+  Pre-requisites: '`WindowStatus` attribute must be set to a value other than `WindowNotOpen`,
+    and the fabric for the Administrator must be removed during the open window.'
+  arguments:
+    AdminFabricIndex: <any valid value>
+  label: Test_Case_Special_Response_-_Fabric_Removed_During_Open_Window
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify administrator-commissioning-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: When the `WindowStatus` attribute is set to `WindowNotOpen`
+  Attribute_Change: '`AdminFabricIndex` will be set to null.'
+  ExpectedResponse: 'Null'
+  Pre-requisites: '`WindowStatus` attribute must be set to `WindowNotOpen`.
+
+
+    These test cases cover the extreme values of the `AdminFabricIndex` field and
+    the special responses based on the `WindowStatus` attribute and fabric removal
+    conditions as described in the specification【4:0†source】【4:2†source】.'
+  arguments:
+    AdminFabricIndex: <any valid value>
+  label: Test_Case_Special_Response_-_Window_Not_Open
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify administrator-commissioning-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

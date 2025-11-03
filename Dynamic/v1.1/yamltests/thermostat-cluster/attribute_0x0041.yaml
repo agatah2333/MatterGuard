@@ -1,0 +1,41 @@
+config:
+  attribute: '0x0041'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0041_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: ACCapacity = 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"ACCapacity"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: ACCapacity = 65535
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"ACCapacity"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: ACCapacity = 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"ACCapacity"': 0}
+  label: Test_Case_Special_Value_(Default)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: ACCapacity = 32768
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    ### Summary'
+  arguments:
+    '{"ACCapacity"': 32768}
+  label: Test_Case_Mid-range_Value
+  option: WriteAttribute

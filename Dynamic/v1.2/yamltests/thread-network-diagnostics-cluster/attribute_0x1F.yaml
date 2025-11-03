@@ -1,0 +1,94 @@
+config:
+  attribute: '0x1F'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x1F_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: NeighborTableList updated with minimum values
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Age: 0
+    AverageRssi: '-128'
+    ExtAddress: 0
+    FrameErrorRate: 0
+    FullNetworkData: 0
+    FullThreadDevice: 0
+    IsChild: 0
+    LQI: 0
+    LastRssi: '-128'
+    LinkFrameCounter: 0
+    MessageErrorRate: 0
+    MleFrameCounter: 0
+    Rloc16: 0
+    RxOnWhenIdle: 0
+  label: Test_Case_Extreme_Values_(Minimum)
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: NeighborTableList updated with maximum values
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Age: 4294967295
+    AverageRssi: 127
+    ExtAddress: 18446744073709551615
+    FrameErrorRate: 100
+    FullNetworkData: 1
+    FullThreadDevice: 1
+    IsChild: 1
+    LQI: 255
+    LastRssi: 127
+    LinkFrameCounter: 4294967295
+    MessageErrorRate: 100
+    MleFrameCounter: 4294967295
+    Rloc16: 65535
+    RxOnWhenIdle: 1
+  label: Test_Case_Extreme_Values_(Maximum)
+  option: WriteAttribute
+- ActionTime: <valid_action_time>
+  Attribute_Change: NeighborTableList updated with Link Down status
+  ExpectedResponse: Link Down
+  Pre-requisites: None
+  arguments:
+    Age: <valid_age>
+    AverageRssi: <valid_average_rssi>
+    ExtAddress: <valid_ext_address>
+    FrameErrorRate: <valid_frame_error_rate>
+    FullNetworkData: 0
+    FullThreadDevice: 0
+    IsChild: 0
+    LQI: <valid_lqi>
+    LastRssi: <valid_last_rssi>
+    LinkFrameCounter: <valid_link_frame_counter>
+    MessageErrorRate: <valid_message_error_rate>
+    MleFrameCounter: <valid_mle_frame_counter>
+    Rloc16: <valid_rloc16>
+    RxOnWhenIdle: 0
+  label: Test_Case_Special_Response_(Link_Down)
+  option: WriteAttribute
+- ActionTime: <valid_action_time>
+  Attribute_Change: NeighborTableList updated with Network Jammed status
+  ExpectedResponse: Network Jammed
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values and special responses for the NeighborTableList
+    attribute in the Thread Network Diagnostics Cluster.'
+  arguments:
+    Age: <valid_age>
+    AverageRssi: <valid_average_rssi>
+    ExtAddress: <valid_ext_address>
+    FrameErrorRate: 100
+    FullNetworkData: 1
+    FullThreadDevice: 1
+    IsChild: 1
+    LQI: <valid_lqi>
+    LastRssi: <valid_last_rssi>
+    LinkFrameCounter: <valid_link_frame_counter>
+    MessageErrorRate: 100
+    MleFrameCounter: <valid_mle_frame_counter>
+    Rloc16: <valid_rloc16>
+    RxOnWhenIdle: 1
+  label: Test_Case_Special_Response_(Network_Jammed)
+  option: WriteAttribute

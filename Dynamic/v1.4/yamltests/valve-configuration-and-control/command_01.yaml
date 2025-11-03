@@ -1,0 +1,14 @@
+name: Valve Configuration and Control - Close Command Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Valve Configuration and Control
+  timeout: 180
+tests:
+- label: Send Close command
+  command: Close
+  response:
+    values:
+    - name: status
+      value: 0
+  arguments: {}

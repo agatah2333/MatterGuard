@@ -1,0 +1,20 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0044",
+    "name": "Valid Proxies",
+    "description": "Valid proxy list management."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "Get Valid Proxies Request"
+    },
+    {
+      "id": "0x01",
+      "name": "Get Valid Proxies Response"
+    }
+  ],
+  "attributes": [],
+  "events": []
+}

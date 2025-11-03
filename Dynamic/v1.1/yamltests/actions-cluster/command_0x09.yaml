@@ -1,0 +1,44 @@
+config:
+  cluster: actions-cluster
+  command: '0x09'
+  nodeId: '0x654231'
+name: actions-cluster_command_0x09_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`ActionState` to `Active`'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ActionID"': '0, "InvokeID": 0, "Duration": 0}`'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: 4294967295 seconds
+  Attribute_Change: '`ActionState` to `Active`'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ActionID"': '65535, "InvokeID": 4294967295, "Duration": 4294967295}`'
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: 60 seconds
+  Attribute_Change: '`ActionState` to `Active` and then to `Disabled` after 60 seconds'
+  ExpectedResponse: StateChanged Event
+  Pre-requisites: None
+  arguments:
+    '{"ActionID"': '1, "InvokeID": 12345, "Duration": 60}`'
+  label: Test_Case_Special_Response_-_StateChanged_Event
+  option: SendCommand
+- ActionTime: 120 seconds
+  Attribute_Change: '`ActionState` remains unchanged'
+  ExpectedResponse: ActionFailed Event
+  Pre-requisites: 'Simulate an error condition that prevents the action from executing
+    normally
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】.'
+  arguments:
+    '{"ActionID"': '2, "InvokeID": 67890, "Duration": 120}`'
+  label: Test_Case_Special_Response_-_ActionFailed_Event
+  option: SendCommand

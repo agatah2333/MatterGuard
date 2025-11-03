@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0413",
+    "name": "PM2.5 Concentration Measurement",
+    "description": "Cluster for PM2.5 Concentration Measurement functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

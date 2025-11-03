@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x003b",
+    "name": "Switch",
+    "description": "This cluster exposes interactions with a switch device, for the purpose of using those interactions by other devices."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

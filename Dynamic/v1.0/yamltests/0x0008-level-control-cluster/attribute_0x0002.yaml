@@ -1,0 +1,14 @@
+config:
+  node_id: 305414945
+  cluster: '0x0008'
+  endpoint: 1
+tests:
+- label: read_minlevel
+  cluster: '0x0008'
+  attribute: '0x0002'
+  operation: read
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS

@@ -1,0 +1,38 @@
+config:
+  attribute: '0x0004'
+  cluster: illuminance-measurement-cluster
+  nodeId: '0x654231'
+name: illuminance-measurement-cluster_attribute_0x0004_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: LightSensorType will be set to Photodiode (0)
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    LightSensorType: 0
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: LightSensorType will be set to CMOS (1)
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    LightSensorType: 1
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: LightSensorType will be set to a manufacturer-specific type (0x40)
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    LightSensorType: '0x40'
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: LightSensorType will be set to Unknown (null)
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the `LightSensorType`
+    field and the values that could result in special responses as mentioned in the
+    description of the effect【4:0†source】.'
+  arguments: {}
+  option: WriteAttribute

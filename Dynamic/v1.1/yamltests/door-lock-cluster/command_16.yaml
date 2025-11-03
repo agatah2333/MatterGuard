@@ -1,0 +1,55 @@
+config:
+  cluster: door-lock-cluster
+  command: '16'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_16_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: N/A
+  arguments:
+    RFID Code: '"0000000000000000"'
+    User ID: 0
+    User Status: 1
+    User Type: 0 (UnrestrictedUser)
+  label: Test_Case_Minimum_User_ID
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: User ID, User Status, User Type, RFID Code
+  ExpectedResponse: SUCCESS
+  Pre-requisites: N/A
+  arguments:
+    RFID Code: '"FFFFFFFFFFFFFFFF"'
+    User ID: '[# of RFID Users Supported attribute]'
+    User Status: 1
+    User Type: 0 (UnrestrictedUser)
+  label: Test_Case_Maximum_User_ID
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: DUPLICATE
+  Pre-requisites: An existing user with the same RFID Code
+  arguments:
+    RFID Code: '"1234567890ABCDEF"'
+    User ID: 1
+    User Status: 1
+    User Type: 0 (UnrestrictedUser)
+  label: Test_Case_Duplicate_RFID_Code
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: INVALID_COMMAND
+  Pre-requisites: 'N/A
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:7†source】【4:13†source】【4:14†source】.'
+  arguments:
+    RFID Code: '"1234567890ABCDEF"'
+    User ID: 1
+    User Status: 0
+    User Type: 0 (UnrestrictedUser)
+  label: Test_Case_Invalid_User_Status
+  option: SendCommand

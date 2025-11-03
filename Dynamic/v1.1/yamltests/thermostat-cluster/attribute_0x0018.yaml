@@ -1,0 +1,41 @@
+config:
+  attribute: '0x0018'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0018_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"MaxCoolSetpointLimit": <AbsMinCoolSetpointLimit>}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Ensure the AbsMinCoolSetpointLimit is defined and accessible.
+  arguments:
+    '{"MaxCoolSetpointLimit"': <AbsMinCoolSetpointLimit>}
+  label: Test_Case_Extreme_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"MaxCoolSetpointLimit": <AbsMaxCoolSetpointLimit>}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Ensure the AbsMaxCoolSetpointLimit is defined and accessible.
+  arguments:
+    '{"MaxCoolSetpointLimit"': <AbsMaxCoolSetpointLimit>}
+  label: Test_Case_Extreme_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"MaxCoolSetpointLimit": <AbsMaxCoolSetpointLimit>}'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: Ensure the AbsMaxCoolSetpointLimit is defined and accessible.
+  arguments:
+    '{"MaxCoolSetpointLimit"': <AbsMaxCoolSetpointLimit + 1>}
+  label: Test_Case_Value_Greater_than_AbsMaxCoolSetpointLimit
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"MaxCoolSetpointLimit": <AbsMinCoolSetpointLimit>}'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'Ensure the AbsMinCoolSetpointLimit is defined and accessible.
+
+
+    ### Constraints and Special Responses'
+  arguments:
+    '{"MaxCoolSetpointLimit"': <AbsMinCoolSetpointLimit - 1>}
+  label: Test_Case_Value_Less_than_AbsMinCoolSetpointLimit
+  option: WriteAttribute

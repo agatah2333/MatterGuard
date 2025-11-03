@@ -1,0 +1,75 @@
+config:
+  cluster: operational-credentials-cluster
+  command: '0x05'
+  nodeId: '0x654231'
+name: operational-credentials-cluster_command_0x05_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: '`TableFull`'
+  Pre-requisites: The device’s operational credentials table is full.
+  arguments:
+    AdminVendorId: 0
+    CaseAdminSubject: 0
+    ICACValue:
+      Length: 0 bytes
+    IPKValue:
+      Length: 16 bytes
+    NOCValue:
+      Length: 0 bytes
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: New FabricIndex will be allocated, and the NOC, ICAC, and IPK
+    will be stored.
+  ExpectedResponse: '`Success`'
+  Pre-requisites: The device’s operational credentials table is not full.
+  arguments:
+    AdminVendorId: 65535
+    CaseAdminSubject: 254
+    ICACValue:
+      Length: 400 bytes
+    IPKValue:
+      Length: 16 bytes
+    NOCValue:
+      Length: 400 bytes
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: '`FabricConflict`'
+  Pre-requisites: The device already has an Operational Identifier for the given <Root
+    Public Key, FabricID> pair.
+  arguments:
+    AdminVendorId: 12345
+    CaseAdminSubject: 1
+    ICACValue:
+      Length: 100 bytes
+    IPKValue:
+      Length: 16 bytes
+    NOCValue:
+      FabricID> pair: null
+      Length: 100 bytes
+      containing an Operational Identifier for an existing <Root Public Key: null
+  label: Test_Case_Special_Response_-_FabricConflict
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: '`InvalidAdminSubject`'
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:8†source】【4:9†source】.'
+  arguments:
+    AdminVendorId: 12345
+    CaseAdminSubject: 255 (Invalid value)
+    ICACValue:
+      Length: 100 bytes
+    IPKValue:
+      Length: 16 bytes
+    NOCValue:
+      Length: 100 bytes
+  label: Test_Case_Special_Response_-_InvalidAdminSubject
+  option: SendCommand

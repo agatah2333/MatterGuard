@@ -1,0 +1,33 @@
+config:
+  attribute: '0x20'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x20_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '`Current` and `Previous` attributes will be empty lists'
+  ExpectedResponse: No active faults
+  Pre-requisites: 'None
+
+
+    **Test Case 1.2**:'
+  arguments:
+    Current: []
+    Previous: []
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '`Current` will be updated to [1], `Previous` will be updated
+    to [0]'
+  ExpectedResponse: Transition from no fault to LinkDown fault
+  Pre-requisites: 'None
+
+
+    **Test Case 2.2**:'
+  arguments:
+    Current:
+    - 1
+    Previous:
+    - 0
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

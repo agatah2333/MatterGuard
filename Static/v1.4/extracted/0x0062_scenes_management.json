@@ -1,0 +1,367 @@
+{
+  "source_file": "Scenes Management_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0062",
+        "name": "Scenes Management",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "LastConfiguredBy",
+            "dataType": "node-id",
+            "valueRange": "",
+            "description": "Node ID of last configuration modifier",
+            "privilege": "View",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "SceneTableSize",
+            "dataType": "uint16",
+            "valueRange": "0-16",
+            "description": "Maximum scene capacity",
+            "privilege": "View",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "AddScene",
+            "parameters": {
+              "GroupID": {
+                "dataType": "group-id",
+                "valueRange": ""
+              },
+              "SceneID": {
+                "dataType": "uint8",
+                "valueRange": "0-254"
+              },
+              "TransitionTime": {
+                "dataType": "uint32",
+                "valueRange": "0-60000000"
+              },
+              "SceneName": {
+                "dataType": "string",
+                "valueRange": "max 16"
+              },
+              "ExtensionFields": {
+                "dataType": "list[ExtensionFieldSetStruct]",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "ViewScene",
+            "parameters": {
+              "GroupID": {
+                "dataType": "group-id",
+                "valueRange": ""
+              },
+              "SceneID": {
+                "dataType": "uint8",
+                "valueRange": "0-254"
+              }
+            },
+            "privilege": "Observe",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "RemoveScene",
+            "parameters": {
+              "GroupID": {
+                "dataType": "group-id",
+                "valueRange": ""
+              },
+              "SceneID": {
+                "dataType": "uint8",
+                "valueRange": "0-254"
+              }
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x03",
+            "name": "RemoveAllScenes",
+            "parameters": {
+              "GroupID": {
+                "dataType": "group-id",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x04",
+            "name": "StoreScene",
+            "parameters": {
+              "GroupID": {
+                "dataType": "group-id",
+                "valueRange": ""
+              },
+              "SceneID": {
+                "dataType": "uint8",
+                "valueRange": "0-254"
+              }
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x05",
+            "name": "RecallScene",
+            "parameters": {
+              "GroupID": {
+                "dataType": "group-id",
+                "valueRange": ""
+              },
+              "SceneID": {
+                "dataType": "uint8",
+                "valueRange": "0-254"
+              },
+              "TransitionTime": {
+                "dataType": "uint32",
+                "valueRange": "0-60000000"
+              }
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x06",
+            "name": "GetSceneMembership",
+            "parameters": {
+              "GroupID": {
+                "dataType": "group-id",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Observe",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x40",
+            "name": "CopyScene",
+            "parameters": {
+              "SourceGroupID": {
+                "dataType": "group-id",
+                "valueRange": ""
+              },
+              "SourceSceneID": {
+                "dataType": "uint8",
+                "valueRange": "0-254"
+              }
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x00",
+            "name": "AddSceneResponse",
+            "parameters": {
+              "Status": {
+                "dataType": "StatusCodeEnum",
+                "valueRange": ""
+              },
+              "GroupID": {
+                "dataType": "group-id",
+                "valueRange": ""
+              },
+              "SceneID": {
+                "dataType": "uint8",
+                "valueRange": "0-254"
+              }
+            },
+            "privilege": "None",
+            "direction": "client ⇐ server"
+          },
+          {
+            "id": "0x01",
+            "name": "ViewSceneResponse",
+            "parameters": {
+              "Status": {
+                "dataType": "StatusCodeEnum",
+                "valueRange": ""
+              },
+              "GroupID": {
+                "dataType": "group-id",
+                "valueRange": ""
+              },
+              "SceneID": {
+                "dataType": "uint8",
+                "valueRange": "0-254"
+              },
+              "SceneName": {
+                "dataType": "string",
+                "valueRange": "max 16"
+              },
+              "TransitionTime": {
+                "dataType": "uint32",
+                "valueRange": "0-60000000"
+              },
+              "ExtensionFields": {
+                "dataType": "list[ExtensionFieldSetStruct]",
+                "valueRange": ""
+              }
+            },
+            "privilege": "None",
+            "direction": "client ⇐ server"
+          },
+          {
+            "id": "0x02",
+            "name": "RemoveSceneResponse",
+            "parameters": {
+              "Status": {
+                "dataType": "StatusCodeEnum",
+                "valueRange": ""
+              },
+              "GroupID": {
+                "dataType": "group-id",
+                "valueRange": ""
+              },
+              "SceneID": {
+                "dataType": "uint8",
+                "valueRange": "0-254"
+              }
+            },
+            "privilege": "None",
+            "direction": "client ⇐ server"
+          },
+          {
+            "id": "0x03",
+            "name": "RemoveAllScenesResponse",
+            "parameters": {
+              "Status": {
+                "dataType": "StatusCodeEnum",
+                "valueRange": ""
+              },
+              "GroupID": {
+                "dataType": "group-id",
+                "valueRange": ""
+              }
+            },
+            "privilege": "None",
+            "direction": "client ⇐ server"
+          },
+          {
+            "id": "0x04",
+            "name": "StoreSceneResponse",
+            "parameters": {
+              "Status": {
+                "dataType": "StatusCodeEnum",
+                "valueRange": ""
+              },
+              "GroupID": {
+                "dataType": "group-id",
+                "valueRange": ""
+              },
+              "SceneID": {
+                "dataType": "uint8",
+                "valueRange": "0-254"
+              }
+            },
+            "privilege": "None",
+            "direction": "client ⇐ server"
+          },
+          {
+            "id": "0x06",
+            "name": "GetSceneMembershipResponse",
+            "parameters": {
+              "Status": {
+                "dataType": "StatusCodeEnum",
+                "valueRange": ""
+              },
+              "Capacity": {
+                "dataType": "uint8",
+                "valueRange": ""
+              },
+              "GroupID": {
+                "dataType": "group-id",
+                "valueRange": ""
+              },
+              "SceneList": {
+                "dataType": "list[uint8]",
+                "valueRange": ""
+              }
+            },
+            "privilege": "None",
+            "direction": "client ⇐ server"
+          },
+          {
+            "id": "0x40",
+            "name": "CopySceneResponse",
+            "parameters": {
+              "Status": {
+                "dataType": "StatusCodeEnum",
+                "valueRange": ""
+              }
+            },
+            "privilege": "None",
+            "direction": "client ⇐ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "SceneInfoStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "SceneCount": {
+                "dataType": "uint8",
+                "valueRange": "0-253"
+              },
+              "CurrentScene": {
+                "dataType": "uint8",
+                "valueRange": "0-255"
+              },
+              "CurrentGroup": {
+                "dataType": "group-id",
+                "valueRange": ""
+              },
+              "SceneValid": {
+                "dataType": "bool",
+                "valueRange": ""
+              },
+              "RemainingCapacity": {
+                "dataType": "uint8",
+                "valueRange": "0-253"
+              }
+            }
+          },
+          "StatusCodeEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Success",
+              "1": "InvalidGroup",
+              "2": "InvalidScene",
+              "3": "InsufficientCapacity",
+              "4": "UnauthorizedAccess"
+            }
+          },
+          "ExtensionFieldSetStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "ClusterID": "cluster-id",
+              "AttributeList": "list[attribute-id]"
+            }
+          },
+          "group-id": {
+            "baseType": "uint16",
+            "description": "Group identifier (1-65534)"
+          },
+          "node-id": {
+            "baseType": "uint64",
+            "description": "Node identifier"
+          }
+        }
+      }
+    ]
+  }
+}

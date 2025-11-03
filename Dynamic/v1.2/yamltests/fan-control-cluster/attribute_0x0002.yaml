@@ -1,0 +1,42 @@
+config:
+  attribute: '0x0002'
+  cluster: fan-control-cluster
+  nodeId: '0x654231'
+name: fan-control-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '- `FanMode`: Off'
+  ExpectedResponse: Success
+  Pre-requisites: N/A
+  arguments:
+    PercentSetting: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `FanMode`: High'
+  ExpectedResponse: Success
+  Pre-requisites: N/A
+  arguments:
+    PercentSetting: 100
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `PercentSetting`: No change'
+  ExpectedResponse: No change in attribute value
+  Pre-requisites: N/A
+  arguments: {}
+  label: Test_Case_Special_Response_-_Null_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `FanMode`: Medium (if supported)'
+  ExpectedResponse: Success
+  Pre-requisites: 'Fan supports Medium speed
+
+
+    These test cases cover the extreme values of the `PercentSetting` attribute as
+    well as special cases that could result in specific responses as per the attribute''s
+    description【4:0†source】【4:1†source】【4:2†source】【4:3†source】.'
+  arguments:
+    PercentSetting: 50
+  label: Test_Case_Special_Response_-_Mid-range_Value
+  option: WriteAttribute

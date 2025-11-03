@@ -1,0 +1,22 @@
+config:
+  cluster: scenes
+  command: '0x42'
+  nodeId: '0x654231'
+name: scenes_command_0x42_v1.1.0.0
+tests:
+- arguments: {}
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Copy_All_Scenes
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Specific_Scene_Copy
+  option: SendCommand
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

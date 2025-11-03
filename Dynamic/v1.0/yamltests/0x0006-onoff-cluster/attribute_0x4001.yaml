@@ -1,0 +1,82 @@
+config:
+  node_id: 305414945
+  cluster: '0x0006'
+  endpoint: 1
+tests:
+- label: read_ontime
+  cluster: '0x0006'
+  attribute: '0x4001'
+  operation: read
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+- label: write_ontime_minimum_boundary
+  cluster: '0x0006'
+  attribute: '0x4001'
+  operation: write
+  arguments:
+    value: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  post_action_verification:
+  - type: attribute_read
+    description: Verify attribute was written correctly
+    cluster: '0x0006'
+    attribute: '0x4001'
+    expected_value: 0
+- label: write_ontime_maximum_boundary
+  cluster: '0x0006'
+  attribute: '0x4001'
+  operation: write
+  arguments:
+    value: 65535
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  post_action_verification:
+  - type: attribute_read
+    description: Verify attribute was written correctly
+    cluster: '0x0006'
+    attribute: '0x4001'
+    expected_value: 65535
+- label: write_ontime_midrange
+  cluster: '0x0006'
+  attribute: '0x4001'
+  operation: write
+  arguments:
+    value: 32767
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  post_action_verification:
+  - type: attribute_read
+    description: Verify attribute was written correctly
+    cluster: '0x0006'
+    attribute: '0x4001'
+    expected_value: 32767
+- label: write_ontime_above_maximum
+  cluster: '0x0006'
+  attribute: '0x4001'
+  operation: write
+  arguments:
+    value: 65536
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  post_action_verification:
+  - type: attribute_read
+    description: Verify attribute was written correctly
+    cluster: '0x0006'
+    attribute: '0x4001'
+    expected_value: 65536

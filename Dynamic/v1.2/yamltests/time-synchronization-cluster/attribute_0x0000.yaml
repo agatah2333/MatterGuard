@@ -1,0 +1,59 @@
+config:
+  attribute: '0x0000'
+  cluster: time-synchronization-cluster
+  nodeId: '0x654231'
+name: time-synchronization-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: UTCTime set to 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"UTCTime"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 18446744073709551615
+  Attribute_Change: UTCTime set to 18446744073709551615
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"UTCTime"': 18446744073709551615}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: UTCTime set to 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"UTCTime"': 0}
+  label: Test_Case_Special_Value_-_Epoch_Start
+  option: WriteAttribute
+- ActionTime: <current_epoch_time>
+  Attribute_Change: UTCTime set to <current_epoch_time>
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"UTCTime"': <current_epoch_time>}
+  label: Test_Case_Special_Value_-_Current_Time
+  option: WriteAttribute
+- ActionTime: '-1'
+  Attribute_Change: None
+  ExpectedResponse: Error
+  Pre-requisites: None
+  arguments:
+    '{"UTCTime"': -1}
+  label: Test_Case_Invalid_Value_-_Negative_Time
+  option: WriteAttribute
+- ActionTime: 18446744073709551616
+  Attribute_Change: None
+  ExpectedResponse: Error
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    '{"UTCTime"': 18446744073709551616}
+  label: Test_Case_Invalid_Value_-_Beyond_Maximum
+  option: WriteAttribute

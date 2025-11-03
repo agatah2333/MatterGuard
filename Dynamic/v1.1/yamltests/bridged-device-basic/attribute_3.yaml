@@ -1,0 +1,43 @@
+config:
+  attribute: '3'
+  cluster: bridged-device-basic
+  nodeId: '0x654231'
+name: bridged-device-basic_attribute_3_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": True}'
+  ExpectedResponse: <success>
+  Pre-requisites: <device is powered on and within range>
+  arguments:
+    '{"Reachable"': True}
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": False}'
+  ExpectedResponse: <failure>
+  Pre-requisites: <device is powered off or out of range>
+  arguments:
+    '{"Reachable"': False}
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": True}'
+  ExpectedResponse: <success>
+  Pre-requisites: <device is powered on and within range>
+  arguments:
+    '{"Reachable"': True}
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": False}'
+  ExpectedResponse: <failure>
+  Pre-requisites: '<device is powered off or out of range>
+
+
+    These test cases cover the extreme values of the "Reachable" attribute and the
+    special responses that could result from the device being either reachable or
+    not reachable.
+
+
+    For more detailed information, you can refer to the Matter 1.0 Core Specification
+    document【4:14†source】.'
+  arguments:
+    '{"Reachable"': False}
+  option: WriteAttribute

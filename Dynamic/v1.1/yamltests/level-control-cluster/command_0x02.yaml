@@ -1,0 +1,62 @@
+config:
+  cluster: level-control-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: level-control-cluster_command_0x02_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`CurrentLevel` increased by 0 units'
+  ExpectedResponse: Success
+  Pre-requisites: '`CurrentLevel` is not at maximum'
+  arguments:
+    OptionsMask: 0
+    OptionsOverride: 0
+    StepMode: '0x00'
+    StepSize: 0
+    TransitionTime: 0
+  label: Test_Case_Extreme_Values_(Minimum)
+  option: SendCommand
+- ActionTime: 65535
+  Attribute_Change: '`CurrentLevel` decreased by 254 units or until it reaches the
+    minimum level allowed for the device'
+  ExpectedResponse: Success
+  Pre-requisites: '`CurrentLevel` is not at minimum'
+  arguments:
+    OptionsMask: 255
+    OptionsOverride: 255
+    StepMode: '0x01'
+    StepSize: 254
+    TransitionTime: 65535
+  label: Test_Case_Extreme_Values_(Maximum)
+  option: SendCommand
+- ActionTime: 1000
+  Attribute_Change: '`CurrentLevel` increased by 254 units or until it reaches the
+    maximum level allowed for the device'
+  ExpectedResponse: Success
+  Pre-requisites: '`CurrentLevel` is not at maximum'
+  arguments:
+    OptionsMask: 0
+    OptionsOverride: 0
+    StepMode: '0x00'
+    StepSize: 254
+    TransitionTime: 1000
+  label: Test_Case_Special_Response_(Step_Up_to_Maximum)
+  option: SendCommand
+- ActionTime: 1000
+  Attribute_Change: '`CurrentLevel` decreased by 254 units or until it reaches the
+    minimum level allowed for the device'
+  ExpectedResponse: Success
+  Pre-requisites: '`CurrentLevel` is not at minimum
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:2†source】【4:6†source】.'
+  arguments:
+    OptionsMask: 0
+    OptionsOverride: 0
+    StepMode: '0x01'
+    StepSize: 254
+    TransitionTime: 1000
+  label: Test_Case_Special_Response_(Step_Down_to_Minimum)
+  option: SendCommand

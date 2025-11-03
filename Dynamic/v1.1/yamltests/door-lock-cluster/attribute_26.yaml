@@ -1,0 +1,43 @@
+config:
+  attribute: '26'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_26_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: AutoRelockTime set to 0
+  ExpectedResponse: Auto relock disabled
+  Pre-requisites: None
+  arguments:
+    '{"AutoRelockTime"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: AutoRelockTime set to 65535
+  ExpectedResponse: Auto relock set to maximum time
+  Pre-requisites: None
+  arguments:
+    '{"AutoRelockTime"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: AutoRelockTime set to 1
+  ExpectedResponse: Auto relock set to 1 second
+  Pre-requisites: None
+  arguments:
+    '{"AutoRelockTime"': 1}
+  label: Test_Case_Special_Response_-_Immediate_Relock
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: AutoRelockTime set to 30
+  ExpectedResponse: Auto relock set to 30 seconds
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:1†source】【4:6†source】.'
+  arguments:
+    '{"AutoRelockTime"': 30}
+  label: Test_Case_Special_Response_-_Typical_Use_Case
+  option: WriteAttribute

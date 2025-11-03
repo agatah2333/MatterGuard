@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0002'
+  cluster: application-basic-cluster
+  nodeId: '0x654231'
+name: application-basic-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`AdminVendorId` will be set to 0x0000'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AdminVendorId: '0x0000'
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`AdminVendorId` will be set to 0xFFFF'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AdminVendorId: '0xFFFF'
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`AdminVendorId` will be set to 0x0000'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    AdminVendorId: '0x0000'
+  label: Test_Case_Special_Value_(Vendor_ID_for_the_DIAL_registry)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`AdminVendorId` will be set to 0x1234'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    a special value that could result in a specific response as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:5†source】【4:18†source】.'
+  arguments:
+    AdminVendorId: '0x1234'
+  label: Test_Case_Typical_Vendor_ID
+  option: WriteAttribute

@@ -1,0 +1,39 @@
+config:
+  attribute: '0x0016'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0016_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: Primary2Y set to 0
+  ExpectedResponse: Success
+  Pre-requisites: NumberOfPrimaries > 1
+  arguments:
+    '{"Primary2Y"': 0}
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: Primary2Y set to 65279
+  ExpectedResponse: Success
+  Pre-requisites: NumberOfPrimaries > 1
+  arguments:
+    '{"Primary2Y"': 65279}
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: Primary2Y set to 1
+  ExpectedResponse: Success
+  Pre-requisites: NumberOfPrimaries > 1
+  arguments:
+    '{"Primary2Y"': 1}
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: Primary2Y set to 65278
+  ExpectedResponse: Success
+  Pre-requisites: 'NumberOfPrimaries > 1
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as per the attribute''s definition
+    and constraints【4:0†source】.'
+  arguments:
+    '{"Primary2Y"': 65278}
+  option: WriteAttribute

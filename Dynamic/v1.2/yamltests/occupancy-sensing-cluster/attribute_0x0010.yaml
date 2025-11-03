@@ -1,0 +1,47 @@
+config:
+  attribute: '0x0010'
+  cluster: occupancy-sensing-cluster
+  nodeId: '0x654231'
+name: occupancy-sensing-cluster_attribute_0x0010_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: PIROccupiedToUnoccupiedDelay = 0
+  ExpectedResponse: Sensor changes to unoccupied state immediately after the last
+    detection of movement.
+  Pre-requisites: None
+  arguments:
+    '{"PIROccupiedToUnoccupiedDelay"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 65535
+  Attribute_Change: PIROccupiedToUnoccupiedDelay = 65535
+  ExpectedResponse: Sensor changes to unoccupied state after 65535 seconds (approximately
+    18.2 hours) after the last detection of movement.
+  Pre-requisites: None
+  arguments:
+    '{"PIROccupiedToUnoccupiedDelay"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 1
+  Attribute_Change: PIROccupiedToUnoccupiedDelay = 1
+  ExpectedResponse: Sensor changes to unoccupied state 1 second after the last detection
+    of movement.
+  Pre-requisites: None
+  arguments:
+    '{"PIROccupiedToUnoccupiedDelay"': 1}
+  label: Test_Case_Special_Response_-_Immediate_Transition
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: PIROccupiedToUnoccupiedDelay = 0
+  ExpectedResponse: Sensor changes to unoccupied state immediately after the last
+    detection of movement (default behavior).
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the attribute
+    description.'
+  arguments:
+    '{"PIROccupiedToUnoccupiedDelay"': 0}
+  label: Test_Case_Special_Response_-_Default_Value
+  option: WriteAttribute

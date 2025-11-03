@@ -1,0 +1,56 @@
+config:
+  node_id: 305414945
+  cluster: '0x0004'
+  endpoint: 1
+tests:
+- label: test_removegroup_GroupID_minimum_boundary
+  cluster: '0x0004'
+  command: '0x03'
+  arguments:
+    GroupID: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_removegroup_GroupID_maximum_boundary
+  cluster: '0x0004'
+  command: '0x03'
+  arguments:
+    GroupID: 65535
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_removegroup_GroupID_midrange
+  cluster: '0x0004'
+  command: '0x03'
+  arguments:
+    GroupID: 32767
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS

@@ -1,0 +1,42 @@
+config:
+  attribute: '0x0004'
+  cluster: fan-control-cluster
+  nodeId: '0x654231'
+name: fan-control-cluster_attribute_0x0004_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '- `SpeedMax`: 1'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    SpeedMax: 1
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `SpeedMax`: 100'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    SpeedMax: 100
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `SpeedMax`: No change'
+  ExpectedResponse: Error (Constraint Error)
+  Pre-requisites: None
+  arguments:
+    SpeedMax: 0
+  label: Test_Case_Special_Response_-_Below_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `SpeedMax`: No change'
+  ExpectedResponse: Error (Constraint Error)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the `SpeedMax` attribute as well
+    as values that would result in special responses due to constraint violations.'
+  arguments:
+    SpeedMax: 101
+  label: Test_Case_Special_Response_-_Above_Maximum_Value
+  option: WriteAttribute

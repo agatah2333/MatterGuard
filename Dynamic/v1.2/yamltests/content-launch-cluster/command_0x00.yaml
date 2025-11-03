@@ -1,0 +1,59 @@
+config:
+  cluster: content-launch-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: content-launch-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: '"<value>"'
+  Attribute_Change: '"<value>"'
+  ExpectedResponse: '"<value>"'
+  Pre-requisites: '"<value>"'
+  arguments:
+    AutoPlay: 'true'
+    Data: '"<optional_data>"'
+    Search:
+      ContentSearchStruct: <extreme_value>
+  label: Test_Case_Extreme_Value_for_Search_Field
+  option: SendCommand
+- ActionTime: '"<value>"'
+  Attribute_Change: '"<value>"'
+  ExpectedResponse: '"<value>"'
+  Pre-requisites: '"<value>"'
+  arguments:
+    AutoPlay: 'false'
+    Data: '"<extreme_value>"'
+    Search:
+      ContentSearchStruct: <valid_value>
+  label: Test_Case_Extreme_Value_for_Data_Field
+  option: SendCommand
+- ActionTime: '"<value>"'
+  Attribute_Change: '"<value>"'
+  ExpectedResponse: '"Best match should start playing automatically."'
+  Pre-requisites: '"<value>"'
+  arguments:
+    AutoPlay: 'true'
+    Data: '"<optional_data>"'
+    Search:
+      ContentSearchStruct: <valid_value>
+  label: Test_Case_Special_Response_for_AutoPlay_TRUE
+  option: SendCommand
+- ActionTime: '"<value>"'
+  Attribute_Change: '"<value>"'
+  ExpectedResponse: '"Matches should be displayed on screen for user selection."'
+  Pre-requisites: '"<value>"
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    For more detailed information, you can refer to the Matter 1.2 Application Cluster
+    Specification document【4:0†source】.'
+  arguments:
+    AutoPlay: 'false'
+    Data: '"<optional_data>"'
+    Search:
+      ContentSearchStruct: <valid_value>
+  label: Test_Case_Special_Response_for_AutoPlay_FALSE
+  option: SendCommand

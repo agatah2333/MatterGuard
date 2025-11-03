@@ -1,0 +1,1374 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0300",
+    "name": "Color Control",
+    "description": "This cluster provides an interface for changing the color of a light."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "MoveToHue",
+      "parameters": [
+        {
+          "name": "Hue",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "Hue parameter"
+        },
+        {
+          "name": "Direction",
+          "data_type": "enum8",
+          "value_range": {},
+          "description": "Direction parameter"
+        },
+        {
+          "name": "TransitionTime",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Time duration in appropriate units"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "MoveHue",
+      "parameters": [
+        {
+          "name": "MoveMode",
+          "data_type": "enum8",
+          "value_range": {},
+          "description": "MoveMode parameter"
+        },
+        {
+          "name": "Rate",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "Rate parameter"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x02",
+      "name": "StepHue",
+      "parameters": [
+        {
+          "name": "StepMode",
+          "data_type": "enum8",
+          "value_range": {},
+          "description": "StepMode parameter"
+        },
+        {
+          "name": "StepSize",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "StepSize parameter"
+        },
+        {
+          "name": "TransitionTime",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "Time duration in appropriate units"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x03",
+      "name": "MoveToSaturation",
+      "parameters": [
+        {
+          "name": "Saturation",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "Saturation parameter"
+        },
+        {
+          "name": "TransitionTime",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Time duration in appropriate units"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x04",
+      "name": "MoveSaturation",
+      "parameters": [
+        {
+          "name": "MoveMode",
+          "data_type": "enum8",
+          "value_range": {},
+          "description": "MoveMode parameter"
+        },
+        {
+          "name": "Rate",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "Rate parameter"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x05",
+      "name": "StepSaturation",
+      "parameters": [
+        {
+          "name": "StepMode",
+          "data_type": "enum8",
+          "value_range": {},
+          "description": "StepMode parameter"
+        },
+        {
+          "name": "StepSize",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "StepSize parameter"
+        },
+        {
+          "name": "TransitionTime",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "Time duration in appropriate units"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x06",
+      "name": "MoveToHueAndSaturation",
+      "parameters": [
+        {
+          "name": "Hue",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "Hue parameter"
+        },
+        {
+          "name": "Saturation",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "Saturation parameter"
+        },
+        {
+          "name": "TransitionTime",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Time duration in appropriate units"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x07",
+      "name": "MoveToColor",
+      "parameters": [
+        {
+          "name": "ColorX",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "ColorX parameter"
+        },
+        {
+          "name": "ColorY",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "ColorY parameter"
+        },
+        {
+          "name": "TransitionTime",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Time duration in appropriate units"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x08",
+      "name": "MoveColor",
+      "parameters": [
+        {
+          "name": "RateX",
+          "data_type": "int16",
+          "value_range": {
+            "min": "-32768",
+            "max": "32767"
+          },
+          "description": "RateX parameter"
+        },
+        {
+          "name": "RateY",
+          "data_type": "int16",
+          "value_range": {
+            "min": "-32768",
+            "max": "32767"
+          },
+          "description": "RateY parameter"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x09",
+      "name": "StepColor",
+      "parameters": [
+        {
+          "name": "StepX",
+          "data_type": "int16",
+          "value_range": {
+            "min": "-32768",
+            "max": "32767"
+          },
+          "description": "StepX parameter"
+        },
+        {
+          "name": "StepY",
+          "data_type": "int16",
+          "value_range": {
+            "min": "-32768",
+            "max": "32767"
+          },
+          "description": "StepY parameter"
+        },
+        {
+          "name": "TransitionTime",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Time duration in appropriate units"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x0A",
+      "name": "MoveToColorTemperature",
+      "parameters": [
+        {
+          "name": "ColorTemperatureMireds",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "ColorTemperatureMireds parameter"
+        },
+        {
+          "name": "TransitionTime",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Time duration in appropriate units"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x40",
+      "name": "EnhancedMoveToHue",
+      "parameters": [
+        {
+          "name": "EnhancedHue",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "EnhancedHue parameter"
+        },
+        {
+          "name": "Direction",
+          "data_type": "enum8",
+          "value_range": {},
+          "description": "Direction parameter"
+        },
+        {
+          "name": "TransitionTime",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Time duration in appropriate units"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x41",
+      "name": "EnhancedMoveHue",
+      "parameters": [
+        {
+          "name": "MoveMode",
+          "data_type": "enum8",
+          "value_range": {},
+          "description": "MoveMode parameter"
+        },
+        {
+          "name": "Rate",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Rate parameter"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x42",
+      "name": "EnhancedStepHue",
+      "parameters": [
+        {
+          "name": "StepMode",
+          "data_type": "enum8",
+          "value_range": {},
+          "description": "StepMode parameter"
+        },
+        {
+          "name": "StepSize",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "StepSize parameter"
+        },
+        {
+          "name": "TransitionTime",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Time duration in appropriate units"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x43",
+      "name": "EnhancedMoveToHueAndSaturation",
+      "parameters": [
+        {
+          "name": "EnhancedHue",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "EnhancedHue parameter"
+        },
+        {
+          "name": "Saturation",
+          "data_type": "uint8",
+          "value_range": {
+            "min": "0",
+            "max": "255"
+          },
+          "description": "Saturation parameter"
+        },
+        {
+          "name": "TransitionTime",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Time duration in appropriate units"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x44",
+      "name": "ColorLoopSet",
+      "parameters": [
+        {
+          "name": "UpdateFlags",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "UpdateFlags parameter"
+        },
+        {
+          "name": "Action",
+          "data_type": "enum8",
+          "value_range": {},
+          "description": "Action parameter"
+        },
+        {
+          "name": "Direction",
+          "data_type": "enum8",
+          "value_range": {},
+          "description": "Direction parameter"
+        },
+        {
+          "name": "Time",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Time duration in appropriate units"
+        },
+        {
+          "name": "StartHue",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "StartHue parameter"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x47",
+      "name": "StopMoveStep",
+      "parameters": [
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x4B",
+      "name": "MoveColorTemperature",
+      "parameters": [
+        {
+          "name": "MoveMode",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "MoveMode parameter"
+        },
+        {
+          "name": "Rate",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Rate parameter"
+        },
+        {
+          "name": "ColorTemperatureMinimumMireds",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "ColorTemperatureMinimumMireds parameter"
+        },
+        {
+          "name": "ColorTemperatureMaximumMireds",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "ColorTemperatureMaximumMireds parameter"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x4C",
+      "name": "StepColorTemperature",
+      "parameters": [
+        {
+          "name": "StepMode",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "StepMode parameter"
+        },
+        {
+          "name": "StepSize",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "StepSize parameter"
+        },
+        {
+          "name": "TransitionTime",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "Time duration in appropriate units"
+        },
+        {
+          "name": "ColorTemperatureMinimumMireds",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "ColorTemperatureMinimumMireds parameter"
+        },
+        {
+          "name": "ColorTemperatureMaximumMireds",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65535"
+          },
+          "description": "ColorTemperatureMaximumMireds parameter"
+        },
+        {
+          "name": "OptionsMask",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        },
+        {
+          "name": "OptionsOverride",
+          "data_type": "bitmap8",
+          "value_range": {},
+          "description": "Options bitmap"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "CurrentHue",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "CurrentHue attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "CurrentSaturation",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "CurrentSaturation attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "RemainingTime",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "RemainingTime attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0003",
+      "name": "CurrentX",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "CurrentX attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0004",
+      "name": "CurrentY",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "CurrentY attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0005",
+      "name": "DriftCompensation",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "DriftCompensation attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0006",
+      "name": "CompensationText",
+      "data_type": "string",
+      "value_range": {
+        "max": "254"
+      },
+      "description": "CompensationText attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0007",
+      "name": "ColorTemperatureMireds",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "ColorTemperatureMireds attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0008",
+      "name": "ColorMode",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "ColorMode attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x000F",
+      "name": "Options",
+      "data_type": "bitmap8",
+      "value_range": {},
+      "description": "Options attribute",
+      "privilege": "O",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x4000",
+      "name": "EnhancedCurrentHue",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "EnhancedCurrentHue attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x4001",
+      "name": "EnhancedColorMode",
+      "data_type": "enum8",
+      "value_range": {},
+      "description": "EnhancedColorMode attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x4002",
+      "name": "ColorLoopActive",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "ColorLoopActive attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x4003",
+      "name": "ColorLoopDirection",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "ColorLoopDirection attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x4004",
+      "name": "ColorLoopTime",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "ColorLoopTime attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x4005",
+      "name": "ColorLoopStartEnhancedHue",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "ColorLoopStartEnhancedHue attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x4006",
+      "name": "ColorLoopStoredEnhancedHue",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "ColorLoopStoredEnhancedHue attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x400A",
+      "name": "ColorCapabilities",
+      "data_type": "bitmap16",
+      "value_range": {},
+      "description": "ColorCapabilities attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x400B",
+      "name": "ColorTempPhysicalMinMireds",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "ColorTempPhysicalMinMireds attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x400C",
+      "name": "ColorTempPhysicalMaxMireds",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "ColorTempPhysicalMaxMireds attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x400D",
+      "name": "CoupleColorTempToLevelMinMireds",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "CoupleColorTempToLevelMinMireds attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x4010",
+      "name": "StartUpColorTemperatureMireds",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "StartUpColorTemperatureMireds attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0010",
+      "name": "NumberOfPrimaries",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "NumberOfPrimaries attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0011",
+      "name": "Primary1X",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "Primary1X attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0012",
+      "name": "Primary1Y",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "Primary1Y attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0013",
+      "name": "Primary1Intensity",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "Primary1Intensity attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0015",
+      "name": "Primary2X",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "Primary2X attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0016",
+      "name": "Primary2Y",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "Primary2Y attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0017",
+      "name": "Primary2Intensity",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "Primary2Intensity attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0019",
+      "name": "Primary3X",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "Primary3X attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x001A",
+      "name": "Primary3Y",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "Primary3Y attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x001B",
+      "name": "Primary3Intensity",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "Primary3Intensity attribute",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0030",
+      "name": "WhitePointX",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "WhitePointX attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0031",
+      "name": "WhitePointY",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "WhitePointY attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0032",
+      "name": "ColorPointRX",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "ColorPointRX attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0033",
+      "name": "ColorPointRY",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "ColorPointRY attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0034",
+      "name": "ColorPointRIntensity",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "ColorPointRIntensity attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0036",
+      "name": "ColorPointGX",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "ColorPointGX attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0037",
+      "name": "ColorPointGY",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "ColorPointGY attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0038",
+      "name": "ColorPointGIntensity",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "ColorPointGIntensity attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x003A",
+      "name": "ColorPointBX",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "ColorPointBX attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x003B",
+      "name": "ColorPointBY",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "ColorPointBY attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x003C",
+      "name": "ColorPointBIntensity",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "ColorPointBIntensity attribute",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

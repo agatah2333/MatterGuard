@@ -1,0 +1,41 @@
+config:
+  cluster: actions-cluster
+  command: '0x06'
+  nodeId: '0x654231'
+name: actions-cluster_command_0x06_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Pause the action immediately.
+  ExpectedResponse: Success
+  Pre-requisites: The action must be in a state that can be paused.
+  arguments:
+    '{"Duration"': 0}
+  label: Test_Case_Minimum_Duration_Value
+  option: SendCommand
+- ActionTime: 65535
+  Attribute_Change: Pause the action for the maximum duration.
+  ExpectedResponse: Success
+  Pre-requisites: The action must be in a state that can be paused.
+  arguments:
+    '{"Duration"': 65535}
+  label: Test_Case_Maximum_Duration_Value
+  option: SendCommand
+- ActionTime: 1
+  Attribute_Change: Pause the action for 1 second.
+  ExpectedResponse: Success
+  Pre-requisites: The action must be in a state that can be paused.
+  arguments:
+    '{"Duration"': 1}
+  label: Test_Case_Special_Duration_Value_(e.g.,_1_second)
+  option: SendCommand
+- ActionTime: 10
+  Attribute_Change: Pause the action for 10 seconds.
+  ExpectedResponse: Success
+  Pre-requisites: 'The action must be in a state that can be paused.
+
+
+    ### Field Constraints'
+  arguments:
+    '{"Duration"': 10}
+  label: Test_Case_Special_Duration_Value_(e.g.,_10_seconds)
+  option: SendCommand

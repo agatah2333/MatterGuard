@@ -1,0 +1,38 @@
+config:
+  attribute: '0x0005'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x0005_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"WiredCurrentType": "AC"}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"WiredCurrentType"': '"AC"}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"WiredCurrentType": "DC"}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"WiredCurrentType"': '"DC"}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: <none>
+  ExpectedResponse: <error_invalid_value>
+  Pre-requisites: '<none>
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    For more detailed information, you can refer to the Matter specification document【4:0†source】.'
+  arguments:
+    '{"WiredCurrentType"': '"InvalidType"}'
+  label: Test_Case_Special_Response_-_Invalid_Value
+  option: WriteAttribute

@@ -1,0 +1,26 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0509",
+    "name": "Keypad Input",
+    "description": "Provides an interface for key code based input and control on a device like a Video Player or an endpoint like a Content App."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "SendKey",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "SendKeyResponse",
+      "parameters": [],
+      "privilege": "V",
+      "side": "client"
+    }
+  ],
+  "attributes": [],
+  "events": []
+}

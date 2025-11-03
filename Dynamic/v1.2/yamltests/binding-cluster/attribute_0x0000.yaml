@@ -1,0 +1,57 @@
+config:
+  attribute: '0x0000'
+  cluster: binding-cluster
+  nodeId: '0x654231'
+name: binding-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: "0\n  - **ExpectedResponse**: Success\n  - **Which Attribute Will Be\
+    \ Changed and the Value of the Attribute**: Binding list will include the entry\
+    \ with the maximum values.\n  - **Any Pre-requisites**: None"
+  Attribute_Change: "Binding list will include the entry with the maximum values.\n\
+    \  - **Any Pre-requisites**: None"
+  ExpectedResponse: "Success\n  - **Which Attribute Will Be Changed and the Value\
+    \ of the Attribute**: Binding list will include the entry with the maximum values.\n\
+    \  - **Any Pre-requisites**: None"
+  Pre-requisites: None
+  arguments:
+    '**ActionTime**': 0
+    '**Any Pre-requisites**': None
+    '**ExpectedResponse**': Success
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': Binding
+      list will include the entry with the maximum values.
+    '{"Node"': '0xFFFFFFFFFFFFFFFF, "Group": 0xFFFF, "Endpoint": 0xFF, "Cluster":
+      0xFFFF}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: "0\n  - **ExpectedResponse**: RESOURCE_EXHAUSTED\n  - **Which Attribute\
+    \ Will Be Changed and the Value of the Attribute**: No change, as the binding\
+    \ cannot be created due to resource exhaustion.\n  - **Any Pre-requisites**: The\
+    \ system should be in a state where no more resources are available for creating\
+    \ new bindings.\n\nThese test cases cover the extreme values and special responses\
+    \ for the Binding Cluster's attribute ID `0x0000`【4:0†source】【4:1†source】【4:9†source】【4:11†source】."
+  Attribute_Change: "No change, as the binding cannot be created due to resource exhaustion.\n\
+    \  - **Any Pre-requisites**: The system should be in a state where no more resources\
+    \ are available for creating new bindings.\n\nThese test cases cover the extreme\
+    \ values and special responses for the Binding Cluster's attribute ID `0x0000`【4:0†source】【4:1†source】【4:9†source】【4:11†source】."
+  ExpectedResponse: "RESOURCE_EXHAUSTED\n  - **Which Attribute Will Be Changed and\
+    \ the Value of the Attribute**: No change, as the binding cannot be created due\
+    \ to resource exhaustion.\n  - **Any Pre-requisites**: The system should be in\
+    \ a state where no more resources are available for creating new bindings.\n\n\
+    These test cases cover the extreme values and special responses for the Binding\
+    \ Cluster's attribute ID `0x0000`【4:0†source】【4:1†source】【4:9†source】【4:11†source】."
+  Pre-requisites: 'The system should be in a state where no more resources are available
+    for creating new bindings.
+
+
+    These test cases cover the extreme values and special responses for the Binding
+    Cluster''s attribute ID `0x0000`【4:0†source】【4:1†source】【4:9†source】【4:11†source】.'
+  arguments:
+    '**ActionTime**': 0
+    '**Any Pre-requisites**': The system should be in a state where no more resources
+      are available for creating new bindings.
+    '**ExpectedResponse**': RESOURCE_EXHAUSTED
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': No change,
+      as the binding cannot be created due to resource exhaustion.
+    '{"Node"': '0, "Group": 0, "Endpoint": 0, "Cluster": 0}'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

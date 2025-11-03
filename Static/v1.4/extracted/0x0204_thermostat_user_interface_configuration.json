@@ -1,0 +1,71 @@
+{
+  "source_file": "Thermostat User Interface Configuration_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0204",
+        "name": "Thermostat User Interface Configuration",
+        "description": "This cluster provides an interface to allow configuration of the user interface for a thermostat, or a thermostat controller device, that supports a keypad and LCD screen.",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "TemperatureDisplayMode",
+            "dataType": "TemperatureDisplayModeEnum",
+            "valueRange": "Celsius, Fahrenheit",
+            "description": "This attribute SHALL indicate the units of the temperature displayed on the thermostat screen.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "KeypadLockout",
+            "dataType": "KeypadLockoutEnum",
+            "valueRange": "NoLockout, Lockout1, Lockout2, Lockout3, Lockout4, Lockout5",
+            "description": "This attribute SHALL indicate the level of functionality that is available to the user via the keypad.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "ScheduleProgrammingVisibility",
+            "dataType": "ScheduleProgrammingVisibilityEnum",
+            "valueRange": "ScheduleProgrammingPermitted, ScheduleProgrammingDenied",
+            "description": "This attribute is used to hide the weekly schedule programming functionality or menu on a thermostat from a user to prevent local user programming of the weekly schedule.",
+            "privilege": "RW",
+            "writable": true
+          }
+        ],
+        "commands": [],
+        "events": [],
+        "dataTypes": {
+          "TemperatureDisplayModeEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "Celsius",
+              "1": "Fahrenheit"
+            }
+          },
+          "KeypadLockoutEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "NoLockout",
+              "1": "Lockout1",
+              "2": "Lockout2",
+              "3": "Lockout3",
+              "4": "Lockout4",
+              "5": "Lockout5"
+            }
+          },
+          "ScheduleProgrammingVisibilityEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "ScheduleProgrammingPermitted",
+              "1": "ScheduleProgrammingDenied"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

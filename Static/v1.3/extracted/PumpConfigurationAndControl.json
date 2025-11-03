@@ -1,0 +1,545 @@
+{
+  "cluster_id": "0x0200",
+  "name": "Pump Configuration and Control",
+  "description": "The Pump Configuration and Control cluster provides an interface for the setup and control of pump devices, and the automatic reporting of pump status information. Note that control of pump speed is not included – speed is controlled by the On/Off and Level Control clusters.",
+  "features": [
+    {
+      "bit": 0,
+      "code": "PRSCONST",
+      "name": "ConstantPressure",
+      "conformance": "O.a+",
+      "summary": "Supports operating in constant pressure mode"
+    },
+    {
+      "bit": 1,
+      "code": "PRSCOMP",
+      "name": "CompensatedPressure",
+      "conformance": "O.a+",
+      "summary": "Supports operating in compensated pressure mode"
+    },
+    {
+      "bit": 2,
+      "code": "FLW",
+      "name": "ConstantFlow",
+      "conformance": "O.a+",
+      "summary": "Supports operating in constant flow mode"
+    },
+    {
+      "bit": 3,
+      "code": "SPD",
+      "name": "ConstantSpeed",
+      "conformance": "O.a+",
+      "summary": "Supports operating in constant speed mode"
+    },
+    {
+      "bit": 4,
+      "code": "TEMP",
+      "name": "ConstantTemperature",
+      "conformance": "O.a+",
+      "summary": "Supports operating in constant temperature mode"
+    },
+    {
+      "bit": 5,
+      "code": "AUTO",
+      "name": "Automatic",
+      "conformance": "O",
+      "summary": "Supports operating in automatic mode"
+    },
+    {
+      "bit": 6,
+      "code": "LOCAL",
+      "name": "LocalOperation",
+      "conformance": "O",
+      "summary": "Supports operating using local settings"
+    }
+  ],
+  "data_types": [
+    {
+      "name": "PumpStatusBitmap",
+      "type": "map16",
+      "bits": [
+        {
+          "bit": 0,
+          "name": "DeviceFault",
+          "summary": "A fault related to the system or pump device is detected."
+        },
+        {
+          "bit": 1,
+          "name": "SupplyFault",
+          "summary": "A fault related to the supply to the pump is detected."
+        },
+        {
+          "bit": 2,
+          "name": "SpeedLow",
+          "summary": "Setpoint is too low to achieve."
+        },
+        {
+          "bit": 3,
+          "name": "SpeedHigh",
+          "summary": "Setpoint is too high to achieve."
+        },
+        {
+          "bit": 4,
+          "name": "LocalOverride",
+          "summary": "Device control is overridden by hardware, such as an external STOP button or via a local HMI."
+        },
+        {
+          "bit": 5,
+          "name": "Running",
+          "summary": "Pump is currently running"
+        },
+        {
+          "bit": 6,
+          "name": "RemotePressure",
+          "summary": "A remote pressure sensor is used as the sensor for the regulation of the pump."
+        },
+        {
+          "bit": 7,
+          "name": "RemoteFlow",
+          "summary": "A remote flow sensor is used as the sensor for the regulation of the pump."
+        },
+        {
+          "bit": 8,
+          "name": "RemoteTemperature",
+          "summary": "A remote temperature sensor is used as the sensor for the regulation of the pump."
+        }
+      ]
+    },
+    {
+      "name": "OperationModeEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "Normal",
+          "summary": "The pump is controlled by a setpoint, as defined by a connected remote sensor or by the ControlMode attribute.",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "Minimum",
+          "summary": "This value sets the pump to run at the minimum possible speed it can without being stopped.",
+          "conformance": "SPD"
+        },
+        {
+          "value": 2,
+          "name": "Maximum",
+          "summary": "This value sets the pump to run at its maximum possible speed.",
+          "conformance": "SPD"
+        },
+        {
+          "value": 3,
+          "name": "Local",
+          "summary": "This value sets the pump to run with the local settings of the pump, regardless of what these are.",
+          "conformance": "LOCAL"
+        }
+      ]
+    },
+    {
+      "name": "ControlModeEnum",
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "ConstantSpeed",
+          "summary": "The pump is running at a constant speed.",
+          "conformance": "SPD"
+        },
+        {
+          "value": 1,
+          "name": "ConstantPressure",
+          "summary": "The pump will regulate its speed to maintain a constant differential pressure over its flanges.",
+          "conformance": "PRSCONST"
+        },
+        {
+          "value": 2,
+          "name": "ProportionalPressure",
+          "summary": "The pump will regulate its speed to maintain a constant differential pressure over its flanges.",
+          "conformance": "PRSCOMP"
+        },
+        {
+          "value": 3,
+          "name": "ConstantFlow",
+          "summary": "The pump will regulate its speed to maintain a constant flow through the pump.",
+          "conformance": "FLW"
+        },
+        {
+          "value": 5,
+          "name": "ConstantTemperature",
+          "summary": "The pump will regulate its speed to maintain a constant temperature.",
+          "conformance": "TEMP"
+        },
+        {
+          "value": 7,
+          "name": "Automatic",
+          "summary": "The operation of the pump is automatically optimized to provide the most suitable performance with respect to comfort and energy savings.",
+          "conformance": "AUTO"
+        }
+      ]
+    }
+  ],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "MaxPressure",
+      "type": "int16",
+      "constraint": "all",
+      "quality": "XF",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M"
+    },
+    {
+      "id": "0x0001",
+      "name": "MaxSpeed",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "XF",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M"
+    },
+    {
+      "id": "0x0002",
+      "name": "MaxFlow",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "XF",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M"
+    },
+    {
+      "id": "0x0003",
+      "name": "MinConstPressure",
+      "type": "int16",
+      "constraint": "all",
+      "quality": "XF",
+      "default": "null",
+      "access": "RV",
+      "conformance": "PRSCONST, [AUTO]"
+    },
+    {
+      "id": "0x0004",
+      "name": "MaxConstPressure",
+      "type": "int16",
+      "constraint": "all",
+      "quality": "XF",
+      "default": "null",
+      "access": "RV",
+      "conformance": "PRSCONST, [AUTO]"
+    },
+    {
+      "id": "0x0005",
+      "name": "MinCompPressure",
+      "type": "int16",
+      "constraint": "all",
+      "quality": "XF",
+      "default": "null",
+      "access": "RV",
+      "conformance": "PRSCOMP, [AUTO]"
+    },
+    {
+      "id": "0x0006",
+      "name": "MaxCompPressure",
+      "type": "int16",
+      "constraint": "all",
+      "quality": "XF",
+      "default": "null",
+      "access": "RV",
+      "conformance": "PRSCOMP, [AUTO]"
+    },
+    {
+      "id": "0x0007",
+      "name": "MinConstSpeed",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "XF",
+      "default": "null",
+      "access": "RV",
+      "conformance": "SPD, [AUTO]"
+    },
+    {
+      "id": "0x0008",
+      "name": "MaxConstSpeed",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "XF",
+      "default": "null",
+      "access": "RV",
+      "conformance": "SPD, [AUTO]"
+    },
+    {
+      "id": "0x0009",
+      "name": "MinConstFlow",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "XF",
+      "default": "null",
+      "access": "RV",
+      "conformance": "FLW, [AUTO]"
+    },
+    {
+      "id": "0x000A",
+      "name": "MaxConstFlow",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "XF",
+      "default": "null",
+      "access": "RV",
+      "conformance": "FLW, [AUTO]"
+    },
+    {
+      "id": "0x000B",
+      "name": "MinConstTemp",
+      "type": "int16",
+      "constraint": "min -27315",
+      "quality": "XF",
+      "default": "null",
+      "access": "RV",
+      "conformance": "TEMP, [AUTO]"
+    },
+    {
+      "id": "0x000C",
+      "name": "MaxConstTemp",
+      "type": "int16",
+      "constraint": "min -27315",
+      "quality": "XF",
+      "default": "null",
+      "access": "RV",
+      "conformance": "TEMP, [AUTO]"
+    },
+    {
+      "id": "0x0010",
+      "name": "PumpStatus",
+      "type": "PumpStatusBitmap",
+      "constraint": "desc",
+      "quality": "P",
+      "default": "0",
+      "access": "RV",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0011",
+      "name": "EffectiveOperationMode",
+      "type": "OperationModeEnum",
+      "constraint": "desc",
+      "quality": "N",
+      "default": "desc",
+      "access": "RV",
+      "conformance": "M"
+    },
+    {
+      "id": "0x0012",
+      "name": "EffectiveControlMode",
+      "type": "ControlModeEnum",
+      "constraint": "desc",
+      "quality": "N",
+      "default": "desc",
+      "access": "RV",
+      "conformance": "M"
+    },
+    {
+      "id": "0x0013",
+      "name": "Capacity",
+      "type": "int16",
+      "constraint": "all",
+      "quality": "XP",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M"
+    },
+    {
+      "id": "0x0014",
+      "name": "Speed",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0015",
+      "name": "LifetimeRunningHours",
+      "type": "uint24",
+      "constraint": "all",
+      "quality": "XN",
+      "default": "0",
+      "access": "RW VM",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0016",
+      "name": "Power",
+      "type": "uint24",
+      "constraint": "all",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0017",
+      "name": "LifetimeEnergyConsumed",
+      "type": "uint32",
+      "constraint": "all",
+      "quality": "XN",
+      "default": "0",
+      "access": "RW VM",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0020",
+      "name": "OperationMode",
+      "type": "OperationModeEnum",
+      "constraint": "desc",
+      "quality": "N",
+      "default": "0",
+      "access": "RW VM",
+      "conformance": "M"
+    },
+    {
+      "id": "0x0021",
+      "name": "ControlMode",
+      "type": "ControlModeEnum",
+      "constraint": "desc",
+      "quality": "N",
+      "default": "0",
+      "access": "RW VM",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0022",
+      "name": "AlarmMask",
+      "type": "map16",
+      "constraint": "desc",
+      "quality": "N",
+      "default": "0",
+      "access": "RV",
+      "conformance": "D"
+    }
+  ],
+  "events": [
+    {
+      "id": "0x00",
+      "name": "SupplyVoltageLow",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "O"
+    },
+    {
+      "id": "0x01",
+      "name": "SupplyVoltageHigh",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "O"
+    },
+    {
+      "id": "0x02",
+      "name": "PowerMissingPhase",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "O"
+    },
+    {
+      "id": "0x03",
+      "name": "SystemPressureLow",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "O"
+    },
+    {
+      "id": "0x04",
+      "name": "SystemPressureHigh",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "O"
+    },
+    {
+      "id": "0x05",
+      "name": "DryRunning",
+      "priority": "CRITICAL",
+      "access": "V",
+      "conformance": "O"
+    },
+    {
+      "id": "0x06",
+      "name": "MotorTemperatureHigh",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "O"
+    },
+    {
+      "id": "0x07",
+      "name": "PumpMotorFatalFailure",
+      "priority": "CRITICAL",
+      "access": "V",
+      "conformance": "O"
+    },
+    {
+      "id": "0x08",
+      "name": "ElectronicTemperatureHigh",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "O"
+    },
+    {
+      "id": "0x09",
+      "name": "PumpBlocked",
+      "priority": "CRITICAL",
+      "access": "V",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0A",
+      "name": "SensorFailure",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0B",
+      "name": "ElectronicNonFatalFailure",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0C",
+      "name": "ElectronicFatalFailure",
+      "priority": "CRITICAL",
+      "access": "V",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0D",
+      "name": "GeneralFault",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0E",
+      "name": "Leakage",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "O"
+    },
+    {
+      "id": "0x0F",
+      "name": "AirDetection",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "O"
+    },
+    {
+      "id": "0x10",
+      "name": "TurbineOperation",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "O"
+    }
+  ]
+}

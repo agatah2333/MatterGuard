@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0000'
+  cluster: thermostat-user-interface-configuration-cluster
+  nodeId: '0x654231'
+name: thermostat-user-interface-configuration-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: TemperatureUnit = 0 (Fahrenheit)
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"TemperatureUnit"': 0}
+  label: Test_Case_Extreme_Value_(Minimum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: TemperatureUnit = 2 (Kelvin)
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"TemperatureUnit"': 2}
+  label: Test_Case_Extreme_Value_(Maximum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: TemperatureUnit = 1 (Celsius)
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"TemperatureUnit"': 1}
+  label: Test_Case_Special_Response_(Celsius)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:3†source】.'
+  arguments:
+    '{"TemperatureUnit"': 3}
+  label: Test_Case_Invalid_Value_(Out_of_Range)
+  option: WriteAttribute

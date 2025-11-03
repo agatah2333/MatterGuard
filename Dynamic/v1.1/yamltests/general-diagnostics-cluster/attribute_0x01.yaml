@@ -1,0 +1,56 @@
+config:
+  attribute: '0x01'
+  cluster: general-diagnostics-cluster
+  nodeId: '0x654231'
+name: general-diagnostics-cluster_attribute_0x01_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: NetworkInterfaces will be set to the maximum values.
+  ExpectedResponse: Success
+  Pre-requisites: The device must support the maximum number of network interfaces.
+  arguments:
+    HardwareAddress:
+    - 255
+    - 255
+    - 255
+    - 255
+    - 255
+    - 255
+    IPv4Addresses:
+    - 255.255.255.255
+    IPv6Addresses:
+    - ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+    Name: '"A" * 32'
+    NetworkInterfaces: 254
+    Role: 2
+    Security: 2
+    Type: 3
+  label: Test_Case_Extreme_Values
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: NetworkInterfaces will be set to the minimum values.
+  ExpectedResponse: Success
+  Pre-requisites: 'The device must support at least one network interface.
+
+
+    These test cases cover the extreme values and special response values for the
+    `NetworkInterfaces` attribute in the General Diagnostics Cluster.'
+  arguments:
+    HardwareAddress:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    IPv4Addresses:
+    - 0.0.0.0
+    IPv6Addresses:
+    - '::'
+    Name: '""'
+    NetworkInterfaces: 1
+    Role: 0
+    Security: 0
+    Type: 0
+  label: Test_Case_Special_Response_Values
+  option: WriteAttribute

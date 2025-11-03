@@ -1,0 +1,42 @@
+config:
+  attribute: '0x0002'
+  cluster: temperature-measurement-cluster
+  nodeId: '0x654231'
+name: temperature-measurement-cluster_attribute_0x0002_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: MaxMeasuredValue set to MinMeasuredValue + 1
+  ExpectedResponse: Success
+  Pre-requisites: MinMeasuredValue must be set to a known value
+  arguments:
+    MaxMeasuredValue: MinMeasuredValue + 1
+  label: Test_Case_Minimum_Value_of_the_Constraint
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: MaxMeasuredValue set to 32767
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    MaxMeasuredValue: 32767
+  label: Test_Case_Maximum_Value_of_the_Constraint
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: MaxMeasuredValue set to null
+  ExpectedResponse: Indicates that the value is not available
+  Pre-requisites: None
+  arguments: {}
+  label: Test_Case_Special_Response_-_Null_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: No change
+  ExpectedResponse: Error indicating value is below the minimum constraint
+  Pre-requisites: 'MinMeasuredValue must be set to a known value
+
+
+    These test cases cover the extreme values of the constraints and the special responses
+    as mentioned in the description of the effect for the `MaxMeasuredValue` attribute
+    in the Temperature Measurement Cluster【4:0†source】.'
+  arguments:
+    MaxMeasuredValue: MinMeasuredValue
+  label: Test_Case_Special_Response_-_Invalid_Value_Below_Minimum
+  option: WriteAttribute

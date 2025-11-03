@@ -1,0 +1,56 @@
+config:
+  attribute: '0x0007'
+  cluster: network-commissioning-cluster
+  nodeId: '0x654231'
+name: network-commissioning-cluster_attribute_0x0007_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"LastConnectErrorValue": -2147483648}'
+  ExpectedResponse: <error_handling_response>
+  Pre-requisites: Ensure the network interface is enabled and a connection attempt
+    has been made.
+  arguments:
+    '{"LastConnectErrorValue"': -2147483648}
+  label: Test_Case_Minimum_Value_for_int32
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LastConnectErrorValue": 2147483647}'
+  ExpectedResponse: <error_handling_response>
+  Pre-requisites: Ensure the network interface is enabled and a connection attempt
+    has been made.
+  arguments:
+    '{"LastConnectErrorValue"': 2147483647}
+  label: Test_Case_Maximum_Value_for_int32
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LastConnectErrorValue": null}'
+  ExpectedResponse: <no_attempt_response>
+  Pre-requisites: No connection attempt has been made, or no network configurations
+    exist in the Networks attribute.
+  arguments:
+    '{"LastConnectErrorValue"': null}
+  label: Test_Case_Null_Value_(No_Attempt_Made_or_No_Network_Configurations_Exist)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LastConnectErrorValue": -1}'
+  ExpectedResponse: <specific_error_response>
+  Pre-requisites: 'Ensure the network interface is enabled and a connection attempt
+    has been made that resulted in a specific error.
+
+
+    ### Notes
+
+    - Replace `<current_time>`, `<error_handling_response>`, `<no_attempt_response>`,
+    and `<specific_error_response>` with the actual values based on the system''s
+    response and current time.
+
+    - Ensure that the pre-requisites are met before running each test case to validate
+    the expected behavior accurately.
+
+
+    These test cases cover the extreme values and special conditions for the `LastConnectErrorValue`
+    attribute in the Network Commissioning Cluster【4:0†source】【4:1†source】【4:2†source】【4:3†source】.'
+  arguments:
+    '{"LastConnectErrorValue"': -1}
+  label: Test_Case_Specific_Error_Value_(Example:_-1_for_a_generic_error)
+  option: WriteAttribute

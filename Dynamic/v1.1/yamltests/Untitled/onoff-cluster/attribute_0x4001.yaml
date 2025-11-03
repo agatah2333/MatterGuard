@@ -1,0 +1,56 @@
+config:
+  node_id: 305414945
+  cluster: '0x0006'
+  endpoint: 1
+tests:
+- label: test_read_ontime
+  operation: read
+  cluster: '0x0006'
+  attribute: '0x4001'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_write_ontime_minimum
+  operation: write
+  cluster: '0x0006'
+  attribute: '0x4001'
+  value: 0
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_write_ontime_maximum
+  operation: write
+  cluster: '0x0006'
+  attribute: '0x4001'
+  value: 65534
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_write_ontime_invalid_above
+  operation: write
+  cluster: '0x0006'
+  attribute: '0x4001'
+  value: 65535
+  expected: FAILURE
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

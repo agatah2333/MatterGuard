@@ -1,0 +1,111 @@
+{
+  "source_file": "Thread Network Directory_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0453",
+        "name": "Thread Network Directory",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "PreferredExtendedPanID",
+            "dataType": "octstr",
+            "valueRange": "8",
+            "description": "Represents the Thread Extended PAN ID value for the Thread network designated by the user to be their preferred network.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "ThreadNetworks",
+            "dataType": "list[ThreadNetworkStruct]",
+            "valueRange": "max ThreadNetworkTableSize",
+            "description": "Indicates the list of Thread Networks known about by this cluster.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "ThreadNetworkTableSize",
+            "dataType": "uint8",
+            "valueRange": "desc",
+            "description": "Indicates the maximum number of entries that can be held in the ThreadNetworks list.",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "AddNetwork",
+            "parameters": {
+              "dataType": "octstr",
+              "valueRange": "max 254",
+              "description": "This field SHALL represent the Operational Dataset for the network, using the encoding defined in the Thread specification."
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "RemoveNetwork",
+            "parameters": {
+              "dataType": "octstr",
+              "valueRange": "8",
+              "description": "Removes the network with the given Extended PAN ID from the ThreadNetworks attribute."
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "GetOperationalDataset",
+            "parameters": {
+              "dataType": "octstr",
+              "valueRange": "8",
+              "description": "Retrieves the Thread Operational Dataset with the given Extended PAN ID."
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x03",
+            "name": "OperationalDatasetResponse",
+            "parameters": {
+              "dataType": "octstr",
+              "valueRange": "max 254",
+              "description": "Contains the Thread Operational Dataset for the Extended PAN specified in GetOperationalDataset."
+            },
+            "privilege": "M",
+            "direction": "server ⇒ client"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "ThreadNetworkStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "ExtendedPanID": {
+                "dataType": "octstr",
+                "valueRange": "8"
+              },
+              "NetworkName": {
+                "dataType": "string",
+                "valueRange": "1-16"
+              },
+              "Channel": {
+                "dataType": "uint16",
+                "valueRange": "all"
+              },
+              "ActiveTimestamp": {
+                "dataType": "uint64",
+                "valueRange": "all"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,122 @@
+config:
+  cluster: bridged-device-basic
+  event: '0x01'
+  nodeId: '0x654231'
+name: bridged-device-basic_event_0x01_v1.1.0.0
+tests:
+- ActionTime: '"Before orderly shutdown sequence"'
+  Attribute_Change: '"None"'
+  ExpectedResponse: '"Event generated and delivered urgently to subscribers"'
+  Pre-requisites: '"Node is about to shut down"
+
+
+    #'
+  arguments:
+    '{"EventID"': '"0x01", "Priority": "CRITICAL"}'
+  label: Test_Case_Extreme_Value_of_Constraints
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify bridged-device-basic cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0039'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0039'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0039'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0039'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '"After orderly shutdown sequence"'
+  Attribute_Change: '"None"'
+  ExpectedResponse: '"Event not generated or delivered"'
+  Pre-requisites: '"Node has already shut down"
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】.'
+  arguments:
+    '{"EventID"': '"0x01", "Priority": "CRITICAL"}'
+  label: Test_Case_Special_Response_Scenario
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify bridged-device-basic cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0039'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0039'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0039'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0039'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 60
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

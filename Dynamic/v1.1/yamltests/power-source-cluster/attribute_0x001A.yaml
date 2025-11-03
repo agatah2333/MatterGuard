@@ -1,0 +1,46 @@
+config:
+  attribute: '0x001A'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x001A_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: BatQuantity = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"BatQuantity"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: BatQuantity = 255
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"BatQuantity"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: BatQuantity = 4
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"BatQuantity"': 4}
+  label: Test_Case_Typical_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: BatQuantity = 1
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    a typical value that could be commonly used. The special value test case is included
+    to check the boundary condition where only one battery is present.
+
+
+    For more detailed information, you can refer to the Matter specification document【4:0†source】.'
+  arguments:
+    '{"BatQuantity"': 1}
+  label: Test_Case_Special_Value_(Boundary_Condition)
+  option: WriteAttribute

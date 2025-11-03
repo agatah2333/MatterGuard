@@ -1,0 +1,39 @@
+config:
+  attribute: '0x0000'
+  cluster: access-control-cluster
+  nodeId: '0x654231'
+name: access-control-cluster_attribute_0x0000_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: ACL attribute will have one entry with the specified values.
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    ##### Test Case 1.2: Maximum Values'
+  arguments:
+    AuthMode: PASE
+    FabricIndex: 0
+    Privilege: Administer
+    Subjects: []
+    Targets: []
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'None
+
+
+    ##### Test Case 2.2: Exceeding Maximum Number of Entries'
+  arguments:
+    AuthMode: Group
+    FabricIndex: 1
+    Privilege: Administer
+    Subjects:
+    - 1
+    Targets:
+    - Cluster: 0
+      Endpoint: 1
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: WriteAttribute

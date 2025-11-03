@@ -1,0 +1,46 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x09'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x09_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`PumpStatus` attribute will be updated to reflect the pump is
+    blocked.'
+  ExpectedResponse: PumpBlocked event triggered
+  Pre-requisites: The pump must be running and all fault conditions must be active.
+  arguments:
+    PumpStatus:
+      DeviceFault: 1
+      LocalOverride: 1
+      RemoteFlow: 1
+      RemotePressure: 1
+      RemoteTemperature: 1
+      Running: 1
+      SpeedHigh: 1
+      SpeedLow: 1
+      SupplyFault: 1
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: '`PumpStatus` attribute will remain unchanged.'
+  ExpectedResponse: PumpBlocked event not triggered
+  Pre-requisites: 'The pump must be running without any fault conditions active.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:0†source】.'
+  arguments:
+    PumpStatus:
+      DeviceFault: 0
+      LocalOverride: 0
+      RemoteFlow: 0
+      RemotePressure: 0
+      RemoteTemperature: 0
+      Running: 1
+      SpeedHigh: 0
+      SpeedLow: 0
+      SupplyFault: 0
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: SubscribeToEvent

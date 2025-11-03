@@ -1,0 +1,14 @@
+config:
+  node_id: 305414945
+  cluster: '0x0039'
+  endpoint: 1
+tests:
+- label: read_uniqueid
+  cluster: '0x0039'
+  attribute: '0x0000'
+  operation: read
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS

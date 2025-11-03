@@ -1,0 +1,44 @@
+config:
+  cluster: basic-information-cluster
+  event: '0x02'
+  nodeId: '0x654231'
+name: basic-information-cluster_event_0x02_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: The node will leave the fabric with index 1.
+  ExpectedResponse: Success
+  Pre-requisites: The node must be part of the fabric with index 1.
+  arguments:
+    FabricIndex: 1
+  label: Test_Case_Minimum_Value_of_FabricIndex
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: The node will leave the fabric with index 254.
+  ExpectedResponse: Success
+  Pre-requisites: The node must be part of the fabric with index 254.
+  arguments:
+    FabricIndex: 254
+  label: Test_Case_Maximum_Value_of_FabricIndex
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: The node will perform a factory reset and leave the fabric.
+  ExpectedResponse: Factory Reset Triggered
+  Pre-requisites: The node must be configured to trigger a factory reset for the given
+    FabricIndex value.
+  arguments:
+    FabricIndex: <value_triggering_factory_reset>
+  label: Test_Case_FabricIndex_Value_Leading_to_Special_Response_(e.g.,_Factory_Reset)
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: The node will invoke the RemoveFabric command and leave the fabric.
+  ExpectedResponse: RemoveFabric Command Invoked
+  Pre-requisites: 'The node must be configured to invoke the RemoveFabric command
+    for the given FabricIndex value.
+
+
+    These test cases cover the extreme values of the `FabricIndex` field and special
+    responses as mentioned in the description of the effect【4:0†source】.'
+  arguments:
+    FabricIndex: <value_triggering_remove_fabric>
+  label: Test_Case_FabricIndex_Value_Leading_to_Special_Response_(e.g.,_RemoveFabric_Command)
+  option: SubscribeToEvent

@@ -1,0 +1,47 @@
+config:
+  cluster: window-covering
+  command: '0x05'
+  nodeId: '0x654231'
+name: window-covering_command_0x05_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `TargetPositionLiftPercent100ths`: 0'
+  ExpectedResponse: Treated as `UpOrOpen` command
+  Pre-requisites: Device does not support Position Aware feature
+  arguments:
+    LiftPercent100thsValue: Not provided
+    LiftPercentageValue: 0
+  label: Test_Case_Minimum_LiftPercentageValue
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '- `TargetPositionLiftPercent100ths`: 10000'
+  ExpectedResponse: Treated as `DownOrClose` command
+  Pre-requisites: Device does not support Position Aware feature
+  arguments:
+    LiftPercent100thsValue: Not provided
+    LiftPercentageValue: 100
+  label: Test_Case_Maximum_LiftPercentageValue
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '- `TargetPositionLiftPercent100ths`: 0'
+  ExpectedResponse: Treated as `UpOrOpen` command
+  Pre-requisites: Device supports Position Aware feature
+  arguments:
+    LiftPercent100thsValue: 0
+    LiftPercentageValue: Not provided
+  label: Test_Case_Minimum_LiftPercent100thsValue
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '- `TargetPositionLiftPercent100ths`: 10000'
+  ExpectedResponse: Treated as `DownOrClose` command
+  Pre-requisites: 'Device supports Position Aware feature
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect .'
+  arguments:
+    LiftPercent100thsValue: 10000
+    LiftPercentageValue: Not provided
+  label: Test_Case_Maximum_LiftPercent100thsValue
+  option: SendCommand

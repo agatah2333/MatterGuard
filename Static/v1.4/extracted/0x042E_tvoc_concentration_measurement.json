@@ -1,0 +1,27 @@
+{
+  "clusterName": "Total Volatile Organic Compounds Concentration Measurement",
+  "clusterId": "0x042E",
+  "clusterRevision": 3,
+  "description": "The server cluster provides an interface to Total Volatile Organic Compounds (TVOC) concentration measurement functionality. This cluster is an alias of the Concentration Measurement base cluster.",
+  "picsCode": "TVOCCONC",
+  "baseCluster": "concentration_measurement_base.json",
+  
+  "revision_history": [
+    {"revision": 1, "description": "Mandatory global ClusterRevision attribute added"},
+    {"revision": 2, "description": "CCB 2882"},
+    {"revision": 3, "description": "Cluster redesigned to add support for Level Indication, Peak/Average Measurement, Medium/Unit of Measurement and Uncertainty."}
+  ],
+  
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Application",
+    "scope": "Endpoint",
+    "picsCode": "TVOCCONC"
+  },
+  
+  "substance": "Total Volatile Organic Compounds (TVOC)",
+  "commonUnits": ["PPM", "PPB", "UGM3", "MGM3"],
+  "measurementMedium": "Air",
+  
+  "inheritFrom": "concentration_measurement_base"
+}

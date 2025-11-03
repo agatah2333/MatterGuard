@@ -1,0 +1,6 @@
+config:
+  cluster: basic-information-cluster
+  event: '0x01'
+  nodeId: '0x654231'
+name: basic-information-cluster_event_0x01_v1.1.0.0
+tests: []

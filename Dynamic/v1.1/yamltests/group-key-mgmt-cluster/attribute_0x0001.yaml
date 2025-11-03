@@ -1,0 +1,59 @@
+config:
+  attribute: '0x0001'
+  cluster: group-key-mgmt-cluster
+  nodeId: '0x654231'
+name: group-key-mgmt-cluster_attribute_0x0001_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: GroupTable will include the entry with GroupId 0, Endpoints [1],
+    and empty GroupName.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Endpoints:
+    - 1
+    GroupId: 0
+    GroupName: '""'
+  label: Test_Case_Extreme_Values_(Minimum)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: GroupTable will include the entry with GroupId 65535, Endpoints
+    [1, 2, 3, ..., 255], and GroupName "AAAAAAAAAAAAAAAA".
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Endpoints:
+    - 1
+    - 2
+    - 3
+    - '...'
+    - 255
+    GroupId: 65535
+    GroupName: '"A" * 16'
+  label: Test_Case_Extreme_Values_(Maximum)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: Error (INVALID_COMMAND)
+  Pre-requisites: None
+  arguments:
+    Endpoints:
+    - 1
+    GroupId: 0 (Reserved for IPK)
+    GroupName: '"TestGroup"'
+  label: Test_Case_Special_Response_(Invalid_GroupId)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: Error (INVALID_COMMAND)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values and special responses for the `GroupTable`
+    attribute in the `group-key-mgmt-cluster` cluster as specified in the Matter specification【4:0†source】【4:3†source】【4:6†source】【4:8†source】.'
+  arguments:
+    Endpoints: []
+    GroupId: 12345
+    GroupName: '"TestGroup"'
+  label: Test_Case_Special_Response_(Empty_Endpoints_List)
+  option: WriteAttribute

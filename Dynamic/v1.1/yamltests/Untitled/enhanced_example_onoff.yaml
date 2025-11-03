@@ -1,0 +1,28 @@
+test_metadata:
+  version: 1.0.0
+  matter_spec_version: '1.0'
+  description: Enhanced dynamic test example for OnOff cluster
+config:
+  cluster: '0x0006'
+  node_id: '0x654324'
+  endpoint: 1
+tests:
+- label: test_onoff_on_command
+  operation: command
+  cluster: '0x0006'
+  command: '0x01'
+  arguments: {}
+  prerequisites: []
+  expected: SUCCESS
+- label: test_onoff_off_command
+  operation: command
+  cluster: '0x0006'
+  command: '0x00'
+  arguments: {}
+  prerequisites:
+  - type: command
+    description: Turn on device first
+    cluster: '0x0006'
+    command: '0x01'
+    arguments: {}
+  expected: SUCCESS

@@ -1,0 +1,30 @@
+config:
+  attribute: '0x0010'
+  cluster: pump-configuration-and-control-cluster
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_attribute_0x0010_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `PumpStatus`: `0xFFFF`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`<none>`'
+  arguments:
+    PumpStatusBitmap: '`0xFFFF` (All bits set to 1)'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `EffectiveOperationMode`: `Local`'
+  ExpectedResponse: '`<failure>`'
+  Pre-requisites: '- `LocalOverride` bit in `PumpStatus` is set
+
+
+    These test cases cover the extreme values and special responses for the `PumpStatus`
+    attribute in the Pump Configuration and Control Cluster.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments:
+    PumpStatusBitmap: '`0x0010` (LocalOverride bit set to 1)'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

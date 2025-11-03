@@ -1,0 +1,50 @@
+config:
+  cluster: target-navigator-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: target-navigator-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: CurrentTarget will be set to 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Target with ID 0 must exist in the TargetList
+  arguments:
+    '{"Target"': '0, "Data": ""}'
+  label: Test_Case_Minimum_Value_for_Target
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: CurrentTarget will be set to 255
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Target with ID 255 must exist in the TargetList
+  arguments:
+    '{"Target"': '255, "Data": ""}'
+  label: Test_Case_Maximum_Value_for_Target
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: TARGET_NOT_FOUND
+  Pre-requisites: Target with ID 100 must not exist in the TargetList
+  arguments:
+    '{"Target"': '100, "Data": ""}'
+  label: Test_Case_Target_Not_Found
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: NOT_ALLOWED
+  Pre-requisites: The current state of the device must not allow navigation to Target
+    ID 1
+  arguments:
+    '{"Target"': '1, "Data": ""}'
+  label: Test_Case_Not_Allowed_in_Current_State
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: CurrentTarget will be set to 5
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Target with ID 5 must exist in the TargetList
+
+
+    ### Field Ranges'
+  arguments:
+    '{"Target"': '5, "Data": "example data"}'
+  label: Test_Case_Valid_Target_with_Data
+  option: SendCommand

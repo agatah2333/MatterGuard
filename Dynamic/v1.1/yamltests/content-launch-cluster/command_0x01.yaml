@@ -1,0 +1,52 @@
+config:
+  cluster: content-launch-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: content-launch-cluster_command_0x01_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: N/A
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: Ensure the URL "https://a.co" is reachable.
+  arguments:
+    BrandingInformation: '""'
+    ContentURL: '"https://a.co"'
+    DisplayString: '""'
+  label: Test_Case_Minimum_Length_URL
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: N/A
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: Ensure the URL is reachable and the server can handle long URLs.
+  arguments:
+    BrandingInformation: '""'
+    ContentURL: '"https://www.example.com/" + "a" * 2048'
+    DisplayString: '""'
+  label: Test_Case_Maximum_Length_URL
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: N/A
+  ExpectedResponse: '`URL_NOT_AVAILABLE`'
+  Pre-requisites: Ensure the URL "https://nonexistent.example.com" is not reachable.
+  arguments:
+    BrandingInformation: '""'
+    ContentURL: '"https://nonexistent.example.com"'
+    DisplayString: '""'
+  label: Test_Case_URL_Not_Available
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: N/A
+  ExpectedResponse: '`AUTH_FAILED`'
+  Pre-requisites: 'Ensure the URL "https://example.com/protected" requires authentication
+    and returns a 401 error code.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    BrandingInformation: '""'
+    ContentURL: '"https://example.com/protected"'
+    DisplayString: '""'
+  label: Test_Case_Authentication_Failed
+  option: SendCommand

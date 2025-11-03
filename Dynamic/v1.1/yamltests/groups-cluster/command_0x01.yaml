@@ -1,0 +1,43 @@
+config:
+  cluster: groups-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: groups-cluster_command_0x01_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The group with `GroupID` 1 must exist.
+  arguments:
+    GroupID: 1
+  label: Test_Case_Minimum_GroupID_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The group with `GroupID` max must exist.
+  arguments:
+    GroupID: max
+  label: Test_Case_Maximum_GroupID_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: NOT_FOUND
+  Pre-requisites: The group with the specified `GroupID` must not exist.
+  arguments:
+    GroupID: <non-existent GroupID>
+  label: Test_Case_GroupID_Not_Found
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'N/A
+
+
+    These test cases cover the extreme values of the `GroupID` field, as well as special
+    responses such as `NOT_FOUND` and `CONSTRAINT_ERROR` as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    GroupID: 0 (or any invalid value outside the range)
+  label: Test_Case_Constraint_Error
+  option: SendCommand

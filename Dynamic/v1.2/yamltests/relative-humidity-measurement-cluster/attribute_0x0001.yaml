@@ -1,0 +1,34 @@
+config:
+  attribute: '0x0001'
+  cluster: relative-humidity-measurement-cluster
+  nodeId: '0x654231'
+name: relative-humidity-measurement-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: MinMeasuredValue set to 0
+  ExpectedResponse: Success
+  Pre-requisites: MaxMeasuredValue should be greater than 0
+  arguments:
+    '{"MinMeasuredValue"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: MinMeasuredValue set to <MaxMeasuredValue - 1>
+  ExpectedResponse: Success
+  Pre-requisites: MaxMeasuredValue should be greater than 1
+  arguments:
+    '{"MinMeasuredValue"': <MaxMeasuredValue - 1>}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: MinMeasuredValue set to null
+  ExpectedResponse: Attribute not defined
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints and the special response
+    for the null value as specified in the document.'
+  arguments:
+    '{"MinMeasuredValue"': null}
+  label: Test_Case_Special_Response_for_Null_Value
+  option: WriteAttribute

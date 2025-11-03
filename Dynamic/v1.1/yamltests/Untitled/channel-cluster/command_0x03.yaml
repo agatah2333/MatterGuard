@@ -1,0 +1,165 @@
+config:
+  cluster: channel-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: channel-cluster_command_0x03_v1.1.0.0
+tests:
+- ActionTime: "\"N/A\"\n  - **ExpectedResponse**: \"LauncherResponse\"\n  - **Which\
+    \ Attribute Will Be Changed and the Value of the Attribute**: {\"Status\": \"\
+    ACTIVE_VISIBLE_FOCUS\", \"CurrentApp\": \"new_application\"}\n  - **Any Pre-requisites**:\
+    \ \"Application Platform feature supported\""
+  Attribute_Change: "{\"Status\": \"ACTIVE_VISIBLE_FOCUS\", \"CurrentApp\": \"new_application\"\
+    }\n  - **Any Pre-requisites**: \"Application Platform feature supported\""
+  ExpectedResponse: "\"LauncherResponse\"\n  - **Which Attribute Will Be Changed and\
+    \ the Value of the Attribute**: {\"Status\": \"ACTIVE_VISIBLE_FOCUS\", \"CurrentApp\"\
+    : \"new_application\"}\n  - **Any Pre-requisites**: \"Application Platform feature\
+    \ supported\""
+  Pre-requisites: '"Application Platform feature supported"'
+  arguments:
+    '**ActionTime**': '"N/A"'
+    '**Any Pre-requisites**': '"Application Platform feature supported"'
+    '**ExpectedResponse**': '"LauncherResponse"'
+    '**Which Attribute Will Be Changed and the Value of the Attribute**':
+      CurrentApp: new_application
+      Status: ACTIVE_VISIBLE_FOCUS
+    '{"Application"': '"max_value", "Data": "max_length_octstr"}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify channel-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: "\"N/A\"\n  - **ExpectedResponse**: \"LauncherResponse\"\n  - **Which\
+    \ Attribute Will Be Changed and the Value of the Attribute**: {\"Status\": \"\
+    ACTIVE_VISIBLE_FOCUS\", \"CurrentApp\": \"special_application\"}\n  - **Any Pre-requisites**:\
+    \ \"Application Platform feature supported\"\n\nThese test cases cover the extreme\
+    \ values and special responses for the `LauncherResponse` command in the Channel\
+    \ Cluster. The values for \"max_value\", \"max_length_octstr\", \"special_value\"\
+    , and \"special_data\" should be replaced with the actual maximum and special\
+    \ values as defined in the specification.\n\nFor more detailed information, refer\
+    \ to the Matter Application Cluster Specification document【4:0†source】."
+  Attribute_Change: "{\"Status\": \"ACTIVE_VISIBLE_FOCUS\", \"CurrentApp\": \"special_application\"\
+    }\n  - **Any Pre-requisites**: \"Application Platform feature supported\"\n\n\
+    These test cases cover the extreme values and special responses for the `LauncherResponse`\
+    \ command in the Channel Cluster. The values for \"max_value\", \"max_length_octstr\"\
+    , \"special_value\", and \"special_data\" should be replaced with the actual maximum\
+    \ and special values as defined in the specification.\n\nFor more detailed information,\
+    \ refer to the Matter Application Cluster Specification document【4:0†source】."
+  ExpectedResponse: "\"LauncherResponse\"\n  - **Which Attribute Will Be Changed and\
+    \ the Value of the Attribute**: {\"Status\": \"ACTIVE_VISIBLE_FOCUS\", \"CurrentApp\"\
+    : \"special_application\"}\n  - **Any Pre-requisites**: \"Application Platform\
+    \ feature supported\"\n\nThese test cases cover the extreme values and special\
+    \ responses for the `LauncherResponse` command in the Channel Cluster. The values\
+    \ for \"max_value\", \"max_length_octstr\", \"special_value\", and \"special_data\"\
+    \ should be replaced with the actual maximum and special values as defined in\
+    \ the specification.\n\nFor more detailed information, refer to the Matter Application\
+    \ Cluster Specification document【4:0†source】."
+  Pre-requisites: '"Application Platform feature supported"
+
+
+    These test cases cover the extreme values and special responses for the `LauncherResponse`
+    command in the Channel Cluster. The values for "max_value", "max_length_octstr",
+    "special_value", and "special_data" should be replaced with the actual maximum
+    and special values as defined in the specification.
+
+
+    For more detailed information, refer to the Matter Application Cluster Specification
+    document【4:0†source】.'
+  arguments:
+    '**ActionTime**': '"N/A"'
+    '**Any Pre-requisites**': '"Application Platform feature supported"'
+    '**ExpectedResponse**': '"LauncherResponse"'
+    '**Which Attribute Will Be Changed and the Value of the Attribute**':
+      CurrentApp: special_application
+      Status: ACTIVE_VISIBLE_FOCUS
+    '{"Application"': '"special_value", "Data": "special_data"}'
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify channel-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 60
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

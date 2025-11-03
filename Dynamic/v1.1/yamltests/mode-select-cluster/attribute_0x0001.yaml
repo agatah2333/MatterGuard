@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0001'
+  cluster: mode-select-cluster
+  nodeId: '0x654231'
+name: mode-select-cluster_attribute_0x0001_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: StandardNamespace set to 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"StandardNamespace"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: StandardNamespace set to 65535
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"StandardNamespace"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: StandardNamespace set to null
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"StandardNamespace"': null}
+  label: Test_Case_Default_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: StandardNamespace set to <specific_value_based_on_description>
+  ExpectedResponse: Success or specific error based on the description constraint
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    '{"StandardNamespace"': <specific_value_based_on_description>}
+  label: Test_Case_Special_Value_(Description_Constraint)
+  option: WriteAttribute

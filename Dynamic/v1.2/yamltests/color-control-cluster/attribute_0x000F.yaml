@@ -1,0 +1,32 @@
+config:
+  attribute: '0x000F'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x000F_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Command execution does not proceed if the On/Off cluster's OnOff
+    attribute is FALSE.
+  Pre-requisites: 'The On/Off cluster exists on the same endpoint, and the OnOff attribute
+    is FALSE.
+
+
+    **Test Case 1.2**'
+  arguments:
+    '{"Options"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Command execution proceeds even if the On/Off cluster's OnOff
+    attribute is FALSE.
+  Pre-requisites: 'The On/Off cluster exists on the same endpoint, and the OnOff attribute
+    is FALSE.
+
+
+    **Test Case 2.2**'
+  arguments:
+    '{"Options"': 1}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

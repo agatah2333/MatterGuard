@@ -1,0 +1,6 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x00'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x00_v1.1.0.0
+tests: []

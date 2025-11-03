@@ -1,0 +1,33 @@
+config:
+  cluster: time-synchronization-cluster
+  event: '0x0001'
+  nodeId: '0x654231'
+name: time-synchronization-cluster_event_0x0001_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: "- `Offset`: -43200\n  - `Name`: \"\""
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    Name: '""'
+    Offset: '-43200'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: "- `Offset`: 50400\n  - `Name`: \"America/New_York\""
+  ExpectedResponse: <success>
+  Pre-requisites: '<none>
+
+
+    These test cases cover the extreme values of the `Offset` field and a special
+    value for the `Name` field that could result in a specific response. The `ActionTime`
+    and `ExpectedResponse` fields are placeholders and should be replaced with actual
+    values during implementation.
+
+
+    For more details, refer to the Matter 1.2 Core Specification【4:0†source】.'
+  arguments:
+    Name: '"America/New_York"'
+    Offset: 50400
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: SubscribeToEvent

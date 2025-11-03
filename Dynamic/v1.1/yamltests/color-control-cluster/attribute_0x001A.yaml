@@ -1,0 +1,27 @@
+config:
+  attribute: '0x001A'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x001A_v1.1.0.0
+tests:
+- ActionTime: '`<value>`'
+  Attribute_Change: '`Primary3Y` will be set to `0`'
+  ExpectedResponse: '`<value>`'
+  Pre-requisites: '`NumberOfPrimaries` should be greater than or equal to `3`'
+  arguments:
+    Primary3Y: '`0`'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: '`<value>`'
+  Attribute_Change: '`Primary3Y` will be set to `65279`'
+  ExpectedResponse: '`<value>`'
+  Pre-requisites: '`NumberOfPrimaries` should be greater than or equal to `3`
+
+
+    These test cases cover the extreme values of the constraints of the `Primary3Y`
+    field and ensure that the attribute behaves as expected when set to its minimum
+    and maximum values.'
+  arguments:
+    Primary3Y: '`65279`'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

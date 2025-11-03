@@ -1,0 +1,178 @@
+{
+  "source_file": "Messages_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0097",
+        "name": "Messages",
+        "description": "Provides interface for managing and presenting device messages",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "Messages",
+            "dataType": "list[MessageStruct]",
+            "valueRange": "max 8 entries",
+            "description": "Queued message list",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "ActiveMessageIDs",
+            "dataType": "list[MessageID]",
+            "valueRange": "max 8 entries",
+            "description": "Currently displayed message IDs",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "PresentMessagesRequest",
+            "parameters": [
+              {
+                "name": "MessageID",
+                "dataType": "MessageID",
+                "valueRange": "16-byte octet string"
+              },
+              {
+                "name": "Priority",
+                "dataType": "MessagePriorityEnum",
+                "valueRange": "0-3"
+              },
+              {
+                "name": "MessageControl",
+                "dataType": "MessageControlBitmap",
+                "valueRange": "0-4"
+              },
+              {
+                "name": "StartTime",
+                "dataType": "uint64",
+                "valueRange": "epoch seconds"
+              },
+              {
+                "name": "Duration",
+                "dataType": "uint64",
+                "valueRange": "milliseconds"
+              },
+              {
+                "name": "MessageText",
+                "dataType": "string",
+                "valueRange": "max 256 chars"
+              },
+              {
+                "name": "Responses",
+                "dataType": "list[MessageResponseOptionStruct]",
+                "valueRange": "max 4 options"
+              }
+            ],
+            "description": "Submit new message for presentation",
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "CancelMessagesRequest",
+            "parameters": [
+              {
+                "name": "MessageIDs",
+                "dataType": "list[MessageID]",
+                "valueRange": "max 8 entries"
+              }
+            ],
+            "description": "Cancel pending messages",
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "MessageQueued",
+            "parameters": [
+              {
+                "name": "MessageID",
+                "dataType": "MessageID",
+                "valueRange": "16-byte ID"
+              }
+            ],
+            "description": "New message added to queue",
+            "privilege": "FS",
+            "side": "server"
+          },
+          {
+            "id": "0x02",
+            "name": "MessageComplete",
+            "parameters": [
+              {
+                "name": "ResponseID",
+                "dataType": "uint32",
+                "valueRange": "user selection ID"
+              },
+              {
+                "name": "Reply",
+                "dataType": "string",
+                "valueRange": "max 256 chars"
+              },
+              {
+                "name": "FutureMessagesPreference",
+                "dataType": "FutureMessagePreferenceEnum",
+                "valueRange": "user preference"
+              }
+            ],
+            "description": "Message interaction completed",
+            "privilege": "FS",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "MessageStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "MessageID": "octstr(16)",
+              "Priority": "MessagePriorityEnum",
+              "MessageControl": "MessageControlBitmap",
+              "StartTime": "epoch-s",
+              "Duration": "uint64",
+              "MessageText": "string(256)",
+              "Responses": "list[MessageResponseOptionStruct]"
+            }
+          },
+          "MessagePriorityEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Low",
+              "1": "Medium",
+              "2": "High",
+              "3": "Critical"
+            }
+          },
+          "MessageControlBitmap": {
+            "baseType": "map16",
+            "fields": {
+              "AcknowledgeRequired": {
+                "bit": 0
+              },
+              "SuppressNotification": {
+                "bit": 1
+              },
+              "AllowDeferral": {
+                "bit": 2
+              }
+            }
+          },
+          "MessageResponseOptionStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "ResponseID": "uint32",
+              "Label": "string(64)",
+              "Type": "ResponseTypeEnum"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+config:
+  attribute: '0x03'
+  cluster: icd-management-cluster
+  nodeId: '0x654231'
+name: icd-management-cluster_attribute_0x03_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: All attributes will be set to 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    ActiveModeThreshold: 0
+    CheckInInterval: 0
+    FastPollInterval: 0
+    LongPollInterval: 0
+    ShortPollInterval: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 65535
+  Attribute_Change: All attributes will be set to 65535
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    ### References
+
+    - Matter 1.2 Core Specification【4:0†source】'
+  arguments:
+    ActiveModeThreshold: 65535
+    CheckInInterval: 65535
+    FastPollInterval: 65535
+    LongPollInterval: 65535
+    ShortPollInterval: 65535
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

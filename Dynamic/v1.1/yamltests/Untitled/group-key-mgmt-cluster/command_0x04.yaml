@@ -1,0 +1,125 @@
+config:
+  cluster: group-key-mgmt-cluster
+  command: '0x04'
+  nodeId: '0x654231'
+name: group-key-mgmt-cluster_command_0x04_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: All group memberships for the server endpoint will be removed
+    from the Group Table.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The server endpoint must have at least one group membership.
+  arguments: {}
+  label: Test_Case_Extreme_Value_Test
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify group-key-mgmt-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: All group memberships for the server endpoint will be removed
+    from the Group Table.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'The server endpoint must have no group memberships.
+
+
+    These test cases cover the scenarios where the command is executed under normal
+    conditions and when there are no group memberships to remove, ensuring that the
+    command handles both situations correctly.
+
+
+    ### References
+
+    - The `RemoveAllGroups` command details and its effects are specified in the Matter
+    Application Cluster Specification【4:0†source】.'
+  arguments: {}
+  label: Test_Case_Special_Response_Test
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify group-key-mgmt-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 60
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

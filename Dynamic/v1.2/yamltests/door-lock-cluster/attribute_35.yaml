@@ -1,0 +1,42 @@
+config:
+  attribute: '35'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_35_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`WrongCodeEntryLimit` will be set to 1'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The device should be in a state where it can accept attribute writes.
+  arguments:
+    WrongCodeEntryLimit: 1
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`WrongCodeEntryLimit` will be set to 255'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The device should be in a state where it can accept attribute writes.
+  arguments:
+    WrongCodeEntryLimit: 255
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A (attribute write will fail)
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: The device should be in a state where it can accept attribute writes.
+  arguments:
+    WrongCodeEntryLimit: 0
+  label: Test_Case_Special_Response_-_Constraint_Error
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`WrongCodeEntryLimit` will be set to 5'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'The device should be in a state where it can accept attribute writes.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special response mentioned in the description of the effect【4:0†source】.'
+  arguments:
+    WrongCodeEntryLimit: 5
+  label: Test_Case_Typical_Value
+  option: WriteAttribute

@@ -1,0 +1,31 @@
+config:
+  attribute: '33'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_33_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: LocalProgrammingFeatures = 0x00
+  ExpectedResponse: Success
+  Pre-requisites: 'EnableLocalProgramming = False
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"LocalProgrammingFeatures"': 0x00}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'Door lock does not support disabling the ability to add Users/credentials/Schedules
+    locally
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    '{"LocalProgrammingFeatures"': 0x01}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

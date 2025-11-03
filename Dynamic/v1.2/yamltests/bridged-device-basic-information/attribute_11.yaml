@@ -1,0 +1,6 @@
+config:
+  attribute: '11'
+  cluster: bridged-device-basic-information
+  nodeId: '0x654231'
+name: bridged-device-basic-information_attribute_11_v1.2.0.0
+tests: []

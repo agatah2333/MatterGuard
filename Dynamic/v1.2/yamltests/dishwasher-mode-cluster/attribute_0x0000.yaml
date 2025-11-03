@@ -1,0 +1,61 @@
+config:
+  attribute: '0x0000'
+  cluster: dishwasher-mode-cluster
+  nodeId: '0x654231'
+name: dishwasher-mode-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: 'SupportedModes will be set to [{"Mode": 0, "ModeTags": [0x4000]}]'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    SupportedModes:
+    - Mode: 0
+      ModeTags:
+      - 16384
+  label: Test_Case_Minimum_Supported_Modes
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: 'SupportedModes will be set to [{"Mode": i, "ModeTags": [0x4000]}
+    for i in range(255)]'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    SupportedModes: '[{"Mode": i, "ModeTags": [0x4000]} for i in range(255)]'
+  label: Test_Case_Maximum_Supported_Modes
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments:
+    SupportedModes:
+    - Mode: 256
+      ModeTags:
+      - 16384
+  label: Test_Case_Invalid_Mode_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: 'SupportedModes will be set to [{"Mode": 1, "ModeTags": [0x4001]},
+    {"Mode": 2, "ModeTags": [0x4002]}]'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the `SupportedModes`
+    field and the values that could result in special responses as mentioned in the
+    description of the effect.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments:
+    SupportedModes:
+    - Mode: 1
+      ModeTags:
+      - 16385
+    - Mode: 2
+      ModeTags:
+      - 16386
+  label: Test_Case_Special_Mode_Tags
+  option: WriteAttribute

@@ -1,0 +1,28 @@
+config:
+  attribute: '0x0030'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0030_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: ColorCapabilities = 0x0000
+  ExpectedResponse: Device reports no color capabilities.
+  Pre-requisites: 'None
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"ColorCapabilities"': 0x0000}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: ColorCapabilities = 0x0001
+  ExpectedResponse: Device supports hue/saturation.
+  Pre-requisites: 'None
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"ColorCapabilities"': 0x0001}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

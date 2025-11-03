@@ -1,0 +1,33 @@
+config:
+  attribute: '0x0001'
+  cluster: operational-state-cluster
+  nodeId: '0x654231'
+name: operational-state-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`CountdownTime` will be set to 0'
+  ExpectedResponse: Operation has completed
+  Pre-requisites: None
+  arguments:
+    '{"field0"': 0}`
+  label: Test_Case_Extreme_Value_(Minimum)
+  option: WriteAttribute
+- ActionTime: 259200
+  Attribute_Change: '`CountdownTime` will be set to 259200'
+  ExpectedResponse: Operation is in progress
+  Pre-requisites: None
+  arguments:
+    '{"field0"': 259200}`
+  label: Test_Case_Extreme_Value_(Maximum)
+  option: WriteAttribute
+- ActionTime: 'null'
+  Attribute_Change: '`CountdownTime` will be set to null'
+  ExpectedResponse: No time currently defined until operation completion
+  Pre-requisites: 'No operation in progress or completion time is unknown
+
+
+    ### Field Ranges'
+  arguments:
+    '{"field0"': null}`
+  label: Test_Case_Special_Response_(Null_Value)
+  option: WriteAttribute

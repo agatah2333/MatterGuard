@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0011'
+  cluster: ballast-configuration-cluster
+  nodeId: '0x654231'
+name: ballast-configuration-cluster_attribute_0x0011_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '- `MaxLevel`: MinLevel'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: '- Ensure MinLevel is set to a valid value within the range.'
+  arguments:
+    MaxLevel: MinLevel
+  label: Test_Case_Minimum_Value_of_MaxLevel
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `MaxLevel`: PhysicalMaxLevel'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: '- Ensure PhysicalMaxLevel is set to a valid value within the range.'
+  arguments:
+    MaxLevel: PhysicalMaxLevel
+  label: Test_Case_Maximum_Value_of_MaxLevel
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `MaxLevel`: No change'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: '- Ensure MinLevel is set to a valid value within the range.'
+  arguments:
+    MaxLevel: MinLevel - 1
+  label: Test_Case_Invalid_Value_Below_MinLevel
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `MaxLevel`: No change'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: '- Ensure PhysicalMaxLevel is set to a valid value within the range.
+
+
+    These test cases cover the extreme values of the constraints of the `MaxLevel`
+    field and the values that could result in special responses as mentioned in the
+    description of the effect【4:1†source】【4:2†source】.'
+  arguments:
+    MaxLevel: PhysicalMaxLevel + 1
+  label: Test_Case_Invalid_Value_Above_PhysicalMaxLevel
+  option: WriteAttribute

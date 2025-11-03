@@ -1,0 +1,28 @@
+config:
+  attribute: '18'
+  cluster: basic-information-cluster
+  nodeId: '0x654231'
+name: basic-information-cluster_attribute_18_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": True}'
+  ExpectedResponse: <success>
+  Pre-requisites: '<device must be connected and operational>
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"Reachable"': True}
+  label: Test_Case_Extreme_Values
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": True}'
+  ExpectedResponse: <device is reachable>
+  Pre-requisites: '<device must be connected and operational>
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"Reachable"': True}
+  label: Test_Case_Special_Responses
+  option: WriteAttribute

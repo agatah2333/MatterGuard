@@ -1,0 +1,59 @@
+config:
+  attribute: '1'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_1_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: LockState = 0 (Not Fully Locked)
+  ExpectedResponse: <success>
+  Pre-requisites: The lock must be in a state where it can transition to "Not Fully
+    Locked".
+  arguments:
+    '{"LockState"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: LockState = 5 (Unspecified Error)
+  ExpectedResponse: <success>
+  Pre-requisites: The lock must be in a state where it can transition to "Unspecified
+    Error".
+  arguments:
+    '{"LockState"': 5}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: LockState = 1 (Locked)
+  ExpectedResponse: <success>
+  Pre-requisites: The lock must be in a state where it can transition to "Locked".
+  arguments:
+    '{"LockState"': 1}
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: LockState = 2 (Unlocked)
+  ExpectedResponse: <success>
+  Pre-requisites: The lock must be in a state where it can transition to "Unlocked".
+  arguments:
+    '{"LockState"': 2}
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: LockState = 3 (Unlatched)
+  ExpectedResponse: <success>
+  Pre-requisites: The lock must be in a state where it can transition to "Unlatched".
+  arguments:
+    '{"LockState"': 3}
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: LockState = 4 (Unknown)
+  ExpectedResponse: <success>
+  Pre-requisites: 'The lock must be in a state where it can transition to "Unknown".
+
+
+    ### Summary'
+  arguments:
+    '{"LockState"': 4}
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: WriteAttribute

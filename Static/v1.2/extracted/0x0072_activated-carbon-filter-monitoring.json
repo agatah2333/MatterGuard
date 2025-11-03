@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0072",
+    "name": "Activated Carbon Filter Monitoring",
+    "description": "Cluster for Activated Carbon Filter Monitoring functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

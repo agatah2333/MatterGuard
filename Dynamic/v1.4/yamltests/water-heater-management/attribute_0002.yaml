@@ -1,0 +1,26 @@
+name: Water Heater Management - TankVolume Attribute Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Water Heater Management
+  timeout: 180
+tests:
+- label: Read TankVolume attribute
+  command: readAttribute
+  attribute: TankVolume
+  response:
+    saveAs: tankvolume_value
+- label: TankVolume - Test minimum value (0)
+  command: readAttribute
+  attribute: TankVolume
+  response:
+    constraints:
+      minValue: 0
+      maxValue: 65535
+- label: TankVolume - Test maximum value (65535)
+  command: readAttribute
+  attribute: TankVolume
+  response:
+    constraints:
+      minValue: 0
+      maxValue: 65535

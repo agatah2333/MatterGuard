@@ -1,0 +1,19 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0508",
+    "name": "Low Power",
+    "description": ""
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "Sleep",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    }
+  ],
+  "attributes": [],
+  "events": []
+}

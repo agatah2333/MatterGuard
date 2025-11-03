@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0002'
+  cluster: mode-select-cluster
+  nodeId: '0x654231'
+name: mode-select-cluster_attribute_0x0002_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: PercentSetting = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"PercentSetting"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: PercentSetting = 100
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"PercentSetting"': 100}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: PercentSetting = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"PercentSetting"': 0}
+  label: Test_Case_Default_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: PercentSetting = 50
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the default value, ensuring that the attribute behaves as expected across its
+    entire range.'
+  arguments:
+    '{"PercentSetting"': 50}
+  label: Test_Case_Mid-range_Value
+  option: WriteAttribute

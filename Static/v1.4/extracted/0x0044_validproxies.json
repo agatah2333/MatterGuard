@@ -1,0 +1,56 @@
+{
+  "source_file": "ValidProxies_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0044",
+        "name": "ValidProxies",
+        "dataTypes": {
+          "ValidProxyStruct": {
+            "type": "struct",
+            "fields": {
+              "ProxyNodeID": {
+                "type": "node-id",
+                "valueRange": "all"
+              }
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "ValidProxyList",
+            "dataType": {
+              "type": "list",
+              "elementType": {
+                "type": "struct",
+                "fields": "ValidProxyStruct"
+              }
+            },
+            "valueRange": "N/A",
+            "writable": true,
+            "privilege": "R"
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "GetValidProxiesRequest",
+            "parameters": {},
+            "privilege": "O",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x01",
+            "name": "GetValidProxiesResponse",
+            "parameters": {},
+            "privilege": "N",
+            "direction": "serverToClient"
+          }
+        ],
+        "events": []
+      }
+    ]
+  }
+}

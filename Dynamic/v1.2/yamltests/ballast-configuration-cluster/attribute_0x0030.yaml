@@ -1,0 +1,18 @@
+config:
+  attribute: '0x0030'
+  cluster: ballast-configuration-cluster
+  nodeId: '0x654231'
+name: ballast-configuration-cluster_attribute_0x0030_v1.2.0.0
+tests:
+- arguments: {}
+  label: Test_Case_Minimum_Length
+  option: WriteAttribute
+- arguments: {}
+  label: Test_Case_Maximum_Length
+  option: WriteAttribute
+- arguments: {}
+  label: Test_Case_Exceeding_Maximum_Length
+  option: WriteAttribute
+- arguments: {}
+  label: Test_Case_Special_Characters
+  option: WriteAttribute

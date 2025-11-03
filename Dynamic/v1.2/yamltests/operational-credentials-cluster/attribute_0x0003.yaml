@@ -1,0 +1,30 @@
+config:
+  attribute: '0x0003'
+  cluster: operational-credentials-cluster
+  nodeId: '0x654231'
+name: operational-credentials-cluster_attribute_0x0003_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '- `FabricIndex`: 0'
+  ExpectedResponse: OK
+  Pre-requisites: 'None
+
+
+    **Test Case 2**:'
+  arguments:
+    FabricIndex: 0
+    NodeOperationalCertStatusEnum: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '- `FabricIndex`: 1'
+  ExpectedResponse: TableFull
+  Pre-requisites: 'The NOCs table is full.
+
+
+    **Test Case 4**:'
+  arguments:
+    FabricIndex: 1
+    NodeOperationalCertStatusEnum: 5
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

@@ -1,0 +1,44 @@
+config:
+  attribute: '0x000A'
+  cluster: fan-control-cluster
+  nodeId: '0x654231'
+name: fan-control-cluster_attribute_0x000A_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '- `WindSetting`: `0b01` (Only Sleep Wind active)'
+  ExpectedResponse: If the combination is not supported, only the lowest supported
+    bit (Sleep Wind) should be active.
+  Pre-requisites: WindSupport attribute must support both Sleep Wind and Natural Wind.
+  arguments:
+    WindSetting: '`0b11` (Both Sleep Wind and Natural Wind set)'
+  label: Test_Case_Extreme_Value_(All_Bits_Set)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `WindSetting`: `0b00` (No wind mode active)'
+  ExpectedResponse: No wind mode active.
+  Pre-requisites: None.
+  arguments:
+    WindSetting: '`0b00` (No wind mode set)'
+  label: Test_Case_Extreme_Value_(No_Bits_Set)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `WindSetting`: `0b01` (Only Sleep Wind active)'
+  ExpectedResponse: If the combination is not supported, only the lowest supported
+    bit (Sleep Wind) should be active.
+  Pre-requisites: WindSupport attribute must support both Sleep Wind and Natural Wind.
+  arguments:
+    WindSetting: '`0b11` (Both Sleep Wind and Natural Wind set)'
+  label: Test_Case_Special_Response_(Unsupported_Combination)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `WindSetting`: `0b01` (Sleep Wind active)'
+  ExpectedResponse: Sleep Wind mode active.
+  Pre-requisites: 'WindSupport attribute must support Sleep Wind.
+
+
+    These test cases cover the extreme values and special responses for the `WindSetting`
+    attribute in the Fan Control Cluster【4:0†source】.'
+  arguments:
+    WindSetting: '`0b01` (Only Sleep Wind set)'
+  label: Test_Case_Special_Response_(Single_Supported_Bit)
+  option: WriteAttribute

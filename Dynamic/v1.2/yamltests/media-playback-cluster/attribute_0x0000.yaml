@@ -1,0 +1,44 @@
+config:
+  attribute: '0x0000'
+  cluster: media-playback-cluster
+  nodeId: '0x654231'
+name: media-playback-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Media is currently playing.
+  Pre-requisites: Media should be in a state where playback is possible.
+  arguments:
+    '{"CurrentState"': 0}
+  label: Test_Case_Extreme_Value_(Minimum)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Media is buffering and playback will start when the buffer is
+    filled.
+  Pre-requisites: Media should be in a state where buffering is possible.
+  arguments:
+    '{"CurrentState"': 3}
+  label: Test_Case_Extreme_Value_(Maximum)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Media is currently paused.
+  Pre-requisites: Media should be playing or buffering before pausing.
+  arguments:
+    '{"CurrentState"': 1}
+  label: Test_Case_Special_Response_(Paused)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Media is not currently playing.
+  Pre-requisites: 'Media should be in a state where it can be stopped or not started
+    yet.
+
+
+    These test cases cover the extreme values and special responses for the `CurrentState`
+    attribute of the Media Playback Cluster【4:0†source】【4:1†source】【4:2†source】【4:3†source】.'
+  arguments:
+    '{"CurrentState"': 2}
+  label: Test_Case_Special_Response_(NotPlaying)
+  option: WriteAttribute

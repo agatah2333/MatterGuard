@@ -1,0 +1,179 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0006",
+    "name": "On/Off",
+    "description": "Attributes and commands for switching devices between 'On' and 'Off' states."
+  },
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "Off",
+      "direction": "client",
+      "response": null,
+      "privilege": "O",
+      "side": "client",
+      "parameters": []
+    },
+    {
+      "id": "0x01",
+      "name": "On",
+      "direction": "client",
+      "response": null,
+      "privilege": "O",
+      "side": "client",
+      "parameters": []
+    },
+    {
+      "id": "0x02",
+      "name": "Toggle",
+      "direction": "client",
+      "response": null,
+      "privilege": "O",
+      "side": "client",
+      "parameters": []
+    },
+    {
+      "id": "0x40",
+      "name": "OffWithEffect",
+      "direction": "client",
+      "response": null,
+      "privilege": "O",
+      "side": "client",
+      "parameters": [
+        {
+          "name": "EffectIdentifier",
+          "type": "enum8",
+          "constraint": "[0, 1]",
+          "description": "Effect to use"
+        },
+        {
+          "name": "EffectVariant",
+          "type": "enum8",
+          "constraint": "[0, 2]",
+          "description": "Variant of effect"
+        }
+      ]
+    },
+    {
+      "id": "0x41",
+      "name": "OnWithRecallGlobalScene",
+      "direction": "client",
+      "response": null,
+      "privilege": "O",
+      "side": "client",
+      "parameters": []
+    },
+    {
+      "id": "0x42",
+      "name": "OnWithTimedOff",
+      "direction": "client",
+      "response": null,
+      "privilege": "O",
+      "side": "client",
+      "parameters": [
+        {
+          "name": "OnOffControl",
+          "type": "map8",
+          "constraint": "desc",
+          "description": "Control field"
+        },
+        {
+          "name": "OnTime",
+          "type": "uint16",
+          "constraint": "[0, 65535]",
+          "description": "Time to stay on in tenths of a second"
+        },
+        {
+          "name": "OffWaitTime",
+          "type": "uint16",
+          "constraint": "[0, 65535]",
+          "description": "Time to wait before turning off"
+        }
+      ]
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "OnOff",
+      "type": "bool",
+      "constraint": "",
+      "quality": "N S",
+      "default": "0",
+      "access": "R",
+      "conformance": "M",
+      "description": "Current state of the device"
+    },
+    {
+      "id": "0x4000",
+      "name": "GlobalSceneControl",
+      "type": "bool",
+      "constraint": "",
+      "quality": "",
+      "default": "1",
+      "access": "R",
+      "conformance": "LT",
+      "description": "Scene control behavior"
+    },
+    {
+      "id": "0x4001",
+      "name": "OnTime",
+      "type": "uint16",
+      "constraint": "[0, 65535]",
+      "quality": "N",
+      "default": "0",
+      "access": "RW",
+      "conformance": "LT",
+      "description": "Time to stay on"
+    },
+    {
+      "id": "0x4002",
+      "name": "OffWaitTime",
+      "type": "uint16",
+      "constraint": "[0, 65535]",
+      "quality": "N",
+      "default": "0",
+      "access": "RW",
+      "conformance": "LT",
+      "description": "Time to wait before turning off"
+    },
+    {
+      "id": "0x4003",
+      "name": "StartUpOnOff",
+      "type": "enum8",
+      "constraint": "desc",
+      "quality": "N X",
+      "default": "X",
+      "access": "RW",
+      "conformance": "LT",
+      "description": "Startup behavior"
+    }
+  ],
+  "events": [],
+  "derived_datatypes": [
+    {
+      "type": "enum",
+      "name": "StartUpOnOffEnum",
+      "base_data_type": "ENUM8",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "Off",
+            "value": "0",
+            "description": "Set the OnOff attribute to FALSE"
+          },
+          {
+            "name": "On",
+            "value": "1",
+            "description": "Set the OnOff attribute to TRUE"
+          },
+          {
+            "name": "Toggle",
+            "value": "2",
+            "description": "If the previous value of the OnOff attribute is equal to FALSE, set it to TRUE, otherwise set to FALSE"
+          }
+        ]
+      }
+    }
+  ]
+}

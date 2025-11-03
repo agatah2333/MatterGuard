@@ -1,0 +1,39 @@
+config:
+  cluster: network-commissioning-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: network-commissioning-cluster_command_0x02_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: WindowNotOpen
+  Pre-requisites: No commissioning window should be open
+  arguments: {}
+  label: Test_Case_Revoke_when_no_commissioning_window_is_open
+  option: SendCommand
+- ActionTime: During an active commissioning window
+  Attribute_Change: The temporary PAKEPasscodeVerifier and associated data will be
+    deleted, and the DNS-SD record will stop being published.
+  ExpectedResponse: Success
+  Pre-requisites: An active commissioning window should be open
+  arguments: {}
+  label: Test_Case_Revoke_during_an_active_commissioning_window
+  option: SendCommand
+- ActionTime: During another commissioning process
+  Attribute_Change: None
+  ExpectedResponse: Busy
+  Pre-requisites: Another commissioning process should be in progress
+  arguments: {}
+  label: Test_Case_Revoke_when_another_commissioning_is_in_progress
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: COMMAND_INVALID
+  Pre-requisites: 'Invalid parameters should be provided (though this command does
+    not take parameters, this is a hypothetical case for robustness)
+
+
+    ### Field Ranges'
+  arguments: {}
+  label: Test_Case_Revoke_with_invalid_parameters
+  option: SendCommand

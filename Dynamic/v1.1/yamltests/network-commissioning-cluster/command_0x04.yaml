@@ -1,0 +1,57 @@
+config:
+  cluster: network-commissioning-cluster
+  command: '0x04'
+  nodeId: '0x654231'
+name: network-commissioning-cluster_command_0x04_v1.1.0.0
+tests:
+- ActionTime: <time of action>
+  Attribute_Change: The network with the specified `NetworkID` will be removed.
+  ExpectedResponse: Success
+  Pre-requisites: The network with the specified `NetworkID` must exist.
+  arguments:
+    Breadcrumb:
+      Breadcrumb: <minimum uint64 value>
+    NetworkID:
+      NetworkID: <1 octet value>
+  label: Test_Case_Minimum_Length_of_NetworkID
+  option: SendCommand
+- ActionTime: <time of action>
+  Attribute_Change: The network with the specified `NetworkID` will be removed.
+  ExpectedResponse: Success
+  Pre-requisites: The network with the specified `NetworkID` must exist.
+  arguments:
+    Breadcrumb:
+      Breadcrumb: <maximum uint64 value>
+    NetworkID:
+      NetworkID: <32 octet value>
+  label: Test_Case_Maximum_Length_of_NetworkID
+  option: SendCommand
+- ActionTime: <time of action>
+  Attribute_Change: No attribute will be changed.
+  ExpectedResponse: Failure with status code indicating `NetworkID` not found.
+  Pre-requisites: The network with the specified `NetworkID` must not exist.
+  arguments:
+    Breadcrumb:
+      Breadcrumb: <any uint64 value>
+    NetworkID:
+      NetworkID: <non-existent NetworkID>
+  label: Test_Case_NetworkID_Not_Found
+  option: SendCommand
+- ActionTime: <time of action>
+  Attribute_Change: No attribute will be changed.
+  ExpectedResponse: Failure with status code `BUSY`.
+  Pre-requisites: 'The server must be in a state where it is currently unable to proceed
+    with the operation, such as attempting to connect in the background or already
+    processing a prior `ConnectNetwork` command.
+
+
+    These test cases cover the extreme values of the constraints of the `NetworkID`
+    field and the special responses that could result from the `RemoveNetwork` command
+    as described in the specification【4:0†source】【4:1†source】【4:4†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    Breadcrumb:
+      Breadcrumb: <any uint64 value>
+    NetworkID:
+      NetworkID: <any valid NetworkID>
+  label: Test_Case_Busy_Status
+  option: SendCommand

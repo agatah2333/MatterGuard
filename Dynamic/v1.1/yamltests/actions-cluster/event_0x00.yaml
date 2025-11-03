@@ -1,0 +1,51 @@
+config:
+  cluster: actions-cluster
+  event: '0x00'
+  nodeId: '0x654231'
+name: actions-cluster_event_0x00_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '- `State` attribute will be changed to 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    ActionID: 0
+    InvokeID: 0
+    NewState: 0 (assuming 0 is a valid enum value for NewState)
+  label: Test_Case_Minimum_Values
+  option: SubscribeToEvent
+- ActionTime: 4294967295
+  Attribute_Change: '- `State` attribute will be changed to 2'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    ActionID: 65535
+    InvokeID: 4294967295
+    NewState: Maximum valid enum value (assuming 2 for this example)
+  label: Test_Case_Maximum_Values
+  option: SubscribeToEvent
+- ActionTime: 1
+  Attribute_Change: '- `State` attribute will be changed to 1'
+  ExpectedResponse: StateChanged event generated with NewState=1
+  Pre-requisites: The action with `ActionID` 1 must exist
+  arguments:
+    ActionID: 1
+    InvokeID: 1
+    NewState: 1 (assuming 1 is a valid enum value for NewState)
+  label: Test_Case_Special_Response_Scenario_1
+  option: SubscribeToEvent
+- ActionTime: 2
+  Attribute_Change: '- `State` attribute will be changed to 2'
+  ExpectedResponse: StateChanged event generated with NewState=2
+  Pre-requisites: 'The action with `ActionID` 2 must exist
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:1†source】【4:2†source】.'
+  arguments:
+    ActionID: 2
+    InvokeID: 2
+    NewState: 2 (assuming 2 is a valid enum value for NewState)
+  label: Test_Case_Special_Response_Scenario_2
+  option: SubscribeToEvent

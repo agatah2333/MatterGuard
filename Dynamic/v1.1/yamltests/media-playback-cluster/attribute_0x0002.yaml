@@ -1,0 +1,42 @@
+config:
+  attribute: '0x0002'
+  cluster: media-playback-cluster
+  nodeId: '0x654231'
+name: media-playback-cluster_attribute_0x0002_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"Duration": 1}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"Duration"': 1}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Duration": 18446744073709551615}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"Duration"': 18446744073709551615}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Duration": null}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"Duration"': null}
+  label: Test_Case_Special_Value_(null)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: <none>
+  ExpectedResponse: '<error: invalid_value>'
+  Pre-requisites: '<none>
+
+
+    These test cases cover the extreme values of the constraints of the `Duration`
+    field and the special responses mentioned in the description of the effect【4:0†source】【4:7†source】.'
+  arguments:
+    '{"Duration"': 0}
+  label: Test_Case_Invalid_Value_(0)
+  option: WriteAttribute

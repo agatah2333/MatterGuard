@@ -1,0 +1,112 @@
+{
+  "source_file": "Time Format Localization_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x002C",
+        "name": "Time Format Localization",
+        "dataTypes": {
+          "HourFormatEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "12hr",
+              "1": "24hr",
+              "255": "UseActiveLocale"
+            }
+          },
+          "CalendarTypeEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "Buddhist",
+              "1": "Chinese",
+              "2": "Coptic",
+              "3": "Ethiopian",
+              "4": "Gregorian",
+              "5": "Hebrew",
+              "6": "Indian",
+              "7": "Islamic",
+              "8": "Japanese",
+              "9": "Korean",
+              "10": "Persian",
+              "11": "Taiwanese",
+              "255": "UseActiveLocale"
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "HourFormat",
+            "dataType": {
+              "type": "enum8",
+              "values": {
+                "0": "12hr",
+                "1": "24hr",
+                "255": "UseActiveLocale"
+              }
+            },
+            "valueRange": "all",
+            "writable": true,
+            "privilege": "N"
+          },
+          {
+            "id": "0x0001",
+            "name": "ActiveCalendarType",
+            "dataType": {
+              "type": "enum8",
+              "values": {
+                "0": "Buddhist",
+                "1": "Chinese",
+                "2": "Coptic",
+                "3": "Ethiopian",
+                "4": "Gregorian",
+                "5": "Hebrew",
+                "6": "Indian",
+                "7": "Islamic",
+                "8": "Japanese",
+                "9": "Korean",
+                "10": "Persian",
+                "11": "Taiwanese",
+                "255": "UseActiveLocale"
+              }
+            },
+            "valueRange": "all",
+            "writable": true,
+            "privilege": "N"
+          },
+          {
+            "id": "0x0002",
+            "name": "SupportedCalendarTypes",
+            "dataType": {
+              "type": "list",
+              "elementType": {
+                "type": "enum8",
+                "values": {
+                  "0": "Buddhist",
+                  "1": "Chinese",
+                  "2": "Coptic",
+                  "3": "Ethiopian",
+                  "4": "Gregorian",
+                  "5": "Hebrew",
+                  "6": "Indian",
+                  "7": "Islamic",
+                  "8": "Japanese",
+                  "9": "Korean",
+                  "10": "Persian",
+                  "11": "Taiwanese",
+                  "255": "UseActiveLocale"
+                }
+              }
+            },
+            "valueRange": "desc",
+            "writable": false,
+            "privilege": "F"
+          }
+        ],
+        "commands": [],
+        "events": []
+      }
+    ]
+  }
+}

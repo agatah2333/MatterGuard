@@ -1,0 +1,41 @@
+config:
+  attribute: '0x001D'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x001D_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatChargingCurrent": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"BatChargingCurrent"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatChargingCurrent": 4294967295}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"BatChargingCurrent"': 4294967295}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatChargingCurrent": null}'
+  ExpectedResponse: <Node is currently unable to assess the value>
+  Pre-requisites: <none>
+  arguments:
+    '{"BatChargingCurrent"': null}
+  label: Test_Case_Special_Response_-_Null_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatChargingCurrent": 2147483647}'
+  ExpectedResponse: <success>
+  Pre-requisites: '<none>
+
+
+    ### Summary'
+  arguments:
+    '{"BatChargingCurrent"': 2147483647}
+  label: Test_Case_Special_Response_-_Intermediate_Value
+  option: WriteAttribute

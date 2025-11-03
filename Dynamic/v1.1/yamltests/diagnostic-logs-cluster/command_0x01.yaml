@@ -1,0 +1,6 @@
+config:
+  cluster: diagnostic-logs-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: diagnostic-logs-cluster_command_0x01_v1.1.0.0
+tests: []

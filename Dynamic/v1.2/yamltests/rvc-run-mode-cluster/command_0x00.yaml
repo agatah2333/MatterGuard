@@ -1,0 +1,42 @@
+config:
+  cluster: rvc-run-mode-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: rvc-run-mode-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`CurrentMode` will be set to `0`'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: '`CurrentMode` is not `0`'
+  arguments:
+    '{"NewMode"': 0}`
+  label: Test_Case_Minimum_Value_of_NewMode
+  option: SendCommand
+- ActionTime: '`<current_time>`'
+  Attribute_Change: None
+  ExpectedResponse: '`UnsupportedMode`'
+  Pre-requisites: '`SupportedModes` does not include `255`'
+  arguments:
+    '{"NewMode"': 255}`
+  label: Test_Case_Maximum_Value_of_NewMode
+  option: SendCommand
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`CurrentMode` remains `<current_mode_value>`'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: '`CurrentMode` is `<current_mode_value>`'
+  arguments:
+    '{"NewMode"': <current_mode_value>}`
+  label: Test_Case_NewMode_Equals_CurrentMode
+  option: SendCommand
+- ActionTime: '`<current_time>`'
+  Attribute_Change: None
+  ExpectedResponse: '`UnsupportedMode`'
+  Pre-requisites: '`SupportedModes` does not include `<unsupported_mode_value>`
+
+
+    These test cases cover the extreme values of the `NewMode` field, as well as special
+    conditions that could result in specific responses as per the command''s description【4:1†source】【4:0†source】.'
+  arguments:
+    '{"NewMode"': <unsupported_mode_value>}`
+  label: Test_Case_NewMode_Not_in_SupportedModes
+  option: SendCommand

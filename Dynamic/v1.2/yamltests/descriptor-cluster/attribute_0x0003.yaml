@@ -1,0 +1,29 @@
+config:
+  attribute: '0x0003'
+  cluster: descriptor-cluster
+  nodeId: '0x654231'
+name: descriptor-cluster_attribute_0x0003_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: PartsList will be set to an empty list.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'The device should support the Descriptor cluster.
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"PartsList"': '[]}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: PartsList will remain unchanged.
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'The device should support the Descriptor cluster and have N endpoints.
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"PartsList"': '[1, 2, 3, ..., N+1]} (where N+1 exceeds the maximum number of
+      endpoints supported by the device)'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

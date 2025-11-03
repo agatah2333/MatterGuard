@@ -1,0 +1,6 @@
+config:
+  attribute: '0x0003'
+  cluster: rvc-run-mode-cluster
+  nodeId: '0x654231'
+name: rvc-run-mode-cluster_attribute_0x0003_v1.2.0.0
+tests: []

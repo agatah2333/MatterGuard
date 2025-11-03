@@ -1,0 +1,45 @@
+config:
+  cluster: channel-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: channel-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Error (e.g., INVALID_ARGUMENT)
+  Pre-requisites: N/A
+  arguments:
+    '{"Match"': '""}'
+  label: Test_Case_Extreme_Value_(Empty_String)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Error (e.g., INVALID_ARGUMENT)
+  Pre-requisites: N/A
+  arguments:
+    '{"Match"': '"A" * 1024}  # Assuming 1024 is beyond the typical length limit'
+  label: Test_Case_Extreme_Value_(Very_Long_String)
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: CurrentChannel attribute will be updated to the channel with AffiliateCallSign
+    "KCTS"
+  ExpectedResponse: Success
+  Pre-requisites: The channel with AffiliateCallSign "KCTS" must exist in the ChannelList
+  arguments:
+    '{"Match"': '"KCTS"}'
+  label: Test_Case_Special_Response_(Valid_AffiliateCallSign)
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: CurrentChannel attribute will be updated to the channel with Number
+    "13.1"
+  ExpectedResponse: Success
+  Pre-requisites: 'The channel with Number "13.1" must exist in the ChannelList
+
+
+    These test cases cover both the extreme values of the constraints of the field
+    and the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:3†source】.'
+  arguments:
+    '{"Match"': '"13.1"}'
+  label: Test_Case_Special_Response_(Valid_Number)
+  option: SendCommand

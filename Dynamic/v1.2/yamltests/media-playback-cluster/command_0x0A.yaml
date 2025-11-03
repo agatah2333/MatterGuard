@@ -1,0 +1,57 @@
+config:
+  cluster: media-playback-cluster
+  command: '0x0A'
+  nodeId: '0x654231'
+name: media-playback-cluster_command_0x0A_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: N/A
+  arguments:
+    Data: '""'
+    Status: 0
+  label: Test_Case_Extreme_Value_(Success)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: InvalidStateForCommand
+  Pre-requisites: N/A
+  arguments:
+    Data: '""'
+    Status: 1
+  label: Test_Case_Extreme_Value_(InvalidStateForCommand)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: NotAllowed
+  Pre-requisites: The media is in a state where fast-forward is not allowed (e.g.,
+    during a commercial).
+  arguments:
+    Data: '"Attempting to fast-forward during a commercial"'
+    Status: 2
+  label: Test_Case_Special_Response_(NotAllowed)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: SpeedOutOfRange
+  Pre-requisites: The media is already playing at the maximum supported speed.
+  arguments:
+    Data: '"Media is already playing back at the fastest speed supported by the server"'
+    Status: 4
+  label: Test_Case_Special_Response_(SpeedOutOfRange)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: SeekOutOfRange
+  Pre-requisites: 'The seek command was issued with a position value outside the allowed
+    seek range.
+
+
+    These test cases cover the extreme values and special responses for the `PlaybackResponse`
+    command in the Media Playback Cluster【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    Data: '"Seek position is outside of the allowed seek range of the media"'
+    Status: 5
+  label: Test_Case_Special_Response_(SeekOutOfRange)
+  option: SendCommand

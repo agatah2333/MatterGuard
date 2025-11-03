@@ -1,0 +1,42 @@
+config:
+  attribute: '0x4002'
+  cluster: onoff-cluster
+  nodeId: '0x654231'
+name: onoff-cluster_attribute_0x4002_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: OffWaitTime = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"OffWaitTime"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: '0xFFFF'
+  Attribute_Change: OffWaitTime = 0xFFFF
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"OffWaitTime"': 0xFFFF}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 100
+  Attribute_Change: OffWaitTime decrements to 0
+  ExpectedResponse: OffWaitTime decrements every 1/10th second until it reaches 0
+  Pre-requisites: OnOff attribute is FALSE
+  arguments:
+    '{"OffWaitTime"': 100}
+  label: Test_Case_Special_Response_-_OnOff_Attribute_is_FALSE
+  option: WriteAttribute
+- ActionTime: 200
+  Attribute_Change: OffWaitTime = 200
+  ExpectedResponse: OffWaitTime remains unchanged
+  Pre-requisites: 'OnOff attribute is TRUE
+
+
+    These test cases cover the extreme values of the `OffWaitTime` attribute and the
+    special responses based on the state of the `OnOff` attribute.'
+  arguments:
+    '{"OffWaitTime"': 200}
+  label: Test_Case_Special_Response_-_OnOff_Attribute_is_TRUE
+  option: WriteAttribute

@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x050c",
+    "name": "Application Launcher",
+    "description": "Cluster for Application Launcher functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

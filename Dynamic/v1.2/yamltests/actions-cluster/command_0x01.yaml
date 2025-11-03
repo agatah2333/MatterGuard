@@ -1,0 +1,32 @@
+config:
+  cluster: actions-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: actions-cluster_command_0x01_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: N/A
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'N/A
+
+
+    ##### Test Case 1.2:'
+  arguments:
+    ActionID: 0
+    InvokeID: 0
+    TransitionTime: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: 1
+  Attribute_Change: N/A
+  ExpectedResponse: INVALID_ACTION
+  Pre-requisites: 'ActionID 1 is not defined in the ActionList
+
+
+    ##### Test Case 2.2:'
+  arguments:
+    ActionID: 1
+    InvokeID: 1
+    TransitionTime: 1
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SendCommand

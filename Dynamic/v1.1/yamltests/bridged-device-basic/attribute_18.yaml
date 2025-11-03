@@ -1,0 +1,42 @@
+config:
+  attribute: '18'
+  cluster: bridged-device-basic
+  nodeId: '0x654231'
+name: bridged-device-basic_attribute_18_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": True}'
+  ExpectedResponse: <success>
+  Pre-requisites: <Bridge and Bridged Device are properly configured and connected>
+  arguments:
+    '{"Reachable"': True}
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": False}'
+  ExpectedResponse: <success>
+  Pre-requisites: <Bridge and Bridged Device are properly configured but the Bridged
+    Device is disconnected or powered off>
+  arguments:
+    '{"Reachable"': False}
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": True}'
+  ExpectedResponse: <success>
+  Pre-requisites: <Bridge and Bridged Device are properly configured and connected,
+    and the Bridged Device was previously unreachable>
+  arguments:
+    '{"Reachable"': True}
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": False}'
+  ExpectedResponse: <success>
+  Pre-requisites: '<Bridge and Bridged Device are properly configured, and the Bridged
+    Device was previously reachable but is now disconnected or powered off>
+
+
+    These test cases cover the extreme values of the `Reachable` attribute (True and
+    False) and the scenarios where the reachability status changes, which could result
+    in special responses as mentioned in the description of the effect【4:3†source】【4:14†source】.'
+  arguments:
+    '{"Reachable"': False}
+  option: WriteAttribute

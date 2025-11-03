@@ -1,0 +1,384 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0097",
+    "name": "Messages",
+    "description": "This cluster provides an interface for passing messages to be presented by a device."
+  },
+  "derived_datatypes": [
+    {
+      "type": "octstr",
+      "name": "MessageID",
+      "base_data_type": "octstr",
+      "length": 16,
+      "description": "This data type is an octstr of fixed length 16, containing the binary encoding of a UUID as specified in RFC 4122."
+    },
+    {
+      "type": "bitmap",
+      "name": "MessageControlBitmap",
+      "base_data_type": "map16",
+      "description": "This data type is derived from map16, and indicates control information related to a message.",
+      "value_range": {
+        "bitmap_values": [
+          {
+            "name": "ConfirmationRequired",
+            "bit": 0,
+            "description": "Message requires confirmation from user",
+            "conformance": "CONF"
+          },
+          {
+            "name": "ResponseRequired",
+            "bit": 1,
+            "description": "Message requires response from user",
+            "conformance": "RESP"
+          },
+          {
+            "name": "ReplyMessage",
+            "bit": 2,
+            "description": "Message supports reply message from user",
+            "conformance": "RPLY"
+          },
+          {
+            "name": "MessageConfirmed",
+            "bit": 3,
+            "description": "Message has already been confirmed",
+            "conformance": "CONF"
+          },
+          {
+            "name": "MessageProtected",
+            "bit": 4,
+            "description": "Message required PIN/password protection",
+            "conformance": "PROT"
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "FutureMessagePreferenceEnum",
+      "base_data_type": "ENUM8",
+      "description": "A display device MAY include this preference in the MessageComplete event as a hint to clients about how to handle future similar messages.",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "Allowed",
+            "value": "0",
+            "description": "Similar messages are allowed"
+          },
+          {
+            "name": "Increased",
+            "value": "1",
+            "description": "Similar messages should be sent more often"
+          },
+          {
+            "name": "Reduced",
+            "value": "2",
+            "description": "Similar messages should be sent less often"
+          },
+          {
+            "name": "Disallowed",
+            "value": "3",
+            "description": "Similar messages should not be sent"
+          },
+          {
+            "name": "Banned",
+            "value": "4",
+            "description": "No further messages should be sent"
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "MessagePriorityEnum",
+      "base_data_type": "ENUM8",
+      "description": "Priority SHOULD be used to decide which messages to show when the number of eligible messages is larger than the device's capacity to present them.",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "Low",
+            "value": "0",
+            "description": "Message to be transferred with a low level of importance"
+          },
+          {
+            "name": "Medium",
+            "value": "1",
+            "description": "Message to be transferred with a medium level of importance"
+          },
+          {
+            "name": "High",
+            "value": "2",
+            "description": "Message to be transferred with a high level of importance"
+          },
+          {
+            "name": "Critical",
+            "value": "3",
+            "description": "Message to be transferred with a critical level of importance"
+          }
+        ]
+      }
+    },
+    {
+      "type": "struct",
+      "name": "MessageStruct",
+      "description": "This represents a single message.",
+      "access_quality": "Fabric Scoped",
+      "fields": [
+        {
+          "id": "0",
+          "name": "MessageID",
+          "data_type": "MessageID",
+          "description": "This field SHALL indicate a globally unique ID for this message."
+        },
+        {
+          "id": "1",
+          "name": "Priority",
+          "data_type": "MessagePriorityEnum",
+          "default": "0",
+          "description": "This field SHALL indicate the priority level for this message."
+        },
+        {
+          "id": "2",
+          "name": "MessageControl",
+          "data_type": "MessageControlBitmap",
+          "default": "0",
+          "description": "This field SHALL indicate control information related to the message."
+        },
+        {
+          "id": "3",
+          "name": "StartTime",
+          "data_type": "epoch-s",
+          "quality": "X",
+          "default": "0",
+          "description": "This field SHALL indicate the time in UTC at which the message becomes available to be presented. A null value SHALL indicate \"now.\""
+        },
+        {
+          "id": "4",
+          "name": "Duration",
+          "data_type": "uint64",
+          "quality": "X",
+          "default": "0",
+          "description": "This field SHALL indicate the amount of time, in milliseconds, after the StartTime during which the message is available to be presented. A null value SHALL indicate \"until changed\"."
+        },
+        {
+          "id": "5",
+          "name": "MessageText",
+          "data_type": "string",
+          "constraint": "max 256",
+          "description": "This field SHALL indicate a string containing the message to be presented."
+        },
+        {
+          "id": "6",
+          "name": "Responses",
+          "data_type": "list[MessageResponseOptionStruct]",
+          "constraint": "max 4",
+          "default": "empty",
+          "conformance": "RESP",
+          "description": "This field SHALL indicate a list of potential responses to the message. The entries in this list SHALL have unique values of MessageResponseID."
+        }
+      ]
+    },
+    {
+      "type": "struct", 
+      "name": "MessageResponseOptionStruct",
+      "description": "This represents a possible response to a message.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "MessageResponseID",
+          "data_type": "uint32",
+          "constraint": "min 1",
+          "description": "This field SHALL indicate a unique unsigned 32-bit number identifier for this message response option."
+        },
+        {
+          "id": "1",
+          "name": "Label",
+          "data_type": "string",
+          "constraint": "max 32",
+          "description": "This field SHALL indicate the text for this option; e.g. \"Yes\", \"No\", etc."
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "PresentMessagesRequest",
+      "direction": "client to server",
+      "response": "Y",
+      "parameters": [
+        {
+          "id": "0",
+          "name": "MessageID",
+          "data_type": "MessageID",
+          "description": "This field SHALL indicate a globally unique ID for this message."
+        },
+        {
+          "id": "1",
+          "name": "Priority",
+          "data_type": "MessagePriorityEnum",
+          "default": "0",
+          "description": "This field SHALL indicate the priority level for this message."
+        },
+        {
+          "id": "2",
+          "name": "MessageControl",
+          "data_type": "MessageControlBitmap",
+          "default": "0",
+          "description": "This field SHALL indicate control information related to the message."
+        },
+        {
+          "id": "3",
+          "name": "StartTime",
+          "data_type": "epoch-s",
+          "quality": "X",
+          "default": "0",
+          "description": "This field SHALL indicate the time in UTC at which the message becomes available to be presented. A null value SHALL indicate \"now.\""
+        },
+        {
+          "id": "4",
+          "name": "Duration",
+          "data_type": "uint64",
+          "quality": "X",
+          "default": "0",
+          "description": "This field SHALL indicate the amount of time, in milliseconds, after the StartTime during which the message is available to be presented. A null value SHALL indicate \"until changed\"."
+        },
+        {
+          "id": "5",
+          "name": "MessageText",
+          "data_type": "string",
+          "constraint": "max 256",
+          "description": "This field SHALL indicate a string containing the message to be presented."
+        },
+        {
+          "id": "6",
+          "name": "Responses",
+          "data_type": "list[MessageResponseOptionStruct]",
+          "constraint": "max 4",
+          "default": "empty",
+          "conformance": "RESP",
+          "description": "This field SHALL indicate a list of potential responses to the message."
+        }
+      ],
+      "privilege": "OF",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "CancelMessagesRequest",
+      "direction": "client to server",
+      "response": "Y",
+      "parameters": [
+        {
+          "id": "0",
+          "name": "MessageIDs",
+          "data_type": "list[MessageID]",
+          "constraint": "max 8",
+          "description": "This field SHALL indicate the MessageIDs for the messages being cancelled."
+        }
+      ],
+      "privilege": "OF",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Messages",
+      "data_type": "list[MessageStruct]",
+      "constraint": "max 8",
+      "default": "empty",
+      "access": "RVF",
+      "description": "This attribute SHALL indicate a list of queued messages.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x0001",
+      "name": "ActiveMessageIDs",
+      "data_type": "list[MessageID]",
+      "constraint": "max 8",
+      "default": "empty",
+      "access": "RV",
+      "description": "This attribute SHALL indicate a list of the MessageIDs of the Messages currently being presented. If this list is empty, no messages are currently being presented.",
+      "privilege": "V",
+      "writable": false
+    }
+  ],
+  "events": [
+    {
+      "id": "0x00",
+      "name": "MessageQueued",
+      "priority": "INFO",
+      "access": "V",
+      "access_quality": "Fabric-Sensitive",
+      "description": "This event SHALL be generated when a message is added to the messages attribute.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "MessageID",
+          "data_type": "MessageID",
+          "description": "This field SHALL indicate the MessageID for newly added message."
+        }
+      ]
+    },
+    {
+      "id": "0x01",
+      "name": "MessagePresented",
+      "priority": "INFO",
+      "access": "V",
+      "access_quality": "Fabric-Sensitive",
+      "description": "This event SHALL be generated when the message is presented to the user.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "MessageID",
+          "data_type": "MessageID",
+          "description": "This field SHALL indicate the MessageID for the message being presented."
+        }
+      ]
+    },
+    {
+      "id": "0x02",
+      "name": "MessageComplete",
+      "priority": "INFO",
+      "access": "V",
+      "access_quality": "Fabric-Sensitive",
+      "description": "This event SHALL be generated when the message is confirmed by the user, or when the Duration of the message has elapsed without confirmation.",
+      "fields": [
+        {
+          "id": "0",
+          "name": "MessageID",
+          "data_type": "MessageID",
+          "description": "This field SHALL indicate the MessageID for the message being confirmed."
+        },
+        {
+          "id": "1",
+          "name": "ResponseID",
+          "data_type": "uint32",
+          "quality": "X",
+          "default": "null",
+          "conformance": "RESP",
+          "description": "This field SHALL indicate the MessageResponseID selected by the user. If there was no response before the Duration of the message has elapsed, this field SHALL be null."
+        },
+        {
+          "id": "2",
+          "name": "Reply",
+          "data_type": "string",
+          "constraint": "max 256",
+          "quality": "X",
+          "default": "null",
+          "conformance": "RPLY",
+          "description": "This field SHALL indicate a user-provided reply to the message. If there was no reply, or the message did not have the ReplyRequired bit set, this field SHALL be null."
+        },
+        {
+          "id": "3",
+          "name": "FutureMessagesPreference",
+          "data_type": "FutureMessagePreferenceEnum",
+          "quality": "X",
+          "default": "null",
+          "description": "This field SHALL indicate a user-provided preference for the delivery of similar messages in the future. A null value SHALL indicate no change in preference."
+        }
+      ]
+    }
+  ]
+}

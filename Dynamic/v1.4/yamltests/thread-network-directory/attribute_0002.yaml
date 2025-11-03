@@ -1,0 +1,26 @@
+name: Thread Network Directory - ThreadNetworkTableSize Attribute Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Thread Network Directory
+  timeout: 180
+tests:
+- label: Read ThreadNetworkTableSize attribute
+  command: readAttribute
+  attribute: ThreadNetworkTableSize
+  response:
+    saveAs: threadnetworktablesize_value
+- label: ThreadNetworkTableSize - Test minimum value (0)
+  command: readAttribute
+  attribute: ThreadNetworkTableSize
+  response:
+    constraints:
+      minValue: 0
+      maxValue: 255
+- label: ThreadNetworkTableSize - Test maximum value (255)
+  command: readAttribute
+  attribute: ThreadNetworkTableSize
+  response:
+    constraints:
+      minValue: 0
+      maxValue: 255

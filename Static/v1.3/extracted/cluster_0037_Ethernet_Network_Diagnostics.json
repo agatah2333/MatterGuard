@@ -1,0 +1,82 @@
+{
+  "cluster_id": "0x0037",
+  "cluster_name": "Ethernet Network Diagnostics",
+  "section": "11.16",
+  "description": "The Ethernet Network Diagnostics Cluster provides a means to acquire standardized diagnostics metrics that MAY be used by a Node to assist a user or Administrator in diagnosing potential prob­ lems. The Ethernet Network Diagnostics Cluster attempts to centralize all metrics that are relevant to a potential Ethernet connection to a Node.",
+  "data_types": {
+    "PHYRateEnum": {
+      "name": "PHYRateEnum",
+      "definition_line": "11.16.5.1. PHYRateEnum Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "PHYRate",
+      "details": "PHYRa­ all X null RV O",
+      "raw_line": "0x0000         PHYRate       PHYRa­        all            X              null           RV          O"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "FullDu­",
+      "details": "bool all X null RV O",
+      "raw_line": "0x0001         FullDu­       bool          all            X              null           RV         O"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "PacketRx­",
+      "details": "uint64 all C 0 RV PKTCNT",
+      "raw_line": "0x0002         PacketRx­ uint64            all            C              0              RV         PKTCNT"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "PacketTx­",
+      "details": "uint64 all C 0 RV PKTCNT",
+      "raw_line": "0x0003         PacketTx­ uint64            all            C              0              RV         PKTCNT"
+    },
+    "0x0004": {
+      "id": "0x0004",
+      "name": "TxEr­",
+      "details": "uint64 all C 0 RV ERRCNT",
+      "raw_line": "0x0004         TxEr­         uint64        all            C              0              RV         ERRCNT"
+    },
+    "0x0005": {
+      "id": "0x0005",
+      "name": "Collision­",
+      "details": "uint64 all C 0 RV ERRCNT",
+      "raw_line": "0x0005         Collision­    uint64        all            C              0              RV         ERRCNT"
+    },
+    "0x0006": {
+      "id": "0x0006",
+      "name": "Overrun­",
+      "details": "uint64 all C 0 RV ERRCNT",
+      "raw_line": "0x0006         Overrun­      uint64        all            C              0              RV         ERRCNT"
+    },
+    "0x0007": {
+      "id": "0x0007",
+      "name": "CarrierDe­",
+      "details": "bool all XC null RV O",
+      "raw_line": "0x0007         CarrierDe­ bool             all            XC             null           RV         O"
+    },
+    "0x0008": {
+      "id": "0x0008",
+      "name": "TimeSin­",
+      "details": "uint64 all C 0 RV O",
+      "raw_line": "0x0008         TimeSin­      uint64        all            C              0              RV         O"
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "ResetCounts",
+      "details": "client ⇒ server Y M PKTCNT |",
+      "raw_line": "0x00               ResetCounts        client ⇒ server Y                       M                 PKTCNT |"
+    }
+  },
+  "events": {},
+  "extraction_info": {
+    "start_line": 45308,
+    "end_line": 45528,
+    "total_lines": 220
+  }
+}

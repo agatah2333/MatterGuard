@@ -1,0 +1,54 @@
+config:
+  cluster: level-control-cluster
+  command: '0x04'
+  nodeId: '0x654231'
+name: level-control-cluster_command_0x04_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`CurrentLevel` set to 0, `OnOff` set to FALSE'
+  ExpectedResponse: Success
+  Pre-requisites: Device is on
+  arguments:
+    Level: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+    TransitionTime: 0
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: 65535
+  Attribute_Change: '`CurrentLevel` set to 254, `OnOff` set to TRUE'
+  ExpectedResponse: Success
+  Pre-requisites: Device is off
+  arguments:
+    Level: 254
+    OptionsMask: 255
+    OptionsOverride: 255
+    TransitionTime: 65535
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: Determined by `OnOffTransitionTime`
+  Attribute_Change: '`CurrentLevel` set to 128, `OnOff` set to TRUE'
+  ExpectedResponse: Success
+  Pre-requisites: '`OnOffTransitionTime` attribute is set'
+  arguments:
+    Level: 128
+    OptionsMask: 0
+    OptionsOverride: 0
+  label: Test_Case_Special_Response_-_TransitionTime_Null
+  option: SendCommand
+- ActionTime: 100
+  Attribute_Change: '`CurrentLevel` set to 64, `OnOff` set to TRUE'
+  ExpectedResponse: Success
+  Pre-requisites: 'Device is off, `Options` attribute is set
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    Level: 64
+    OptionsMask: 1
+    OptionsOverride: 1
+    TransitionTime: 100
+  label: Test_Case_Special_Response_-_OptionsMask_and_OptionsOverride
+  option: SendCommand

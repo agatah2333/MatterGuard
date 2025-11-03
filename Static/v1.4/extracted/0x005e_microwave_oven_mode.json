@@ -1,0 +1,94 @@
+{
+  "source_file": "Microwave Oven Mode_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x005E",
+        "name": "Microwave Oven Mode",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SupportedModes",
+            "dataType": "list[uint16]",
+            "valueRange": "Mode Tag Value",
+            "description": "Indicates the list of supported modes available to the microwave oven.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentMode",
+            "dataType": "uint16",
+            "valueRange": "SupportedModes",
+            "description": "Indicates the current mode of the microwave oven.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "StartUpMode",
+            "dataType": "uint16",
+            "valueRange": "SupportedModes",
+            "description": "Indicates the mode to be set at startup.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "OnMode",
+            "dataType": "uint16",
+            "valueRange": "SupportedModes",
+            "description": "Indicates the mode to be set when the device is turned on.",
+            "privilege": "RW",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ChangeToMode",
+            "parameters": {
+              "dataType": "uint8",
+              "valueRange": "SupportedModes",
+              "description": "On receipt of this command, if the NewMode field indicates a valid mode transition within the supported list, the server SHALL set the CurrentMode attribute to the NewMode value."
+            },
+            "privilege": "M",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x01",
+            "name": "ChangeToModeResponse",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Response to ChangeToMode command."
+            },
+            "privilege": "M",
+            "direction": "server → client"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "ModeTagValue": {
+            "baseType": "enum16",
+            "valueRange": {
+              "0x0000": "Auto",
+              "0x0001": "Quick",
+              "0x0002": "Quiet",
+              "0x0003": "LowNoise",
+              "0x0004": "LowEnergy",
+              "0x0005": "Vacation",
+              "0x0006": "Min",
+              "0x0007": "Max",
+              "0x0008": "Night",
+              "0x0009": "Day",
+              "0x4000": "Normal",
+              "0x4001": "Defrost"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

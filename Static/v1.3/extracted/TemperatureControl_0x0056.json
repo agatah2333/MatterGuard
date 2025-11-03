@@ -1,0 +1,145 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0056",
+    "name": "Temperature Control",
+    "description": "This cluster provides an interface to the setpoint temperature on devices such as washers, refrigerators, and water heaters. The setpoint temperature is the temperature to which a device using this cluster would attempt to control to. This cluster does not provide access to the actual or physical temperature associated with any device using this cluster.",
+    "classification": {
+      "hierarchy": "Base",
+      "role": "Application",
+      "scope": "Endpoint",
+      "pics_code": "TCTL"
+    },
+    "revision_history": [
+      {
+        "revision": 1,
+        "description": "Initial release"
+      }
+    ]
+  },
+  "features": {
+    "TN": {
+      "bit": 0,
+      "code": "TN",
+      "name": "TemperatureNumber",
+      "conformance": "O.a",
+      "summary": "Use actual temperature numbers"
+    },
+    "TL": {
+      "bit": 1,
+      "code": "TL",
+      "name": "TemperatureLevel",
+      "conformance": "O.a",
+      "summary": "Use temperature levels"
+    },
+    "STEP": {
+      "bit": 2,
+      "code": "STEP",
+      "name": "TemperatureStep",
+      "conformance": "[TN]",
+      "summary": "Use step control with temperature numbers"
+    }
+  },
+  "data_types": {},
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "TemperatureSetpoint",
+      "type": "temperature",
+      "constraint": "MinTemperature to MaxTemperature",
+      "quality": "",
+      "default": "",
+      "access": "RV",
+      "conformance": "TN",
+      "description": "This attribute SHALL represent the desired Temperature Setpoint on the device."
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "MinTemperature",
+      "type": "temperature",
+      "constraint": "max (MaxTemperature - 1)",
+      "quality": "F",
+      "default": "",
+      "access": "RV",
+      "conformance": "TN",
+      "description": "This attribute SHALL represent the minimum temperature to which the TemperatureSetpoint attribute MAY be set."
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "MaxTemperature",
+      "type": "temperature",
+      "constraint": "desc",
+      "quality": "F",
+      "default": "",
+      "access": "RV",
+      "conformance": "TN",
+      "description": "This attribute SHALL represent the maximum temperature to which the TemperatureSetpoint attribute MAY be set. If the Step attribute is supported, this attribute SHALL be such that MaxTemperature = MinTemperature + Step * n, where n is an integer and n > 0."
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "Step",
+      "type": "temperature",
+      "constraint": "max (MaxTemperature - MinTemperature)",
+      "quality": "F",
+      "default": "",
+      "access": "RV",
+      "conformance": "STEP",
+      "description": "This attribute SHALL represent the discrete value by which the TemperatureSetpoint attribute can be changed via the SetTemperature command."
+    },
+    "0x0004": {
+      "id": "0x0004",
+      "name": "SelectedTemperatureLevel",
+      "type": "uint8",
+      "constraint": "0 to 31",
+      "quality": "",
+      "default": "",
+      "access": "RV",
+      "conformance": "TL",
+      "description": "This attribute SHALL represent the currently selected temperature level setting of the server. This attribute SHALL be the positional index of the list item in the SupportedTemperatureLevels list."
+    },
+    "0x0005": {
+      "id": "0x0005",
+      "name": "SupportedTemperatureLevels",
+      "type": "list[string]",
+      "constraint": "max 32[max 16]",
+      "quality": "",
+      "default": "",
+      "access": "RV",
+      "conformance": "TL",
+      "description": "This attribute SHALL represent the list of supported temperature level settings that may be selected via the TargetTemperatureLevel field in the SetTemperature command. Each string is readable text that describes each temperature level setting in a way that can be easily understood by humans."
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "SetTemperature",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "M",
+      "fields": [
+        {
+          "id": "0",
+          "name": "TargetTemperature",
+          "type": "temperature",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "TN",
+          "description": "This field SHALL specify the desired temperature setpoint that the server is to be set to."
+        },
+        {
+          "id": "1",
+          "name": "TargetTemperatureLevel",
+          "type": "uint8",
+          "constraint": "desc",
+          "quality": "",
+          "default": "",
+          "conformance": "TL",
+          "description": "This field SHALL specify the index of the list item in the SupportedTemperatureLevels list that represents the desired temperature level setting of the server."
+        }
+      ],
+      "description": "The SetTemperature command is used to set the desired temperature setpoint or level."
+    }
+  },
+  "events": {}
+}

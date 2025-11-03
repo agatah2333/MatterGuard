@@ -1,0 +1,14 @@
+config:
+  attribute: '0x000E'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x000E_v1.1.0.0
+tests:
+- arguments: {}
+  option: WriteAttribute
+- arguments: {}
+  option: WriteAttribute
+- arguments: {}
+  option: WriteAttribute
+- arguments: {}
+  option: WriteAttribute

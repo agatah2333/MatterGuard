@@ -1,0 +1,6 @@
+config:
+  attribute: '0x0001'
+  cluster: scenes
+  nodeId: '0x654231'
+name: scenes_attribute_0x0001_v1.1.0.0
+tests: []

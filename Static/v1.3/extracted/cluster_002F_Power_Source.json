@@ -1,0 +1,268 @@
+{
+  "cluster_id": "0x002F",
+  "cluster_name": "Power Source",
+  "section": "11.7",
+  "description": "This cluster is used to describe the configuration and capabilities of a physical power source that provides power to one or more endpoints on a node. In case the node has multiple power sources, each is described by its own cluster instance. Each instance of this cluster may be associated with one or more endpoints or the entire node.",
+  "data_types": {
+    "WiredFaultEnum": {
+      "name": "WiredFaultEnum",
+      "definition_line": "11.7.6.1. WiredFaultEnum Type"
+    },
+    "BatFaultEnum": {
+      "name": "BatFaultEnum",
+      "definition_line": "11.7.6.2. BatFaultEnum Type"
+    },
+    "BatChargeFaultEnum": {
+      "name": "BatChargeFaultEnum",
+      "definition_line": "11.7.6.3. BatChargeFaultEnum Type"
+    },
+    "PowerSourceStatusEnum": {
+      "name": "PowerSourceStatusEnum",
+      "definition_line": "11.7.6.4. PowerSourceStatusEnum Type"
+    },
+    "WiredCurrentTypeEnum": {
+      "name": "WiredCurrentTypeEnum",
+      "definition_line": "11.7.6.5. WiredCurrentTypeEnum Type"
+    },
+    "BatChargeLevelEnum": {
+      "name": "BatChargeLevelEnum",
+      "definition_line": "11.7.6.6. BatChargeLevelEnum Type"
+    },
+    "BatReplaceabilityEnum": {
+      "name": "BatReplaceabilityEnum",
+      "definition_line": "11.7.6.7. BatReplaceabilityEnum Type"
+    },
+    "BatCommonDesignationEnum": {
+      "name": "BatCommonDesignationEnum",
+      "definition_line": "11.7.6.8. BatCommonDesignationEnum Type"
+    },
+    "BatApprovedChemistryEnum": {
+      "name": "BatApprovedChemistryEnum",
+      "definition_line": "11.7.6.9. BatApprovedChemistryEnum Type"
+    },
+    "BatChargeStateEnum": {
+      "name": "BatChargeStateEnum",
+      "definition_line": "11.7.6.10. BatChargeStateEnum Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "Status",
+      "details": "Power­ desc RV M",
+      "raw_line": "0x0000         Status         Power­        desc                                         RV          M"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "Order",
+      "details": "uint8 all N RV M",
+      "raw_line": "0x0001         Order          uint8         all            N                             RV          M"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "Descrip­",
+      "details": "string max 60 F RV M",
+      "raw_line": "0x0002         Descrip­       string        max 60         F                             RV          M"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "WiredAsse",
+      "details": "uint32 all XC RV [WIRED]",
+      "raw_line": "0x0003         WiredAsse uint32             all            XC                            RV          [WIRED]"
+    },
+    "0x0004": {
+      "id": "0x0004",
+      "name": "WiredAsse",
+      "details": "uint16 all XC RV [WIRED]",
+      "raw_line": "0x0004         WiredAsse uint16             all            XC                            RV          [WIRED]"
+    },
+    "0x0005": {
+      "id": "0x0005",
+      "name": "WiredCur­",
+      "details": "WiredCur­ desc F RV WIRED",
+      "raw_line": "0x0005         WiredCur­ WiredCur­ desc                    F                             RV          WIRED"
+    },
+    "0x0006": {
+      "id": "0x0006",
+      "name": "WiredAsse",
+      "details": "uint32 all XC RV [WIRED]",
+      "raw_line": "0x0006         WiredAsse uint32             all            XC                            RV          [WIRED]"
+    },
+    "0x0007": {
+      "id": "0x0007",
+      "name": "Wired­",
+      "details": "uint32 all F RV [WIRED]",
+      "raw_line": "0x0007         Wired­         uint32        all            F                             RV          [WIRED]"
+    },
+    "0x0008": {
+      "id": "0x0008",
+      "name": "Wired­",
+      "details": "uint32 all F RV [WIRED]",
+      "raw_line": "0x0008         Wired­         uint32        all            F                             RV          [WIRED]"
+    },
+    "0x0009": {
+      "id": "0x0009",
+      "name": "WiredPre­",
+      "details": "bool all RV [WIRED]",
+      "raw_line": "0x0009         WiredPre­ bool               all                                          RV          [WIRED]"
+    },
+    "0x000A": {
+      "id": "0x000A",
+      "name": "ActiveWir",
+      "details": "list[Wired­ max 8 RV [WIRED]",
+      "raw_line": "0x000A         ActiveWir list[Wired­ max 8                                               RV          [WIRED]"
+    },
+    "0x000B": {
+      "id": "0x000B",
+      "name": "BatVoltage",
+      "details": "uint32 all XC RV [BAT]",
+      "raw_line": "0x000B         BatVoltage uint32            all            XC                            RV          [BAT]"
+    },
+    "0x000C": {
+      "id": "0x000C",
+      "name": "BatPer­",
+      "details": "uint8 0 to 200 XC RV [BAT]",
+      "raw_line": "0x000C         BatPer­        uint8         0 to 200       XC                            RV          [BAT]"
+    },
+    "0x000D": {
+      "id": "0x000D",
+      "name": "Bat­",
+      "details": "uint32 all XC RV [BAT]",
+      "raw_line": "0x000D         Bat­           uint32        all            XC                            RV          [BAT]"
+    },
+    "0x000E": {
+      "id": "0x000E",
+      "name": "BatCharge",
+      "details": "BatCharge desc RV BAT",
+      "raw_line": "0x000E         BatCharge BatCharge          desc                                         RV          BAT"
+    },
+    "0x000F": {
+      "id": "0x000F",
+      "name": "BatRe­",
+      "details": "bool all RV BAT",
+      "raw_line": "0x000F         BatRe­         bool          all                                          RV          BAT"
+    },
+    "0x0010": {
+      "id": "0x0010",
+      "name": "BatRe­",
+      "details": "BatRe­ all F RV BAT",
+      "raw_line": "0x0010         BatRe­         BatRe­        all            F                             RV          BAT"
+    },
+    "0x0011": {
+      "id": "0x0011",
+      "name": "BatPre­",
+      "details": "bool all RV [BAT]",
+      "raw_line": "0x0011         BatPre­        bool          all                                          RV          [BAT]"
+    },
+    "0x0012": {
+      "id": "0x0012",
+      "name": "ActiveBat­",
+      "details": "list[Bat­ max 8 RV [BAT]",
+      "raw_line": "0x0012         ActiveBat­ list[Bat­         max 8                                        RV          [BAT]"
+    },
+    "0x0013": {
+      "id": "0x0013",
+      "name": "BatRe­",
+      "details": "string max 60 F RV REPLC",
+      "raw_line": "0x0013         BatRe­         string        max 60         F                             RV          REPLC"
+    },
+    "0x0014": {
+      "id": "0x0014",
+      "name": "BatCom­",
+      "details": "BatCom­ desc F RV [REPLC]",
+      "raw_line": "0x0014         BatCom­         BatCom­       desc           F                             RV          [REPLC]"
+    },
+    "0x0015": {
+      "id": "0x0015",
+      "name": "BatANSID­",
+      "details": "string max 20 F RV [REPLC]",
+      "raw_line": "0x0015         BatANSID­ string              max 20         F                             RV          [REPLC]"
+    },
+    "0x0016": {
+      "id": "0x0016",
+      "name": "BatIECDes",
+      "details": "string max 20 F RV [REPLC]",
+      "raw_line": "0x0016         BatIECDes string              max 20         F                             RV          [REPLC]"
+    },
+    "0x0017": {
+      "id": "0x0017",
+      "name": "BatAp­",
+      "details": "BatAp­ desc F RV [REPLC]",
+      "raw_line": "0x0017         BatAp­          BatAp­        desc           F                             RV          [REPLC]"
+    },
+    "0x0018": {
+      "id": "0x0018",
+      "name": "BatCapac­",
+      "details": "uint32 all F RV [REPLC |",
+      "raw_line": "0x0018         BatCapac­ uint32              all            F                             RV          [REPLC |"
+    },
+    "0x0019": {
+      "id": "0x0019",
+      "name": "BatQuan­",
+      "details": "uint8 all F RV REPLC",
+      "raw_line": "0x0019         BatQuan­        uint8         all            F                             RV          REPLC"
+    },
+    "0x001A": {
+      "id": "0x001A",
+      "name": "BatCharge",
+      "details": "BatCharge desc RV RECHG",
+      "raw_line": "0x001A         BatCharge BatCharge           desc                                         RV          RECHG"
+    },
+    "0x001B": {
+      "id": "0x001B",
+      "name": "Bat­",
+      "details": "uint32 all XC RV [RECHG]",
+      "raw_line": "0x001B         Bat­            uint32        all            XC                            RV          [RECHG]"
+    },
+    "0x001C": {
+      "id": "0x001C",
+      "name": "BatFunc­",
+      "details": "bool all RV RECHG",
+      "raw_line": "0x001C         BatFunc­        bool          all                                          RV          RECHG"
+    },
+    "0x001D": {
+      "id": "0x001D",
+      "name": "BatCharg­",
+      "details": "uint32 all XC RV [RECHG]",
+      "raw_line": "0x001D         BatCharg­ uint32              all            XC                            RV          [RECHG]"
+    },
+    "0x001E": {
+      "id": "0x001E",
+      "name": "Active­",
+      "details": "list[BatCha max 16 RV [RECHG]",
+      "raw_line": "0x001E         Active­         list[BatCha max 16                                         RV          [RECHG]"
+    },
+    "0x001F": {
+      "id": "0x001F",
+      "name": "End­",
+      "details": "list[end­ RV M",
+      "raw_line": "0x001F         End­            list[end­                                                  RV          M"
+    }
+  },
+  "commands": {},
+  "events": {
+    "0x00": {
+      "id": "0x00",
+      "name": "WiredFault­",
+      "details": "INFO V [WIRED]",
+      "raw_line": "0x00                   WiredFault­            INFO                    V                         [WIRED]"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "BatFaultChange",
+      "details": "INFO V [BAT]",
+      "raw_line": "0x01                   BatFaultChange         INFO                    V                         [BAT]"
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "BatChargeFault­",
+      "details": "INFO V [RECHG]",
+      "raw_line": "0x02                   BatChargeFault­        INFO                    V                         [RECHG]"
+    }
+  },
+  "extraction_info": {
+    "start_line": 38609,
+    "end_line": 39976,
+    "total_lines": 1367
+  }
+}

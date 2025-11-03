@@ -1,0 +1,40 @@
+config:
+  cluster: media-playback-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: media-playback-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`CurrentState` to `PLAYING`'
+  ExpectedResponse: 0 (SUCCESS)
+  Pre-requisites: Media is in a state that allows playback (e.g., PAUSED or NOT_PLAYING)
+  arguments: {}
+  label: Test_Case_Normal_Play
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: 1 (INVALID_STATE_FOR_COMMAND)
+  Pre-requisites: Media is in a state that does not allow playback (e.g., already
+    PLAYING)
+  arguments: {}
+  label: Test_Case_Invalid_State_for_Command
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: 2 (NOT_ALLOWED)
+  Pre-requisites: Playback is restricted (e.g., during a commercial)
+  arguments: {}
+  label: Test_Case_Not_Allowed
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: 3 (NOT_ACTIVE)
+  Pre-requisites: 'Endpoint is not active for playback
+
+
+    These test cases cover the extreme values and special responses for the `Play`
+    command in the Media Playback cluster as specified in the Matter Application Cluster
+    Specification【4:0†source】.'
+  arguments: {}
+  label: Test_Case_Not_Active
+  option: SendCommand

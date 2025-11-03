@@ -1,0 +1,48 @@
+config:
+  cluster: account-login-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: account-login-cluster_command_0x01_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The account associated with the Temporary Account Identifier matches
+    the active account of the running Content App.
+  arguments:
+    SetupPIN: '"12345678901"'
+  label: Test_Case_Minimum_Length_SetupPIN
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The account associated with the Temporary Account Identifier matches
+    the active account of the running Content App.
+  arguments:
+    SetupPIN: '"12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"'
+  label: Test_Case_Maximum_Length_SetupPIN
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: FAILURE
+  Pre-requisites: The account associated with the Temporary Account Identifier does
+    not match the active account of the running Content App.
+  arguments: {}
+  label: Test_Case_Null_SetupPIN_(Account_Mismatch)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'The account associated with the Temporary Account Identifier matches
+    the active account of the running Content App.
+
+
+    These test cases cover the extreme values of the constraints of the `SetupPIN`
+    field and the special response scenarios mentioned in the description of the effect.
+
+
+    For more details, refer to the Matter Application Cluster Specification【4:0†source】.'
+  arguments:
+    SetupPIN: '"A1B2C3D4E5F"'
+  label: Test_Case_Special_Character_SetupPIN
+  option: SendCommand

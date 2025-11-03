@@ -1,0 +1,48 @@
+config:
+  cluster: network-commissioning-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: network-commissioning-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"WindowStatus": "Open"}'
+  ExpectedResponse: Success
+  Pre-requisites: Node is not currently in a commissioning window
+  arguments:
+    '{"CommissioningTimeout"': '0, "PAKEPasscodeVerifier": "<min_octstr>", "Discriminator":
+      0, "Iterations": 1000, "Salt": "<16_byte_octstr>"}'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: '{"WindowStatus": "Open"}'
+  ExpectedResponse: Success
+  Pre-requisites: Node is not currently in a commissioning window
+  arguments:
+    '{"CommissioningTimeout"': '65535, "PAKEPasscodeVerifier": "<max_octstr>", "Discriminator":
+      2047, "Iterations": 100000, "Salt": "<32_byte_octstr>"}'
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: PAKEParameterError
+  Pre-requisites: Node is not currently in a commissioning window
+  arguments:
+    '{"CommissioningTimeout"': '300, "PAKEPasscodeVerifier": "<invalid_octstr>", "Discriminator":
+      100, "Iterations": 500, "Salt": "<invalid_octstr>"}'
+  label: Test_Case_Special_Response_-_PAKEParameterError
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Busy
+  Pre-requisites: 'Node is currently in a commissioning window or fail-safe timer
+    is armed
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:12†source】【4:13†source】.'
+  arguments:
+    '{"CommissioningTimeout"': '300, "PAKEPasscodeVerifier": "<valid_octstr>", "Discriminator":
+      100, "Iterations": 5000, "Salt": "<valid_octstr>"}'
+  label: Test_Case_Special_Response_-_Busy
+  option: SendCommand

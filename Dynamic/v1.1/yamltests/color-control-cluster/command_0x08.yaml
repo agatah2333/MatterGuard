@@ -1,0 +1,58 @@
+config:
+  cluster: color-control-cluster
+  command: '0x08'
+  nodeId: '0x654231'
+name: color-control-cluster_command_0x08_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '`ColorMode` set to 1, `CurrentX` and `CurrentY` will start moving
+    at the specified rates.'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    OptionsMask: 0
+    OptionsOverride: 0
+    RateX: '-32768'
+    RateY: '-32768'
+  label: Test_Case_Extreme_Values_(Minimum)
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '`ColorMode` set to 1, `CurrentX` and `CurrentY` will start moving
+    at the specified rates.'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    OptionsMask: 255
+    OptionsOverride: 255
+    RateX: 32767
+    RateY: 32767
+  label: Test_Case_Extreme_Values_(Maximum)
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: Movement will stop, `CurrentX` and `CurrentY` will remain at their
+    current values.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Movement should be in progress from a previous command.
+  arguments:
+    OptionsMask: 0
+    OptionsOverride: 0
+    RateX: 0
+    RateY: 0
+  label: Test_Case_Special_Response_(Stop_Movement)
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: INVALID_COMMAND
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the command
+    description【4:2†source】【4:3†source】【4:5†source】.'
+  arguments:
+    OptionsMask: 255
+    OptionsOverride: 255
+    RateX: 0
+    RateY: 0
+  label: Test_Case_Special_Response_(Invalid_Command)
+  option: SendCommand

@@ -1,0 +1,6 @@
+config:
+  cluster: ota-software-update-requestor
+  command: '0x00'
+  nodeId: '0x654231'
+name: ota-software-update-requestor_command_0x00_v1.2.0.0
+tests: []

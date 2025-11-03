@@ -1,0 +1,195 @@
+{
+  "source_file": "Valve Configuration and Control_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0081",
+        "name": "Valve Configuration and Control",
+        "description": "This cluster is used to configure a valve.",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "OpenDuration",
+            "dataType": "uint32",
+            "valueRange": "null | positive integer",
+            "description": "Indicates the duration for which the valve will remain open.",
+            "privilege": "View",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "DefaultOpenDuration",
+            "dataType": "uint32",
+            "valueRange": "null | positive integer",
+            "description": "Default duration for which the valve will remain open.",
+            "privilege": "View",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "AutoCloseTime",
+            "dataType": "uint64",
+            "valueRange": "null | UTC time",
+            "description": "UTC time when the valve will close.",
+            "privilege": "View",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "RemainingDuration",
+            "dataType": "uint32",
+            "valueRange": "null | positive integer",
+            "description": "Remaining duration until the valve closes.",
+            "privilege": "View",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "CurrentState",
+            "dataType": "ValveStateEnum",
+            "valueRange": "0-2",
+            "description": "Current state of the valve.",
+            "privilege": "View",
+            "writable": false
+          },
+          {
+            "id": "0x0005",
+            "name": "TargetState",
+            "dataType": "ValveStateEnum",
+            "valueRange": "0-2",
+            "description": "Target state of the valve.",
+            "privilege": "View",
+            "writable": false
+          },
+          {
+            "id": "0x0006",
+            "name": "CurrentLevel",
+            "dataType": "uint8",
+            "valueRange": "0-100",
+            "description": "Current level of the valve.",
+            "privilege": "View",
+            "writable": false
+          },
+          {
+            "id": "0x0007",
+            "name": "TargetLevel",
+            "dataType": "uint8",
+            "valueRange": "0-100",
+            "description": "Target level of the valve.",
+            "privilege": "View",
+            "writable": false
+          },
+          {
+            "id": "0x0008",
+            "name": "DefaultOpenLevel",
+            "dataType": "uint8",
+            "valueRange": "1-100",
+            "description": "Default open level of the valve.",
+            "privilege": "View",
+            "writable": true
+          },
+          {
+            "id": "0x0009",
+            "name": "ValveFault",
+            "dataType": "ValveFaultBitmap",
+            "valueRange": "0-5",
+            "description": "Indicates faults detected in the valve.",
+            "privilege": "View",
+            "writable": false
+          },
+          {
+            "id": "0x000A",
+            "name": "LevelStep",
+            "dataType": "uint8",
+            "valueRange": "1-50",
+            "description": "Step size for level changes.",
+            "privilege": "View",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "Open",
+            "parameters": {
+              "OpenDuration": {
+                "dataType": "uint32",
+                "valueRange": "null | positive integer",
+                "description": "Duration for which the valve will remain open."
+              },
+              "TargetLevel": {
+                "dataType": "uint8",
+                "valueRange": "1-100",
+                "description": "Target level of the valve."
+              }
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "Close",
+            "parameters": {},
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "ValveStateChanged",
+            "parameters": {
+              "ValveState": {
+                "dataType": "ValveStateEnum",
+                "valueRange": "0-2",
+                "description": "New state of the valve."
+              },
+              "ValveLevel": {
+                "dataType": "uint8",
+                "valueRange": "0-100",
+                "description": "New level of the valve."
+              }
+            },
+            "privilege": "View",
+            "side": "server"
+          },
+          {
+            "id": "0x01",
+            "name": "ValveFault",
+            "parameters": {
+              "ValveFault": {
+                "dataType": "ValveFaultBitmap",
+                "valueRange": "0-5",
+                "description": "Value of the ValveFault attribute at the time of the event."
+              }
+            },
+            "privilege": "View",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "ValveFaultBitmap": {
+            "baseType": "bitmap16",
+            "fields": {
+              "0": "MotorFault",
+              "1": "PositionSensorFault",
+              "2": "CurrentOverload",
+              "3": "VoltageIrregularity",
+              "4": "TemperatureWarning",
+              "5": "CommunicationError"
+            }
+          },
+          "ValveStateEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "Closed",
+              "1": "Opening",
+              "2": "Open"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

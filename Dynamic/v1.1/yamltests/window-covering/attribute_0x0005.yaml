@@ -1,0 +1,45 @@
+config:
+  attribute: '0x0005'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0005_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"NumberOfActuationsLift": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"NumberOfActuationsLift"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"NumberOfActuationsLift": 65535}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"NumberOfActuationsLift"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"NumberOfActuationsLift": 65534}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"NumberOfActuationsLift"': 65534}
+  label: Test_Case_Special_Response_-_Just_Below_Overflow
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: <none>
+  ExpectedResponse: '<error: CONSTRAINT_ERROR>'
+  Pre-requisites: '<none>
+
+
+    These test cases cover the extreme values of the `NumberOfActuationsLift` attribute
+    and the special response when the value exceeds the maximum constraint.
+
+
+    For more details, refer to the Matter Application Cluster Specification【4:0†source】.'
+  arguments:
+    '{"NumberOfActuationsLift"': 65536}
+  label: Test_Case_Special_Response_-_Overflow
+  option: WriteAttribute

@@ -1,0 +1,225 @@
+config:
+  node_id: 305414945
+  cluster: '0x0006'
+  endpoint: 1
+tests:
+- label: test_onoffcontrol_minimum_boundary
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 0
+    OffWaitTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_onoffcontrol_maximum_boundary
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 1
+    OnTime: 0
+    OffWaitTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_onoffcontrol_midrange
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 0
+    OffWaitTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_onoffcontrol_above_maximum
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 2
+    OnTime: 0
+    OffWaitTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_ontime_minimum_boundary
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 0
+    OffWaitTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_ontime_maximum_boundary
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 65534
+    OffWaitTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_ontime_midrange
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 32767
+    OffWaitTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_ontime_above_maximum
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 65535
+    OffWaitTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_offwaittime_minimum_boundary
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 0
+    OffWaitTime: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_offwaittime_maximum_boundary
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 0
+    OffWaitTime: 65534
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_offwaittime_midrange
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 0
+    OffWaitTime: 32767
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_offwaittime_above_maximum
+  cluster: '0x0006'
+  command: '0x42'
+  arguments:
+    OnOffControl: 0
+    OnTime: 0
+    OffWaitTime: 65535
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+execution_metadata:
+  estimated_duration: 360
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

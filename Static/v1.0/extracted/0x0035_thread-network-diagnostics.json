@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0035",
+    "name": "Thread Network Diagnostics",
+    "description": "Thread network diagnostics."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

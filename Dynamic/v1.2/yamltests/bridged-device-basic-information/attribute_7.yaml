@@ -1,0 +1,43 @@
+config:
+  attribute: '7'
+  cluster: bridged-device-basic-information
+  nodeId: '0x654231'
+name: bridged-device-basic-information_attribute_7_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `HardwareVersion`: 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    HardwareVersion: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `HardwareVersion`: 65535'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    HardwareVersion: 65535
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `HardwareVersion`: No change'
+  ExpectedResponse: Error (Invalid Value)
+  Pre-requisites: None
+  arguments:
+    HardwareVersion: '-1'
+  label: Test_Case_Special_Response_-_Invalid_Value_(Negative)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `HardwareVersion`: No change'
+  ExpectedResponse: Error (Out of Range)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the `HardwareVersion`
+    field and the values that could result in special responses as mentioned in the
+    description.'
+  arguments:
+    HardwareVersion: 70000
+  label: Test_Case_Special_Response_-_Out_of_Range_Value
+  option: WriteAttribute

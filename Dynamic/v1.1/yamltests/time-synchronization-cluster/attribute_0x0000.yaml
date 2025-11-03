@@ -1,0 +1,49 @@
+config:
+  attribute: '0x0000'
+  cluster: time-synchronization-cluster
+  nodeId: '0x654231'
+name: time-synchronization-cluster_attribute_0x0000_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: IdentifyTime set to 0.
+  ExpectedResponse: Device terminates its identification state.
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyTime"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 65535
+  Attribute_Change: IdentifyTime set to 65535.
+  ExpectedResponse: Device enters identification state and continues for 65535 seconds.
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyTime"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 1
+  Attribute_Change: IdentifyTime set to 1.
+  ExpectedResponse: Device enters identification state and continues for 1 second.
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyTime"': 1}
+  label: Test_Case_Special_Response_-_Enter_Identification_State
+  option: WriteAttribute
+- ActionTime: 10
+  Attribute_Change: IdentifyTime set to 10.
+  ExpectedResponse: Device continues identification state for 10 seconds.
+  Pre-requisites: Device must already be in identification state.
+  arguments:
+    '{"IdentifyTime"': 10}
+  label: Test_Case_Special_Response_-_Continue_Identification_State
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: IdentifyTime set to 0.
+  ExpectedResponse: Device terminates its identification state.
+  Pre-requisites: 'Device must already be in identification state.
+
+
+    ### Summary'
+  arguments:
+    '{"IdentifyTime"': 0}
+  label: Test_Case_Special_Response_-_Terminate_Identification_State
+  option: WriteAttribute

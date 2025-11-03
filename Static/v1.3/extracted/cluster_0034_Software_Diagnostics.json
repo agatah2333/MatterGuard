@@ -1,0 +1,59 @@
+{
+  "cluster_id": "0x0034",
+  "cluster_name": "Software Diagnostics",
+  "section": "11.13",
+  "description": "The Software Diagnostics Cluster provides a means to acquire standardized diagnostics metrics that MAY be used by a Node to assist a user or Administrator in diagnosing potential problems. The Soft­ ware Diagnostics Cluster attempts to centralize all metrics that are relevant to the software that may be running on a Node.",
+  "data_types": {
+    "ThreadMetricsStruct": {
+      "name": "ThreadMetricsStruct",
+      "definition_line": "11.13.5.1. ThreadMetricsStruct Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "Thread­",
+      "details": "list[Thread max 64 RV O",
+      "raw_line": "0x0000         Thread­       list[Thread max 64                                         RV          O"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "Cur­",
+      "details": "uint64 RV O",
+      "raw_line": "0x0001         Cur­          uint64                                                     RV          O"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "Cur­",
+      "details": "uint64 RV O",
+      "raw_line": "0x0002         Cur­          uint64                                                     RV          O"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "Cur­",
+      "details": "uint64 RV WTRMRK",
+      "raw_line": "0x0003         Cur­          uint64                                                     RV          WTRMRK"
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "ResetWater­",
+      "details": "client ⇒ server Y M WTRMRK",
+      "raw_line": "0x00                 ResetWater­        client ⇒ server Y                     M                  WTRMRK"
+    }
+  },
+  "events": {
+    "0x00": {
+      "id": "0x00",
+      "name": "SoftwareFault",
+      "details": "INFO V O",
+      "raw_line": "0x00                   SoftwareFault          INFO                    V                         O"
+    }
+  },
+  "extraction_info": {
+    "start_line": 43310,
+    "end_line": 43542,
+    "total_lines": 232
+  }
+}

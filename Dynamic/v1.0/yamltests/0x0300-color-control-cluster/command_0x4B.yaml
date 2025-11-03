@@ -1,0 +1,1440 @@
+test_metadata:
+  version: 1.0.0
+  matter_spec_version: '1.0'
+  description: Refined test cases for color-control cluster command 0x4B
+  extraction_method: systematic_cluster_analysis
+config:
+  cluster: color-control-cluster
+  cluster_id: '0x0300'
+  command_id: '0x4B'
+  nodeId: '0x654231'
+  endpoint: 1
+name: color-control_cluster_command_0x4B_refined_v1.0.0
+test_info:
+  total_test_cases: 19
+  test_focus:
+  - Extreme values of constraints
+  - Special response scenarios
+  - Error conditions
+test_summary: '- There are 19 test cases in the sendcommand
+
+  - The range of each field is {"MoveMode": "[0, 255]", "Rate": "[0, 255]", "ColorTemperatureMinimumMireds":
+  "[0, 255]", "ColorTemperatureMaximumMireds": "[0, 255]", "OptionsMask": "[0, 255]",
+  "OptionsOverride": "[0, 255]"}'
+tests:
+- test_id: TC_MoveColorTemperature_001
+  label: Test_Case_Basic_MoveColorTemperature
+  description: Basic test for MoveColorTemperature command
+  test_type: normal_operation
+  Pre-requisites:
+  - Device supports MoveColorTemperature command
+  option: SendCommand
+  arguments:
+    MoveMode: 0
+    Rate: 0
+    ColorTemperatureMinimumMireds: 0
+    ColorTemperatureMaximumMireds: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: Command executed successfully
+  formatted_output: 'Test case 1:
+
+    - Value of each field: {"MoveMode": 0, "Rate": 0, "ColorTemperatureMinimumMireds":
+    0, "ColorTemperatureMaximumMireds": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: Command executed
+    successfully
+
+    - Any pre-requisites: Device supports MoveColorTemperature command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_002
+  label: Test_Case_Min_MoveMode
+  description: Test MoveColorTemperature with minimum MoveMode value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveColorTemperature command
+  option: SendCommand
+  arguments:
+    MoveMode: 0
+    Rate: 0
+    ColorTemperatureMinimumMireds: 0
+    ColorTemperatureMaximumMireds: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: MoveMode set to minimum value
+  formatted_output: 'Test case 2:
+
+    - Value of each field: {"MoveMode": 0, "Rate": 0, "ColorTemperatureMinimumMireds":
+    0, "ColorTemperatureMaximumMireds": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: MoveMode set
+    to minimum value
+
+    - Any pre-requisites: Device supports MoveColorTemperature command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_003
+  label: Test_Case_Max_MoveMode
+  description: Test MoveColorTemperature with maximum MoveMode value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveColorTemperature command
+  option: SendCommand
+  arguments:
+    MoveMode: 255
+    Rate: 0
+    ColorTemperatureMinimumMireds: 0
+    ColorTemperatureMaximumMireds: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: MoveMode set to maximum value
+  formatted_output: 'Test case 3:
+
+    - Value of each field: {"MoveMode": 255, "Rate": 0, "ColorTemperatureMinimumMireds":
+    0, "ColorTemperatureMaximumMireds": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: MoveMode set
+    to maximum value
+
+    - Any pre-requisites: Device supports MoveColorTemperature command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_004
+  label: Test_Case_Null_MoveMode
+  description: Test MoveColorTemperature with null MoveMode value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null MoveMode handling
+  option: SendCommand
+  arguments:
+    MoveMode: 255
+    Rate: 0
+    ColorTemperatureMinimumMireds: 0
+    ColorTemperatureMaximumMireds: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for MoveMode
+  formatted_output: 'Test case 4:
+
+    - Value of each field: {"MoveMode": 255, "Rate": 0, "ColorTemperatureMinimumMireds":
+    0, "ColorTemperatureMaximumMireds": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for MoveMode
+
+    - Any pre-requisites: Device supports null MoveMode handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_005
+  label: Test_Case_Min_Rate
+  description: Test MoveColorTemperature with minimum Rate value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveColorTemperature command
+  option: SendCommand
+  arguments:
+    MoveMode: 0
+    Rate: 0
+    ColorTemperatureMinimumMireds: 0
+    ColorTemperatureMaximumMireds: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: Rate set to minimum value
+  formatted_output: 'Test case 5:
+
+    - Value of each field: {"MoveMode": 0, "Rate": 0, "ColorTemperatureMinimumMireds":
+    0, "ColorTemperatureMaximumMireds": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: Rate set to
+    minimum value
+
+    - Any pre-requisites: Device supports MoveColorTemperature command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_006
+  label: Test_Case_Max_Rate
+  description: Test MoveColorTemperature with maximum Rate value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveColorTemperature command
+  option: SendCommand
+  arguments:
+    MoveMode: 0
+    Rate: 255
+    ColorTemperatureMinimumMireds: 0
+    ColorTemperatureMaximumMireds: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: Rate set to maximum value
+  formatted_output: 'Test case 6:
+
+    - Value of each field: {"MoveMode": 0, "Rate": 255, "ColorTemperatureMinimumMireds":
+    0, "ColorTemperatureMaximumMireds": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: Rate set to
+    maximum value
+
+    - Any pre-requisites: Device supports MoveColorTemperature command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_007
+  label: Test_Case_Null_Rate
+  description: Test MoveColorTemperature with null Rate value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null Rate handling
+  option: SendCommand
+  arguments:
+    MoveMode: 0
+    Rate: 255
+    ColorTemperatureMinimumMireds: 0
+    ColorTemperatureMaximumMireds: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for Rate
+  formatted_output: 'Test case 7:
+
+    - Value of each field: {"MoveMode": 0, "Rate": 255, "ColorTemperatureMinimumMireds":
+    0, "ColorTemperatureMaximumMireds": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for Rate
+
+    - Any pre-requisites: Device supports null Rate handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_008
+  label: Test_Case_Min_ColorTemperatureMinimumMireds
+  description: Test MoveColorTemperature with minimum ColorTemperatureMinimumMireds
+    value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveColorTemperature command
+  option: SendCommand
+  arguments:
+    MoveMode: 0
+    Rate: 0
+    ColorTemperatureMinimumMireds: 0
+    ColorTemperatureMaximumMireds: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: ColorTemperatureMinimumMireds set to minimum value
+  formatted_output: 'Test case 8:
+
+    - Value of each field: {"MoveMode": 0, "Rate": 0, "ColorTemperatureMinimumMireds":
+    0, "ColorTemperatureMaximumMireds": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: ColorTemperatureMinimumMireds
+    set to minimum value
+
+    - Any pre-requisites: Device supports MoveColorTemperature command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_009
+  label: Test_Case_Max_ColorTemperatureMinimumMireds
+  description: Test MoveColorTemperature with maximum ColorTemperatureMinimumMireds
+    value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveColorTemperature command
+  option: SendCommand
+  arguments:
+    MoveMode: 0
+    Rate: 0
+    ColorTemperatureMinimumMireds: 255
+    ColorTemperatureMaximumMireds: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: ColorTemperatureMinimumMireds set to maximum value
+  formatted_output: 'Test case 9:
+
+    - Value of each field: {"MoveMode": 0, "Rate": 0, "ColorTemperatureMinimumMireds":
+    255, "ColorTemperatureMaximumMireds": 0, "OptionsMask": 0, "OptionsOverride":
+    0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: ColorTemperatureMinimumMireds
+    set to maximum value
+
+    - Any pre-requisites: Device supports MoveColorTemperature command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_010
+  label: Test_Case_Null_ColorTemperatureMinimumMireds
+  description: Test MoveColorTemperature with null ColorTemperatureMinimumMireds value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null ColorTemperatureMinimumMireds handling
+  option: SendCommand
+  arguments:
+    MoveMode: 0
+    Rate: 0
+    ColorTemperatureMinimumMireds: 255
+    ColorTemperatureMaximumMireds: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for ColorTemperatureMinimumMireds
+  formatted_output: 'Test case 10:
+
+    - Value of each field: {"MoveMode": 0, "Rate": 0, "ColorTemperatureMinimumMireds":
+    255, "ColorTemperatureMaximumMireds": 0, "OptionsMask": 0, "OptionsOverride":
+    0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for ColorTemperatureMinimumMireds
+
+    - Any pre-requisites: Device supports null ColorTemperatureMinimumMireds handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_011
+  label: Test_Case_Min_ColorTemperatureMaximumMireds
+  description: Test MoveColorTemperature with minimum ColorTemperatureMaximumMireds
+    value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveColorTemperature command
+  option: SendCommand
+  arguments:
+    MoveMode: 0
+    Rate: 0
+    ColorTemperatureMinimumMireds: 0
+    ColorTemperatureMaximumMireds: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: ColorTemperatureMaximumMireds set to minimum value
+  formatted_output: 'Test case 11:
+
+    - Value of each field: {"MoveMode": 0, "Rate": 0, "ColorTemperatureMinimumMireds":
+    0, "ColorTemperatureMaximumMireds": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: ColorTemperatureMaximumMireds
+    set to minimum value
+
+    - Any pre-requisites: Device supports MoveColorTemperature command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_012
+  label: Test_Case_Max_ColorTemperatureMaximumMireds
+  description: Test MoveColorTemperature with maximum ColorTemperatureMaximumMireds
+    value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveColorTemperature command
+  option: SendCommand
+  arguments:
+    MoveMode: 0
+    Rate: 0
+    ColorTemperatureMinimumMireds: 0
+    ColorTemperatureMaximumMireds: 255
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: ColorTemperatureMaximumMireds set to maximum value
+  formatted_output: 'Test case 12:
+
+    - Value of each field: {"MoveMode": 0, "Rate": 0, "ColorTemperatureMinimumMireds":
+    0, "ColorTemperatureMaximumMireds": 255, "OptionsMask": 0, "OptionsOverride":
+    0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: ColorTemperatureMaximumMireds
+    set to maximum value
+
+    - Any pre-requisites: Device supports MoveColorTemperature command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_013
+  label: Test_Case_Null_ColorTemperatureMaximumMireds
+  description: Test MoveColorTemperature with null ColorTemperatureMaximumMireds value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null ColorTemperatureMaximumMireds handling
+  option: SendCommand
+  arguments:
+    MoveMode: 0
+    Rate: 0
+    ColorTemperatureMinimumMireds: 0
+    ColorTemperatureMaximumMireds: 255
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for ColorTemperatureMaximumMireds
+  formatted_output: 'Test case 13:
+
+    - Value of each field: {"MoveMode": 0, "Rate": 0, "ColorTemperatureMinimumMireds":
+    0, "ColorTemperatureMaximumMireds": 255, "OptionsMask": 0, "OptionsOverride":
+    0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for ColorTemperatureMaximumMireds
+
+    - Any pre-requisites: Device supports null ColorTemperatureMaximumMireds handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_014
+  label: Test_Case_Min_OptionsMask
+  description: Test MoveColorTemperature with minimum OptionsMask value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveColorTemperature command
+  option: SendCommand
+  arguments:
+    MoveMode: 0
+    Rate: 0
+    ColorTemperatureMinimumMireds: 0
+    ColorTemperatureMaximumMireds: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: OptionsMask set to minimum value
+  formatted_output: 'Test case 14:
+
+    - Value of each field: {"MoveMode": 0, "Rate": 0, "ColorTemperatureMinimumMireds":
+    0, "ColorTemperatureMaximumMireds": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: OptionsMask
+    set to minimum value
+
+    - Any pre-requisites: Device supports MoveColorTemperature command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_015
+  label: Test_Case_Max_OptionsMask
+  description: Test MoveColorTemperature with maximum OptionsMask value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveColorTemperature command
+  option: SendCommand
+  arguments:
+    MoveMode: 0
+    Rate: 0
+    ColorTemperatureMinimumMireds: 0
+    ColorTemperatureMaximumMireds: 0
+    OptionsMask: 255
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: OptionsMask set to maximum value
+  formatted_output: 'Test case 15:
+
+    - Value of each field: {"MoveMode": 0, "Rate": 0, "ColorTemperatureMinimumMireds":
+    0, "ColorTemperatureMaximumMireds": 0, "OptionsMask": 255, "OptionsOverride":
+    0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: OptionsMask
+    set to maximum value
+
+    - Any pre-requisites: Device supports MoveColorTemperature command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_016
+  label: Test_Case_Null_OptionsMask
+  description: Test MoveColorTemperature with null OptionsMask value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null OptionsMask handling
+  option: SendCommand
+  arguments:
+    MoveMode: 0
+    Rate: 0
+    ColorTemperatureMinimumMireds: 0
+    ColorTemperatureMaximumMireds: 0
+    OptionsMask: 255
+    OptionsOverride: 0
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for OptionsMask
+  formatted_output: 'Test case 16:
+
+    - Value of each field: {"MoveMode": 0, "Rate": 0, "ColorTemperatureMinimumMireds":
+    0, "ColorTemperatureMaximumMireds": 0, "OptionsMask": 255, "OptionsOverride":
+    0}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for OptionsMask
+
+    - Any pre-requisites: Device supports null OptionsMask handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_017
+  label: Test_Case_Min_OptionsOverride
+  description: Test MoveColorTemperature with minimum OptionsOverride value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveColorTemperature command
+  option: SendCommand
+  arguments:
+    MoveMode: 0
+    Rate: 0
+    ColorTemperatureMinimumMireds: 0
+    ColorTemperatureMaximumMireds: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: OptionsOverride set to minimum value
+  formatted_output: 'Test case 17:
+
+    - Value of each field: {"MoveMode": 0, "Rate": 0, "ColorTemperatureMinimumMireds":
+    0, "ColorTemperatureMaximumMireds": 0, "OptionsMask": 0, "OptionsOverride": 0}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: OptionsOverride
+    set to minimum value
+
+    - Any pre-requisites: Device supports MoveColorTemperature command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_018
+  label: Test_Case_Max_OptionsOverride
+  description: Test MoveColorTemperature with maximum OptionsOverride value
+  test_type: boundary_value
+  Pre-requisites:
+  - Device supports MoveColorTemperature command
+  option: SendCommand
+  arguments:
+    MoveMode: 0
+    Rate: 0
+    ColorTemperatureMinimumMireds: 0
+    ColorTemperatureMaximumMireds: 0
+    OptionsMask: 0
+    OptionsOverride: 255
+  ActionTime: 0
+  ExpectedResponse: Success
+  Attribute_Change: OptionsOverride set to maximum value
+  formatted_output: 'Test case 18:
+
+    - Value of each field: {"MoveMode": 0, "Rate": 0, "ColorTemperatureMinimumMireds":
+    0, "ColorTemperatureMaximumMireds": 0, "OptionsMask": 0, "OptionsOverride": 255}
+
+    - ActionTime: 0
+
+    - ExpectedResponse: Success
+
+    - Which attribute will be changed and the value of the attribute: OptionsOverride
+    set to maximum value
+
+    - Any pre-requisites: Device supports MoveColorTemperature command'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- test_id: TC_MoveColorTemperature_019
+  label: Test_Case_Null_OptionsOverride
+  description: Test MoveColorTemperature with null OptionsOverride value
+  test_type: special_response
+  Pre-requisites:
+  - Device supports null OptionsOverride handling
+  option: SendCommand
+  arguments:
+    MoveMode: 0
+    Rate: 0
+    ColorTemperatureMinimumMireds: 0
+    ColorTemperatureMaximumMireds: 0
+    OptionsMask: 0
+    OptionsOverride: 255
+  ActionTime: Special timing may apply
+  ExpectedResponse: Success with special behavior
+  Attribute_Change: Special null value behavior for OptionsOverride
+  formatted_output: 'Test case 19:
+
+    - Value of each field: {"MoveMode": 0, "Rate": 0, "ColorTemperatureMinimumMireds":
+    0, "ColorTemperatureMaximumMireds": 0, "OptionsMask": 0, "OptionsOverride": 255}
+
+    - ActionTime: Special timing may apply
+
+    - ExpectedResponse: Success with special behavior
+
+    - Which attribute will be changed and the value of the attribute: Special null
+    value behavior for OptionsOverride
+
+    - Any pre-requisites: Device supports null OptionsOverride handling'
+  setup_sequence:
+  - step: 1
+    description: Verify color-control-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0300'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true

@@ -1,0 +1,133 @@
+config:
+  attribute: '0x0007'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0007_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`ConfigStatus` will be set to 0x00.'
+  ExpectedResponse: The window covering should be non-operational, with normal lift
+    and tilt movements, and no position-aware or encoder control.
+  Pre-requisites: The window covering device should be installed and powered on.
+  arguments:
+    Control - Lift: 0
+    Control - Tilt: 0
+    Encoder - Lift: 0
+    Encoder - Tilt: 0
+    Operational: 0
+    Reversal: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify window-covering cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: '`ConfigStatus` will be set to 0x3D.'
+  ExpectedResponse: The window covering should be operational, with reversed lift
+    movements, position-aware control for both lift and tilt, and encoder control
+    for both lift and tilt.
+  Pre-requisites: 'The window covering device should support all the features being
+    tested (reversal, position-aware control, and encoder control).
+
+
+    These test cases cover the extreme values of the constraints of the `ConfigStatus`
+    attribute and the values that could result in special responses as described in
+    the specification【4:0†source】【4:1†source】【4:6†source】.'
+  arguments:
+    Control - Lift: 1
+    Control - Tilt: 1
+    Encoder - Lift: 1
+    Encoder - Tilt: 1
+    Operational: 1
+    Reversal: 1
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify window-covering cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 60
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

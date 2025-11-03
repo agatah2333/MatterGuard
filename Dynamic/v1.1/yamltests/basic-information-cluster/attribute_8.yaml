@@ -1,0 +1,24 @@
+config:
+  attribute: '8'
+  cluster: basic-information-cluster
+  nodeId: '0x654231'
+name: basic-information-cluster_attribute_8_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": 0}'
+  ExpectedResponse: <failure>
+  Pre-requisites: <None>
+  arguments:
+    '{"Reachable"': 0}
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Reachable": 1}'
+  ExpectedResponse: <success>
+  Pre-requisites: '<None>
+
+
+    These test cases cover the extreme values of the `Reachable` attribute and the
+    special responses that could result from these values as described in the specification【4:9†source】【4:10†source】.'
+  arguments:
+    '{"Reachable"': 1}
+  option: WriteAttribute

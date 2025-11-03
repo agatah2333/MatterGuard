@@ -1,0 +1,154 @@
+{
+  "cluster_id": "n/a",
+  "cluster_name": "Alarm Base",
+  "cluster_type": "Base",
+  "description": "This cluster is a base cluster from which clusters for particular alarms for a device type can be derived. Each derivation SHALL define the values for the AlarmBitmap data type used in this cluster. Each derivation SHALL define which alarms are latched.",
+  "revision_history": [
+    {
+      "revision": 1,
+      "description": "Initial revision"
+    }
+  ],
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Application",
+    "scope": "Endpoint",
+    "pics_code": "ALARM"
+  },
+  "features": {
+    "bitmap": {
+      "0": {
+        "code": "RESET",
+        "name": "Reset",
+        "summary": "Supports the ability to reset alarms"
+      }
+    }
+  },
+  "data_types": {
+    "AlarmBitmap": {
+      "type": "map32",
+      "description": "This data type SHALL be a map32 with values defined by the derived cluster. The meaning of each bit position SHALL be consistent for all attributes in a derived cluster. That is, if bit 0 is defined for an alarm, the Latch, State, and Supported information for that alarm are also bit 0."
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "name": "Mask",
+      "type": "AlarmBitmap",
+      "constraint": "all",
+      "default": "0",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate a bitmap where each bit set in the Mask attribute corresponds to an alarm that SHALL be enabled."
+    },
+    "0x0001": {
+      "name": "Latch",
+      "type": "AlarmBitmap",
+      "constraint": "all",
+      "quality": "F",
+      "default": "0",
+      "access": "RV",
+      "conformance": "RESET",
+      "description": "This attribute SHALL indicate a bitmap where each bit set in the Latch attribute SHALL indicate that the corresponding alarm will be latched when set, and will not reset to inactive when the underlying condition which caused the alarm is no longer present, and so requires an explicit reset using the Reset command."
+    },
+    "0x0002": {
+      "name": "State",
+      "type": "AlarmBitmap",
+      "constraint": "all",
+      "default": "0",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate a bitmap where each bit SHALL represent the state of an alarm. The value of true means the alarm is active, otherwise the alarm is inactive."
+    },
+    "0x0003": {
+      "name": "Supported",
+      "type": "AlarmBitmap",
+      "constraint": "all",
+      "quality": "F",
+      "default": "0",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate a bitmap where each bit SHALL represent whether or not an alarm is supported. The value of true means the alarm is supported, otherwise the alarm is not supported. If an alarm is not supported, the corresponding bit in Mask, Latch, and State SHALL be false."
+    }
+  },
+  "commands": {
+    "0x00": {
+      "name": "Reset",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "RESET",
+      "description": "This command resets active and latched alarms (if possible). Any generated Notify event SHALL contain fields that represent the state of the server after the command has been processed.",
+      "fields": {
+        "0": {
+          "name": "Alarms",
+          "type": "AlarmBitmap",
+          "constraint": "all",
+          "default": "0",
+          "conformance": "M",
+          "description": "This field SHALL indicate a bitmap where each bit set in this field corresponds to an alarm that SHALL be reset to inactive in the State attribute unless the alarm definition requires manual intervention. If the alarms indicated are successfully reset, the response status code SHALL be SUCCESS, otherwise, the response status code SHALL be FAILURE."
+        }
+      }
+    },
+    "0x01": {
+      "name": "ModifyEnabledAlarms",
+      "direction": "client => server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "O",
+      "description": "This command allows a client to request that an alarm be enabled or suppressed at the server.",
+      "fields": {
+        "0": {
+          "name": "Mask",
+          "type": "AlarmBitmap",
+          "constraint": "all",
+          "default": "0",
+          "conformance": "M",
+          "description": "This field SHALL indicate a bitmap where each bit set in the this field corresponds to an alarm that SHOULD be enabled or suppressed. A value of 1 SHALL indicate that the alarm SHOULD be enabled while a value of 0 SHALL indicate that the alarm SHOULD be suppressed."
+        }
+      }
+    }
+  },
+  "events": {
+    "0x00": {
+      "name": "Notify",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "M",
+      "description": "This event SHALL be generated when one or more alarms change state",
+      "fields": {
+        "1": {
+          "name": "Active",
+          "type": "AlarmBitmap",
+          "constraint": "all",
+          "default": "0",
+          "conformance": "M",
+          "description": "This field SHALL indicate those alarms that have become active."
+        },
+        "2": {
+          "name": "Inactive",
+          "type": "AlarmBitmap",
+          "constraint": "all",
+          "default": "0",
+          "conformance": "M",
+          "description": "This field SHALL indicate those alarms that have become inactive."
+        },
+        "3": {
+          "name": "State",
+          "type": "AlarmBitmap",
+          "constraint": "all",
+          "default": "0",
+          "conformance": "M",
+          "description": "This field SHALL be a copy of the new State attribute value that resulted in the event being generated. That is, this field SHALL have all the bits in Active set and SHALL NOT have any of the bits in Inactive set."
+        },
+        "4": {
+          "name": "Mask",
+          "type": "AlarmBitmap",
+          "constraint": "all",
+          "default": "0",
+          "conformance": "M",
+          "description": "This field SHALL be a copy of the Mask attribute when this event was generated."
+        }
+      }
+    }
+  }
+}

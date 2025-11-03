@@ -1,0 +1,102 @@
+{
+  "source_file": "Operational State_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0060",
+        "name": "Operational State",
+        "description": "Monitors and controls device operational state machines",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "PhaseList",
+            "dataType": "list[string]",
+            "valueRange": "max 32 items (64 chars each)",
+            "description": "Available operational phases",
+            "privilege": "RVM",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentPhase",
+            "dataType": "uint8",
+            "valueRange": "0-PhaseList.length-1",
+            "description": "Current operational phase index",
+            "privilege": "RVM",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "OperationalState",
+            "dataType": "OperationalStateEnum",
+            "valueRange": "0x00-0xBF",
+            "description": "Current device operational state",
+            "privilege": "R",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "Pause",
+            "parameters": [],
+            "description": "Suspend current operation",
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x04",
+            "name": "OperationalCommandResponse",
+            "parameters": [],
+            "description": "Acknowledge command execution",
+            "privilege": "N",
+            "direction": "client ⇐ server"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "OperationalError",
+            "parameters": [
+              {
+                "name": "ErrorDetails",
+                "dataType": "ErrorStateStruct",
+                "valueRange": "0x00-0xBF"
+              }
+            ],
+            "description": "Critical operational failure notification",
+            "privilege": "CRITICAL",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "OperationalStateEnum": {
+            "baseType": "enum8",
+            "valueRanges": {
+              "GeneralStates": "0x00-0x3F",
+              "DerivedClusterStates": "0x40-0x7F",
+              "ManufacturerStates": "0x80-0xBF"
+            }
+          },
+          "ErrorStateStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "ErrorCode": "ErrorStateEnum",
+              "Timestamp": "epoch-s",
+              "Details": "string(max 256)"
+            }
+          },
+          "ErrorStateEnum": {
+            "baseType": "enum8",
+            "valueRanges": {
+              "GeneralErrors": "0x00-0x3F",
+              "DerivedClusterErrors": "0x40-0x7F",
+              "ManufacturerErrors": "0x80-0xBF"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

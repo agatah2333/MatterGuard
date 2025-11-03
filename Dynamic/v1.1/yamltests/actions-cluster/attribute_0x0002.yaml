@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0002'
+  cluster: actions-cluster
+  nodeId: '0x654231'
+name: actions-cluster_attribute_0x0002_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"SetupURL"': '""}'
+  label: Test_Case_Minimum_Length
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"SetupURL"': '"<string of 512 characters>"}'
+  label: Test_Case_Maximum_Length
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"SetupURL"': '"https://www.example.com/Matter/bridgev1/Actions"}'
+  label: Test_Case_Valid_URL
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field (minimum
+    and maximum length) and the values that could result in special responses (valid
+    URLs and URLs with ActionID suffix) as mentioned in the description of the effect【4:7†source】.'
+  arguments:
+    '{"SetupURL"': '"https://www.example.com/Matter/bridgev1/Actions/?a=123"}'
+  label: Test_Case_URL_with_ActionID_Suffix
+  option: WriteAttribute

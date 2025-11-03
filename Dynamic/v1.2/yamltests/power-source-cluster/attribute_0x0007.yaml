@@ -1,0 +1,40 @@
+config:
+  attribute: '0x0007'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x0007_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: FabricSceneInfo will be set to the minimum values.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    ExtensionFieldSets: []
+    FabricIndex: '0x0000'
+    SceneID: '0x0000'
+    SceneIndex: '0x0000'
+    SceneName: '""'
+    TransitionTime: '0x0000'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: '0xFFFF'
+  Attribute_Change: FabricSceneInfo will be set to the maximum values.
+  ExpectedResponse: Success or Error (depending on implementation limits)
+  Pre-requisites: 'Ensure the system can handle maximum values without overflow.
+
+
+    These test cases cover the extreme values and special responses for the attribute
+    ID 0x0007 of the Power Source Cluster.'
+  arguments:
+    ExtensionFieldSets:
+    - AttributeValueList:
+      - AttributeID: 1
+        AttributeValue: 65535
+      ClusterID: 6
+    FabricIndex: '0xFFFF'
+    SceneID: '0xFFFF'
+    SceneIndex: '0xFFFF'
+    SceneName: '"Test Scene with Max Values"'
+    TransitionTime: '0xFFFF'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

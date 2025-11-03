@@ -1,0 +1,6 @@
+config:
+  cluster: operational-credentials-cluster
+  command: '0x09'
+  nodeId: '0x654231'
+name: operational-credentials-cluster_command_0x09_v1.2.0.0
+tests: []

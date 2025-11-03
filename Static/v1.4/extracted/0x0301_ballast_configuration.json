@@ -1,0 +1,158 @@
+{
+  "source_file": "Ballast Configuration_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0301",
+        "name": "Ballast Configuration",
+        "description": "This cluster is used for configuring a lighting ballast.",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "PhysicalMinLevel",
+            "dataType": "uint8",
+            "valueRange": "1-254",
+            "description": "Specifies the minimum light output the ballast can achieve according to the dimming light curve.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "PhysicalMaxLevel",
+            "dataType": "uint8",
+            "valueRange": "1-254",
+            "description": "Specifies the maximum light output the ballast can achieve according to the dimming light curve.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "BallastStatus",
+            "dataType": "BallastStatusBitmap",
+            "valueRange": "",
+            "description": "Specifies the status of various aspects of the ballast or the connected lights.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0010",
+            "name": "MinLevel",
+            "dataType": "uint8",
+            "valueRange": "PhysicalMinLevel to MaxLevel",
+            "description": "Specifies the light output when Level Control Cluster's CurrentLevel equals 1.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0011",
+            "name": "MaxLevel",
+            "dataType": "uint8",
+            "valueRange": "MinLevel to PhysicalMaxLevel",
+            "description": "Specifies the light output when Level Control Cluster's CurrentLevel equals 254.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0014",
+            "name": "IntrinsicBallastFactor",
+            "dataType": "uint8",
+            "valueRange": "",
+            "description": "Specifies the ballast factor prior to any adjustment.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0015",
+            "name": "BallastFactorAdjustment",
+            "dataType": "uint8",
+            "valueRange": "100-MS",
+            "description": "Multiplication factor applied to configured light output.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0020",
+            "name": "LampQuantity",
+            "dataType": "uint8",
+            "valueRange": "",
+            "description": "Number of lamps connected to this ballast.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0030",
+            "name": "LampType",
+            "dataType": "string",
+            "valueRange": "max 16",
+            "description": "Type of lamps connected to the ballast.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0031",
+            "name": "LampManufacturer",
+            "dataType": "string",
+            "valueRange": "max 16",
+            "description": "Manufacturer of currently connected lamps.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0032",
+            "name": "LampRatedHours",
+            "dataType": "uint24",
+            "valueRange": "",
+            "description": "Manufacturer rated hours of lamp use.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0033",
+            "name": "LampBurnHours",
+            "dataType": "uint24",
+            "valueRange": "",
+            "description": "Cumulative operating hours since last re-lamping.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0034",
+            "name": "LampAlarmMode",
+            "dataType": "LampAlarmModeBitmap",
+            "valueRange": "",
+            "description": "Specifies attributes that may trigger alarms.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0035",
+            "name": "LampBurnHoursTripPoint",
+            "dataType": "uint24",
+            "valueRange": "",
+            "description": "Threshold hours before generating alarm.",
+            "privilege": "RW",
+            "writable": true
+          }
+        ],
+        "commands": [],
+        "events": [],
+        "dataTypes": {
+          "BallastStatusBitmap": {
+            "baseType": "map8",
+            "valueRange": {
+              "BallastNonOperational": "0=Operational, 1=Not Operational",
+              "LampFailure": "0=All Lamps OK, 1=Fault Detected"
+            }
+          },
+          "LampAlarmModeBitmap": {
+            "baseType": "map8",
+            "valueRange": {
+              "LampBurnHours": "Alarm generation state"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

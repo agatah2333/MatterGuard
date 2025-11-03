@@ -1,0 +1,6 @@
+config:
+  attribute: '0x01'
+  cluster: ethernet-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: ethernet-network-diagnostics-cluster_attribute_0x01_v1.2.0.0
+tests: []

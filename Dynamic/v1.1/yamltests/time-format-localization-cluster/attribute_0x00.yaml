@@ -1,0 +1,6 @@
+config:
+  attribute: '0x00'
+  cluster: time-format-localization-cluster
+  nodeId: '0x654231'
+name: time-format-localization-cluster_attribute_0x00_v1.1.0.0
+tests: []

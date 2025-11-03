@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0406",
+    "name": "Occupancy Sensing",
+    "description": "Cluster for Occupancy Sensing functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

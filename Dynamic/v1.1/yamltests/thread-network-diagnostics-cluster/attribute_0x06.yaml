@@ -1,0 +1,49 @@
+config:
+  attribute: '0x06'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x06_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: LastNetworkID set to an empty string
+  ExpectedResponse: Success
+  Pre-requisites: The attribute should be writable for testing purposes.
+  arguments:
+    '{"LastNetworkID"': '""}'
+  label: Test_Case_Minimum_Length_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: LastNetworkID set to a string of 32 'A' characters
+  ExpectedResponse: Success
+  Pre-requisites: The attribute should be writable for testing purposes.
+  arguments:
+    '{"LastNetworkID"': '"A" * 32}'
+  label: Test_Case_Maximum_Length_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: LastNetworkID set to null
+  ExpectedResponse: Success
+  Pre-requisites: The attribute should be writable for testing purposes.
+  arguments:
+    '{"LastNetworkID"': null}
+  label: Test_Case_Null_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: LastNetworkID set to a string of special characters
+  ExpectedResponse: Success
+  Pre-requisites: The attribute should be writable for testing purposes.
+  arguments:
+    '{"LastNetworkID"': '"!@#$%^&*()_+-=[]{}|;'':,.<>?/~`"}'
+  label: Test_Case_Special_Characters
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: LastNetworkID set to "Network123"
+  ExpectedResponse: Success
+  Pre-requisites: 'The attribute should be writable for testing purposes.
+
+
+    ### Summary'
+  arguments:
+    '{"LastNetworkID"': '"Network123"}'
+  label: Test_Case_Typical_Network_ID
+  option: WriteAttribute

@@ -1,0 +1,15 @@
+config:
+  node_id: 6636324
+  cluster: '0x050F'
+  endpoint: 1
+tests:
+- label: send_command_0b
+  cluster: '0x050F'
+  command: '0x0B'
+  operation: invoke
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  arguments: {}

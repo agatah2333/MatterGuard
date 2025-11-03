@@ -1,0 +1,49 @@
+config:
+  attribute: '0x0002'
+  cluster: operational-credentials-cluster
+  nodeId: '0x654231'
+name: operational-credentials-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: AdminVendorId will be set to 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"AdminVendorId"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: AdminVendorId will be set to 65535
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"AdminVendorId"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: AdminVendorId will be set to null
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"AdminVendorId"': null}
+  label: Test_Case_Special_Value_(Null)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: AdminVendorId will remain unchanged
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments:
+    '{"AdminVendorId"': -1}
+  label: Test_Case_Invalid_Value_(Negative)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: AdminVendorId will remain unchanged
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'None
+
+
+    ### Summary'
+  arguments:
+    '{"AdminVendorId"': 65536}
+  label: Test_Case_Invalid_Value_(Above_Maximum)
+  option: WriteAttribute

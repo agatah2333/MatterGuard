@@ -1,0 +1,49 @@
+config:
+  attribute: '0x0000'
+  cluster: relative-humidity-measurement-cluster
+  nodeId: '0x654231'
+name: relative-humidity-measurement-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '- `MeasuredValue`: 0'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    MeasuredValue: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `MeasuredValue`: 10000'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    MeasuredValue: 10000
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `MeasuredValue`: null'
+  ExpectedResponse: <measurement_unknown>
+  Pre-requisites: <none>
+  arguments: {}
+  label: Test_Case_Special_Response_-_Null_Value_(Measurement_Unknown)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `MeasuredValue`: 5000'
+  ExpectedResponse: <success>
+  Pre-requisites: '<none>
+
+
+    These test cases cover the extreme values of the `MeasuredValue` field, as well
+    as a special response scenario where the measurement is unknown (null value).
+    The mid-range value test case ensures that typical values within the range are
+    also handled correctly.
+
+
+    ### References
+
+    - The constraints and special responses for the `MeasuredValue` attribute are
+    derived from the Matter 1.2 Application Cluster Specification【4:0†source】【4:11†source】.'
+  arguments:
+    MeasuredValue: 5000
+  label: Test_Case_Mid-range_Value
+  option: WriteAttribute

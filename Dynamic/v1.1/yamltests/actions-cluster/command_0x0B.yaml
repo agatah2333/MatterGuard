@@ -1,0 +1,53 @@
+config:
+  cluster: actions-cluster
+  command: '0x0B'
+  nodeId: '0x654231'
+name: actions-cluster_command_0x0B_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: N/A
+  ExpectedResponse: '`NOT_FOUND` (if ActionID 0 does not exist)'
+  Pre-requisites: Ensure ActionID 0 does not exist in the ActionList.
+  arguments:
+    ActionID: 0
+    Duration: 0
+    InvokeID: 0 (optional, can be omitted)
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: 4294967295
+  Attribute_Change: N/A
+  ExpectedResponse: '`NOT_FOUND` (if ActionID 65535 does not exist)'
+  Pre-requisites: Ensure ActionID 65535 does not exist in the ActionList.
+  arguments:
+    ActionID: 65535
+    Duration: 4294967295
+    InvokeID: 4294967295 (optional, can be omitted)
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: 3600
+  Attribute_Change: Action state to `Disabled` and then back to `Active` or `Inactive`.
+  ExpectedResponse: Success, action state changes to `Disabled` and then re-starts
+    after 1 hour.
+  Pre-requisites: Ensure ActionID 1 exists in the ActionList.
+  arguments:
+    ActionID: 1 (assuming ActionID 1 exists)
+    Duration: 3600 (1 hour)
+    InvokeID: 12345 (optional)
+  label: Test_Case_Valid_ActionID_with_Specific_Duration
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: Action state to `Disabled` and then back to `Active` or `Inactive`.
+  ExpectedResponse: Success, action state changes to `Disabled` and then immediately
+    re-starts.
+  Pre-requisites: 'Ensure ActionID 2 exists in the ActionList.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:19†source】.'
+  arguments:
+    ActionID: 2 (assuming ActionID 2 exists)
+    Duration: 0
+    InvokeID: 67890 (optional)
+  label: Test_Case_Valid_ActionID_with_Zero_Duration
+  option: SendCommand

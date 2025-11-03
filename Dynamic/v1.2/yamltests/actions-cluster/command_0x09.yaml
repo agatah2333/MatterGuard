@@ -1,0 +1,47 @@
+config:
+  cluster: actions-cluster
+  command: '0x09'
+  nodeId: '0x654231'
+name: actions-cluster_command_0x09_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Action with ID 0 will be enabled for 0 duration.
+  ExpectedResponse: Success
+  Pre-requisites: Action with ID 0 must exist.
+  arguments:
+    ActionID: 0
+    Duration: 0
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: 4294967295
+  Attribute_Change: Action with ID 65535 will be enabled for maximum duration.
+  ExpectedResponse: Success
+  Pre-requisites: Action with ID 65535 must exist.
+  arguments:
+    ActionID: 65535
+    Duration: 4294967295
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: 1000
+  Attribute_Change: None
+  ExpectedResponse: ActionNotFound
+  Pre-requisites: Action with ID 12345 must not exist.
+  arguments:
+    ActionID: 12345
+    Duration: 1000
+  label: Test_Case_Special_Response_-_Action_Not_Found
+  option: SendCommand
+- ActionTime: 4294967296
+  Attribute_Change: None
+  ExpectedResponse: InvalidDuration
+  Pre-requisites: 'Action with ID 1 must exist.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    ActionID: 1
+    Duration: 4294967296 (out of range)
+  label: Test_Case_Special_Response_-_Invalid_Duration
+  option: SendCommand

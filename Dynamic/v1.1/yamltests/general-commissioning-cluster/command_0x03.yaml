@@ -1,0 +1,63 @@
+config:
+  cluster: general-commissioning-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: general-commissioning-cluster_command_0x03_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: "- `LocationType` set to 0x00\n  - `CountryCode` set to \"US\"\
+    \n  - `Breadcrumb` set to 0"
+  ExpectedResponse: Success
+  Pre-requisites: Fail-safe context must be armed.
+  arguments:
+    Breadcrumb: 0
+    CountryCode: '"US"'
+    LocationType: 0x00 (Indoor)
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: "- `LocationType` set to 0x02\n  - `CountryCode` set to \"ZZ\"\
+    \n  - `Breadcrumb` set to 18446744073709551615"
+  ExpectedResponse: Success
+  Pre-requisites: Fail-safe context must be armed.
+  arguments:
+    Breadcrumb: 18446744073709551615 (Maximum uint64 value)
+    CountryCode: '"ZZ"'
+    LocationType: 0x02 (Indoor/Outdoor)
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: INVALID_COMMAND
+  Pre-requisites: Fail-safe context must be armed.
+  arguments:
+    Breadcrumb: 12345
+    CountryCode: '"US"'
+    LocationType: 0x03 (Unsupported value)
+  label: Test_Case_Special_Response_for_Unsupported_LocationType
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: FAILSAFE_REQUIRED
+  Pre-requisites: Fail-safe context must not be armed.
+  arguments:
+    Breadcrumb: 67890
+    CountryCode: '"CA"'
+    LocationType: 0x01 (Outdoor)
+  label: Test_Case_Special_Response_for_Missing_Fail-Safe_Context
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: "- `LocationType` set to 0x01\n  - `CountryCode` set to \"ZZ\"\
+    \n  - `Breadcrumb` set to 0"
+  ExpectedResponse: Success
+  Pre-requisites: 'Fail-safe context must be armed.
+
+
+    These test cases cover the extreme values of the constraints and the special responses
+    as mentioned in the provided context【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    Breadcrumb: 0
+    CountryCode: '"ZZ"'
+    LocationType: 0x01 (Outdoor)
+  label: Test_Case_Valid_Command_with_Edge_Country_Code
+  option: SendCommand

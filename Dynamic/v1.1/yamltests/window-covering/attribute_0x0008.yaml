@@ -1,0 +1,40 @@
+config:
+  attribute: '0x0008'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0008_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentPositionLiftPercentage`: 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    CurrentPositionLiftPercentage: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentPositionLiftPercentage`: 100'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    CurrentPositionLiftPercentage: 100
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentPositionLiftPercentage`: Null'
+  ExpectedResponse: Current position is unknown, calibration needed
+  Pre-requisites: None
+  arguments: {}
+  label: Test_Case_Special_Response_-_Null_Value_(Indicates_Current_Position_is_Unknown)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentPositionLiftPercentage`: Null'
+  ExpectedResponse: Value unavailable, no target position set
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special responses mentioned in the description of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments: {}
+  label: Test_Case_Special_Response_-_Value_Unavailable_(No_Target_Position_Set)
+  option: WriteAttribute

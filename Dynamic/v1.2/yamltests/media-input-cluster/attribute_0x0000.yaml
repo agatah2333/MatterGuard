@@ -1,0 +1,34 @@
+config:
+  attribute: '0x0000'
+  cluster: media-input-cluster
+  nodeId: '0x654231'
+name: media-input-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`InputList` will include an entry with the minimum values.'
+  ExpectedResponse: Success
+  Pre-requisites: 'Device should support at least one input.
+
+
+    ##### Test Case 1.2: Maximum Values'
+  arguments:
+    Description: '""'
+    Index: 0
+    InputType: 0 (Internal)
+    Name: '""'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`InputList` will include an entry with HDMI input type.'
+  ExpectedResponse: Success
+  Pre-requisites: 'Device should support HDMI input type.
+
+
+    ##### Test Case 2.2: Special Name and Description Values'
+  arguments:
+    Description: '"Living room HDMI"'
+    Index: 1
+    InputType: 4 (HDMI)
+    Name: '"HDMI 1"'
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: WriteAttribute

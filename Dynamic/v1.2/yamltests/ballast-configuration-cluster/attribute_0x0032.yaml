@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0032'
+  cluster: ballast-configuration-cluster
+  nodeId: '0x654231'
+name: ballast-configuration-cluster_attribute_0x0032_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: LampRatedHours = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"LampRatedHours"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: LampRatedHours = 16777215
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"LampRatedHours"': 16777215}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: LampRatedHours = null
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"LampRatedHours"': null}
+  label: Test_Case_Special_Value_(Null)
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: LampRatedHours = 8388607
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special value that could result in a special response as mentioned in the
+    description of the effect.'
+  arguments:
+    '{"LampRatedHours"': 8388607}
+  label: Test_Case_Mid-Range_Value
+  option: WriteAttribute

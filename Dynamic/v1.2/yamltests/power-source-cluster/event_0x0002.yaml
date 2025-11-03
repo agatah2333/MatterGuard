@@ -1,0 +1,6 @@
+config:
+  cluster: power-source-cluster
+  event: '0x0002'
+  nodeId: '0x654231'
+name: power-source-cluster_event_0x0002_v1.2.0.0
+tests: []

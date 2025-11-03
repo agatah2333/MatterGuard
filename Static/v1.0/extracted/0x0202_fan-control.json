@@ -1,0 +1,91 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0202",
+    "name": "Fan Control",
+    "description": "This cluster provides an interface for controlling a fan."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "FanMode",
+      "type": "enum8",
+      "constraint": "desc",
+      "description": "FanMode attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "FanModeSequence",
+      "type": "unknown",
+      "description": "FanModeSequence attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "PercentSetting",
+      "type": "unknown",
+      "description": "PercentSetting attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0003",
+      "name": "PercentCurrent",
+      "type": "unknown",
+      "description": "PercentCurrent attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0004",
+      "name": "SpeedMax",
+      "type": "uint8",
+      "constraint": "[0, 255]",
+      "description": "SpeedMax attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0005",
+      "name": "SpeedSetting",
+      "type": "unknown",
+      "description": "SpeedSetting attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0006",
+      "name": "SpeedCurrent",
+      "type": "unknown",
+      "description": "SpeedCurrent attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0007",
+      "name": "RockSupport",
+      "type": "unknown",
+      "description": "RockSupport attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0008",
+      "name": "RockSetting",
+      "type": "unknown",
+      "description": "RockSetting attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0009",
+      "name": "WindSupport",
+      "type": "unknown",
+      "description": "WindSupport attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x000a",
+      "name": "WindSetting",
+      "type": "unknown",
+      "description": "WindSetting attribute",
+      "access": "R"
+    }
+  ],
+  "events": []
+}

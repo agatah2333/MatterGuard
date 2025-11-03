@@ -1,0 +1,32 @@
+config:
+  attribute: '0x0016'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x0016_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`BatIECDesignation: ""`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`None`
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"BatIECDesignation"': '""}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`<error_invalid_designation>`'
+  Pre-requisites: '`None`
+
+
+    These test cases cover the extreme values of the constraints of the `BatIECDesignation`
+    field and a special value that could result in an error response.
+
+
+    For more details, you can refer to the Matter 1.2 Core Specification document【4:0†source】.'
+  arguments:
+    '{"BatIECDesignation"': '"InvalidDesignation"}'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

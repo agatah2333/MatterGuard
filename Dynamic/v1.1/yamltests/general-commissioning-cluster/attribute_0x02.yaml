@@ -1,0 +1,28 @@
+config:
+  attribute: '0x02'
+  cluster: general-commissioning-cluster
+  nodeId: '0x654231'
+name: general-commissioning-cluster_attribute_0x02_v1.1.0.0
+tests:
+- ActionTime: <time>
+  Attribute_Change: '{"AdminVendorId": 0}'
+  ExpectedResponse: <response>
+  Pre-requisites: '`WindowStatus` is not `WindowNotOpen`
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"AdminVendorId"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <time>
+  Attribute_Change: '{"AdminVendorId": <valid_vendor_id>}'
+  ExpectedResponse: <response>
+  Pre-requisites: '`WindowStatus` is not `WindowNotOpen`
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"AdminVendorId"': <valid_vendor_id>}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

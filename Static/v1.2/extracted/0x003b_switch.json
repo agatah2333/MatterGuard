@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x003b",
+    "name": "Switch",
+    "description": "Cluster for Switch functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

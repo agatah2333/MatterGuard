@@ -1,0 +1,49 @@
+config:
+  attribute: '0x0018'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x0018_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`{"BatCapacity": 0}`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"BatCapacity"': 0}`
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`{"BatCapacity": 4294967295}`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"BatCapacity"': 4294967295}`
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`{"BatCapacity": 2000}`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"BatCapacity"': 2000}`
+  label: Test_Case_Special_Response_-_Typical_Capacity
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`{"BatCapacity": 100}`'
+  ExpectedResponse: '`<low_capacity_warning>`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"BatCapacity"': 100}`
+  label: Test_Case_Special_Response_-_Low_Capacity_Warning
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`{"BatCapacity": 10000}`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`None`
+
+
+    ### Summary'
+  arguments:
+    '{"BatCapacity"': 10000}`
+  label: Test_Case_Special_Response_-_High_Capacity
+  option: WriteAttribute

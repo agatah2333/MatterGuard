@@ -1,0 +1,28 @@
+config:
+  attribute: '0x0002'
+  cluster: operational-state-cluster
+  nodeId: '0x654231'
+name: operational-state-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '{"State": 0}'
+  ExpectedResponse: '"Success"'
+  Pre-requisites: 'None
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"State"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '{"State": 0}'
+  ExpectedResponse: '"Device Stopped"'
+  Pre-requisites: 'None
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"State"': 0}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

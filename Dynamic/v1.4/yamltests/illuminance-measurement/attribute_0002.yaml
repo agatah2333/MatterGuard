@@ -1,0 +1,14 @@
+config:
+  node_id: 6636324
+  cluster: '0x0400'
+  endpoint: 1
+tests:
+- label: read_attribute_0002
+  cluster: '0x0400'
+  attribute: '0x0002'
+  operation: read
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS

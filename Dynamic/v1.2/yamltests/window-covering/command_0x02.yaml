@@ -1,0 +1,31 @@
+config:
+  cluster: window-covering
+  command: '0x02'
+  nodeId: '0x654231'
+name: window-covering_command_0x02_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: "- `TargetPositionLiftPercent100ths` will be set to the current\
+    \ value of `CurrentPositionLiftPercent100ths`.\n  - `TargetPositionTiltPercent100ths`\
+    \ will be set to the current value of `CurrentPositionTiltPercent100ths`."
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The window covering should be in motion (either lifting or tilting).
+  arguments: {}
+  label: Test_Case_Normal_Operation
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: BUSY
+  Pre-requisites: 'The window covering should be in maintenance mode.
+
+
+    These test cases cover the normal operation scenario and the special response
+    scenario where the device is in maintenance mode. The `StopMotion` command does
+    not have any fields, so the test cases focus on the conditions and expected responses
+    based on the device''s state.
+
+
+    For more detailed information, refer to the Matter Application Cluster Specification【4:0†source】.'
+  arguments: {}
+  label: Test_Case_Maintenance_Mode
+  option: SendCommand

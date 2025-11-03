@@ -1,0 +1,49 @@
+config:
+  cluster: door-lock-cluster
+  command: '14'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_14_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: CONSTRAINT_ERROR (User ID out of range)
+  Pre-requisites: N/A
+  arguments:
+    User ID: 0
+    User Type: '0x00'
+  label: Test_Case_Minimum_User_ID_and_User_Type
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: UserType attribute of the specified User ID
+  ExpectedResponse: SUCCESS (if User ID is within range)
+  Pre-requisites: Ensure the User ID exists and is valid
+  arguments:
+    User ID:
+    - Number of Total Users Supported
+    User Type: '0xFF'
+  label: Test_Case_Maximum_User_ID_and_User_Type
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: DUPLICATE (if the User Type already exists for the User ID)
+  Pre-requisites: Ensure the User ID and User Type already exist
+  arguments:
+    User ID: 1
+    User Type:
+    - Existing User Type
+  label: Test_Case_Duplicate_User_Type
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: UserType attribute of the specified User ID
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Ensure the User ID exists and is valid
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    User ID: 2
+    User Type: 0x02 (NonAccessUser)
+  label: Test_Case_Special_User_Type_(e.g.,_NonAccessUser)
+  option: SendCommand

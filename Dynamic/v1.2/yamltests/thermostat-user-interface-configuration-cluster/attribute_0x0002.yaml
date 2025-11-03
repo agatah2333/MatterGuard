@@ -1,0 +1,6 @@
+config:
+  attribute: '0x0002'
+  cluster: thermostat-user-interface-configuration-cluster
+  nodeId: '0x654231'
+name: thermostat-user-interface-configuration-cluster_attribute_0x0002_v1.2.0.0
+tests: []

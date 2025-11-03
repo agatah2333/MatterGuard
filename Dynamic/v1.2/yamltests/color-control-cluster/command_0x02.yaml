@@ -1,0 +1,46 @@
+config:
+  cluster: color-control-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: color-control-cluster_command_0x02_v1.2.0.0
+tests:
+- ActionTime: 0
+  ExpectedResponse: No movement, command execution stops any ongoing operation.
+  arguments:
+    OptionsMask: 0
+    OptionsOverride: 0
+    StepMode: 0
+    StepSize: 0
+    TransitionTime: 0
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: 100
+  ExpectedResponse: Device steps up by 254 units.
+  arguments:
+    OptionsMask: 0
+    OptionsOverride: 0
+    StepMode: 1
+    StepSize: 254
+    TransitionTime: 100
+  label: Test_Case_Maximum_StepSize
+  option: SendCommand
+- ActionTime: 65534
+  ExpectedResponse: Device steps down by 50 units over maximum transition time.
+  arguments:
+    OptionsMask: 0
+    OptionsOverride: 0
+    StepMode: 3
+    StepSize: 50
+    TransitionTime: 65534
+  label: Test_Case_Maximum_TransitionTime
+  option: SendCommand
+- ActionTime: 50
+  ExpectedResponse: No movement, command execution has no effect.
+  arguments:
+    OptionsMask: 0
+    OptionsOverride: 0
+    StepMode: 1
+    StepSize: 0
+    TransitionTime: 50
+  label: Test_Case_Special_Response_for_Zero_StepSize
+  option: SendCommand

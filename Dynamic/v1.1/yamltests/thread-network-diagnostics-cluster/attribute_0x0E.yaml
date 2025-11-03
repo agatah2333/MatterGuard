@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0E'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x0E_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: ActiveNetworkFaults = []
+  ExpectedResponse: <success>
+  Pre-requisites: Node is operational with no detected faults.
+  arguments:
+    '{"NetworkFault"': '[]}'
+  label: Test_Case_Extreme_Value_(Minimum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: ActiveNetworkFaults = [0, 1, 2, 3]
+  ExpectedResponse: <success>
+  Pre-requisites: Node is operational and all possible faults are detected.
+  arguments:
+    '{"NetworkFault"': '[0, 1, 2, 3]}'
+  label: Test_Case_Extreme_Value_(Maximum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: ActiveNetworkFaults = [1]
+  ExpectedResponse: <success>
+  Pre-requisites: Node is operational and a single fault (LinkDown) is detected.
+  arguments:
+    '{"NetworkFault"': '[1]}'
+  label: Test_Case_Special_Response_(Single_Fault)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: ActiveNetworkFaults = []
+  ExpectedResponse: <success>
+  Pre-requisites: 'Node previously had a hardware failure fault which is now cleared.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:7†source】.'
+  arguments:
+    '{"NetworkFault"': '[2]}'
+  label: Test_Case_Special_Response_(Fault_Cleared)
+  option: WriteAttribute

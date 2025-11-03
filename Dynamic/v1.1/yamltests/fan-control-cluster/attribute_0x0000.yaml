@@ -1,0 +1,29 @@
+config:
+  attribute: '0x0000'
+  cluster: fan-control-cluster
+  nodeId: '0x654231'
+name: fan-control-cluster_attribute_0x0000_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: "- PercentSetting: 0\n  - PercentCurrent: 0\n  - SpeedSetting:\
+    \ 0 (if present)\n  - SpeedCurrent: 0 (if present)"
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    **Test Case 1.2**'
+  arguments:
+    '{"FanMode"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- FanMode: 3 (if unsupported)'
+  ExpectedResponse: If unsupported, FanMode should be set to High (3)
+  Pre-requisites: 'Fan does not support "On" mode
+
+
+    **Test Case 2.2**'
+  arguments:
+    '{"FanMode"': 4}
+  label: Test_Case_Special_Responses_Based_on_Description
+  option: WriteAttribute

@@ -1,0 +1,47 @@
+config:
+  attribute: '0x02'
+  cluster: general-commissioning-cluster
+  nodeId: '0x654231'
+name: general-commissioning-cluster_attribute_0x02_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '`AdminVendorId` will be set to 0x0000'
+  ExpectedResponse: Success
+  Pre-requisites: '`WindowStatus` must be set to a value other than 0 (WindowNotOpen)'
+  arguments:
+    AdminVendorId: '0x0000'
+    WindowStatus: 1 (EnhancedWindowOpen)
+  label: Test_Case_Minimum_Value_of_AdminVendorId
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '`AdminVendorId` will be set to 0xFFFF'
+  ExpectedResponse: Success
+  Pre-requisites: '`WindowStatus` must be set to a value other than 0 (WindowNotOpen)'
+  arguments:
+    AdminVendorId: '0xFFFF'
+    WindowStatus: 2 (BasicWindowOpen)
+  label: Test_Case_Maximum_Value_of_AdminVendorId
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '`AdminVendorId` will be set to null'
+  ExpectedResponse: '`AdminVendorId` will be set to null'
+  Pre-requisites: '`WindowStatus` must be set to 0 (WindowNotOpen)'
+  arguments:
+    AdminVendorId: <any_value>
+    WindowStatus: 0 (WindowNotOpen)
+  label: Test_Case_Special_Response_-_WindowStatus_is_WindowNotOpen
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '`AdminVendorId` remains unchanged'
+  ExpectedResponse: '`AdminVendorId` remains unchanged'
+  Pre-requisites: 'Fabric associated with the Administrator that opened the window
+    is removed while the window is still open
+
+
+    These test cases cover the extreme values of the `AdminVendorId` field and the
+    special responses based on the `WindowStatus` attribute as described in the specification【4:0†source】【4:1†source】.'
+  arguments:
+    AdminVendorId: <any_value>
+    WindowStatus: 1 (EnhancedWindowOpen)
+  label: Test_Case_Special_Response_-_Fabric_Removed_During_Open_Window
+  option: WriteAttribute

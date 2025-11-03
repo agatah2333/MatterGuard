@@ -1,0 +1,55 @@
+config:
+  cluster: network-commissioning-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: network-commissioning-cluster_command_0x03_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: The `Networks` attribute will be updated with the new Thread network
+    configuration.
+  ExpectedResponse: Success
+  Pre-requisites: The device must support the Network Commissioning Cluster.
+  arguments:
+    OperationalDataset:
+      Breadcrumb: 0
+      OperationalDataset: <5 bytes of data>
+  label: Test_Case_Minimum_OperationalDataset_Length
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: The `Networks` attribute will be updated with the new Thread network
+    configuration.
+  ExpectedResponse: Success
+  Pre-requisites: The device must support the Network Commissioning Cluster.
+  arguments:
+    OperationalDataset:
+      Breadcrumb: 0
+      OperationalDataset: <254 bytes of data>
+  label: Test_Case_Maximum_OperationalDataset_Length
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Busy
+  Pre-requisites: The device is currently processing another network commissioning
+    command.
+  arguments:
+    OperationalDataset:
+      Breadcrumb: 0
+      OperationalDataset: <valid data>
+  label: Test_Case_Special_Response_-_Busy
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Invalid Argument
+  Pre-requisites: 'The provided OperationalDataset does not meet the required format
+    or constraints.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    OperationalDataset:
+      Breadcrumb: 0
+      OperationalDataset: <invalid data>
+  label: Test_Case_Special_Response_-_Invalid_Argument
+  option: SendCommand

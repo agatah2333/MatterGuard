@@ -1,0 +1,44 @@
+config:
+  cluster: media-playback-cluster
+  command: '0x0B'
+  nodeId: '0x654231'
+name: media-playback-cluster_command_0x0B_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: SampledPosition set to the beginning of the media
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Media should be loaded and ready for playback
+  arguments:
+    '{"Position"': 0}
+  label: Test_Case_Minimum_Value
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: No change
+  ExpectedResponse: SEEK_OUT_OF_RANGE
+  Pre-requisites: Media should be loaded and ready for playback
+  arguments:
+    '{"Position"': 18446744073709551615} (max uint64)
+  label: Test_Case_Maximum_Value
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: SampledPosition set to 5000ms
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Media should be loaded and the valid seek range should include 5000ms
+  arguments:
+    '{"Position"': 5000} (assuming 5000ms is within the valid range)
+  label: Test_Case_Valid_Position_within_Range
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: No change
+  ExpectedResponse: SEEK_OUT_OF_RANGE
+  Pre-requisites: 'Media should be loaded and the valid seek range should be less
+    than 100000ms
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"Position"': 100000} (assuming 100000ms is beyond the valid range)
+  label: Test_Case_Position_Beyond_Valid_Range
+  option: SendCommand

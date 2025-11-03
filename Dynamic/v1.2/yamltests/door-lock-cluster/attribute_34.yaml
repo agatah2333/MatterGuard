@@ -1,0 +1,31 @@
+config:
+  attribute: '34'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_34_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: LocalProgrammingFeatures set to 0x00 (All local programming features
+    disabled)
+  ExpectedResponse: Success
+  Pre-requisites: 'EnableLocalProgramming attribute must be set to False
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"LocalProgrammingFeatures"': 0x00}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'The door lock does not support disabling the Adjust Locally feature
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:5†source】.'
+  arguments:
+    '{"LocalProgrammingFeatures"': 0x08}
+  label: Test_Case_Special_Responses
+  option: WriteAttribute

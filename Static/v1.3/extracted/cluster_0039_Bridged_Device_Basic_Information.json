@@ -1,0 +1,179 @@
+{
+  "cluster_id": "0x0039",
+  "cluster_name": "Bridged Device Basic Information",
+  "section": "9.13",
+  "description": "This Cluster serves two purposes towards a Node communicating with a Bridge: • Indicate that the functionality on the Endpoint where it is placed (and its Parts) is bridged from a non-Matter technology, and • Provide a centralized collection of attributes that the Node MAY collect to aid in conveying information regarding the Bridged Device to a user, such as the vendor name, the model name,",
+  "data_types": {},
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "DataMod­",
+      "details": "X",
+      "raw_line": "0x0000         DataMod­                                                                              X"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "Vendor­",
+      "details": "O",
+      "raw_line": "0x0001         Vendor­                                                                               O"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "VendorID",
+      "details": "O",
+      "raw_line": "0x0002         VendorID                                                                              O"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "Product­",
+      "details": "O",
+      "raw_line": "0x0003         Product­                                                                              O"
+    },
+    "0x0004": {
+      "id": "0x0004",
+      "name": "ProductID",
+      "details": "X",
+      "raw_line": "0x0004         ProductID                                                                             X"
+    },
+    "0x0005": {
+      "id": "0x0005",
+      "name": "NodeLabel",
+      "details": "O",
+      "raw_line": "0x0005         NodeLabel                                                                             O"
+    },
+    "0x0006": {
+      "id": "0x0006",
+      "name": "Location",
+      "details": "X",
+      "raw_line": "0x0006         Location                                                                              X"
+    },
+    "0x0007": {
+      "id": "0x0007",
+      "name": "Hardware­",
+      "details": "O",
+      "raw_line": "0x0007         Hardware­                                                                             O"
+    },
+    "0x0008": {
+      "id": "0x0008",
+      "name": "Hardware­",
+      "details": "O",
+      "raw_line": "0x0008         Hardware­                                                                             O"
+    },
+    "0x0009": {
+      "id": "0x0009",
+      "name": "Software­",
+      "details": "O",
+      "raw_line": "0x0009         Software­                                                                             O"
+    },
+    "0x000A": {
+      "id": "0x000A",
+      "name": "Software­",
+      "details": "O",
+      "raw_line": "0x000A         Software­                                                                             O"
+    },
+    "0x000B": {
+      "id": "0x000B",
+      "name": "Manufac­",
+      "details": "O",
+      "raw_line": "0x000B         Manufac­                                                                              O"
+    },
+    "0x000C": {
+      "id": "0x000C",
+      "name": "PartNum­",
+      "details": "O",
+      "raw_line": "0x000C         PartNum­                                                                              O"
+    },
+    "0x000D": {
+      "id": "0x000D",
+      "name": "Produc­",
+      "details": "O",
+      "raw_line": "0x000D         Produc­                                                                               O"
+    },
+    "0x000E": {
+      "id": "0x000E",
+      "name": "Product­",
+      "details": "O",
+      "raw_line": "0x000E         Product­                                                                              O"
+    },
+    "0x000F": {
+      "id": "0x000F",
+      "name": "Serial­",
+      "details": "O",
+      "raw_line": "0x000F         Serial­                                                                               O"
+    },
+    "0x0010": {
+      "id": "0x0010",
+      "name": "LocalCon­",
+      "details": "X",
+      "raw_line": "0x0010         LocalCon­                                                                             X"
+    },
+    "0x0011": {
+      "id": "0x0011",
+      "name": "Reachable",
+      "details": "M",
+      "raw_line": "0x0011         Reachable                                                                             M"
+    },
+    "0x0012": {
+      "id": "0x0012",
+      "name": "UniqueID",
+      "details": "O",
+      "raw_line": "0x0012         UniqueID                                                                              O"
+    },
+    "0x0013": {
+      "id": "0x0013",
+      "name": "Capabili­",
+      "details": "X",
+      "raw_line": "0x0013         Capabili­                                                                             X"
+    },
+    "0x0014": {
+      "id": "0x0014",
+      "name": "Produc­",
+      "details": "O",
+      "raw_line": "0x0014         Produc­                                                                               O"
+    },
+    "0x0015": {
+      "id": "0x0015",
+      "name": "Specifica­",
+      "details": "X",
+      "raw_line": "0x0015         Specifica­                                                                            X"
+    },
+    "0x0016": {
+      "id": "0x0016",
+      "name": "Max­",
+      "details": "X",
+      "raw_line": "0x0016         Max­                                                                                  X"
+    }
+  },
+  "commands": {},
+  "events": {
+    "0x00": {
+      "id": "0x00",
+      "name": "StartUp",
+      "details": "O",
+      "raw_line": "0x00                     StartUp                                                                  O"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "ShutDown",
+      "details": "O",
+      "raw_line": "0x01                     ShutDown                                                                 O"
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "Leave",
+      "details": "O",
+      "raw_line": "0x02                     Leave                                                                    O"
+    },
+    "0x03": {
+      "id": "0x03",
+      "name": "Reach­",
+      "details": "M",
+      "raw_line": "0x03                     Reach­                                                                   M"
+    }
+  },
+  "extraction_info": {
+    "start_line": 30500,
+    "end_line": 30727,
+    "total_lines": 227
+  }
+}

@@ -1,0 +1,50 @@
+config:
+  attribute: '0x0012'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0012_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"CurrentPositionLiftPercentage": 0}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The window covering must be fully open.
+  arguments:
+    '{"CurrentPositionLiftPercentage"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"CurrentPositionLiftPercentage": 100}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The window covering must be fully closed.
+  arguments:
+    '{"CurrentPositionLiftPercentage"': 100}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments:
+    '{"CurrentPositionLiftPercentage"': -1}
+  label: Test_Case_Out_of_Bounds_Value_(Negative)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments:
+    '{"CurrentPositionLiftPercentage"': 101}
+  label: Test_Case_Out_of_Bounds_Value_(Above_100)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: VALUE_UNAVAILABLE
+  Pre-requisites: 'The current position is unknown or no target position has been
+    set.
+
+
+    ### Constraints'
+  arguments:
+    '{"CurrentPositionLiftPercentage"': null}
+  label: Test_Case_Special_Response_(Position_Unavailable)
+  option: WriteAttribute

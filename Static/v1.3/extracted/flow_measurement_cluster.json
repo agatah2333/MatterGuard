@@ -1,0 +1,79 @@
+{
+  "cluster": {
+    "id": "0x0404",
+    "name": "Flow Measurement",
+    "description": "This cluster provides an interface to flow measurement functionality, including configuration and provision of notifications of flow measurements.",
+    "classification": {
+      "hierarchy": "Base",
+      "role": "Application", 
+      "scope": "Endpoint",
+      "pics_code": "FLW"
+    },
+    "revision": {
+      "current": 3,
+      "history": [
+        {
+          "revision": 1,
+          "description": "Mandatory global ClusterRevision attribute added"
+        },
+        {
+          "revision": 2,
+          "description": "CCB 2241 2370"
+        },
+        {
+          "revision": 3,
+          "description": "New data model format and notation"
+        }
+      ]
+    },
+    "data_types": [],
+    "attributes": [
+      {
+        "id": "0x0000",
+        "name": "MeasuredValue",
+        "type": "uint16",
+        "constraint": "MinMeasuredValue to MaxMeasuredValue",
+        "quality": "XP",
+        "default": "null",
+        "access": "RV",
+        "conformance": "M",
+        "description": "MeasuredValue represents the flow in m³/h as follows: MeasuredValue = 10 x Flow. The null value indicates that the flow measurement is unknown, otherwise the range SHALL be as described in Measured Value."
+      },
+      {
+        "id": "0x0001", 
+        "name": "MinMeasuredValue",
+        "type": "uint16",
+        "constraint": "0 to MaxMeasuredValue-1",
+        "quality": "X",
+        "default": null,
+        "access": "RV",
+        "conformance": "M",
+        "description": "The MinMeasuredValue attribute indicates the minimum value of MeasuredValue that can be measured. The null value indicates that the value is not available."
+      },
+      {
+        "id": "0x0002",
+        "name": "MaxMeasuredValue", 
+        "type": "uint16",
+        "constraint": "MinMeasuredValue+1 to 65534",
+        "quality": "X",
+        "default": null,
+        "access": "RV", 
+        "conformance": "M",
+        "description": "The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue that can be measured. The null value indicates that the value is not available."
+      },
+      {
+        "id": "0x0003",
+        "name": "Tolerance",
+        "type": "uint16",
+        "constraint": "0 to 2048",
+        "quality": null,
+        "default": "0",
+        "access": "RV",
+        "conformance": "O",
+        "description": "See Measured Value."
+      }
+    ],
+    "commands": [],
+    "events": []
+  }
+}

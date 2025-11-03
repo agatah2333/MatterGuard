@@ -1,0 +1,58 @@
+config:
+  cluster: network-commissioning-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: network-commissioning-cluster_command_0x03_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Error (Invalid OperationalDataset)
+  Pre-requisites: None
+  arguments:
+    '{"OperationalDataset"': '"", "Breadcrumb": 0}'
+  label: Test_Case_Minimum_Length_OperationalDataset
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: OperationalDataset updated
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"OperationalDataset"': '"<max_length_octstr>", "Breadcrumb": 0}'
+  label: Test_Case_Maximum_Length_OperationalDataset
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: Breadcrumb updated
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"OperationalDataset"': '"<valid_dataset>", "Breadcrumb": 0}'
+  label: Test_Case_Minimum_Breadcrumb_Value
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: Breadcrumb updated
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"OperationalDataset"': '"<valid_dataset>", "Breadcrumb": 18446744073709551615}'
+  label: Test_Case_Maximum_Breadcrumb_Value
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Error (Invalid OperationalDataset)
+  Pre-requisites: None
+  arguments:
+    '{"OperationalDataset"': '"<invalid_format>", "Breadcrumb": 0}'
+  label: Test_Case_Invalid_OperationalDataset_Format
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: OperationalDataset and Breadcrumb updated
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values and special responses for the `AddOrUpdateThreadNetwork`
+    command in the Network Commissioning Cluster【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"OperationalDataset"': '"<valid_dataset>", "Breadcrumb": 123456789}'
+  label: Test_Case_Valid_OperationalDataset_with_Valid_Breadcrumb
+  option: SendCommand

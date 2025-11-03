@@ -1,0 +1,43 @@
+config:
+  attribute: '0x07'
+  cluster: ethernet-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: ethernet-network-diagnostics-cluster_attribute_0x07_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"LastConnectErrorValue": -2147483648}'
+  ExpectedResponse: <error_response>
+  Pre-requisites: <Ensure no network configurations exist>
+  arguments:
+    '{"LastConnectErrorValue"': -2147483648}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LastConnectErrorValue": 2147483647}'
+  ExpectedResponse: <error_response>
+  Pre-requisites: <Ensure no network configurations exist>
+  arguments:
+    '{"LastConnectErrorValue"': 2147483647}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LastConnectErrorValue": null}'
+  ExpectedResponse: <null_response>
+  Pre-requisites: <Ensure no connection attempt was made>
+  arguments:
+    '{"LastConnectErrorValue"': null}
+  label: Test_Case_Special_Response_-_No_Attempt_Made
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"LastConnectErrorValue": null}'
+  ExpectedResponse: <null_response>
+  Pre-requisites: '<Ensure the last connection attempt succeeded>
+
+
+    These test cases cover the extreme values of the `int32` type and the special
+    conditions where the attribute should be set to `null` based on the connection
+    attempts and their outcomes【4:0†source】.'
+  arguments:
+    '{"LastConnectErrorValue"': null}
+  label: Test_Case_Special_Response_-_Last_Connection_Succeeded
+  option: WriteAttribute

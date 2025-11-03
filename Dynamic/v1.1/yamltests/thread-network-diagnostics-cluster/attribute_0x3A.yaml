@@ -1,0 +1,43 @@
+config:
+  attribute: '0x3A'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x3A_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '{"Delay": 0}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Delay"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '{"Delay": 4294967295}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Delay"': 4294967295}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '{"Delay": 1000}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Delay"': 1000}
+  label: Test_Case_Typical_Operational_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '{"Delay": 2147483647}'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    typical operational values to ensure the attribute behaves as expected across
+    its entire range.'
+  arguments:
+    '{"Delay"': 2147483647}
+  label: Test_Case_Mid-Range_Value
+  option: WriteAttribute

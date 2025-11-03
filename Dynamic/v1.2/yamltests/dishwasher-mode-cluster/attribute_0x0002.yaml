@@ -1,0 +1,46 @@
+config:
+  attribute: '0x0002'
+  cluster: dishwasher-mode-cluster
+  nodeId: '0x654231'
+name: dishwasher-mode-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentMode` will be set to 0x00'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: '- The mode 0x00 must be a valid mode in the `SupportedModes` list.'
+  arguments:
+    StartUpMode: '0x00'
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentMode` will remain unchanged.'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: '- The mode 0xFF must not be a valid mode in the `SupportedModes`
+    list.'
+  arguments:
+    StartUpMode: '0xFF'
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentMode` will be set to the mode with the Normal tag.'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: '- The mode with the Normal tag must be present in the `SupportedModes`
+    list.'
+  arguments:
+    StartUpMode: <Mode with Normal Tag>
+  label: Test_Case_Valid_Mode_with_Normal_Tag
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentMode` will remain unchanged.'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: '- The invalid mode must not be present in the `SupportedModes`
+    list.
+
+
+    These test cases cover the extreme values of the constraints of the `StartUpMode`
+    field and the values that could result in special responses as mentioned in the
+    description of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    StartUpMode: <Invalid Mode>
+  label: Test_Case_Invalid_Mode
+  option: WriteAttribute

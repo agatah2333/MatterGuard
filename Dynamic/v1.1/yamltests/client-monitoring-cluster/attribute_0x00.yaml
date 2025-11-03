@@ -1,0 +1,50 @@
+config:
+  attribute: '0x00'
+  cluster: client-monitoring-cluster
+  nodeId: '0x654231'
+name: client-monitoring-cluster_attribute_0x00_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: IdentifyTime set to 0.
+  ExpectedResponse: Device terminates its identification state.
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyTime"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 65535
+  Attribute_Change: IdentifyTime set to 65535.
+  ExpectedResponse: Device enters identification state and continues for 65535 seconds.
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyTime"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 1
+  Attribute_Change: IdentifyTime set to 1.
+  ExpectedResponse: Device enters identification state and continues for 1 second.
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyTime"': 1}
+  label: Test_Case_Special_Response_-_Start_Identification
+  option: WriteAttribute
+- ActionTime: 300
+  Attribute_Change: IdentifyTime set to 300.
+  ExpectedResponse: Device continues identification state for 300 seconds.
+  Pre-requisites: Device must already be in identification state.
+  arguments:
+    '{"IdentifyTime"': 300}
+  label: Test_Case_Special_Response_-_Continue_Identification
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: IdentifyTime set to 0.
+  ExpectedResponse: Device stops identification state immediately.
+  Pre-requisites: 'Device must already be in identification state.
+
+
+    These test cases cover the extreme values of the `IdentifyTime` attribute and
+    the special responses as described in the specification【4:0†source】.'
+  arguments:
+    '{"IdentifyTime"': 0}
+  label: Test_Case_Special_Response_-_Stop_Identification
+  option: WriteAttribute

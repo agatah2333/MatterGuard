@@ -1,0 +1,31 @@
+config:
+  attribute: '0x0005'
+  cluster: level-control-cluster
+  nodeId: '0x654231'
+name: level-control-cluster_attribute_0x0005_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`MinFrequency` will be set to 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    MinFrequency: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '`MinFrequency` will be set to MaxFrequency'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the `MinFrequency`
+    field and the values that could result in special responses as mentioned in the
+    description of the effect.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments:
+    MinFrequency: MaxFrequency
+  label: Test_Case_Special_Response_Values
+  option: WriteAttribute

@@ -1,0 +1,32 @@
+config:
+  cluster: access-control-cluster
+  event: '0x0001'
+  nodeId: '0x654231'
+name: access-control-cluster_event_0x0001_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: AccessControlExtensionStruct, NULL
+  ExpectedResponse: Event generated with ChangeType "Changed"
+  Pre-requisites: None
+  arguments:
+    AdminNodeID: '0x0000000000000001'
+    AdminPasscodeID: 0
+    ChangeType: 0 (Changed)
+    LatestValue: NULL (resources are scarce)
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: 'AccessControlExtensionStruct, {Data: "ExampleData"}'
+  ExpectedResponse: Event generated with ChangeType "Added"
+  Pre-requisites: 'Valid TLV-encoded data in LatestValue
+
+
+    These test cases cover the extreme values and special responses for the event
+    ID 0x0001 of the Access Control Cluster as specified in the Matter 1.2 Core Specification【4:0†source】【4:2†source】【4:6†source】【4:9†source】.'
+  arguments:
+    AdminNodeID: '0xFFFFFFFFFFFFFFFF'
+    AdminPasscodeID: 65535
+    ChangeType: 1 (Added)
+    LatestValue: '{Data: "ExampleData"} (assuming a valid TLV-encoded data)'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SubscribeToEvent

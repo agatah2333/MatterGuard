@@ -1,0 +1,102 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x050d",
+    "name": "Application Basic",
+    "description": "Provides information about a Content App running on a Video Player device which is represented as an endpoint."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "VendorName",
+      "data_type": "string",
+      "value_range": {
+        "max": "32"
+      },
+      "description": "This attribute SHALL specify a human readable (displayable) name of the vendor for the Content App.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "VendorID",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "This attribute SHALL specify the Vendor ID for the Content App.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "ApplicationName",
+      "data_type": "string",
+      "value_range": {},
+      "description": "This attribute SHALL specify a human readable (displayable) name of the Content App.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0003",
+      "name": "ProductID",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "This attribute SHALL specify the Product ID for the Content App.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0004",
+      "name": "Application",
+      "data_type": "Application",
+      "value_range": {},
+      "description": "This attribute SHALL specify the Application for this Content App.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0005",
+      "name": "Status",
+      "data_type": "ApplicationStatusEnum",
+      "value_range": {},
+      "description": "This attribute SHALL specify the current running status of the application.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0006",
+      "name": "ApplicationVersion",
+      "data_type": "string",
+      "value_range": {
+        "max": "32"
+      },
+      "description": "This attribute SHALL specify the version of the Content App.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0007",
+      "name": "AllowedVendorList",
+      "data_type": "list[vendor-id]",
+      "value_range": {},
+      "description": "This attribute SHALL specify the list of vendor IDs that are allowed to control this Content App.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

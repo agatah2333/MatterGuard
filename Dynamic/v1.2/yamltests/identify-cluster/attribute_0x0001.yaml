@@ -1,0 +1,58 @@
+config:
+  attribute: '0x0001'
+  cluster: identify-cluster
+  nodeId: '0x654231'
+name: identify-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: IdentifyType will be set to 0x00
+  ExpectedResponse: No presentation
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyType"': 0x00}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: IdentifyType will be set to 0x05
+  ExpectedResponse: Presentation will be conveyed by actuator functionality such as
+    through a window blind operation or in-wall relay
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyType"': 0x05}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: IdentifyType will be set to 0x01
+  ExpectedResponse: Light output of a lighting product
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyType"': 0x01}
+  label: Test_Case_Special_Value_-_LightOutput
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: IdentifyType will be set to 0x02
+  ExpectedResponse: Typically a small LED
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyType"': 0x02}
+  label: Test_Case_Special_Value_-_VisibleIndicator
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: IdentifyType will be set to 0x03
+  ExpectedResponse: Audible beep
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyType"': 0x03}
+  label: Test_Case_Special_Value_-_AudibleBeep
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: IdentifyType will be set to 0x04
+  ExpectedResponse: Presentation will be visible on display screen
+  Pre-requisites: 'None
+
+
+    ### Summary'
+  arguments:
+    '{"IdentifyType"': 0x04}
+  label: Test_Case_Special_Value_-_Display
+  option: WriteAttribute

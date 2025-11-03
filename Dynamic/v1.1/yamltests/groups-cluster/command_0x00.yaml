@@ -1,0 +1,73 @@
+config:
+  cluster: groups-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: groups-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: GroupID added to the Group Table with an empty GroupName.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The server should not already be a member of the group with GroupID
+    1.
+  arguments:
+    '{"GroupID"': '1, "GroupName": ""}'
+  label: Test_Case_Minimum_GroupID_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: GroupID added to the Group Table with an empty GroupName.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The server should not already be a member of the group with the
+    maximum GroupID.
+  arguments:
+    '{"GroupID"': '<max>, "GroupName": ""}'
+  label: Test_Case_Maximum_GroupID_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: GroupID 2 added to the Group Table with GroupName "AAAAAAAAAAAAAAAA".
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The server should not already be a member of the group with GroupID
+    2.
+  arguments:
+    '{"GroupID"': '2, "GroupName": "A" * 16}'
+  label: Test_Case_GroupName_with_Maximum_Length
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: GroupName updated to "ExistingGroup" for GroupID 1.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The server should already be a member of the group with GroupID
+    1.
+  arguments:
+    '{"GroupID"': '1, "GroupName": "ExistingGroup"}'
+  label: Test_Case_GroupID_Already_Exists
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: UNSUPPORTED_ACCESS
+  Pre-requisites: The receiving node requires security material to support the group
+    ID, and that material does not exist for this group ID.
+  arguments:
+    '{"GroupID"': '3, "GroupName": "NewGroup"}'
+  label: Test_Case_GroupID_with_Unsupported_Access
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: RESOURCE_EXHAUSTED
+  Pre-requisites: There are no available resources to add the membership for the server
+    endpoint.
+  arguments:
+    '{"GroupID"': '4, "GroupName": "NewGroup"}'
+  label: Test_Case_Resource_Exhausted
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'GroupID is outside the valid range (1 to max).
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"GroupID"': '0, "GroupName": "InvalidGroup"}'
+  label: Test_Case_Constraint_Error
+  option: SendCommand

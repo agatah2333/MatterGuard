@@ -1,0 +1,114 @@
+{
+  "cluster_id": "0x0046",
+  "cluster_name": "ICD Management",
+  "section": "9.17",
+  "description": "ICD Management Cluster enables configuration of the ICD’s behavior and ensuring that listed clients can be notified when an intermittently connected device, ICD, is available for communica­ tion. The cluster implements the requirements of the Check-In Protocol that enables the ICD Check-In use case.",
+  "data_types": {
+    "UserActiveModeTriggerBitmap": {
+      "name": "UserActiveModeTriggerBitmap",
+      "definition_line": "9.17.5.1. UserActiveModeTriggerBitmap Type"
+    },
+    "MonitoringRegistrationStruct": {
+      "name": "MonitoringRegistrationStruct",
+      "definition_line": "9.17.5.2. MonitoringRegistrationStruct Type"
+    },
+    "OperatingModeEnum": {
+      "name": "OperatingModeEnum",
+      "definition_line": "9.17.5.3. OperatingModeEnum Type"
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "IdleMode­",
+      "details": "uint32 1 to 64800 F 1 RV M",
+      "raw_line": "0x0000         IdleMode­ uint32             1 to 64800     F              1              RV          M"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "Active­",
+      "details": "uint32 all F 300 RV M",
+      "raw_line": "0x0001         Active­        uint32        all            F              300            RV          M"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "Active­",
+      "details": "uint16 all F 300 RV M",
+      "raw_line": "0x0002         Active­        uint16        all            F              300            RV          M"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "Regis­",
+      "details": "list[Moni­ desc N [] RFA CIP",
+      "raw_line": "0x0003         Regis­         list[Moni­    desc           N              []             RFA         CIP"
+    },
+    "0x0004": {
+      "id": "0x0004",
+      "name": "ICD­",
+      "details": "uint32 all NC 0 RA CIP",
+      "raw_line": "0x0004         ICD­           uint32        all            NC             0              RA          CIP"
+    },
+    "0x0005": {
+      "id": "0x0005",
+      "name": "ClientsSup",
+      "details": "uint16 min 1 F 1 RV CIP",
+      "raw_line": "0x0005         ClientsSup uint16            min 1          F              1              RV          CIP"
+    },
+    "0x0006": {
+      "id": "0x0006",
+      "name": "UserAc­",
+      "details": "UserActive­ desc F 0 RV P, UAT",
+      "raw_line": "0x0006         UserAc­       UserActive­ desc             F              0              RV         P, UAT"
+    },
+    "0x0007": {
+      "id": "0x0007",
+      "name": "UserAc­",
+      "details": "string max 128 F \"\" RV P, desc",
+      "raw_line": "0x0007         UserAc­       string        max 128        F              \"\"             RV         P, desc"
+    },
+    "0x0008": {
+      "id": "0x0008",
+      "name": "Operating­",
+      "details": "Operating­ all RV P, LITS",
+      "raw_line": "0x0008         Operating­ Operating­ all                                                RV         P, LITS"
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "RegisterClient",
+      "details": "client ⇒ server RegisterClien­ MF CIP",
+      "raw_line": "0x00               RegisterClient client ⇒ server RegisterClien­              MF                CIP"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "RegisterClien­",
+      "details": "client ⇐ server N CIP",
+      "raw_line": "0x01               RegisterClien­ client ⇐ server N                                             CIP"
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "Unregister­",
+      "details": "client ⇒ server Y MF CIP",
+      "raw_line": "0x02               Unregister­        client ⇒ server Y                       MF                CIP"
+    },
+    "0x03": {
+      "id": "0x03",
+      "name": "StayAc­",
+      "details": "client ⇒ server StayActiveRe­ O LITS, O",
+      "raw_line": "0x03               StayAc­            client ⇒ server StayActiveRe­           O                 LITS, O"
+    },
+    "0x04": {
+      "id": "0x04",
+      "name": "StayActiveRe­",
+      "details": "client ⇐ server N LITS, O",
+      "raw_line": "0x04               StayActiveRe­ client ⇐ server N                                              LITS, O"
+    }
+  },
+  "events": {},
+  "extraction_info": {
+    "start_line": 33386,
+    "end_line": 34316,
+    "total_lines": 930
+  }
+}

@@ -1,0 +1,43 @@
+config:
+  cluster: media-input-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: media-input-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: CurrentInput attribute will be set to 0
+  ExpectedResponse: Success
+  Pre-requisites: The InputList attribute must contain an entry with Index 0
+  arguments:
+    '{"Index"': 0}
+  label: Test_Case_Minimum_Value
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: CurrentInput attribute will be set to 255
+  ExpectedResponse: Success
+  Pre-requisites: The InputList attribute must contain an entry with Index 255
+  arguments:
+    '{"Index"': 255}
+  label: Test_Case_Maximum_Value
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Error (Index not found)
+  Pre-requisites: The InputList attribute must not contain an entry with Index 128
+  arguments:
+    '{"Index"': 128}
+  label: Test_Case_Special_Response_-_Index_Not_Present
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: CurrentInput attribute will be set to 1
+  ExpectedResponse: Success
+  Pre-requisites: 'The InputList attribute must contain an entry with Index 1
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    '{"Index"': 1}
+  label: Test_Case_Special_Response_-_Index_at_Boundary
+  option: SendCommand

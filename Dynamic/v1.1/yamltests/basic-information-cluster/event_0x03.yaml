@@ -1,0 +1,25 @@
+config:
+  cluster: basic-information-cluster
+  event: '0x03'
+  nodeId: '0x654231'
+name: basic-information-cluster_event_0x03_v1.1.0.0
+tests:
+- ActionTime: '`<current timestamp>`'
+  Attribute_Change: '`Reachable` attribute will be set to `true`'
+  ExpectedResponse: '`Reachable attribute is now true`'
+  Pre-requisites: '`Reachable` attribute must be supported by the device'
+  arguments:
+    '{"ReachableNewValue"': '`true`}'
+  option: SubscribeToEvent
+- ActionTime: '`<current timestamp>`'
+  Attribute_Change: '`Reachable` attribute will be set to `false`'
+  ExpectedResponse: '`Reachable attribute is now false`'
+  Pre-requisites: '`Reachable` attribute must be supported by the device
+
+
+    These test cases cover the extreme values of the `ReachableNewValue` field, which
+    are `true` and `false`, and the expected responses when the `Reachable` attribute
+    changes【4:0†source】.'
+  arguments:
+    '{"ReachableNewValue"': '`false`}'
+  option: SubscribeToEvent

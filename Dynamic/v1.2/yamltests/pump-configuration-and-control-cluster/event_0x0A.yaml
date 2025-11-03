@@ -1,0 +1,28 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x0A'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x0A_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: NoError
+  Pre-requisites: None
+  arguments:
+    ErrorCode: 0x00 (NoError)
+    SensorType: 0x00 (Pressure)
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: '`PumpStatus` attribute will have the `DeviceFault` bit set.'
+  ExpectedResponse: SensorDisconnected
+  Pre-requisites: 'The pump must be running.
+
+
+    These test cases cover the extreme values and special responses for the SensorFailure
+    event in the Pump Configuration and Control Cluster【4:0†source】.'
+  arguments:
+    ErrorCode: 0x02 (SensorDisconnected)
+    SensorType: 0x02 (Temperature)
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: SubscribeToEvent

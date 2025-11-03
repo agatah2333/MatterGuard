@@ -1,0 +1,49 @@
+config:
+  cluster: general-diagnostics-cluster
+  event: '0x02'
+  nodeId: '0x654231'
+name: general-diagnostics-cluster_event_0x02_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    field0: 0
+    field1: 0
+    field2: 0
+  label: Test_Case_Minimum_Values
+  option: SubscribeToEvent
+- ActionTime: 4294967295
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    field0: 65535
+    field1: 4294967295
+    field2: 255
+  label: Test_Case_Maximum_Values
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: UNSUPPORTED_EVENT
+  Pre-requisites: None
+  arguments:
+    field0: 0
+    field1: 0
+    field2: 0xFF (Invalid Event ID)
+  label: Test_Case_Special_Response_-_Invalid_Event_ID
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: UNSUPPORTED_NODE
+  Pre-requisites: 'Node does not support the event
+
+
+    ### Summary'
+  arguments:
+    field0: 0
+    field1: 0
+    field2: 0
+  label: Test_Case_Special_Response_-_Unsupported_Node
+  option: SubscribeToEvent

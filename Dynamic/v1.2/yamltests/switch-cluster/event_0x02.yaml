@@ -1,0 +1,28 @@
+config:
+  cluster: switch-cluster
+  event: '0x02'
+  nodeId: '0x654231'
+name: switch-cluster_event_0x02_v1.2.0.0
+tests:
+- ActionTime: <timestamp>
+  Attribute_Change: '`CurrentPosition` will be set to 0'
+  ExpectedResponse: Event generated with NewPosition = 0
+  Pre-requisites: NumberOfPositions must be greater than 1
+  arguments:
+    NewPosition: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: <timestamp>
+  Attribute_Change: '`CurrentPosition` will be set to NumberOfPositions-1'
+  ExpectedResponse: Event generated with NewPosition = NumberOfPositions-1
+  Pre-requisites: 'NumberOfPositions must be greater than 1
+
+
+    ### References
+
+    - The constraints and details for the `NewPosition` field and the `LongPress`
+    event are derived from the Matter 1.2 Application Cluster Specification【4:0†source】【4:1†source】.'
+  arguments:
+    NewPosition: NumberOfPositions-1
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: SubscribeToEvent

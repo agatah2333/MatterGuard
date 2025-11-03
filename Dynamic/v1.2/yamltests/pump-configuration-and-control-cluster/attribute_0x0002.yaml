@@ -1,0 +1,46 @@
+config:
+  attribute: '0x0002'
+  cluster: pump-configuration-and-control-cluster
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '- `MaxFlow`: 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    MaxFlow: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `MaxFlow`: 6553.4'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    MaxFlow: '6553.4'
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `MaxFlow`: No change'
+  ExpectedResponse: Error (Constraint Error)
+  Pre-requisites: None
+  arguments:
+    MaxFlow: '6553.5'
+  label: Test_Case_Invalid_Value_(Above_Maximum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `MaxFlow`: null'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the `MaxFlow` attribute, including
+    the minimum and maximum valid values, an invalid value above the maximum, and
+    a special response for a null value.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments: {}
+  label: Test_Case_Special_Response_(Null_Value)
+  option: WriteAttribute

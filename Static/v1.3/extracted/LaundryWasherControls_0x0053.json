@@ -1,0 +1,113 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0053",
+    "name": "Laundry Washer Controls",
+    "description": "This cluster provides a way to access options associated with the operation of a laundry washer device type.",
+    "classification": {
+      "hierarchy": "Base",
+      "role": "Application",
+      "scope": "Endpoint",
+      "pics_code": "WASHERCTRL"
+    },
+    "revision_history": [
+      {
+        "revision": 1,
+        "description": "Initial release"
+      }
+    ]
+  },
+  "features": {
+    "SPIN": {
+      "bit": 0,
+      "code": "SPIN",
+      "name": "Spin",
+      "conformance": "O",
+      "summary": "Multiple spin speeds supported"
+    },
+    "RINSE": {
+      "bit": 1,
+      "code": "RINSE",
+      "name": "Rinse",
+      "conformance": "O",
+      "summary": "Multiple rinse cycles supported"
+    }
+  },
+  "data_types": {
+    "enums": {
+      "NumberOfRinsesEnum": {
+        "type": "enum8",
+        "description": "The NumberOfRinsesEnum provides a representation of the number of rinses that will be performed for a selected mode.",
+        "values": {
+          "0": {
+            "name": "None",
+            "conformance": "RINSE",
+            "description": "This laundry washer mode does not perform rinse cycles"
+          },
+          "1": {
+            "name": "Normal",
+            "conformance": "RINSE",
+            "description": "This laundry washer mode performs normal rinse cycles determined by the manufacturer"
+          },
+          "2": {
+            "name": "Extra",
+            "conformance": "RINSE",
+            "description": "This laundry washer mode performs an extra rinse cycle"
+          },
+          "3": {
+            "name": "Max",
+            "conformance": "RINSE",
+            "description": "This laundry washer mode performs the maximum number of rinse cycles determined by the manufacturer"
+          }
+        }
+      }
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "SpinSpeeds",
+      "type": "list[string]",
+      "constraint": "max 16[max 64]",
+      "quality": "",
+      "default": "",
+      "access": "RV",
+      "conformance": "SPIN",
+      "description": "This attribute indicates the list of spin speeds available to the appliance in the currently selected mode. The spin speed values are determined by the manufacturer. At least one spin speed value SHALL be provided in the SpinSpeeds list."
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "SpinSpeedCurrent",
+      "type": "uint8",
+      "constraint": "0 to 15",
+      "quality": "X",
+      "default": "desc",
+      "access": "RW VO",
+      "conformance": "SPIN",
+      "description": "This attribute indicates the currently selected spin speed. It is the index into the SpinSpeeds list of the selected spin speed. If null is written to this attribute, there will be no spin speed for the selected cycle."
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "NumberOfRinses",
+      "type": "NumberOfRinsesEnum",
+      "constraint": "desc",
+      "quality": "",
+      "default": "1",
+      "access": "RW VO",
+      "conformance": "RINSE",
+      "description": "This attribute represents how many times a rinse cycle SHALL be performed on a device for the current mode of operation. A value of None SHALL indicate that no rinse cycle will be performed."
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "SupportedRinses",
+      "type": "list[NumberOfRinsesEnum]",
+      "constraint": "max 4",
+      "quality": "",
+      "default": "",
+      "access": "RV",
+      "conformance": "RINSE",
+      "description": "This attribute represents the amount of rinses allowed for a specific mode. Each entry SHALL indicate a NumberOfRinsesEnum value that is possible in the selected mode on the device."
+    }
+  },
+  "commands": {},
+  "events": {}
+}

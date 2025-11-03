@@ -1,0 +1,44 @@
+config:
+  attribute: '0x0012'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0012_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Primary1Y will be set to 0.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Primary1Y"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Primary1Y will be set to 65279.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Primary1Y"': 65279}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Primary1Y will be set to 32640.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Primary1Y"': 32640}
+  label: Test_Case_Mid-Range_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Primary1Y will be set to 32768.
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    a mid-range value to ensure the attribute behaves as expected across its entire
+    range. The special response value is included to check for any specific behavior
+    at a significant midpoint.'
+  arguments:
+    '{"Primary1Y"': 32768}
+  label: Test_Case_Special_Response_Value
+  option: WriteAttribute

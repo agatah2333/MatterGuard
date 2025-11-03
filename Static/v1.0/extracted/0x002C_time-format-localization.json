@@ -1,0 +1,33 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x002C",
+    "name": "Time Format Localization",
+    "description": "Time format preferences."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "HourFor",
+      "type": "unknown",
+      "description": "HourFor attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "ActiveCal",
+      "type": "unknown",
+      "description": "ActiveCal attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "Support",
+      "type": "unknown",
+      "description": "Support attribute",
+      "access": "R"
+    }
+  ],
+  "events": []
+}

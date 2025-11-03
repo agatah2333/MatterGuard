@@ -1,0 +1,243 @@
+config:
+  cluster: door-lock-cluster
+  event: '4'
+  nodeId: '0x654231'
+name: door-lock-cluster_event_4_v1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: All attributes will be set to their minimum values.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    DataIndex: 0
+    DataOperationType: 0
+    FabricIndex: 0
+    LockDataType: 0
+    OperationSource: 0
+    SourceNode: 0
+    UserIndex: 0
+  label: Test_Case_Extreme_Values_of_Constraints
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify door-lock-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: '0xFFFFFFFF'
+  Attribute_Change: All attributes will be set to their maximum values.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    DataIndex: '0xFFFF'
+    DataOperationType: 2
+    FabricIndex: '0xFFFF'
+    LockDataType: 8
+    OperationSource: '0xFF'
+    SourceNode: '0xFFFFFFFFFFFFFFFF'
+    UserIndex: '0xFFFE'
+  label: Test_Case_Maximum_Values_of_Constraints
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify door-lock-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 1000
+  Attribute_Change: Attempt to add a duplicate user index.
+  ExpectedResponse: DUPLICATE
+  Pre-requisites: User index 1 already exists.
+  arguments:
+    DataIndex: 1
+    DataOperationType: 1
+    FabricIndex: 1
+    LockDataType: 2
+    OperationSource: 1
+    SourceNode: 1
+    UserIndex: 1
+  label: Test_Case_Special_Response_for_Duplicate_Entry
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify door-lock-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 2000
+  Attribute_Change: Attempt to replace an occupied slot.
+  ExpectedResponse: OCCUPIED
+  Pre-requisites: 'User index 2 is already occupied.
+
+
+    These test cases cover the extreme values of the constraints and the special responses
+    mentioned in the description of the effect for the LockUserChange event in the
+    Door Lock Cluster【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】.'
+  arguments:
+    DataIndex: 2
+    DataOperationType: 2
+    FabricIndex: 2
+    LockDataType: 6
+    OperationSource: 2
+    SourceNode: 2
+    UserIndex: 2
+  label: Test_Case_Special_Response_for_Occupied_Slot
+  option: SubscribeToEvent
+  setup_sequence:
+  - step: 1
+    description: Verify door-lock-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0101'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true

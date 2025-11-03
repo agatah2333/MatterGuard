@@ -1,0 +1,48 @@
+config:
+  cluster: media-input-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: media-input-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentInput` attribute will be set to 0'
+  ExpectedResponse: Success
+  Pre-requisites: '- The `InputList` attribute must contain an entry with `Index`
+    0'
+  arguments:
+    Index: 0
+  label: Test_Case_Minimum_Value_of_Index
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '- If successful, `CurrentInput` attribute will be set to 255'
+  ExpectedResponse: Success or Failure (depending on whether the `InputList` contains
+    an entry with `Index` 255)
+  Pre-requisites: '- The `InputList` attribute must contain an entry with `Index`
+    255'
+  arguments:
+    Index: 255
+  label: Test_Case_Maximum_Value_of_Index
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '- No change to `CurrentInput`'
+  ExpectedResponse: Failure (Invalid Index)
+  Pre-requisites: '- The `InputList` attribute must not contain an entry with `Index`
+    10'
+  arguments:
+    Index: 10 (assuming 10 is not in the `InputList`)
+  label: Test_Case_Index_Not_in_InputList
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '- `CurrentInput` attribute will be set to 1'
+  ExpectedResponse: Success
+  Pre-requisites: '- The `InputList` attribute must contain an entry with `Index`
+    1
+
+
+    These test cases cover the extreme values of the `Index` field and a special scenario
+    where the `Index` is not present in the `InputList` attribute. The expected responses
+    and attribute changes are based on the command''s description and constraints【4:0†source】【4:2†source】【4:3†source】.'
+  arguments:
+    Index: 1 (assuming 1 is a valid index in the `InputList`)
+  label: Test_Case_Valid_Index_with_Special_Response
+  option: SendCommand

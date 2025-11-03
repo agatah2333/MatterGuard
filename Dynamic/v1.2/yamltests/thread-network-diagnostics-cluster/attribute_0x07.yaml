@@ -1,0 +1,26 @@
+config:
+  attribute: '0x07'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x07_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: LastConnectErrorValue set to 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ErrorValue"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: LastConnectErrorValue set to 255
+  ExpectedResponse: Failure
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the `ErrorValue` field and the special
+    response scenarios as described in the specification【4:0†source】.'
+  arguments:
+    '{"ErrorValue"': 255}
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: WriteAttribute

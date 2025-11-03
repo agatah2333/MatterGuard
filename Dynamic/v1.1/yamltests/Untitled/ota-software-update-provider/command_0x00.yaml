@@ -1,0 +1,259 @@
+config:
+  cluster: ota-software-update-provider
+  command: '0x00'
+  nodeId: '0x654231'
+name: ota-software-update-provider_command_0x00_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: NotAvailable
+  Pre-requisites: None
+  arguments:
+    HardwareVersion: 0
+    Location: '"AA"'
+    MetadataForProvider: '""'
+    ProductID: 0
+    ProtocolsSupported:
+    - 0
+    RequestorCanConsent: 'False'
+    SoftwareVersion: 0
+    VendorID: 0
+  label: Test_Case_Extreme_Values_(Minimum)
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify ota-software-update-provider cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0029'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0029'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0029'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0029'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 86400
+  Attribute_Change: None
+  ExpectedResponse: UpdateAvailable
+  Pre-requisites: None
+  arguments:
+    HardwareVersion: 65535
+    Location: '"ZZ"'
+    MetadataForProvider: '"<512 bytes of data>"'
+    ProductID: 65535
+    ProtocolsSupported:
+    - 0
+    - 1
+    - 2
+    - 3
+    RequestorCanConsent: 'True'
+    SoftwareVersion: 4294967295
+    VendorID: 65535
+  label: Test_Case_Extreme_Values_(Maximum)
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify ota-software-update-provider cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0029'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0029'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0029'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0029'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 3600
+  Attribute_Change: None
+  ExpectedResponse: Busy
+  Pre-requisites: None
+  arguments:
+    HardwareVersion: 1
+    Location: '"US"'
+    MetadataForProvider: '"BusyTest"'
+    ProductID: 5678
+    ProtocolsSupported:
+    - 0
+    - 2
+    RequestorCanConsent: 'False'
+    SoftwareVersion: 100
+    VendorID: 1234
+  label: Test_Case_Special_Response_(Busy)
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify ota-software-update-provider cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0029'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0029'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0029'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0029'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: DownloadProtocolNotSupported
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:5†source】【4:14†source】.'
+  arguments:
+    HardwareVersion: 2
+    Location: '"EU"'
+    MetadataForProvider: '"ProtocolTest"'
+    ProductID: 8765
+    ProtocolsSupported:
+    - 3
+    RequestorCanConsent: 'True'
+    SoftwareVersion: 200
+    VendorID: 4321
+  label: Test_Case_Special_Response_(DownloadProtocolNotSupported)
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify ota-software-update-provider cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0029'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0029'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0029'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0029'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

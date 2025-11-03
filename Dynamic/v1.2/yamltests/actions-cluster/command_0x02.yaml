@@ -1,0 +1,48 @@
+config:
+  cluster: actions-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: actions-cluster_command_0x02_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: Action with `ActionID` 0x0000 will be started.
+  ExpectedResponse: Success
+  Pre-requisites: Action with `ActionID` 0x0000 must exist in the `ActionList`.
+  arguments:
+    ActionID: '0x0000'
+    InvokeID: '0x0000'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: Action with `ActionID` 0xFFFF will be started.
+  ExpectedResponse: Success
+  Pre-requisites: Action with `ActionID` 0xFFFF must exist in the `ActionList`.
+  arguments:
+    ActionID: '0xFFFF'
+    InvokeID: '0xFFFF'
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Error - Action Not Found
+  Pre-requisites: Action with `ActionID` 0x1234 must not exist in the `ActionList`.
+  arguments:
+    ActionID: '0x1234'
+    InvokeID: '0x0001'
+  label: Test_Case_Special_Response_-_Action_Not_Found
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Error - Invalid State
+  Pre-requisites: 'Action with `ActionID` 0x5678 exists but is in a state that does
+    not allow starting.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    ActionID: '0x5678'
+    InvokeID: '0x0002'
+  label: Test_Case_Special_Response_-_Invalid_State
+  option: SendCommand

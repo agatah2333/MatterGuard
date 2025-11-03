@@ -1,0 +1,30 @@
+config:
+  attribute: '0x0004'
+  cluster: network-commissioning-cluster
+  nodeId: '0x654231'
+name: network-commissioning-cluster_attribute_0x0004_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`MaxNetworks` set to 0'
+  ExpectedResponse: Error or no networks can be added
+  Pre-requisites: Device should support setting `MaxNetworks` to 0
+  arguments:
+    MaxNetworks: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '`MaxNetworks` set to 255'
+  ExpectedResponse: Maximum networks can be added
+  Pre-requisites: 'Device should support setting `MaxNetworks` to 255
+
+
+    These test cases cover the extreme values of the `MaxNetworks` attribute and the
+    special responses that might occur when setting the attribute to its maximum value.
+
+
+    For more detailed information, you can refer to the Matter 1.2 Core Specification
+    document【6:0†source】.'
+  arguments:
+    MaxNetworks: 255
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: WriteAttribute

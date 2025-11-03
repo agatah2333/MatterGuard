@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0011'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0011_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '- `CurrentPositionLift`: 0'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: '- The window covering is fully open.'
+  arguments:
+    CurrentPositionLift: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `CurrentPositionLift`: <InstalledClosedLimitLift>'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: '- The window covering is fully closed.'
+  arguments:
+    CurrentPositionLift: <InstalledClosedLimitLift>
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `CurrentPositionLift`: No change'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: '- The window covering is at any position.'
+  arguments:
+    CurrentPositionLift: <InstalledClosedLimitLift + 1>
+  label: Test_Case_Out_of_Bounds_(Above_Maximum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `CurrentPositionLift`: No change'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: '- The window covering is at any position.
+
+
+    These test cases cover the extreme values of the constraints of the `CurrentPositionLift`
+    field and the values that could result in special responses as mentioned in the
+    description of the effect.'
+  arguments:
+    CurrentPositionLift: '-1'
+  label: Test_Case_Out_of_Bounds_(Below_Minimum)
+  option: WriteAttribute

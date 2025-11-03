@@ -1,0 +1,61 @@
+config:
+  attribute: '0x07'
+  cluster: general-diagnostics-cluster
+  nodeId: '0x654231'
+name: general-diagnostics-cluster_attribute_0x07_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: NetworkInterfaces will be an empty list.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    NetworkInterfaces: []
+  label: Test_Case_Extreme_Values_(Minimum)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: NetworkInterfaces will be updated with the provided list.
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '"FabricConnected"': false,
+    '"HardwareAddress"': '"22:33:44:55:66:77",'
+    '"Name"': '"Interface4",'
+    '"OffPremiseServicesReachableIPv4"': false,
+    '"OffPremiseServicesReachableIPv6"': false,
+    '"Type"': 4
+    NetworkInterfaces: '['
+  label: Test_Case_Extreme_Values_(Maximum)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: INVALID_COMMAND
+  Pre-requisites: None
+  arguments:
+    '"FabricConnected"': true,
+    '"HardwareAddress"': '"00:11:22:33:44:55",'
+    '"Name"': '"InvalidTypeInterface",'
+    '"OffPremiseServicesReachableIPv4"': true,
+    '"OffPremiseServicesReachableIPv6"': true,
+    '"Type"': 9  // Invalid type
+    NetworkInterfaces: '['
+  label: Test_Case_Special_Response_(Invalid_Type)
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: INVALID_COMMAND
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    '"FabricConnected"': true,
+    '"HardwareAddress"': '"00:11:22:33:44:55",'
+    '"Name"': '"",'
+    '"OffPremiseServicesReachableIPv4"': true,
+    '"OffPremiseServicesReachableIPv6"': true,
+    '"Type"': 1
+    NetworkInterfaces: '['
+  label: Test_Case_Special_Response_(Empty_Name)
+  option: WriteAttribute

@@ -1,0 +1,22 @@
+config:
+  cluster: account-login-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: account-login-cluster_command_0x03_v1.1.0.0
+tests:
+- arguments: {}
+  label: Test_Case_Minimum_Length_for_TempAccountIdentifier
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Maximum_Length_for_TempAccountIdentifier
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Invalid_TempAccountIdentifier_Length_(Less_than_Minimum)
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Invalid_TempAccountIdentifier_Length_(More_than_Maximum)
+  option: SendCommand
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

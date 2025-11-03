@@ -1,0 +1,60 @@
+config:
+  cluster: time-synchronization-cluster
+  event: '0x0000'
+  nodeId: '0x654231'
+name: time-synchronization-cluster_event_0x0000_v1.2.0.0
+tests:
+- ActionTime: "\"Any time the node attempts to update its time\"\n  - **ExpectedResponse**:\
+    \ \"DSTTableEmpty event generated\"\n  - **Which Attribute Will Be Changed and\
+    \ the Value of the Attribute**: \"None\"\n  - **Any Pre-requisites**: \"The node\
+    \ has not generated a DSTTableEmpty event in the last hour\""
+  Attribute_Change: "\"None\"\n  - **Any Pre-requisites**: \"The node has not generated\
+    \ a DSTTableEmpty event in the last hour\""
+  ExpectedResponse: "\"DSTTableEmpty event generated\"\n  - **Which Attribute Will\
+    \ Be Changed and the Value of the Attribute**: \"None\"\n  - **Any Pre-requisites**:\
+    \ \"The node has not generated a DSTTableEmpty event in the last hour\""
+  Pre-requisites: '"The node has not generated a DSTTableEmpty event in the last hour"'
+  arguments:
+    '**ActionTime**': '"Any time the node attempts to update its time"'
+    '**Any Pre-requisites**': '"The node has not generated a DSTTableEmpty event in
+      the last hour"'
+    '**ExpectedResponse**': '"DSTTableEmpty event generated"'
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': '"None"'
+    '{"ValidStarting"': '"0", "DSTOffset": "empty list"}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: "\"When the DSTOffset list is cleared by a SetTimeZone command or a\
+    \ SetDSTOffset command with an empty list\"\n  - **ExpectedResponse**: \"DSTTableEmpty\
+    \ event generated\"\n  - **Which Attribute Will Be Changed and the Value of the\
+    \ Attribute**: \"None\"\n  - **Any Pre-requisites**: \"The node has not generated\
+    \ a DSTTableEmpty event in the last hour\"\n\nThese test cases cover the scenarios\
+    \ where the DSTTableEmpty event is generated due to the DSTOffset list being empty\
+    \ and the node attempting to update its time, as well as when the list is cleared\
+    \ by specific commands【4:0†source】【4:1†source】."
+  Attribute_Change: "\"None\"\n  - **Any Pre-requisites**: \"The node has not generated\
+    \ a DSTTableEmpty event in the last hour\"\n\nThese test cases cover the scenarios\
+    \ where the DSTTableEmpty event is generated due to the DSTOffset list being empty\
+    \ and the node attempting to update its time, as well as when the list is cleared\
+    \ by specific commands【4:0†source】【4:1†source】."
+  ExpectedResponse: "\"DSTTableEmpty event generated\"\n  - **Which Attribute Will\
+    \ Be Changed and the Value of the Attribute**: \"None\"\n  - **Any Pre-requisites**:\
+    \ \"The node has not generated a DSTTableEmpty event in the last hour\"\n\nThese\
+    \ test cases cover the scenarios where the DSTTableEmpty event is generated due\
+    \ to the DSTOffset list being empty and the node attempting to update its time,\
+    \ as well as when the list is cleared by specific commands【4:0†source】【4:1†source】."
+  Pre-requisites: '"The node has not generated a DSTTableEmpty event in the last hour"
+
+
+    These test cases cover the scenarios where the DSTTableEmpty event is generated
+    due to the DSTOffset list being empty and the node attempting to update its time,
+    as well as when the list is cleared by specific commands【4:0†source】【4:1†source】.'
+  arguments:
+    '**ActionTime**': '"When the DSTOffset list is cleared by a SetTimeZone command
+      or a SetDSTOffset command with an empty list"'
+    '**Any Pre-requisites**': '"The node has not generated a DSTTableEmpty event in
+      the last hour"'
+    '**ExpectedResponse**': '"DSTTableEmpty event generated"'
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': '"None"'
+    '{"ValidStarting"': '"current time", "DSTOffset": "empty list"}'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SubscribeToEvent

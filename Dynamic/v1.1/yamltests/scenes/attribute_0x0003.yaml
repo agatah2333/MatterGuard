@@ -1,0 +1,40 @@
+config:
+  attribute: '0x0003'
+  cluster: scenes
+  nodeId: '0x654231'
+name: scenes_attribute_0x0003_v1.1.0.0
+tests:
+- ActionTime: Before any scene is stored or recalled.
+  Attribute_Change: SceneValid = FALSE
+  ExpectedResponse: The attribute should be FALSE.
+  Pre-requisites: None
+  arguments: {}
+  label: Test_Case_Initial_State
+  option: WriteAttribute
+- ActionTime: After a successful StoreScene command.
+  Attribute_Change: SceneValid = TRUE
+  ExpectedResponse: The attribute should be TRUE.
+  Pre-requisites: A StoreScene command must be successfully executed.
+  arguments: {}
+  label: Test_Case_After_Storing_a_Scene
+  option: WriteAttribute
+- ActionTime: After a successful RecallScene command.
+  Attribute_Change: SceneValid = TRUE
+  ExpectedResponse: The attribute should be TRUE.
+  Pre-requisites: A RecallScene command must be successfully executed.
+  arguments: {}
+  label: Test_Case_After_Recalling_a_Scene
+  option: WriteAttribute
+- ActionTime: After the server state is modified following a StoreScene or RecallScene
+    command.
+  Attribute_Change: SceneValid = FALSE
+  ExpectedResponse: The attribute should be FALSE.
+  Pre-requisites: 'A StoreScene or RecallScene command must be successfully executed,
+    followed by a modification of the server state.
+
+
+    These test cases cover the extreme values and special responses for the `SceneValid`
+    attribute in the Scenes cluster【4:0†source】【4:0†source】.'
+  arguments: {}
+  label: Test_Case_After_Modifying_Server_State
+  option: WriteAttribute

@@ -1,0 +1,394 @@
+{
+  "cluster_id": "0x0036",
+  "cluster_name": "Wi-Fi Network Diagnostics",
+  "cluster_description": "The Wi-Fi Network Diagnostics Cluster provides a means to acquire standardized diagnostics metrics that MAY be used by a Node to assist a user or Administrator in diagnosing potential problems. The Wi-Fi Network Diagnostics Cluster attempts to centralize all metrics that are relevant to a potential Wi-Fi radio running on a Node.",
+  "revision_history": [
+    {
+      "revision": 1,
+      "description": "Initial revision"
+    }
+  ],
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Utility",
+    "scope": "Node",
+    "pics_code": "DGWIFI",
+    "quality": "K"
+  },
+  "features": {
+    "PKTCNT": {
+      "bit": 0,
+      "name": "PacketCounts",
+      "summary": "Node makes available the counts for the number of received and transmitted packets on the Wi-Fi interface."
+    },
+    "ERRCNT": {
+      "bit": 1,
+      "name": "ErrorCounts",
+      "summary": "Node makes available the counts for the number of errors that have occurred during the reception and transmission of packets on the Wi-Fi interface."
+    }
+  },
+  "data_types": {
+    "SecurityTypeEnum": {
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "Unspecified",
+          "summary": "Indicate the usage of an unspecified Wi-Fi security type",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "None",
+          "summary": "Indicate the usage of no Wi-Fi security",
+          "conformance": "M"
+        },
+        {
+          "value": 2,
+          "name": "WEP",
+          "summary": "Indicate the usage of WEP Wi-Fi security",
+          "conformance": "M"
+        },
+        {
+          "value": 3,
+          "name": "WPA",
+          "summary": "Indicate the usage of WPA Wi-Fi security",
+          "conformance": "M"
+        },
+        {
+          "value": 4,
+          "name": "WPA2",
+          "summary": "Indicate the usage of WPA2 Wi-Fi security",
+          "conformance": "M"
+        },
+        {
+          "value": 5,
+          "name": "WPA3",
+          "summary": "Indicate the usage of WPA3 Wi-Fi security",
+          "conformance": "M"
+        }
+      ]
+    },
+    "WiFiVersionEnum": {
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "a",
+          "summary": "Indicate the network interface is currently using 802.11a against the wireless access point.",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "b",
+          "summary": "Indicate the network interface is currently using 802.11b against the wireless access point.",
+          "conformance": "M"
+        },
+        {
+          "value": 2,
+          "name": "g",
+          "summary": "Indicate the network interface is currently using 802.11g against the wireless access point.",
+          "conformance": "M"
+        },
+        {
+          "value": 3,
+          "name": "n",
+          "summary": "Indicate the network interface is currently using 802.11n against the wireless access point.",
+          "conformance": "M"
+        },
+        {
+          "value": 4,
+          "name": "ac",
+          "summary": "Indicate the network interface is currently using 802.11ac against the wireless access point.",
+          "conformance": "M"
+        },
+        {
+          "value": 5,
+          "name": "ax",
+          "summary": "Indicate the network interface is currently using 802.11ax against the wireless access point.",
+          "conformance": "M"
+        },
+        {
+          "value": 6,
+          "name": "ah",
+          "summary": "Indicate the network interface is currently using 802.11ah against the wireless access point.",
+          "conformance": "M"
+        }
+      ]
+    },
+    "AssociationFailureCauseEnum": {
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "Unknown",
+          "summary": "The reason for the failure is unknown.",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "AssociationFailed",
+          "summary": "An error occurred during association.",
+          "conformance": "M"
+        },
+        {
+          "value": 2,
+          "name": "AuthenticationFailed",
+          "summary": "An error occurred during authentication.",
+          "conformance": "M"
+        },
+        {
+          "value": 3,
+          "name": "SsidNotFound",
+          "summary": "The specified SSID could not be found.",
+          "conformance": "M"
+        }
+      ]
+    },
+    "ConnectionStatusEnum": {
+      "type": "enum8",
+      "values": [
+        {
+          "value": 0,
+          "name": "Connected",
+          "summary": "Indicate the node is connected",
+          "conformance": "M"
+        },
+        {
+          "value": 1,
+          "name": "NotConnected",
+          "summary": "Indicate the node is not connected",
+          "conformance": "M"
+        }
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "BSSID",
+      "type": "octstr",
+      "constraint": "6",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The BSSID attribute SHALL indicate the BSSID for which the Wi-Fi network the Node is currently connected."
+    },
+    {
+      "id": "0x0001",
+      "name": "SecurityType",
+      "type": "SecurityTypeEnum",
+      "constraint": "all",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The SecurityType attribute SHALL indicate the current type of Wi-Fi security used."
+    },
+    {
+      "id": "0x0002",
+      "name": "WiFiVersion",
+      "type": "WiFiVersionEnum",
+      "constraint": "all",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The WiFiVersion attribute SHALL indicate the current 802.11 standard version in use by the Node."
+    },
+    {
+      "id": "0x0003",
+      "name": "ChannelNumber",
+      "type": "uint16",
+      "constraint": "all",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The ChannelNumber attribute SHALL indicate the channel that Wi-Fi communication is currently operating on."
+    },
+    {
+      "id": "0x0004",
+      "name": "RSSI",
+      "type": "int8",
+      "constraint": "-120 to 0",
+      "quality": "XC",
+      "default": "null",
+      "access": "RV",
+      "conformance": "M",
+      "description": "The RSSI attribute SHALL indicate the current RSSI of the Node's Wi-Fi radio in dBm."
+    },
+    {
+      "id": "0x0005",
+      "name": "BeaconLostCount",
+      "type": "uint32",
+      "constraint": "all",
+      "quality": "XC",
+      "default": "0",
+      "access": "RV",
+      "conformance": "ERRCNT",
+      "description": "The BeaconLostCount attribute SHALL indicate the count of the number of missed beacons the Node has detected. If the Node does not have an ability to count beacons expected and not received, this value MAY remain set to zero."
+    },
+    {
+      "id": "0x0006",
+      "name": "BeaconRxCount",
+      "type": "uint32",
+      "constraint": "all",
+      "quality": "XC",
+      "default": "0",
+      "access": "RV",
+      "conformance": "PKTCNT",
+      "description": "The BeaconRxCount attribute SHALL indicate the count of the number of received beacons. The total number of expected beacons that could have been received during the interval since association SHOULD match the sum of BeaconRxCount and BeaconLostCount. If the Node does not have an ability to report count of beacons received, this value MAY remain set to zero."
+    },
+    {
+      "id": "0x0007",
+      "name": "PacketMulticastRxCount",
+      "type": "uint32",
+      "constraint": "all",
+      "quality": "XC",
+      "default": "0",
+      "access": "RV",
+      "conformance": "PKTCNT",
+      "description": "The PacketMulticastRxCount attribute SHALL indicate the number of multicast packets received by the Node."
+    },
+    {
+      "id": "0x0008",
+      "name": "PacketMulticastTxCount",
+      "type": "uint32",
+      "constraint": "all",
+      "quality": "XC",
+      "default": "0",
+      "access": "RV",
+      "conformance": "PKTCNT",
+      "description": "The PacketMulticastTxCount attribute SHALL indicate the number of multicast packets transmitted by the Node."
+    },
+    {
+      "id": "0x0009",
+      "name": "PacketUnicastRxCount",
+      "type": "uint32",
+      "constraint": "all",
+      "quality": "XC",
+      "default": "0",
+      "access": "RV",
+      "conformance": "PKTCNT",
+      "description": "The PacketUnicastRxCount attribute SHALL indicate the number of unicast packets received by the Node."
+    },
+    {
+      "id": "0x000A",
+      "name": "PacketUnicastTxCount",
+      "type": "uint32",
+      "constraint": "all",
+      "quality": "XC",
+      "default": "0",
+      "access": "RV",
+      "conformance": "PKTCNT",
+      "description": "The PacketUnicastTxCount attribute SHALL indicate the number of unicast packets transmitted by the Node."
+    },
+    {
+      "id": "0x000B",
+      "name": "CurrentMaxRate",
+      "type": "uint64",
+      "constraint": "all",
+      "quality": "XC",
+      "default": "0",
+      "access": "RV",
+      "conformance": "O",
+      "description": "The CurrentMaxRate attribute SHALL indicate the current maximum PHY rate of transfer of data in bits-per-second."
+    },
+    {
+      "id": "0x000C",
+      "name": "OverrunCount",
+      "type": "uint64",
+      "constraint": "all",
+      "quality": "XC",
+      "default": "0",
+      "access": "RV",
+      "conformance": "ERRCNT",
+      "description": "The OverrunCount attribute SHALL indicate the number of packets dropped either at ingress or egress, due to lack of buffer memory to retain all packets on the network interface. The OverrunCount attribute SHALL be reset to 0 upon a reboot of the Node."
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "ResetCounts",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "O",
+      "conformance": "ERRCNT",
+      "description": "Reception of this command SHALL reset the following attributes to 0: BeaconLostCount, BeaconRxCount, PacketMulticastRxCount, PacketMulticastTxCount, PacketUnicastRxCount, PacketUnicastTxCount. This command has no associated data."
+    }
+  ],
+  "events": [
+    {
+      "id": "0x00",
+      "name": "Disconnection",
+      "priority": "info",
+      "access": "V",
+      "conformance": "O",
+      "fields": [
+        {
+          "id": 0,
+          "name": "ReasonCode",
+          "type": "uint16",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "This field SHALL contain the Reason Code field value for the Disassociation or Deauthentication event that caused the disconnection and the value SHALL align with Table 9-49 \"Reason codes\" of IEEE 802.11-2020."
+        }
+      ],
+      "description": "The Disconnection Event SHALL indicate that a Node's Wi-Fi connection has been disconnected as a result of de-authenticated or dis-association and indicates the reason."
+    },
+    {
+      "id": "0x01",
+      "name": "AssociationFailure",
+      "priority": "info",
+      "access": "V",
+      "conformance": "O",
+      "fields": [
+        {
+          "id": 0,
+          "name": "AssociationFailureCause",
+          "type": "AssociationFailureCauseEnum",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "The AssociationFailureCause field SHALL be set to a value from the AssociationFailureCauseEnum."
+        },
+        {
+          "id": 1,
+          "name": "Status",
+          "type": "uint16",
+          "constraint": "all",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "The Status field SHALL be set to the Status Code value that was present in the last frame related to association where Status Code was not equal to zero and which caused the failure of a last trial attempt, if this last failure was due to one of the following Management frames: Association Response (Type 0, Subtype 1), Reassociation Response (Type 0, Subtype 3), Authentication (Type 0, Subtype 11). Table 9-50 \"Status codes\" of IEEE 802.11-2020 contains a description of all values possible."
+        }
+      ],
+      "description": "The AssociationFailure event SHALL indicate that a Node has attempted to connect, or reconnect, to a Wi-Fi access point, but is unable to successfully associate or authenticate, after exhausting all internal retries of its supplicant."
+    },
+    {
+      "id": "0x02",
+      "name": "ConnectionStatus",
+      "priority": "info",
+      "access": "V",
+      "conformance": "O",
+      "fields": [
+        {
+          "id": 0,
+          "name": "ConnectionStatus",
+          "type": "ConnectionStatusEnum",
+          "constraint": "",
+          "quality": "",
+          "default": "",
+          "conformance": "M",
+          "description": "The ConnectionStatus Event SHALL indicate that a Node's connection status to a Wi-Fi network has changed. Connected, in this context, SHALL mean that a Node acting as a Wi-Fi station is successfully associated to a Wi-Fi Access Point."
+        }
+      ],
+      "description": "The ConnectionStatus Event SHALL indicate that a Node's connection status to a Wi-Fi network has changed."
+    }
+  ]
+}

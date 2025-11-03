@@ -1,0 +1,29 @@
+config:
+  cluster: switch-cluster
+  event: '0x02'
+  nodeId: '0x654231'
+name: switch-cluster_event_0x02_v1.1.0.0
+tests:
+- ActionTime: <time_value>
+  Attribute_Change: '`CurrentPosition` attribute will be set to 0'
+  ExpectedResponse: Event generated with `NewPosition` set to 0
+  Pre-requisites: '`NumberOfPositions` should be greater than 1'
+  arguments:
+    NewPosition: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: <time_value>
+  Attribute_Change: '`CurrentPosition` attribute will be set to `NumberOfPositions`
+    - 1'
+  ExpectedResponse: Event generated with `NewPosition` set to `NumberOfPositions`
+    - 1
+  Pre-requisites: '`NumberOfPositions` should be greater than 1
+
+
+    These test cases cover the extreme values of the `NewPosition` field and ensure
+    that the event is generated correctly when the switch is pressed for a long time,
+    as specified in the Matter Application Cluster Specification【4:0†source】.'
+  arguments:
+    NewPosition: '`NumberOfPositions` - 1'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SubscribeToEvent

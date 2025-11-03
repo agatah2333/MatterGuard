@@ -1,0 +1,318 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0004",
+    "name": "Groups",
+    "description": "The Groups cluster manages, per endpoint, the content of the node-wide Group Table that is part of the underlying interaction layer. In a network supporting fabrics, group IDs referenced by attributes or other elements of this cluster are scoped to the accessing fabric. The Groups cluster is scoped to the endpoint. Groups cluster commands support discovering the endpoint membership in a group, adding the endpoint to a group, removing the endpoint from a group, removing endpoint membership from all groups. All commands defined in this cluster SHALL only affect groups scoped to the accessing fabric. When group names are supported, the server stores a name string, which is set by the client for each assigned group and indicated in response to a client request.",
+    "revision_history": [
+      {
+        "revision": 1,
+        "description": "Global mandatory ClusterRevision attribute added; CCB 1745 2100"
+      },
+      {
+        "revision": 2,
+        "description": "CCB 2289"
+      },
+      {
+        "revision": 3,
+        "description": "CCB 2310 2704"
+      },
+      {
+        "revision": 4,
+        "description": "New data model format and notation"
+      }
+    ],
+    "classification": {
+      "hierarchy": "Base",
+      "role": "Utility",
+      "scope": "Endpoint",
+      "pics_code": "G"
+    }
+  },
+  "features": {
+    "feature_map": [
+      {
+        "bit": 0,
+        "code": "GN",
+        "feature": "GroupNames",
+        "summary": "The ability to store a name for a group.",
+        "description": "The Group Names feature indicates the ability to store a name for a group when a group is added."
+      }
+    ]
+  },
+  "data_types": {
+    "derived_types": [
+      {
+        "name": "NameSupportBitmap",
+        "base_type": "map8",
+        "description": "This data type is derived from map8.",
+        "bits": [
+          {
+            "bit": 7,
+            "name": "GroupNames",
+            "summary": "The ability to store a name for a group."
+          }
+        ]
+      }
+    ]
+  },
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "NameSupport",
+      "type": "NameSupportBitmap",
+      "constraint": "desc",
+      "quality": "F",
+      "default": "0",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute provides legacy, read-only access to whether the Group Names feature is supported. The most significant bit, bit 7 (GroupNames), SHALL be equal to bit 0 of the FeatureMap attribute (GN Feature). All other bits SHALL be 0."
+    }
+  ],
+  "commands": {
+    "client_to_server": [
+      {
+        "id": "0x00",
+        "name": "AddGroup",
+        "direction": "client => server",
+        "response": "AddGroupResponse",
+        "access": "FM",
+        "conformance": "M",
+        "description": "The AddGroup command allows a client to add group membership in a particular group for the server endpoint.",
+        "fields": [
+          {
+            "id": 0,
+            "name": "GroupID",
+            "type": "group-id",
+            "constraint": "min 1",
+            "conformance": "M",
+            "description": "This field SHALL be used to identify the group and any associated key material to which the server endpoint is to be added."
+          },
+          {
+            "id": 1,
+            "name": "GroupName",
+            "type": "string",
+            "constraint": "max 16",
+            "conformance": "M",
+            "description": "This field MAY be set to a human-readable name for the group. If the client has no name for the group, the GroupName field SHALL be set to the empty string. Support of group names is optional and is indicated by the FeatureMap and NameSupport attribute."
+          }
+        ],
+        "effect_on_receipt": "If the server does not support group names, the GroupName field SHALL be ignored. On receipt of the AddGroup command, the server SHALL perform a specific procedure to validate constraints, check security material, handle existing membership, check resources, add membership, and optionally generate an AddGroupResponse."
+      },
+      {
+        "id": "0x01",
+        "name": "ViewGroup",
+        "direction": "client => server",
+        "response": "ViewGroupResponse",
+        "access": "FO",
+        "conformance": "M",
+        "description": "The ViewGroup command allows a client to request that the server responds with a ViewGroupResponse command containing the name string for a particular group.",
+        "fields": [
+          {
+            "id": 0,
+            "name": "GroupID",
+            "type": "group-id",
+            "constraint": "min 1",
+            "conformance": "M",
+            "description": "Group identifier to view."
+          }
+        ],
+        "effect_on_receipt": "On receipt of the ViewGroup command, the server SHALL perform validation and respond with appropriate status based on group membership."
+      },
+      {
+        "id": "0x02",
+        "name": "GetGroupMembership",
+        "direction": "client => server",
+        "response": "GetGroupMembershipResponse",
+        "access": "FO",
+        "conformance": "M",
+        "description": "The GetGroupMembership command allows a client to inquire about the group membership of the server endpoint, in a number of ways.",
+        "fields": [
+          {
+            "id": 0,
+            "name": "GroupList",
+            "type": "list[group-id]",
+            "constraint": "all[min 1]",
+            "conformance": "M",
+            "description": "List of group IDs to query. If empty, server responds with all group IDs of which the endpoint is a member."
+          }
+        ],
+        "effect_on_receipt": "On receipt of the GetGroupMembership command, the server SHALL respond with group membership information using the GetGroupMembershipResponse command based on the GroupList field contents."
+      },
+      {
+        "id": "0x03",
+        "name": "RemoveGroup",
+        "direction": "client => server",
+        "response": "RemoveGroupResponse",
+        "access": "FM",
+        "conformance": "M",
+        "description": "The RemoveGroup command allows a client to request that the server removes the membership for the server endpoint, if any, in a particular group.",
+        "fields": [
+          {
+            "id": 0,
+            "name": "GroupID",
+            "type": "group-id",
+            "constraint": "min 1",
+            "conformance": "M",
+            "description": "Group identifier to remove the endpoint from."
+          }
+        ],
+        "effect_on_receipt": "On receipt of the RemoveGroup command, the server SHALL validate constraints, remove membership if present, and generate appropriate status response. Additionally, if the Scenes Management cluster is supported on the same endpoint, scenes associated with the indicated group SHALL be removed on that endpoint."
+      },
+      {
+        "id": "0x04",
+        "name": "RemoveAllGroups",
+        "direction": "client => server",
+        "response": "Y",
+        "access": "FM",
+        "conformance": "M",
+        "description": "The RemoveAllGroups command allows a client to direct the server to remove all group associations for the server endpoint.",
+        "fields": [],
+        "effect_on_receipt": "On receipt of this command, the server SHALL remove all group memberships for the server endpoint from the Group Table. If the RemoveAllGroups command was received as unicast and a response is not suppressed, the server SHALL generate a response with the Status field set to SUCCESS. Additionally, if the Scenes Management cluster is supported on the same endpoint, all scenes, except for scenes associated with group ID 0, SHALL be removed on that endpoint."
+      },
+      {
+        "id": "0x05",
+        "name": "AddGroupIfIdentifying",
+        "direction": "client => server",
+        "response": "Y",
+        "access": "FM",
+        "conformance": "M",
+        "description": "The AddGroupIfIdentifying command allows a client to add group membership in a particular group for the server endpoint, on condition that the endpoint is identifying itself. Identifying functionality is controlled using the Identify cluster. For correct operation of the AddGroupIfIdentifying command, any endpoint that supports the Groups server cluster SHALL also support the Identify server cluster. This command might be used to assist configuring group membership in the absence of a commissioning tool.",
+        "fields": [
+          {
+            "id": 0,
+            "name": "GroupID",
+            "type": "group-id",
+            "constraint": "min 1",
+            "conformance": "M",
+            "description": "This field SHALL be used to identify the group and any associated key material to which the server endpoint is to be added."
+          },
+          {
+            "id": 1,
+            "name": "GroupName",
+            "type": "string",
+            "constraint": "max 16",
+            "conformance": "M",
+            "description": "This field MAY be set to a human-readable name for the group. If the client has no name for the group, the GroupName field SHALL be set to the empty string. Support of group names is optional and is indicated by the FeatureMap and NameSupport attribute."
+          }
+        ],
+        "effect_on_receipt": "If the server does not support group names, the GroupName field SHALL be ignored. On receipt of the AddGroupIfIdentifying command, the server SHALL verify it is currently identifying itself before proceeding with group addition logic similar to AddGroup."
+      }
+    ],
+    "server_to_client": [
+      {
+        "id": "0x00",
+        "name": "AddGroupResponse",
+        "direction": "client <= server",
+        "response": "N",
+        "conformance": "M",
+        "description": "The AddGroupResponse is sent by the Groups cluster server in response to an AddGroup command.",
+        "fields": [
+          {
+            "id": 0,
+            "name": "Status",
+            "type": "enum8",
+            "constraint": "desc",
+            "conformance": "M",
+            "description": "This field is set according to the Effect on Receipt section of the AddGroup command."
+          },
+          {
+            "id": 1,
+            "name": "GroupID",
+            "type": "group-id",
+            "constraint": "min 1",
+            "conformance": "M",
+            "description": "This field is set to the GroupID field of the received AddGroup command."
+          }
+        ]
+      },
+      {
+        "id": "0x01",
+        "name": "ViewGroupResponse",
+        "direction": "client <= server",
+        "response": "N",
+        "conformance": "M",
+        "description": "The ViewGroupResponse command is sent by the Groups cluster server in response to a ViewGroup command.",
+        "fields": [
+          {
+            "id": 0,
+            "name": "Status",
+            "type": "enum8",
+            "constraint": "desc",
+            "conformance": "M",
+            "description": "This field is according to the Effect on Receipt section of the ViewGroup command."
+          },
+          {
+            "id": 1,
+            "name": "GroupID",
+            "type": "group-id",
+            "constraint": "min 1",
+            "conformance": "M",
+            "description": "This field is set to the GroupID field of the received ViewGroup command."
+          },
+          {
+            "id": 2,
+            "name": "GroupName",
+            "type": "string",
+            "constraint": "max 16",
+            "conformance": "M",
+            "description": "If the status is SUCCESS, and group names are supported, this field is set to the group name associated with that group in the Group Table; otherwise it is set to the empty string."
+          }
+        ]
+      },
+      {
+        "id": "0x02",
+        "name": "GetGroupMembershipResponse",
+        "direction": "client <= server",
+        "response": "N",
+        "conformance": "M",
+        "description": "The GetGroupMembershipResponse command is sent by the Groups cluster server in response to a GetGroupMembership command.",
+        "fields": [
+          {
+            "id": 0,
+            "name": "Capacity",
+            "type": "uint8",
+            "constraint": "all",
+            "quality": "X",
+            "conformance": "M",
+            "description": "This field SHALL contain the remaining capacity of the Group Table of the node. Values: 0 (No further groups MAY be added), 0 < Capacity < 0xFE (Capacity holds the number of groups that MAY be added), 0xFE (At least 1 further group MAY be added, exact number unknown), null (Unknown if any further groups MAY be added)."
+          },
+          {
+            "id": 1,
+            "name": "GroupList",
+            "type": "list[group-id]",
+            "constraint": "all[min 1]",
+            "conformance": "M",
+            "description": "The GroupList field SHALL contain either the group IDs of all the groups in the Group Table for which the server endpoint is a member of the group (in the case where the GroupList field of the received GetGroupMembership command was empty), or the group IDs of all the groups in the Group Table for which the server endpoint is a member of the group and for which the group ID was included in the GroupList field of the received GetGroupMembership command."
+          }
+        ]
+      },
+      {
+        "id": "0x03",
+        "name": "RemoveGroupResponse",
+        "direction": "client <= server",
+        "response": "N",
+        "conformance": "M",
+        "description": "The RemoveGroupResponse command is generated by the server in response to the receipt of a RemoveGroup command.",
+        "fields": [
+          {
+            "id": 0,
+            "name": "Status",
+            "type": "enum8",
+            "constraint": "desc",
+            "conformance": "M",
+            "description": "This field is according to the Effect on Receipt section of the RemoveGroup command."
+          },
+          {
+            "id": 1,
+            "name": "GroupID",
+            "type": "group-id",
+            "constraint": "min 1",
+            "conformance": "M",
+            "description": "This field is set to the GroupID field of the received RemoveGroup command."
+          }
+        ]
+      }
+    ]
+  },
+  "events": []
+}

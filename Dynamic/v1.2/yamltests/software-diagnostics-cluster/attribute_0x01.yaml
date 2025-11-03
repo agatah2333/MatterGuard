@@ -1,0 +1,60 @@
+config:
+  attribute: '0x01'
+  cluster: software-diagnostics-cluster
+  nodeId: '0x654231'
+name: software-diagnostics-cluster_attribute_0x01_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ID"': '0, "Name": "", "StackFreeCurrent": 0, "StackFreeMinimum": 0, "StackSize":
+      0}'
+  label: Test_Case_Extreme_Values
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ID"': '18446744073709551615, "Name": "ABCDEFGH", "StackFreeCurrent": 4294967295,
+      "StackFreeMinimum": 4294967295, "StackSize": 4294967295}'
+  label: Test_Case_Maximum_Values
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ID"': '12345, "Name": "Special", "StackFreeCurrent": 1024, "StackFreeMinimum":
+      512, "StackSize": 2048}'
+  label: Test_Case_Special_Response_for_Name_Field
+  option: WriteAttribute
+- ActionTime: After ResetWatermarks command
+  Attribute_Change: StackFreeMinimum = 3000
+  ExpectedResponse: StackFreeMinimum should be set to StackFreeCurrent
+  Pre-requisites: ResetWatermarks command issued
+  arguments:
+    '{"ID"': '67890, "Name": "Thread1", "StackFreeCurrent": 3000, "StackFreeMinimum":
+      1000, "StackSize": 5000}'
+  label: Test_Case_ResetWatermarks_Command_Effect
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    For more detailed information, you can refer to the Matter 1.2 Core Specification
+    document【4:1†source】【4:2†source】【4:4†source】【4:10†source】.'
+  arguments:
+    '{"ID"': '54321, "Name": "Faulty", "StackFreeCurrent": 2048, "StackFreeMinimum":
+      1024, "StackSize": 4096}'
+  label: Test_Case_Special_Response_for_FaultRecording_Field
+  option: WriteAttribute

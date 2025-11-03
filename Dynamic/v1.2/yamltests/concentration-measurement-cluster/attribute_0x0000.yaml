@@ -1,0 +1,41 @@
+config:
+  attribute: '0x0000'
+  cluster: concentration-measurement-cluster
+  nodeId: '0x654231'
+name: concentration-measurement-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '`MeasuredValue` will be set to 0.'
+  ExpectedResponse: Measurement is too low to be measured.
+  Pre-requisites: None
+  arguments:
+    MeasuredValue: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '`MeasuredValue` will be set to 65534.'
+  ExpectedResponse: Measurement is at the maximum limit.
+  Pre-requisites: None
+  arguments:
+    MeasuredValue: 65534
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '`MeasuredValue` will be set to null.'
+  ExpectedResponse: Measurement is unknown.
+  Pre-requisites: None
+  arguments: {}
+  label: Test_Case_Null_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '`MeasuredValue` will be set to 32767.'
+  ExpectedResponse: Measurement is at a special threshold.
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the `MeasuredValue`
+    field and the special responses mentioned in the description of the effect【4:0†source】【4:3†source】【4:15†source】【4:16†source】.'
+  arguments:
+    MeasuredValue: 32767
+  label: Test_Case_Special_Response_Value
+  option: WriteAttribute

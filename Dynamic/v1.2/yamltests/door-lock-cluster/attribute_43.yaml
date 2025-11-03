@@ -1,0 +1,59 @@
+config:
+  attribute: '43'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_43_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"SoundVolume": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"SoundVolume"': 0}
+  label: Test_Case_Extreme_Value_(Minimum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"SoundVolume": 3}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"SoundVolume"': 3}
+  label: Test_Case_Extreme_Value_(Maximum)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"SoundVolume": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"SoundVolume"': 0}
+  label: Test_Case_Special_Response_(Silent_Mode)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"SoundVolume": 1}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"SoundVolume"': 1}
+  label: Test_Case_Special_Response_(Low_Volume)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"SoundVolume": 2}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"SoundVolume"': 2}
+  label: Test_Case_Special_Response_(High_Volume)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"SoundVolume": 3}'
+  ExpectedResponse: <success>
+  Pre-requisites: '<none>
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    '{"SoundVolume"': 3}
+  label: Test_Case_Special_Response_(Medium_Volume)
+  option: WriteAttribute

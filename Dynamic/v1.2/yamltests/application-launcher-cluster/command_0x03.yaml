@@ -1,0 +1,63 @@
+config:
+  cluster: application-launcher-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: application-launcher-cluster_command_0x03_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: The application was successfully launched, stopped, or hidden.
+  arguments:
+    '{"Status"': '0, "Data": ""}'
+  label: Test_Case_Extreme_Value_(Success)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: AppNotAvailable
+  Pre-requisites: The requested application is not available on the platform.
+  arguments:
+    '{"Status"': '1, "Data": ""}'
+  label: Test_Case_Extreme_Value_(AppNotAvailable)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: SystemBusy
+  Pre-requisites: The video platform is currently unable to honor the command due
+    to being busy.
+  arguments:
+    '{"Status"': '2, "Data": ""}'
+  label: Test_Case_Extreme_Value_(SystemBusy)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: The application was successfully launched, stopped, or hidden, and
+    additional data is provided.
+  arguments:
+    '{"Status"': '0, "Data": "OptionalData"}'
+  label: Test_Case_Special_Response_(Success_with_Data)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: AppNotAvailable
+  Pre-requisites: The requested application is not available on the platform, and
+    additional data is provided indicating the reason.
+  arguments:
+    '{"Status"': '1, "Data": "AppNotFound"}'
+  label: Test_Case_Special_Response_(AppNotAvailable_with_Data)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: SystemBusy
+  Pre-requisites: 'The video platform is currently unable to honor the command due
+    to being busy, and additional data is provided indicating the reason.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"Status"': '2, "Data": "TryLater"}'
+  label: Test_Case_Special_Response_(SystemBusy_with_Data)
+  option: SendCommand

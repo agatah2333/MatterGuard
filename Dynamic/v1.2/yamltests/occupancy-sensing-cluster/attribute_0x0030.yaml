@@ -1,0 +1,49 @@
+config:
+  attribute: '0x0030'
+  cluster: occupancy-sensing-cluster
+  nodeId: '0x654231'
+name: occupancy-sensing-cluster_attribute_0x0030_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: PhysicalContactOccupiedToUnoccupiedDelay = 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"PhysicalContactOccupiedToUnoccupiedDelay"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: PhysicalContactOccupiedToUnoccupiedDelay = 65535
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"PhysicalContactOccupiedToUnoccupiedDelay"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: PhysicalContactOccupiedToUnoccupiedDelay = null
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"PhysicalContactOccupiedToUnoccupiedDelay"': null}
+  label: Test_Case_Special_Null_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: PhysicalContactOccupiedToUnoccupiedDelay = 10
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"PhysicalContactOccupiedToUnoccupiedDelay"': 10}
+  label: Test_Case_Transition_Delay_of_10_Seconds
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: PhysicalContactOccupiedToUnoccupiedDelay = 300
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    ### Summary'
+  arguments:
+    '{"PhysicalContactOccupiedToUnoccupiedDelay"': 300}
+  label: Test_Case_Transition_Delay_of_300_Seconds
+  option: WriteAttribute

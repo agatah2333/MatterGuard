@@ -1,0 +1,79 @@
+config:
+  attribute: '0x0000'
+  cluster: laundry-washer-mode-cluster
+  nodeId: '0x654231'
+name: laundry-washer-mode-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: SpinSpeeds will be set to ["Low"]
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    SpinSpeeds:
+    - Low
+  label: Test_Case_Minimum_Constraint
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: SpinSpeeds will be set to ["Speed1", "Speed2", "Speed3", "Speed4",
+    "Speed5", "Speed6", "Speed7", "Speed8", "Speed9", "Speed10", "Speed11", "Speed12",
+    "Speed13", "Speed14", "Speed15", "Speed16"]
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    SpinSpeeds:
+    - Speed1
+    - Speed2
+    - Speed3
+    - Speed4
+    - Speed5
+    - Speed6
+    - Speed7
+    - Speed8
+    - Speed9
+    - Speed10
+    - Speed11
+    - Speed12
+    - Speed13
+    - Speed14
+    - Speed15
+    - Speed16
+  label: Test_Case_Maximum_Constraint
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: None
+  arguments:
+    SpinSpeeds:
+    - Speed1
+    - Speed2
+    - Speed3
+    - Speed4
+    - Speed5
+    - Speed6
+    - Speed7
+    - Speed8
+    - Speed9
+    - Speed10
+    - Speed11
+    - Speed12
+    - Speed13
+    - Speed14
+    - Speed15
+    - Speed16
+    - Speed17
+  label: Test_Case_Exceeding_Maximum_Constraint
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the `SpinSpeeds`
+    field and the values that could result in special responses as mentioned in the
+    description of the effect【4:0†source】.'
+  arguments:
+    SpinSpeeds: []
+  label: Test_Case_Special_Response_-_Null_Value
+  option: WriteAttribute

@@ -1,0 +1,199 @@
+config:
+  node_id: 305414945
+  cluster: '0x0005'
+  endpoint: 1
+tests:
+- label: test_groupid_minimum_boundary
+  cluster: '0x0005'
+  command: '0x00'
+  arguments:
+    GroupID: 0
+    SceneID: 0
+    TransitionTime: 0
+    SceneName: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_groupid_maximum_boundary
+  cluster: '0x0005'
+  command: '0x00'
+  arguments:
+    GroupID: 65535
+    SceneID: 0
+    TransitionTime: 0
+    SceneName: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_groupid_midrange
+  cluster: '0x0005'
+  command: '0x00'
+  arguments:
+    GroupID: 32767
+    SceneID: 0
+    TransitionTime: 0
+    SceneName: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_sceneid_minimum_boundary
+  cluster: '0x0005'
+  command: '0x00'
+  arguments:
+    GroupID: 0
+    SceneID: 0
+    TransitionTime: 0
+    SceneName: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_sceneid_maximum_boundary
+  cluster: '0x0005'
+  command: '0x00'
+  arguments:
+    GroupID: 0
+    SceneID: 255
+    TransitionTime: 0
+    SceneName: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_sceneid_midrange
+  cluster: '0x0005'
+  command: '0x00'
+  arguments:
+    GroupID: 0
+    SceneID: 127
+    TransitionTime: 0
+    SceneName: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_sceneid_above_maximum
+  cluster: '0x0005'
+  command: '0x00'
+  arguments:
+    GroupID: 0
+    SceneID: 256
+    TransitionTime: 0
+    SceneName: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_transitiontime_minimum_boundary
+  cluster: '0x0005'
+  command: '0x00'
+  arguments:
+    GroupID: 0
+    SceneID: 0
+    TransitionTime: 0
+    SceneName: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_transitiontime_maximum_boundary
+  cluster: '0x0005'
+  command: '0x00'
+  arguments:
+    GroupID: 0
+    SceneID: 0
+    TransitionTime: 65535
+    SceneName: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_transitiontime_midrange
+  cluster: '0x0005'
+  command: '0x00'
+  arguments:
+    GroupID: 0
+    SceneID: 0
+    TransitionTime: 32767
+    SceneName: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+execution_metadata:
+  estimated_duration: 300
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

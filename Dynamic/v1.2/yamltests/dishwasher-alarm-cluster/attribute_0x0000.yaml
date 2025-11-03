@@ -1,0 +1,28 @@
+config:
+  attribute: '0x0000'
+  cluster: dishwasher-alarm-cluster
+  nodeId: '0x654231'
+name: dishwasher-alarm-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Mask = 0x00000000
+  ExpectedResponse: No alarms enabled
+  Pre-requisites: 'None
+
+
+    **Test Case 1.2**'
+  arguments:
+    '{"Mask"': 0x00000000}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Mask = 0x00000001
+  ExpectedResponse: InflowError alarm enabled
+  Pre-requisites: 'None
+
+
+    **Test Case 2.2**'
+  arguments:
+    '{"Mask"': 0x00000001}
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: WriteAttribute

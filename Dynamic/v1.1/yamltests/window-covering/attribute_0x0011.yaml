@@ -1,0 +1,14 @@
+config:
+  attribute: '0x0011'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0011_v1.1.0.0
+tests:
+- arguments: {}
+  option: WriteAttribute
+- arguments: {}
+  option: WriteAttribute
+- arguments: {}
+  option: WriteAttribute
+- arguments: {}
+  option: WriteAttribute

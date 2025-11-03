@@ -1,0 +1,47 @@
+config:
+  attribute: '0x001B'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x001B_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: '`NumberOfPrimaries` > 2'
+  arguments:
+    '{"Primary3Intensity"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: '`NumberOfPrimaries` > 2'
+  arguments:
+    '{"Primary3Intensity"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: '`NumberOfPrimaries` > 2'
+  arguments:
+    '{"Primary3Intensity"': 128}
+  label: Test_Case_Mid-range_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: '`NumberOfPrimaries` > 2
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    a mid-range value to ensure the attribute behaves as expected across its entire
+    range. The special value test case ensures that boundary conditions are also handled
+    correctly.
+
+
+    For more details, refer to the Matter Application Cluster Specification document【4:0†source】.'
+  arguments:
+    '{"Primary3Intensity"': 1}
+  label: Test_Case_Special_Value_(Boundary_Condition)
+  option: WriteAttribute

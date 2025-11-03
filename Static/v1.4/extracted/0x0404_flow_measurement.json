@@ -1,0 +1,86 @@
+{
+  "source_file": "Flow Measurement_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0404",
+        "name": "Flow Measurement",
+        "description": "Provides flow rate measurement capabilities with 0.1 m³/h resolution",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "MeasuredValue",
+            "dataType": "uint16",
+            "valueRange": "MinMeasuredValue-MaxMeasuredValue",
+            "description": "Flow rate in 0.1 m³/h units (MeasuredValue = 10 × Flow)",
+            "privilege": "R",
+            "writable": false,
+            "specialValues": {
+              "0xFFFF": "Invalid measurement"
+            }
+          },
+          {
+            "id": "0x0001",
+            "name": "MinMeasuredValue",
+            "dataType": "uint16",
+            "valueRange": "0-65533",
+            "description": "Minimum measurable flow rate (0.0-6553.3 m³/h)",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "MaxMeasuredValue",
+            "dataType": "uint16",
+            "valueRange": "MinMeasuredValue+1-65534",
+            "description": "Maximum measurable flow rate",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "Tolerance",
+            "dataType": "uint16",
+            "valueRange": "0-2048",
+            "description": "Measurement tolerance in 0.1 m³/h units",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "dataTypes": {
+          "FlowValueStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "RawValue": "uint16",
+              "FlowRate": {
+                "calculation": "RawValue / 10",
+                "unit": "m³/h",
+                "precision": 0.1
+              },
+              "Validity": {
+                "type": "bool",
+                "mapping": {
+                  "true": "Valid",
+                  "false": "Invalid (0xFFFF)"
+                }
+              }
+            }
+          }
+        },
+        "commands": [],
+        "events": [],
+        "validationRules": [
+          {
+            "rule": "MaxMeasuredValue > MinMeasuredValue + 1",
+            "errorCode": "INVALID_RANGE"
+          },
+          {
+            "rule": "Tolerance ≤ 2048",
+            "errorCode": "TOLERANCE_OVERFLOW"
+          }
+        ]
+      }
+    ]
+  }
+}

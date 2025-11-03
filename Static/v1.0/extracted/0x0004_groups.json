@@ -1,0 +1,125 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0004",
+    "name": "Groups",
+    "description": "The Groups cluster manages, per endpoint, the content of the node-wide Group Table that is part of the underlying Interaction Model."
+  },
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "AddGroup",
+      "direction": "client",
+      "response": "AddGroupResponse",
+      "privilege": "O",
+      "side": "client",
+      "parameters": [
+        {
+          "name": "GroupID",
+          "type": "group-id",
+          "constraint": "[0, 65535]",
+          "description": "Group identifier"
+        },
+        {
+          "name": "GroupName",
+          "type": "string",
+          "constraint": "max 16",
+          "description": "Human readable name for the group"
+        }
+      ]
+    },
+    {
+      "id": "0x01",
+      "name": "ViewGroup",
+      "direction": "client",
+      "response": "ViewGroupResponse",
+      "privilege": "O",
+      "side": "client",
+      "parameters": [
+        {
+          "name": "GroupID",
+          "type": "group-id",
+          "constraint": "[0, 65535]",
+          "description": "Group identifier"
+        }
+      ]
+    },
+    {
+      "id": "0x02",
+      "name": "GetGroupMembership",
+      "direction": "client",
+      "response": "GetGroupMembershipResponse",
+      "privilege": "O",
+      "side": "client",
+      "parameters": [
+        {
+          "name": "GroupList",
+          "type": "list",
+          "constraint": "max 255",
+          "description": "List of group identifiers"
+        }
+      ]
+    },
+    {
+      "id": "0x03",
+      "name": "RemoveGroup",
+      "direction": "client",
+      "response": "RemoveGroupResponse",
+      "privilege": "O",
+      "side": "client",
+      "parameters": [
+        {
+          "name": "GroupID",
+          "type": "group-id",
+          "constraint": "[0, 65535]",
+          "description": "Group identifier"
+        }
+      ]
+    },
+    {
+      "id": "0x04",
+      "name": "RemoveAllGroups",
+      "direction": "client",
+      "response": null,
+      "privilege": "O",
+      "side": "client",
+      "parameters": []
+    },
+    {
+      "id": "0x05",
+      "name": "AddGroupIfIdentifying",
+      "direction": "client",
+      "response": null,
+      "privilege": "O",
+      "side": "client",
+      "parameters": [
+        {
+          "name": "GroupID",
+          "type": "group-id",
+          "constraint": "[0, 65535]",
+          "description": "Group identifier"
+        },
+        {
+          "name": "GroupName",
+          "type": "string",
+          "constraint": "max 16",
+          "description": "Human readable name for the group"
+        }
+      ]
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "NameSupport",
+      "type": "map8",
+      "constraint": "desc",
+      "quality": "",
+      "default": "X",
+      "access": "R",
+      "conformance": "M",
+      "description": "Indicates whether group names are supported"
+    }
+  ],
+  "events": [],
+  "derived_datatypes": []
+}

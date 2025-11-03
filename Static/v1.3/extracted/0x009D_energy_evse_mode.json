@@ -1,0 +1,68 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x009D",
+    "name": "Energy EVSE Mode",
+    "description": "This cluster is derived from the Mode Base cluster which also defines a namespace for the operation of EVSE devices."
+  },
+  "derived_datatypes": [
+    {
+      "type": "enum",
+      "name": "ModeTag",
+      "base_data_type": "ENUM16",
+      "description": "The derived cluster specific ModeTag values.",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "Manual",
+            "value": "0x4000",
+            "description": "While in this mode, the EVSE needs to be sent an EnableEvseCharging or EnableEvseDischarging command to make the EVSE start charging or discharging."
+          },
+          {
+            "name": "TimeOfUse",
+            "value": "0x4001",
+            "description": "While in this mode, the EVSE will attempt to automatically start charging based on the user's charging targets and a Time of Use tariff to charge at the cheapest times of the day."
+          },
+          {
+            "name": "SolarCharging",
+            "value": "0x4002",
+            "description": "While in this mode, the EVSE will attempt to automatically start charging based on available excess solar PV generation, limiting the charging power to avoid imported energy from the grid."
+          }
+        ]
+      }
+    }
+  ],
+  "commands": [],
+  "attributes": [],
+  "events": [],
+  "mode_constraints": {
+    "description": "The table below lists the changes relative to the Mode Base cluster for the fields of the ModeOptionStruct type.",
+    "constraints": [
+      {
+        "field_id": "2",
+        "field_name": "ModeTags",
+        "constraint": "1 to 8"
+      }
+    ],
+    "requirements": [
+      "At least one entry in the SupportedModes attribute SHALL include the Manual mode tag in the ModeTags field list."
+    ]
+  },
+  "mode_examples": [
+    {
+      "mode_name": "Manual",
+      "tags": ["0x4000 (Manual)"]
+    },
+    {
+      "mode_name": "Auto-scheduled",
+      "tags": ["0x4001 (TimeOfUse)"]
+    },
+    {
+      "mode_name": "Solar",
+      "tags": ["0x4002 (SolarCharging)"]
+    },
+    {
+      "mode_name": "Auto-scheduled with Solar charging",
+      "tags": ["0x4001 (TimeOfUse)", "0x4002 (SolarCharging)"]
+    }
+  ]
+}

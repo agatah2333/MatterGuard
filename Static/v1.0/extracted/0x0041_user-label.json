@@ -1,0 +1,45 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0041",
+    "name": "User Label",
+    "description": "This cluster provides a feature to tag an endpoint with zero or more labels."
+  },
+  "derived_datatypes": [
+    {
+      "type": "struct",
+      "name": "LabelStruct",
+      "base_data_type": "STRUCT",
+      "value_range": {
+        "struct_fields": [
+          {
+            "name": "Label",
+            "data_type": "string",
+            "description": "The Label or Value semantic is not defined here. Label examples: 'room', 'zone', 'group', 'direction'."
+          },
+          {
+            "name": "Value",
+            "data_type": "string",
+            "description": "The Value is a discriminator for a Label that may have multiple instances. Label:Value examples: 'room':'bedroom 2', 'orientation':'North', 'floor':'2', 'direction':'up'"
+          }
+        ]
+      }
+    }
+  ],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "LabelList",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "4",
+        "max": "255"
+      },
+      "description": "This is a list of string tuples. An implementation SHALL support at least 4 list entries per node for all User Label cluster instances on the node.",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

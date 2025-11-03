@@ -1,0 +1,64 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0507",
+    "name": "Media Input",
+    "description": "Provides an interface for controlling the Input Selector on a media device such as a Video Player."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "SelectInput",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "ShowInputStatus",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x02",
+      "name": "HideInputStatus",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x03",
+      "name": "RenameInput",
+      "parameters": [],
+      "privilege": "A",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "InputList",
+      "data_type": "list[InputInfo]",
+      "value_range": {},
+      "description": "This list provides the media inputs supported by the device.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "CurrentInput",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "This field contains the value of the index field of the currently selected InputInfo.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

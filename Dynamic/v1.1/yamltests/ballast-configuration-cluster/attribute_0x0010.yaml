@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0010'
+  cluster: ballast-configuration-cluster
+  nodeId: '0x654231'
+name: ballast-configuration-cluster_attribute_0x0010_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '- `MinLevel`: 1'
+  ExpectedResponse: Success
+  Pre-requisites: '- `PhysicalMinLevel` <= 1 <= `MaxLevel`'
+  arguments:
+    MinLevel: 1
+  label: Test_Case_Minimum_Value_of_MinLevel
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `MinLevel`: 254'
+  ExpectedResponse: Success
+  Pre-requisites: '- `PhysicalMinLevel` <= 254 <= `MaxLevel`'
+  arguments:
+    MinLevel: 254
+  label: Test_Case_Maximum_Value_of_MinLevel
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `MinLevel`: Not changed'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: '- `PhysicalMinLevel` > 1'
+  arguments:
+    MinLevel: <PhysicalMinLevel - 1>
+  label: Test_Case_Value_Below_PhysicalMinLevel
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '- `MinLevel`: Not changed'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: '- `MaxLevel` < 254
+
+
+    These test cases cover the extreme values of the constraints of the `MinLevel`
+    field and the values that could result in special responses as mentioned in the
+    description of the effect【4:0†source】.'
+  arguments:
+    MinLevel: <MaxLevel + 1>
+  label: Test_Case_Value_Above_MaxLevel
+  option: WriteAttribute

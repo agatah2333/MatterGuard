@@ -1,0 +1,85 @@
+{
+  "source_file": "Energy Preference_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x009B",
+        "name": "Energy Preference",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "EnergyBalances",
+            "dataType": "list[BalanceStruct]",
+            "valueRange": "2-10",
+            "description": "This attribute SHALL indicate a list of BalanceStructs, each representing a step along a linear scale of relative priorities.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentEnergyBalance",
+            "dataType": "uint8",
+            "valueRange": "",
+            "description": "This attribute SHALL indicate the current preference of the user for balancing different priorities during device use.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "EnergyPriorities",
+            "dataType": "list[EnergyPriorityEnum]",
+            "valueRange": "2",
+            "description": "This attribute SHALL indicate two extremes for interpreting the values in the EnergyBalances attribute.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "LowPowerModeSensitivities",
+            "dataType": "list[BalanceStruct]",
+            "valueRange": "2-10",
+            "description": "This attribute SHALL indicate a list of BalanceStructs, each representing a condition or set of conditions for the device to enter a low power mode.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0004",
+            "name": "CurrentLowPowerModeSensitivity",
+            "dataType": "uint8",
+            "valueRange": "",
+            "description": "This attribute SHALL indicate the current preference of the user for determining when the device should enter a low power mode.",
+            "privilege": "RW",
+            "writable": true
+          }
+        ],
+        "commands": [],
+        "events": [],
+        "dataTypes": {
+          "EnergyPriorityEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Unspecified",
+              "1": "PerformancePriority",
+              "2": "Balanced",
+              "3": "EnergySavingPriority"
+            }
+          },
+          "BalanceStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "Step": {
+                "type": "float",
+                "valueRange": "percent all"
+              },
+              "Label": {
+                "type": "string",
+                "valueRange": "max 64"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

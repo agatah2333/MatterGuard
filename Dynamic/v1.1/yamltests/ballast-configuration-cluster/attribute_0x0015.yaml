@@ -1,0 +1,42 @@
+config:
+  attribute: '0x0015'
+  cluster: ballast-configuration-cluster
+  nodeId: '0x654231'
+name: ballast-configuration-cluster_attribute_0x0015_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `BallastFactorAdjustment`: 100'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    BallastFactorAdjustment: 100
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `BallastFactorAdjustment`: MS'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    BallastFactorAdjustment: MS (Manufacturer Specific maximum value)
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `BallastFactorAdjustment`: null'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments: {}
+  label: Test_Case_Null_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '- `BallastFactorAdjustment`: No change'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:8†source】.'
+  arguments:
+    BallastFactorAdjustment: Value outside the manufacturer specified range
+  label: Test_Case_Constraint_Error
+  option: WriteAttribute

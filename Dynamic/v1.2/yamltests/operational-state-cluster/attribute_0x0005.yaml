@@ -1,0 +1,32 @@
+config:
+  attribute: '0x0005'
+  cluster: operational-state-cluster
+  nodeId: '0x654231'
+name: operational-state-cluster_attribute_0x0005_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: OperationalState set to Running
+  ExpectedResponse: NoError
+  Pre-requisites: 'Device should be in a non-error state
+
+
+    **Test Case 1.2: Maximum Values**'
+  arguments:
+    ErrorStateDetails: '""'
+    ErrorStateID: '0x00'
+    ErrorStateLabel: '""'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: OperationalState set to Running
+  ExpectedResponse: NoError
+  Pre-requisites: 'Device should be in a non-error state
+
+
+    **Test Case 2.2: UnableToStartOrResume**'
+  arguments:
+    ErrorStateDetails: '""'
+    ErrorStateID: '0x00'
+    ErrorStateLabel: '""'
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: WriteAttribute

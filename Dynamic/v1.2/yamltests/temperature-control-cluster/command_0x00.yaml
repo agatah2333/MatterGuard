@@ -1,0 +1,46 @@
+config:
+  cluster: temperature-control-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: temperature-control-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: <current time>
+  Attribute_Change: '{"TemperatureSetpoint": <MinTemperature>}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: <None>
+  arguments:
+    '{"TargetTemperature"': '<MinTemperature>, "TargetTemperatureLevel": <0>}'
+  label: Test_Case_Minimum_TargetTemperature
+  option: SendCommand
+- ActionTime: <current time>
+  Attribute_Change: '{"TemperatureSetpoint": <MaxTemperature>}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: <None>
+  arguments:
+    '{"TargetTemperature"': '<MaxTemperature>, "TargetTemperatureLevel": <length of
+      SupportedTemperatureLevels - 1>}'
+  label: Test_Case_Maximum_TargetTemperature
+  option: SendCommand
+- ActionTime: <current time>
+  Attribute_Change: '{"TemperatureSetpoint": <unchanged>}'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: <Step attribute is supported and (MinTemperature + 1) % Step !=
+    0>
+  arguments:
+    '{"TargetTemperature"': '<MinTemperature + 1>, "TargetTemperatureLevel": <0>}'
+  label: Test_Case_TargetTemperature_causing_CONSTRAINT_ERROR
+  option: SendCommand
+- ActionTime: <current time>
+  Attribute_Change: '{"SelectedTemperatureLevel": <unchanged>}'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: '<None>
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:17†source】.'
+  arguments:
+    '{"TargetTemperature"': '<MinTemperature>, "TargetTemperatureLevel": <length of
+      SupportedTemperatureLevels>}'
+  label: Test_Case_TargetTemperatureLevel_out_of_bounds
+  option: SendCommand

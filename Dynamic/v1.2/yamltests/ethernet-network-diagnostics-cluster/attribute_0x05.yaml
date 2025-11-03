@@ -1,0 +1,42 @@
+config:
+  attribute: '0x05'
+  cluster: ethernet-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: ethernet-network-diagnostics-cluster_attribute_0x05_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: CollisionCount will be set to 0
+  ExpectedResponse: Success
+  Pre-requisites: Node should be in a state where it can accept attribute writes.
+  arguments:
+    '{"CollisionCount"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: CollisionCount will be set to 18446744073709551615
+  ExpectedResponse: Success
+  Pre-requisites: Node should be in a state where it can accept attribute writes.
+  arguments:
+    '{"CollisionCount"': 18446744073709551615} (maximum value for uint64)
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: CollisionCount will be set to 0
+  ExpectedResponse: Success
+  Pre-requisites: Node should be in a state where it can accept attribute writes.
+  arguments:
+    '{"CollisionCount"': 0}
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: CollisionCount will be set to 1
+  ExpectedResponse: Success
+  Pre-requisites: 'Node should be in a state where it can accept attribute writes.
+
+
+    These test cases cover the extreme values of the `CollisionCount` attribute and
+    the values that could result in special responses as per the attribute''s description.'
+  arguments:
+    '{"CollisionCount"': 1}
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: WriteAttribute

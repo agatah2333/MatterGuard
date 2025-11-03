@@ -1,0 +1,29 @@
+config:
+  attribute: '0x0001'
+  cluster: dishwasher-alarm-cluster
+  nodeId: '0x654231'
+name: dishwasher-alarm-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: No alarms are latched.
+  Pre-requisites: 'Ensure no alarms are active.
+
+
+    ##### Test Case 1.2'
+  arguments:
+    '{"Latch"': 0x00000000}
+  label: Test_Case_Extreme_Values
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: The first alarm is latched and will not reset to inactive without
+    an explicit reset.
+  Pre-requisites: 'Ensure the first alarm is active.
+
+
+    ##### Test Case 2.2'
+  arguments:
+    '{"Latch"': 0x00000001}
+  label: Test_Case_Special_Responses
+  option: WriteAttribute

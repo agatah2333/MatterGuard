@@ -1,0 +1,31 @@
+config:
+  attribute: '0x01'
+  cluster: general-commissioning-cluster
+  nodeId: '0x654231'
+name: general-commissioning-cluster_attribute_0x01_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Breadcrumb = 0
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    ##### Test Case 1.2'
+  arguments:
+    '{"Breadcrumb"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Breadcrumb = 123456789
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the Breadcrumb
+    field and a special value that could be used in typical scenarios. The expected
+    responses are based on the assumption that the attribute write operations are
+    successful within the valid range.'
+  arguments:
+    '{"Breadcrumb"': 123456789}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

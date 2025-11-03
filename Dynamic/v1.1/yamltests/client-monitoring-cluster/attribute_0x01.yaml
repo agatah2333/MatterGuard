@@ -1,0 +1,53 @@
+config:
+  attribute: '0x01'
+  cluster: client-monitoring-cluster
+  nodeId: '0x654231'
+name: client-monitoring-cluster_attribute_0x01_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: IdentifyType = 0x00
+  ExpectedResponse: No presentation
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyType"': 0x00}
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: IdentifyType = 0x01
+  ExpectedResponse: Light output of a lighting product
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyType"': 0x01}
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: IdentifyType = 0x02
+  ExpectedResponse: Typically a small LED
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyType"': 0x02}
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: IdentifyType = 0x03
+  ExpectedResponse: Audible beep
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyType"': 0x03}
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: IdentifyType = 0x04
+  ExpectedResponse: Presentation will be visible on display screen
+  Pre-requisites: None
+  arguments:
+    '{"IdentifyType"': 0x04}
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: IdentifyType = 0x05
+  ExpectedResponse: Presentation will be conveyed by actuator functionality such as
+    through a window blind operation or in-wall relay
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values and special responses for the `IdentifyType`
+    attribute in the client-monitoring-cluster cluster【4:2†source】.'
+  arguments:
+    '{"IdentifyType"': 0x05}
+  option: WriteAttribute

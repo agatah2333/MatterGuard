@@ -1,0 +1,37 @@
+config:
+  attribute: '0x00'
+  cluster: software-diagnostics-cluster
+  nodeId: '0x654231'
+name: software-diagnostics-cluster_attribute_0x00_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: N/A
+  Pre-requisites: N/A
+  arguments:
+    ID: 0
+    Name: '""'
+    StackFreeCurrent: 0
+    StackFreeMinimum: 0
+    StackSize: 0
+  label: Test_Case_Extreme_Values
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: N/A
+  Pre-requisites: 'N/A
+
+
+    These test cases cover the extreme values and special responses for the `ThreadMetrics`
+    attribute in the Software Diagnostics Cluster.
+
+
+    For more detailed information, you can refer to the Matter specification document【4:0†source】.'
+  arguments:
+    ID: 1
+    Name: '"Thread1"'
+    StackFreeCurrent: 1024
+    StackFreeMinimum: 512
+    StackSize: 2048
+  label: Test_Case_Special_Responses
+  option: WriteAttribute

@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0507",
+    "name": "Media Input",
+    "description": "Cluster for Media Input functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

@@ -1,0 +1,109 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0049",
+    "name": "Oven Mode",
+    "description": "This cluster is derived from the Mode Base cluster, defining additional mode tags and namespaced enumerated values for oven devices.",
+    "classification": {
+      "hierarchy": "Mode Base",
+      "role": "Application",
+      "scope": "Endpoint",
+      "pics_code": "OTCCM"
+    },
+    "revision_history": [
+      {
+        "revision": 1,
+        "description": "Initial Release"
+      }
+    ]
+  },
+  "features": {},
+  "derived_data_types": {
+    "structs": {
+      "ModeOptionStruct": {
+        "description": "Derived from Mode Base cluster",
+        "fields": {
+          "2": {
+            "name": "ModeTags",
+            "type": "list[ModeTagStruct]",
+            "constraint": "1 to 8",
+            "conformance": "M"
+          }
+        }
+      }
+    }
+  },
+  "attributes": {
+    "note": "This cluster inherits all attributes from the Mode Base cluster"
+  },
+  "commands": {
+    "note": "This cluster inherits all commands from the Mode Base cluster"
+  },
+  "events": {
+    "note": "This cluster inherits all events from the Mode Base cluster"
+  },
+  "cluster_namespace": {
+    "mode_tags": {
+      "0x4000": {
+        "name": "Bake",
+        "description": "This mode sets the device into baking mode for baking food items."
+      },
+      "0x4001": {
+        "name": "Convection",
+        "description": "This mode sets the device into convection mode which creates an airflow within the device during the cooking duration."
+      },
+      "0x4002": {
+        "name": "Grill",
+        "description": "This mode sets the device into grill mode for grilling food items. This is the same as Broil for many regions."
+      },
+      "0x4003": {
+        "name": "Roast",
+        "description": "This mode sets the device into roast mode for roasting food items."
+      },
+      "0x4004": {
+        "name": "Clean",
+        "description": "This mode sets the device into cleaning mode to clean the internal components of the appliance."
+      },
+      "0x4005": {
+        "name": "Convection Bake",
+        "description": "This mode sets the device into convection bake mode which creates an airflow within the device during the baking duration."
+      },
+      "0x4006": {
+        "name": "Convection Roast",
+        "description": "This mode sets the device into convection roast mode which creates an airflow within the device during the roasting duration."
+      },
+      "0x4007": {
+        "name": "Warming",
+        "description": "This mode sets the device into a warming mode which begins warming the cavity."
+      },
+      "0x4008": {
+        "name": "Proofing",
+        "description": "This mode sets the device into proofing mode which creates an environment ready for proofing."
+      },
+      "0x4009": {
+        "name": "Steam",
+        "description": "Steam mode for cooking."
+      }
+    }
+  },
+  "mode_constraints": {
+    "required_modes": "At least one entry in the SupportedModes attribute SHALL include the Bake mode tag in the ModeTags field list."
+  },
+  "mode_examples": [
+    {
+      "mode": "Convection",
+      "tags": ["0x4001 (Convection)"]
+    },
+    {
+      "mode": "Bake",
+      "tags": ["0x4000 (Bake)"]
+    },
+    {
+      "mode": "Bake and Warm",
+      "tags": ["0x4000 (Bake)", "0x4007 (Warming)"]
+    },
+    {
+      "mode": "Convection Cook and Clean",
+      "tags": ["0x4001 (Convection)", "0x4004 (Clean)"]
+    }
+  ]
+}

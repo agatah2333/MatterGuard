@@ -1,0 +1,44 @@
+config:
+  cluster: door-lock-cluster
+  command: '3'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_3_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: The door will unlock and relock immediately.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"Timeout"': '0, "PINCode": ""}'
+  label: Test_Case_Minimum_Timeout_Value
+  option: SendCommand
+- ActionTime: 65535
+  Attribute_Change: The door will unlock and relock after 65535 seconds.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"Timeout"': '65535, "PINCode": ""}'
+  label: Test_Case_Maximum_Timeout_Value
+  option: SendCommand
+- ActionTime: 60
+  Attribute_Change: None, as the operation will fail due to invalid PIN.
+  ExpectedResponse: FAILURE
+  Pre-requisites: RequirePINForRemoteOperation attribute is True.
+  arguments:
+    '{"Timeout"': '60, "PINCode": "1234"}'
+  label: Test_Case_Invalid_PIN_Code
+  option: SendCommand
+- ActionTime: 120
+  Attribute_Change: The door will unlock and relock after 120 seconds.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'RequirePINForRemoteOperation attribute is True, and "5678" is a
+    valid PIN.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:3†source】.'
+  arguments:
+    '{"Timeout"': '120, "PINCode": "5678"}'
+  label: Test_Case_Valid_PIN_Code
+  option: SendCommand

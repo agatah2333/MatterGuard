@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0037'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0037_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: UnoccupiedSetback set to UnoccupiedSetbackMin
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Ensure UnoccupiedSetbackMin is defined and accessible.
+  arguments:
+    '{"UnoccupiedSetback"': UnoccupiedSetbackMin}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: UnoccupiedSetback set to UnoccupiedSetbackMax
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Ensure UnoccupiedSetbackMax is defined and accessible.
+  arguments:
+    '{"UnoccupiedSetback"': UnoccupiedSetbackMax}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: UnoccupiedSetback set to UnoccupiedSetbackMin
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Ensure UnoccupiedSetbackMin is defined and accessible.
+  arguments:
+    '{"UnoccupiedSetback"': UnoccupiedSetbackMin - 1}
+  label: Test_Case_Below_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: UnoccupiedSetback set to UnoccupiedSetbackMax
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Ensure UnoccupiedSetbackMax is defined and accessible.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:1†source】.'
+  arguments:
+    '{"UnoccupiedSetback"': UnoccupiedSetbackMax + 1}
+  label: Test_Case_Above_Maximum_Value
+  option: WriteAttribute

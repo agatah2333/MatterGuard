@@ -1,0 +1,49 @@
+config:
+  attribute: '0x0002'
+  cluster: administrator-commissioning-cluster
+  nodeId: '0x654231'
+name: administrator-commissioning-cluster_attribute_0x0002_v1.1.0.0
+tests:
+- ActionTime: During an open commissioning window
+  Attribute_Change: '`AdminVendorId` will be set to 0.'
+  ExpectedResponse: The `AdminVendorId` should be set to 0.
+  Pre-requisites: The commissioning window must be opened by an Administrator with
+    Vendor ID 0.
+  arguments:
+    AdminVendorId: 0
+    WindowStatus: 1 (EnhancedWindowOpen)
+  option: WriteAttribute
+- ActionTime: During an open commissioning window
+  Attribute_Change: '`AdminVendorId` will be set to 65535.'
+  ExpectedResponse: The `AdminVendorId` should be set to 65535.
+  Pre-requisites: The commissioning window must be opened by an Administrator with
+    Vendor ID 65535.
+  arguments:
+    AdminVendorId: 65535
+    WindowStatus: 2 (BasicWindowOpen)
+  option: WriteAttribute
+- ActionTime: After the commissioning window has closed
+  Attribute_Change: '`AdminVendorId` will be set to null.'
+  ExpectedResponse: The `AdminVendorId` should be set to null.
+  Pre-requisites: The commissioning window must have been closed.
+  arguments:
+    AdminVendorId: 12345
+    WindowStatus: 0 (WindowNotOpen)
+  option: WriteAttribute
+- ActionTime: During an open commissioning window, and then the fabric for the Administrator
+    is removed
+  Attribute_Change: '`AdminVendorId` will remain 54321.'
+  ExpectedResponse: The `AdminVendorId` should remain 54321 even after the fabric
+    is removed.
+  Pre-requisites: 'The commissioning window must be opened by an Administrator with
+    Vendor ID 54321, and then the fabric for this Administrator must be removed while
+    the window is still open.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    AdminVendorId: 54321
+    WindowStatus: 1 (EnhancedWindowOpen)
+  option: WriteAttribute

@@ -1,0 +1,80 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x005E",
+    "name": "Microwave Oven Mode",
+    "description": "This cluster is derived from the Mode Base cluster, defining additional mode tags and namespaced enumerated values for Microwave Oven devices.",
+    "classification": {
+      "hierarchy": "Mode Base",
+      "role": "Application",
+      "scope": "Endpoint",
+      "pics_code": "MWOM"
+    },
+    "revision_history": [
+      {
+        "revision": 1,
+        "description": "Initial Release"
+      }
+    ]
+  },
+  "features": {},
+  "derived_data_types": {},
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "SupportedModes",
+      "type": "list[ModeOptionStruct]",
+      "conformance": "M",
+      "description": "Exactly one entry in the SupportedModes attribute SHALL include the Normal mode tag in the ModeTags field."
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "CurrentMode",
+      "type": "uint8",
+      "conformance": "M"
+    },
+    "0x0002": {
+      "id": "0x0002",
+      "name": "StartUpMode",
+      "type": "uint8",
+      "conformance": "X"
+    },
+    "0x0003": {
+      "id": "0x0003",
+      "name": "OnMode",
+      "type": "uint8",
+      "conformance": "X"
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "ChangeToMode",
+      "direction": "client => server",
+      "response": "ChangeToModeResponse",
+      "conformance": "X"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "ChangeToModeResponse",
+      "direction": "client <= server",
+      "conformance": "X"
+    }
+  },
+  "events": {},
+  "cluster_namespace": {
+    "mode_tags": {
+      "0x4000": {
+        "name": "Normal",
+        "summary": "The normal mode of operation"
+      },
+      "0x4001": {
+        "name": "Defrost",
+        "summary": "A mode optimized for defrosting foods"
+      }
+    }
+  },
+  "mode_constraints": {
+    "required_modes": "Exactly one entry in the SupportedModes attribute SHALL include the Normal mode tag in the ModeTags field.",
+    "mutual_exclusion": "The Normal and Defrost mode tags are mutually exclusive and SHALL NOT both be used together in a mode's ModeTags."
+  }
+}

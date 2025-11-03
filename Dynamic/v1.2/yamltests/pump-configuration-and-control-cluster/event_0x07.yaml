@@ -1,0 +1,27 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x07'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x07_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '{"PumpStatus": "DeviceFault"}'
+  ExpectedResponse: CRITICAL
+  Pre-requisites: None
+  arguments:
+    '{"ErrorState"': 1}
+  label: Test_Case_Extreme_Value_of_the_Constraint
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: '{"PumpStatus": "NoError"}'
+  ExpectedResponse: INFO
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    '{"ErrorState"': 0}
+  label: Test_Case_Special_Response_Value
+  option: SubscribeToEvent

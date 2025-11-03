@@ -1,0 +1,6 @@
+config:
+  attribute: '0x33'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x33_v1.2.0.0
+tests: []

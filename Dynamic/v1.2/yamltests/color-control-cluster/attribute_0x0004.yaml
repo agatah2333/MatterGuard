@@ -1,0 +1,42 @@
+config:
+  attribute: '0x0004'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0004_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '- `CurrentY`: 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    CurrentY: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '- `CurrentY`: 65279'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    CurrentY: 65279
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '- `CurrentY`: 32640'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    CurrentY: 32640
+  label: Test_Case_Mid-Range_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '- `CurrentY`: No change'
+  ExpectedResponse: Error (Out of Range)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    a value that could result in a special response (out of range error)【4:0†source】【4:1†source】【4:3†source】【4:6†source】.'
+  arguments:
+    CurrentY: 0xFFFF (65535, which is out of range)
+  label: Test_Case_Special_Response_Value
+  option: WriteAttribute

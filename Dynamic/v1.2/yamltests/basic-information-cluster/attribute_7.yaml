@@ -1,0 +1,39 @@
+config:
+  attribute: '7'
+  cluster: basic-information-cluster
+  nodeId: '0x654231'
+name: basic-information-cluster_attribute_7_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: None (Read-only attribute)
+  ExpectedResponse: Success
+  Pre-requisites: Device must support the Basic Information Cluster and the HardwareVersion
+    attribute.
+  arguments:
+    '{"HardwareVersion"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None (Read-only attribute)
+  ExpectedResponse: Success
+  Pre-requisites: Device must support the Basic Information Cluster and the HardwareVersion
+    attribute.
+  arguments:
+    '{"HardwareVersion"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None (Read-only attribute)
+  ExpectedResponse: Success
+  Pre-requisites: 'Device must support the Basic Information Cluster and the HardwareVersion
+    attribute.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    a special value that could be of interest. The expected response for all cases
+    is success since the attribute is read-only and the values are within the valid
+    range.'
+  arguments:
+    '{"HardwareVersion"': 128}
+  label: Test_Case_Special_Value_(Example:_Mid-range_value)
+  option: WriteAttribute

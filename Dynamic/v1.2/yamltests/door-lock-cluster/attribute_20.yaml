@@ -1,0 +1,33 @@
+config:
+  attribute: '20'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_20_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `CredentialRulesSupport`: `0x00`'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: None
+  arguments:
+    CredentialRulesSupport: '`0x00` (All bits are 0, meaning no credential rules are
+      supported)'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `CredentialRulesSupport`: `0xFF`'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the `CredentialRulesSupport` attribute,
+    ensuring that the system can handle both the minimum and maximum possible values
+    correctly.
+
+
+    For more detailed information, you can refer to the Matter 1.2 Application Cluster
+    Specification document【4:0†source】.'
+  arguments:
+    CredentialRulesSupport: '`0xFF` (All bits are 1, meaning all possible credential
+      rules are supported)'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

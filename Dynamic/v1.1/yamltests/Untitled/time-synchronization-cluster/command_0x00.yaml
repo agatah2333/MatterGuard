@@ -1,0 +1,235 @@
+config:
+  cluster: time-synchronization-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: time-synchronization-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: "- `UTCTime`: 0\n  - `Granularity`: NoTimeGranularity\n  - `TimeSource`:\
+    \ None"
+  ExpectedResponse: 0x00 (SUCCESS)
+  Pre-requisites: None
+  arguments:
+    Granularity: 0 (NoTimeGranularity)
+    TimeSource: 0 (None)
+    UtcTime: 0
+  label: Test_Case_Minimum_UtcTime
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify time-synchronization-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 18446744073709551615
+  Attribute_Change: "- `UTCTime`: 18446744073709551615\n  - `Granularity`: MillisecondsGranularity\n\
+    \  - `TimeSource`: External"
+  ExpectedResponse: 0x00 (SUCCESS)
+  Pre-requisites: None
+  arguments:
+    Granularity: 3 (MillisecondsGranularity)
+    TimeSource: 3 (External)
+    UtcTime: 18446744073709551615
+  label: Test_Case_Maximum_UtcTime
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify time-synchronization-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 123456789
+  Attribute_Change: None
+  ExpectedResponse: 0x02 (TimeNotAccepted)
+  Pre-requisites: The server's current Granularity is higher than SecondsGranularity
+    and does not accept the new time.
+  arguments:
+    Granularity: 2 (SecondsGranularity)
+    TimeSource: 1 (Admin)
+    UtcTime: 123456789
+  label: Test_Case_Special_Response_-_TimeNotAccepted
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify time-synchronization-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 987654321
+  Attribute_Change: "- `UTCTime`: 987654321\n  - `Granularity`: MinutesGranularity\n\
+    \  - `TimeSource`: Admin"
+  ExpectedResponse: 0x00 (SUCCESS)
+  Pre-requisites: 'The server''s current Granularity is NoTimeGranularity.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    Granularity: 0 (NoTimeGranularity)
+    TimeSource: 2 (NodeTimeCluster)
+    UtcTime: 987654321
+  label: Test_Case_Valid_Time_Update_with_NoTimeGranularity
+  option: SendCommand
+  setup_sequence:
+  - step: 1
+    description: Verify time-synchronization-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

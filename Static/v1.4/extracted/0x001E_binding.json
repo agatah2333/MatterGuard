@@ -1,0 +1,70 @@
+{
+  "source_file": "Binding_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x001E",
+        "name": "Binding",
+        "dataTypes": {
+          "TargetStruct": {
+            "type": "struct",
+            "fields": {
+              "Node": {
+                "type": "node-id",
+                "valueRange": "all"
+              },
+              "Group": {
+                "type": "group-id",
+                "valueRange": "min 1"
+              },
+              "Endpoint": {
+                "type": "endpoint-no",
+                "valueRange": "all"
+              },
+              "Cluster": {
+                "type": "cluster-id",
+                "valueRange": "all"
+              }
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "Binding",
+            "dataType": {
+              "type": "list",
+              "elementType": {
+                "type": "struct",
+                "fields": {
+                  "0": {
+                    "type": "node-id",
+                    "valueRange": "all"
+                  },
+                  "1": {
+                    "type": "group-id",
+                    "valueRange": "min 1"
+                  },
+                  "2": {
+                    "type": "endpoint-no",
+                    "valueRange": "all"
+                  },
+                  "3": {
+                    "type": "cluster-id",
+                    "valueRange": "all"
+                  }
+                }
+              }
+            },
+            "valueRange": "desc",
+            "writable": true,
+            "privilege": "RW"
+          }
+        ],
+        "commands": [],
+        "events": []
+      }
+    ]
+  }
+}

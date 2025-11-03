@@ -1,0 +1,44 @@
+config:
+  attribute: '0x0003'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0003_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: CurrentX = 0x0000
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"CurrentX"': 0x0000}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: CurrentX = 0xfeff
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"CurrentX"': 0xfeff}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: CurrentX = 0x616b
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"CurrentX"': 0x616b}
+  label: Test_Case_Default_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: CurrentX = 0x0001
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the default value. The special response value is chosen as 0x0001, which is just
+    above the minimum value and can be used to check for any off-by-one errors or
+    special handling at the lower boundary.'
+  arguments:
+    '{"CurrentX"': 0x0001}
+  label: Test_Case_Special_Response_Value
+  option: WriteAttribute

@@ -1,0 +1,359 @@
+{
+  "source_file": "Content Control_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x050F",
+        "name": "Content Control",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "Enabled",
+            "dataType": "bool",
+            "valueRange": "bool",
+            "description": "Indicates whether the Content Control feature is active",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "OnDemandRatings",
+            "dataType": "list[RatingNameStruct]",
+            "valueRange": "",
+            "description": "Valid ratings for on-demand content",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "OnDemandRatingThreshold",
+            "dataType": "string",
+            "valueRange": "max 8",
+            "description": "Threshold rating for filtering on-demand content",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "ScheduledContentRatings",
+            "dataType": "list[RatingNameStruct]",
+            "valueRange": "",
+            "description": "Valid ratings for scheduled content",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0004",
+            "name": "ScheduledContentRatingThreshold",
+            "dataType": "string",
+            "valueRange": "max 8",
+            "description": "Threshold rating for filtering scheduled content",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0005",
+            "name": "ScreenDailyTime",
+            "dataType": "elapsed-s",
+            "valueRange": "max 86400",
+            "description": "Maximum daily screen time allowance",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0006",
+            "name": "RemainingScreenTime",
+            "dataType": "elapsed-s",
+            "valueRange": "max 86400",
+            "description": "Remaining screen time for current day",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0007",
+            "name": "BlockUnrated",
+            "dataType": "bool",
+            "valueRange": "bool",
+            "description": "Blocks playback of unrated content",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0008",
+            "name": "BlockChannelList",
+            "dataType": "list[BlockChannelStruct]",
+            "valueRange": "",
+            "description": "List of blocked channels",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0009",
+            "name": "BlockApplicationList",
+            "dataType": "list[AppInfoStruct]",
+            "valueRange": "",
+            "description": "List of blocked applications",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x000A",
+            "name": "BlockContentTimeWindow",
+            "dataType": "list[TimeWindowStruct]",
+            "valueRange": "max 7",
+            "description": "Time windows for content blocking",
+            "privilege": "R",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "UpdatePIN",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "OldPIN: string(max 6), NewPIN: string(max 6)",
+              "description": "Updates the Content Control PIN"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "ResetPIN",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Resets the Content Control PIN"
+            },
+            "privilege": "Admin",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "ResetPINResponse",
+            "parameters": {
+              "dataType": "string",
+              "valueRange": "max 6",
+              "description": "Returns new PIN after reset"
+            },
+            "privilege": "Admin",
+            "direction": "client ⇐ server"
+          },
+          {
+            "id": "0x03",
+            "name": "Enable",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Activates Content Control"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x04",
+            "name": "Disable",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Deactivates Content Control"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x05",
+            "name": "AddBonusTime",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "PINCode: string(max 6), BonusTime: elapsed-s(desc 300s)",
+              "description": "Adds extra screen time"
+            },
+            "privilege": "Operate",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x06",
+            "name": "SetScreenDailyTime",
+            "parameters": {
+              "dataType": "elapsed-s",
+              "valueRange": "max 86400",
+              "description": "Sets daily screen time limit"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x07",
+            "name": "BlockUnratedContent",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Blocks unrated content"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x08",
+            "name": "UnblockUnratedContent",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Unblocks unrated content"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x09",
+            "name": "SetOnDemandRatingThreshold",
+            "parameters": {
+              "dataType": "string",
+              "valueRange": "max 8",
+              "description": "Sets on-demand content rating filter"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x0A",
+            "name": "SetScheduledContentRatingThreshold",
+            "parameters": {
+              "dataType": "string",
+              "valueRange": "max 8",
+              "description": "Sets scheduled content rating filter"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x0B",
+            "name": "AddBlockChannels",
+            "parameters": {
+              "dataType": "list[BlockChannelStruct]",
+              "valueRange": "",
+              "description": "Adds channels to block list"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x0C",
+            "name": "RemoveBlockChannels",
+            "parameters": {
+              "dataType": "list[uint16]",
+              "valueRange": "",
+              "description": "Removes channels from block list"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x0D",
+            "name": "AddBlockApplications",
+            "parameters": {
+              "dataType": "list[AppInfoStruct]",
+              "valueRange": "",
+              "description": "Adds apps to block list"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x0E",
+            "name": "RemoveBlockApplications",
+            "parameters": {
+              "dataType": "list[AppInfoStruct]",
+              "valueRange": "",
+              "description": "Removes apps from block list"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x0F",
+            "name": "SetBlockContentTimeWindow",
+            "parameters": {
+              "dataType": "TimeWindowStruct",
+              "valueRange": "",
+              "description": "Sets content blocking time window"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x10",
+            "name": "RemoveBlockContentTimeWindow",
+            "parameters": {
+              "dataType": "list[uint16]",
+              "valueRange": "",
+              "description": "Removes time windows from block schedule"
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "RemainingScreenTimeExpired",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Triggers when screen time reaches zero"
+            },
+            "privilege": "View",
+            "side": "server"
+          },
+          {
+            "id": "0x01",
+            "name": "EnteringBlockContentTimeWindow",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Notifies upcoming content blocking period"
+            },
+            "privilege": "View",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "DayOfWeekBitmap": {
+            "baseType": "map8",
+            "valueRange": {
+              "0x01": "Sunday",
+              "0x02": "Monday",
+              "0x04": "Tuesday",
+              "0x08": "Wednesday",
+              "0x10": "Thursday",
+              "0x20": "Friday",
+              "0x40": "Saturday"
+            }
+          },
+          "RatingNameStruct": {
+            "baseType": "string",
+            "valueRange": "max 8"
+          },
+          "BlockChannelStruct": {
+            "baseType": "uint16",
+            "fields": {
+              "ChannelNumber": "uint16",
+              "ChannelName": "string(max 16)"
+            }
+          },
+          "TimeWindowStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "StartTime": "epoch-s",
+              "EndTime": "epoch-s",
+              "Days": "DayOfWeekBitmap"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

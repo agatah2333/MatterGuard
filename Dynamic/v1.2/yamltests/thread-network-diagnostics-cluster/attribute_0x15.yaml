@@ -1,0 +1,33 @@
+config:
+  attribute: '0x15'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x15_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `NeighborTable`: `[]`'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: '- The Node should be in a state where it has no neighbors.'
+  arguments:
+    NeighborTable: '`[]` (Empty list, representing no neighbors)'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '- `NeighborTable`: `[{"NodeId": 1, "LinkQuality": 0}, {"NodeId":
+    2, "LinkQuality": 0}]`'
+  ExpectedResponse: '`Warning: Low Link Quality`'
+  Pre-requisites: '- The Node should be in a state where it can detect neighbors but
+    with poor link quality.
+
+
+    These test cases ensure that the `NeighborTable` attribute is tested for both
+    its extreme values and special conditions that might trigger specific responses.
+
+
+    For more detailed information, you can refer to the Matter 1.2 Core Specification
+    document【4:0†source】.'
+  arguments:
+    NeighborTable: '`[{"NodeId": 1, "LinkQuality": 0}, {"NodeId": 2, "LinkQuality":
+      0}]` (List with neighbors having the lowest possible link quality)'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

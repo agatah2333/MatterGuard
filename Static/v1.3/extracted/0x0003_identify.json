@@ -1,0 +1,161 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0003",
+    "name": "Identify",
+    "description": "This cluster supports an endpoint identification state (e.g., flashing a light), that indicates to an observer (e.g., an installer) which of several nodes and/or endpoints it is."
+  },
+  "derived_datatypes": [
+    {
+      "type": "enum",
+      "name": "IdentifyTypeEnum",
+      "base_data_type": "ENUM8",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "None",
+            "value": "0x00",
+            "description": "No presentation."
+          },
+          {
+            "name": "LightOutput",
+            "value": "0x01",
+            "description": "Light output of a lighting product."
+          },
+          {
+            "name": "VisibleIndicator",
+            "value": "0x02",
+            "description": "Typically a small LED."
+          },
+          {
+            "name": "AudibleBeep",
+            "value": "0x03",
+            "description": ""
+          },
+          {
+            "name": "Display",
+            "value": "0x04",
+            "description": "Presentation will be visible on display screen."
+          },
+          {
+            "name": "Actuator",
+            "value": "0x05",
+            "description": "Presentation will be conveyed by actuator functionality such as through a window blind operation or in-wall relay."
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "EffectIdentifierEnum",
+      "base_data_type": "ENUM8",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "Blink",
+            "value": "0x00",
+            "description": "e.g., Light is turned on/off once."
+          },
+          {
+            "name": "Breathe",
+            "value": "0x01",
+            "description": "e.g., Light is turned on/off over 1 second and repeated 15 times."
+          },
+          {
+            "name": "Okay",
+            "value": "0x02",
+            "description": "e.g., Colored light turns green for 1 second; non-colored light flashes twice."
+          },
+          {
+            "name": "ChannelChange",
+            "value": "0x0B",
+            "description": "e.g., Colored light turns orange for 8 seconds; non-colored light switches to the maximum brightness for 0.5s and then minimum brightness for 7.5s."
+          },
+          {
+            "name": "FinishEffect",
+            "value": "0xFE",
+            "description": "Complete the current effect sequence before terminating. e.g., if in the middle of a breathe effect (as above), first complete the current 1s breathe effect and then terminate the effect."
+          },
+          {
+            "name": "StopEffect",
+            "value": "0xFF",
+            "description": "Terminate the effect as soon as possible."
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "EffectVariantEnum",
+      "base_data_type": "ENUM8",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "Default",
+            "value": "0x00",
+            "description": "Indicates the default effect is used"
+          }
+        ]
+      }
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "Identify",
+      "parameters": [
+        {
+          "name": "IdentifyTime",
+          "data_type": "uint16",
+          "value_range": {},
+          "description": "The time in seconds for which the device should identify itself"
+        }
+      ],
+      "privilege": "M",
+      "side": "client"
+    },
+    {
+      "id": "0x40",
+      "name": "TriggerEffect",
+      "parameters": [
+        {
+          "name": "EffectIdentifier",
+          "data_type": "EffectIdentifierEnum",
+          "value_range": {},
+          "description": "The effect to trigger"
+        },
+        {
+          "name": "EffectVariant",
+          "data_type": "EffectVariantEnum",
+          "value_range": {},
+          "description": "The variant of the effect"
+        }
+      ],
+      "privilege": "M",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "IdentifyTime",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "This attribute specifies the remaining length of time, in seconds, that the endpoint will continue to identify itself. If this attribute is set to a value other than 0 then the device SHALL enter its identification state, in order to indicate to an observer which of several nodes and/or endpoints it is. It is RECOMMENDED that this state consists of flashing a light with a period of 0.5 seconds. The IdentifyTime attribute SHALL be decremented every second while in this state.",
+      "privilege": "V",
+      "writable": true
+    },
+    {
+      "id": "0x0001",
+      "name": "IdentifyType",
+      "data_type": "IdentifyTypeEnum",
+      "value_range": {},
+      "description": "This attribute specifies how the identification state is presented to the user. This field SHALL contain one of the values defined in IdentifyTypeEnum. The value None SHALL NOT be used if the device is capable of presenting its identification state using one of the other methods defined in IdentifyTypeEnum.",
+      "privilege": "V",
+      "writable": false
+    }
+  ],
+  "events": []
+}

@@ -1,0 +1,47 @@
+config:
+  cluster: actions-cluster
+  event: '0x00'
+  nodeId: '0x654231'
+name: actions-cluster_event_0x00_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: NewState set to Active
+  ExpectedResponse: Event generated when the transition starts
+  Pre-requisites: None
+  arguments:
+    ActionID: 0
+    InvokeID: 0
+    NewState: Active
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: NewState set to Inactive
+  ExpectedResponse: Event generated when the transition completes
+  Pre-requisites: None
+  arguments:
+    ActionID: 65535
+    InvokeID: 4294967295
+    NewState: Inactive
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: NewState set to Active
+  ExpectedResponse: Event generated when the transition starts
+  Pre-requisites: None
+  arguments:
+    ActionID: 1
+    InvokeID: 1
+    NewState: Active
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: NewState set to Inactive
+  ExpectedResponse: Event generated when the transition completes
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:0†source】.'
+  arguments:
+    ActionID: 1
+    InvokeID: 1
+    NewState: Inactive
+  option: SubscribeToEvent

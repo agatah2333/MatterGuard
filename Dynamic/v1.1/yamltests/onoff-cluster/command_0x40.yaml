@@ -1,0 +1,51 @@
+config:
+  cluster: onoff-cluster
+  command: '0x40'
+  nodeId: '0x654231'
+name: onoff-cluster_command_0x40_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: "- `OnOff` attribute will be set to `FALSE`\n  - `OnTime` attribute\
+    \ will be set to `0`"
+  ExpectedResponse: Success
+  Pre-requisites: '`GlobalSceneControl` attribute is `TRUE`'
+  arguments:
+    EffectIdentifier: '0x00'
+    EffectVariant: '0x00'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: "- `OnOff` attribute will be set to `FALSE`\n  - `OnTime` attribute\
+    \ will be set to `0`"
+  ExpectedResponse: Success
+  Pre-requisites: '`GlobalSceneControl` attribute is `TRUE`'
+  arguments:
+    EffectIdentifier: '0x01'
+    EffectVariant: '0xFF'
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: "- `OnOff` attribute will be set to `FALSE`\n  - `OnTime` attribute\
+    \ will be set to `0`"
+  ExpectedResponse: Success
+  Pre-requisites: '`GlobalSceneControl` attribute is `FALSE`'
+  arguments:
+    EffectIdentifier: '0x00'
+    EffectVariant: '0x01'
+  label: Test_Case_Special_Response_for_`EffectIdentifier`_0x00
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: "- `OnOff` attribute will be set to `FALSE`\n  - `OnTime` attribute\
+    \ will be set to `0`"
+  ExpectedResponse: Success
+  Pre-requisites: '`GlobalSceneControl` attribute is `FALSE`
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:10†source】【4:15†source】.'
+  arguments:
+    EffectIdentifier: '0x01'
+    EffectVariant: '0x00'
+  label: Test_Case_Special_Response_for_`EffectIdentifier`_0x01
+  option: SendCommand

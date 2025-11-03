@@ -1,0 +1,26 @@
+config:
+  cluster: network-commissioning-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: network-commissioning-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  ExpectedResponse: Success
+  arguments: {}
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: <current_time>
+  ExpectedResponse: Success
+  arguments: {}
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: <current_time>
+  ExpectedResponse: Busy
+  arguments: {}
+  label: Test_Case_Busy_Status
+  option: SendCommand
+- ActionTime: <current_time>
+  ExpectedResponse: PAKEParameterError
+  arguments: {}
+  label: Test_Case_PAKEParameterError
+  option: SendCommand

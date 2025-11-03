@@ -1,0 +1,30 @@
+config:
+  cluster: door-lock-cluster
+  event: '0'
+  nodeId: '0x654231'
+name: door-lock-cluster_event_0_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: <AlarmCode set to 0x00>
+  ExpectedResponse: <Alarm triggered with code 0x00>
+  Pre-requisites: <None>
+  arguments:
+    '{"AlarmCode"': 0x00}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: <AlarmCode set to 0xFF>
+  ExpectedResponse: <Alarm triggered with code 0xFF indicating an indeterminate state>
+  Pre-requisites: '<None>
+
+
+    These test cases cover the extreme values and special responses for the `AlarmCode`
+    field in the DoorLockAlarm event of the Door Lock Cluster.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments:
+    '{"AlarmCode"': 0xFF}
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: SubscribeToEvent

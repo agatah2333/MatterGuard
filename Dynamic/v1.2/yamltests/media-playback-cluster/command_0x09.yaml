@@ -1,0 +1,46 @@
+config:
+  cluster: media-playback-cluster
+  command: '0x09'
+  nodeId: '0x654231'
+name: media-playback-cluster_command_0x09_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: SampledPosition attribute will be updated to the beginning of
+    the current frame.
+  ExpectedResponse: Success
+  Pre-requisites: Media should be playing.
+  arguments:
+    '{"DeltaPositionMilliseconds"': 0}
+  label: Test_Case_Minimum_Value
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: SampledPosition attribute will be updated to the earliest valid
+    position.
+  ExpectedResponse: Success
+  Pre-requisites: Media should be playing.
+  arguments:
+    '{"DeltaPositionMilliseconds"': 18446744073709551615}
+  label: Test_Case_Maximum_Value
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: No change to the position of the playback.
+  ExpectedResponse: SeekOutOfRange
+  Pre-requisites: Media should be playing.
+  arguments:
+    '{"DeltaPositionMilliseconds"': <value that results in a position before the earliest
+      valid position>}
+  label: Test_Case_Special_Response_-_SeekOutOfRange
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: No change to the position of the playback.
+  ExpectedResponse: NotAllowed
+  Pre-requisites: 'Media should be in a state where seeking backward is not allowed
+    (e.g., live streaming content not supporting seek).
+
+
+    These test cases cover the extreme values of the `DeltaPositionMilliseconds` field
+    and the special responses as mentioned in the command description【4:0†source】【4:2†source】【4:5†source】.'
+  arguments:
+    '{"DeltaPositionMilliseconds"': <value>}
+  label: Test_Case_Special_Response_-_NotAllowed
+  option: SendCommand

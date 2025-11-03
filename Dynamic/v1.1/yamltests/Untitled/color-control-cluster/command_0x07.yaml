@@ -1,0 +1,22 @@
+config:
+  cluster: color-control-cluster
+  command: '0x07'
+  nodeId: '0x654231'
+name: color-control-cluster_command_0x07_v1.1.0.0
+tests:
+- arguments: {}
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Special_Response_-_Transition_Time_Zero
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Special_Response_-_Mid_Range_Values
+  option: SendCommand
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

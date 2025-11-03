@@ -1,0 +1,30 @@
+config:
+  attribute: '0x0034'
+  cluster: ballast-configuration-cluster
+  nodeId: '0x654231'
+name: ballast-configuration-cluster_attribute_0x0034_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: LampAlarmMode = 0
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    **Test Case 1.2: Maximum Value**'
+  arguments:
+    '{"LampAlarmMode"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: LampAlarmMode = 1
+  ExpectedResponse: Alarm generated for LampBurnHours
+  Pre-requisites: 'Alarms cluster must be present on the same device
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    '{"LampAlarmMode"': 1}  // Assuming bit 0 corresponds to LampBurnHours alarm generation
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: WriteAttribute

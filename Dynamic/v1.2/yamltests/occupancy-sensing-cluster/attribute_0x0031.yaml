@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0031'
+  cluster: occupancy-sensing-cluster
+  nodeId: '0x654231'
+name: occupancy-sensing-cluster_attribute_0x0031_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: PhysicalContactUnoccupiedToOccupiedDelay = 0
+  ExpectedResponse: Sensor does not report unoccupied to occupied transition.
+  Pre-requisites: None
+  arguments:
+    '{"PhysicalContactUnoccupiedToOccupiedDelay"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 65535
+  Attribute_Change: PhysicalContactUnoccupiedToOccupiedDelay = 65535
+  ExpectedResponse: Sensor changes to occupied state after 65535 seconds.
+  Pre-requisites: None
+  arguments:
+    '{"PhysicalContactUnoccupiedToOccupiedDelay"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 'null'
+  Attribute_Change: PhysicalContactUnoccupiedToOccupiedDelay = null
+  ExpectedResponse: Sensor does not report unoccupied to occupied transition.
+  Pre-requisites: None
+  arguments:
+    '{"PhysicalContactUnoccupiedToOccupiedDelay"': null}
+  label: Test_Case_Special_Response_-_Null_Value
+  option: WriteAttribute
+- ActionTime: 300
+  Attribute_Change: PhysicalContactUnoccupiedToOccupiedDelay = 300
+  ExpectedResponse: Sensor changes to occupied state after 300 seconds.
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    '{"PhysicalContactUnoccupiedToOccupiedDelay"': 300}
+  label: Test_Case_Typical_Value
+  option: WriteAttribute

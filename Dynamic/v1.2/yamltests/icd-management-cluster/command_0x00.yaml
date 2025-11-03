@@ -1,0 +1,55 @@
+config:
+  cluster: icd-management-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: icd-management-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: RegisteredClients updated with provided values.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    CheckInNodeID: '0x0000000000000001'
+    Key: '0x00000000000000000000000000000000'
+    MonitoredSubject: '0x0000000000000001'
+    VerificationKey: '0x00000000000000000000000000000000'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: RegisteredClients updated with provided values.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    CheckInNodeID: '0xFFFFFFFFFFFFFFFF'
+    Key: '0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
+    MonitoredSubject: '0xFFFFFFFFFFFFFFFF'
+    VerificationKey: '0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: RESOURCE_EXHAUSTED
+  Pre-requisites: RegisteredClients list is full.
+  arguments:
+    CheckInNodeID: '0x0000000000000002'
+    Key: '0x11111111111111111111111111111111'
+    MonitoredSubject: '0x0000000000000002'
+    VerificationKey: '0x11111111111111111111111111111111'
+  label: Test_Case_Special_Response_-_Resource_Exhausted
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: FAILURE
+  Pre-requisites: 'VerificationKey does not match the stored key for the CheckInNodeID.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    CheckInNodeID: '0x0000000000000003'
+    Key: '0x22222222222222222222222222222222'
+    MonitoredSubject: '0x0000000000000003'
+    VerificationKey: '0x33333333333333333333333333333333'
+  label: Test_Case_Special_Response_-_Invalid_Verification_Key
+  option: SendCommand

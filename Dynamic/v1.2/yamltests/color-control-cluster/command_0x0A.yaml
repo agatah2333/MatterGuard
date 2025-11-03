@@ -1,0 +1,18 @@
+config:
+  cluster: color-control-cluster
+  command: '0x0A'
+  nodeId: '0x654231'
+name: color-control-cluster_command_0x0A_v1.2.0.0
+tests:
+- arguments: {}
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Special_Response_-_Invalid_Command
+  option: SendCommand
+- arguments: {}
+  label: Test_Case_Special_Response_-_Transition_Time_Zero
+  option: SendCommand

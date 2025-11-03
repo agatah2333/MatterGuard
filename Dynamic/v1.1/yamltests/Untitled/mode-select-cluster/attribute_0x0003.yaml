@@ -1,0 +1,338 @@
+config:
+  attribute: '0x0003'
+  cluster: mode-select-cluster
+  nodeId: '0x654231'
+name: mode-select-cluster_attribute_0x0003_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: CurrentMode set to 0 if valid.
+  ExpectedResponse: Success if 0 is a valid mode in SupportedModes, otherwise INVALID_COMMAND.
+  Pre-requisites: SupportedModes must include a mode with value 0.
+  arguments:
+    '{"CurrentMode"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify mode-select-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: None if invalid.
+  ExpectedResponse: INVALID_COMMAND if 255 is not a valid mode in SupportedModes.
+  Pre-requisites: SupportedModes must be checked to confirm if 255 is a valid mode.
+  arguments:
+    '{"CurrentMode"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify mode-select-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: CurrentMode set to <valid_mode>.
+  ExpectedResponse: Success
+  Pre-requisites: <valid_mode> must be present in SupportedModes.
+  arguments:
+    '{"CurrentMode"': <valid_mode>}
+  label: Test_Case_Valid_Mode_Change
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify mode-select-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: INVALID_COMMAND
+  Pre-requisites: <invalid_mode> must not be present in SupportedModes.
+  arguments:
+    '{"CurrentMode"': <invalid_mode>}
+  label: Test_Case_Invalid_Mode_Change
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify mode-select-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: INVALID_COMMAND
+  Pre-requisites: <min_valid_mode> must be the smallest value in SupportedModes.
+  arguments:
+    '{"CurrentMode"': <min_valid_mode - 1>}
+  label: Test_Case_Boundary_Value_Just_Below_Valid_Range
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify mode-select-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: INVALID_COMMAND
+  Pre-requisites: '<max_valid_mode> must be the largest value in SupportedModes.
+
+
+    ### Notes
+
+    - The `SupportedModes` attribute must be populated with valid mode values for
+    the device.
+
+    - The `CurrentMode` attribute must always match one of the values in `SupportedModes`
+    to be valid.
+
+    - Special responses like `INVALID_COMMAND` are expected when attempting to set
+    `CurrentMode` to a value not present in `SupportedModes`.
+
+
+    These test cases ensure that the `CurrentMode` attribute behaves correctly under
+    various conditions, including boundary and invalid values【4:6†source】【4:15†source】【4:19†source】.'
+  arguments:
+    '{"CurrentMode"': <max_valid_mode + 1>}
+  label: Test_Case_Boundary_Value_Just_Above_Valid_Range
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify mode-select-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0050'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 180
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

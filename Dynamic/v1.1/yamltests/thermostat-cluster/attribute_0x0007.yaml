@@ -1,0 +1,42 @@
+config:
+  attribute: '0x0007'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0007_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"PICoolingDemand": 0}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Thermostat should be in "cooling" mode.
+  arguments:
+    '{"PICoolingDemand"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"PICoolingDemand": 100}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Thermostat should be in "cooling" mode.
+  arguments:
+    '{"PICoolingDemand"': 100}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"PICoolingDemand": 0}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Thermostat should be in "off" mode.
+  arguments:
+    '{"PICoolingDemand"': 50}
+  label: Test_Case_Special_Response_-_Thermostat_in_"off"_mode
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"PICoolingDemand": 0}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'Thermostat should be in "heating" mode.
+
+
+    These test cases cover the extreme values of the `PICoolingDemand` attribute and
+    the special responses when the thermostat is in "off" or "heating" mode【4:2†source】.'
+  arguments:
+    '{"PICoolingDemand"': 75}
+  label: Test_Case_Special_Response_-_Thermostat_in_"heating"_mode
+  option: WriteAttribute

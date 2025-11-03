@@ -1,0 +1,99 @@
+{
+  "source_file": "Account Login_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x050E",
+        "name": "Account Login",
+        "description": "This cluster provides commands that facilitate user account login on a Content App or a node.",
+        "attributes": [],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "GetSetupPIN",
+            "parameters": {
+              "TempAccountIdentifier": {
+                "dataType": "string",
+                "valueRange": "16 to 100 characters",
+                "description": "This field specifies the client’s temporary account identifier."
+              }
+            },
+            "privilege": "Admin",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "GetSetupPINResponse",
+            "parameters": {
+              "SetupPIN": {
+                "dataType": "string",
+                "valueRange": "At least 8 characters",
+                "description": "This field provides the setup PIN code as a text string or empty string to indicate that the accounts do not match."
+              }
+            },
+            "privilege": "None",
+            "direction": "server ⇒ client"
+          },
+          {
+            "id": "0x02",
+            "name": "Login",
+            "parameters": {
+              "TempAccountIdentifier": {
+                "dataType": "string",
+                "valueRange": "16 to 100 characters",
+                "description": "This field specifies the client’s temporary account identifier."
+              },
+              "SetupPIN": {
+                "dataType": "string",
+                "valueRange": "Minimum 8 characters",
+                "description": "This field provides the setup PIN code."
+              },
+              "Node": {
+                "dataType": "node-id",
+                "valueRange": "Optional",
+                "description": "This optional field provides the Node ID of the Client."
+              }
+            },
+            "privilege": "Admin",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x03",
+            "name": "Logout",
+            "parameters": {
+              "Node": {
+                "dataType": "node-id",
+                "valueRange": "Optional",
+                "description": "This optional field provides the Node ID of the Client."
+              }
+            },
+            "privilege": "Admin",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "LoggedOut",
+            "parameters": {
+              "Node": {
+                "dataType": "node-id",
+                "valueRange": "Optional",
+                "description": "This field provides the Node ID corresponding to the user account that has logged out, if available."
+              }
+            },
+            "privilege": "Admin",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "node-id": {
+            "baseType": "uint64",
+            "description": "Standard Node Identifier type"
+          }
+        }
+      }
+    ]
+  }
+}

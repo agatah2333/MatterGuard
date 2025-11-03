@@ -1,0 +1,148 @@
+{
+  "source_file": "Total Volatile Organic Compounds Concentration Measurement_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x042E",
+        "name": "Total Volatile Organic Compounds Concentration Measurement",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "MeasuredValue",
+            "dataType": "float",
+            "valueRange": "MinMeasuredValue to MaxMeasuredValue",
+            "description": "Represents the most recent measurement as a single-precision floating-point number.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "MinMeasuredValue",
+            "dataType": "float",
+            "valueRange": "all",
+            "description": "Represents the minimum value of MeasuredValue that is capable of being measured.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "MaxMeasuredValue",
+            "dataType": "float",
+            "valueRange": "min MinMeasuredValue",
+            "description": "Represents the maximum value of MeasuredValue that is capable of being measured.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "PeakMeasuredValue",
+            "dataType": "float",
+            "valueRange": "MinMeasuredValue to MaxMeasuredValue",
+            "description": "Represents the maximum value of MeasuredValue that has been measured during the PeakMeasuredValueWindow.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "PeakMeasuredValueWindow",
+            "dataType": "uint32",
+            "valueRange": "max 604800",
+            "description": "Represents the window of time used for determining the PeakMeasuredValue.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0005",
+            "name": "AverageMeasuredValue",
+            "dataType": "float",
+            "valueRange": "MinMeasuredValue to MaxMeasuredValue",
+            "description": "Represents the average value of MeasuredValue that has been measured during the AverageMeasuredValueWindow.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0006",
+            "name": "AverageMeasuredValueWindow",
+            "dataType": "uint32",
+            "valueRange": "max 604800",
+            "description": "Represents the window of time used for determining the AverageMeasuredValue.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0007",
+            "name": "Uncertainty",
+            "dataType": "float",
+            "valueRange": "MS",
+            "description": "Represents the uncertainty of the measurement.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0008",
+            "name": "MeasurementUnit",
+            "dataType": "MeasurementUnitEnum",
+            "valueRange": "MS",
+            "description": "Represents the unit of measurement.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0009",
+            "name": "MeasurementMedium",
+            "dataType": "MeasurementMediumEnum",
+            "valueRange": "MS",
+            "description": "Represents the medium of measurement.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x000A",
+            "name": "LevelValue",
+            "dataType": "LevelValueEnum",
+            "valueRange": "0",
+            "description": "Represents the level value.",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "commands": [],
+        "events": [],
+        "dataTypes": {
+          "MeasurementUnitEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "PPM",
+              "1": "PPB",
+              "2": "PPT",
+              "3": "MGM3",
+              "4": "UGM3",
+              "5": "NGM3",
+              "6": "PM3",
+              "7": "BQM3"
+            }
+          },
+          "MeasurementMediumEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Air",
+              "1": "Water",
+              "2": "Soil"
+            }
+          },
+          "LevelValueEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Unknown",
+              "1": "Low",
+              "2": "Medium",
+              "3": "High",
+              "4": "Critical"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

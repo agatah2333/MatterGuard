@@ -1,0 +1,58 @@
+config:
+  attribute: '0x02'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x02_v1.2.0.0
+tests:
+- ActionTime: "\"N/A\"\n  - **ExpectedResponse**: \"Success\"\n  - **Which Attribute\
+    \ Will Be Changed and the Value of the Attribute**: \"NeighborTable will be set\
+    \ to an empty list\"\n  - **Any Pre-requisites**: \"Node is operational and has\
+    \ no neighbors\""
+  Attribute_Change: "\"NeighborTable will be set to an empty list\"\n  - **Any Pre-requisites**:\
+    \ \"Node is operational and has no neighbors\""
+  ExpectedResponse: "\"Success\"\n  - **Which Attribute Will Be Changed and the Value\
+    \ of the Attribute**: \"NeighborTable will be set to an empty list\"\n  - **Any\
+    \ Pre-requisites**: \"Node is operational and has no neighbors\""
+  Pre-requisites: '"Node is operational and has no neighbors"'
+  arguments:
+    '**ActionTime**': '"N/A"'
+    '**Any Pre-requisites**': '"Node is operational and has no neighbors"'
+    '**ExpectedResponse**': '"Success"'
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': '"NeighborTable
+      will be set to an empty list"'
+    '{"NeighborTable"': '"[]"} (Empty list)'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: "\"N/A\"\n  - **ExpectedResponse**: \"Warning or Error indicating poor\
+    \ link quality\"\n  - **Which Attribute Will Be Changed and the Value of the Attribute**:\
+    \ \"NeighborTable will be updated with nodes having poor link quality\"\n  - **Any\
+    \ Pre-requisites**: \"Node is operational and has neighbors with poor link quality\"\
+    \n\nThese test cases cover the extreme values and special response scenarios for\
+    \ the `NeighborTable` attribute in the Thread Network Diagnostics Cluster."
+  Attribute_Change: "\"NeighborTable will be updated with nodes having poor link quality\"\
+    \n  - **Any Pre-requisites**: \"Node is operational and has neighbors with poor\
+    \ link quality\"\n\nThese test cases cover the extreme values and special response\
+    \ scenarios for the `NeighborTable` attribute in the Thread Network Diagnostics\
+    \ Cluster."
+  ExpectedResponse: "\"Warning or Error indicating poor link quality\"\n  - **Which\
+    \ Attribute Will Be Changed and the Value of the Attribute**: \"NeighborTable\
+    \ will be updated with nodes having poor link quality\"\n  - **Any Pre-requisites**:\
+    \ \"Node is operational and has neighbors with poor link quality\"\n\nThese test\
+    \ cases cover the extreme values and special response scenarios for the `NeighborTable`\
+    \ attribute in the Thread Network Diagnostics Cluster."
+  Pre-requisites: '"Node is operational and has neighbors with poor link quality"
+
+
+    These test cases cover the extreme values and special response scenarios for the
+    `NeighborTable` attribute in the Thread Network Diagnostics Cluster.'
+  arguments:
+    '**ActionTime**': '"N/A"'
+    '**Any Pre-requisites**': '"Node is operational and has neighbors with poor link
+      quality"'
+    '**ExpectedResponse**': '"Warning or Error indicating poor link quality"'
+    '**Which Attribute Will Be Changed and the Value of the Attribute**': '"NeighborTable
+      will be updated with nodes having poor link quality"'
+    '{"NeighborTable"': '"[{NodeId: 1, LinkQuality: 0}, {NodeId: 2, LinkQuality: 0}]"}
+      (Nodes with poor link quality)'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

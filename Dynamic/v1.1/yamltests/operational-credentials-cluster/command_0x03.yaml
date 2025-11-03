@@ -1,0 +1,24 @@
+config:
+  cluster: operational-credentials-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: operational-credentials-cluster_command_0x03_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: The session associated with the client will be terminated.
+  ExpectedResponse: Success
+  Pre-requisites: The client must be logged in.
+  arguments: {}
+  label: Test_Case_Extreme_Value_of_Constraints
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Failure (e.g., NotLoggedIn)
+  Pre-requisites: 'The client must not be logged in.
+
+
+    These test cases cover the extreme values and special response scenarios for the
+    Logout command in the Operational Credentials Cluster【4:0†source】.'
+  arguments: {}
+  label: Test_Case_Special_Response_Scenario
+  option: SendCommand

@@ -1,0 +1,55 @@
+config:
+  cluster: color-control-cluster
+  command: '0x0A'
+  nodeId: '0x654231'
+name: color-control-cluster_command_0x0A_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '`ColorTemperatureMireds` set to 0'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    ColorTemperatureMireds: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+    TransitionTime: 0
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: Maximum transition time
+  Attribute_Change: '`ColorTemperatureMireds` set to 0xfeff'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    ColorTemperatureMireds: '0xfeff'
+    OptionsMask: 255
+    OptionsOverride: 255
+    TransitionTime: 65534
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: INVALID_COMMAND
+  Pre-requisites: The device does not support the `MoveToColorTemperature` command.
+  arguments:
+    ColorTemperatureMireds: 0
+    OptionsMask: 0
+    OptionsOverride: 0
+    TransitionTime: 0
+  label: Test_Case_Special_Response_-_Invalid_Command
+  option: SendCommand
+- ActionTime: 100 seconds
+  Attribute_Change: '`ColorTemperatureMireds` set to 0xfeff (clipped)'
+  ExpectedResponse: SUCCESS with clipping
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:7†source】【4:9†source】.'
+  arguments:
+    ColorTemperatureMireds: 0xffff (out of range, should be clipped)
+    OptionsMask: 0
+    OptionsOverride: 0
+    TransitionTime: 1000
+  label: Test_Case_Special_Response_-_Clipped_Value
+  option: SendCommand

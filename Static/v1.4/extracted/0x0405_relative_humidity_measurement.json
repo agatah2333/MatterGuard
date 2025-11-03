@@ -1,0 +1,89 @@
+{
+  "source_file": "Relative Humidity Measurement_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0405",
+        "name": "Relative Humidity Measurement",
+        "description": "Measures and reports relative humidity percentage with high precision",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "MeasuredValue",
+            "dataType": "uint16",
+            "valueRange": "0-10000",
+            "description": "Humidity percentage (MeasuredValue = Actual% × 100)",
+            "privilege": "R",
+            "writable": false,
+            "unitConversion": {
+              "formula": "Actual% = MeasuredValue / 100",
+              "resolution": "0.01%",
+              "example": "5000 → 50.00% RH"
+            }
+          },
+          {
+            "id": "0x0001",
+            "name": "MinMeasuredValue",
+            "dataType": "uint16",
+            "valueRange": "0-9999",
+            "description": "Minimum measurable humidity (0.00%-99.99%)",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "MaxMeasuredValue",
+            "dataType": "uint16",
+            "valueRange": "1-10000",
+            "description": "Maximum measurable humidity (0.01%-100.00%)",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "Tolerance",
+            "dataType": "uint16",
+            "valueRange": "0-2048",
+            "description": "Measurement tolerance in 0.01% units",
+            "privilege": "R",
+            "writable": false,
+            "note": "Tolerance% = Tolerance / 100"
+          }
+        ],
+        "dataTypes": {
+          "HumidityValueStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "RawValue": "uint16",
+              "Percentage": {
+                "calculation": "RawValue / 100",
+                "unit": "% RH",
+                "precision": 0.01
+              },
+              "ValidityFlag": {
+                "type": "bool",
+                "mapping": {
+                  "true": "Valid (0-10000)",
+                  "false": "Out of Range"
+                }
+              }
+            }
+          }
+        },
+        "validationRules": [
+          {
+            "rule": "MaxMeasuredValue > MinMeasuredValue",
+            "errorCode": "INVALID_RANGE"
+          },
+          {
+            "rule": "Tolerance ≤ (MaxMeasuredValue - MinMeasuredValue)",
+            "errorCode": "TOLERANCE_EXCEEDS_RANGE"
+          }
+        ],
+        "commands": [],
+        "events": []
+      }
+    ]
+  }
+}

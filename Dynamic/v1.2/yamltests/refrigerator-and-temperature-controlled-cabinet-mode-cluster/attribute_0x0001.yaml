@@ -1,0 +1,55 @@
+config:
+  attribute: '0x0001'
+  cluster: refrigerator-and-temperature-controlled-cabinet-mode-cluster
+  nodeId: '0x654231'
+name: refrigerator-and-temperature-controlled-cabinet-mode-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: <time>
+  Attribute_Change: '{"MinTemperature": <MinTemperature>}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Ensure that the `MaxTemperature` attribute is set to a value greater
+    than `MinTemperature`.
+  arguments:
+    '{"MinTemperature"': <MinTemperature>}
+  label: Test_Case_Minimum_Value_of_the_Constraint
+  option: WriteAttribute
+- ActionTime: <time>
+  Attribute_Change: '{"MinTemperature": <MaxTemperature - 1>}'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Ensure that the `MaxTemperature` attribute is set to a value greater
+    than `MinTemperature`.
+  arguments:
+    '{"MinTemperature"': <MaxTemperature - 1>}
+  label: Test_Case_Maximum_Value_of_the_Constraint
+  option: WriteAttribute
+- ActionTime: <time>
+  Attribute_Change: '{"MinTemperature": <previous valid value>}'
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: Ensure that the `MaxTemperature` attribute is set to a value greater
+    than `MinTemperature`.
+  arguments:
+    '{"MinTemperature"': <MaxTemperature>}
+  label: Test_Case_Value_Exceeding_the_Constraint
+  option: WriteAttribute
+- ActionTime: <time>
+  Attribute_Change: '{"MinTemperature": <previous valid value>}'
+  ExpectedResponse: INVALID_IN_STATE
+  Pre-requisites: 'Ensure that the device is in a state where it cannot accept changes
+    to the `MinTemperature` attribute.
+
+
+    ### Notes
+
+    - Replace `<MinTemperature>`, `<MaxTemperature>`, `<time>`, and `<special value>`
+    with the actual values based on the device''s specifications and testing requirements.
+
+    - Ensure that the `MaxTemperature` attribute is properly set before testing the
+    `MinTemperature` attribute to avoid invalid test scenarios.
+
+
+    These test cases cover the extreme values of the constraints and the special response
+    scenarios as mentioned in the attribute description【4:0†source】【4:1†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"MinTemperature"': <special value>}
+  label: Test_Case_Special_Response_Scenario
+  option: WriteAttribute

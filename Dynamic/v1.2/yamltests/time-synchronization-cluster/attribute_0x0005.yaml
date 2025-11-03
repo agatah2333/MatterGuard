@@ -1,0 +1,45 @@
+config:
+  attribute: '0x0005'
+  cluster: time-synchronization-cluster
+  nodeId: '0x654231'
+name: time-synchronization-cluster_attribute_0x0005_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: LastDSTChangeTime will be set to 0
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"LastDSTChangeTime"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 18446744073709551615
+  Attribute_Change: LastDSTChangeTime will be set to 18446744073709551615
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"LastDSTChangeTime"': 18446744073709551615}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 1609459200000000
+  Attribute_Change: LastDSTChangeTime will be set to 1609459200000000
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    '{"LastDSTChangeTime"': 1609459200000000}  // Corresponds to 2021-01-01 00:00:00
+      UTC
+  label: Test_Case_Special_Value_-_Epoch_Time
+  option: WriteAttribute
+- ActionTime: <current_epoch_time_in_microseconds>
+  Attribute_Change: LastDSTChangeTime will be set to <current_epoch_time_in_microseconds>
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    special values that could result in specific responses. The values are based on
+    the range and typical use cases for the `LastDSTChangeTime` attribute in the Time
+    Synchronization Cluster【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"LastDSTChangeTime"': <current_epoch_time_in_microseconds>}
+  label: Test_Case_Special_Value_-_Current_Time
+  option: WriteAttribute

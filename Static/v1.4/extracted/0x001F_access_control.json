@@ -1,0 +1,170 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x001F",
+    "name": "Access Control Cluster",
+    "description": "The Access Control Cluster provides a data model for managing access control lists (ACLs) on a node.",
+    "revision": "2"
+  },
+  "features": [
+    {
+      "bit": "0",
+      "code": "EXTS",
+      "name": "Extension",
+      "summary": "Device provides ACL Extension attribute",
+      "conformance": "optional"
+    },
+    {
+      "bit": "1",
+      "code": "MNGD",
+      "name": "ManagedDevice",
+      "summary": "Device is managed"
+    }
+  ],
+  "derived_datatypes": [
+    {
+      "type": "enum",
+      "name": "AccessControlEntryAuthModeEnum",
+      "base_data_type": "ENUM8",
+      "value_range": {
+        "enum_values": [
+          {"name": "PASE", "value": "1", "description": "Passcode authenticated session"},
+          {"name": "CASE", "value": "2", "description": "Certificate authenticated session"},
+          {"name": "Group", "value": "3", "description": "Group authenticated session"}
+        ]
+      }
+    },
+    {
+      "type": "enum", 
+      "name": "AccessControlEntryPrivilegeEnum",
+      "base_data_type": "ENUM8",
+      "value_range": {
+        "enum_values": [
+          {"name": "View", "value": "1", "description": "Can read and observe all (except Access Control Cluster and as seen by a non-Proxy)"},
+          {"name": "ProxyView", "value": "2", "description": "Can read and observe all (as seen by a Proxy)"},
+          {"name": "Operate", "value": "3", "description": "View privileges, and can perform the primary function of this Node (except Access Control Cluster)"},
+          {"name": "Manage", "value": "4", "description": "Operate privileges, and can modify persistent configuration of this Node (except Access Control Cluster)"},
+          {"name": "Administer", "value": "5", "description": "Manage privileges, and can observe and modify the Access Control Cluster"}
+        ]
+      }
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Acl",
+      "data_type": "list",
+      "entry_type": "AccessControlEntryStruct",
+      "privilege": "A",
+      "writable": true,
+      "access": "fabric_scoped"
+    },
+    {
+      "id": "0x0001",
+      "name": "Extension",
+      "data_type": "list",
+      "entry_type": "AccessControlExtensionStruct", 
+      "privilege": "A",
+      "writable": true,
+      "access": "fabric_scoped",
+      "conformance": "EXTS"
+    },
+    {
+      "id": "0x0002",
+      "name": "SubjectsPerAccessControlEntry",
+      "data_type": "uint16",
+      "default": "4",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed",
+      "constraint": "min 4"
+    },
+    {
+      "id": "0x0003",
+      "name": "TargetsPerAccessControlEntry",
+      "data_type": "uint16",
+      "default": "3",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed",
+      "constraint": "min 3"
+    },
+    {
+      "id": "0x0004",
+      "name": "AccessControlEntriesPerFabric",
+      "data_type": "uint16",
+      "default": "4",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed",
+      "constraint": "min 4"
+    }
+  ],
+  "commands": [],
+  "events": [
+    {
+      "id": "0x00",
+      "name": "AccessControlEntryChanged",
+      "priority": "info",
+      "privilege": "A",
+      "access": "fabric_sensitive",
+      "fields": [
+        {
+          "id": "0",
+          "name": "AdminNodeID",
+          "data_type": "node-id",
+          "nullable": true
+        },
+        {
+          "id": "1", 
+          "name": "AdminPasscodeID",
+          "data_type": "uint16",
+          "nullable": true
+        },
+        {
+          "id": "2",
+          "name": "ChangeType",
+          "data_type": "ChangeTypeEnum"
+        },
+        {
+          "id": "3",
+          "name": "LatestValue",
+          "data_type": "AccessControlEntryStruct",
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "id": "0x01",
+      "name": "AccessControlExtensionChanged",
+      "priority": "info",
+      "privilege": "A",
+      "access": "fabric_sensitive",
+      "conformance": "EXTS",
+      "fields": [
+        {
+          "id": "0",
+          "name": "AdminNodeID",
+          "data_type": "node-id",
+          "nullable": true
+        },
+        {
+          "id": "1",
+          "name": "AdminPasscodeID", 
+          "data_type": "uint16",
+          "nullable": true
+        },
+        {
+          "id": "2",
+          "name": "ChangeType",
+          "data_type": "ChangeTypeEnum"
+        },
+        {
+          "id": "3",
+          "name": "LatestValue",
+          "data_type": "AccessControlExtensionStruct",
+          "nullable": true
+        }
+      ]
+    }
+  ]
+}

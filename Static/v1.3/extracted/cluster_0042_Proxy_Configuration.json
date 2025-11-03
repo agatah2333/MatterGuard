@@ -1,0 +1,20 @@
+{
+  "cluster_id": "0x0042",
+  "cluster_name": "Proxy Configuration",
+  "section": "9.15.13",
+  "description": "This cluster provides a means for a proxy-capable device to be told the set of Nodes it SHALL proxy.",
+  "data_types": {
+    "ConfigurationStruct": {
+      "name": "ConfigurationStruct",
+      "definition_line": "9.15.13.4.1. ConfigurationStruct Type"
+    }
+  },
+  "attributes": {},
+  "commands": {},
+  "events": {},
+  "extraction_info": {
+    "start_line": 32586,
+    "end_line": 32668,
+    "total_lines": 82
+  }
+}

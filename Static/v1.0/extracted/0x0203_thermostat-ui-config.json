@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0203",
+    "name": "Thermostat UI Config",
+    "description": "This cluster provides an interface to allow configuration of the user interface for a thermostat, or a thermostat controller device, that supports a keypad and LCD screen."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

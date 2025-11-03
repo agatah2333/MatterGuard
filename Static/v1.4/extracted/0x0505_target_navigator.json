@@ -1,0 +1,86 @@
+{
+  "source_file": "Target Navigator_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0505",
+        "name": "Target Navigator",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "TargetList",
+            "dataType": "list[TargetInfoStruct]",
+            "valueRange": "",
+            "description": "Represents navigable targets in the user experience",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentTarget",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "Identifier of the currently active target",
+            "privilege": "R",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "NavigateTarget",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "Target: uint8, Data: string(optional)",
+              "description": "Initiates navigation to specified target"
+            },
+            "privilege": "O",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x01",
+            "name": "NavigateTargetResponse",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "Status: StatusEnum, Data: string(optional)",
+              "description": "Response to navigation command"
+            },
+            "privilege": "N",
+            "direction": "serverToClient"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "TargetUpdated",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "TargetList: list[TargetInfoStruct], CurrentTarget: uint8, Data: octstr(max 900)",
+              "description": "Notifies target configuration changes"
+            },
+            "privilege": "INFO",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "TargetInfoStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "Identifier": "uint8(0-254)",
+              "Name": "string"
+            }
+          },
+          "StatusEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Success",
+              "1": "TargetNotFound",
+              "2": "NotAllowed"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

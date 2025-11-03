@@ -1,0 +1,54 @@
+config:
+  attribute: '0x0000'
+  cluster: group-key-mgmt-cluster
+  nodeId: '0x654231'
+name: group-key-mgmt-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '`GroupKeyMap` will include the entry with `GroupId` 1 and `GroupKeySetID`
+    1.'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    GroupId: 1
+    GroupKeySetID: 1
+  label: Test_Case_Minimum_Values
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`GroupKeyMap` will include the entry with `GroupId` 65535 and
+    `GroupKeySetID` 65535.'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    GroupId: 65535
+    GroupKeySetID: 65535
+  label: Test_Case_Maximum_Values
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Fail with INVALID_COMMAND status code
+  Pre-requisites: None
+  arguments:
+    GroupId: 100
+    GroupKeySetID: 0
+  label: Test_Case_Reserved_GroupKeySetID_(Special_Response)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: '`GroupKeyMap` will include the entry with `GroupId` 1234 and
+    `GroupKeySetID` 5678.'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the special response for the reserved `GroupKeySetID` value.
+
+
+    ### References
+
+    - Matter 1.2 Core Specification【4:0†source】.'
+  arguments:
+    GroupId: 1234
+    GroupKeySetID: 5678
+  label: Test_Case_Typical_Valid_Entry
+  option: WriteAttribute

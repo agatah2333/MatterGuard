@@ -1,0 +1,37 @@
+config:
+  attribute: '0'
+  cluster: basic-information-cluster
+  nodeId: '0x654231'
+name: basic-information-cluster_attribute_0_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: DataModelRevision set to 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"DataModelRevision"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: DataModelRevision set to 255
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"DataModelRevision"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: DataModelRevision set to 1
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    a typical value to ensure the attribute behaves as expected across its range.
+
+
+    For more detailed information, refer to the Matter specification document【4:0†source】.'
+  arguments:
+    '{"DataModelRevision"': 1}
+  label: Test_Case_Typical_Value
+  option: WriteAttribute

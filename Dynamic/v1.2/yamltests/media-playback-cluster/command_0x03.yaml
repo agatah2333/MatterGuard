@@ -1,0 +1,31 @@
+config:
+  cluster: media-playback-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: media-playback-cluster_command_0x03_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: "- `CurrentState` attribute will be set to `Playing`\n  - `SampledPosition`\
+    \ attribute will be set to the start of the media"
+  ExpectedResponse: Success
+  Pre-requisites: Media must be loaded and in a state that allows starting over (e.g.,
+    not in a `NotActive` state).
+  arguments: {}
+  label: Test_Case_Extreme_Value_of_Constraints
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '- No attribute changes as the command is not allowed.'
+  ExpectedResponse: NotAllowed
+  Pre-requisites: 'Media is in a state where starting over is not allowed (e.g., during
+    a commercial).
+
+
+    These test cases cover the extreme values and special response scenarios for the
+    `StartOver` command in the Media Playback cluster.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:0†source】.'
+  arguments: {}
+  label: Test_Case_Special_Response_Scenario
+  option: SendCommand

@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0505",
+    "name": "Target Navigator",
+    "description": "Cluster for Target Navigator functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

@@ -1,0 +1,45 @@
+config:
+  attribute: '0x0000'
+  cluster: temperature-control-cluster
+  nodeId: '0x654231'
+name: temperature-control-cluster_attribute_0x0000_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: TemperatureSetpoint set to MinTemperature
+  ExpectedResponse: Success
+  Pre-requisites: Ensure MinTemperature is defined and within the acceptable range.
+  arguments:
+    '{"TemperatureSetpoint"': MinTemperature}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: TemperatureSetpoint set to MaxTemperature
+  ExpectedResponse: Success
+  Pre-requisites: Ensure MaxTemperature is defined and within the acceptable range.
+  arguments:
+    '{"TemperatureSetpoint"': MaxTemperature}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: No change, error response
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: Ensure MinTemperature is defined and the system correctly handles
+    out-of-range values.
+  arguments:
+    '{"TemperatureSetpoint"': MinTemperature - 1}
+  label: Test_Case_Below_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: No change, error response
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'Ensure MaxTemperature is defined and the system correctly handles
+    out-of-range values.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    '{"TemperatureSetpoint"': MaxTemperature + 1}
+  label: Test_Case_Above_Maximum_Value
+  option: WriteAttribute

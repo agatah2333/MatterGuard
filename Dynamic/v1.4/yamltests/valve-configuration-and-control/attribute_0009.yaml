@@ -1,0 +1,12 @@
+name: Valve Configuration and Control - ValveFault Attribute Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Valve Configuration and Control
+  timeout: 180
+tests:
+- label: Read ValveFault attribute
+  command: readAttribute
+  attribute: ValveFault
+  response:
+    saveAs: valvefault_value

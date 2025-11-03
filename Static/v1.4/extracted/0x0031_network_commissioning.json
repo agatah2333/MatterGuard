@@ -1,0 +1,297 @@
+{
+  "source_file": "Network Commissioning.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0031",
+        "name": "Network Commissioning",
+        "dataTypes": {
+          "WiFiSecurityBitmap": {
+            "type": "bitmap",
+            "baseType": "map8",
+            "bits": {
+              "0": "Unsecured",
+              "1": "WEP",
+              "2": "WPA-Personal",
+              "3": "WPA2-Personal",
+              "4": "WPA3-Personal"
+            }
+          },
+          "ThreadCapabilitiesBitmap": {
+            "type": "bitmap",
+            "baseType": "map16",
+            "bits": {
+              "0": "FullStack",
+              "1": "BorderRouter",
+              "2": "Commissioner",
+              "3": "Joiner",
+              "4": "SleepyEndDevice"
+            }
+          },
+          "WiFiInterfaceScanResultStruct": {
+            "type": "struct",
+            "fields": {
+              "ssid": "octstr",
+              "bssid": "octstr",
+              "security": "WiFiSecurityBitmap",
+              "channel": "uint16",
+              "rssi": "int8"
+            }
+          },
+          "ThreadInterfaceScanResultStruct": {
+            "type": "struct",
+            "fields": {
+              "panId": "uint16",
+              "extendedPanId": "octstr",
+              "networkName": "string",
+              "channel": "uint8",
+              "rssi": "int8"
+            }
+          },
+          "NetworkCommissioningStatusEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "Success",
+              "1": "OutOfRange",
+              "2": "BoundsExceeded",
+              "3": "NetworkIDNotFound",
+              "4": "DuplicateNetworkID",
+              "5": "NetworkNotFound",
+              "6": "LowScanTimeout",
+              "7": "LowConnectTimeout"
+            }
+          },
+          "WiFiBandEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "2.4GHz",
+              "1": "5GHz",
+              "2": "6GHz"
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "MaxNetworks",
+            "dataType": "uint8",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0001",
+            "name": "Networks",
+            "dataType": {
+              "type": "list",
+              "elementType": "octstr"
+            },
+            "writable": true,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0002",
+            "name": "ScanMaxTimeSeconds",
+            "dataType": "uint16",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0003",
+            "name": "ConnectMaxTimeSeconds",
+            "dataType": "uint16",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0004",
+            "name": "InterfaceEnabled",
+            "dataType": "bool",
+            "writable": true,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0005",
+            "name": "LastNetworkingStatus",
+            "dataType": "NetworkCommissioningStatusEnum",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0006",
+            "name": "LastNetworkID",
+            "dataType": {
+              "type": "octstr",
+              "maxLength": 32
+            },
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0007",
+            "name": "LastConnectErrorValue",
+            "dataType": "int32",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0008",
+            "name": "SupportedWiFiBands",
+            "dataType": {
+              "type": "list",
+              "elementType": "WiFiBandEnum"
+            },
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x0009",
+            "name": "SupportedThreadFeatures",
+            "dataType": "ThreadCapabilitiesBitmap",
+            "writable": false,
+            "privilege": "Read"
+          },
+          {
+            "id": "0x000A",
+            "name": "ThreadVersion",
+            "dataType": "uint16",
+            "writable": false,
+            "privilege": "Read"
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ScanNetworks",
+            "parameters": {
+              "SSID": {
+                "type": "octstr",
+                "maxLength": 32
+              },
+              "Breadcrumb": "uint64"
+            },
+            "privilege": "Administer",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x01",
+            "name": "ScanNetworksResponse",
+            "parameters": {
+              "NetworkingStatus": "NetworkCommissioningStatusEnum",
+              "DebugText": {
+                "type": "string",
+                "maxLength": 512
+              },
+              "WiFiScanResults": {
+                "type": "list",
+                "elementType": "WiFiInterfaceScanResultStruct"
+              },
+              "ThreadScanResults": {
+                "type": "list",
+                "elementType": "ThreadInterfaceScanResultStruct"
+              }
+            },
+            "privilege": "None",
+            "direction": "serverToClient"
+          },
+          {
+            "id": "0x02",
+            "name": "AddOrUpdateWiFiNetwork",
+            "parameters": {
+              "SSID": {
+                "type": "octstr",
+                "maxLength": 32
+              },
+              "Credentials": {
+                "type": "octstr",
+                "maxLength": 64
+              },
+              "Breadcrumb": "uint64"
+            },
+            "privilege": "Administer",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x03",
+            "name": "AddOrUpdateThreadNetwork",
+            "parameters": {
+              "OperationalDataset": {
+                "type": "octstr",
+                "maxLength": 254
+              },
+              "Breadcrumb": "uint64"
+            },
+            "privilege": "Administer",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x04",
+            "name": "RemoveNetwork",
+            "parameters": {
+              "NetworkID": {
+                "type": "octstr",
+                "maxLength": 32
+              },
+              "Breadcrumb": "uint64"
+            },
+            "privilege": "Administer",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x05",
+            "name": "NetworkConfigResponse",
+            "parameters": {
+              "NetworkingStatus": "NetworkCommissioningStatusEnum",
+              "DebugText": {
+                "type": "string",
+                "maxLength": 512
+              },
+              "NetworkIndex": "uint8"
+            },
+            "privilege": "None",
+            "direction": "serverToClient"
+          },
+          {
+            "id": "0x06",
+            "name": "ConnectNetwork",
+            "parameters": {
+              "NetworkID": {
+                "type": "octstr",
+                "maxLength": 32
+              },
+              "Breadcrumb": "uint64"
+            },
+            "privilege": "Administer",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x07",
+            "name": "ConnectNetworkResponse",
+            "parameters": {
+              "NetworkingStatus": "NetworkCommissioningStatusEnum",
+              "DebugText": "string",
+              "ErrorValue": "int32"
+            },
+            "privilege": "None",
+            "direction": "serverToClient"
+          },
+          {
+            "id": "0x08",
+            "name": "ReorderNetwork",
+            "parameters": {
+              "NetworkID": {
+                "type": "octstr",
+                "maxLength": 32
+              },
+              "NetworkIndex": "uint8",
+              "Breadcrumb": "uint64"
+            },
+            "privilege": "Administer",
+            "direction": "clientToServer"
+          }
+        ],
+        "events": []
+      }
+    ]
+  }
+}

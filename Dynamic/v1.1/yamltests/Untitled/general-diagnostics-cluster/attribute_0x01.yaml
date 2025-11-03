@@ -1,0 +1,148 @@
+config:
+  attribute: '0x01'
+  cluster: general-diagnostics-cluster
+  nodeId: '0x654231'
+name: general-diagnostics-cluster_attribute_0x01_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: NetworkInterfaces will be set to the maximum values.
+  ExpectedResponse: Success
+  Pre-requisites: The device must support the maximum number of network interfaces.
+  arguments:
+    HardwareAddress:
+    - 255
+    - 255
+    - 255
+    - 255
+    - 255
+    - 255
+    IPv4Addresses:
+    - 255.255.255.255
+    IPv6Addresses:
+    - ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+    Name: '"A" * 32'
+    NetworkInterfaces: 254
+    Role: 2
+    Security: 2
+    Type: 3
+  label: Test_Case_Extreme_Values
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify general-diagnostics-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: 0
+  Attribute_Change: NetworkInterfaces will be set to the minimum values.
+  ExpectedResponse: Success
+  Pre-requisites: 'The device must support at least one network interface.
+
+
+    These test cases cover the extreme values and special response values for the
+    `NetworkInterfaces` attribute in the General Diagnostics Cluster.'
+  arguments:
+    HardwareAddress:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    IPv4Addresses:
+    - 0.0.0.0
+    IPv6Addresses:
+    - '::'
+    Name: '""'
+    NetworkInterfaces: 1
+    Role: 0
+    Security: 0
+    Type: 0
+  label: Test_Case_Special_Response_Values
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify general-diagnostics-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 60
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

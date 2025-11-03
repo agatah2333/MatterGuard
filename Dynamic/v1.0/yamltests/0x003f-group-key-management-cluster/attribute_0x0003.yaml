@@ -1,0 +1,14 @@
+config:
+  node_id: 305414945
+  cluster: '0x003F'
+  endpoint: 1
+tests:
+- label: read_maxgroup
+  cluster: '0x003F'
+  attribute: '0x0003'
+  operation: read
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS

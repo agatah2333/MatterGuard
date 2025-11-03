@@ -1,0 +1,52 @@
+config:
+  cluster: network-commissioning-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: network-commissioning-cluster_command_0x01_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: COMMAND_INVALID
+  Pre-requisites: None
+  arguments:
+    '{"CommissioningTimeout"': 0}
+  label: Test_Case_Minimum_Value_of_CommissioningTimeout
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: WindowStatus set to BasicWindowOpen
+  ExpectedResponse: Success
+  Pre-requisites: No other commissioning window should be open, and the fail-safe
+    timer should not be armed.
+  arguments:
+    '{"CommissioningTimeout"': 65535}
+  label: Test_Case_Maximum_Value_of_CommissioningTimeout
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Busy
+  Pre-requisites: Another commissioning window is already open.
+  arguments:
+    '{"CommissioningTimeout"': 300}
+  label: Test_Case_Commissioning_Window_Already_Open
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Busy
+  Pre-requisites: The fail-safe timer is currently armed.
+  arguments:
+    '{"CommissioningTimeout"': 300}
+  label: Test_Case_Fail-Safe_Timer_Armed
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: WindowStatus set to BasicWindowOpen
+  ExpectedResponse: Success
+  Pre-requisites: 'No other commissioning window should be open, and the fail-safe
+    timer should not be armed.
+
+
+    These test cases cover the extreme values of the `CommissioningTimeout` field
+    and the special responses based on the conditions mentioned in the command description【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"CommissioningTimeout"': 600}
+  label: Test_Case_Valid_CommissioningTimeout_with_No_Pre-existing_Conditions
+  option: SendCommand

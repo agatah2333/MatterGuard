@@ -1,0 +1,167 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0506",
+    "name": "Media Playback",
+    "description": "Provides an interface for controlling Media Playback (PLAY, PAUSE, etc) on a media device such as a TV, Set-top Box, or Smart Speaker."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "Play",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "Pause",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x02",
+      "name": "Stop",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x03",
+      "name": "StartOver",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x04",
+      "name": "Previous",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x05",
+      "name": "Next",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x06",
+      "name": "Rewind",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x07",
+      "name": "FastForward",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x08",
+      "name": "SkipForward",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x09",
+      "name": "SkipBackward",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x0A",
+      "name": "PlaybackResponse",
+      "parameters": [],
+      "privilege": "V",
+      "side": "client"
+    },
+    {
+      "id": "0x0B",
+      "name": "Seek",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "CurrentState",
+      "data_type": "PlaybackStateEnum",
+      "value_range": {},
+      "description": "This SHALL indicate the current playback state of media.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "StartTime",
+      "data_type": "epoch-us",
+      "value_range": {},
+      "description": "This SHALL indicate the start time of the media, in case the media has a fixed start time (for example, live stream or television broadcast), or null when start time does not apply to the current media.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "Duration",
+      "data_type": "uint64",
+      "value_range": {},
+      "description": "This SHALL indicate the duration, in milliseconds, of the current media being played back or null when duration is not applicable.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0003",
+      "name": "SampledPosition",
+      "data_type": "PlaybackPosition",
+      "value_range": {},
+      "description": "This SHALL indicate the position of playback (Position field) at the time (UpdateAt field) specified in the attribute.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0004",
+      "name": "PlaybackSpeed",
+      "data_type": "single",
+      "value_range": {},
+      "description": "This SHALL indicate the speed at which the current media is being played.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0005",
+      "name": "SeekRangeEnd",
+      "data_type": "uint64",
+      "value_range": {},
+      "description": "This SHALL indicate the furthest forward valid position to which a client MAY seek forward, in milliseconds from the start of the media.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0006",
+      "name": "SeekRangeStart",
+      "data_type": "uint64",
+      "value_range": {},
+      "description": "This SHALL indicate the earliest valid position to which a client MAY seek back, in milliseconds from start of the media.",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

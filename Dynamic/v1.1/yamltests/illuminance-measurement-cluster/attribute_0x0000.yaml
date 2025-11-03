@@ -1,0 +1,42 @@
+config:
+  attribute: '0x0000'
+  cluster: illuminance-measurement-cluster
+  nodeId: '0x654231'
+name: illuminance-measurement-cluster_attribute_0x0000_v1.1.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`MeasuredValue = 0`'
+  ExpectedResponse: '`Value of illuminance is too low to be measured`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"MeasuredValue"': 0}`
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`MeasuredValue = 1`'
+  ExpectedResponse: '`Valid illuminance measurement`'
+  Pre-requisites: '`MinMeasuredValue <= 1`'
+  arguments:
+    '{"MeasuredValue"': 1}`
+  label: Test_Case_Minimum_Measured_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`MeasuredValue = 65534`'
+  ExpectedResponse: '`Valid illuminance measurement`'
+  Pre-requisites: '`MaxMeasuredValue >= 65534`'
+  arguments:
+    '{"MeasuredValue"': 65534}`
+  label: Test_Case_Maximum_Measured_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`MeasuredValue = null`'
+  ExpectedResponse: '`Illuminance measurement is invalid`'
+  Pre-requisites: '`None`
+
+
+    These test cases cover the extreme values of the constraints of the `MeasuredValue`
+    field and the special responses mentioned in the description of the effect【4:0†source】【4:1†source】【4:3†source】.'
+  arguments:
+    '{"MeasuredValue"': null}`
+  label: Test_Case_Invalid_Measurement
+  option: WriteAttribute

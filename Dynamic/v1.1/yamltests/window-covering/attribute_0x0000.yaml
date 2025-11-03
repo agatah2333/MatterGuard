@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0000'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0000_v1.1.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`WindowStatus` will be set to `WindowNotOpen`'
+  ExpectedResponse: '`WindowNotOpen`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"WindowStatus"': 0}`
+  label: Test_Case_Extreme_Value_(Minimum)
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`WindowStatus` will be set to `BasicWindowOpen`'
+  ExpectedResponse: '`BasicWindowOpen`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"WindowStatus"': 2}`
+  label: Test_Case_Extreme_Value_(Maximum)
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`WindowStatus` will be set to `EnhancedWindowOpen`'
+  ExpectedResponse: '`EnhancedWindowOpen`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"WindowStatus"': 1}`
+  label: Test_Case_Special_Response_(EnhancedWindowOpen)
+  option: WriteAttribute
+- ActionTime: '`<expiry_time>`'
+  Attribute_Change: '`WindowStatus` will be set to `WindowNotOpen`'
+  ExpectedResponse: '`WindowNotOpen`'
+  Pre-requisites: '`WindowStatus` was previously set to `EnhancedWindowOpen`
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】.'
+  arguments:
+    '{"WindowStatus"': 1}`
+  label: Test_Case_Revert_to_WindowNotOpen
+  option: WriteAttribute

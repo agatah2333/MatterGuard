@@ -1,0 +1,46 @@
+config:
+  attribute: '0x01'
+  cluster: ota-software-update-requestor
+  nodeId: '0x654231'
+name: ota-software-update-requestor_attribute_0x01_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`ProductID` will be set to 0'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    ProductID: 0
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`ProductID` will be set to 65535'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    ProductID: 65535
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`ProductID` will be set to the value matching the Basic Information
+    Cluster'
+  ExpectedResponse: Success
+  Pre-requisites: The Basic Information Cluster must have a `ProductID` attribute
+    set to a specific value
+  arguments:
+    ProductID: <value matching Basic Information Cluster ProductID>
+  label: Test_Case_Special_Response_-_Matching_Basic_Information_Cluster
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: Error or Failure
+  Pre-requisites: 'The Basic Information Cluster must have a `ProductID` attribute
+    set to a specific value that does not match the test value
+
+
+    These test cases cover the extreme values of the `ProductID` field and the special
+    responses based on the matching or non-matching values with the Basic Information
+    Cluster''s `ProductID` attribute【4:0†source】【4:1†source】.'
+  arguments:
+    ProductID: <value not matching Basic Information Cluster ProductID>
+  label: Test_Case_Special_Response_-_Non-Matching_Basic_Information_Cluster
+  option: WriteAttribute

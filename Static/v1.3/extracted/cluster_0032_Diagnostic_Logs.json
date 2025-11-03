@@ -1,0 +1,41 @@
+{
+  "cluster_id": "0x0032",
+  "cluster_name": "Diagnostic Logs",
+  "section": "11.11",
+  "description": "This Cluster supports an interface to a Node. It provides commands for retrieving unstructured diagnostic logs from a Node that may be used to aid in diagnostics. It will often be the case that unstructured diagnostic logs will be Node-wide and not specific to any subset of Endpoints. When present, this Cluster SHALL be implemented once for the Node. The Node SHOULD also implement the BDX Initiator and BDX Sender roles as defined in the BDX Protocol.",
+  "data_types": {
+    "IntentEnum": {
+      "name": "IntentEnum",
+      "definition_line": "11.11.4.1. IntentEnum Type"
+    },
+    "StatusEnum": {
+      "name": "StatusEnum",
+      "definition_line": "11.11.4.2. StatusEnum Type"
+    },
+    "TransferProtocolEnum": {
+      "name": "TransferProtocolEnum",
+      "definition_line": "11.11.4.3. TransferProtocolEnum Type"
+    }
+  },
+  "attributes": {},
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "RetrieveL­",
+      "details": "client ⇒ server RetrieveL­ O M",
+      "raw_line": "0x00                RetrieveL­         client ⇒ server RetrieveL­              O                 M"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "RetrieveL­",
+      "details": "client ⇐ server N M",
+      "raw_line": "0x01                RetrieveL­         client ⇐ server N                                         M"
+    }
+  },
+  "events": {},
+  "extraction_info": {
+    "start_line": 42158,
+    "end_line": 42449,
+    "total_lines": 291
+  }
+}

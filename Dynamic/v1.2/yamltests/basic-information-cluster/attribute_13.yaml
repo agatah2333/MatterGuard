@@ -1,0 +1,34 @@
+config:
+  attribute: '13'
+  cluster: basic-information-cluster
+  nodeId: '0x654231'
+name: basic-information-cluster_attribute_13_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: 'CapabilityMinima will be set to {"field0": 0, "field1": 0, "field2":
+    0}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    CapabilityMinima:
+      field0: 0
+      field1: 0
+      field2: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 1
+  Attribute_Change: 'CapabilityMinima will be set to {"field0": 1, "field1": 1, "field2":
+    1}'
+  ExpectedResponse: Success with a special note indicating all capabilities are enabled
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values and special responses for the CapabilityMinima
+    attribute in the Basic Information Cluster.'
+  arguments:
+    CapabilityMinima:
+      field0: 1
+      field1: 1
+      field2: 1
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

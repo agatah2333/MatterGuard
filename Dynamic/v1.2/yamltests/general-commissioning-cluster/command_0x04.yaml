@@ -1,0 +1,43 @@
+config:
+  cluster: general-commissioning-cluster
+  command: '0x04'
+  nodeId: '0x654231'
+name: general-commissioning-cluster_command_0x04_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: '`NoFailSafe`'
+  Pre-requisites: No Fail-Safe context exists.
+  arguments: {}
+  label: Test_Case_No_Fail-Safe_Context
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: '`InvalidAuthentication`'
+  Pre-requisites: Command received outside a CASE session.
+  arguments: {}
+  label: Test_Case_Invalid_Authentication_(Outside_CASE_Session)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: '`InvalidAuthentication`'
+  Pre-requisites: Command received within a CASE session, but the accessing fabric
+    is not the one associated with the ongoing Fail-Safe context.
+  arguments: {}
+  label: Test_Case_Invalid_Authentication_(Wrong_Fabric)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: "- Fail-Safe timer will be disarmed.\n  - Commissioning window\
+    \ will be closed.\n  - Temporary administrative privileges will be revoked.\n\
+    \  - Secure Session Context of any PASE session will be cleared.\n  - Breadcrumb\
+    \ attribute will be reset to zero."
+  ExpectedResponse: '`OK`'
+  Pre-requisites: 'Command received within a CASE session, and the accessing fabric
+    matches the Fabric Index associated with the current Fail-Safe context.
+
+
+    These test cases cover the extreme values and special responses for the `CommissioningComplete`
+    command as specified in the Matter 1.2 Core Specification【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments: {}
+  label: Test_Case_Successful_Execution
+  option: SendCommand

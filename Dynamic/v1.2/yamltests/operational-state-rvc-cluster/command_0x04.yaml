@@ -1,0 +1,29 @@
+config:
+  cluster: operational-state-rvc-cluster
+  command: '0x04'
+  nodeId: '0x654231'
+name: operational-state-rvc-cluster_command_0x04_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '- `OperationalState`: Running'
+  ExpectedResponse: Success
+  Pre-requisites: Device should be in a state that allows the command to be processed.
+  arguments:
+    CommandResponseState:
+      ErrorStateID: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: '- `OperationalState`: Error'
+  ExpectedResponse: Failure
+  Pre-requisites: 'Device should be in a state that does not allow the command to
+    be processed.
+
+
+    These test cases cover the extreme values and special responses for the `CommandResponseState`
+    field in the Operational State RVC Cluster command with ID 0x04【4:0†source】【4:1†source】【4:5†source】【4:7†source】【4:9†source】.'
+  arguments:
+    CommandResponseState:
+      ErrorStateID: 3
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SendCommand

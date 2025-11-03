@@ -1,0 +1,46 @@
+config:
+  attribute: '0x01'
+  cluster: localization-configuration-cluster
+  nodeId: '0x654231'
+name: localization-configuration-cluster_attribute_0x01_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`SupportedLocales` will be set to an empty list.'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: None
+  arguments:
+    SupportedLocales: '`[]` (empty list)'
+  label: Test_Case_Minimum_Values
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`SupportedLocales` will be set to the provided list of 32 entries.'
+  ExpectedResponse: '`SUCCESS`'
+  Pre-requisites: None
+  arguments:
+    SupportedLocales: '`["en-US", "fr-FR", "es-ES", "de-DE", "zh-CN", "ja-JP", "ru-RU",
+      "pt-PT", "it-IT", "ko-KR", "ar-SA", "hi-IN", "bn-BD", "pa-IN", "jv-ID", "te-IN",
+      "mr-IN", "ta-IN", "ur-PK", "gu-IN", "kn-IN", "ml-IN", "or-IN", "as-IN", "ma-IN",
+      "sa-IN", "ne-NP", "si-LK", "km-KH", "lo-LA", "my-MM", "th-TH"]` (32 entries)'
+  label: Test_Case_Maximum_Values
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: No change, as the operation will fail.
+  ExpectedResponse: '`CONSTRAINT_ERROR`'
+  Pre-requisites: None
+  arguments:
+    SupportedLocales: '`["en-US", "en-US"]` (duplicate entries)'
+  label: Test_Case_Special_Response_-_Duplicate_Entries
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: No change, as the operation will fail.
+  ExpectedResponse: '`CONSTRAINT_ERROR`'
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the `SupportedLocales`
+    field and the values that could result in special responses as mentioned in the
+    description of the effect【4:0†source】.'
+  arguments:
+    SupportedLocales: '`["invalid-locale"]` (invalid format)'
+  label: Test_Case_Special_Response_-_Invalid_Locale_Format
+  option: WriteAttribute

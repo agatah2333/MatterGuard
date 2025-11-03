@@ -1,0 +1,43 @@
+config:
+  attribute: '0x001A'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x001A_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatChargeState": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"BatChargeState"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatChargeState": 3}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"BatChargeState"': 3}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatChargeState": 1}'
+  ExpectedResponse: <charging>
+  Pre-requisites: <battery_present>
+  arguments:
+    '{"BatChargeState"': 1}
+  label: Test_Case_Special_Response_Value_1
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatChargeState": 2}'
+  ExpectedResponse: <discharging>
+  Pre-requisites: '<battery_present>
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:7†source】【4:8†source】【4:9†source】.'
+  arguments:
+    '{"BatChargeState"': 2}
+  label: Test_Case_Special_Response_Value_2
+  option: WriteAttribute

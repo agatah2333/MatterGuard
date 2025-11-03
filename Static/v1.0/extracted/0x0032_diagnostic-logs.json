@@ -1,0 +1,20 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0032",
+    "name": "Diagnostic Logs",
+    "description": "Diagnostic log retrieval."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "RetrieveLogsRequest"
+    },
+    {
+      "id": "0x01",
+      "name": "RetrieveLogsResponse"
+    }
+  ],
+  "attributes": [],
+  "events": []
+}

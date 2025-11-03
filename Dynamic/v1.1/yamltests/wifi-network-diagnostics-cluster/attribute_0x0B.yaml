@@ -1,0 +1,42 @@
+config:
+  attribute: '0x0B'
+  cluster: wifi-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: wifi-network-diagnostics-cluster_attribute_0x0B_v1.1.0.0
+tests:
+- ActionTime: '`0`'
+  Attribute_Change: '`CurrentMaxRate` set to `0`'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: Interface must be operational
+  arguments:
+    CurrentMaxRate: '`0`'
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: '`0`'
+  Attribute_Change: '`CurrentMaxRate` set to `18446744073709551615`'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: Interface must be operational
+  arguments:
+    CurrentMaxRate: '`18446744073709551615`'
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: '`0`'
+  Attribute_Change: '`CurrentMaxRate` set to `null`'
+  ExpectedResponse: '`Null`'
+  Pre-requisites: Interface not configured or operational
+  arguments:
+    CurrentMaxRate: '`0`'
+  label: Test_Case_Special_Response_-_Interface_Not_Configured
+  option: WriteAttribute
+- ActionTime: '`0`'
+  Attribute_Change: '`CurrentMaxRate` set to `1000000000`'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: 'Interface must be operational and capable of 1 Gbps rate
+
+
+    These test cases cover the extreme values of the `CurrentMaxRate` attribute and
+    special conditions where the interface is not configured or operational.'
+  arguments:
+    CurrentMaxRate: '`1000000000` (1 Gbps)'
+  label: Test_Case_Special_Response_-_Interface_Operational_with_Specific_Rate
+  option: WriteAttribute

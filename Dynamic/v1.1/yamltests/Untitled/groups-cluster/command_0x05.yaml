@@ -1,0 +1,60 @@
+config:
+  node_id: 305414945
+  cluster: '0x0004'
+  endpoint: 1
+tests:
+- label: test_groupid_minimum_boundary
+  cluster: '0x0004'
+  command: '0x05'
+  arguments:
+    GroupID: 0
+    GroupName: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_groupid_maximum_boundary
+  cluster: '0x0004'
+  command: '0x05'
+  arguments:
+    GroupID: 65535
+    GroupName: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+- label: test_groupid_midrange
+  cluster: '0x0004'
+  command: '0x05'
+  arguments:
+    GroupID: 32767
+    GroupName: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  expected: SUCCESS
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+execution_metadata:
+  estimated_duration: 90
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

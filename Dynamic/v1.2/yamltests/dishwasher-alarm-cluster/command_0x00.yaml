@@ -1,0 +1,49 @@
+config:
+  cluster: dishwasher-alarm-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: dishwasher-alarm-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: '- `OperationalState` set to `Running`'
+  ExpectedResponse: Success
+  Pre-requisites: All alarms are active and latched
+  arguments:
+    AlarmMap: '0xFFFFFFFF'
+  label: Test_Case_Reset_with_All_Alarms_Active
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '- `OperationalState` set to `Running`'
+  ExpectedResponse: Success
+  Pre-requisites: No alarms are active
+  arguments:
+    AlarmMap: '0x00000000'
+  label: Test_Case_Reset_with_No_Alarms_Active
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '- `OperationalState` set to `Running`'
+  ExpectedResponse: Success
+  Pre-requisites: InflowError and DoorError alarms are active and latched
+  arguments:
+    AlarmMap: 0x00000005 (bit 0 for InflowError, bit 2 for DoorError)
+  label: Test_Case_Reset_with_Specific_Alarms_Active_(e.g.,_InflowError_and_DoorError)
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '- `OperationalState` set to `Running`'
+  ExpectedResponse: Success
+  Pre-requisites: 'DrainError and TempTooLow alarms are active and latched, other
+    alarms are inactive
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    ### References
+
+    - Matter-1.2-Application-Cluster-Specification.pdf【4:0†source】'
+  arguments:
+    AlarmMap: 0x0000000A (bit 1 for DrainError, bit 3 for TempTooLow)
+  label: Test_Case_Reset_with_Mixed_Alarms_(some_active,_some_inactive)
+  option: SendCommand

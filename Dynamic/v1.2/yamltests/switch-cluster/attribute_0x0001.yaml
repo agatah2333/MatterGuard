@@ -1,0 +1,6 @@
+config:
+  attribute: '0x0001'
+  cluster: switch-cluster
+  nodeId: '0x654231'
+name: switch-cluster_attribute_0x0001_v1.2.0.0
+tests: []

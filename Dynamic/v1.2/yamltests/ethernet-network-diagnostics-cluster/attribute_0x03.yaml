@@ -1,0 +1,28 @@
+config:
+  attribute: '0x03'
+  cluster: ethernet-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: ethernet-network-diagnostics-cluster_attribute_0x03_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: PacketTxCount = 0
+  ExpectedResponse: Success
+  Pre-requisites: 'Node has just rebooted.
+
+
+    **Test Case 1.2**'
+  arguments:
+    '{"PacketTxCount"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: PacketTxCount = 1
+  ExpectedResponse: Success
+  Pre-requisites: 'Node has successfully transmitted one packet since the last reboot.
+
+
+    **Test Case 2.2**'
+  arguments:
+    '{"PacketTxCount"': 1}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

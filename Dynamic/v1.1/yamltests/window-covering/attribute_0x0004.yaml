@@ -1,0 +1,51 @@
+config:
+  attribute: '0x0004'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0004_v1.1.0.0
+tests:
+- ActionTime: <timestamp>
+  Attribute_Change: '{"CurrentPositionTilt": <InstalledOpenLimitTilt>}'
+  ExpectedResponse: <success>
+  Pre-requisites: Ensure the device is calibrated and operational.
+  arguments:
+    '{"CurrentPositionTilt"': <InstalledOpenLimitTilt>}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <timestamp>
+  Attribute_Change: '{"CurrentPositionTilt": <InstalledClosedLimitTilt>}'
+  ExpectedResponse: <success>
+  Pre-requisites: Ensure the device is calibrated and operational.
+  arguments:
+    '{"CurrentPositionTilt"': <InstalledClosedLimitTilt>}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <timestamp>
+  Attribute_Change: '{"CurrentPositionTilt": <(InstalledOpenLimitTilt + InstalledClosedLimitTilt)
+    / 2>}'
+  ExpectedResponse: <success>
+  Pre-requisites: Ensure the device is calibrated and operational.
+  arguments:
+    '{"CurrentPositionTilt"': <(InstalledOpenLimitTilt + InstalledClosedLimitTilt)
+      / 2>}
+  label: Test_Case_Mid-range_Value
+  option: WriteAttribute
+- ActionTime: <timestamp>
+  Attribute_Change: '{"CurrentPositionTilt": <null>}'
+  ExpectedResponse: <calibration_needed>
+  Pre-requisites: Device should be in a state where calibration is required.
+  arguments:
+    '{"CurrentPositionTilt"': <null>}
+  label: Test_Case_Special_Response_-_Calibration_Needed
+  option: WriteAttribute
+- ActionTime: <timestamp>
+  Attribute_Change: '{"CurrentPositionTilt": <no_change>}'
+  ExpectedResponse: <constraint_error>
+  Pre-requisites: 'Ensure the device is calibrated and operational.
+
+
+    ### Ranges'
+  arguments:
+    '{"CurrentPositionTilt"': <InstalledClosedLimitTilt + 1>}
+  label: Test_Case_Special_Response_-_Invalid_Value
+  option: WriteAttribute

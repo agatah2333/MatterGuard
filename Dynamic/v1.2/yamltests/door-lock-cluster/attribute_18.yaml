@@ -1,0 +1,26 @@
+config:
+  attribute: '18'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_18_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: MaxRFIDCodeLength = 1
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"MaxRFIDCodeLength"': 1}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values and special responses for the `MaxRFIDCodeLength`
+    attribute in the Door Lock cluster.'
+  arguments:
+    '{"MaxRFIDCodeLength"': 0}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

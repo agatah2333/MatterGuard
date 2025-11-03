@@ -1,0 +1,47 @@
+config:
+  cluster: media-input-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: media-input-cluster_command_0x03_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`InputList[0].Name` will be changed to "Input0"'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The device must have at least one input in the `InputList`.
+  arguments:
+    Index: 0
+    Name: '"Input0"'
+  label: Test_Case_Minimum_Index_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '`InputList[255].Name` will be changed to "Input255"'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The device must have at least 256 inputs in the `InputList`.
+  arguments:
+    Index: 255
+    Name: '"Input255"'
+  label: Test_Case_Maximum_Index_Value
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '`InputList[1].Name` will be changed to "Input@#1"'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The device must have at least two inputs in the `InputList`.
+  arguments:
+    Index: 1
+    Name: '"Input@#1"'
+  label: Test_Case_Special_Character_in_Name
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '`InputList[2].Name` will be changed to an empty string'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'The device must have at least three inputs in the `InputList`.
+
+
+    These test cases cover the extreme values of the `Index` field and special values
+    for the `Name` field, ensuring comprehensive testing of the `RenameInput` command
+    functionality【4:1†source】【4:3†source】【4:18†source】.'
+  arguments:
+    Index: 2
+    Name: '""'
+  label: Test_Case_Empty_Name
+  option: SendCommand

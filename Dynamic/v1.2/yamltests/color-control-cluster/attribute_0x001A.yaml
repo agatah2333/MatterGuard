@@ -1,0 +1,44 @@
+config:
+  attribute: '0x001A'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x001A_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Primary3Y = 0
+  ExpectedResponse: Success
+  Pre-requisites: NumberOfPrimaries > 2
+  arguments:
+    '{"Primary3Y"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Primary3Y = 0xFEFF
+  ExpectedResponse: Success
+  Pre-requisites: NumberOfPrimaries > 2
+  arguments:
+    '{"Primary3Y"': 0xFEFF}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Primary3Y = 0x8000
+  ExpectedResponse: Success
+  Pre-requisites: NumberOfPrimaries > 2
+  arguments:
+    '{"Primary3Y"': 0x8000}
+  label: Test_Case_Special_Response_Value_1
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Primary3Y = 0x4000
+  ExpectedResponse: Success
+  Pre-requisites: 'NumberOfPrimaries > 2
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    values that could result in special responses. The pre-requisite for all test
+    cases is that the `NumberOfPrimaries` attribute must be greater than 2, making
+    `Primary3Y` a mandatory attribute.'
+  arguments:
+    '{"Primary3Y"': 0x4000}
+  label: Test_Case_Special_Response_Value_2
+  option: WriteAttribute

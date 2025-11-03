@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0011'
+  cluster: pump-configuration-and-control-cluster
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_attribute_0x0011_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: MinConstFlow set to 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"MinConstFlow"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: MinConstFlow set to 65534
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"MinConstFlow"': 65534}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Error (Constraint Error)
+  Pre-requisites: None
+  arguments:
+    '{"MinConstFlow"': 65535}
+  label: Test_Case_Invalid_Value_(Above_Maximum)
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: MinConstFlow set to null
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special condition where the value is null, which is mentioned in the description
+    of the effect.'
+  arguments:
+    '{"MinConstFlow"': null}
+  label: Test_Case_Special_Condition_(Null_Value)
+  option: WriteAttribute

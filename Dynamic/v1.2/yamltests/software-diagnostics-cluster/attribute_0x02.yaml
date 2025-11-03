@@ -1,0 +1,49 @@
+config:
+  attribute: '0x02'
+  cluster: software-diagnostics-cluster
+  nodeId: '0x654231'
+name: software-diagnostics-cluster_attribute_0x02_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`{"AdminVendorId": 0}`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"AdminVendorId"': 0}`
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`{"AdminVendorId": 65535}`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"AdminVendorId"': 65535}`
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`{"AdminVendorId": 12345}`'
+  ExpectedResponse: '`<success>`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"AdminVendorId"': 12345}`
+  label: Test_Case_Typical_Value
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`<error_invalid_value>`'
+  Pre-requisites: '`None`'
+  arguments:
+    '{"AdminVendorId"': -1}`
+  label: Test_Case_Invalid_Value_(Negative)
+  option: WriteAttribute
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`None`'
+  ExpectedResponse: '`<error_invalid_value>`'
+  Pre-requisites: '`None`
+
+
+    ### Summary'
+  arguments:
+    '{"AdminVendorId"': 70000}`
+  label: Test_Case_Invalid_Value_(Above_Maximum)
+  option: WriteAttribute

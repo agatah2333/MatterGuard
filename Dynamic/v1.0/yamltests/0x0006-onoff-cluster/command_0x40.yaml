@@ -1,0 +1,113 @@
+config:
+  node_id: 305414945
+  cluster: '0x0006'
+  endpoint: 1
+tests:
+- label: test_offwitheffect_EffectIdentifier_minimum_boundary
+  cluster: '0x0006'
+  command: '0x40'
+  arguments:
+    EffectIdentifier: 0
+    EffectVariant: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_offwitheffect_EffectIdentifier_maximum_boundary
+  cluster: '0x0006'
+  command: '0x40'
+  arguments:
+    EffectIdentifier: 1
+    EffectVariant: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_offwitheffect_EffectIdentifier_midrange
+  cluster: '0x0006'
+  command: '0x40'
+  arguments:
+    EffectIdentifier: 0
+    EffectVariant: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_offwitheffect_EffectVariant_minimum_boundary
+  cluster: '0x0006'
+  command: '0x40'
+  arguments:
+    EffectIdentifier: 0
+    EffectVariant: 0
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_offwitheffect_EffectVariant_maximum_boundary
+  cluster: '0x0006'
+  command: '0x40'
+  arguments:
+    EffectIdentifier: 0
+    EffectVariant: 2
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS
+- label: test_offwitheffect_EffectVariant_midrange
+  cluster: '0x0006'
+  command: '0x40'
+  arguments:
+    EffectIdentifier: 0
+    EffectVariant: 1
+  response:
+    values:
+    - name: status
+      value: '0x00'
+  prerequisites:
+  - type: attribute_read
+    description: Verify device is reachable
+    cluster: '0x001D'
+    attribute: '0x0000'
+    timeout: 10
+  prerequisite_confirmations: []
+  expected: SUCCESS

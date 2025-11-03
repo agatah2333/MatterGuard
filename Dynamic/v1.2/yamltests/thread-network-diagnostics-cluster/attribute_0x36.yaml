@@ -1,0 +1,31 @@
+config:
+  attribute: '0x36'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x36_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"ChildRoleCount": 0}'
+  ExpectedResponse: Success
+  Pre-requisites: 'Node has just rebooted.
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"ChildRoleCount"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"ChildRoleCount": 1}'
+  ExpectedResponse: Success
+  Pre-requisites: 'Node has just transitioned to the OT_DEVICE_ROLE_CHILD role for
+    the first time since the last reboot.
+
+
+    These test cases cover the extreme values of the `ChildRoleCount` attribute and
+    a special case where the node transitions to the child role for the first time
+    since the last reboot【4:5†source】.'
+  arguments:
+    '{"ChildRoleCount"': 1}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

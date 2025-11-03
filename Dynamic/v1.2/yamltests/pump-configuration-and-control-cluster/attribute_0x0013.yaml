@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0013'
+  cluster: pump-configuration-and-control-cluster
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_attribute_0x0013_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: Capacity set to 0%
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Capacity: 0%
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Capacity set to 163.835%
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    Capacity: 163.835%
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Capacity set to null
+  ExpectedResponse: Null value indicates the measurement or estimation of the speed
+    is not available.
+  Pre-requisites: Measurement or estimation of the speed is not available.
+  arguments:
+    Capacity: <null>
+  label: Test_Case_Special_Response_-_Null_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: Error (values of capacity less than zero have no physical meaning)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special responses mentioned in the description of the effect【4:0†source】【4:6†source】【4:9†source】.'
+  arguments:
+    Capacity: -1%
+  label: Test_Case_Invalid_Negative_Value
+  option: WriteAttribute

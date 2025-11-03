@@ -1,0 +1,25 @@
+config:
+  cluster: thread-network-diagnostics-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_command_0x00_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '- `OverrunCount`: 0'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The attributes `OverrunCount` should have a non-zero value before
+    the command is sent.
+  arguments: {}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '- `OverrunCount`: 0'
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'The attributes `OverrunCount` should have a non-zero value before
+    the command is sent.
+
+
+    ### Additional Information'
+  arguments: {}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SendCommand

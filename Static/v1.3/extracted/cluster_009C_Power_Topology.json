@@ -1,0 +1,28 @@
+{
+  "cluster_id": "0x009C",
+  "cluster_name": "Power Topology",
+  "section": "11.8",
+  "description": "The Power Topology Cluster provides a mechanism for expressing how power is flowing between endpoints.",
+  "data_types": {},
+  "attributes": {
+    "0x0000": {
+      "id": "0x0000",
+      "name": "Avail­",
+      "details": "list[end­ max 20 F RV SET",
+      "raw_line": "0x0000         Avail­         list[end­     max 20         F                             RV               SET"
+    },
+    "0x0001": {
+      "id": "0x0001",
+      "name": "ActiveEnd",
+      "details": "list[end­ max 20 N RV DYPF",
+      "raw_line": "0x0001         ActiveEnd list[end­          max 20         N                             RV               DYPF"
+    }
+  },
+  "commands": {},
+  "events": {},
+  "extraction_info": {
+    "start_line": 39976,
+    "end_line": 40065,
+    "total_lines": 89
+  }
+}

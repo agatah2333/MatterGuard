@@ -1,0 +1,230 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x002F",
+    "name": "Power Source",
+    "description": "Power source status and information."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "Status",
+      "type": "unknown",
+      "description": "Status attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "Order",
+      "type": "uint8",
+      "constraint": "[0, 255]",
+      "description": "Order attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "Descrip",
+      "type": "unknown",
+      "description": "Descrip attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0003",
+      "name": "WiredAs",
+      "type": "unknown",
+      "description": "WiredAs attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0004",
+      "name": "WiredAs",
+      "type": "unknown",
+      "description": "WiredAs attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0005",
+      "name": "Wired",
+      "type": "unknown",
+      "description": "Wired attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0006",
+      "name": "WiredAs",
+      "type": "unknown",
+      "description": "WiredAs attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0007",
+      "name": "Wired",
+      "type": "unknown",
+      "description": "Wired attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0008",
+      "name": "Wired",
+      "type": "unknown",
+      "description": "Wired attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0009",
+      "name": "WiredP",
+      "type": "unknown",
+      "description": "WiredP attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x000a",
+      "name": "ActiveWi",
+      "type": "unknown",
+      "description": "ActiveWi attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x000b",
+      "name": "BatVolt",
+      "type": "unknown",
+      "description": "BatVolt attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x000c",
+      "name": "BatPer",
+      "type": "unknown",
+      "description": "BatPer attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x000d",
+      "name": "Bat",
+      "type": "unknown",
+      "description": "Bat attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x000e",
+      "name": "BatCharg",
+      "type": "unknown",
+      "description": "BatCharg attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x000f",
+      "name": "BatRe",
+      "type": "unknown",
+      "description": "BatRe attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0010",
+      "name": "BatRe",
+      "type": "unknown",
+      "description": "BatRe attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0011",
+      "name": "BatPre",
+      "type": "unknown",
+      "description": "BatPre attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0012",
+      "name": "Active",
+      "type": "unknown",
+      "description": "Active attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0013",
+      "name": "BatRe",
+      "type": "unknown",
+      "description": "BatRe attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0014",
+      "name": "BatCom",
+      "type": "unknown",
+      "description": "BatCom attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0015",
+      "name": "BatAN",
+      "type": "unknown",
+      "description": "BatAN attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0016",
+      "name": "BatIECDe",
+      "type": "unknown",
+      "description": "BatIECDe attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0017",
+      "name": "BatAp",
+      "type": "unknown",
+      "description": "BatAp attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0018",
+      "name": "BatCa",
+      "type": "unknown",
+      "description": "BatCa attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0019",
+      "name": "BatQuan",
+      "type": "unknown",
+      "description": "BatQuan attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x001a",
+      "name": "BatCharg",
+      "type": "unknown",
+      "description": "BatCharg attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x001b",
+      "name": "Bat",
+      "type": "unknown",
+      "description": "Bat attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x001c",
+      "name": "BatFunc",
+      "type": "unknown",
+      "description": "BatFunc attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x001d",
+      "name": "BatCharg",
+      "type": "unknown",
+      "description": "BatCharg attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x001e",
+      "name": "Active",
+      "type": "unknown",
+      "description": "Active attribute",
+      "access": "R"
+    }
+  ],
+  "events": []
+}

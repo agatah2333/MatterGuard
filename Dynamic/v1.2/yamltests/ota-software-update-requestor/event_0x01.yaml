@@ -1,0 +1,6 @@
+config:
+  cluster: ota-software-update-requestor
+  event: '0x01'
+  nodeId: '0x654231'
+name: ota-software-update-requestor_event_0x01_v1.2.0.0
+tests: []

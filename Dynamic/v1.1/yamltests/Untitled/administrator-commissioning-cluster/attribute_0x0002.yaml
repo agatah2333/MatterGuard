@@ -1,0 +1,229 @@
+config:
+  attribute: '0x0002'
+  cluster: administrator-commissioning-cluster
+  nodeId: '0x654231'
+name: administrator-commissioning-cluster_attribute_0x0002_v1.1.0.0
+tests:
+- ActionTime: During an open commissioning window
+  Attribute_Change: '`AdminVendorId` will be set to 0.'
+  ExpectedResponse: The `AdminVendorId` should be set to 0.
+  Pre-requisites: The commissioning window must be opened by an Administrator with
+    Vendor ID 0.
+  arguments:
+    AdminVendorId: 0
+    WindowStatus: 1 (EnhancedWindowOpen)
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify administrator-commissioning-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: During an open commissioning window
+  Attribute_Change: '`AdminVendorId` will be set to 65535.'
+  ExpectedResponse: The `AdminVendorId` should be set to 65535.
+  Pre-requisites: The commissioning window must be opened by an Administrator with
+    Vendor ID 65535.
+  arguments:
+    AdminVendorId: 65535
+    WindowStatus: 2 (BasicWindowOpen)
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify administrator-commissioning-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: After the commissioning window has closed
+  Attribute_Change: '`AdminVendorId` will be set to null.'
+  ExpectedResponse: The `AdminVendorId` should be set to null.
+  Pre-requisites: The commissioning window must have been closed.
+  arguments:
+    AdminVendorId: 12345
+    WindowStatus: 0 (WindowNotOpen)
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify administrator-commissioning-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+- ActionTime: During an open commissioning window, and then the fabric for the Administrator
+    is removed
+  Attribute_Change: '`AdminVendorId` will remain 54321.'
+  ExpectedResponse: The `AdminVendorId` should remain 54321 even after the fabric
+    is removed.
+  Pre-requisites: 'The commissioning window must be opened by an Administrator with
+    Vendor ID 54321, and then the fabric for this Administrator must be removed while
+    the window is still open.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    AdminVendorId: 54321
+    WindowStatus: 1 (EnhancedWindowOpen)
+  option: WriteAttribute
+  setup_sequence:
+  - step: 1
+    description: Verify administrator-commissioning-cluster cluster is supported
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0xFFFD'
+    expected_response: Success
+    timeout: 10
+  - step: 2
+    description: Verify device is reachable and responsive
+    action:
+      type: read-by-id
+      cluster_id: '0x001D'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+  - step: 3
+    description: Read attribute 0x0000 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0000'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 4
+    description: Read attribute 0x0001 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0001'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+  - step: 5
+    description: Read attribute 0x0002 for cluster state verification
+    action:
+      type: read-by-id
+      cluster_id: '0x0000'
+      attribute_id: '0x0002'
+    expected_response: Success
+    timeout: 10
+    continue_on_failure: true
+execution_metadata:
+  estimated_duration: 120
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

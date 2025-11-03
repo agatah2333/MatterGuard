@@ -1,0 +1,43 @@
+config:
+  attribute: '5'
+  cluster: bridged-device-basic-information
+  nodeId: '0x654231'
+name: bridged-device-basic-information_attribute_5_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '- `NodeLabel`: "A"'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    NodeLabel: '"A"'
+  label: Test_Case_Minimum_Length
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `NodeLabel`: "A" * 32'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    NodeLabel: '"A" * 32'
+  label: Test_Case_Maximum_Length
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `NodeLabel`: "!@#$%^&*()_+-=[]{}|;'':,.<>/?"'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    NodeLabel: '"!@#$%^&*()_+-=[]{}|;'':,.<>/?"'
+  label: Test_Case_Special_Characters
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `NodeLabel`: None'
+  ExpectedResponse: Error
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the `NodeLabel`
+    field and include a special case with special characters. The empty string case
+    is included to test the system''s response to invalid input.'
+  arguments:
+    NodeLabel: '""'
+  label: Test_Case_Empty_String_(Invalid_Case)
+  option: WriteAttribute

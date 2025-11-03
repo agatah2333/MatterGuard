@@ -1,0 +1,47 @@
+{
+  "source_file": "Content App Observer_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0510",
+        "name": "Content App Observer",
+        "attributes": [],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ContentAppMessage",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "data: string(max 500), encodingHint: string(max 100)",
+              "description": "Content app-specific data and optional encoding hint"
+            },
+            "privilege": "Optional",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "ContentAppMessageResponse",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "status: StatusEnum, data: string(max 500), encodingHint: string(max 100)",
+              "description": "Response with status code and optional app-specific data"
+            },
+            "privilege": "Mandatory",
+            "direction": "client ⇐ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "StatusEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Success",
+              "1": "UnexpectedData"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

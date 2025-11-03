@@ -1,0 +1,30 @@
+config:
+  attribute: '2'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_2_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: LockState = 0
+  ExpectedResponse: Lock state is not fully locked
+  Pre-requisites: 'Lock hardware must be able to report the lock state
+
+
+    **Test Case 1.2**:'
+  arguments:
+    '{"LockState"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: LockState = NULL
+  ExpectedResponse: Lock hardware does not currently know the status of the locking
+    mechanism
+  Pre-requisites: 'Lock hardware must be in a state where it cannot determine the
+    lock status (e.g., after a power cycle)
+
+
+    **Test Case 2.2**:'
+  arguments:
+    '{"LockState"': NULL}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

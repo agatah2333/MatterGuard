@@ -1,0 +1,271 @@
+{
+  "source_file": "Actions_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0025",
+        "name": "Actions",
+        "dataTypes": {
+          "ActionStruct": {
+            "type": "struct",
+            "fields": {
+              "ActionID": "uint16",
+              "Name": {
+                "type": "string",
+                "maxLength": 32
+              },
+              "Type": {
+                "type": "enum8",
+                "values": {
+                  "0": "Instant",
+                  "1": "InstantWithTransition",
+                  "2": "Start",
+                  "3": "StartWithDuration",
+                  "4": "Stop",
+                  "5": "Pause",
+                  "6": "Resume"
+                }
+              },
+              "EndpointListID": "uint16",
+              "State": {
+                "type": "enum8",
+                "values": {
+                  "0": "Inactive",
+                  "1": "Active",
+                  "2": "Paused",
+                  "3": "Disabled"
+                }
+              }
+            }
+          },
+          "EndpointListStruct": {
+            "type": "struct",
+            "fields": {
+              "EndpointListID": "uint16",
+              "Endpoints": {
+                "type": "list",
+                "elementType": "endpoint-no"
+              }
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "ActionList",
+            "dataType": {
+              "type": "list",
+              "elementType": {
+                "type": "struct",
+                "fields": "ActionStruct"
+              },
+              "maxLength": 256
+            },
+            "valueRange": "max 256",
+            "writable": true,
+            "privilege": "R"
+          },
+          {
+            "id": "0x0001",
+            "name": "EndpointLists",
+            "dataType": {
+              "type": "list",
+              "elementType": {
+                "type": "struct",
+                "fields": "EndpointListStruct"
+              },
+              "maxLength": 256
+            },
+            "valueRange": "max 256",
+            "writable": true,
+            "privilege": "R"
+          },
+          {
+            "id": "0x0002",
+            "name": "SetupURL",
+            "dataType": {
+              "type": "string",
+              "maxLength": 512
+            },
+            "valueRange": "max 512",
+            "writable": true,
+            "privilege": "R"
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "InstantAction",
+            "parameters": {
+              "dataType": {
+                "type": "uint16",
+                "valueRange": "all"
+              }
+            },
+            "privilege": "O",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x01",
+            "name": "InstantActionWithTransition",
+            "parameters": {
+              "dataType": {
+                "type": "uint16",
+                "valueRange": "all"
+              }
+            },
+            "privilege": "O",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x02",
+            "name": "StartAction",
+            "parameters": {
+              "dataType": {
+                "type": "uint16",
+                "valueRange": "all"
+              }
+            },
+            "privilege": "O",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x03",
+            "name": "StartActionWithDuration",
+            "parameters": {
+              "dataType": {
+                "type": "uint16",
+                "valueRange": "all"
+              }
+            },
+            "privilege": "O",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x04",
+            "name": "StopAction",
+            "parameters": {
+              "dataType": {
+                "type": "uint16",
+                "valueRange": "all"
+              }
+            },
+            "privilege": "O",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x05",
+            "name": "PauseAction",
+            "parameters": {
+              "dataType": {
+                "type": "uint16",
+                "valueRange": "all"
+              }
+            },
+            "privilege": "O",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x06",
+            "name": "PauseActionWithDuration",
+            "parameters": {
+              "dataType": {
+                "type": "uint16",
+                "valueRange": "all"
+              }
+            },
+            "privilege": "O",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x07",
+            "name": "ResumeAction",
+            "parameters": {
+              "dataType": {
+                "type": "uint16",
+                "valueRange": "all"
+              }
+            },
+            "privilege": "O",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x08",
+            "name": "EnableAction",
+            "parameters": {
+              "dataType": {
+                "type": "uint16",
+                "valueRange": "all"
+              }
+            },
+            "privilege": "O",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x09",
+            "name": "EnableActionWithDuration",
+            "parameters": {
+              "dataType": {
+                "type": "uint16",
+                "valueRange": "all"
+              }
+            },
+            "privilege": "O",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x0A",
+            "name": "DisableAction",
+            "parameters": {
+              "dataType": {
+                "type": "uint16",
+                "valueRange": "all"
+              }
+            },
+            "privilege": "O",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x0B",
+            "name": "DisableActionWithDuration",
+            "parameters": {
+              "dataType": {
+                "type": "uint16",
+                "valueRange": "all"
+              }
+            },
+            "privilege": "O",
+            "direction": "clientToServer"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "StateChanged",
+            "parameters": {
+              "dataType": {
+                "type": "uint16",
+                "valueRange": "M"
+              }
+            },
+            "privilege": "INFO",
+            "side": "V"
+          },
+          {
+            "id": "0x01",
+            "name": "ActionFailed",
+            "parameters": {
+              "dataType": {
+                "type": "uint16",
+                "valueRange": "M"
+              }
+            },
+            "privilege": "INFO",
+            "side": "V"
+          }
+        ]
+      }
+    ]
+  }
+}

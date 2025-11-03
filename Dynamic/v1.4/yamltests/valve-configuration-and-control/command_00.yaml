@@ -1,0 +1,22 @@
+name: Valve Configuration and Control - Open Command Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Valve Configuration and Control
+  timeout: 180
+tests:
+- label: Send Open command
+  command: Open
+  response: &id001
+    values:
+    - name: status
+      value: 0
+  arguments:
+    OpenDuration: 1000
+    TargetLevel: 1
+- label: Open - Test TargetLevel boundary (255)
+  command: Open
+  response: *id001
+  arguments:
+    OpenDuration: 1000
+    TargetLevel: 255

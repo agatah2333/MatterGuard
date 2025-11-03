@@ -1,0 +1,35 @@
+config:
+  attribute: '0x35'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x35_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: "- `CurrentHeapHighWatermark` set to 0\n  - `StackFreeMinimum`\
+    \ set to 0"
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Node should be in a default state with no prior faults or connections.
+  arguments:
+    ConnectionStatusEnum: 0
+    CurrentHeapHighWatermark: 0
+    NetworkFaultEnum: 0
+    StackFreeMinimum: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: UINT32_MAX
+  Attribute_Change: "- `CurrentHeapHighWatermark` set to UINT32_MAX\n  - `StackFreeMinimum`\
+    \ set to UINT32_MAX"
+  ExpectedResponse: FAILURE
+  Pre-requisites: 'Node should have a history of faults and connection issues.
+
+
+    These test cases cover the extreme values and special response scenarios for the
+    Thread Network Diagnostics cluster attributes. For more detailed information,
+    refer to the Matter 1.2 Core Specification document【4:0†source】.'
+  arguments:
+    ConnectionStatusEnum: 2 (HardwareFailure)
+    CurrentHeapHighWatermark: UINT32_MAX
+    NetworkFaultEnum: 3 (NetworkJammed)
+    StackFreeMinimum: UINT32_MAX
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: WriteAttribute

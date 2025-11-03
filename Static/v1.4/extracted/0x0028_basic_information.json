@@ -1,0 +1,378 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0028",
+    "name": "Basic Information Cluster",
+    "description": "This cluster provides basic information about the node which aids in bootstrapping and operational behavior.",
+    "revision": "4"
+  },
+  "features": [],
+  "derived_datatypes": [
+    {
+      "type": "enum",
+      "name": "ColorEnum",
+      "base_data_type": "ENUM8",
+      "value_range": {
+        "enum_values": [
+          {"name": "Black", "value": "0", "description": "Approximately RGB #000000."},
+          {"name": "Navy", "value": "1", "description": "Approximately RGB #000080."},
+          {"name": "Green", "value": "2", "description": "Approximately RGB #008000."},
+          {"name": "Teal", "value": "3", "description": "Approximately RGB #008080."},
+          {"name": "Maroon", "value": "4", "description": "Approximately RGB #800080."},
+          {"name": "Purple", "value": "5", "description": "Approximately RGB #800080."},
+          {"name": "Olive", "value": "6", "description": "Approximately RGB #808000."},
+          {"name": "Gray", "value": "7", "description": "Approximately RGB #808080."},
+          {"name": "Blue", "value": "8", "description": "Approximately RGB #0000FF."},
+          {"name": "Lime", "value": "9", "description": "Approximately RGB #00FF00."},
+          {"name": "Aqua", "value": "10", "description": "Approximately RGB #00FFFF."},
+          {"name": "Red", "value": "11", "description": "Approximately RGB #FF0000."},
+          {"name": "Fuchsia", "value": "12", "description": "Approximately RGB #FF00FF."},
+          {"name": "Yellow", "value": "13", "description": "Approximately RGB #FFFF00."},
+          {"name": "White", "value": "14", "description": "Approximately RGB #FFFFFF."},
+          {"name": "Nickel", "value": "15", "description": "Typical hardware \"Nickel\" color."},
+          {"name": "Chrome", "value": "16", "description": "Typical hardware \"Chrome\" color."},
+          {"name": "Brass", "value": "17", "description": "Typical hardware \"Brass\" color."},
+          {"name": "Copper", "value": "18", "description": "Typical hardware \"Copper\" color."},
+          {"name": "Silver", "value": "19", "description": "Typical hardware \"Silver\" color."},
+          {"name": "Gold", "value": "20", "description": "Typical hardware \"Gold\" color."}
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "ProductFinishEnum",
+      "base_data_type": "ENUM8",
+      "value_range": {
+        "enum_values": [
+          {"name": "Other", "value": "0", "description": "Product has some other finish not listed below."},
+          {"name": "Matte", "value": "1", "description": "Product has a matte finish."},
+          {"name": "Satin", "value": "2", "description": "Product has a satin finish."},
+          {"name": "Polished", "value": "3", "description": "Product has a polished or shiny finish."},
+          {"name": "Rugged", "value": "4", "description": "Product has a rugged finish."},
+          {"name": "Fabric", "value": "5", "description": "Product has a fabric finish."}
+        ]
+      }
+    },
+    {
+      "type": "struct",
+      "name": "CapabilityMinimaStruct",
+      "fields": [
+        {
+          "id": "0",
+          "name": "CaseSessionsPerFabric",
+          "data_type": "uint16",
+          "default": "3",
+          "conformance": "mandatory",
+          "constraint": "min 3"
+        },
+        {
+          "id": "1",
+          "name": "SubscriptionsPerFabric",
+          "data_type": "uint16",
+          "default": "3",
+          "conformance": "mandatory",
+          "constraint": "min 3"
+        }
+      ]
+    },
+    {
+      "type": "struct",
+      "name": "ProductAppearanceStruct",
+      "fields": [
+        {
+          "id": "0",
+          "name": "Finish",
+          "data_type": "ProductFinishEnum",
+          "conformance": "mandatory"
+        },
+        {
+          "id": "1",
+          "name": "PrimaryColor",
+          "data_type": "ColorEnum",
+          "nullable": true,
+          "conformance": "mandatory"
+        }
+      ]
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "DataModelRevision",
+      "data_type": "uint16",
+      "default": "MS",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed"
+    },
+    {
+      "id": "0x0001",
+      "name": "VendorName",
+      "data_type": "string",
+      "default": "MS",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed",
+      "constraint": "maxLength 32"
+    },
+    {
+      "id": "0x0002",
+      "name": "VendorID",
+      "data_type": "vendor-id",
+      "default": "MS",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed"
+    },
+    {
+      "id": "0x0003",
+      "name": "ProductName",
+      "data_type": "string",
+      "default": "MS",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed",
+      "constraint": "maxLength 32"
+    },
+    {
+      "id": "0x0004",
+      "name": "ProductID",
+      "data_type": "uint16",
+      "default": "MS",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed"
+    },
+    {
+      "id": "0x0005",
+      "name": "NodeLabel",
+      "data_type": "string",
+      "default": "\"\"",
+      "privilege": "VM",
+      "writable": true,
+      "persistence": "nonVolatile",
+      "constraint": "maxLength 32"
+    },
+    {
+      "id": "0x0006",
+      "name": "Location",
+      "data_type": "string",
+      "default": "\"XX\"",
+      "privilege": "VA",
+      "writable": true,
+      "persistence": "nonVolatile",
+      "constraint": "allowed 2"
+    },
+    {
+      "id": "0x0007",
+      "name": "HardwareVersion",
+      "data_type": "uint16",
+      "default": "0",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed"
+    },
+    {
+      "id": "0x0008",
+      "name": "HardwareVersionString",
+      "data_type": "string",
+      "default": "MS",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed",
+      "constraint": "lengthBetween 1 to 64"
+    },
+    {
+      "id": "0x0009",
+      "name": "SoftwareVersion",
+      "data_type": "uint32",
+      "default": "0",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed"
+    },
+    {
+      "id": "0x000A",
+      "name": "SoftwareVersionString",
+      "data_type": "string",
+      "default": "MS",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed",
+      "constraint": "lengthBetween 1 to 64"
+    },
+    {
+      "id": "0x000B",
+      "name": "ManufacturingDate",
+      "data_type": "string",
+      "default": "MS",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed",
+      "optional": true,
+      "constraint": "lengthBetween 8 to 16"
+    },
+    {
+      "id": "0x000C",
+      "name": "PartNumber",
+      "data_type": "string",
+      "default": "MS",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed",
+      "optional": true,
+      "constraint": "maxLength 32"
+    },
+    {
+      "id": "0x000D",
+      "name": "ProductURL",
+      "data_type": "string",
+      "default": "MS",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed",
+      "optional": true,
+      "constraint": "maxLength 256"
+    },
+    {
+      "id": "0x000E",
+      "name": "ProductLabel",
+      "data_type": "string",
+      "default": "MS",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed",
+      "optional": true,
+      "constraint": "maxLength 64"
+    },
+    {
+      "id": "0x000F",
+      "name": "SerialNumber",
+      "data_type": "string",
+      "default": "MS",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed",
+      "optional": true,
+      "constraint": "maxLength 32"
+    },
+    {
+      "id": "0x0010",
+      "name": "LocalConfigDisabled",
+      "data_type": "bool",
+      "default": "false",
+      "privilege": "VM",
+      "writable": true,
+      "persistence": "nonVolatile",
+      "optional": true
+    },
+    {
+      "id": "0x0011",
+      "name": "Reachable",
+      "data_type": "bool",
+      "default": "true",
+      "privilege": "V",
+      "writable": false,
+      "optional": true
+    },
+    {
+      "id": "0x0012",
+      "name": "UniqueID",
+      "data_type": "string",
+      "default": "MS",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed",
+      "constraint": "maxLength 32"
+    },
+    {
+      "id": "0x0013",
+      "name": "CapabilityMinima",
+      "data_type": "CapabilityMinimaStruct",
+      "default": "MS",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed"
+    },
+    {
+      "id": "0x0014",
+      "name": "ProductAppearance",
+      "data_type": "ProductAppearanceStruct",
+      "default": "MS",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed",
+      "optional": true
+    },
+    {
+      "id": "0x0015",
+      "name": "SpecificationVersion",
+      "data_type": "uint32",
+      "default": "0",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed"
+    },
+    {
+      "id": "0x0016",
+      "name": "MaxPathsPerInvoke",
+      "data_type": "uint16",
+      "default": "1",
+      "privilege": "V",
+      "writable": false,
+      "persistence": "fixed",
+      "constraint": "min 1"
+    }
+  ],
+  "commands": [],
+  "events": [
+    {
+      "id": "0x00",
+      "name": "StartUp",
+      "priority": "critical",
+      "privilege": "V",
+      "fields": [
+        {
+          "id": "0",
+          "name": "SoftwareVersion",
+          "data_type": "uint32"
+        }
+      ]
+    },
+    {
+      "id": "0x01",
+      "name": "ShutDown",
+      "priority": "critical",
+      "privilege": "V",
+      "optional": true,
+      "fields": []
+    },
+    {
+      "id": "0x02",
+      "name": "Leave",
+      "priority": "info",
+      "privilege": "V",
+      "optional": true,
+      "fields": [
+        {
+          "id": "0",
+          "name": "FabricIndex",
+          "data_type": "fabric-idx",
+          "constraint": "1 to 254"
+        }
+      ]
+    },
+    {
+      "id": "0x03",
+      "name": "ReachableChanged",
+      "priority": "info",
+      "privilege": "V",
+      "fields": [
+        {
+          "id": "0",
+          "name": "ReachableNewValue",
+          "data_type": "bool"
+        }
+      ]
+    }
+  ]
+}

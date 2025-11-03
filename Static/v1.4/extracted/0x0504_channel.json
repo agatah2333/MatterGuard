@@ -1,0 +1,195 @@
+{
+  "source_file": "Channel_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0504",
+        "name": "Channel",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "ChannelList",
+            "dataType": "list[ChannelInfoStruct]",
+            "valueRange": "R V O",
+            "description": "This attribute SHALL provide the list of supported channels.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "Lineup",
+            "dataType": "LineupInfoStruct",
+            "valueRange": "R V O",
+            "description": "This attribute SHALL identify the channel lineup using external data sources.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "CurrentChannel",
+            "dataType": "ChannelInfoStruct",
+            "valueRange": "R V O",
+            "description": "This attribute SHALL contain the current channel.",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ChangeChannel",
+            "parameters": {
+              "Match": {
+                "dataType": "string",
+                "valueRange": "M",
+                "description": "This field SHALL contain a user-input string to match in order to identify the target channel."
+              }
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "ChangeChannelResponse",
+            "parameters": {
+              "Status": {
+                "dataType": "StatusEnum",
+                "valueRange": "desc",
+                "description": "This field SHALL indicate the status of the command which resulted in this response."
+              },
+              "Data": {
+                "dataType": "string",
+                "valueRange": "any",
+                "description": "This field SHALL indicate Optional app-specific data."
+              }
+            },
+            "privilege": "N",
+            "direction": "client ⇐ server"
+          },
+          {
+            "id": "0x02",
+            "name": "ChangeChannelByNumber",
+            "parameters": {
+              "MajorNumber": {
+                "dataType": "uint16",
+                "valueRange": "all",
+                "description": "Channel major number value (ATSC format)"
+              },
+              "MinorNumber": {
+                "dataType": "uint16",
+                "valueRange": "all",
+                "description": "Channel minor number value (ATSC format)"
+              }
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x03",
+            "name": "SkipChannel",
+            "parameters": {
+              "Count": {
+                "dataType": "int16",
+                "valueRange": "all",
+                "description": "Number of steps to increase/decrease current channel"
+              }
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x04",
+            "name": "GetProgramGuide",
+            "parameters": {
+              "StartTime": {
+                "dataType": "epoch-s",
+                "valueRange": "M",
+                "description": "Start time for program guide retrieval"
+              },
+              "EndTime": {
+                "dataType": "epoch-s",
+                "valueRange": "M",
+                "description": "End time for program guide retrieval"
+              },
+              "ChannelList": {
+                "dataType": "list[ChannelInfoStruct]",
+                "valueRange": "max 255",
+                "description": "List of requested channels"
+              },
+              "PageToken": {
+                "dataType": "PageTokenStruct",
+                "valueRange": "X null",
+                "description": "Pagination token"
+              },
+              "RecordingFlag": {
+                "dataType": "RecordingFlagBitmap",
+                "valueRange": "X null",
+                "description": "Recording options flags"
+              }
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x05",
+            "name": "ProgramGuideResponse",
+            "parameters": {
+              "dataType": "various",
+              "valueRange": "various",
+              "description": "Response to GetProgramGuide command"
+            },
+            "privilege": "View",
+            "direction": "server → client"
+          },
+          {
+            "id": "0x06",
+            "name": "RecordProgram",
+            "parameters": {
+              "dataType": "various",
+              "valueRange": "various",
+              "description": "Records a program"
+            },
+            "privilege": "Manage",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x07",
+            "name": "CancelRecordProgram",
+            "parameters": {
+              "dataType": "various",
+              "valueRange": "various",
+              "description": "Cancels a program recording"
+            },
+            "privilege": "Manage",
+            "direction": "client → server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "ChannelInfoStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "MajorNumber": "uint16",
+              "MinorNumber": "uint16",
+              "Name": "string",
+              "CallSign": "string",
+              "AffiliateCallSign": "string",
+              "Identifier": "string",
+              "Type": "ChannelTypeEnum"
+            }
+          },
+          "ChannelTypeEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Satellite",
+              "1": "Cable",
+              "2": "Terrestrial",
+              "3": "OTT"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

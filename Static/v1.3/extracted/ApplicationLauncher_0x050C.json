@@ -1,0 +1,122 @@
+{
+  "id": "0x050C",
+  "name": "Application Launcher",
+  "description": "This cluster provides an interface for launching applications on a Video Player device such as a TV. This cluster is supported on endpoints that can launch Applications, such as a Casting Video Player device with a Content App Platform. It supports identifying an Application by global identifier from a given catalog, and launching it. It also supports tracking the currently in-focus Application.",
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Application",
+    "scope": "Endpoint",
+    "picsCode": "APPLAUNCHER"
+  },
+  "revision": {
+    "current": 1,
+    "history": [
+      {
+        "revision": 1,
+        "description": "Initial Release"
+      }
+    ]
+  },
+  "features": {
+    "AP": {
+      "bit": 0,
+      "code": "AP",
+      "name": "ApplicationPlatform",
+      "summary": "Support for attributes and commands required for endpoint to support launching any application within the supported application catalogs"
+    }
+  },
+  "dataTypes": {
+    "StatusEnum": {
+      "type": "enum8",
+      "values": {
+        "0": {"name": "Success", "summary": "Command succeeded", "conformance": "M"},
+        "1": {"name": "AppNotAvailable", "summary": "Requested app is not available.", "conformance": "M"},
+        "2": {"name": "SystemBusy", "summary": "Video platform unable to honor command.", "conformance": "M"}
+      }
+    },
+    "ApplicationStruct": {
+      "type": "struct",
+      "description": "This indicates a global identifier for an Application given a catalog.",
+      "fields": {
+        "0": {"name": "CatalogVendorID", "type": "uint16", "constraint": "all", "conformance": "M"},
+        "1": {"name": "ApplicationID", "type": "string", "constraint": "all", "conformance": "M"}
+      }
+    },
+    "ApplicationEPStruct": {
+      "type": "struct",
+      "description": "This specifies an app along with its corresponding endpoint.",
+      "fields": {
+        "0": {"name": "Application", "type": "ApplicationStruct", "constraint": "all", "conformance": "M"},
+        "1": {"name": "Endpoint", "type": "endpoint-no", "constraint": "all", "default": "MS", "conformance": "O"}
+      }
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "name": "CatalogList",
+      "type": "list[uint16]",
+      "quality": "N",
+      "access": "RV",
+      "conformance": "AP",
+      "description": "This attribute SHALL specify the list of supported application catalogs, where each entry in the list is the CSA-issued vendor ID for the catalog. The DIAL registry SHALL use value 0x0000."
+    },
+    "0x0001": {
+      "name": "CurrentApp",
+      "type": "ApplicationEPStruct",
+      "constraint": "desc",
+      "quality": "X",
+      "default": "null",
+      "access": "RV",
+      "conformance": "O",
+      "description": "This attribute SHALL specify the current in-focus application, identified using an Application ID, catalog vendor ID and the corresponding endpoint number when the application is represented by a Content App endpoint. A null SHALL be used to indicate there is no current in-focus application."
+    }
+  },
+  "commands": {
+    "0x00": {
+      "name": "LaunchApp",
+      "direction": "client ⇒ server",
+      "response": "LauncherResponse",
+      "access": "O",
+      "conformance": "M",
+      "description": "Upon receipt of this command, the server SHALL launch the application with optional data. The application SHALL be either the specified application, if the Application Platform feature is supported; otherwise the application corresponding to the endpoint.",
+      "fields": {
+        "0": {"name": "Application", "type": "ApplicationStruct", "constraint": "desc", "conformance": "AP"},
+        "1": {"name": "Data", "type": "octstr", "default": "MS", "conformance": "O"}
+      }
+    },
+    "0x01": {
+      "name": "StopApp",
+      "direction": "client ⇒ server",
+      "response": "LauncherResponse",
+      "access": "O",
+      "conformance": "M",
+      "description": "Upon receipt of this command, the server SHALL stop the application if it is running. The application SHALL be either the specified application, if the Application Platform feature is supported; otherwise the application corresponding to the endpoint.",
+      "fields": {
+        "0": {"name": "Application", "type": "ApplicationStruct", "constraint": "desc", "default": "MS", "conformance": "AP"}
+      }
+    },
+    "0x02": {
+      "name": "HideApp",
+      "direction": "client ⇒ server",
+      "response": "LauncherResponse",
+      "access": "O",
+      "conformance": "M",
+      "description": "Upon receipt of this command, the server SHALL hide the application. The application SHALL be either the specified application, if the Application Platform feature is supported; otherwise the application corresponding to the endpoint.",
+      "fields": {
+        "0": {"name": "Application", "type": "ApplicationStruct", "constraint": "desc", "default": "MS", "conformance": "AP"}
+      }
+    },
+    "0x03": {
+      "name": "LauncherResponse",
+      "direction": "client ⇐ server",
+      "response": "N",
+      "conformance": "M",
+      "description": "This command SHALL be generated in response to LaunchApp/StopApp/HideApp commands.",
+      "fields": {
+        "0": {"name": "Status", "type": "StatusEnum", "constraint": "all", "conformance": "M"},
+        "1": {"name": "Data", "type": "octstr", "default": "MS", "conformance": "O"}
+      }
+    }
+  },
+  "events": {}
+}

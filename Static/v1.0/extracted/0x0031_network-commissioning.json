@@ -1,0 +1,101 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0031",
+    "name": "Network Commissioning",
+    "description": "Manages network interface commissioning."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "ScanNetworks"
+    },
+    {
+      "id": "0x01",
+      "name": "ScanNetworksResponse"
+    },
+    {
+      "id": "0x02",
+      "name": "AddOrUpdateWiFiNetwork"
+    },
+    {
+      "id": "0x04",
+      "name": "RemoveNetwork"
+    },
+    {
+      "id": "0x05",
+      "name": "NetworkConfigResponse"
+    },
+    {
+      "id": "0x06",
+      "name": "ConnectNetwork"
+    },
+    {
+      "id": "0x07",
+      "name": "ConnectNetworkResponse"
+    },
+    {
+      "id": "0x08",
+      "name": "ReorderNetwork"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "MaxNet",
+      "type": "unknown",
+      "description": "MaxNet attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "Networks",
+      "type": "unknown",
+      "description": "Networks attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0002",
+      "name": "ScanMax",
+      "type": "unknown",
+      "description": "ScanMax attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0003",
+      "name": "Connect",
+      "type": "unknown",
+      "description": "Connect attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0004",
+      "name": "Inter",
+      "type": "unknown",
+      "description": "Inter attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0005",
+      "name": "LastNet",
+      "type": "unknown",
+      "description": "LastNet attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0006",
+      "name": "LastNet",
+      "type": "unknown",
+      "description": "LastNet attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0007",
+      "name": "LastCon",
+      "type": "unknown",
+      "description": "LastCon attribute",
+      "access": "R"
+    }
+  ],
+  "events": []
+}

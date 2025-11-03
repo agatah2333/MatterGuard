@@ -1,0 +1,53 @@
+config:
+  attribute: '0x0003'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0003_v1.1.0.0
+tests:
+- ActionTime: <0>
+  Attribute_Change: '{"CurrentPositionLift": <InstalledOpenLimitLift>}'
+  ExpectedResponse: <Success>
+  Pre-requisites: <Ensure the device is calibrated and operational>
+  arguments:
+    '{"CurrentPositionLift"': <InstalledOpenLimitLift>}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <0>
+  Attribute_Change: '{"CurrentPositionLift": <InstalledClosedLimitLift>}'
+  ExpectedResponse: <Success>
+  Pre-requisites: <Ensure the device is calibrated and operational>
+  arguments:
+    '{"CurrentPositionLift"': <InstalledClosedLimitLift>}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <0>
+  Attribute_Change: '{"CurrentPositionLift": <null>}'
+  ExpectedResponse: <Calibration Needed>
+  Pre-requisites: <Device should be in a state where calibration is required>
+  arguments:
+    '{"CurrentPositionLift"': <null>}
+  label: Test_Case_Null_Value_(Special_Case)
+  option: WriteAttribute
+- ActionTime: <0>
+  Attribute_Change: '{"CurrentPositionLift": <(InstalledOpenLimitLift + InstalledClosedLimitLift)
+    / 2>}'
+  ExpectedResponse: <Success>
+  Pre-requisites: '<Ensure the device is calibrated and operational>
+
+
+    ### Notes
+
+    - The `InstalledOpenLimitLift` and `InstalledClosedLimitLift` values should be
+    defined based on the specific device''s configuration.
+
+    - The `null` value is used to indicate that the current position is unknown and
+    typically requires calibration.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the special response mentioned in the description of the effect【4:4†source】【4:10†source】【4:12†source】.'
+  arguments:
+    '{"CurrentPositionLift"': <(InstalledOpenLimitLift + InstalledClosedLimitLift)
+      / 2>}
+  label: Test_Case_Mid-Range_Value
+  option: WriteAttribute

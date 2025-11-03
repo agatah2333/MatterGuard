@@ -1,0 +1,44 @@
+config:
+  attribute: '0x00'
+  cluster: general-commissioning-cluster
+  nodeId: '0x654231'
+name: general-commissioning-cluster_attribute_0x00_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Breadcrumb will be set to 0
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Breadcrumb"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Breadcrumb will be set to 18446744073709551615
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"Breadcrumb"': 18446744073709551615}  // Maximum value for uint64
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: Device restart or power cycle
+  Attribute_Change: Breadcrumb will be reset to 0
+  ExpectedResponse: Breadcrumb reset to 0
+  Pre-requisites: Device restart or power cycle
+  arguments:
+    '{"Breadcrumb"': 123456789}
+  label: Test_Case_Special_Value_(Reset_to_Zero)
+  option: WriteAttribute
+- ActionTime: After executing a command that resets the Breadcrumb attribute
+  Attribute_Change: Breadcrumb will be reset to 0
+  ExpectedResponse: Breadcrumb reset to 0
+  Pre-requisites: 'Execution of a specific command that has a side-effect of resetting
+    the Breadcrumb attribute
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:1†source】【4:2†source】【4:5†source】【4:7†source】.'
+  arguments:
+    '{"Breadcrumb"': 987654321}
+  label: Test_Case_Special_Value_(Side-effect_of_Command)
+  option: WriteAttribute

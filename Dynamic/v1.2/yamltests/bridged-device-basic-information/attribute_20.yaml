@@ -1,0 +1,41 @@
+config:
+  attribute: '20'
+  cluster: bridged-device-basic-information
+  nodeId: '0x654231'
+name: bridged-device-basic-information_attribute_20_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: Reachable attribute will be set to 0.
+  ExpectedResponse: Indication that the bridged device is not reachable.
+  Pre-requisites: The bridged device must be initially reachable.
+  arguments:
+    '{"Reachable"': 0}
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Reachable attribute will be set to 1.
+  ExpectedResponse: Indication that the bridged device is reachable.
+  Pre-requisites: The bridged device must be initially not reachable.
+  arguments:
+    '{"Reachable"': 1}
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Reachable attribute will be set to 0.
+  ExpectedResponse: Event `ReachableChanged` should be triggered indicating the device
+    is not reachable.
+  Pre-requisites: The bridged device must be initially reachable.
+  arguments:
+    '{"Reachable"': 0}
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: Reachable attribute will be set to 1.
+  ExpectedResponse: Event `ReachableChanged` should be triggered indicating the device
+    is reachable.
+  Pre-requisites: 'The bridged device must be initially not reachable.
+
+
+    These test cases cover the extreme values of the constraints of the field (0 and
+    1) and the values that could result in special responses (triggering the `ReachableChanged`
+    event) as mentioned in the description of the effect【4:0†source】【4:6†source】【4:10†source】.'
+  arguments:
+    '{"Reachable"': 1}
+  option: WriteAttribute

@@ -1,0 +1,29 @@
+config:
+  cluster: account-login-cluster
+  command: '0x03'
+  nodeId: '0x654231'
+name: account-login-cluster_command_0x03_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: The current user account will be cleared.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The user must be logged in.
+  arguments: {}
+  label: Test_Case_Normal_Logout
+  option: SendCommand
+- ActionTime: Within 10 minutes of the last logout attempt
+  Attribute_Change: No change, as the command will fail.
+  ExpectedResponse: FAILURE
+  Pre-requisites: 'The user must be logged in, and there must have been 10 unique
+    logout requests in the last 10 minutes.
+
+
+    These test cases cover the normal operation of the `Logout` command and the special
+    case where rate limiting is applied to prevent brute force attacks.
+
+
+    For more detailed information, refer to the Matter Application Cluster Specification
+    document【4:0†source】.'
+  arguments: {}
+  label: Test_Case_Logout_with_Rate_Limiting
+  option: SendCommand

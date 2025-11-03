@@ -1,0 +1,25 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0408",
+    "name": "Soil Moisture Measurement",
+    "description": "This cluster provides an interface to soil moisture measurement functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "MeasuredValue",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "Measured soil moisture value",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

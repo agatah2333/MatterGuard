@@ -1,0 +1,44 @@
+config:
+  attribute: '2'
+  cluster: basic-information-cluster
+  nodeId: '0x654231'
+name: basic-information-cluster_attribute_2_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: VendorID will be set to 0x0000
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"VendorID"': 0x0000}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: VendorID will be set to 0xFFFF
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"VendorID"': 0xFFFF}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: VendorID will be set to 0x8000
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"VendorID"': 0x8000}
+  label: Test_Case_Mid-range_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: VendorID will be set to 0x1234
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    a mid-range value. Since there are no special responses mentioned for specific
+    values of the VendorID attribute, the test cases focus on the range of possible
+    values.'
+  arguments:
+    '{"VendorID"': 0x1234}
+  label: Test_Case_Special_Value_(Example:_VendorID_for_a_known_vendor)
+  option: WriteAttribute

@@ -1,0 +1,46 @@
+config:
+  cluster: audio-output-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: audio-output-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: CurrentOutput attribute will be set to 0.
+  ExpectedResponse: Success
+  Pre-requisites: The OutputList attribute must contain at least one output.
+  arguments:
+    '{"Index"': 0}
+  label: Test_Case_Minimum_Value_of_Index
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: Error (Index out of range)
+  Pre-requisites: The OutputList attribute must contain fewer than 256 outputs.
+  arguments:
+    '{"Index"': 255}
+  label: Test_Case_Maximum_Value_of_Index
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: CurrentOutput attribute will be set to 1.
+  ExpectedResponse: Success
+  Pre-requisites: The OutputList attribute must contain at least two outputs.
+  arguments:
+    '{"Index"': 1}
+  label: Test_Case_Valid_Index_within_Range
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: CurrentOutput attribute will be set to 2.
+  ExpectedResponse: Success with special handling (e.g., HDMI output selected, volume
+    control via HDMI)
+  Pre-requisites: 'The OutputList attribute must contain at least three outputs, and
+    the third output must be of type HDMI.
+
+
+    These test cases cover the extreme values of the Index field and a special case
+    where the selected output type might trigger additional behavior (e.g., HDMI volume
+    control). The expected responses and attribute changes are based on the constraints
+    and descriptions provided in the specification【4:0†source】【4:3†source】【4:10†source】.'
+  arguments:
+    '{"Index"': 2}
+  label: Test_Case_Index_Value_Leading_to_Special_Response
+  option: SendCommand

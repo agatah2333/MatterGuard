@@ -1,0 +1,99 @@
+{
+  "source_file": "Ecosystem Information_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0750",
+        "name": "Ecosystem Information",
+        "dataTypes": {
+          "EcosystemDeviceStruct": {
+            "type": "struct",
+            "fields": {
+              "DeviceName": {
+                "type": "string",
+                "maxLength": 64
+              },
+              "DeviceNameLastEdit": {
+                "type": "epoch-us"
+              },
+              "BridgedEndpoint": {
+                "type": "endpoint-no",
+                "valueRange": "desc"
+              },
+              "OriginalEndpoint": {
+                "type": "endpoint-no",
+                "valueRange": "desc"
+              },
+              "DeviceTypes": {
+                "type": "list",
+                "elementType": "DeviceTypeStruct",
+                "valueRange": "desc"
+              },
+              "UniqueLocationIDs": {
+                "type": "list",
+                "elementType": {
+                  "type": "string",
+                  "maxLength": 64
+                },
+                "maxLength": 64
+              },
+              "UniqueLocationIDsLastEdit": {
+                "type": "epoch-us"
+              }
+            }
+          },
+          "EcosystemLocationStruct": {
+            "type": "struct",
+            "fields": {
+              "UniqueLocationID": {
+                "type": "string",
+                "maxLength": 64
+              },
+              "LocationDescriptor": {
+                "type": "location-desc",
+                "valueRange": "desc"
+              },
+              "LocationDescriptorLastEdit": {
+                "type": "epoch-us",
+                "valueRange": "0"
+              }
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "DeviceDirectory",
+            "dataType": {
+              "type": "list",
+              "elementType": {
+                "type": "struct",
+                "fields": "EcosystemDeviceStruct"
+              }
+            },
+            "valueRange": "N",
+            "writable": true,
+            "privilege": "R"
+          },
+          {
+            "id": "0x0001",
+            "name": "LocationDirectory",
+            "dataType": {
+              "type": "list",
+              "elementType": {
+                "type": "struct",
+                "fields": "EcosystemLocationStruct"
+              }
+            },
+            "valueRange": "N",
+            "writable": true,
+            "privilege": "R"
+          }
+        ],
+        "commands": [],
+        "events": []
+      }
+    ]
+  }
+}

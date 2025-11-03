@@ -1,0 +1,48 @@
+config:
+  cluster: rvc-clean-mode-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: rvc-clean-mode-cluster_command_0x01_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`CurrentMode` will be set to the value of `NewMode`'
+  ExpectedResponse: Success
+  Pre-requisites: The `NewMode` must be a valid mode in the `SupportedMode` list.
+  arguments:
+    Status: '0x00'
+    StatusText: '"Mode changed successfully"'
+  label: Test_Case_Extreme_Value_(Success)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: No attribute will be changed.
+  ExpectedResponse: UnsupportedMode
+  Pre-requisites: The `NewMode` is not in the `SupportedMode` list.
+  arguments:
+    Status: '0x01'
+    StatusText: '""'
+  label: Test_Case_Extreme_Value_(UnsupportedMode)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: No attribute will be changed.
+  ExpectedResponse: CleaningInProgress
+  Pre-requisites: The device is currently in a cleaning mode.
+  arguments:
+    Status: '0x40'
+    StatusText: '"Cleaning is currently in progress"'
+  label: Test_Case_Special_Response_(CleaningInProgress)
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: No attribute will be changed.
+  ExpectedResponse: InvalidInMode
+  Pre-requisites: 'The current mode of the device does not allow the requested mode
+    change.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:5†source】【4:6†source】.'
+  arguments:
+    Status: '0x03'
+    StatusText: '"Invalid mode change request"'
+  label: Test_Case_Special_Response_(InvalidInMode)
+  option: SendCommand

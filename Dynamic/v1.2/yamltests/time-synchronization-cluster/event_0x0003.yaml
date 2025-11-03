@@ -1,0 +1,26 @@
+config:
+  cluster: time-synchronization-cluster
+  event: '0x0003'
+  nodeId: '0x654231'
+name: time-synchronization-cluster_event_0x0003_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Event is generated
+  Pre-requisites: The node has not generated a `TimeFailure` event in the last hour
+    and is unable to get time from any source.
+  arguments: {}
+  label: Test_Case_Extreme_Value_Scenario
+  option: SubscribeToEvent
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Event is generated
+  Pre-requisites: 'The node attempts to get time from a source but fails, and it has
+    not generated a `TimeFailure` event in the last hour.
+
+
+    These test cases cover the scenarios where the `TimeFailure` event is expected
+    to be generated based on the conditions specified in the Matter 1.2 Core Specification【4:0†source】【4:1†source】【4:2†source】.'
+  arguments: {}
+  label: Test_Case_Special_Response_Scenario
+  option: SubscribeToEvent

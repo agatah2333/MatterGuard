@@ -1,0 +1,70 @@
+{
+  "cluster_id": "0x0204",
+  "cluster_name": "Thermostat User Interface Configuration",
+  "revision": 3,
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Application",
+    "scope": "Endpoint",
+    "pics_code": "TSUIC"
+  },
+  "summary": "This cluster provides an interface to allow configuration of the user interface for a thermostat, or a thermostat controller device, that supports a keypad and LCD screen.",
+  "key_attributes": {
+    "0x0000": {
+      "name": "TemperatureDisplayMode",
+      "type": "enum8",
+      "description": "Temperature display mode (Celsius or Fahrenheit)"
+    },
+    "0x0001": {
+      "name": "KeypadLockout",
+      "type": "enum8", 
+      "description": "Level of functionality available to the user via keypad"
+    },
+    "0x0002": {
+      "name": "ScheduleProgrammingVisibility",
+      "type": "enum8",
+      "description": "Level of programming functionality available to the user"
+    }
+  },
+  "data_types": {
+    "TemperatureDisplayModeEnum": {
+      "type": "enum8",
+      "values": {
+        "0": "Celsius - Temperature displayed in Celsius",
+        "1": "Fahrenheit - Temperature displayed in Fahrenheit"
+      }
+    },
+    "KeypadLockoutEnum": {
+      "type": "enum8", 
+      "values": {
+        "0": "NoLockout - All functionality available to the user",
+        "1": "Lockout1 - Level 1 reduced functionality",
+        "2": "Lockout2 - Level 2 reduced functionality",
+        "3": "Lockout3 - Level 3 reduced functionality",
+        "4": "Lockout4 - Level 4 reduced functionality",
+        "5": "Lockout5 - Least functionality available to the user"
+      }
+    },
+    "ScheduleProgrammingVisibilityEnum": {
+      "type": "enum8",
+      "values": {
+        "0": "ScheduleProgrammingPermitted - Local schedule programming functionality is enabled at the thermostat",
+        "1": "ScheduleProgrammingDenied - Local schedule programming functionality is disabled at the thermostat"
+      }
+    }
+  },
+  "revision_history": [
+    {
+      "revision": 1,
+      "description": "Mandatory global ClusterRevision attribute added"
+    },
+    {
+      "revision": 2,
+      "description": "All Hubs changes"
+    },
+    {
+      "revision": 3,
+      "description": "New data model format and notation"
+    }
+  ]
+}

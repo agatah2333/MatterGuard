@@ -1,0 +1,45 @@
+config:
+  cluster: actions-cluster
+  command: '0x08'
+  nodeId: '0x654231'
+name: actions-cluster_command_0x08_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: NOT_FOUND
+  Pre-requisites: ActionID 0 does not exist in ActionList
+  arguments:
+    '{"ActionID"': '0, "InvokeID": 0}'
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: NOT_FOUND
+  Pre-requisites: ActionID 65535 does not exist in ActionList
+  arguments:
+    '{"ActionID"': '65535, "InvokeID": 4294967295}'
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: Action state will change to Active
+  ExpectedResponse: SUCCESS
+  Pre-requisites: ActionID <valid_action_id> exists in ActionList and is in a state
+    where the command applies
+  arguments:
+    '{"ActionID"': '<valid_action_id>, "InvokeID": 12345}'
+  label: Test_Case_Valid_ActionID_with_InvokeID
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: INVALID_COMMAND
+  Pre-requisites: 'ActionID <valid_action_id> exists in ActionList but is not in a
+    state where the command applies
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:2†source】【4:6†source】【4:10†source】【4:12†source】.'
+  arguments:
+    '{"ActionID"': '<valid_action_id>, "InvokeID": 67890}'
+  label: Test_Case_Invalid_State_for_Action
+  option: SendCommand

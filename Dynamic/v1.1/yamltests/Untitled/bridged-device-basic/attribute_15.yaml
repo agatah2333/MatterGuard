@@ -1,0 +1,10 @@
+config:
+  attribute: '15'
+  cluster: bridged-device-basic
+  nodeId: '0x654231'
+name: bridged-device-basic_attribute_15_v1.1.0.0
+tests: []
+execution_metadata:
+  estimated_duration: 0
+  enhanced_for_dynamic_testing: true
+  enhancement_timestamp: '2024-01-01T00:00:00Z'

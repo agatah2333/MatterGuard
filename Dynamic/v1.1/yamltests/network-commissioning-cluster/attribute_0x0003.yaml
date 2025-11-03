@@ -1,0 +1,6 @@
+config:
+  attribute: '0x0003'
+  cluster: network-commissioning-cluster
+  nodeId: '0x654231'
+name: network-commissioning-cluster_attribute_0x0003_v1.1.0.0
+tests: []

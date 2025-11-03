@@ -1,0 +1,27 @@
+config:
+  attribute: '40'
+  cluster: door-lock-cluster
+  nodeId: '0x654231'
+name: door-lock-cluster_attribute_40_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`AlarmMask` will be set to 0x00.'
+  ExpectedResponse: No alarms will be triggered.
+  Pre-requisites: The Alarms cluster must be on the same endpoint.
+  arguments:
+    AlarmMask: 0x00 (all alarms off)
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`AlarmMask` will be set to 0x7F.'
+  ExpectedResponse: All alarms will be enabled.
+  Pre-requisites: 'The Alarms cluster must be on the same endpoint.
+
+
+    These test cases cover the extreme values of the `AlarmMask` attribute and the
+    values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    AlarmMask: 0x7F (all alarms on)
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

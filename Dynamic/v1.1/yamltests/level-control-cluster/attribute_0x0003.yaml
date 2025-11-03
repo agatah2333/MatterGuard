@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0003'
+  cluster: level-control-cluster
+  nodeId: '0x654231'
+name: level-control-cluster_attribute_0x0003_v1.1.0.0
+tests:
+- ActionTime: '"N/A"'
+  Attribute_Change: '"MaxLevel set to MinLevel"'
+  ExpectedResponse: '"Success"'
+  Pre-requisites: '"MinLevel must be defined and less than or equal to 254"'
+  arguments:
+    '{"MaxLevel"': '"MinLevel"}'
+  label: Test_Case_Minimum_Value_of_the_Constraint
+  option: WriteAttribute
+- ActionTime: '"N/A"'
+  Attribute_Change: '"MaxLevel set to 254"'
+  ExpectedResponse: '"Success"'
+  Pre-requisites: '"None"'
+  arguments:
+    '{"MaxLevel"': 254}
+  label: Test_Case_Maximum_Value_of_the_Constraint
+  option: WriteAttribute
+- ActionTime: '"N/A"'
+  Attribute_Change: '"MaxLevel set to 253"'
+  ExpectedResponse: '"Success"'
+  Pre-requisites: '"None"'
+  arguments:
+    '{"MaxLevel"': 253}
+  label: Test_Case_Value_Just_Below_the_Maximum_Constraint
+  option: WriteAttribute
+- ActionTime: '"N/A"'
+  Attribute_Change: '"MaxLevel set to MinLevel + 1"'
+  ExpectedResponse: '"Success"'
+  Pre-requisites: '"MinLevel must be defined and less than or equal to 253"
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    '{"MaxLevel"': '"MinLevel + 1"}'
+  label: Test_Case_Value_Just_Above_the_Minimum_Constraint
+  option: WriteAttribute

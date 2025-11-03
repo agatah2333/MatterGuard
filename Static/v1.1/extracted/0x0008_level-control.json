@@ -1,0 +1,57 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0008",
+    "name": "Level Control",
+    "description": "is used for a lighting application."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "OnOff",
+      "data_type": "bool",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x4000",
+      "name": "GlobalSceneControl",
+      "data_type": "bool",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x4001",
+      "name": "OnTime",
+      "data_type": "uint16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x4002",
+      "name": "OffWaitTime",
+      "data_type": "uint16",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x4003",
+      "name": "StartUpOnOff",
+      "data_type": "unknown",
+      "value_range": {},
+      "description": "",
+      "privilege": "V",
+      "writable": false
+    }
+  ],
+  "events": []
+}

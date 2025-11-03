@@ -1,0 +1,28 @@
+{
+  "source_file": "Low Power_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0508",
+        "name": "Low Power",
+        "description": "Provides low power mode management interface",
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "Sleep",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "Initiate low power mode transition"
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "attributes": [],
+        "events": []
+      }
+    ]
+  }
+}

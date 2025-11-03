@@ -1,0 +1,249 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0006",
+    "name": "On/Off",
+    "description": "Attributes and commands for turning devices on and off."
+  },
+  "derived_datatypes": [
+    {
+      "type": "bitmap",
+      "name": "OnOffControlBitmap",
+      "base_data_type": "map8",
+      "value_range": {
+        "bitmap_fields": [
+          {
+            "name": "AcceptOnlyWhenOn",
+            "bit": 0,
+            "description": "Indicates a command is only accepted when in On state"
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "StartUpOnOffEnum",
+      "base_data_type": "enum8",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "Off",
+            "value": "0",
+            "description": "Set the OnOff attribute to FALSE"
+          },
+          {
+            "name": "On",
+            "value": "1",
+            "description": "Set the OnOff attribute to TRUE"
+          },
+          {
+            "name": "Toggle",
+            "value": "2",
+            "description": "If the previous value of the OnOff attribute is equal to FALSE, set the OnOff attribute to TRUE. If the previous value of the OnOff attribute is equal to TRUE, set the OnOff attribute to FALSE (toggle)."
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "EffectIdentifierEnum",
+      "base_data_type": "enum8",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "DelayedAllOff",
+            "value": "0x00",
+            "description": "Delayed All Off"
+          },
+          {
+            "name": "DyingLight",
+            "value": "0x01",
+            "description": "Dying Light"
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "DelayedAllOffEffectVariantEnum",
+      "base_data_type": "enum8",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "DelayedOffFastFade",
+            "value": "0x00",
+            "description": "Fade to off in 0.8 seconds"
+          },
+          {
+            "name": "NoFade",
+            "value": "0x01",
+            "description": "No fade"
+          },
+          {
+            "name": "DelayedOffSlowFade",
+            "value": "0x02",
+            "description": "50% dim down in 0.8 seconds then fade to off in 12 seconds"
+          }
+        ]
+      }
+    },
+    {
+      "type": "enum",
+      "name": "DyingLightEffectVariantEnum",
+      "base_data_type": "enum8",
+      "value_range": {
+        "enum_values": [
+          {
+            "name": "DyingLightFadeOff",
+            "value": "0x00",
+            "description": "20% dim up in 0.5s then fade to off in 1 second"
+          }
+        ]
+      }
+    }
+  ],
+  "commands": [
+    {
+      "id": "0x00",
+      "name": "Off",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x01",
+      "name": "On",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x02",
+      "name": "Toggle",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x40",
+      "name": "OffWithEffect",
+      "parameters": [
+        {
+          "name": "EffectIdentifier",
+          "data_type": "EffectIdentifierEnum",
+          "value_range": {},
+          "description": "The effect to apply when turning off"
+        },
+        {
+          "name": "EffectVariant",
+          "data_type": "enum8",
+          "value_range": {},
+          "description": "The variant of the effect"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x41",
+      "name": "OnWithRecallGlobalScene",
+      "parameters": [],
+      "privilege": "O",
+      "side": "client"
+    },
+    {
+      "id": "0x42",
+      "name": "OnWithTimedOff",
+      "parameters": [
+        {
+          "name": "OnOffControl",
+          "data_type": "OnOffControlBitmap",
+          "value_range": {
+            "min": "0",
+            "max": "1"
+          },
+          "description": "Control bitmap for timed off behavior"
+        },
+        {
+          "name": "OnTime",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65534"
+          },
+          "description": "Time in 1/10ths second to stay on"
+        },
+        {
+          "name": "OffWaitTime",
+          "data_type": "uint16",
+          "value_range": {
+            "min": "0",
+            "max": "65534"
+          },
+          "description": "Time in 1/10ths second to wait before accepting another on command"
+        }
+      ],
+      "privilege": "O",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "OnOff",
+      "data_type": "bool",
+      "value_range": {
+        "min": "false",
+        "max": "true"
+      },
+      "description": "This attribute indicates whether the device type implemented on the endpoint is turned off or turned on, in these cases the value of the OnOff attribute equals FALSE, or TRUE respectively.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x4000",
+      "name": "GlobalSceneControl",
+      "data_type": "bool",
+      "value_range": {
+        "min": "false",
+        "max": "true"
+      },
+      "description": "Used to prevent a second Off command storing the all-devices-off situation as a global scene, and to prevent a second On command destroying the current settings.",
+      "privilege": "V",
+      "writable": false
+    },
+    {
+      "id": "0x4001",
+      "name": "OnTime",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "Specifies the length of time (in 1/10ths second) that the On state SHALL be maintained before automatically transitioning to the Off state when using the OnWithTimedOff command.",
+      "privilege": "V",
+      "writable": true
+    },
+    {
+      "id": "0x4002",
+      "name": "OffWaitTime",
+      "data_type": "uint16",
+      "value_range": {
+        "min": "0",
+        "max": "65535"
+      },
+      "description": "Specifies the length of time (in 1/10ths second) that the Off state SHALL be guarded to prevent another OnWithTimedOff command turning the server back to its On state.",
+      "privilege": "V",
+      "writable": true
+    },
+    {
+      "id": "0x4003",
+      "name": "StartUpOnOff",
+      "data_type": "StartUpOnOffEnum",
+      "value_range": {},
+      "description": "Defines the desired startup behavior of a device when it is supplied with power. If the value is null, the OnOff attribute is set to its previous value.",
+      "privilege": "V",
+      "writable": true
+    }
+  ],
+  "events": []
+}

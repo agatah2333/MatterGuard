@@ -1,0 +1,41 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x0F'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x0F_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: No air detected
+  Pre-requisites: Pump is operational
+  arguments:
+    '{"AirDetection"': 0}
+  label: Test_Case_Minimum_Value
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: OperationalState set to Error
+  ExpectedResponse: Air detected
+  Pre-requisites: Pump is operational
+  arguments:
+    '{"AirDetection"': 1}
+  label: Test_Case_Maximum_Value
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: OperationalState set to Error
+  ExpectedResponse: Air detected, OperationalState set to Error
+  Pre-requisites: Pump is operational
+  arguments:
+    '{"AirDetection"': 1}
+  label: Test_Case_Special_Response_-_Air_Detected
+  option: SubscribeToEvent
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: No air detected, OperationalState remains unchanged
+  Pre-requisites: 'Pump is operational
+
+
+    ### Summary'
+  arguments:
+    '{"AirDetection"': 0}
+  label: Test_Case_Special_Response_-_No_Air_Detected
+  option: SubscribeToEvent

@@ -1,0 +1,49 @@
+config:
+  cluster: pump-configuration-and-control-cluster
+  event: '0x08'
+  nodeId: '0x654231'
+name: pump-configuration-and-control-cluster_event_0x08_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"PumpStatus": "SupplyFault"}'
+  ExpectedResponse: <TemperatureTooLow>
+  Pre-requisites: Ensure the pump is operational and temperature sensor is calibrated.
+  arguments:
+    '{"Temperature"': -273.15}
+  label: Test_Case_Minimum_Temperature_Value
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '{"PumpStatus": "DeviceFault"}'
+  ExpectedResponse: <TemperatureTooHigh>
+  Pre-requisites: Ensure the pump is operational and temperature sensor is calibrated.
+  arguments:
+    '{"Temperature"': 327.67}
+  label: Test_Case_Maximum_Temperature_Value
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '{"PumpStatus": "Running"}'
+  ExpectedResponse: <NormalOperation>
+  Pre-requisites: Ensure the pump is operational and temperature sensor is calibrated.
+  arguments:
+    '{"Temperature"': 25.00}
+  label: Test_Case_Normal_Operating_Temperature
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '{"PumpStatus": "Warning"}'
+  ExpectedResponse: <WarningHighTemperature>
+  Pre-requisites: Ensure the pump is operational and temperature sensor is calibrated.
+  arguments:
+    '{"Temperature"': 327.66}
+  label: Test_Case_Temperature_Just_Below_Maximum_Threshold
+  option: SubscribeToEvent
+- ActionTime: <current_time>
+  Attribute_Change: '{"PumpStatus": "Warning"}'
+  ExpectedResponse: <WarningLowTemperature>
+  Pre-requisites: 'Ensure the pump is operational and temperature sensor is calibrated.
+
+
+    ### Summary'
+  arguments:
+    '{"Temperature"': -273.14}
+  label: Test_Case_Temperature_Just_Above_Minimum_Threshold
+  option: SubscribeToEvent

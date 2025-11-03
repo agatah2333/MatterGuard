@@ -1,0 +1,96 @@
+{
+  "source_file": "Diagnostic Logs_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0032",
+        "name": "Diagnostic Logs",
+        "dataTypes": {
+          "IntentEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "GeneralDiagnostics",
+              "1": "NetworkDiagnostics",
+              "2": "CrashAnalysis"
+            }
+          },
+          "StatusEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "Success",
+              "1": "NoLogs",
+              "2": "Busy",
+              "3": "Denied",
+              "4": "Exhausted"
+            }
+          },
+          "TransferProtocolEnum": {
+            "type": "enum8",
+            "values": {
+              "0": "BDX",
+              "1": "HTTPS"
+            }
+          }
+        },
+        "attributes": [],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "RetrieveLogsRequest",
+            "parameters": {
+              "Intent": {
+                "type": "IntentEnum",
+                "valueRange": "0-2"
+              },
+              "RequestedProtocol": {
+                "type": "TransferProtocolEnum",
+                "valueRange": "0-1"
+              },
+              "TransferFileDesignator": {
+                "type": "string",
+                "maxLength": 32,
+                "optional": true,
+                "condition": "RequestedProtocol == 0"
+              }
+            },
+            "privilege": "Operate",
+            "direction": "clientToServer"
+          },
+          {
+            "id": "0x01",
+            "name": "RetrieveLogsResponse",
+            "parameters": {
+              "Status": {
+                "type": "StatusEnum",
+                "valueRange": "0-4"
+              },
+              "LogContent": {
+                "type": "octstr",
+                "maxLength": 1024,
+                "optional": true,
+                "conditions": [
+                  "Status == 0",
+                  "Status == 4"
+                ]
+              },
+              "UTCTimeStamp": {
+                "type": "uint64",
+                "format": "epoch-us",
+                "optional": true
+              },
+              "TimeSinceBoot": {
+                "type": "uint64",
+                "format": "system-us",
+                "optional": true
+              }
+            },
+            "privilege": "None",
+            "direction": "serverToClient"
+          }
+        ],
+        "events": []
+      }
+    ]
+  }
+}

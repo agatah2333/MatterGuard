@@ -1,0 +1,34 @@
+config:
+  cluster: resource-monitoring-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: resource-monitoring-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: "- `Condition`: 100\n  - `ChangeIndicator`: 0 (No Change)\n  -\
+    \ `LastChangedTime`: <current_time>"
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The resource is in a fully depleted state.
+  arguments:
+    ChangeIndicator: 0
+    Condition: 0
+  label: Test_Case_Extreme_Values
+  option: SendCommand
+- ActionTime: <current_time>
+  Attribute_Change: "- `Condition`: 100\n  - `ChangeIndicator`: 0 (No Change)\n  -\
+    \ `LastChangedTime`: <current_time>"
+  ExpectedResponse: SUCCESS
+  Pre-requisites: 'The resource is partially used and marked for change.
+
+
+    These test cases cover the extreme values and special responses for the `ResetCondition`
+    command in the Resource Monitoring Cluster.
+
+
+    For more details, refer to the Matter Application Cluster Specification【4:0†source】.'
+  arguments:
+    ChangeIndicator: 1
+    Condition: 50
+    LastChangedTime: <previous_time>
+  label: Test_Case_Special_Response
+  option: SendCommand

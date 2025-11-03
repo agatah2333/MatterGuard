@@ -1,0 +1,14 @@
+name: Water Heater Management - Boost Command Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Water Heater Management
+  timeout: 180
+tests:
+- label: Send Boost command
+  command: Boost
+  response:
+    values:
+    - name: status
+      value: 0
+  arguments: {}

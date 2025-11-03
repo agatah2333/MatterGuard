@@ -1,0 +1,147 @@
+{
+  "source_file": "Microwave oven control_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x005F",
+        "name": "Microwave Oven Control",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "CookTime",
+            "dataType": "elapsed-s",
+            "valueRange": "1 to MaxCookTime",
+            "description": "This attribute SHALL indicate the total cook time associated with the operation of the device.",
+            "privilege": "R V M",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "MaxCookTime",
+            "dataType": "elapsed-s",
+            "valueRange": "1 to 86400",
+            "description": "This attribute SHALL indicate the maximum value to which the CookTime attribute can be set.",
+            "privilege": "R V M",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "PowerSetting",
+            "dataType": "uint8",
+            "valueRange": "desc",
+            "description": "This attribute SHALL indicate the power level associated with the operation of the device.",
+            "privilege": "R V PWRNUM",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "MinPower",
+            "dataType": "uint8",
+            "valueRange": "1 to 99",
+            "description": "This attribute SHALL indicate the minimum value to which the PowerSetting attribute that can be set on the server.",
+            "privilege": "R V PWRLMTS",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "MaxPower",
+            "dataType": "uint8",
+            "valueRange": "(MinPower + 1) to 100",
+            "description": "This attribute SHALL indicate the maximum value to which the PowerSetting attribute that can be set on the server.",
+            "privilege": "R V PWRLMTS",
+            "writable": false
+          },
+          {
+            "id": "0x0005",
+            "name": "PowerStep",
+            "dataType": "uint8",
+            "valueRange": "desc",
+            "description": "This attribute SHALL indicate the increment of power that can be set on the server.",
+            "privilege": "R V PWRLMTS",
+            "writable": false
+          },
+          {
+            "id": "0x0006",
+            "name": "SupportedWatts",
+            "dataType": "list[uint16]",
+            "valueRange": "1 to 10",
+            "description": "This attribute SHALL indicate the list of power levels (in W) supported by the server.",
+            "privilege": "R V P, WATTS",
+            "writable": false
+          },
+          {
+            "id": "0x0007",
+            "name": "SelectedWattIndex",
+            "dataType": "uint8",
+            "valueRange": "desc",
+            "description": "This attribute SHALL indicate the index into the list of SupportedWatts of the currently selected power setting.",
+            "privilege": "R V P, WATTS",
+            "writable": false
+          },
+          {
+            "id": "0x0008",
+            "name": "WattRating",
+            "dataType": "uint16",
+            "valueRange": "all",
+            "description": "This attribute SHALL indicate the rating, in Watts, of the microwave power of the oven.",
+            "privilege": "R V O",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "SetCookingParameters",
+            "parameters": {
+              "dataType": "CookingParametersStruct",
+              "valueRange": "CookMode: uint8(desc), CookTime: elapsed-s(1-MaxCookTime), PowerSetting: uint8(MinPower-MaxPower), WattSettingIndex: uint8(desc), StartAfterSetting: bool",
+              "description": "Composite parameter structure for cooking settings"
+            },
+            "privilege": "O.b+",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "AddMoreTime",
+            "parameters": {
+              "dataType": "elapsed-s",
+              "valueRange": "1 to MaxCookTime",
+              "description": "TimeToAdd parameter for extending cooking duration"
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "CookingParametersStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "CookMode": {
+                "type": "uint8",
+                "valueRange": "desc"
+              },
+              "CookTime": {
+                "type": "elapsed-s",
+                "valueRange": "1 to MaxCookTime"
+              },
+              "PowerSetting": {
+                "type": "uint8",
+                "valueRange": "MinPower to MaxPower"
+              },
+              "WattSettingIndex": {
+                "type": "uint8",
+                "valueRange": "desc"
+              },
+              "StartAfterSetting": {
+                "type": "bool",
+                "valueRange": "all"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

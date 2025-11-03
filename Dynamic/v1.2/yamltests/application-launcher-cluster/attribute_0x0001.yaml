@@ -1,0 +1,32 @@
+config:
+  attribute: '0x0001'
+  cluster: application-launcher-cluster
+  nodeId: '0x654231'
+name: application-launcher-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '`CurrentApp` will be set to the specified values.'
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    ##### Test Case 1.2'
+  arguments:
+    ApplicationID: '""'
+    CatalogVendorID: 0
+    Endpoint: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '`CurrentApp` will remain unchanged.'
+  ExpectedResponse: AppNotAvailable
+  Pre-requisites: 'The application "NonExistentApp" should not exist in the catalog.
+
+
+    ##### Test Case 2.2'
+  arguments:
+    ApplicationID: '"NonExistentApp"'
+    CatalogVendorID: 0
+    Endpoint: 0
+  label: Test_Case_Special_Responses
+  option: WriteAttribute

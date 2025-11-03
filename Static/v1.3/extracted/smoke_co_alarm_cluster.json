@@ -1,0 +1,484 @@
+{
+  "cluster": {
+    "id": "0x005C",
+    "name": "Smoke CO Alarm",
+    "description": "This cluster provides an interface for observing and managing the state of smoke and CO alarms.",
+    "classification": {
+      "hierarchy": "Base",
+      "role": "Application", 
+      "scope": "Endpoint",
+      "pics_code": "SMOKECO"
+    },
+    "revision": {
+      "current": 1,
+      "history": [
+        {
+          "revision": 1,
+          "description": "Initial Release"
+        }
+      ]
+    },
+    "features": [
+      {
+        "bit": 0,
+        "code": "SMOKE",
+        "name": "SmokeAlarm",
+        "conformance": "O.a+",
+        "summary": "Supports Smoke alarm"
+      },
+      {
+        "bit": 1,
+        "code": "CO",
+        "name": "COAlarm", 
+        "conformance": "O.a+",
+        "summary": "Supports CO alarm"
+      }
+    ],
+    "data_types": [
+      {
+        "name": "AlarmStateEnum",
+        "type": "enum8",
+        "values": [
+          {
+            "value": 0,
+            "name": "Normal",
+            "summary": "Nominal state, the device is not alarming",
+            "conformance": "M",
+            "description": "This value SHALL indicate that this alarm is not alarming."
+          },
+          {
+            "value": 1,
+            "name": "Warning",
+            "summary": "Warning state",
+            "conformance": "O",
+            "description": "This value SHALL indicate that this alarm is in a warning state. Alarms in this state SHOULD be subject to being muted via physical interaction."
+          },
+          {
+            "value": 2,
+            "name": "Critical",
+            "summary": "Critical state",
+            "conformance": "M",
+            "description": "This value SHALL indicate that this alarm is in a critical state. Alarms in this state SHALL NOT be subject to being muted via physical interaction."
+          }
+        ]
+      },
+      {
+        "name": "SensitivityEnum",
+        "type": "enum8",
+        "values": [
+          {
+            "value": 0,
+            "name": "High",
+            "summary": "High sensitivity",
+            "conformance": "O"
+          },
+          {
+            "value": 1,
+            "name": "Standard",
+            "summary": "Standard Sensitivity",
+            "conformance": "M"
+          },
+          {
+            "value": 2,
+            "name": "Low",
+            "summary": "Low sensitivity",
+            "conformance": "O"
+          }
+        ]
+      },
+      {
+        "name": "ExpressedStateEnum",
+        "type": "enum8",
+        "values": [
+          {
+            "value": 0,
+            "name": "Normal",
+            "summary": "Nominal state, the device is not alarming",
+            "conformance": "M",
+            "description": "This value SHALL indicate that this alarm is not alarming."
+          },
+          {
+            "value": 1,
+            "name": "SmokeAlarm",
+            "summary": "Smoke Alarm state",
+            "conformance": "SMOKE",
+            "description": "This value SHALL indicate that this alarm is currently expressing visual indication of Smoke Alarm. This value SHALL indicate that the alarm is currently expressing audible indication of Smoke Alarm unless the DeviceMuted attribute is supported and set to Muted."
+          },
+          {
+            "value": 2,
+            "name": "COAlarm",
+            "summary": "CO Alarm state",
+            "conformance": "CO",
+            "description": "This value SHALL indicate that this alarm is currently expressing visual indication of CO Alarm. This value SHALL indicate that the alarm is currently expressing audible indication of CO Alarm unless the DeviceMuted attribute is supported and set to Muted."
+          },
+          {
+            "value": 3,
+            "name": "BatteryAlert",
+            "summary": "Battery Alert State",
+            "conformance": "M",
+            "description": "This value SHALL indicate that this alarm is currently expressing visual indication of Critical Low Battery. This value SHALL indicate that the alarm is currently expressing audible indication of Critical Low Battery unless the DeviceMuted attribute is supported and set to Muted."
+          },
+          {
+            "value": 4,
+            "name": "Testing",
+            "summary": "Test in Progress",
+            "conformance": "M",
+            "description": "This value SHALL indicate that this alarm is currently expressing visual and audible indication of SelfTest."
+          },
+          {
+            "value": 5,
+            "name": "HardwareFault",
+            "summary": "Hardware Fault Alert State",
+            "conformance": "M",
+            "description": "This value SHALL indicate that this alarm is currently expressing visual indication of Hardware Fault. This value SHALL indicate that the alarm is currently expressing audible indication of Hardware Fault unless the DeviceMuted attribute is supported and set to Muted."
+          },
+          {
+            "value": 6,
+            "name": "EndOfService",
+            "summary": "End of Service Alert State",
+            "conformance": "M",
+            "description": "This value SHALL indicate that this alarm is currently expressing visual indication of End Of Service. This value SHALL indicate that the alarm is currently expressing audible indication of End of Service unless the DeviceMuted attribute is supported and set to Muted."
+          },
+          {
+            "value": 7,
+            "name": "InterconnectSmoke",
+            "summary": "Interconnected Smoke Alarm State",
+            "conformance": "O",
+            "description": "This value SHALL indicate that this alarm is currently expressing visual indication of Smoke Alarm caused by Interconnect. This value SHALL indicate that the alarm is currently expressing audible indication of Smoke Alarm caused by Interconnect unless the DeviceMuted attribute is supported and set to Muted."
+          },
+          {
+            "value": 8,
+            "name": "InterconnectCO",
+            "summary": "Interconnected CO Alarm State",
+            "conformance": "O",
+            "description": "This value SHALL indicate that this alarm is currently expressing visual indication of CO Alarm caused by Interconnect. This value SHALL indicate that the alarm is currently expressing audible indication of CO Alarm caused by Interconnect unless the DeviceMuted attribute is supported and set to Muted."
+          }
+        ]
+      },
+      {
+        "name": "MuteStateEnum",
+        "type": "enum8",
+        "values": [
+          {
+            "value": 0,
+            "name": "NotMuted",
+            "summary": "Not Muted",
+            "conformance": "M"
+          },
+          {
+            "value": 1,
+            "name": "Muted",
+            "summary": "Muted",
+            "conformance": "M"
+          }
+        ]
+      },
+      {
+        "name": "EndOfServiceEnum",
+        "type": "enum8",
+        "values": [
+          {
+            "value": 0,
+            "name": "Normal",
+            "summary": "Device has not expired",
+            "conformance": "M"
+          },
+          {
+            "value": 1,
+            "name": "Expired",
+            "summary": "Device has reached its end of service",
+            "conformance": "M",
+            "description": "This value SHALL indicate that the device has reached its end of service, and needs to be replaced."
+          }
+        ]
+      },
+      {
+        "name": "ContaminationStateEnum",
+        "type": "enum8",
+        "values": [
+          {
+            "value": 0,
+            "name": "Normal",
+            "summary": "Nominal state, the sensor is not contaminated",
+            "conformance": "M"
+          },
+          {
+            "value": 1,
+            "name": "Low",
+            "summary": "Low contamination",
+            "conformance": "O"
+          },
+          {
+            "value": 2,
+            "name": "Warning",
+            "summary": "Warning state",
+            "conformance": "O"
+          },
+          {
+            "value": 3,
+            "name": "Critical",
+            "summary": "Critical state, will cause nuisance alarms",
+            "conformance": "M"
+          }
+        ]
+      }
+    ],
+    "attributes": [
+      {
+        "id": "0x0000",
+        "name": "ExpressedState",
+        "type": "ExpressedStateEnum",
+        "constraint": "all",
+        "quality": "N",
+        "default": null,
+        "access": "RV",
+        "conformance": "M",
+        "description": "This attribute SHALL indicate the visibly- and audibly-expressed state of the alarm. When multiple alarm conditions are being reflected in the server, this attribute SHALL indicate the condition with the highest priority."
+      },
+      {
+        "id": "0x0001", 
+        "name": "SmokeState",
+        "type": "AlarmStateEnum",
+        "constraint": "all",
+        "quality": "N",
+        "default": null,
+        "access": "RV",
+        "conformance": "SMOKE",
+        "description": "This attribute SHALL indicate whether the device's smoke sensor is currently triggering a smoke alarm."
+      },
+      {
+        "id": "0x0002",
+        "name": "COState", 
+        "type": "AlarmStateEnum",
+        "constraint": "all",
+        "quality": "N",
+        "default": null,
+        "access": "RV", 
+        "conformance": "CO",
+        "description": "This attribute SHALL indicate whether the device's CO sensor is currently triggering a CO alarm."
+      },
+      {
+        "id": "0x0003",
+        "name": "BatteryAlert",
+        "type": "AlarmStateEnum",
+        "constraint": "all",
+        "quality": "N",
+        "default": null,
+        "access": "RV",
+        "conformance": "M",
+        "description": "This attribute SHALL indicate whether the power resource fault detection mechanism is currently triggered at the device."
+      },
+      {
+        "id": "0x0004",
+        "name": "DeviceMuted",
+        "type": "MuteStateEnum",
+        "constraint": "all",
+        "quality": "N",
+        "default": null,
+        "access": "RV",
+        "conformance": "O",
+        "description": "This attribute SHALL indicate the whether the audible expression of the device is currently muted."
+      },
+      {
+        "id": "0x0005",
+        "name": "TestInProgress",
+        "type": "bool",
+        "constraint": "all",
+        "quality": null,
+        "default": null,
+        "access": "RV",
+        "conformance": "M",
+        "description": "This attribute SHALL indicate whether the device self-test is currently activated."
+      },
+      {
+        "id": "0x0006",
+        "name": "HardwareFaultAlert",
+        "type": "bool",
+        "constraint": "all",
+        "quality": "N",
+        "default": null,
+        "access": "RV",
+        "conformance": "M",
+        "description": "This attribute SHALL indicate whether the hardware fault detection mechanism is currently triggered."
+      },
+      {
+        "id": "0x0007",
+        "name": "EndOfServiceAlert",
+        "type": "EndOfServiceEnum",
+        "constraint": "all",
+        "quality": "N",
+        "default": null,
+        "access": "RV",
+        "conformance": "M",
+        "description": "This attribute SHALL indicate whether the end-of-service has been triggered at the device."
+      },
+      {
+        "id": "0x0008",
+        "name": "InterconnectSmokeAlarm",
+        "type": "AlarmStateEnum",
+        "constraint": "all",
+        "quality": null,
+        "default": null,
+        "access": "RV",
+        "conformance": "O",
+        "description": "This attribute SHALL indicate whether the interconnected smoke alarm is currently triggering by branching devices."
+      },
+      {
+        "id": "0x0009",
+        "name": "InterconnectCOAlarm",
+        "type": "AlarmStateEnum",
+        "constraint": "all",
+        "quality": null,
+        "default": null,
+        "access": "RV",
+        "conformance": "O",
+        "description": "This attribute SHALL indicate whether the interconnected CO alarm is currently triggering by branching devices."
+      },
+      {
+        "id": "0x000A",
+        "name": "ContaminationState",
+        "type": "ContaminationStateEnum",
+        "constraint": "all",
+        "quality": null,
+        "default": null,
+        "access": "RV",
+        "conformance": "[SMOKE]",
+        "description": "This attribute SHALL indicate the contamination level of the smoke sensor."
+      },
+      {
+        "id": "0x000B",
+        "name": "SmokeSensitivityLevel",
+        "type": "SensitivityEnum",
+        "constraint": "all",
+        "quality": null,
+        "default": null,
+        "access": "RW VM",
+        "conformance": "[SMOKE]",
+        "description": "This attribute SHALL indicate the sensitivity level of the smoke sensor configured on the device."
+      },
+      {
+        "id": "0x000C",
+        "name": "ExpiryDate",
+        "type": "epoch-s",
+        "constraint": "all",
+        "quality": "F",
+        "default": null,
+        "access": "RV",
+        "conformance": "O",
+        "description": "This attribute SHALL indicate the date by which the device should be replaced."
+      }
+    ],
+    "commands": [
+      {
+        "id": "0x00",
+        "name": "SelfTestRequest",
+        "direction": "client => server",
+        "response": "Y",
+        "access": "O",
+        "conformance": "O",
+        "description": "This command SHALL initiate a device self-test. The return status SHALL indicate whether the test was successfully initiated."
+      }
+    ],
+    "events": [
+      {
+        "id": "0x00",
+        "name": "SmokeAlarm",
+        "priority": "CRITICAL",
+        "access": "V",
+        "conformance": "SMOKE",
+        "description": "This event SHALL be generated when SmokeState attribute changes to either Warning or Critical state.",
+        "fields": [
+          {
+            "id": 0,
+            "name": "AlarmSeverityLevel",
+            "type": "AlarmStateEnum",
+            "constraint": "all",
+            "conformance": "M",
+            "description": "This field SHALL indicate the current value of the SmokeState attribute."
+          }
+        ]
+      },
+      {
+        "id": "0x01",
+        "name": "COAlarm",
+        "priority": "CRITICAL",
+        "access": "V",
+        "conformance": "CO",
+        "description": "This event SHALL be generated when COState attribute changes to either Warning or Critical state.",
+        "fields": [
+          {
+            "id": 0,
+            "name": "AlarmSeverityLevel",
+            "type": "AlarmStateEnum",
+            "constraint": "all",
+            "conformance": "M",
+            "description": "This field SHALL indicate the current value of the COState attribute."
+          }
+        ]
+      },
+      {
+        "id": "0x02",
+        "name": "LowBattery",
+        "priority": "INFO",
+        "access": "V",
+        "conformance": "M"
+      },
+      {
+        "id": "0x03",
+        "name": "HardwareFault",
+        "priority": "INFO",
+        "access": "V",
+        "conformance": "M"
+      },
+      {
+        "id": "0x04",
+        "name": "EndOfService",
+        "priority": "INFO",
+        "access": "V",
+        "conformance": "M"
+      },
+      {
+        "id": "0x05",
+        "name": "SelfTestComplete",
+        "priority": "INFO",
+        "access": "V",
+        "conformance": "M"
+      },
+      {
+        "id": "0x06",
+        "name": "AlarmMuted",
+        "priority": "INFO",
+        "access": "V",
+        "conformance": "O"
+      },
+      {
+        "id": "0x07",
+        "name": "MuteEnded",
+        "priority": "INFO",
+        "access": "V",
+        "conformance": "O"
+      },
+      {
+        "id": "0x08",
+        "name": "InterconnectSmokeAlarm",
+        "priority": "CRITICAL",
+        "access": "V",
+        "conformance": "[SMOKE]"
+      },
+      {
+        "id": "0x09",
+        "name": "InterconnectCOAlarm",
+        "priority": "CRITICAL",
+        "access": "V",
+        "conformance": "[CO]"
+      },
+      {
+        "id": "0x0A",
+        "name": "AllClear",
+        "priority": "INFO",
+        "access": "V",
+        "conformance": "M"
+      }
+    ]
+  }
+}

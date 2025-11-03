@@ -1,0 +1,28 @@
+config:
+  attribute: '0x001C'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x001C_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatFunctionalWhileCharging": true}'
+  ExpectedResponse: Success
+  Pre-requisites: 'Battery must be rechargeable.
+
+
+    **Test Case 1.2**'
+  arguments:
+    '{"BatFunctionalWhileCharging"': true}
+  label: Test_Case_Extreme_Values
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatFunctionalWhileCharging": true}'
+  ExpectedResponse: Node remains operational while charging.
+  Pre-requisites: 'Battery must be rechargeable.
+
+
+    **Test Case 2.2**'
+  arguments:
+    '{"BatFunctionalWhileCharging"': true}
+  label: Test_Case_Special_Responses
+  option: WriteAttribute

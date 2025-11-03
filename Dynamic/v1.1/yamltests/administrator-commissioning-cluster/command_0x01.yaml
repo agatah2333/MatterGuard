@@ -1,0 +1,42 @@
+config:
+  cluster: administrator-commissioning-cluster
+  command: '0x01'
+  nodeId: '0x654231'
+name: administrator-commissioning-cluster_command_0x01_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: COMMAND_INVALID
+  Pre-requisites: None
+  arguments:
+    '{"CommissioningTimeout"': 0}
+  label: Test_Case_Minimum_Value
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: '{"WindowStatus": "BasicWindowOpen"}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"CommissioningTimeout"': 65535}
+  label: Test_Case_Maximum_Value
+  option: SendCommand
+- ActionTime: During an already open commissioning window
+  Attribute_Change: None
+  ExpectedResponse: Busy
+  Pre-requisites: An active commissioning window
+  arguments:
+    '{"CommissioningTimeout"': 300}
+  label: Test_Case_Special_Response_-_Busy_(Commissioning_window_already_open)
+  option: SendCommand
+- ActionTime: When the fail-safe timer is armed
+  Attribute_Change: None
+  ExpectedResponse: Busy
+  Pre-requisites: 'Fail-safe timer is armed
+
+
+    These test cases cover the extreme values of the `CommissioningTimeout` field
+    and the special responses that could be triggered based on the command''s description【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】.'
+  arguments:
+    '{"CommissioningTimeout"': 300}
+  label: Test_Case_Special_Response_-_Busy_(Fail-safe_timer_armed)
+  option: SendCommand

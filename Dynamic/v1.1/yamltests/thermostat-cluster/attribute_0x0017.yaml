@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0017'
+  cluster: thermostat-cluster
+  nodeId: '0x654231'
+name: thermostat-cluster_attribute_0x0017_v1.1.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: MinCoolSetpointLimit set to AbsMinCoolSetpointLimit
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Ensure AbsMinCoolSetpointLimit is defined and accessible.
+  arguments:
+    '{"MinCoolSetpointLimit"': <AbsMinCoolSetpointLimit>}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: MinCoolSetpointLimit set to AbsMaxCoolSetpointLimit
+  ExpectedResponse: SUCCESS
+  Pre-requisites: Ensure AbsMaxCoolSetpointLimit is defined and accessible.
+  arguments:
+    '{"MinCoolSetpointLimit"': <AbsMaxCoolSetpointLimit>}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: Ensure AbsMinCoolSetpointLimit is defined and accessible.
+  arguments:
+    '{"MinCoolSetpointLimit"': <AbsMinCoolSetpointLimit - 1>}
+  label: Test_Case_Value_Below_Minimum_Constraint
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: None
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'Ensure AbsMaxCoolSetpointLimit is defined and accessible.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:1†source】【4:2†source】【4:3†source】【4:4†source】.'
+  arguments:
+    '{"MinCoolSetpointLimit"': <AbsMaxCoolSetpointLimit + 1>}
+  label: Test_Case_Value_Above_Maximum_Constraint
+  option: WriteAttribute

@@ -1,0 +1,26 @@
+config:
+  attribute: '0x16'
+  cluster: thread-network-diagnostics-cluster
+  nodeId: '0x654231'
+name: thread-network-diagnostics-cluster_attribute_0x16_v1.2.0.0
+tests:
+- ActionTime: <current time>
+  Attribute_Change: '{"ChildRoleCount": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: <Node rebooted>
+  arguments:
+    '{"ChildRoleCount"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: <current time>
+  Attribute_Change: '{"ChildRoleCount": <max integer value>}'
+  ExpectedResponse: <success>
+  Pre-requisites: '<Node has been running for a long time without reboot>
+
+
+    These test cases cover the extreme values of the `ChildRoleCount` attribute and
+    ensure that the system handles both the minimum and maximum possible values correctly.'
+  arguments:
+    '{"ChildRoleCount"': <max integer value>}
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: WriteAttribute

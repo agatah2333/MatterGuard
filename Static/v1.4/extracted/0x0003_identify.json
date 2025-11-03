@@ -1,0 +1,94 @@
+{
+  "source_file": "Identify_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0003",
+        "name": "Identify",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "IdentifyTime",
+            "dataType": "uint16",
+            "valueRange": "",
+            "description": "Remaining identification duration in seconds",
+            "privilege": "ReadWrite",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "IdentifyType",
+            "dataType": "IdentifyTypeEnum",
+            "valueRange": "0-5",
+            "description": "Visual/audible identification method",
+            "privilege": "Read",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "Identify",
+            "parameters": {
+              "IdentifyTime": {
+                "dataType": "uint16",
+                "valueRange": "",
+                "description": "Set identification duration (0=stop)"
+              }
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x40",
+            "name": "TriggerEffect",
+            "parameters": {
+              "EffectIdentifier": {
+                "dataType": "EffectIdentifierEnum",
+                "valueRange": "0x00-0xFF"
+              },
+              "EffectVariant": {
+                "dataType": "EffectVariantEnum",
+                "valueRange": "0x00"
+              }
+            },
+            "privilege": "Manage",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "IdentifyTypeEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "None",
+              "1": "LightOutput",
+              "2": "VisibleIndicator",
+              "3": "AudibleBeep",
+              "4": "Display",
+              "5": "Actuator"
+            }
+          },
+          "EffectIdentifierEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Blink",
+              "1": "Breathe",
+              "2": "Okay",
+              "11": "ChannelChange",
+              "254": "FinishEffect",
+              "255": "StopEffect"
+            }
+          },
+          "EffectVariantEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Default"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+config:
+  cluster: icd-management-cluster
+  command: '0x02'
+  nodeId: '0x654231'
+name: icd-management-cluster_command_0x02_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: RegisteredClients list will be updated to remove the entry with
+    `CheckInNodeID` 0.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The client with `CheckInNodeID` 0 must be registered.
+  arguments:
+    CheckInNodeID: 0
+    VerificationKey: (not provided)
+  label: Test_Case_Minimum_Value_for_CheckInNodeID
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: RegisteredClients list will be updated to remove the entry with
+    `CheckInNodeID` 0xFFFFFFFFFFFFFFFF.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The client with `CheckInNodeID` 0xFFFFFFFFFFFFFFFF must be registered.
+  arguments:
+    CheckInNodeID: '0xFFFFFFFFFFFFFFFF'
+    VerificationKey: (not provided)
+  label: Test_Case_Maximum_Value_for_CheckInNodeID
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: RegisteredClients list will be updated to remove the entry with
+    the provided `CheckInNodeID`.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: The client with the provided `CheckInNodeID` and `VerificationKey`
+    must be registered.
+  arguments:
+    CheckInNodeID: <valid_node_id>
+    VerificationKey: <correct_verification_key>
+  label: Test_Case_Valid_CheckInNodeID_with_Correct_VerificationKey
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: No change.
+  ExpectedResponse: FAILURE
+  Pre-requisites: The client with the provided `CheckInNodeID` must be registered,
+    but the `VerificationKey` does not match.
+  arguments:
+    CheckInNodeID: <valid_node_id>
+    VerificationKey: <incorrect_verification_key>
+  label: Test_Case_Valid_CheckInNodeID_with_Incorrect_VerificationKey
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: No change.
+  ExpectedResponse: FAILURE
+  Pre-requisites: 'The client with the provided `CheckInNodeID` must not be registered.
+
+
+    ### Field Ranges'
+  arguments:
+    CheckInNodeID: <non_existent_node_id>
+    VerificationKey: (not provided)
+  label: Test_Case_Non-Existent_CheckInNodeID
+  option: SendCommand

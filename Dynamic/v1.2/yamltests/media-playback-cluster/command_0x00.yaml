@@ -1,0 +1,44 @@
+config:
+  cluster: media-playback-cluster
+  command: '0x00'
+  nodeId: '0x654231'
+name: media-playback-cluster_command_0x00_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`CurrentState` to 0 (Playing)'
+  ExpectedResponse: 0 (Success)
+  Pre-requisites: Media is in a state that allows playback (e.g., Paused or NotPlaying)
+  arguments: {}
+  label: Test_Case_Normal_Play_Command
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: No change
+  ExpectedResponse: 1 (InvalidStateForCommand)
+  Pre-requisites: Media is already in the Playing state
+  arguments: {}
+  label: Test_Case_Play_Command_when_Media_is_Already_Playing
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '`CurrentState` to 0 (Playing), `PlaybackSpeed` to normal speed'
+  ExpectedResponse: 0 (Success)
+  Pre-requisites: Media is in FastForward state
+  arguments: {}
+  label: Test_Case_Play_Command_when_Media_is_in_FastForward_State
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: '`CurrentState` to 0 (Playing), `PlaybackSpeed` to normal speed'
+  ExpectedResponse: 0 (Success)
+  Pre-requisites: Media is in Rewind state
+  arguments: {}
+  label: Test_Case_Play_Command_when_Media_is_in_Rewind_State
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: No change
+  ExpectedResponse: 3 (NotActive)
+  Pre-requisites: 'Media endpoint is not active for playback
+
+
+    ### Summary'
+  arguments: {}
+  label: Test_Case_Play_Command_when_Media_is_Not_Active
+  option: SendCommand

@@ -1,0 +1,55 @@
+config:
+  attribute: '0x0000'
+  cluster: media-input-cluster
+  nodeId: '0x654231'
+name: media-input-cluster_attribute_0x0000_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: '`InputList` will include an entry with the minimum values.'
+  ExpectedResponse: Success
+  Pre-requisites: Device should support the Media Input Cluster.
+  arguments:
+    Description: '""'
+    Index: 0
+    InputType: 0 (INTERNAL)
+    Name: '""'
+  label: Test_Case_Minimum_Values
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: '`InputList` will include an entry with the maximum values.'
+  ExpectedResponse: Success
+  Pre-requisites: Device should support the Media Input Cluster.
+  arguments:
+    Description: '"Max Input Description"'
+    Index: 255
+    InputType: 11 (OTHER)
+    Name: '"Max Input Name"'
+  label: Test_Case_Maximum_Values
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: No change to `InputList`.
+  ExpectedResponse: Error - Unsupported Input Type
+  Pre-requisites: Device should support the Media Input Cluster.
+  arguments:
+    Description: '"This input type is not supported"'
+    Index: 1
+    InputType: 12 (Invalid value, not in enum)
+    Name: '"Invalid Input"'
+  label: Test_Case_Special_Response_-_Unsupported_Input_Type
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: No change to `InputList`.
+  ExpectedResponse: Error - Duplicate Index
+  Pre-requisites: 'An entry with Index 1 should already exist in `InputList`.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:2†source】【4:18†source】.'
+  arguments:
+    Description: '"This input has a duplicate index"'
+    Index: 1 (Assuming an entry with Index 1 already exists)
+    InputType: 4 (HDMI)
+    Name: '"Duplicate Index"'
+  label: Test_Case_Special_Response_-_Duplicate_Index
+  option: WriteAttribute

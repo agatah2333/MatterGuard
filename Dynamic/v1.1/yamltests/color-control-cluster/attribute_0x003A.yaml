@@ -1,0 +1,42 @@
+config:
+  attribute: '0x003A'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x003A_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: '{"ColorPointBX": 0}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ColorPointBX"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '{"ColorPointBX": 0xFEFF}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ColorPointBX"': 0xFEFF}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: '{"ColorPointBX": 0x7F80}'
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"ColorPointBX"': 0x7F80}
+  label: Test_Case_Mid-Range_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Error (Out of Range)
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    a special boundary condition that could result in an error response.'
+  arguments:
+    '{"ColorPointBX"': 0xFFFF}
+  label: Test_Case_Special_Value_(Boundary_Condition)
+  option: WriteAttribute

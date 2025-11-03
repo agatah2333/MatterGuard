@@ -1,0 +1,28 @@
+config:
+  cluster: door-lock-cluster
+  command: '13'
+  nodeId: '0x654231'
+name: door-lock-cluster_command_13_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: The holiday schedule at index 0 will be cleared.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: At least one holiday schedule should be supported by the lock.
+  arguments:
+    HolidayIndex: 0
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: No attribute will be changed as the command will fail.
+  ExpectedResponse: CONSTRAINT_ERROR
+  Pre-requisites: 'The number of holiday schedules supported by the lock should be
+    known.
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    HolidayIndex: '[Number of Holiday Schedules Supported attribute] + 1'
+  label: Test_Case_Values_of_the_Field_That_Could_Result_in_Special_Responses
+  option: SendCommand

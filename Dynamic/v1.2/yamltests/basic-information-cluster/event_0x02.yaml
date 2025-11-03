@@ -1,0 +1,30 @@
+config:
+  cluster: basic-information-cluster
+  event: '0x02'
+  nodeId: '0x654231'
+name: basic-information-cluster_event_0x02_v1.2.0.0
+tests:
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`FabricIndex` will be set to 1'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: '`Node is part of the fabric with index 1`'
+  arguments:
+    FabricIndex: 1
+  label: Test_Case_Extreme_Value_of_the_Constraint
+  option: SubscribeToEvent
+- ActionTime: '`<current_time>`'
+  Attribute_Change: '`FabricIndex` will be set to 254'
+  ExpectedResponse: '`Success`'
+  Pre-requisites: '`Node is part of the fabric with index 254`
+
+
+    These test cases cover the extreme values of the `FabricIndex` field and ensure
+    that the system handles the lowest and highest possible values correctly. The
+    expected response is `Success` as long as the node is part of the specified fabric.
+
+
+    For more detailed information, refer to the Matter 1.2 Core Specification document【4:0†source】.'
+  arguments:
+    FabricIndex: 254
+  label: Test_Case_Special_Response_Scenario
+  option: SubscribeToEvent

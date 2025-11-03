@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0013'
+  cluster: color-control-cluster
+  nodeId: '0x654231'
+name: color-control-cluster_attribute_0x0013_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: NumberOfPrimaries > 0
+  arguments:
+    '{"Primary1Intensity"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: NumberOfPrimaries > 0
+  arguments:
+    '{"Primary1Intensity"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Error (Invalid Value)
+  Pre-requisites: NumberOfPrimaries > 0
+  arguments:
+    '{"Primary1Intensity"': null}
+  label: Test_Case_Special_Response_-_Invalid_Value
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: 'NumberOfPrimaries > 0
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】.'
+  arguments:
+    '{"Primary1Intensity"': 0}
+  label: Test_Case_Special_Response_-_Default_Value
+  option: WriteAttribute

@@ -1,0 +1,112 @@
+{
+  "source_file": "Joint Fabric PKI_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0753",
+        "name": "Joint Fabric PKI",
+        "attributes": [],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ICACSRRequest",
+            "parameters": {
+              "ICACSR": {
+                "dataType": "octstr",
+                "valueRange": "",
+                "description": "Intermediate CA Certificate Signing Request"
+              }
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "ICACSRResponse",
+            "parameters": {
+              "status": {
+                "dataType": "ICACSigningStatusEnum",
+                "valueRange": "0-7"
+              },
+              "signedICAC": {
+                "dataType": "octstr",
+                "valueRange": ""
+              }
+            },
+            "privilege": "None",
+            "direction": "server ⇒ client"
+          },
+          {
+            "id": "0x02",
+            "name": "TransferAnchorRequest",
+            "parameters": {
+              "newAnchorCert": {
+                "dataType": "octstr",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Administer",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x03",
+            "name": "TransferAnchorResponse",
+            "parameters": {
+              "status": {
+                "dataType": "TransferAnchorStatusEnum",
+                "valueRange": "0-2"
+              },
+              "transferNonce": {
+                "dataType": "octstr(32)",
+                "valueRange": ""
+              }
+            },
+            "privilege": "None",
+            "direction": "server ⇒ client"
+          },
+          {
+            "id": "0x04",
+            "name": "TransferAnchorComplete",
+            "parameters": {
+              "transferNonce": {
+                "dataType": "octstr(32)",
+                "valueRange": ""
+              },
+              "confirmationSignature": {
+                "dataType": "octstr(64)",
+                "valueRange": ""
+              }
+            },
+            "privilege": "Special",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "ICACSigningStatusEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "OK",
+              "1": "InvalidIcaCsrFormat",
+              "2": "InvalidIcaCsrSignature",
+              "3": "FailedDCLVendorIdValidation",
+              "4": "NotAnIcac",
+              "5": "BusyAnchorTransfer",
+              "6": "IcaCsrSigningFailed",
+              "7": "IcaCsrRequestNoUserConsent"
+            }
+          },
+          "TransferAnchorStatusEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "OK",
+              "1": "TransferAnchorStatusDatastoreBusy",
+              "2": "TransferAnchorStatusNoUserConsent"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

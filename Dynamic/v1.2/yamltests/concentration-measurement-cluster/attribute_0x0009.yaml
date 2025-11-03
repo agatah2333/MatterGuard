@@ -1,0 +1,29 @@
+config:
+  attribute: '0x0009'
+  cluster: concentration-measurement-cluster
+  nodeId: '0x654231'
+name: concentration-measurement-cluster_attribute_0x0009_v1.2.0.0
+tests:
+- ActionTime: Not specified
+  Attribute_Change: MeasurementMedium = Air
+  ExpectedResponse: Measurement is being made in Air
+  Pre-requisites: 'None
+
+
+    **Test Case 1.2**'
+  arguments:
+    '{"MeasurementMedium"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: Not specified
+  Attribute_Change: MeasurementMedium = Air
+  ExpectedResponse: Measurement is being made in Air
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints and the special responses
+    for the `MeasurementMedium` attribute in the `concentration-measurement-cluster`【4:0†source】【4:1†source】【4:2†source】【4:3†source】【4:4†source】【4:5†source】【4:6†source】【4:7†source】【4:8†source】【4:9†source】【4:10†source】【4:11†source】【4:12†source】【4:13†source】【4:14†source】【4:15†source】【4:16†source】【4:17†source】【4:18†source】【4:19†source】.'
+  arguments:
+    '{"MeasurementMedium"': 0}
+  label: Test_Case_Special_Responses
+  option: WriteAttribute

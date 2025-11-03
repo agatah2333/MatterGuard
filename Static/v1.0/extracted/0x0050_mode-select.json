@@ -1,0 +1,33 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0050",
+    "name": "Mode Select",
+    "description": "This cluster provides an interface for selecting a mode from a list of supported modes."
+  },
+  "derived_datatypes": [],
+  "commands": [
+    {
+      "id": "0x0000",
+      "name": "ChangeToMode",
+      "parameters": [],
+      "privilege": "V",
+      "side": "client"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "0x0005",
+      "name": "OnMode",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "OnMode attribute",
+      "privilege": "V",
+      "writable": true,
+      "access": "R"
+    }
+  ],
+  "events": []
+}

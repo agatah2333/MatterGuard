@@ -1,0 +1,98 @@
+{
+  "source_file": "Temperature Control_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0056",
+        "name": "Temperature Control",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "TemperatureSetpoint",
+            "dataType": "temperature",
+            "valueRange": "MinTemperature to MaxTemperature",
+            "description": "Represents the desired Temperature Setpoint on the device.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0001",
+            "name": "MinTemperature",
+            "dataType": "temperature",
+            "valueRange": "max (MaxTemperature - 1)",
+            "description": "Represents the minimum temperature to which the TemperatureSetpoint attribute MAY be set.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0002",
+            "name": "MaxTemperature",
+            "dataType": "temperature",
+            "valueRange": "desc",
+            "description": "Represents the maximum temperature to which the TemperatureSetpoint attribute MAY be set.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "Step",
+            "dataType": "temperature",
+            "valueRange": "max (MaxTemperature - MinTemperature)",
+            "description": "Represents the discrete value by which the TemperatureSetpoint attribute can be changed.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0004",
+            "name": "SelectedTemperatureLevel",
+            "dataType": "uint8",
+            "valueRange": "max 31",
+            "description": "Represents the currently selected temperature level setting of the server.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0005",
+            "name": "SupportedTemperatureLevels",
+            "dataType": "list[string]",
+            "valueRange": "max 32[max 16]",
+            "description": "Represents the list of supported temperature level settings.",
+            "privilege": "R",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "SetTemperature",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": {
+                "temperature": "MinTemperature to MaxTemperature",
+                "levelIndex": "0 to length of SupportedTemperatureLevels list -1"
+              },
+              "description": "Specifies both temperature setpoint and level index"
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "dataTypes": {
+          "TemperatureControlStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "TemperatureSetpoint": "temperature(MinTemperature-MaxTemperature)",
+              "MinTemperature": "temperature",
+              "MaxTemperature": "temperature",
+              "Step": "temperature",
+              "SelectedTemperatureLevel": "uint8(max 31)",
+              "SupportedTemperatureLevels": "list[string](max 32 elements)"
+            }
+          }
+        },
+        "description": "This cluster provides an interface to the setpoint temperature on devices such as washers, refrigerators, and water heaters."
+      }
+    ]
+  }
+}

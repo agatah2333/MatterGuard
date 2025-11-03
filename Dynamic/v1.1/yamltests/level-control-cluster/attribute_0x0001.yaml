@@ -1,0 +1,56 @@
+config:
+  attribute: '0x0001'
+  cluster: level-control-cluster
+  nodeId: '0x654231'
+name: level-control-cluster_attribute_0x0001_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"RemainingTime"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 65534
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"RemainingTime"': 65534}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 65533
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"RemainingTime"': 65533}
+  label: Test_Case_Special_Value_(Just_Below_Maximum)
+  option: WriteAttribute
+- ActionTime: 32767
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"RemainingTime"': 32767}
+  label: Test_Case_Mid-Range_Value
+  option: WriteAttribute
+- ActionTime: 1
+  Attribute_Change: None
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    ### References
+
+    - Matter Application Cluster Specification R1.0【4:1†source】'
+  arguments:
+    '{"RemainingTime"': 1}
+  label: Test_Case_Special_Value_(Just_Above_Minimum)
+  option: WriteAttribute

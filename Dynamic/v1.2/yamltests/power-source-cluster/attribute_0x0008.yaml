@@ -1,0 +1,41 @@
+config:
+  attribute: '0x0008'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x0008_v1.2.0.0
+tests:
+- ActionTime: <current time>
+  Attribute_Change: '{"Order": 0}'
+  ExpectedResponse: <success>
+  Pre-requisites: <None>
+  arguments:
+    '{"Order"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current time>
+  Attribute_Change: '{"Order": 255}'
+  ExpectedResponse: <success>
+  Pre-requisites: <None>
+  arguments:
+    '{"Order"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current time>
+  Attribute_Change: '{"Order": 0}'
+  ExpectedResponse: <primary source selected>
+  Pre-requisites: <None>
+  arguments:
+    '{"Order"': 0}
+  label: Test_Case_Special_Response_-_Primary_Source
+  option: WriteAttribute
+- ActionTime: <current time>
+  Attribute_Change: '{"Order": 1}'
+  ExpectedResponse: <secondary source selected>
+  Pre-requisites: '<None>
+
+
+    ### Constraints and Ranges'
+  arguments:
+    '{"Order"': 1}
+  label: Test_Case_Special_Response_-_Secondary_Source
+  option: WriteAttribute

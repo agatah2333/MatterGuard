@@ -1,0 +1,35 @@
+{
+  "source_file": "Power Source Configuration_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x002E",
+        "name": "Power Source Configuration",
+        "dataTypes": {
+          "PowerSourceConfigStruct": {
+            "type": "list",
+            "elementType": "endpoint-no",
+            "maxLength": 6
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "Sources",
+            "dataType": {
+              "type": "list",
+              "elementType": "endpoint-no",
+              "maxLength": 6
+            },
+            "valueRange": "max 6",
+            "writable": false,
+            "privilege": "Read"
+          }
+        ],
+        "commands": [],
+        "events": []
+      }
+    ]
+  }
+}

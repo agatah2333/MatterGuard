@@ -1,0 +1,11 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x005b",
+    "name": "Air Quality",
+    "description": "Cluster for Air Quality functionality."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [],
+  "events": []
+}

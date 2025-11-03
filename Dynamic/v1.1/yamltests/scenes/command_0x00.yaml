@@ -1,0 +1,60 @@
+config:
+  cluster: scenes
+  command: '0x00'
+  nodeId: '0x654231'
+name: scenes_command_0x00_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: SceneTable updated with the new scene entry.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: None
+  arguments:
+    ExtensionFieldSets: []
+    GroupID: 0
+    SceneID: 0
+    SceneName: '""'
+    TransitionTime: 0
+  label: Test_Case_Extreme_Values_of_Constraints
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: SceneTable updated with the new scene entry.
+  ExpectedResponse: SUCCESS
+  Pre-requisites: GroupID 65535 must exist in the Group Table.
+  arguments:
+    ExtensionFieldSets:
+    - /* some valid extension field sets */
+    GroupID: 65535
+    SceneID: 255
+    SceneName: '"1234567890123456"'
+    TransitionTime: 65535
+  label: Test_Case_Maximum_Values_of_Constraints
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: ILLEGAL_COMMAND
+  Pre-requisites: GroupID 1 must not exist in the Group Table.
+  arguments:
+    ExtensionFieldSets: []
+    GroupID: 1 (assuming GroupID 1 does not exist in the Group Table)
+    SceneID: 1
+    SceneName: '"TestScene"'
+    TransitionTime: 10
+  label: Test_Case_Special_Response_-_ILLEGAL_COMMAND
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: RESOURCE_EXHAUSTED
+  Pre-requisites: 'Scene Table must be full.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:2†source】【4:12†source】【4:15†source】.'
+  arguments:
+    ExtensionFieldSets: []
+    GroupID: 2 (assuming GroupID 2 exists in the Group Table)
+    SceneID: 2
+    SceneName: '"TestScene2"'
+    TransitionTime: 20
+  label: Test_Case_Special_Response_-_RESOURCE_EXHAUSTED
+  option: SendCommand

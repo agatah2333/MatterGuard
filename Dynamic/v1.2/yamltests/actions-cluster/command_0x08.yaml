@@ -1,0 +1,47 @@
+config:
+  cluster: actions-cluster
+  command: '0x08'
+  nodeId: '0x654231'
+name: actions-cluster_command_0x08_v1.2.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: Action with `ActionID` 0 will be enabled.
+  ExpectedResponse: Success
+  Pre-requisites: Action with `ActionID` 0 must exist.
+  arguments:
+    ActionID: 0
+    InvokeID: 0
+  label: Test_Case_Minimum_Values
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: Action with `ActionID` 65535 will be enabled.
+  ExpectedResponse: Success
+  Pre-requisites: Action with `ActionID` 65535 must exist.
+  arguments:
+    ActionID: 65535
+    InvokeID: 65535
+  label: Test_Case_Maximum_Values
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Error - Invalid ActionID
+  Pre-requisites: None
+  arguments:
+    ActionID: 65536 (out of range)
+    InvokeID: 1
+  label: Test_Case_Special_Response_-_Invalid_ActionID
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Error - Action Already Enabled
+  Pre-requisites: 'Action with `ActionID` 1 must already be enabled.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    ActionID: 1
+    InvokeID: 1
+  label: Test_Case_Special_Response_-_Action_Already_Enabled
+  option: SendCommand

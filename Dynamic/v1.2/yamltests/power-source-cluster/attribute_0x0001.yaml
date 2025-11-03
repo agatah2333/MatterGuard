@@ -1,0 +1,28 @@
+config:
+  attribute: '0x0001'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x0001_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"Previous": []}'
+  ExpectedResponse: <no_faults_detected>
+  Pre-requisites: '<none>
+
+
+    **Test Case 1.2: Maximum Value**'
+  arguments:
+    '{"Previous"': '[]}'
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"Previous": [1]}'
+  ExpectedResponse: <over_temp_fault_detected>
+  Pre-requisites: '<none>
+
+
+    **Test Case 2.2: Multiple Specific Faults Detected**'
+  arguments:
+    '{"Previous"': '[1]}  // Assuming 1 represents OverTemp'
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: WriteAttribute

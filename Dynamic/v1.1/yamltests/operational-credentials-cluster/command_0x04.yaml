@@ -1,0 +1,27 @@
+config:
+  cluster: operational-credentials-cluster
+  command: '0x04'
+  nodeId: '0x654231'
+name: operational-credentials-cluster_command_0x04_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: The fabric with `FabricIndex` 1 will be removed.
+  ExpectedResponse: Success
+  Pre-requisites: The fabric with `FabricIndex` 1 must exist.
+  arguments:
+    FabricIndex: 1 (0x01)
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: Immediate
+  Attribute_Change: No attribute will be changed.
+  ExpectedResponse: InvalidCommand
+  Pre-requisites: 'None. This value is out of the valid range and should trigger an
+    error response.
+
+
+    These test cases cover the extreme values and special responses for the `RemoveFabric`
+    command in the Operational Credentials Cluster.'
+  arguments:
+    FabricIndex: 255 (0xFF)
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: SendCommand

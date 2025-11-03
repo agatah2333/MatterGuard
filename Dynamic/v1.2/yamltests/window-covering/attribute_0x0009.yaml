@@ -1,0 +1,29 @@
+config:
+  attribute: '0x0009'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0009_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: N/A
+  Pre-requisites: 'N/A
+
+
+    **Test Case 1.2**'
+  arguments:
+    '{"LiftPositionAware"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: If the device does not support the PositionAwareLift feature,
+    the LiftEncoderControlled bit is ignored.
+  Pre-requisites: 'Device does not support PositionAwareLift feature.
+
+
+    **Test Case 2.2**'
+  arguments:
+    '{"LiftPositionAware"': 0}
+  label: Test_Case_Special_Responses
+  option: WriteAttribute

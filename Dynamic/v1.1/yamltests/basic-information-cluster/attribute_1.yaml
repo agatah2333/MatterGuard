@@ -1,0 +1,41 @@
+config:
+  attribute: '1'
+  cluster: basic-information-cluster
+  nodeId: '0x654231'
+name: basic-information-cluster_attribute_1_v1.1.0.0
+tests:
+- ActionTime: Immediate
+  Attribute_Change: None
+  ExpectedResponse: Error or specific handling for invalid VendorID
+  Pre-requisites: None
+  arguments:
+    '{"VendorID"': 0}
+  label: Test_Case_Minimum_VendorID_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: VendorID set to 65535
+  ExpectedResponse: Successful acceptance of the VendorID
+  Pre-requisites: None
+  arguments:
+    '{"VendorID"': 65535}
+  label: Test_Case_Maximum_VendorID_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: VendorID set to 1234
+  ExpectedResponse: Successful acceptance of the VendorID
+  Pre-requisites: None
+  arguments:
+    '{"VendorID"': 1234}
+  label: Test_Case_Valid_VendorID_Value
+  option: WriteAttribute
+- ActionTime: Immediate
+  Attribute_Change: VendorID set to 9999
+  ExpectedResponse: Specific handling or response for the special VendorID
+  Pre-requisites: 'None
+
+
+    ### Summary'
+  arguments:
+    '{"VendorID"': 9999}
+  label: Test_Case_Special_VendorID_Value_(e.g.,_reserved_or_special_handling)
+  option: WriteAttribute

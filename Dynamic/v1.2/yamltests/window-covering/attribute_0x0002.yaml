@@ -1,0 +1,46 @@
+config:
+  attribute: '0x0002'
+  cluster: window-covering
+  nodeId: '0x654231'
+name: window-covering_attribute_0x0002_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '- `AdminVendorId` will be set to 0x0000'
+  ExpectedResponse: Success
+  Pre-requisites: '- `WindowStatus` must be set to a value other than 0 (WindowNotOpen)'
+  arguments:
+    AdminVendorId: '0x0000'
+    WindowStatus: 1 (EnhancedWindowOpen)
+  label: Test_Case_Minimum_Value_of_AdminVendorId
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `AdminVendorId` will be set to 0xFFFF'
+  ExpectedResponse: Success
+  Pre-requisites: '- `WindowStatus` must be set to a value other than 0 (WindowNotOpen)'
+  arguments:
+    AdminVendorId: '0xFFFF'
+    WindowStatus: 1 (EnhancedWindowOpen)
+  label: Test_Case_Maximum_Value_of_AdminVendorId
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `AdminVendorId` will be set to null'
+  ExpectedResponse: '`AdminVendorId` will be set to null'
+  Pre-requisites: '- `WindowStatus` must be set to 0 (WindowNotOpen)'
+  arguments:
+    AdminVendorId: '0x1234'
+    WindowStatus: 0 (WindowNotOpen)
+  label: Test_Case_Special_Response_-_WindowStatus_Not_Open
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '- `AdminVendorId` will remain 0x5678'
+  ExpectedResponse: '`AdminVendorId` will not be updated'
+  Pre-requisites: "- `WindowStatus` must be set to a value other than 0 (WindowNotOpen)\n\
+    \  - The fabric for the Administrator that opened the window is removed while\
+    \ the commissioning window is still open\n\nThese test cases cover the extreme\
+    \ values of the `AdminVendorId` field and the special responses based on the `WindowStatus`\
+    \ attribute as described in the provided context【4:0†source】."
+  arguments:
+    AdminVendorId: '0x5678'
+    WindowStatus: 1 (EnhancedWindowOpen)
+  label: Test_Case_Special_Response_-_Fabric_Removed_During_Open_Window
+  option: WriteAttribute

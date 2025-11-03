@@ -1,0 +1,49 @@
+config:
+  attribute: '12'
+  cluster: bridged-device-basic-information
+  nodeId: '0x654231'
+name: bridged-device-basic-information_attribute_12_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"UniqueID": ""}'
+  ExpectedResponse: <error_or_success_based_on_spec>
+  Pre-requisites: <none>
+  arguments:
+    '{"UniqueID"': '""}'
+  label: Test_Case_Minimum_Length_UniqueID
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"UniqueID": "<max_length_string>"}'
+  ExpectedResponse: <success>
+  Pre-requisites: <none>
+  arguments:
+    '{"UniqueID"': '"<max_length_string>"}'
+  label: Test_Case_Maximum_Length_UniqueID
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"UniqueID": "!@#$%^&*()_+-=[]{}|;'':,.<>?/~`"}'
+  ExpectedResponse: <success_or_error_based_on_spec>
+  Pre-requisites: <none>
+  arguments:
+    '{"UniqueID"': '"!@#$%^&*()_+-=[]{}|;'':,.<>?/~`"}'
+  label: Test_Case_Special_Characters_in_UniqueID
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"UniqueID": "unique id with spaces"}'
+  ExpectedResponse: <success_or_error_based_on_spec>
+  Pre-requisites: <none>
+  arguments:
+    '{"UniqueID"': '"unique id with spaces"}'
+  label: Test_Case_UniqueID_with_Spaces
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"UniqueID": "UniqueID123"}'
+  ExpectedResponse: <success>
+  Pre-requisites: '<none>
+
+
+    ### Constraints and Special Responses'
+  arguments:
+    '{"UniqueID"': '"UniqueID123"}'
+  label: Test_Case_UniqueID_with_Mixed_Case
+  option: WriteAttribute

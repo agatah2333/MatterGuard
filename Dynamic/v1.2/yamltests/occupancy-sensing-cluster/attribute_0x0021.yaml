@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0021'
+  cluster: occupancy-sensing-cluster
+  nodeId: '0x654231'
+name: occupancy-sensing-cluster_attribute_0x0021_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: No transition to occupied state
+  Pre-requisites: None
+  arguments:
+    '{"UltrasonicUnoccupiedToOccupiedDelay"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: 65535
+  Attribute_Change: Occupancy state to occupied
+  ExpectedResponse: Transition to occupied state after 65535 seconds
+  Pre-requisites: UltrasonicUnoccupiedToOccupiedThreshold must be set
+  arguments:
+    '{"UltrasonicUnoccupiedToOccupiedDelay"': 65535}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: 1
+  Attribute_Change: Occupancy state to occupied
+  ExpectedResponse: Immediate transition to occupied state
+  Pre-requisites: UltrasonicUnoccupiedToOccupiedThreshold must be set
+  arguments:
+    '{"UltrasonicUnoccupiedToOccupiedDelay"': 1}
+  label: Test_Case_Special_Response_-_Immediate_Transition
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: None
+  ExpectedResponse: No transition to occupied state
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:1†source】【4:6†source】【4:7†source】.'
+  arguments:
+    '{"UltrasonicUnoccupiedToOccupiedDelay"': 0}
+  label: Test_Case_Special_Response_-_No_Transition
+  option: WriteAttribute

@@ -1,0 +1,111 @@
+{
+  "source_file": "Mode Select_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0050",
+        "name": "Mode Select",
+        "description": "Controls device characteristics with predefined mode options",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "Description",
+            "dataType": "string",
+            "valueRange": "max 64 characters",
+            "description": "Server functionality description",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "StandardNamespace",
+            "dataType": "enum16",
+            "valueRange": "desc",
+            "description": "Standard semantic tag namespace",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "SupportedModes",
+            "dataType": "list[ModeOptionStruct]",
+            "valueRange": "max 255 entries",
+            "description": "Available operation modes",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "CurrentMode",
+            "dataType": "uint8",
+            "valueRange": "SupportedModes.Mode values",
+            "description": "Active operation mode",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "StartUpMode",
+            "dataType": "uint8",
+            "valueRange": "SupportedModes.Mode values",
+            "description": "Initialization mode setting",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x0005",
+            "name": "OnMode",
+            "dataType": "uint8",
+            "valueRange": "SupportedModes.Mode values",
+            "description": "Mode activation trigger",
+            "privilege": "RW",
+            "writable": true
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "ChangeToMode",
+            "parameters": [
+              {
+                "name": "NewMode",
+                "dataType": "uint8",
+                "valueRange": "SupportedModes.Mode values"
+              }
+            ],
+            "description": "Initiate mode transition",
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "dataTypes": {
+          "ModeOptionStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "Label": {
+                "dataType": "string",
+                "valueRange": "max 64 characters"
+              },
+              "Mode": {
+                "dataType": "uint8",
+                "valueRange": "unique identifier"
+              },
+              "SemanticTags": {
+                "dataType": "list[SemanticTagStruct]",
+                "valueRange": "max 64 entries"
+              }
+            }
+          },
+          "SemanticTagStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "TagID": "uint16",
+              "TagValue": "string(max 32)"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

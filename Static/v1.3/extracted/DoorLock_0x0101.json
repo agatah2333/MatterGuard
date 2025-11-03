@@ -1,0 +1,531 @@
+{
+  "id": "0x0101",
+  "name": "Door Lock",
+  "description": "The door lock cluster provides an interface to a generic way to secure a door. The physical object that provides the locking functionality is abstracted from the cluster. The cluster has a small list of mandatory attributes and functions and a list of optional features.",
+  "classification": {
+    "hierarchy": "Base",
+    "role": "Application",
+    "scope": "Endpoint",
+    "picsCode": "DRLK"
+  },
+  "revision": {
+    "current": 7,
+    "history": [
+      {
+        "revision": 1,
+        "description": "Mandatory global ClusterRevision attribute added; CCB 1811 1812 1821"
+      },
+      {
+        "revision": 2,
+        "description": "CCB 2430"
+      },
+      {
+        "revision": 3,
+        "description": "CCB 2629 2630"
+      },
+      {
+        "revision": 4,
+        "description": "All Hubs changes and added feature map"
+      },
+      {
+        "revision": 5,
+        "description": ""
+      },
+      {
+        "revision": 6,
+        "description": "New data model format and notation. Added User features. General cleanup of functionality"
+      },
+      {
+        "revision": 7,
+        "description": "Added support for European door locks (unbolt feature)"
+      }
+    ]
+  },
+  "features": {
+    "PIN": {
+      "bit": 0,
+      "code": "PIN",
+      "name": "PINCredential",
+      "conformance": "O",
+      "summary": "Lock supports PIN credentials (via keypad, or over-the-air)"
+    },
+    "RID": {
+      "bit": 1,
+      "code": "RID",
+      "name": "RFIDCredential",
+      "conformance": "O",
+      "summary": "Lock supports RFID credentials"
+    },
+    "FGP": {
+      "bit": 2,
+      "code": "FGP",
+      "name": "FingerCredentials",
+      "conformance": "P, O",
+      "summary": "Lock supports finger related credentials (fingerprint, finger vein)"
+    },
+    "LOG": {
+      "bit": 3,
+      "code": "LOG",
+      "name": "Logging",
+      "conformance": "O",
+      "summary": "Lock supports local/on-lock logging when Events are not supported"
+    },
+    "WDSCH": {
+      "bit": 4,
+      "code": "WDSCH",
+      "name": "WeekDayAccessSchedules",
+      "conformance": "O",
+      "summary": "Lock supports week day user access schedules"
+    },
+    "DPS": {
+      "bit": 5,
+      "code": "DPS",
+      "name": "DoorPositionSensor",
+      "conformance": "O",
+      "summary": "Lock supports a door position sensor that indicates door's state"
+    },
+    "FACE": {
+      "bit": 6,
+      "code": "FACE",
+      "name": "FaceCredentials",
+      "conformance": "P, O",
+      "summary": "Lock supports face related credentials (face, iris, retina)"
+    },
+    "COTA": {
+      "bit": 7,
+      "code": "COTA",
+      "name": "CredentialOverTheAirAccess",
+      "conformance": "O",
+      "summary": "PIN codes over-the-air supported for lock/unlock operations"
+    },
+    "USR": {
+      "bit": 8,
+      "code": "USR",
+      "name": "User",
+      "conformance": "[PIN | RID | FGP | FACE]",
+      "summary": "Lock supports the user commands and database"
+    },
+    "NOT": {
+      "bit": 9,
+      "code": "NOT",
+      "name": "Notification",
+      "conformance": "O",
+      "summary": "Operation and Programming Notifications"
+    },
+    "YDSCH": {
+      "bit": 10,
+      "code": "YDSCH",
+      "name": "YearDayAccessSchedules",
+      "conformance": "O",
+      "summary": "Lock supports year day user access schedules"
+    },
+    "HDSCH": {
+      "bit": 11,
+      "code": "HDSCH",
+      "name": "HolidaySchedules",
+      "conformance": "O",
+      "summary": "Lock supports holiday schedules"
+    },
+    "UBOLT": {
+      "bit": 12,
+      "code": "UBOLT",
+      "name": "Unbolting",
+      "conformance": "O",
+      "summary": "Lock supports unbolting"
+    }
+  },
+  "dataTypes": {
+    "DaysMaskBitmap": {
+      "type": "map8",
+      "description": "This bitmap SHALL indicate the days of the week the Week Day schedule applies for.",
+      "bits": {
+        "0": {"name": "Sunday", "summary": "Schedule is applied on Sunday"},
+        "1": {"name": "Monday", "summary": "Schedule is applied on Monday"},
+        "2": {"name": "Tuesday", "summary": "Schedule is applied on Tuesday"},
+        "3": {"name": "Wednesday", "summary": "Schedule is applied on Wednesday"},
+        "4": {"name": "Thursday", "summary": "Schedule is applied on Thursday"},
+        "5": {"name": "Friday", "summary": "Schedule is applied on Friday"},
+        "6": {"name": "Saturday", "summary": "Schedule is applied on Saturday"}
+      }
+    },
+    "CredentialRulesBitmap": {
+      "type": "map8",
+      "bits": {
+        "0": {"name": "Single", "summary": "Only one credential is required for lock operation"},
+        "1": {"name": "Dual", "summary": "Any two credentials are required for lock operation"},
+        "2": {"name": "Tri", "summary": "Any three credentials are required for lock operation"}
+      }
+    },
+    "OperatingModesBitmap": {
+      "type": "map16",
+      "bits": {
+        "0": {"name": "Normal", "summary": "Normal operation mode", "conformance": "M"},
+        "1": {"name": "Vacation", "summary": "Vacation operation mode", "conformance": "O"},
+        "2": {"name": "Privacy", "summary": "Privacy operation mode", "conformance": "O"},
+        "3": {"name": "NoRemoteLockUnlock", "summary": "No remote lock and unlock operation mode", "conformance": "M"},
+        "4": {"name": "Passage", "summary": "Passage operation mode", "conformance": "O"}
+      }
+    },
+    "ConfigurationRegisterBitmap": {
+      "type": "map16",
+      "bits": {
+        "0": {"name": "LocalProgramming", "summary": "The state of local programming functionality"},
+        "1": {"name": "KeypadInterface", "summary": "The state of the keypad interface"},
+        "2": {"name": "RemoteInterface", "summary": "The state of the remote interface"},
+        "5": {"name": "SoundVolume", "summary": "Sound volume is set to Silent value"},
+        "6": {"name": "AutoRelockTime", "summary": "Auto relock time it set to 0"},
+        "7": {"name": "LEDSettings", "summary": "LEDs is disabled"}
+      }
+    },
+    "LocalProgrammingFeaturesBitmap": {
+      "type": "map8",
+      "bits": {
+        "0": {"name": "AddUsersCredentialsSchedules", "summary": "The state of the ability to add users, credentials or schedules on the device"},
+        "1": {"name": "ModifyUsersCredentialsSchedules", "summary": "The state of the ability to modify users, credentials or schedules on the device"},
+        "2": {"name": "ClearUsersCredentialsSchedules", "summary": "The state of the ability to clear users, credentials or schedules on the device"},
+        "3": {"name": "AdjustSettings", "summary": "The state of the ability to adjust settings on the device"}
+      }
+    },
+    "AlarmMaskBitmap": {
+      "type": "map16",
+      "bits": {
+        "0": {"name": "LockJammed", "summary": "Locking Mechanism Jammed", "conformance": "M"},
+        "1": {"name": "LockFactoryReset", "summary": "Lock Reset to Factory Defaults", "conformance": "O"},
+        "2": {"name": "N/A", "summary": "Reserved", "conformance": "O"},
+        "3": {"name": "LockRadioPowerCycled", "summary": "RF Module Power Cycled", "conformance": "O"},
+        "4": {"name": "WrongCodeEntryLimit", "summary": "Tamper Alarm - wrong PIN | RID code entry limit"},
+        "5": {"name": "FrontEscutcheonRemoved", "summary": "Tamper Alarm - front escutcheon removed from main", "conformance": "O"},
+        "6": {"name": "DoorForcedOpen", "summary": "Forced Door Open under Door Locked Condition", "conformance": "O"}
+      }
+    },
+    "EventMaskBitmap": {
+      "type": "map16",
+      "bits": {
+        "0": {"name": "Bit0", "summary": "State of bit 0"},
+        "1": {"name": "Bit1", "summary": "State of bit 1"},
+        "2": {"name": "Bit2", "summary": "State of bit 2"},
+        "3": {"name": "Bit3", "summary": "State of bit 3"},
+        "4": {"name": "Bit4", "summary": "State of bit 4"},
+        "5": {"name": "Bit5", "summary": "State of bit 5"},
+        "6": {"name": "Bit6", "summary": "State of bit 6"},
+        "7": {"name": "Bit7", "summary": "State of bit 7"},
+        "8": {"name": "Bit8", "summary": "State of bit 8"},
+        "9": {"name": "Bit9", "summary": "State of bit 9"},
+        "10": {"name": "Bit10", "summary": "State of bit 10"},
+        "11": {"name": "Bit11", "summary": "State of bit 11"},
+        "12": {"name": "Bit12", "summary": "State of bit 12"},
+        "13": {"name": "Bit13", "summary": "State of bit 13"},
+        "14": {"name": "Bit14", "summary": "State of bit 14"},
+        "15": {"name": "Bit15", "summary": "State of bit 15"}
+      }
+    },
+    "AlarmCodeEnum": {
+      "type": "enum8",
+      "description": "This enumeration SHALL indicate the alarm type.",
+      "values": {
+        "0": {"name": "LockJammed", "summary": "Locking Mechanism Jammed", "conformance": "M"},
+        "1": {"name": "LockFactoryReset", "summary": "Lock Reset to Factory Defaults", "conformance": "O"},
+        "3": {"name": "LockRadioPowerCycled", "summary": "Lock Radio Power Cycled", "conformance": "O"},
+        "4": {"name": "WrongCodeEntryLimit", "summary": "Tamper Alarm - wrong [USR] code entry limit"},
+        "5": {"name": "FrontEsceutcheonRemoved", "summary": "Tamper Alarm - front escutcheon removed from main", "conformance": "O"},
+        "6": {"name": "DoorForcedOpen", "summary": "Forced Door Open under Door Locked Condition", "conformance": "[DPS]"},
+        "7": {"name": "DoorAjar", "summary": "Door ajar", "conformance": "[DPS]"},
+        "8": {"name": "ForcedUser", "summary": "Force User SOS alarm", "conformance": "[USR]"}
+      }
+    },
+    "CredentialRuleEnum": {
+      "type": "enum8",
+      "description": "This enumeration SHALL indicate the credential rule that can be applied to a particular user.",
+      "values": {
+        "0": {"name": "Single", "summary": "Only one credential is required for lock operation", "conformance": "USR"},
+        "1": {"name": "Dual", "summary": "Any two credentials are required for lock operation", "conformance": "[USR]"},
+        "2": {"name": "Tri", "summary": "Any three credentials are required for lock operation", "conformance": "[USR]"}
+      }
+    },
+    "CredentialTypeEnum": {
+      "type": "enum8",
+      "description": "This enumeration SHALL indicate the credential type.",
+      "values": {
+        "0": {"name": "ProgrammingPIN", "summary": "Programming PIN code credential type", "conformance": "O"},
+        "1": {"name": "PIN", "summary": "PIN code credential type", "conformance": "PIN"},
+        "2": {"name": "RFID", "summary": "RFID identifier credential type", "conformance": "RID"},
+        "3": {"name": "Fingerprint", "summary": "Fingerprint identifier credential type", "conformance": "FGP"},
+        "4": {"name": "FingerVein", "summary": "Finger vein identifier credential type", "conformance": "FGP"},
+        "5": {"name": "Face", "summary": "Face identifier credential type", "conformance": "FACE"}
+      }
+    },
+    "DataOperationTypeEnum": {
+      "type": "enum8",
+      "description": "This enumeration SHALL indicate the data operation performed.",
+      "values": {
+        "0": {"name": "Add", "summary": "Data is being added or was added", "conformance": "M"},
+        "1": {"name": "Clear", "summary": "Data is being cleared or was cleared", "conformance": "M"},
+        "2": {"name": "Modify", "summary": "Data is being modified or was modified", "conformance": "M"}
+      }
+    },
+    "DoorStateEnum": {
+      "type": "enum8",
+      "description": "This enumeration SHALL indicate the current door state.",
+      "values": {
+        "0": {"name": "DoorOpen", "summary": "Door state is open", "conformance": "DPS"},
+        "1": {"name": "DoorClosed", "summary": "Door state is closed", "conformance": "DPS"},
+        "2": {"name": "DoorJammed", "summary": "Door state is jammed", "conformance": "[DPS]"},
+        "3": {"name": "DoorForcedOpen", "summary": "Door state is currently forced open", "conformance": "[DPS]"},
+        "4": {"name": "DoorUnspecifiedError", "summary": "Door state is invalid for unspecified reason", "conformance": "[DPS]"},
+        "5": {"name": "DoorAjar", "summary": "Door state is ajar", "conformance": "[DPS]"}
+      }
+    },
+    "LockStateEnum": {
+      "type": "enum8",
+      "values": {
+        "0": {"name": "NotFullyLocked", "summary": "Lock state is not fully locked", "conformance": "M"},
+        "1": {"name": "Locked", "summary": "Lock state is fully locked", "conformance": "M"},
+        "2": {"name": "Unlocked", "summary": "Lock state is fully unlocked", "conformance": "M"},
+        "3": {"name": "Unlatched", "summary": "Lock state is fully unlocked and the latch is pulled", "conformance": "O"}
+      }
+    },
+    "LockTypeEnum": {
+      "type": "enum8",
+      "values": {
+        "0": {"name": "DeadBolt", "summary": "Physical lock type is dead bolt", "conformance": "M"},
+        "1": {"name": "Magnetic", "summary": "Physical lock type is magnetic", "conformance": "M"},
+        "2": {"name": "Other", "summary": "Physical lock type is other", "conformance": "M"},
+        "3": {"name": "Mortise", "summary": "Physical lock type is mortise", "conformance": "M"},
+        "4": {"name": "Rim", "summary": "Physical lock type is rim", "conformance": "M"},
+        "5": {"name": "LatchBolt", "summary": "Physical lock type is latch bolt", "conformance": "M"},
+        "6": {"name": "CylindricalLock", "summary": "Physical lock type is cylindrical lock", "conformance": "M"},
+        "7": {"name": "TubularLock", "summary": "Physical lock type is tubular lock", "conformance": "M"},
+        "8": {"name": "InterconnectedLock", "summary": "Physical lock type is interconnected lock", "conformance": "M"},
+        "9": {"name": "DeadLatch", "summary": "Physical lock type is dead latch", "conformance": "M"},
+        "10": {"name": "DoorFurniture", "summary": "Physical lock type is door furniture", "conformance": "M"},
+        "11": {"name": "Eurocylinder", "summary": "Physical lock type is euro cylinder", "conformance": "M"}
+      }
+    },
+    "LEDSettingEnum": {
+      "type": "enum8",
+      "values": {
+        "0": {"name": "NoLEDSignal", "summary": "Never use LED for signalization", "conformance": "M"},
+        "1": {"name": "NoLEDSignalAccessAllowed", "summary": "Use LED signalization except for access allowed events", "conformance": "M"},
+        "2": {"name": "LEDSignalAll", "summary": "Use LED signalization for all events", "conformance": "M"}
+      }
+    },
+    "SoundVolumeEnum": {
+      "type": "enum8",
+      "values": {
+        "0": {"name": "Silent", "summary": "Silent Mode", "conformance": "M"},
+        "1": {"name": "Low", "summary": "Low Volume", "conformance": "M"},
+        "2": {"name": "High", "summary": "High Volume", "conformance": "M"},
+        "3": {"name": "Medium", "summary": "Medium Volume", "conformance": "M"}
+      }
+    },
+    "OperatingModeEnum": {
+      "type": "enum8",
+      "description": "This enumeration SHALL indicate the lock operating mode.",
+      "values": {
+        "0": {"name": "Normal", "conformance": "M"},
+        "1": {"name": "Vacation", "conformance": "O"},
+        "2": {"name": "Privacy", "conformance": "O"},
+        "3": {"name": "NoRemoteLockUnlock", "conformance": "M"},
+        "4": {"name": "Passage", "conformance": "O"}
+      }
+    },
+    "UserStatusEnum": {
+      "type": "enum8",
+      "description": "This enumeration SHALL indicate what the status is for a specific user ID.",
+      "values": {
+        "0": {"name": "Available", "summary": "The user ID is available", "conformance": "M"},
+        "1": {"name": "OccupiedEnabled", "summary": "The user ID is occupied and enabled", "conformance": "M"},
+        "3": {"name": "OccupiedDisabled", "summary": "The user ID is occupied and disabled", "conformance": "O"}
+      }
+    },
+    "UserTypeEnum": {
+      "type": "enum8",
+      "description": "This enumeration SHALL indicate what the type is for a specific user ID.",
+      "values": {
+        "0": {"name": "UnrestrictedUser", "summary": "The user ID type is unrestricted", "conformance": "M"},
+        "1": {"name": "YearDayScheduleUser", "summary": "The user ID type is schedule", "conformance": "O"},
+        "2": {"name": "WeekDayScheduleUser", "summary": "The user ID type is schedule", "conformance": "O"},
+        "3": {"name": "ProgrammingUser", "summary": "The user ID type is programming", "conformance": "O"},
+        "4": {"name": "NonAccessUser", "summary": "The user ID type is non access", "conformance": "O"},
+        "5": {"name": "ForcedUser", "summary": "The user ID type is forced", "conformance": "[USR]"},
+        "6": {"name": "DisposableUser", "summary": "The user ID type is disposable", "conformance": "[USR]"},
+        "7": {"name": "ExpiringUser", "summary": "The user ID type is expiring", "conformance": "[USR]"},
+        "8": {"name": "ScheduleRestrictedUser", "summary": "The user ID type is schedule restricted", "conformance": "WDSCH | YDSCH"},
+        "9": {"name": "RemoteOnlyUser", "summary": "The user ID type is remote only", "conformance": "USR & COTA & PIN"}
+      }
+    },
+    "CredentialStruct": {
+      "type": "struct",
+      "description": "This struct SHALL indicate the credential types and their corresponding indices (if any) for the event or user record.",
+      "fields": {
+        "0": {"name": "CredentialType", "type": "CredentialTypeEnum", "conformance": "M"},
+        "1": {"name": "CredentialIndex", "type": "uint16", "default": "0", "conformance": "M"}
+      }
+    }
+  },
+  "statusCodes": {
+    "DUPLICATE": {
+      "value": "0x02",
+      "description": "Entry would cause a duplicate credential/ID."
+    },
+    "OCCUPIED": {
+      "value": "0x03",
+      "description": "Entry would replace an occupied slot."
+    }
+  },
+  "attributes": {
+    "0x0000": {
+      "name": "LockState",
+      "type": "LockStateEnum",
+      "constraint": "desc",
+      "quality": "XPS",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute may be NULL if the lock hardware does not currently know the status of the locking mechanism."
+    },
+    "0x0001": {
+      "name": "LockType",
+      "type": "LockTypeEnum",
+      "constraint": "desc",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate the type of door lock as defined in LockTypeEnum."
+    },
+    "0x0002": {
+      "name": "ActuatorEnabled",
+      "type": "bool",
+      "constraint": "all",
+      "access": "RV",
+      "conformance": "M",
+      "description": "This attribute SHALL indicate if the lock is currently able to (Enabled) or not able to (Disabled) process remote Lock, Unlock, or Unlock with Timeout commands."
+    },
+    "0x0003": {
+      "name": "DoorState",
+      "type": "DoorStateEnum",
+      "constraint": "desc",
+      "quality": "XP",
+      "access": "RV",
+      "conformance": "DPS",
+      "description": "This attribute SHALL indicate the current door state as defined in DoorStateEnum."
+    }
+  },
+  "commands": {
+    "0x00": {
+      "name": "LockDoor",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "OT",
+      "conformance": "M",
+      "description": "This command causes the lock device to lock the door. This command includes an optional code for the lock.",
+      "fields": {
+        "0": {"name": "PINCode", "type": "octstr", "conformance": "[COTA & PIN]"}
+      }
+    },
+    "0x01": {
+      "name": "UnlockDoor",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "OT",
+      "conformance": "M",
+      "description": "This command causes the lock device to unlock the door. This command includes an optional code for the lock.",
+      "fields": {
+        "0": {"name": "PINCode", "type": "octstr", "conformance": "[COTA & PIN]"}
+      }
+    },
+    "0x02": {
+      "name": "Toggle",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "OT",
+      "conformance": "X"
+    },
+    "0x03": {
+      "name": "UnlockWithTimeout",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "OT",
+      "conformance": "O",
+      "description": "This command causes the lock device to unlock the door with a timeout parameter.",
+      "fields": {
+        "0": {"name": "Timeout", "type": "uint16", "conformance": "M"},
+        "1": {"name": "PINCode", "type": "octstr", "conformance": "[COTA & PIN]"}
+      }
+    },
+    "0x27": {
+      "name": "UnboltDoor",
+      "direction": "client ⇒ server",
+      "response": "Y",
+      "access": "OT",
+      "conformance": "UBOLT"
+    }
+  },
+  "events": {
+    "0x00": {
+      "name": "DoorLockAlarm",
+      "priority": "CRITICAL",
+      "access": "V",
+      "conformance": "M",
+      "description": "The door lock server provides several alarms which can be sent when there is a critical state on the door lock.",
+      "fields": {
+        "0": {"name": "AlarmCode", "type": "AlarmCodeEnum", "conformance": "M"}
+      }
+    },
+    "0x01": {
+      "name": "DoorStateChange",
+      "priority": "desc",
+      "access": "V",
+      "conformance": "DPS",
+      "description": "The door lock server sends out a DoorStateChange event when the door lock door state changes.",
+      "fields": {
+        "0": {"name": "DoorState", "type": "DoorStateEnum", "conformance": "M"}
+      }
+    },
+    "0x02": {
+      "name": "LockOperation",
+      "priority": "desc",
+      "access": "V",
+      "conformance": "M",
+      "description": "The door lock server sends out a LockOperation event when the event is triggered by the various lock operation sources.",
+      "fields": {
+        "0": {"name": "LockOperationType", "type": "LockOperationTypeEnum", "conformance": "M"},
+        "1": {"name": "OperationSource", "type": "OperationSourceEnum", "conformance": "M"},
+        "2": {"name": "UserIndex", "type": "uint16", "quality": "X", "conformance": "M"},
+        "3": {"name": "FabricIndex", "type": "fabric-idx", "quality": "X", "conformance": "M"},
+        "4": {"name": "SourceNode", "type": "node-id", "quality": "X", "conformance": "M"},
+        "5": {"name": "Credentials", "type": "list[CredentialStruct]", "constraint": "1 to NumberOfCredentialsSupportedPerUser", "quality": "X", "conformance": "[USR]"}
+      }
+    },
+    "0x03": {
+      "name": "LockOperationError",
+      "priority": "desc",
+      "access": "V",
+      "conformance": "M",
+      "description": "The door lock server sends out a LockOperationError event when a lock operation fails for various reasons.",
+      "fields": {
+        "0": {"name": "LockOperationType", "type": "LockOperationTypeEnum", "conformance": "M"},
+        "1": {"name": "OperationSource", "type": "OperationSourceEnum", "conformance": "M"},
+        "2": {"name": "OperationError", "type": "OperationErrorEnum", "conformance": "M"},
+        "3": {"name": "UserIndex", "type": "uint16", "quality": "X", "conformance": "M"},
+        "4": {"name": "FabricIndex", "type": "fabric-idx", "quality": "X", "conformance": "M"},
+        "5": {"name": "SourceNode", "type": "node-id", "quality": "X", "conformance": "M"},
+        "6": {"name": "Credentials", "type": "list[CredentialStruct]", "constraint": "1 to NumberOfCredentialsSupportedPerUser", "quality": "X", "conformance": "[USR]"}
+      }
+    },
+    "0x04": {
+      "name": "LockUserChange",
+      "priority": "INFO",
+      "access": "V",
+      "conformance": "USR",
+      "description": "The door lock server sends out a LockUserChange event when a lock user, schedule, or credential change has occurred.",
+      "fields": {
+        "0": {"name": "LockDataType", "type": "LockDataTypeEnum", "conformance": "M"},
+        "1": {"name": "DataOperationType", "type": "DataOperationTypeEnum", "conformance": "M"},
+        "2": {"name": "OperationSource", "type": "OperationSourceEnum", "constraint": "Unspecified, Keypad, Remote", "conformance": "M"},
+        "3": {"name": "UserIndex", "type": "uint16", "quality": "X", "conformance": "M"},
+        "4": {"name": "FabricIndex", "type": "fabric-idx", "quality": "X", "conformance": "M"},
+        "5": {"name": "SourceNode", "type": "node-id", "quality": "X", "conformance": "M"},
+        "6": {"name": "DataIndex", "type": "uint16", "quality": "X", "conformance": "M"}
+      }
+    }
+  }
+}

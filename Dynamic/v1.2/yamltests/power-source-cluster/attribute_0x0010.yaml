@@ -1,0 +1,43 @@
+config:
+  attribute: '0x0010'
+  cluster: power-source-cluster
+  nodeId: '0x654231'
+name: power-source-cluster_attribute_0x0010_v1.2.0.0
+tests:
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatQuantity": 0}'
+  ExpectedResponse: <error or specific handling for zero quantity>
+  Pre-requisites: <none>
+  arguments:
+    '{"BatQuantity"': 0}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatQuantity": 255}'
+  ExpectedResponse: <successful update or specific handling for maximum value>
+  Pre-requisites: <none>
+  arguments:
+    '{"BatQuantity"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatQuantity": 1}'
+  ExpectedResponse: <successful update>
+  Pre-requisites: <none>
+  arguments:
+    '{"BatQuantity"': 1}
+  label: Test_Case_Special_Value_(e.g.,_typical_operational_value)
+  option: WriteAttribute
+- ActionTime: <current_time>
+  Attribute_Change: '{"BatQuantity": 254}'
+  ExpectedResponse: <successful update>
+  Pre-requisites: '<none>
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    values that could result in special responses as mentioned in the description
+    of the effect.'
+  arguments:
+    '{"BatQuantity"': 254}
+  label: Test_Case_Special_Value_(e.g.,_edge_case_just_below_maximum)
+  option: WriteAttribute

@@ -1,0 +1,322 @@
+{
+  "source_file": "Smoke CO Alarm_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x005C",
+        "name": "Smoke CO Alarm",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "ExpressedState",
+            "dataType": "ExpressedStateEnum",
+            "valueRange": "All",
+            "description": "Indicates the visibly- and audibly-expressed state of the alarm.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "SmokeState",
+            "dataType": "AlarmStateEnum",
+            "valueRange": "All",
+            "description": "Indicates whether the device’s smoke sensor is currently triggering a smoke alarm.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "COState",
+            "dataType": "AlarmStateEnum",
+            "valueRange": "All",
+            "description": "Indicates whether the device’s CO sensor is currently triggering a CO alarm.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "BatteryAlert",
+            "dataType": "AlarmStateEnum",
+            "valueRange": "All",
+            "description": "Indicates whether the power resource fault detection mechanism is currently triggered.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "DeviceMuted",
+            "dataType": "MuteStateEnum",
+            "valueRange": "All",
+            "description": "Indicates whether the audible expression of the device is currently muted.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0005",
+            "name": "TestInProgress",
+            "dataType": "bool",
+            "valueRange": "All",
+            "description": "Indicates whether the device self-test is currently activated.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0006",
+            "name": "HardwareFaultAlert",
+            "dataType": "bool",
+            "valueRange": "All",
+            "description": "Indicates whether the hardware fault detection mechanism is currently triggered.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0007",
+            "name": "EndOfServiceAlert",
+            "dataType": "EndOfServiceEnum",
+            "valueRange": "All",
+            "description": "Indicates whether the end-of-service has been triggered at the device.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0008",
+            "name": "InterconnectSmokeAlarm",
+            "dataType": "AlarmStateEnum",
+            "valueRange": "All",
+            "description": "Indicates whether the interconnected smoke alarm is currently triggering by branching devices.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0009",
+            "name": "InterconnectCOAlarm",
+            "dataType": "AlarmStateEnum",
+            "valueRange": "All",
+            "description": "Indicates whether the interconnected CO alarm is currently triggering by branching devices.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x000A",
+            "name": "ContaminationState",
+            "dataType": "ContaminationStateEnum",
+            "valueRange": "All",
+            "description": "Indicates the contamination level of the smoke sensor.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x000B",
+            "name": "SmokeSensitivityLevel",
+            "dataType": "SensitivityEnum",
+            "valueRange": "All",
+            "description": "Indicates the sensitivity level of the smoke sensor configured on the device.",
+            "privilege": "RW",
+            "writable": true
+          },
+          {
+            "id": "0x000C",
+            "name": "ExpiryDate",
+            "dataType": "epoch-s",
+            "valueRange": "All",
+            "description": "Indicates the date when the device reaches its stated expiry date.",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "SelfTestRequest",
+            "parameters": {
+              "dataType": "N/A",
+              "valueRange": "N/A",
+              "description": "This command SHALL initiate a device self-test."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "SmokeAlarm",
+            "parameters": {
+              "dataType": "AlarmStateEnum",
+              "valueRange": "All",
+              "description": "Generated when SmokeState attribute changes to either Warning or Critical state."
+            },
+            "privilege": "CRITICAL",
+            "side": "server"
+          },
+          {
+            "id": "0x01",
+            "name": "COAlarm",
+            "parameters": {
+              "dataType": "AlarmStateEnum",
+              "valueRange": "All",
+              "description": "Generated when COState attribute changes to either Warning or Critical state."
+            },
+            "privilege": "CRITICAL",
+            "side": "server"
+          },
+          {
+            "id": "0x02",
+            "name": "LowBattery",
+            "parameters": {
+              "dataType": "AlarmStateEnum",
+              "valueRange": "All",
+              "description": "Generated when BatteryAlert attribute changes to either Warning or Critical state."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x03",
+            "name": "HardwareFault",
+            "parameters": {
+              "dataType": "AlarmStateEnum",
+              "valueRange": "All",
+              "description": "Generated when the device detects a hardware fault that leads to setting HardwareFaultAlert to True."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x04",
+            "name": "EndOfService",
+            "parameters": {
+              "dataType": "AlarmStateEnum",
+              "valueRange": "All",
+              "description": "Generated when the EndOfServiceAlert is set to Expired."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x05",
+            "name": "SelfTestComplete",
+            "parameters": {
+              "dataType": "AlarmStateEnum",
+              "valueRange": "All",
+              "description": "Generated when the SelfTest completes, and the attribute TestInProgress changes to False."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x06",
+            "name": "AlarmMuted",
+            "parameters": {
+              "dataType": "AlarmStateEnum",
+              "valueRange": "All",
+              "description": "Generated when the DeviceMuted attribute changes to Muted."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x07",
+            "name": "MuteEnded",
+            "parameters": {
+              "dataType": "AlarmStateEnum",
+              "valueRange": "All",
+              "description": "Generated when DeviceMuted attribute changes to NotMuted."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          },
+          {
+            "id": "0x08",
+            "name": "InterconnectSmokeAlarm",
+            "parameters": {
+              "dataType": "AlarmStateEnum",
+              "valueRange": "All",
+              "description": "Generated when the device hosting the server receives a smoke alarm from an interconnected sensor."
+            },
+            "privilege": "CRITICAL",
+            "side": "server"
+          },
+          {
+            "id": "0x09",
+            "name": "InterconnectCOAlarm",
+            "parameters": {
+              "dataType": "AlarmStateEnum",
+              "valueRange": "All",
+              "description": "Generated when the device hosting the server receives a CO alarm from an interconnected sensor."
+            },
+            "privilege": "CRITICAL",
+            "side": "server"
+          },
+          {
+            "id": "0x0A",
+            "name": "AllClear",
+            "parameters": {
+              "dataType": "AlarmStateEnum",
+              "valueRange": "All",
+              "description": "Generated when ExpressedState attribute returns to Normal state."
+            },
+            "privilege": "INFO",
+            "side": "server"
+          }
+        ],
+        "dataTypes": {
+          "AlarmStateEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Normal",
+              "1": "Warning",
+              "2": "Critical"
+            }
+          },
+          "SensitivityEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "High",
+              "1": "Standard",
+              "2": "Low"
+            }
+          },
+          "ExpressedStateEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Normal",
+              "1": "SmokeAlarm",
+              "2": "COAlarm",
+              "3": "BatteryAlert",
+              "4": "Testing",
+              "5": "HardwareFault",
+              "6": "EndOfService",
+              "7": "InterconnectSmoke",
+              "8": "InterconnectCO"
+            }
+          },
+          "MuteStateEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "NotMuted",
+              "1": "Muted"
+            }
+          },
+          "EndOfServiceEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Normal",
+              "1": "Expired"
+            }
+          },
+          "ContaminationStateEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Normal",
+              "1": "Low",
+              "2": "Warning",
+              "3": "Critical"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

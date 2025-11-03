@@ -1,0 +1,26 @@
+name: Water Tank Level Monitoring - Condition Attribute Test
+config:
+  nodeId: '0x12344321'
+  endpoint: 1
+  cluster: Water Tank Level Monitoring
+  timeout: 180
+tests:
+- label: Read Condition attribute
+  command: readAttribute
+  attribute: Condition
+  response:
+    saveAs: condition_value
+- label: Condition - Test minimum value (0)
+  command: readAttribute
+  attribute: Condition
+  response:
+    constraints:
+      minValue: 0
+      maxValue: 255
+- label: Condition - Test maximum value (255)
+  command: readAttribute
+  attribute: Condition
+  response:
+    constraints:
+      minValue: 0
+      maxValue: 255

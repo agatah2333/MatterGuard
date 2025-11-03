@@ -1,0 +1,26 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x002B",
+    "name": "Localization Configuration",
+    "description": "Language and locale settings."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "ActiveLo",
+      "type": "unknown",
+      "description": "ActiveLo attribute",
+      "access": "R"
+    },
+    {
+      "id": "0x0001",
+      "name": "Supported",
+      "type": "unknown",
+      "description": "Supported attribute",
+      "access": "R"
+    }
+  ],
+  "events": []
+}

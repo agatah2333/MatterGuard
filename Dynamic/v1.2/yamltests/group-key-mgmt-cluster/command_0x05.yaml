@@ -1,0 +1,35 @@
+config:
+  cluster: group-key-mgmt-cluster
+  command: '0x05'
+  nodeId: '0x654231'
+name: group-key-mgmt-cluster_command_0x05_v1.2.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: 'Ensure the server has at least two Group Key Sets with IDs 0 and
+    65535.
+
+
+    #'
+  arguments:
+    '{"GroupKeySetIDs"': '[0, 65535]}'
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: SendCommand
+- ActionTime: N/A
+  Attribute_Change: N/A
+  ExpectedResponse: Success
+  Pre-requisites: 'Ensure the server has at least six Group Key Sets with IDs 0, 1,
+    2, 3, 4, and 5.
+
+
+    These test cases cover the extreme values and special responses for the `KeySetReadAllIndicesResponse`
+    command in the Group Key Management Cluster.
+
+
+    For more detailed information, you can refer to the Matter 1.2 Core Specification
+    document【4:0†source】.'
+  arguments:
+    '{"GroupKeySetIDs"': '[0, 1, 2, 3, 4, 5]}'
+  label: Test_Case_Values_of_the_Field_that_Could_Result_in_Special_Responses
+  option: SendCommand

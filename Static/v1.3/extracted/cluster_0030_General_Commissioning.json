@@ -1,0 +1,96 @@
+{
+  "cluster_id": "0x0030",
+  "cluster_name": "General Commissioning",
+  "section": "11.10",
+  "description": "This cluster is used to manage basic commissioning lifecycle. This cluster also represents responsibilities related to commissioning that don’t well fit other com­ missioning clusters, like Section 11.9, “Network Commissioning Cluster”. It also hosts functionalities those other clusters may depend on. Matter Specification R1.3                        Connectivity Standards Alliance Document 23-27349 April 17, 2024",
+  "data_types": {
+    "CommissioningErrorEnum": {
+      "name": "CommissioningErrorEnum",
+      "definition_line": "11.10.4.1. CommissioningErrorEnum Type"
+    },
+    "RegulatoryLocationTypeEnum": {
+      "name": "RegulatoryLocationTypeEnum",
+      "definition_line": "11.10.4.2. RegulatoryLocationTypeEnum Type"
+    },
+    "BasicCommissioningInfo": {
+      "name": "BasicCommissioningInfo",
+      "definition_line": "11.10.4.3. BasicCommissioningInfo Type"
+    }
+  },
+  "attributes": {
+    "0x00": {
+      "id": "0x00",
+      "name": "Bread­",
+      "details": "uint64 all 0 RW VA M",
+      "raw_line": "0x00           Bread­         uint64        all                           0              RW VA       M"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "BasicCom­",
+      "details": "BasicCom­ desc F RV M",
+      "raw_line": "0x01           BasicCom­ BasicCom­          desc           F                             RV          M"
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "Regulato­",
+      "details": "Regulato­ all Location­ RV M",
+      "raw_line": "0x02           Regulato­      Regulato­     all                           Location­      RV          M"
+    },
+    "0x03": {
+      "id": "0x03",
+      "name": "Location­",
+      "details": "Regulato­ all F IndoorOut­ R V M",
+      "raw_line": "0x03           Location­      Regulato­     all            F              IndoorOut­ R V             M"
+    },
+    "0x04": {
+      "id": "0x04",
+      "name": "Support­",
+      "details": "bool all F true RV M",
+      "raw_line": "0x04           Support­       bool          all            F              true           RV          M"
+    }
+  },
+  "commands": {
+    "0x00": {
+      "id": "0x00",
+      "name": "ArmFailSafe",
+      "details": "client ⇒ server ArmFailSafeRe­ A M",
+      "raw_line": "0x00                ArmFailSafe       client ⇒ server ArmFailSafeRe­ A                          M"
+    },
+    "0x01": {
+      "id": "0x01",
+      "name": "ArmFailSafeR­",
+      "details": "client ⇐ server N M",
+      "raw_line": "0x01                ArmFailSafeR­ client ⇐ server N                                             M"
+    },
+    "0x02": {
+      "id": "0x02",
+      "name": "SetRegulato­",
+      "details": "client ⇒ server SetRegulato­ A M",
+      "raw_line": "0x02               SetRegulato­       client ⇒ server SetRegulato­            A                 M"
+    },
+    "0x03": {
+      "id": "0x03",
+      "name": "SetRegulato­",
+      "details": "client ⇐ server N M",
+      "raw_line": "0x03               SetRegulato­       client ⇐ server N                                         M"
+    },
+    "0x04": {
+      "id": "0x04",
+      "name": "Commission­",
+      "details": "client ⇒ server Commission­ AF M",
+      "raw_line": "0x04               Commission­        client ⇒ server Commission­             AF                M"
+    },
+    "0x05": {
+      "id": "0x05",
+      "name": "Commission­",
+      "details": "client ⇐ server N M",
+      "raw_line": "0x05               Commission­        client ⇐ server N                                         M"
+    }
+  },
+  "events": {},
+  "extraction_info": {
+    "start_line": 41527,
+    "end_line": 42158,
+    "total_lines": 631
+  }
+}

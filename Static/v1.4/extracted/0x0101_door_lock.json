@@ -1,0 +1,1215 @@
+{
+  "source_file": "Door Lock_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0101",
+        "name": "Door Lock",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "LockState",
+            "dataType": "enum8",
+            "valueRange": "LockStateEnum",
+            "description": "Indicates the current state of the lock.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "LockType",
+            "dataType": "enum8",
+            "valueRange": "LockTypeEnum",
+            "description": "Indicates the type of door lock.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "ActuatorEnabled",
+            "dataType": "bool",
+            "valueRange": "0-1",
+            "description": "Indicates if the lock can process remote commands.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0003",
+            "name": "DoorState",
+            "dataType": "enum8",
+            "valueRange": "DoorStateEnum",
+            "description": "Indicates the current door state.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "DoorOpenEvents",
+            "dataType": "uint16",
+            "valueRange": "0-65535",
+            "description": "Number of door open events since last reset.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0005",
+            "name": "DoorClosedEvents",
+            "dataType": "uint16",
+            "valueRange": "0-65535",
+            "description": "Number of door closed events since last reset.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0006",
+            "name": "OpenPeriod",
+            "dataType": "uint16",
+            "valueRange": "0-65535",
+            "description": "Number of minutes the door has been open since last transition.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0007",
+            "name": "NumberOfTotalUsersSupported",
+            "dataType": "uint16",
+            "valueRange": "0-65535",
+            "description": "Total number of users supported by the lock.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0008",
+            "name": "NumberOfPINUsersSupported",
+            "dataType": "uint16",
+            "valueRange": "0-65535",
+            "description": "Number of PIN users supported.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0009",
+            "name": "NumberOfRFIDUsersSupported",
+            "dataType": "uint16",
+            "valueRange": "0-65535",
+            "description": "Number of RFID users supported.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x000A",
+            "name": "NumberOfWeekDaySchedulesSupportedPerUser",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "Number of configurable week day schedules supported per user.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x000B",
+            "name": "NumberOfYearDaySchedulesSupportedPerUser",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "Number of configurable year day schedules supported per user.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x000C",
+            "name": "NumberOfHolidaySchedulesSupported",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "Number of holiday schedules supported for the entire door lock device.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x000D",
+            "name": "MaxPINCodeLength",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "Maximum length in bytes of a PIN Code on this device.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x000E",
+            "name": "MinPINCodeLength",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "Minimum length in bytes of a PIN Code on this device.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x000F",
+            "name": "MaxRFIDCodeLength",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "Maximum length in bytes of a RFID Code on this device.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0010",
+            "name": "MinRFIDCodeLength",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "Minimum length in bytes of a RFID Code on this device.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0011",
+            "name": "CredentialRulesSupport",
+            "dataType": "bool",
+            "valueRange": "0-1",
+            "description": "Indicates if the lock supports credential rules.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0012",
+            "name": "NumberOfCredentialsSupportedPerUser",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "Number of credentials supported per user.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0020",
+            "name": "Language",
+            "dataType": "charString",
+            "valueRange": "String",
+            "description": "Language supported by the lock.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0021",
+            "name": "LEDSettings",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "Settings for the LED on the lock.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0022",
+            "name": "AutoRelockTime",
+            "dataType": "uint16",
+            "valueRange": "0-65535",
+            "description": "Time in seconds before the lock automatically relocks.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0023",
+            "name": "SoundVolume",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "Volume level of the lock's sound.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0024",
+            "name": "OperatingMode",
+            "dataType": "enum8",
+            "valueRange": "OperatingModeEnum",
+            "description": "Current operating mode of the lock.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0025",
+            "name": "SupportedOperatingModes",
+            "dataType": "bitmap16",
+            "valueRange": "Bitmap",
+            "description": "Bitmap of supported operating modes.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0026",
+            "name": "DefaultConfigurationRegister",
+            "dataType": "bitmap16",
+            "valueRange": "Bitmap",
+            "description": "Default configuration register settings.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0027",
+            "name": "EnableLocalProgramming",
+            "dataType": "bool",
+            "valueRange": "0-1",
+            "description": "Indicates if local programming is enabled.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0028",
+            "name": "EnableOneTouchLocking",
+            "dataType": "bool",
+            "valueRange": "0-1",
+            "description": "Indicates if one-touch locking is enabled.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0029",
+            "name": "EnableInsideStatusLED",
+            "dataType": "bool",
+            "valueRange": "0-1",
+            "description": "Indicates if the inside status LED is enabled.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x002A",
+            "name": "EnablePrivacyModeButton",
+            "dataType": "bool",
+            "valueRange": "0-1",
+            "description": "Indicates if the privacy mode button is enabled.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x002B",
+            "name": "LocalProgrammingFeatures",
+            "dataType": "bitmap16",
+            "valueRange": "Bitmap",
+            "description": "Bitmap of local programming features supported.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0030",
+            "name": "WrongCodeEntryLimit",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "Number of wrong code entries allowed before lockout.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0031",
+            "name": "UserCodeTemporaryDisableTime",
+            "dataType": "uint16",
+            "valueRange": "0-65535",
+            "description": "Time in seconds to temporarily disable user code after wrong entries.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0032",
+            "name": "SendPINOverTheAir",
+            "dataType": "bool",
+            "valueRange": "0-1",
+            "description": "Indicates if PIN can be sent over the air.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0033",
+            "name": "RequirePINforRemoteOperation",
+            "dataType": "bool",
+            "valueRange": "0-1",
+            "description": "Indicates if PIN is required for remote operation.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0034",
+            "name": "SecurityLevel",
+            "dataType": "enum8",
+            "valueRange": "SecurityLevelEnum",
+            "description": "Security level of the lock.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0035",
+            "name": "SoundVolume",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "Volume level of the lock's sound.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0040",
+            "name": "AlarmMask",
+            "dataType": "bitmap16",
+            "valueRange": "Bitmap",
+            "description": "Bitmap of alarms that are masked.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0080",
+            "name": "AliroReaderVerificationKey",
+            "dataType": "octetString",
+            "valueRange": "String",
+            "description": "Verification key for Aliro reader.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0081",
+            "name": "AliroReaderGroupIdentifier",
+            "dataType": "octetString",
+            "valueRange": "String",
+            "description": "Group identifier for Aliro reader.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0082",
+            "name": "AliroReaderGroupConfidential",
+            "dataType": "bool",
+            "valueRange": "0-1",
+            "description": "Indicates if the Aliro reader group is confidential.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0083",
+            "name": "AliroExpectedTransactionSupportedProtocols",
+            "dataType": "bitmap16",
+            "valueRange": "Bitmap",
+            "description": "Bitmap of supported protocols for expected transactions.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0084",
+            "name": "AliroGroupProtocolVerificationKey",
+            "dataType": "octetString",
+            "valueRange": "String",
+            "description": "Verification key for Aliro group protocol.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0085",
+            "name": "AliroSupportedProtocols",
+            "dataType": "bitmap16",
+            "valueRange": "Bitmap",
+            "description": "Bitmap of supported protocols for Aliro.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0086",
+            "name": "AliroWBProtocolVersion",
+            "dataType": "octetString",
+            "valueRange": "String",
+            "description": "Version of the Aliro WB protocol.",
+            "privilege": "R",
+            "writable": true
+          },
+          {
+            "id": "0x0087",
+            "name": "NumberOfAliroAccessKeysSupported",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "Number of Aliro access keys supported.",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0088",
+            "name": "NumberOfAliroEndpointKeysSupported",
+            "dataType": "uint8",
+            "valueRange": "0-255",
+            "description": "Number of Aliro endpoint keys supported.",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "LockDoor",
+            "parameters": {
+              "PINCode": {
+                "dataType": "octstr",
+                "valueRange": "[COTA & PIN]",
+                "description": "Optional code for the lock operation"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x01",
+            "name": "UnlockDoor",
+            "parameters": {
+              "PINCode": {
+                "dataType": "octstr",
+                "valueRange": "[COTA & PIN]",
+                "description": "Optional code for the unlock operation"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x02",
+            "name": "Toggle",
+            "parameters": {},
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x03",
+            "name": "UnlockWithTimeout",
+            "parameters": {
+              "Timeout": {
+                "dataType": "uint16",
+                "valueRange": "1-65535",
+                "description": "Unlock duration in seconds"
+              },
+              "PINCode": {
+                "dataType": "octstr",
+                "valueRange": "[COTA & PIN]",
+                "description": "Optional authentication code"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x03",
+            "name": "UnlockWithTimeout",
+            "parameters": {
+              "Timeout": {
+                "dataType": "uint16",
+                "valueRange": "1-65535",
+                "description": "Unlock duration in seconds"
+              },
+              "PINCode": {
+                "dataType": "octstr",
+                "valueRange": "[COTA & PIN]",
+                "description": "Optional authentication code"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x04",
+            "name": "GetPINCode",
+            "parameters": {
+              "UserID": {
+                "dataType": "uint16",
+                "valueRange": "1-65535",
+                "description": "Target user identifier"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x05",
+            "name": "GetPINCodeResponse",
+            "parameters": {},
+            "privilege": "USR",
+            "direction": "server → client"
+          },
+          {
+            "id": "0x06",
+            "name": "ClearPINCode",
+            "parameters": {
+              "UserID": {
+                "dataType": "uint16",
+                "valueRange": "1-65535",
+                "description": "Target user identifier"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x07",
+            "name": "ClearAllPINCodes",
+            "parameters": {},
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x08",
+            "name": "GetUserStatus",
+            "parameters": {
+              "UserID": {
+                "dataType": "uint16",
+                "valueRange": "1-65535",
+                "description": "Target user identifier"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x09",
+            "name": "GetUserStatusResponse",
+            "parameters": {
+              "UserStatus": {
+                "dataType": "UserStatusEnum",
+                "valueRange": "0-2",
+                "description": "0=Available, 1=Occupied, 2=Disabled"
+              }
+            },
+            "privilege": "USR",
+            "direction": "server → client"
+          },
+          {
+            "id": "0x0A",
+            "name": "SetWeekDaySchedule",
+            "parameters": {
+              "ScheduleID": {
+                "dataType": "uint8",
+                "valueRange": "0-255",
+                "description": "Unique schedule identifier"
+              },
+              "UserID": {
+                "dataType": "uint16",
+                "valueRange": "1-65535",
+                "description": "Associated user identifier"
+              },
+              "DaysMask": {
+                "dataType": "bitmap8",
+                "valueRange": "0x01-0x7F",
+                "description": "Bitmask for days (Mon-Sun)"
+              },
+              "StartHour": {
+                "dataType": "uint8",
+                "valueRange": "0-23",
+                "description": "Start time hour"
+              },
+              "StartMinute": {
+                "dataType": "uint8",
+                "valueRange": "0-59",
+                "description": "Start time minute"
+              },
+              "EndHour": {
+                "dataType": "uint8",
+                "valueRange": "0-23",
+                "description": "End time hour"
+              },
+              "EndMinute": {
+                "dataType": "uint8",
+                "valueRange": "0-59",
+                "description": "End time minute"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x0B",
+            "name": "GetWeekDaySchedule",
+            "parameters": {
+              "ScheduleID": {
+                "dataType": "uint8",
+                "valueRange": "0-255"
+              },
+              "UserID": {
+                "dataType": "uint16",
+                "valueRange": "1-65535"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x0C",
+            "name": "GetWeekDayScheduleResponse",
+            "parameters": {
+              "Schedule": {
+                "dataType": "WeekDayScheduleStruct",
+                "valueRange": "See dataTypes"
+              }
+            },
+            "privilege": "USR",
+            "direction": "server → client"
+          },
+          {
+            "id": "0x0D",
+            "name": "ClearWeekDaySchedule",
+            "parameters": {
+              "ScheduleID": {
+                "dataType": "uint8",
+                "valueRange": "0-255"
+              },
+              "UserID": {
+                "dataType": "uint16",
+                "valueRange": "1-65535"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x0E",
+            "name": "SetYearDaySchedule",
+            "parameters": {
+              "ScheduleID": {
+                "dataType": "uint8",
+                "valueRange": "0-255"
+              },
+              "UserID": {
+                "dataType": "uint16",
+                "valueRange": "1-65535"
+              },
+              "LocalStartTime": {
+                "dataType": "utc",
+                "valueRange": "0-4294967295"
+              },
+              "LocalEndTime": {
+                "dataType": "utc",
+                "valueRange": "0-4294967295"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x0F",
+            "name": "GetYearDaySchedule",
+            "parameters": {
+              "ScheduleID": {
+                "dataType": "uint8",
+                "valueRange": "0-255"
+              },
+              "UserID": {
+                "dataType": "uint16",
+                "valueRange": "1-65535"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x10",
+            "name": "GetYearDayScheduleResponse",
+            "parameters": {
+              "YearDaySchedule": {
+                "dataType": "YearDayScheduleStruct",
+                "valueRange": "See dataTypes"
+              }
+            },
+            "privilege": "USR",
+            "direction": "server → client"
+          },
+          {
+            "id": "0x11",
+            "name": "SetHolidaySchedule",
+            "parameters": {
+              "ScheduleID": {
+                "dataType": "uint8",
+                "valueRange": "0-255"
+              },
+              "LocalStartTime": {
+                "dataType": "utc",
+                "valueRange": "0-4294967295"
+              },
+              "LocalEndTime": {
+                "dataType": "utc",
+                "valueRange": "0-4294967295"
+              },
+              "OperatingMode": {
+                "dataType": "enum8",
+                "valueRange": "0=Normal, 1=Vacation"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x12",
+            "name": "GetHolidaySchedule",
+            "parameters": {
+              "ScheduleID": {
+                "dataType": "uint8",
+                "valueRange": "0-255"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x13",
+            "name": "GetHolidayScheduleResponse",
+            "parameters": {
+              "HolidaySchedule": {
+                "dataType": "HolidayScheduleStruct",
+                "valueRange": "See dataTypes"
+              }
+            },
+            "privilege": "USR",
+            "direction": "server → client"
+          },
+          {
+            "id": "0x14",
+            "name": "ClearHolidaySchedule",
+            "parameters": {
+              "ScheduleID": {
+                "dataType": "uint8",
+                "valueRange": "0-255"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x14",
+            "name": "ClearHolidaySchedule",
+            "parameters": {
+              "ScheduleID": {
+                "dataType": "uint8",
+                "valueRange": "0-255",
+                "description": "Holiday schedule identifier to clear"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x15",
+            "name": "SetUserType",
+            "parameters": {
+              "UserID": {
+                "dataType": "uint16",
+                "valueRange": "1-65535",
+                "description": "Target user identifier"
+              },
+              "UserType": {
+                "dataType": "UserTypeEnum",
+                "valueRange": "0-4",
+                "description": "0=Unrestricted, 1=YearDay, 2=WeekDay, 3=Master, 4=NonAccess"
+              }
+            },
+            "privilege": "ADMIN",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x16",
+            "name": "GetUserType",
+            "parameters": {
+              "UserID": {
+                "dataType": "uint16",
+                "valueRange": "1-65535",
+                "description": "Target user identifier"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x17",
+            "name": "GetUserTypeResponse",
+            "parameters": {
+              "UserType": {
+                "dataType": "UserTypeEnum",
+                "valueRange": "0-4",
+                "description": "User type classification"
+              }
+            },
+            "privilege": "USR",
+            "direction": "server → client"
+          },
+          {
+            "id": "0x18",
+            "name": "SetRFIDCode",
+            "parameters": {
+              "UserID": {
+                "dataType": "uint16",
+                "valueRange": "1-65535",
+                "description": "Associated user identifier"
+              },
+              "RFIDCode": {
+                "dataType": "octstr",
+                "valueRange": "8-16 bytes",
+                "description": "RFID authentication data"
+              }
+            },
+            "privilege": "ADMIN",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x19",
+            "name": "GetRFIDCode",
+            "parameters": {
+              "UserID": {
+                "dataType": "uint16",
+                "valueRange": "1-65535",
+                "description": "Target user identifier"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x1A",
+            "name": "GetRFIDCodeResponse",
+            "parameters": {
+              "RFIDCode": {
+                "dataType": "octstr",
+                "valueRange": "8-16 bytes",
+                "description": "Stored RFID credential"
+              },
+              "CodeStatus": {
+                "dataType": "enum8",
+                "valueRange": "0=Valid, 1=Expired, 2=Disabled"
+              }
+            },
+            "privilege": "USR",
+            "direction": "server → client"
+          },
+          {
+            "id": "0x1B",
+            "name": "ClearRFIDCode",
+            "parameters": {
+              "UserID": {
+                "dataType": "uint16",
+                "valueRange": "1-65535",
+                "description": "Target user identifier"
+              }
+            },
+            "privilege": "ADMIN",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x1C",
+            "name": "ClearAllRFIDCodes",
+            "parameters": {
+              "SecurityToken": {
+                "dataType": "octstr",
+                "valueRange": "32 bytes",
+                "description": "Administrative authorization token"
+              }
+            },
+            "privilege": "ADMIN",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x1D",
+            "name": "SetUser",
+            "parameters": {
+              "UserID": {
+                "dataType": "uint16",
+                "valueRange": "1-65535",
+                "description": "User identifier"
+              },
+              "UserStatus": {
+                "dataType": "UserStatusEnum",
+                "valueRange": "0-2",
+                "description": "0=Available, 1=Occupied, 2=Disabled"
+              },
+              "UserType": {
+                "dataType": "UserTypeEnum",
+                "valueRange": "0-4",
+                "description": "User privilege level"
+              },
+              "Credentials": {
+                "dataType": "list[CredentialStruct]",
+                "valueRange": "max 5",
+                "description": "Associated credentials"
+              }
+            },
+            "privilege": "ADMIN",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x1E",
+            "name": "GetUser",
+            "parameters": {
+              "UserID": {
+                "dataType": "uint16",
+                "valueRange": "1-65535",
+                "description": "Target user identifier"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x1F",
+            "name": "GetUserResponse",
+            "parameters": {
+              "UserProfile": {
+                "dataType": "UserProfileStruct",
+                "valueRange": "See dataTypes",
+                "description": "Complete user profile data"
+              }
+            },
+            "privilege": "USR",
+            "direction": "server → client"
+          },
+          {
+            "id": "0x20",
+            "name": "ClearUser",
+            "parameters": {
+              "UserID": {
+                "dataType": "uint16",
+                "valueRange": "1-65535",
+                "description": "User identifier to remove"
+              }
+            },
+            "privilege": "ADMIN",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x21",
+            "name": "SetCredential",
+            "parameters": {
+              "Credential": {
+                "dataType": "CredentialStruct",
+                "valueRange": "See dataTypes",
+                "description": "Credential data structure"
+              }
+            },
+            "privilege": "ADMIN",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x22",
+            "name": "GetCredential",
+            "parameters": {
+              "CredentialIndex": {
+                "dataType": "uint16",
+                "valueRange": "0-65535",
+                "description": "Credential database index"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x23",
+            "name": "GetCredentialResponse",
+            "parameters": {
+              "Credential": {
+                "dataType": "CredentialStruct",
+                "valueRange": "See dataTypes",
+                "description": "Retrieved credential data"
+              }
+            },
+            "privilege": "USR",
+            "direction": "server → client"
+          },
+          {
+            "id": "0x24",
+            "name": "GetCredentialStatus",
+            "parameters": {
+              "CredentialIndex": {
+                "dataType": "uint16",
+                "valueRange": "0-65535",
+                "description": "Credential database index"
+              }
+            },
+            "privilege": "USR",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x25",
+            "name": "GetCredentialStatusResponse",
+            "parameters": {
+              "Validity": {
+                "dataType": "enum8",
+                "valueRange": "0=Valid, 1=Expired, 2=Revoked",
+                "description": "Credential status"
+              },
+              "LastUsed": {
+                "dataType": "utc",
+                "valueRange": "0-4294967295",
+                "description": "Last usage timestamp"
+              }
+            },
+            "privilege": "USR",
+            "direction": "server → client"
+          },
+          {
+            "id": "0x26",
+            "name": "ClearCredential",
+            "parameters": {
+              "Credential": {
+                "dataType": "CredentialStruct",
+                "valueRange": "See dataTypes",
+                "description": "Credential to revoke"
+              }
+            },
+            "privilege": "ADMIN",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x27",
+            "name": "UnboltDoor",
+            "parameters": {
+              "SecurityCode": {
+                "dataType": "octstr",
+                "valueRange": "[COTA & PIN]",
+                "description": "Mechanical override authorization"
+              }
+            },
+            "privilege": "ADMIN",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x28",
+            "name": "SetAliroReaderConfig",
+            "parameters": {
+              "SigningKey": {
+                "dataType": "octstr",
+                "valueRange": "16 bytes",
+                "description": "EdDSA signing private key"
+              },
+              "VerificationKey": {
+                "dataType": "octstr",
+                "valueRange": "32 bytes",
+                "description": "EdDSA verification public key"
+              },
+              "GroupIdentifier": {
+                "dataType": "octstr",
+                "valueRange": "4 bytes",
+                "description": "Aliro group identifier"
+              },
+              "GroupResolvingKey": {
+                "dataType": "octstr",
+                "valueRange": "16 bytes",
+                "description": "Group resolving key"
+              }
+            },
+            "privilege": "ALIRO",
+            "direction": "client → server"
+          },
+          {
+            "id": "0x29",
+            "name": "ClearAliroReaderConfig",
+            "parameters": {},
+            "privilege": "ALIRO",
+            "direction": "client → server"
+          }
+        ],
+        "dataTypes": {
+          "LockStateEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "NotFullyLocked",
+              "1": "Locked",
+              "2": "Unlocked",
+              "3": "Undefined"
+            }
+          },
+          "LockTypeEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "DeadBolt",
+              "1": "Magnetic",
+              "2": "Mortise",
+              "3": "Rim",
+              "4": "LatchBolt",
+              "5": "CylindricalLock",
+              "6": "TubularLock",
+              "7": "InterconnectedLock"
+            }
+          },
+          "DoorStateEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "Open",
+              "1": "Closed",
+              "2": "ErrorJammed",
+              "3": "ErrorForcedOpen",
+              "4": "ErrorUnspecified",
+              "5": "Undefined"
+            }
+          },
+          "OperatingModeEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "Normal",
+              "1": "Vacation",
+              "2": "Privacy",
+              "3": "NoKeypadAccess",
+              "4": "Passage",
+              "5": "TemporaryDisable",
+              "6": "EngineeringMode",
+              "7": "Custom"
+            }
+          },
+          "UserStatusEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "Available",
+              "1": "Occupied",
+              "2": "Disabled"
+            }
+          },
+          "UserTypeEnum": {
+            "baseType": "enum8",
+            "values": {
+              "0": "Unrestricted",
+              "1": "YearDaySchedule",
+              "2": "WeekDaySchedule",
+              "3": "Master",
+              "4": "NonAccess"
+            }
+          },
+          "WeekDayScheduleStruct": {
+            "baseType": "struct",
+            "fields": {
+              "ScheduleID": "uint8",
+              "UserID": "uint16",
+              "DaysMask": "bitmap8",
+              "StartTime": "string",
+              "EndTime": "string"
+            }
+          },
+          "YearDayScheduleStruct": {
+            "baseType": "struct",
+            "fields": {
+              "ScheduleID": "uint8",
+              "UserID": "uint16",
+              "StartDate": "date",
+              "EndDate": "date"
+            }
+          },
+          "HolidayScheduleStruct": {
+            "baseType": "struct",
+            "fields": {
+              "ScheduleID": "uint8",
+              "StartDate": "date",
+              "EndDate": "date",
+              "OperatingMode": "enum8"
+            }
+          },
+          "CredentialStruct": {
+            "baseType": "struct",
+            "fields": {
+              "Type": "enum8",
+              "Index": "uint16",
+              "Data": "octstr",
+              "Expiration": "utc"
+            }
+          },
+          "UserProfileStruct": {
+            "baseType": "struct",
+            "fields": {
+              "UserID": "uint16",
+              "UserName": "string",
+              "UserType": "UserTypeEnum",
+              "CredentialCount": "uint8",
+              "LastAccess": "utc"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

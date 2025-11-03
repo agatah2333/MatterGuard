@@ -1,0 +1,45 @@
+config:
+  cluster: ota-software-update-provider
+  command: '0x01'
+  nodeId: '0x654231'
+name: ota-software-update-provider_command_0x01_v1.2.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: UpdateState to "Applying"
+  ExpectedResponse: Proceed
+  Pre-requisites: The OTA Requestor has successfully downloaded the software image.
+  arguments:
+    '{"UpdateToken"': '"<8-byte token>", "NewVersion": 0}'
+  label: Test_Case_Minimum_Length_UpdateToken
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: UpdateState to "Applying"
+  ExpectedResponse: Proceed
+  Pre-requisites: The OTA Requestor has successfully downloaded the software image.
+  arguments:
+    '{"UpdateToken"': '"<32-byte token>", "NewVersion": 4294967295}'
+  label: Test_Case_Maximum_Length_UpdateToken
+  option: SendCommand
+- ActionTime: 3600 (1 hour)
+  Attribute_Change: UpdateState to "AwaitingNextAction"
+  ExpectedResponse: AwaitNextAction
+  Pre-requisites: The OTA Requestor is ready to apply the update but needs to wait
+    for further instructions.
+  arguments:
+    '{"UpdateToken"': '"<valid token>", "NewVersion": 12345678}'
+  label: Test_Case_Special_Response_-_AwaitNextAction
+  option: SendCommand
+- ActionTime: 0
+  Attribute_Change: UpdateState to "Idle"
+  ExpectedResponse: Discontinue
+  Pre-requisites: 'The OTA Provider has determined that the software image should
+    not be applied.
+
+
+    These test cases cover the extreme values of the constraints of the fields and
+    the values that could result in special responses as mentioned in the description
+    of the effect【4:0†source】【4:4†source】【4:5†source】【4:12†source】【4:13†source】【4:16†source】【4:18†source】.'
+  arguments:
+    '{"UpdateToken"': '"<valid token>", "NewVersion": 87654321}'
+  label: Test_Case_Special_Response_-_Discontinue
+  option: SendCommand

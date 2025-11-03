@@ -1,0 +1,95 @@
+{
+  "source_file": "media input.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0507",
+        "name": "Media Input",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "InputList",
+            "dataType": "list[InputInfoStruct]",
+            "valueRange": "",
+            "description": "This attribute SHALL provide a list of the media inputs supported by the device.",
+            "privilege": "M",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentInput",
+            "dataType": "uint8",
+            "valueRange": "all",
+            "description": "This attribute SHALL contain the value of the index field of the currently selected InputInfoStruct.",
+            "privilege": "M",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "SelectInput",
+            "parameters": {
+              "Index": {
+                "dataType": "uint8",
+                "valueRange": "all",
+                "description": "This field SHALL indicate the index field of the InputInfoStruct from the InputList attribute in which to change to."
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "ShowInputStatus",
+            "parameters": {},
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x02",
+            "name": "HideInputStatus",
+            "parameters": {},
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x03",
+            "name": "RenameInput",
+            "parameters": {
+              "Index": {
+                "dataType": "uint8",
+                "valueRange": "all",
+                "description": "This field SHALL indicate the index field of the InputInfoStruct from the InputList attribute in which to rename."
+              },
+              "Name": {
+                "dataType": "string",
+                "valueRange": "all",
+                "description": "This field SHALL indicate the new name for the input."
+              }
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": [],
+        "dataTypes": {
+          "InputInfoStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "Index": "uint8",
+              "InputType": "InputTypeEnum",
+              "Name": "string",
+              "Description": "string"
+            }
+          },
+          "InputTypeEnum": {
+            "baseType": "enum8",
+            "valueRange": "0-11"
+          }
+        }
+      }
+    ]
+  }
+}

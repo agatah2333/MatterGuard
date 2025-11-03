@@ -1,0 +1,28 @@
+config:
+  attribute: '0x000F'
+  cluster: level-control-cluster
+  nodeId: '0x654231'
+name: level-control-cluster_attribute_0x000F_v1.1.0.0
+tests:
+- ActionTime: 0
+  Attribute_Change: Options = 0
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    **Test Case 1.2: Maximum Value**'
+  arguments:
+    '{"Options"': 0}
+  label: Test_Case_Extreme_Values_of_the_Constraints_of_the_Field
+  option: WriteAttribute
+- ActionTime: 0
+  Attribute_Change: Options = 0
+  ExpectedResponse: No link between color temperature and current level
+  Pre-requisites: 'None
+
+
+    **Test Case 2.2: CoupleColorTempToLevel Bit Set to 1**'
+  arguments:
+    '{"Options"': 0}
+  label: Test_Case_Special_Responses_Based_on_Field_Values
+  option: WriteAttribute

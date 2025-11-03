@@ -1,0 +1,55 @@
+config:
+  attribute: '0x0000'
+  cluster: switch-cluster
+  nodeId: '0x654231'
+name: switch-cluster_attribute_0x0000_v1.1.0.0
+tests:
+- ActionTime: N/A
+  Attribute_Change: NumberOfPositions set to 2
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"NumberOfPositions"': 2}
+  label: Test_Case_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: NumberOfPositions set to 255
+  ExpectedResponse: Success
+  Pre-requisites: None
+  arguments:
+    '{"NumberOfPositions"': 255}
+  label: Test_Case_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: Error (Value out of range)
+  Pre-requisites: None
+  arguments:
+    '{"NumberOfPositions"': 1}
+  label: Test_Case_Special_Response_-_Below_Minimum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: None
+  ExpectedResponse: Error (Value out of range)
+  Pre-requisites: None
+  arguments:
+    '{"NumberOfPositions"': 256}
+  label: Test_Case_Special_Response_-_Above_Maximum_Value
+  option: WriteAttribute
+- ActionTime: N/A
+  Attribute_Change: NumberOfPositions set to 2
+  ExpectedResponse: Success
+  Pre-requisites: 'None
+
+
+    These test cases cover the extreme values of the constraints of the field and
+    the values that could result in special responses as mentioned in the description
+    of the effect.
+
+
+    For more detailed information, you can refer to the Matter Application Cluster
+    Specification document【4:8†source】.'
+  arguments:
+    '{"NumberOfPositions"': 2}
+  label: Test_Case_Default_Value
+  option: WriteAttribute

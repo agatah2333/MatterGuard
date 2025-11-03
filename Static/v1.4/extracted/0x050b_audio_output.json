@@ -1,0 +1,78 @@
+{
+  "source_file": "Audio Output_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x050B",
+        "name": "Audio Output",
+        "dataTypes": {
+          "OutputTypeEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "HDMI",
+              "1": "BT",
+              "2": "Optical",
+              "3": "Headphone",
+              "4": "Internal",
+              "5": "Other"
+            }
+          },
+          "OutputInfoStruct": {
+            "baseType": "Struct",
+            "fields": {
+              "Index": "uint8",
+              "OutputType": "OutputTypeEnum",
+              "Name": "string"
+            }
+          }
+        },
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "OutputList",
+            "dataType": "list[OutputInfoStruct]",
+            "valueRange": "",
+            "description": "This attribute provides the list of outputs supported by the device.",
+            "privilege": "M",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentOutput",
+            "dataType": "uint8",
+            "valueRange": "all",
+            "description": "This attribute contains the value of the index field of the currently selected OutputInfoStruct.",
+            "privilege": "M",
+            "writable": false
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "SelectOutput",
+            "parameters": {
+              "dataType": "uint8",
+              "valueRange": "all",
+              "description": "This SHALL indicate the index field of the OutputInfoStruct from the OutputList attribute in which to change to."
+            },
+            "privilege": "O",
+            "direction": "client ⇒ server"
+          },
+          {
+            "id": "0x01",
+            "name": "RenameOutput",
+            "parameters": {
+              "dataType": "Struct",
+              "valueRange": "Index: uint8, Name: string",
+              "description": "Parameters for renaming output: Index indicates target output, Name specifies new name"
+            },
+            "privilege": "M",
+            "direction": "client ⇒ server"
+          }
+        ],
+        "events": []
+      }
+    ]
+  }
+}

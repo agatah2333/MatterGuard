@@ -1,0 +1,74 @@
+{
+  "source_file": "Illuminance Measurement_extracted.json",
+  "extraction_note": "Copied from extracted_data1 directory - Matter 1.4 cluster data",
+  "cluster_data": {
+    "clusters": [
+      {
+        "id": "0x0400",
+        "name": "Illuminance Measurement",
+        "description": "Provides illuminance measurement capabilities with sensor configuration",
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "MeasuredValue",
+            "dataType": "uint16",
+            "valueRange": "0 | MinMeasuredValue-MaxMeasuredValue",
+            "description": "Illuminance in Lux (10,000×log₁₀(lx)+1)",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0001",
+            "name": "MinMeasuredValue",
+            "dataType": "uint16",
+            "valueRange": "1-65533",
+            "description": "Minimum measurable illuminance value",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0002",
+            "name": "MaxMeasuredValue",
+            "dataType": "uint16",
+            "valueRange": "MinMeasuredValue+1-65534",
+            "description": "Maximum measurable illuminance value",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0003",
+            "name": "Tolerance",
+            "dataType": "uint16",
+            "valueRange": "0-2048",
+            "description": "Measurement tolerance value",
+            "privilege": "R",
+            "writable": false
+          },
+          {
+            "id": "0x0004",
+            "name": "LightSensorType",
+            "dataType": "LightSensorTypeEnum",
+            "valueRange": "0-254",
+            "description": "Type of light sensor technology",
+            "privilege": "R",
+            "writable": false
+          }
+        ],
+        "dataTypes": {
+          "LightSensorTypeEnum": {
+            "baseType": "enum8",
+            "valueRange": {
+              "0": "Photodiode",
+              "1": "CMOS",
+              "2": "CCD",
+              "3": "Thermopile",
+              "4-254": "Reserved"
+            }
+          }
+        },
+        "commands": [],
+        "events": []
+      }
+    ]
+  }
+}

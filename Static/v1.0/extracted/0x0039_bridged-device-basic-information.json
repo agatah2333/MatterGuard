@@ -1,0 +1,207 @@
+{
+  "cluster_information": {
+    "cluster_id": "0x0039",
+    "name": "Bridged Device Basic Information",
+    "description": "This Cluster serves two purposes towards a Node communicating with a Bridge: indicate that the functionality on the Endpoint where it is placed (and its Parts) is bridged from a non-Matter technology, and provide a centralized collection of attributes that the Node MAY collect to aid in conveying information regarding the Bridged Device to a user."
+  },
+  "derived_datatypes": [],
+  "commands": [],
+  "attributes": [
+    {
+      "id": "0x0000",
+      "name": "VendorName",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "32"
+      },
+      "description": "The vendor name in human readable text",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "VendorID",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "The vendor identifier",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "ProductName",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "32"
+      },
+      "description": "The product name in human readable text",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "NodeLabel",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "32"
+      },
+      "description": "The Node Label assigned by the user",
+      "privilege": "A",
+      "writable": true,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "HardwareVersion",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "The hardware version of the bridged device",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "HardwareVersionString",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "The hardware version string of the bridged device",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "SoftwareVersion",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "The software version of the bridged device",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "SoftwareVersionString",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "The software version string of the bridged device",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "ManufacturingDate",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "The manufacturing date of the bridged device",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "PartNumber",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "32"
+      },
+      "description": "The part number of the bridged device",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "ProductURL",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "256"
+      },
+      "description": "The product URL of the bridged device",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "ProductLabel",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "64"
+      },
+      "description": "The product label of the bridged device",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "SerialNumber",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "32"
+      },
+      "description": "The serial number of the bridged device",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "Reachable",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "255"
+      },
+      "description": "Indicates whether the bridged device is reachable",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    },
+    {
+      "id": "0x0000",
+      "name": "UniqueID",
+      "data_type": "uint8",
+      "value_range": {
+        "min": "0",
+        "max": "32"
+      },
+      "description": "The unique identifier of the bridged device",
+      "privilege": "V",
+      "writable": false,
+      "access": "R"
+    }
+  ],
+  "events": []
+}
